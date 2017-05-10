@@ -1,5 +1,6 @@
 {
-  "Blue": [{
+  "Blue": [
+  {
   "Epoch": 3,
   "Color": "Blue",
   "Requirement": {
@@ -206,9 +207,175 @@
     }
   },
   "CardName": "Mecenate"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "PurpleAction" : 6,
+      "Privilege" : 1
+    }
+  },
+  "CardName": "Eroe"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "FreeAction" : 7,
+      "Privilege" : 1
+    }
+  },
+  "CardName": "Ambasciatore"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 5
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Privilege" : 3
+    }
+  },
+  "CardName": "Messo Reale"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Privilege" : 1
+    },
+    "Permanent" : {
+    	"PurpleBonus" : 2
+    }
+  },
+  "CardName": "Cavaliere"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Multiplier" : 2,
+      "ResourceToCount" : "Green",
+      "Return" : "Victory"
+    }
+  },
+  "CardName": "Nobile"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Multiplier" : 2,
+      "ResourceToCount" : "Yellow",
+      "Return" : "Victory"
+    }
+  },
+  "CardName": "Governatore"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 5
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Multiplier" : 0.5,
+      "ResourceToCount" : "Military",
+      "Return" : "Victory"
+    }
+  },
+  "CardName": "Generale"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 7
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Multiplier" : 2,
+      "ResourceToCount" : "Blue",
+      "Return" : "Victory"
+    }
+  },
+  "CardName": "Cortigiana"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Gold": 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Multiplier" : 2,
+      "ResourceToCount" : "Purple",
+      "Return" : "Victory"
+    }
+  },
+  "CardName": "Araldo"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {
+    	"Faith": 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "RemoveTileEffect" : 1
+    }
+  },
+  "CardName": "Predicatore"
 }
 ],
-  "Purple": [{
+  "Purple": [
+  {
   "Epoch": 2,
   "Color": "Purple",
   "Requirement": {
@@ -582,6 +749,106 @@
     }
   },
   "CardName": "Combattere le Eresie"
+},
+ {
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 2,
+      "Privilege" : 1
+    },
+    "EndGame": {
+      "Victory" : 3
+    }
+  },
+  "CardName": "Costruire le Mura"
+},
+ {
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 7,
+      "MilitaryToSub" : 4
+    },
+    "Second": {
+      "Stone" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 3,
+      "Privilege" : 1
+    },
+    "EndGame": {
+      "Victory" : 2
+    }
+  },
+  "CardName": "Costruire i Bastioni"
+},
+ {
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 4,
+      "Privilege" : 1
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Costruire le Torri"
+},
+ {
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 6,
+      "MilitaryToSub" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Gold" : 5,
+      "Privilege" : 1
+    },
+    "EndGame": {
+      "Victory" : 3
+    }
+  },
+  "CardName": "Supporto al Re"
+},
+ {
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 2,
+      "Wood" : 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Privilege" : 2
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Innalzare una Statua"
 }
 ],
   "Green": [
@@ -937,7 +1204,7 @@
         }
       }
     },
-    "CardName": "Città Fortificata"
+    "CardName": "Cittï¿½ Fortificata"
     },
     {"Epoch": 3,
     "Color": "Green",
@@ -1077,7 +1344,53 @@
         }
       }
     },
-    "CardName": "Città Mercantile"
+    "CardName": "Cittï¿½ Mercantile"
+    },
+     {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+    	"Immediate" : {
+    		"Gold" : 3
+    	},
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 6,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Privilege" : 1
+          }
+        }
+      }
+    },
+    "CardName": "CittÃ "
+    },
+     {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+    "Immediate" : {
+    		"Stone" : 1,
+    		"Privilege" : 1
+    	},
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 6,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Victory" : 4,
+            "Stone" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Borgo"
     }
   ],
   "Yellow" : [
@@ -1212,7 +1525,7 @@
       "CardName": "Fortezza"
     },
     {
-      "Epoch": 2,
+      "Epoch": 3,
       "Color": "Yellow",
       "Requirement": {
         "First": {
@@ -1656,6 +1969,180 @@
         }
       },
       "CardName": "Accademia Militare"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 2,
+          "Stone" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 6
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 6,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Multiplier" : 1,
+              "ResourceToCount" : "Purple",
+              "Return" : "Victory"
+            }
+          }
+        }
+      },
+      "CardName": "Arco di Trionfo"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 2,
+          "Wood" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 6
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 6,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Multiplier" : 1,
+              "ResourceToCount" : "Blue",
+              "Return" : "Victory"
+            }
+          }
+        }
+      },
+      "CardName": "Teatro"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 1,
+          "Stone" : 3
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 5
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 5,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Multiplier" : 1,
+              "ResourceToCount" : "Yellow",
+              "Return" : "Gold"
+            }
+          }
+        }
+      },
+      "CardName": "Zecca"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 3,
+          "Stone" : 1
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 5
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 5,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Multiplier" : 1,
+              "ResourceToCount" : "Green",
+              "Return" : "Gold"
+            }
+          }
+        }
+      },
+      "CardName": "Esattoria"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Stone" : 4,
+          "Wood" : 2,
+          "Gold" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 9
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 5,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Privilege" : 1,
+              "Victory" : 2
+            }
+          }
+        }
+      },
+      "CardName": "Castelletto"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Stone" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 1
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 1,
+          "Requirement" : {
+          	"First" : {
+          		"Gold" : 1
+          	}
+          },
+          "Effect" : {
+            "First" : {
+              "Privilege" : 1
+            }
+          }
+        }
+      },
+      "CardName": "Castelletto"
     }
     ]
 }
