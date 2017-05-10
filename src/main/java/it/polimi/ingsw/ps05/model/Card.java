@@ -10,5 +10,12 @@ public interface Card {
 	public ArrayList<ArrayList<Resource>> getRequirements(); 
 	
 	public ArrayList<ArrayList<Resource>> getEffects(); 
+	
+	public String getName();
+	
+	public Epoch getEpoch();
 	//TODO: evaluate if it's better to use a resource object or a value pair object as in preliminary UML -- Sirolfo 
+	
+	
+	
 }
