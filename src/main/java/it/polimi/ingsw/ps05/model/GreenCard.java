@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
-public class LeaderCard implements Card {
+public class GreenCard extends TowerCard {
 
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
@@ -23,27 +23,15 @@ public class LeaderCard implements Card {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public void applyEffect(Object player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Epoch getEpoch() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> effects) {
+		super(epoch, color, cardName, effects);
+		// TODO Auto-generated constructor stub
 	}
 	
-	public LeaderCard(){
-		// TODO Check constructor
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public GreenCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+			ArrayList<ArrayList<Resource>> effects) {
+		super(epoch, color, cardName, requirements, effects);
 	}
 
 }

@@ -21,4 +21,32 @@ public class ExcommunicationCard implements Card {
 		return null;
 	}
 
+	@Override
+	public boolean isActive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void applyEffect(Object player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Epoch getEpoch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ExcommunicationCard(){
+		// TODO Check constructor
+	}
+
 }
