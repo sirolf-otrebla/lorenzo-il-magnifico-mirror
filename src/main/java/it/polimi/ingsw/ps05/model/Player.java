@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 
 public class Player {
 	
@@ -11,17 +12,19 @@ public class Player {
 	Color Color;
 	BonusTile BonusTile;
 	
-	int FaithPts;
-	int MilitaryPts;
-	int VictoryPts;
-	int Gold;
-	int Wood;
-	int Stone;
-	int Slaves;
+	FaithResource FaithPts;
+	MilitaryResource MilitaryPts;
+	VictoryResource VictoryPts;
+	GoldResource Gold;
+	WoodResource Wood;
+	StoneResource Stone;
+	ServantResource Servants;
 	
 	ArrayList<Card> GreenCardList;
 	ArrayList<Card> BlueCardList;
 	ArrayList<Card> YellowCardList;
 	ArrayList<Card> PurpleCardList;
+	ArrayList<LeaderCard> LeaderCardList;
+	ArrayList<Effect> PermanentEffectList;
 	
 }
