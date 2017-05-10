@@ -1,0 +1,1661 @@
+{
+  "Blue": [{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "HarvestAction" : 4,
+      "Faith" : 2
+    }
+  },
+  "CardName": "Cardinale"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 3
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "ProductionBonus" : 2
+    }
+  },
+  "CardName": "Artigiano"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "YellowBonus" : 2,
+      "StoneCostBonus" : 1,
+      "WoodCostBonus" : -1
+    }
+  },
+  "CardName": "Costruttore"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 3
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "HarvestBonus" : 2
+    }
+  },
+  "CardName": "Contadino"
+},{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 3
+    },
+    "Permanent" : {
+      "GreenBonus" : 2
+    }
+  },
+  "CardName": "Condottiero"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 5
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "ProductionAction" : 4,
+      "Faith" : 1
+    }
+  },
+  "CardName": "Vescovo"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "GreenAction" : 6,
+      "Military" : 2
+    }
+  },
+  "CardName": "Capitano"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Immediate": { 
+      "YellowAction" : 6,
+      "StoneCostBonus" : 1,
+      "WoodCostBonus" : 1
+    }
+  },
+  "CardName": "Architetto"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "HarvestBonus" : 3
+    }
+  },
+  "CardName": "Fattore"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "ProductionBonus" : 3
+    }
+  },
+  "CardName": "Studioso"
+},
+{
+  "Epoch": 3,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 5
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 3
+    }
+  },
+  "CardName": "Messo Papale"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "FreeAction" : 4,
+      "Faith" : 1
+    }
+  },
+  "CardName": "Badessa"
+},
+{
+  "Epoch": 1,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 4
+    }
+  },
+  "Effect": {
+    "Permanent": {
+      "BlueBonus" : 2,
+      "GoldCostBonus" : 1
+    }
+  },
+  "CardName": "Dama"
+},
+{
+  "Epoch": 2,
+  "Color": "Blue",
+  "Requirement": {
+    "First": {"Gold": 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "BlueAction" : 6,
+      "GoldCostBonus" : 2
+    }
+  },
+  "CardName": "Mecenate"
+}
+],
+  "Purple": [{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 7,
+      "MilitaryToSub" : 4
+    },
+    "Second": {
+      "Stone" : 2,
+      "Wood" : 2,
+      "Gold" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 3
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Sostegno al Cardinale"
+},
+{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 8,
+      "MilitaryToSub" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 1,
+      "Gold" : 5
+    }, 
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Crociata"
+},
+{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Servant" : 3,
+      "Gold" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "ProductionAction" : 3
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Migliorare le Strade"
+},
+{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Wood" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Servant" : 5
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Accogliere gli Stranieri"
+},
+{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 2,
+      "Wood" : 2,
+      "Gold" : 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 2
+    },
+    "EndGame": {
+      "Victory" : 6
+    }
+  },
+  "CardName": "Riparare l'Abazzia"
+},{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Wood" : 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 3
+    },
+    "EndGame": {
+      "Victory" : 3
+    }
+  },
+  "CardName": "Commissionare Arte Sacra"
+},{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 3,
+      "Wood" : 3,
+      "Gold" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 1,
+      "FreeAction": 7
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Riparare la Cattedrale"
+},
+{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 12,
+      "MilitaryToSub" : 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Gold" : 3,
+      "Wood" : 3,
+      "Stone" : 3
+    },
+    "EndGame": {
+      "Victory" : 7
+    }
+  },
+  "CardName": "Conquista Militare"
+},
+{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Gold" : 8
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 7
+    },
+    "EndGame": {
+      "Victory" : 6
+    }
+  },
+  "CardName": "Ingaggiare Mercenari"
+},
+{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 15,
+      "MilitaryToSub" : 8
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 4
+    },
+    "EndGame": {
+      "Victory" : 8
+    }
+  },
+  "CardName": "Guerra Santa"
+},
+{
+  "Epoch": 3,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 10,
+      "MilitaryToSub" : 5
+    },
+    "Second": {
+      "Stone" : 3,
+      "Wood" : 3,
+      "Gold" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 2
+    },
+    "EndGame": {
+      "Victory" : 10
+    }
+  },
+  "CardName": "Sostegno al Papa"
+},
+{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Servant" : 2,
+      "Gold" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "HarvestAction" : 4
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Scavare Canalizzazioni"
+},
+{
+  "Epoch": 2,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Gold" : 6
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 6
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Ingaggiare Soldati"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Stone" : 1,
+      "Wood" : 1,
+      "Gold" : 1
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 1
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Riparare la Chiesa"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 4,
+      "MilitaryToSub" : 2
+    },
+    "Second": {
+      "Stone" : 1,
+      "Wood" : 1,
+      "Gold" : 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 3
+    },
+    "EndGame": {
+      "Victory" : 1
+    }
+  },
+  "CardName": "Sostegno al Vescovo"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Gold" : 4
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Military" : 5
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Ingaggiare Reclute"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Wood" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Servant" : 4
+    },
+    "EndGame": {
+      "Victory" : 4
+    }
+  },
+  "CardName": "Ospitare Mendicanti"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 3,
+      "MilitaryToSub" : 2
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Gold" : 3
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Campagna Militare"
+},
+{
+  "Epoch": 1,
+  "Color": "Purple",
+  "Requirement": {
+    "First": {
+      "Military": 5,
+      "MilitaryToSub" : 3
+    }
+  },
+  "Effect": {
+    "Immediate": {
+      "Faith" : 2
+    },
+    "EndGame": {
+      "Victory" : 5
+    }
+  },
+  "CardName": "Combattere le Eresie"
+}
+],
+  "Green": [
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 3,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 1,
+            "Servant" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Borgo"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 1,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Avamposto Commerciale"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Servant" : 1,
+        "Military" : 2
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 6,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Stone" : 1,
+            "Faith" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Monastero"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 5,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Stone" : 1,
+            "Military" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Rocca"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Wood" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 2,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Wood" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Bosco"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Wood" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 5,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Wood" : 3
+          }
+        }
+      }
+    },
+    "CardName": "Foresta"
+    },
+    {"Epoch": 1,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Stone" : 2
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 4,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Stone" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Cava di Ghiaia"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Gold" : 4
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 6,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 1,
+            "Stone" : 1,
+            "Wood" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Ducato"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 5,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Servant" : 2,
+            "Military" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Maniero"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Servant" : 2,
+        "Stone" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 4,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Stone" : 2,
+            "Servant" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Villaggio Minerario"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Wood" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 3,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Stone" : 3
+          }
+        }
+      }
+    },
+    "CardName": "Cava di Pietra"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Gold" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 1,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Miniera d'Oro"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Servant" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 3,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Military" : 1,
+            "Wood" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Villaggio Montano"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Faith" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 2,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Faith" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Eremo"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Servant" : 2,
+        "Wood" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 4,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 1,
+            "Wood" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Possedimento"
+    },
+    {"Epoch": 2,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Military" : 2,
+        "Servant" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 2,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Military" : 1,
+            "Servant" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Città Fortificata"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Gold" : 2,
+        "Victory" : 2
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 4,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Military" : 3,
+            "Servant" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Castello"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Military" : 2
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 5,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Victory" : 4,
+            "Wood" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Colonia"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Victory" : 3
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 2,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Victory" : 1,
+            "Stone" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Cava di Marmo"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Faith" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 1,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 1,
+            "Faith" : 1
+          }
+        }
+      }
+    },
+    "CardName": "Santuario"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Victory" : 1,
+        "Wood" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 3,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Victory" : 2,
+            "Wood" : 2
+          }
+        }
+      }
+    },
+    "CardName": "Tenuta"
+    },
+    {"Epoch": 3,
+    "Color": "Green",
+    "Requirement": {
+    },
+    "Effect": {
+      "Immediate" : {
+        "Gold" : 1,
+        "Servant" : 1
+      },
+      "Activable": {
+        "Type" : "Harvest",
+        "DiceRequired" : 1,
+        "Requirement" : {
+        },
+        "Effect" : {
+          "First" : {
+            "Gold" : 3
+          }
+        }
+      }
+    },
+    "CardName": "Città Mercantile"
+    }
+  ],
+  "Yellow" : [
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 1,
+          "Stone" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 2
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 3,
+          "Requirement" : {
+            "First" : {
+              "Stone" : 1
+            },
+            "Second" : {
+              "Stone" : 2
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Gold" : 3
+            },
+            "Second" : {
+              "Gold" : 5
+            }
+          }
+        }
+      },
+      "CardName": "Tagliapietre"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Faith" : 1
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 2,
+          "Requirement" : {
+            "First" : {
+              "Gold" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Faith" : 1
+            }
+          }
+        }
+      },
+      "CardName": "Cappella"
+    },
+    {
+      "Epoch": 1,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 1,
+          "Wood" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 3
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 4,
+          "Requirement" : {
+            "First" : {
+              "Wood" : 1
+            },
+            "Second" : {
+              "Wood" : 2
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Gold" : 3
+            },
+            "Second" : {
+              "Gold" : 5
+            }
+          }
+        }
+      },
+      "CardName": "Falegnameria"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 2,
+          "Stone" : 2,
+          "Wood" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 8
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 6,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Military" : 2,
+              "Victory" : 2
+            }
+          }
+        }
+      },
+      "CardName": "Fortezza"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 3,
+          "Stone" : 3,
+          "Wood" : 1
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 7
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 2,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Gold" : 5
+            }
+          }
+        }
+      },
+      "CardName": "Banca"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Stone" : 4
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 6
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 5,
+          "Requirement" : {
+            "First" : {
+              "Stone" : 1
+            },
+            "Second" : {
+              "Stone" : 3
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 3
+            },
+            "Second" : {
+              "Victory" : 7
+            }
+          }
+        }
+      },
+      "CardName": "Gilda degli Scultori"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 2,
+          "Stone" : 1
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 3
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 3,
+          "Requirement" : {
+            "First" : {
+              "Gold" : 3
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Wood" : 2,
+              "Stone" : 2
+            }
+          }
+        }
+      },
+      "CardName": "Mercato"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Stone" : 3
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 2,
+          "Faith"  :1
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 2,
+          "Requirement" : {
+            "First" : {
+              "Faith" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Gold" : 2,
+              "Victory" : 2
+            }
+          }
+        }
+      },
+      "CardName": "Battistero"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood" : 3
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 4
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 3,
+          "Requirement" : {
+            "First" : {
+              "Gold" : 1
+            },
+            "Second" : {
+              "Gold" : 2
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 3
+            },
+            "Second" : {
+              "Victory" : 5
+            }
+          }
+        }
+      },
+      "CardName": "Tesoreria"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 4
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 5
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 4,
+          "Requirement" : {
+            "First" : {
+              "Wood" : 1
+            },
+            "Second" : {
+              "Wood" : 2
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 3
+            },
+            "Second" : {
+              "Victory" : 7
+            }
+          }
+        }
+      },
+      "CardName": "Gilda dei Pittori"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 1,
+          "Stone" : 1
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 3
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 1,
+          "Requirement" : {
+            "First" : {
+              "Servant" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Military" : 3
+            }
+          }
+        }
+      },
+      "CardName": "Caserma"
+    },
+    {
+      "Epoch": 2,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 1,
+          "Stone" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 4
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 4,
+          "Requirement" : {
+            "First" : {
+              "Stone" : 1,
+              "Wood" : 1,
+              "Servant" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 6
+            }
+          }
+        }
+      },
+      "CardName": "Gilda dei Costruttori"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 4,
+          "Wood" : 3
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 8
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 4,
+          "Requirement" : {
+            "First" : {
+              "Gold" : 4
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Wood" : 3,
+              "Stone" : 3
+            }
+          }
+        }
+      },
+      "CardName": "Fiera"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 4,
+          "Stone" : 4
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 7,
+          "Faith" : 3
+          
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 2,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 1
+            }
+          }
+        }
+      },
+      "CardName": "Cattedrale"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Gold": 3,
+          "Stone" : 1,
+          "Wood" : 3
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 9
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 6,
+          "Requirement" : {
+            "First" : {
+              "Gold" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Servant" : 2,
+              "Victory" : 4
+            }
+          }
+        }
+      },
+      "CardName": "Palazzo"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Servant": 2,
+          "Stone" : 2,
+          "Wood" : 4
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 10
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 1,
+          "Requirement" : {
+          },
+          "Effect" : {
+            "First" : {
+              "Victory" : 3
+            }
+          }
+        }
+      },
+      "CardName": "Giardino"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Wood": 1,
+          "Stone" : 4
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 5,
+          "Faith" : 1
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 1,
+          "Requirement" : {
+            "First" : {
+              "Stone" : 1
+            },
+            "Second" : {
+              "Wood" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Faith" : 2
+            },
+            "Second" : {
+              "Faith" : 2
+            }
+          }
+        }
+      },
+      "CardName": "Basilica"
+    },
+    {
+      "Epoch": 3,
+      "Color": "Yellow",
+      "Requirement": {
+        "First": {
+          "Servant": 1,
+          "Stone" : 2,
+          "Wood" : 2
+        }
+      },
+     "Effect": {
+        "Immediate": {
+          "Victory" : 7
+        },
+        "Activable" : {
+          "Type" : "Production",
+          "DiceRequired" : 3,
+          "Requirement" : {
+            "First" : {
+              "Servant" : 1
+            }
+          },
+          "Effect" : {
+            "First" : {
+              "Military" : 3,
+              "Victory" : 1
+            }
+          }
+        }
+      },
+      "CardName": "Accademia Militare"
+    }
+    ]
+}
