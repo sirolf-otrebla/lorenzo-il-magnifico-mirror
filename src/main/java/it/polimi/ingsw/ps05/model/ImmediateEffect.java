@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 
 public class ImmediateEffect implements Effect {
 

@@ -2,9 +2,21 @@ package it.polimi.ingsw.ps05.model;
 
 public class Epoch {
 
-	public Epoch() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private int epoch;
 
+	public Epoch(int epoch) {
+		this.epoch = epoch;
+	}
+	
+	public Epoch() {
+		
+	}
+	
+	public void setEpoch(int epoch){
+		this.epoch = epoch;
+	}
+	
+	public int getEpoch() {
+		return this.epoch;
+	}
 }
