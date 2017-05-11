@@ -1,5 +1,21 @@
 package it.polimi.ingsw.ps05.model;
 
 public class Color {
-// TO DO
+	private String color;
+
+	public Color(String color) {
+		this.color = color;
+	}
+	
+	public Color() {
+		
+	}
+	
+	public void setColor(String color){
+		this.color = color;
+	}
+	
+	public String getColor() {
+		return this.color;
+	}
 }
