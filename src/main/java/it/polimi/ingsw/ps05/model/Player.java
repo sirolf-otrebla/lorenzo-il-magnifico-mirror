@@ -6,29 +6,29 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 public class Player {
 	
 	// server information
-	int PlayerID;
+	int playerID;
 	String username;
 	
 	// game information
-	Color Color;
-	Familiar FamilyList;
-	BonusTile BonusTile;
+	Color color;
+	Familiar familyList;
+	BonusTile bonusTile;
 	
-	FaithResource FaithPts;
-	MilitaryResource MilitaryPts;
-	VictoryResource VictoryPts;
+	FaithResource faithPts;
+	MilitaryResource militaryPts;
+	VictoryResource victoryPts;
 	
-	GoldResource Gold;
-	WoodResource Wood;
-	StoneResource Stone;
-	ServantResource Servants;
+	GoldResource gold;
+	WoodResource wood;
+	StoneResource stone;
+	ServantResource servants;
 	
-	ArrayList<Card> GreenCardList;
-	ArrayList<Card> BlueCardList;
-	ArrayList<Card> YellowCardList;
-	ArrayList<Card> PurpleCardList;
-	ArrayList<LeaderCard> LeaderCardList;
+	ArrayList<Card> greenCardList;
+	ArrayList<Card> blueCardList;
+	ArrayList<Card> yellowCardList;
+	ArrayList<Card> purpleCardList;
+	ArrayList<LeaderCard> leaderCardList;
 	
-	ArrayList<Effect> PermanentEffectList;
+	ArrayList<Effect> permanentEffectList;
 	
 }
