@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.*;
 
-
-public class GameFlowController {
+public class TurnManager {
 	
+	Player currentPlayer;
 	ArrayList<Action> actionDone;
-	Epoch currentEpoch;
-	Turn currentTurn;
-	Player activePlayer; //??????? utile qui?
-	ArrayList<Epoch> epochList;
+	ArrayList<Familiar> familiarToBeUsed;
+	ArrayList<Player> playerOrder;
 	
-	
+
 }

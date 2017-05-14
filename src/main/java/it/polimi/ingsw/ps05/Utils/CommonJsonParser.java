@@ -15,9 +15,13 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 
 public class CommonJsonParser {
+	
+	public CommonJsonParser(){
+		System.out.println("ciao");
+	}
 
 	public void parse() {
-try {     
+		try {     
         	
         	File file = new File("C:\\Users\\lucaf\\workspace\\ProvaParser\\src\\res\\cards.json");
     		System.out.println(file.exists());

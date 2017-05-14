@@ -2,9 +2,10 @@ package it.polimi.ingsw.ps05.model;
 
 public class Epoch {
 
-	private int epoch;
+	private EpochEnumeration epoch;
+	private ExcommunicationCard excommunicationCard;
 
-	public Epoch(int epoch) {
+	public Epoch(EpochEnumeration epoch) {
 		this.epoch = epoch;
 	}
 	
@@ -12,11 +13,16 @@ public class Epoch {
 		
 	}
 	
-	public void setEpoch(int epoch){
+	public Epoch(EpochEnumeration epoch, ExcommunicationCard excommunicationCard){
 		this.epoch = epoch;
+		this.excommunicationCard = excommunicationCard;
 	}
 	
-	public int getEpoch() {
+	public EpochEnumeration getEpoch() {
 		return this.epoch;
+	}
+	
+	public ExcommunicationCard getExcomunicationCard(){
+		return this.excommunicationCard;
 	}
 }
