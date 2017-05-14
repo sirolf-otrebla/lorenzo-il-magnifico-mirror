@@ -5,4 +5,4 @@
  * @author Alberto
  *
  */
-package controller;
+package it.polimi.ingsw.ps05.View.gui;
