@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects;
 
+import org.json.simple.JSONObject;
+
 import it.polimi.ingsw.ps05.model.Effect;
 
 public interface ExcommunicationEffect extends Effect {
@@ -10,5 +12,7 @@ public interface ExcommunicationEffect extends Effect {
 	// It is a good solution? --Sirolfo
 	
 	public void applyEffect();
+	
+	public void inizializeFromJson(JSONObject json);
 	
 }

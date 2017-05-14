@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONObject;
+
 import it.polimi.ingsw.ps05.model.Effect;
 import it.polimi.ingsw.ps05.model.EffectType;
 
@@ -23,6 +25,12 @@ public class NoBlueVictoryPtsExcomm implements ExcommunicationEffect {
 	public void applyEffect() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void inizializeFromJson(JSONObject json) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
