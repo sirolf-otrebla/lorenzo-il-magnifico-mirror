@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
+
 import java.util.ArrayList;
 
 public class Turn implements Period {
