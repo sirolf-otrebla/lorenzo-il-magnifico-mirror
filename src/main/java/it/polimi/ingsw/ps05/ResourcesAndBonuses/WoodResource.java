@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+
 public class WoodResource implements Resource {
 	private int amount;
 	
@@ -17,5 +19,15 @@ public class WoodResource implements Resource {
 	
 	public int getAmount(){
 		return this.amount;
+	}
+
+	@Override
+	public void remove(int amount) throws NotEnoughResourcesException {
+
+	}
+
+	@Override
+	public void remove(Resource res) throws NotEnoughResourcesException {
+
 	}
 }
