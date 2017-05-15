@@ -1,15 +1,14 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
-public class MilitaryResource implements Resource, ActionResult {
-	//TODO vedi faith
+public class MilitaryResourceToSub implements Resource, ActionResult {
+
 	private Integer amount;
-	private Integer value;
 	
-	public MilitaryResource(Integer amount){
+	public MilitaryResourceToSub(Integer amount){
 		this.amount = amount;
 	}
 	
-	public MilitaryResource() {
+	public MilitaryResourceToSub() {
 		
 	}
 	
@@ -19,14 +18,6 @@ public class MilitaryResource implements Resource, ActionResult {
 	
 	public Integer getAmount(){
 		return this.amount;
-	}
-	
-	public void setValue(Integer value){
-		this.value = value;
-	}
-	
-	public Integer getValue(Integer value){
-		return this.value;
 	}
 
 	@Override
