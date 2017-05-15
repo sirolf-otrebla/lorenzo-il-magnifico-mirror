@@ -10,6 +10,5 @@ public class TurnManager {
 	ArrayList<Action> actionDone;
 	ArrayList<Familiar> familiarToBeUsed;
 	ArrayList<Player> playerOrder;
-	
 
 }

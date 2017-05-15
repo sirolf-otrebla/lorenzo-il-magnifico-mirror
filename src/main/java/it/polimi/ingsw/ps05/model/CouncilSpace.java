@@ -13,5 +13,9 @@ public class CouncilSpace extends ActionSpaceWithEffect {
         occupantList.add(occupant);
     }
 
+    public void getOrder() {
+        // TODO
+    }
+
 
 }
