@@ -2,6 +2,11 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class BlueCard extends TowerCard {
@@ -15,5 +20,4 @@ public class BlueCard extends TowerCard {
 			ArrayList<ArrayList<Resource>> effects) {
 		super(epoch, color, cardName, requirements, effects);
 	}
-
 }
