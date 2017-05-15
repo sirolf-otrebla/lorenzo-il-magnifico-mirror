@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class ActionSpaceWithEffect extends ActionSpace {
 
+	private ArrayList<Effect> effect; // this is the bonus directly associated with the action space itself
+
 	@Override
 	public ArrayList<Effect> getEffect() {
 		// TODO Auto-generated method stub
