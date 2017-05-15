@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
+import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
+import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
 public class Player {
 	
@@ -10,25 +12,35 @@ public class Player {
 	String username;
 	
 	// game information
-	Color color;
-	Familiar familyList;
-	BonusTile bonusTile;
-	
-	FaithResource faithPts;
-	MilitaryResource militaryPts;
-	VictoryResource victoryPts;
-	
-	GoldResource gold;
-	WoodResource wood;
-	StoneResource stone;
-	ServantResource servants;
-	
-	ArrayList<Card> greenCardList;
-	ArrayList<Card> blueCardList;
-	ArrayList<Card> yellowCardList;
-	ArrayList<Card> purpleCardList;
-	ArrayList<LeaderCard> leaderCardList;
-	
-	ArrayList<Effect> permanentEffectList;
+	private Color color;
+	private Familiar familyList;
+	private BonusTile bonusTile;
+
+	private FaithResource faithPts;
+	private MilitaryResource militaryPts;
+	private VictoryResource victoryPts;
+
+	private GoldResource gold;
+	private WoodResource wood;
+	private StoneResource stone;
+	private ServantResource servants;
+
+
+	private ArrayList<Card> greenCardList;
+	private ArrayList<Card> blueCardList;
+	private ArrayList<Card> yellowCardList;
+	private ArrayList<Card> purpleCardList;
+	private ArrayList<LeaderCard> leaderCardList;
+
+	private ArrayList<Effect> permanentEffectList;
+
+	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
+
+	    Action thisAction = new Action(this, familiar, position);
+	    thisAction.execute();
+	    return thisAction;
+    }
+
+
 	
 }

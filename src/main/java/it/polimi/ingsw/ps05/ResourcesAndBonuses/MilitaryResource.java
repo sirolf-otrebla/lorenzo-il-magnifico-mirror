@@ -18,4 +18,14 @@ public class MilitaryResource implements Resource {
 	public int getAmount(){
 		return this.amount;
 	}
+
+	@Override
+	public void remove(Resource res) {
+
+	}
+
+	@Override
+	public void remove(int amount) {
+
+	}
 }
