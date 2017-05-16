@@ -1,7 +1,20 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.*;
+
 public class BonusWithMultiplier implements ActionResult {
-	public int multiplier;
-	//public Resource resource --> classe della risorsa che da in output (Gold o Victory)
-	//public Colour colour --> colore delle carte da contare !!! si possono contare anche i punti militare
+	private Float multiplier;
+	private Resource returnResource;
+	private Class cardToCount;
+	
+	public BonusWithMultiplier() {
+		
+	}
+
+	public BonusWithMultiplier(Float multiplier, Resource returnResource, Class cardToCount) {
+		super();
+		this.multiplier = multiplier;
+		this.returnResource = returnResource;
+		this.cardToCount = cardToCount;
+	}
 }
