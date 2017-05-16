@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+
 public class MilitaryResourceToSub implements Resource, ActionResult {
 
 	private Integer amount;
@@ -25,8 +28,13 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 
 	}
 
-	@Override
 	public void remove(Integer amount) {
 
+	}
+
+	@Override
+	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+		// TODO Auto-generated method stub
+		
 	}
 }

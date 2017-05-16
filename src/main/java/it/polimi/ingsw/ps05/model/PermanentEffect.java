@@ -19,7 +19,7 @@ public class PermanentEffect implements Effect {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Effect>> getResultList() {
+	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

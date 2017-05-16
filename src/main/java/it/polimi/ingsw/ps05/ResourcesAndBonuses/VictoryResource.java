@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class VictoryResource implements Resource, ActionResult {
@@ -31,12 +32,17 @@ public class VictoryResource implements Resource, ActionResult {
 		return this.value;
 	}
 
-	@Override
 	public void remove(Integer amount) throws NotEnoughResourcesException {
 
 	}
 	@Override
 	public void remove(Resource res) throws NotEnoughResourcesException {
 
+	}
+
+	@Override
+	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+		// TODO Auto-generated method stub
+		
 	}
 }
