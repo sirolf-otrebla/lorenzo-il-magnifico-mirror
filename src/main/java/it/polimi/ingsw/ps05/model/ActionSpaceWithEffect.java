@@ -7,7 +7,7 @@ public class ActionSpaceWithEffect extends ActionSpace {
 	private ArrayList<Effect> effect; // this is the bonus directly associated with the action space itself
 
 	@Override
-	public ArrayList<Effect> getEffect() {
+	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
 		return null;
 	}

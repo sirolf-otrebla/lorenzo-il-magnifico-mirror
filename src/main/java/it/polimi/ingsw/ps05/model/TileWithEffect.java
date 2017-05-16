@@ -17,7 +17,7 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 	}
 
 	@Override
-	public ArrayList<Effect> getEffect() {  //TODO
+	public ArrayList<Effect> getEffects() {  //TODO
 		return null;
 	}
 }

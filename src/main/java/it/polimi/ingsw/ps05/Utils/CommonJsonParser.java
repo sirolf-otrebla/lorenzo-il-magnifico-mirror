@@ -64,17 +64,26 @@ public class CommonJsonParser {
 		return list;
 	}
 
-	private ArrayList<ArrayList<ActionResult>> getActivableActionResultFromJSON(JSONObject json) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NumberFormatException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+	private ArrayList<ArrayList<ActionResult>> getActivableActionResultFromJSON(JSONObject json) throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, NumberFormatException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+
 		ArrayList<ArrayList<ActionResult>> list = new ArrayList<ArrayList<ActionResult>>();
 		for (int i = 0; i < json.keySet().toArray().length; i++) {
-			ArrayList<ActionResult> resList = new ArrayList<ActionResult>();
+
+				ArrayList<ActionResult> resList = new ArrayList<ActionResult>();
 			JSONObject effectList = (JSONObject) json.get(json.keySet().toArray()[i]); //entro in first o second
 			for (int j = 0; j < effectList.keySet().toArray().length; j++){ //ciclo le risorse/azioni aggiugnendole ad un arraylist
-					if (!effectList.keySet().toArray()[j].toString().equals("Return") & !effectList.keySet().toArray()[j].toString().equals("Multiplier") & !effectList.keySet().toArray()[j].toString().equals("ResourceToCount")){
-						resList.add(createAllExceptActivable(effectList, j)); 
-					} else {
-						resList.add(createBonusWithMultiplier(effectList));
-						break;
+
+							if (!effectList.keySet().toArray()[j].toString().equals("Return") &
+									!effectList.keySet().toArray()[j].toString().equals("Multiplier") &
+									!effectList.keySet().toArray()[j].toString().equals("ResourceToCount")){
+
+									resList.add(createAllExceptActivable(effectList, j));
+							}
+							else {
+
+								resList.add(createBonusWithMultiplier(effectList));
+								break;
 					}
 			}
 			list.add(resList);
@@ -82,7 +91,9 @@ public class CommonJsonParser {
 		return list;
 	}
 	
-	private ActivableEffect createActivable(JSONObject json) throws NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+	private ActivableEffect createActivable(JSONObject json) throws NumberFormatException, InstantiationException,
+			IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+
 		return new ActivableEffect(ActivableEffectType.valueOf(json.get("Type").toString()),
 				Integer.parseInt(json.get("DiceRequired").toString()),
 				getRequirements((JSONObject)json.get("Requirement")),
@@ -90,6 +101,7 @@ public class CommonJsonParser {
 	}
 	
 	private ActionResult createAllExceptActivable(JSONObject json, int j) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, NumberFormatException, IllegalArgumentException, InvocationTargetException{
+
 		Object actionObject = Class.forName(json.keySet().toArray()[j].toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
 		Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
 		method.invoke(actionObject, Integer.parseInt(json.get(json.keySet().toArray()[j].toString()).toString()));
@@ -97,7 +109,8 @@ public class CommonJsonParser {
 	}
 
 	private BonusWithMultiplier createBonusWithMultiplier(JSONObject json) throws NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		return new BonusWithMultiplier(Float.parseFloat(json.get("Multiplier").toString()),
+
+			return new BonusWithMultiplier(Float.parseFloat(json.get("Multiplier").toString()),
 				(Resource)Class.forName(json.get("Return").toString()).newInstance(),
 				 Class.forName(json.get("ResourceToCount").toString()));
 	}
