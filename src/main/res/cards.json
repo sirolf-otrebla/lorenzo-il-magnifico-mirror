@@ -40,7 +40,7 @@
     "PermanentEffect": {
       "YellowBonus" : 2,
       "StoneResourceCostBonus" : 1,
-      "WoodResourceResourceCostBonus" : -1
+      "WoodResourceCostBonus" : 1
     }
   },
   "CardName": "Costruttore"
@@ -284,7 +284,7 @@
   "Effect": {
     "ImmediateEffect": {
       "Multiplier" : 2,
-      "ResourceToCount" : "Green",
+      "ResourceToCount" : "GreenCard",
       "Return" : "VictoryResource"
     }
   },
@@ -301,7 +301,7 @@
   "Effect": {
     "ImmediateEffect": {
       "Multiplier" : 2,
-      "ResourceToCount" : "Yellow",
+      "ResourceToCount" : "YellowCard",
       "Return" : "VictoryResource"
     }
   },
@@ -335,7 +335,7 @@
   "Effect": {
     "ImmediateEffect": {
       "Multiplier" : 2,
-      "ResourceToCount" : "Blue",
+      "ResourceToCount" : "BlueCard",
       "Return" : "VictoryResource"
     }
   },
@@ -352,7 +352,7 @@
   "Effect": {
     "ImmediateEffect": {
       "Multiplier" : 2,
-      "ResourceToCount" : "Violet",
+      "ResourceToCount" : "VioletCard",
       "Return" : "VictoryResource"
     }
   },
@@ -858,7 +858,7 @@
     },
     "Effect": {
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 3,
         "Requirement" : {
         },
@@ -878,7 +878,7 @@
     },
     "Effect": {
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 1,
         "Requirement" : {
         },
@@ -901,7 +901,7 @@
         "MilitaryResource" : 2
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 6,
         "Requirement" : {
         },
@@ -921,7 +921,7 @@
     },
     "Effect": {
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 5,
         "Requirement" : {
         },
@@ -944,7 +944,7 @@
         "WoodResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 2,
         "Requirement" : {
         },
@@ -966,7 +966,7 @@
         "WoodResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 5,
         "Requirement" : {
         },
@@ -988,7 +988,7 @@
         "StoneResource" : 2
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 4,
         "Requirement" : {
         },
@@ -1010,7 +1010,7 @@
         "GoldResource" : 4
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 6,
         "Requirement" : {
         },
@@ -1031,7 +1031,7 @@
     },
     "Effect": {
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 5,
         "Requirement" : {
         },
@@ -1055,7 +1055,7 @@
         "StoneResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 4,
         "Requirement" : {
         },
@@ -1078,7 +1078,7 @@
         "WoodResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 3,
         "Requirement" : {
         },
@@ -1100,7 +1100,7 @@
         "GoldResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 1,
         "Requirement" : {
         },
@@ -1122,7 +1122,7 @@
         "ServantResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 3,
         "Requirement" : {
         },
@@ -1145,7 +1145,7 @@
         "FaithResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 2,
         "Requirement" : {
         },
@@ -1168,7 +1168,7 @@
         "WoodResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 4,
         "Requirement" : {
         },
@@ -1192,7 +1192,7 @@
         "ServantResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 2,
         "Requirement" : {
         },
@@ -1216,7 +1216,7 @@
         "VictoryResource" : 2
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 4,
         "Requirement" : {
         },
@@ -1239,7 +1239,7 @@
         "MilitaryResource" : 2
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 5,
         "Requirement" : {
         },
@@ -1262,7 +1262,7 @@
         "VictoryResource" : 3
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 2,
         "Requirement" : {
         },
@@ -1285,7 +1285,7 @@
         "FaithResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 1,
         "Requirement" : {
         },
@@ -1309,7 +1309,7 @@
         "WoodResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 3,
         "Requirement" : {
         },
@@ -1333,7 +1333,7 @@
         "ServantResource" : 1
       },
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 1,
         "Requirement" : {
         },
@@ -1355,7 +1355,7 @@
     		"GoldResource" : 3
     	},
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 6,
         "Requirement" : {
         },
@@ -1378,7 +1378,7 @@
     		"PrivilegeBonus" : 1
     	},
       "ActivableEffect": {
-        "Type" : "Harvest",
+        "Type" : "HARVEST",
         "DiceRequired" : 6,
         "Requirement" : {
         },
@@ -1408,7 +1408,7 @@
           "VictoryResource" : 2
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 3,
           "Requirement" : {
             "First" : {
@@ -1443,7 +1443,7 @@
           "FaithResource" : 1
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 2,
           "Requirement" : {
             "First" : {
@@ -1473,7 +1473,7 @@
           "VictoryResource" : 3
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 4,
           "Requirement" : {
             "First" : {
@@ -1510,7 +1510,7 @@
           "VictoryResource" : 8
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 6,
           "Requirement" : {
           },
@@ -1539,7 +1539,7 @@
           "VictoryResource" : 7
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 2,
           "Requirement" : {
           },
@@ -1565,7 +1565,7 @@
           "VictoryResource" : 6
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 5,
           "Requirement" : {
             "First" : {
@@ -1601,7 +1601,7 @@
           "VictoryResource" : 3
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 3,
           "Requirement" : {
             "First" : {
@@ -1632,7 +1632,7 @@
           "FaithResource"  :1
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 2,
           "Requirement" : {
             "First" : {
@@ -1662,7 +1662,7 @@
           "VictoryResource" : 4
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 3,
           "Requirement" : {
             "First" : {
@@ -1697,7 +1697,7 @@
           "VictoryResource" : 5
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 4,
           "Requirement" : {
             "First" : {
@@ -1733,7 +1733,7 @@
           "VictoryResource" : 3
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 1,
           "Requirement" : {
             "First" : {
@@ -1763,7 +1763,7 @@
           "VictoryResource" : 4
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 4,
           "Requirement" : {
             "First" : {
@@ -1795,7 +1795,7 @@
           "VictoryResource" : 8
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 4,
           "Requirement" : {
             "First" : {
@@ -1828,7 +1828,7 @@
           
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 2,
           "Requirement" : {
           },
@@ -1856,7 +1856,7 @@
           "VictoryResource" : 9
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 6,
           "Requirement" : {
             "First" : {
@@ -1888,7 +1888,7 @@
           "VictoryResource" : 10
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 1,
           "Requirement" : {
           },
@@ -1916,7 +1916,7 @@
           "FaithResource" : 1
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 1,
           "Requirement" : {
             "First" : {
@@ -1953,7 +1953,7 @@
           "VictoryResource" : 7
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 3,
           "Requirement" : {
             "First" : {
@@ -1984,14 +1984,14 @@
           "VictoryResource" : 6
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 6,
           "Requirement" : {
           },
           "Effect" : {
             "First" : {
               "Multiplier" : 1,
-              "ResourceToCount" : "Violet",
+              "ResourceToCount" : "VioletCard",
               "Return" : "VictoryResource"
             }
           }
@@ -2013,14 +2013,14 @@
           "VictoryResource" : 6
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 6,
           "Requirement" : {
           },
           "Effect" : {
             "First" : {
               "Multiplier" : 1,
-              "ResourceToCount" : "Blue",
+              "ResourceToCount" : "BlueCard",
               "Return" : "VictoryResource"
             }
           }
@@ -2042,14 +2042,14 @@
           "VictoryResource" : 5
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 5,
           "Requirement" : {
           },
           "Effect" : {
             "First" : {
               "Multiplier" : 1,
-              "ResourceToCount" : "Yellow",
+              "ResourceToCount" : "YellowCard",
               "Return" : "GoldResource"
             }
           }
@@ -2071,14 +2071,14 @@
           "VictoryResource" : 5
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 5,
           "Requirement" : {
           },
           "Effect" : {
             "First" : {
               "Multiplier" : 1,
-              "ResourceToCount" : "Green",
+              "ResourceToCount" : "GreenCard",
               "Return" : "GoldResource"
             }
           }
@@ -2101,7 +2101,7 @@
           "VictoryResource" : 9
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 5,
           "Requirement" : {
           },
@@ -2128,7 +2128,7 @@
           "VictoryResource" : 1
         },
         "ActivableEffect" : {
-          "Type" : "Production",
+          "Type" : "PRODUCTION",
           "DiceRequired" : 1,
           "Requirement" : {
           	"First" : {

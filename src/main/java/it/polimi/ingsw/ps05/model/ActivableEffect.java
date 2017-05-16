@@ -12,8 +12,23 @@ public class ActivableEffect implements Effect {
 	ArrayList<ArrayList<Resource>> resourcesRequired;
 	ArrayList<ArrayList<ActionResult>> effects;
 	
+	public ActivableEffect(){
+		
+	}
 	
-	
+	public ActivableEffect(ActivableEffectType type, Integer diceRequired,
+			ArrayList<ArrayList<Resource>> resourcesRequired, ArrayList<ArrayList<ActionResult>> effects) {
+		super();
+		this.type = type;
+		this.diceRequired = diceRequired;
+		this.resourcesRequired = resourcesRequired;
+		this.effects = effects;
+	}
+
+
+
+
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub
