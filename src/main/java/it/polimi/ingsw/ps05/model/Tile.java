@@ -15,8 +15,9 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     private TowerCard card;
 
     @Override
-    public ArrayList<Effect> getEffect() {
-        return null;
+    public ArrayList<Effect> getEffects() {
+
+        return this.card.getEffects();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
         /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that
         the player has to pay X coins;
          */
-        if (parentTower.isOccupied) throw new TowerOccupiedException();
+        if (parentTower.isOccupied) throw new TowerOccupiedException(this.parentTower, super.isOccupied());
         else return super.isOccupied();
     }
 

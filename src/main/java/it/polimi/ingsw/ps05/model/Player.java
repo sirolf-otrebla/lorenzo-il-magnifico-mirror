@@ -20,10 +20,10 @@ public class Player {
 	private MilitaryResource militaryPts;
 	private VictoryResource victoryPts;
 
-	private GoldResource gold;
-	private WoodResource wood;
-	private StoneResource stone;
-	private ServantResource servants;
+	GoldResource gold;
+	WoodResource wood;
+	StoneResource stone;
+	ServantResource servants;
 
 
 	private ArrayList<Card> greenCardList;

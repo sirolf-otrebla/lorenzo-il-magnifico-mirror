@@ -29,7 +29,7 @@ public abstract class ActionSpace {
 		return isOccupied;
 	}
 
-	public abstract ArrayList<Effect> getEffect(); //TODO: implement this method in subclasses;
+	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
 
 	public  ArrayList<Resource> getRequirements(){
 		return requirements;

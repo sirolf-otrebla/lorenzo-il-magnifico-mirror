@@ -26,6 +26,8 @@ public class Action implements Period {
 		}
 		catch (TowerOccupiedException towerOccupied){
 			occupied = false;
+			player.gold.remove(towerOccupied.getTowerOccupied().getRentAmount());
+
 			// TODO: lower money (use exceptions to set amount ecc. )
 		}
 		/* this block executes the action when the TowerOccupiedException is not thrown.
@@ -38,7 +40,7 @@ public class Action implements Period {
 			else {
 				manageRequirements();
 				this.position.setOccupied(this.familiar);
-				ArrayList<Effect> effectList = this.position.getEffect();
+				ArrayList<Effect> effectList = this.position.getEffects();
 
 			}
 
