@@ -6,4 +6,7 @@ public class GreenCardDeck implements Deck {
 	
 	ArrayList<GreenCard> cardList;
 	
+	public GreenCardDeck(ArrayList<GreenCard> cardList){
+		this.cardList = cardList;
+	}
 }

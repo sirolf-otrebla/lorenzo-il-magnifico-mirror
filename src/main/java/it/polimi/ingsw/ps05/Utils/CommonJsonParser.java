@@ -1,26 +1,131 @@
 package it.polimi.ingsw.ps05.Utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 
 public class CommonJsonParser {
+	
+	File file;
 
 	public CommonJsonParser(){
-		
+        file = new File("./src/main/res/cards.json");
+        
 	}
 
-	public void parse() {
+	public ArrayList<Deck> loadDeck() {
+		ArrayList<Deck> deck = new ArrayList<Deck>();
+		try {
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			deck.add(loadBlueCardDeck(obj));
+			deck.add(loadYellowCardDeck(obj));
+			deck.add(loadGreenCardDeck(obj));
+			deck.add(loadVioletCardDeck(obj));
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+		return deck;
 		
+	}
+	
+	private BlueCardDeck loadBlueCardDeck(JSONObject json){
+		JSONArray list = (JSONArray) json.get("Blue");
+		ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
+		for (Object o : list){
+			try {
+				blueCardList.add(loadBlueCard((JSONObject)o));
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new BlueCardDeck(blueCardList);
+		
+	}
+	
+	private YellowCardDeck loadYellowCardDeck(JSONObject json){
+		JSONArray list = (JSONArray) json.get("Yellow");
+		ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
+		for (Object o : list){
+			try {
+				yellowCardList.add(loadYellowCard((JSONObject)o));
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new YellowCardDeck(yellowCardList);
+	}
+	
+	private GreenCardDeck loadGreenCardDeck(JSONObject json){
+		JSONArray list = (JSONArray) json.get("Green");
+		ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
+		for (Object o : list){
+			try {
+				greenCardList.add(loadGreenCard((JSONObject)o));
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new GreenCardDeck(greenCardList);
+	}
+	
+	private VioletCardDeck loadVioletCardDeck(JSONObject json){
+		JSONArray list = (JSONArray) json.get("Violet");
+		ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
+		for (Object o : list){
+			try {
+				violetCardList.add(loadVioletCard((JSONObject)o));
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return new VioletCardDeck(violetCardList);
+	}
+	
+	private BlueCard loadBlueCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
+		return new BlueCard(getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+	}
+	
+	private YellowCard loadYellowCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
+		return new YellowCard(getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+	}
+	
+	private GreenCard loadGreenCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
+		return new GreenCard(getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+	}
+	
+	private VioletCard loadVioletCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
+		return new VioletCard(getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+	}
+	
+	
+	private Epoch getCardEpoch(JSONObject json){
+		return new Epoch(EpochEnumeration.valueOf(json.get("Epoch").toString()));
+	}
+	
+	private Color getCardColor(JSONObject json){
+		return new Color(ColorEnumeration.valueOf(json.get("Color").toString()));
+	}
+	
+	private String getCardName(JSONObject json){
+		return json.get("CardName").toString();
 	}
 
 	private ArrayList<ArrayList<Resource>> getRequirements(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{ //json è l'oggetto che contiene first e second
-
 		ArrayList<ArrayList<Resource>> list = new ArrayList<ArrayList<Resource>>(); //lista con le liste tra cui scegliere
 		for (int i = 0; i < json.keySet().toArray().length; i++) {
 			JSONObject requirementList = (JSONObject) json.get(json.keySet().toArray()[i]); //entro in first o second

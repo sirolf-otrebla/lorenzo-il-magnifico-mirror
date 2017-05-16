@@ -13,7 +13,7 @@ public class LeaderCard implements Card {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Resource>> getEffects() {
+	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
 		return null;
 	}
