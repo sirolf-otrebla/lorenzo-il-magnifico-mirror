@@ -5,4 +5,8 @@ import java.util.ArrayList;
 public class VioletCardDeck implements Deck {
 	
 	ArrayList<VioletCard> cardList;
+	
+	public VioletCardDeck(ArrayList<VioletCard> cardList){
+		this.cardList = cardList;
+	}
 }

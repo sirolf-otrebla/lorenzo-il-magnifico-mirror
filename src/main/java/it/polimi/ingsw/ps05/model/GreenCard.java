@@ -13,7 +13,7 @@ public class GreenCard extends TowerCard {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Resource>> getEffects() {
+	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,13 +24,13 @@ public class GreenCard extends TowerCard {
 		return false;
 	}
 	
-	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> effects) {
+	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public GreenCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
-			ArrayList<ArrayList<Resource>> effects) {
+			ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);
 	}
 
