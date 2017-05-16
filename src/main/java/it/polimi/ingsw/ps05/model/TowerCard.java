@@ -34,9 +34,10 @@ public class TowerCard implements Card {
 	}
 
 	@Override
-	public ArrayList<Effect> getEffects() {
+	public ArrayList<Effect>getEffects() {
+
+		return this.effects;
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
