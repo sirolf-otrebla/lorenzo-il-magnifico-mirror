@@ -5,11 +5,15 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 
 public class ImmediateEffect implements Effect {
 	
-	
+	ArrayList<ActionResult> effctsList;
 
 	public ImmediateEffect() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setEffectList(ArrayList<ActionResult> effectsList){
+		
 	}
 
 	@Override

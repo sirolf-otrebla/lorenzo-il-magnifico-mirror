@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.*;
 
-
 public class GameFlowController {
 	
 	ArrayList<Action> actionDone;
@@ -12,6 +11,5 @@ public class GameFlowController {
 	Turn currentTurn;
 	Player activePlayer; //??????? utile qui?
 	ArrayList<Epoch> epochList;
-	
 	
 }
