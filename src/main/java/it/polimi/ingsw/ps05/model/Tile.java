@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
 
 import java.util.ArrayList;
 
-/* represent the all card  spaces within towers
+/* represent the all card spaces within towers
  * 
  * further comments will be added.
  */
@@ -21,7 +21,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 
     @Override
 
-    public boolean isOccupied() throws  TowerOccupiedException{
+    public boolean isOccupied() throws TowerOccupiedException{
         if (super.isOccupied()) return super.isOccupied();
         /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that
         the player has to pay X coins;
