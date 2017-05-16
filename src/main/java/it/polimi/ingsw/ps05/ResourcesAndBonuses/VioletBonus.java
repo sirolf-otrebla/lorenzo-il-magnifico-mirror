@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
-public class GreenAction implements ActionResult {
-	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+public class VioletBonus implements ActionResult {
+private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	
-	public GreenAction(Integer value){
+	public VioletBonus(Integer value){
 		this.value = value;
 	}
 	
-	public GreenAction() {
+	public VioletBonus() {
 		
 	}
 	
