@@ -10,9 +10,9 @@ public class TowerCard implements Card {
 	public Color color = new Color();
 	public String cardName = new String();
 	public ArrayList<ArrayList<Resource>> requirements = new ArrayList<ArrayList<Resource>>();
-	public ArrayList<ArrayList<Resource>> effects = new ArrayList<ArrayList<Resource>>();
+	public ArrayList<Effect> effects = new ArrayList<Effect>();
 
-	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<ArrayList<Resource>> effects) {
+	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
@@ -20,7 +20,7 @@ public class TowerCard implements Card {
 		this.effects = effects;
 	}
 	
-	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> effects) {
+	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
@@ -34,7 +34,7 @@ public class TowerCard implements Card {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Resource>> getEffects() {
+	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
 		return null;
 	}
