@@ -1,12 +1,10 @@
 package it.polimi.ingsw.ps05.model;
 
 
-/* ENUM HERE, not class */
-
 public class Color {
-	private String color;
+	private ColorEnumeration color;
 
-	public Color(String color) {
+	public Color(ColorEnumeration color) {
 		this.color = color;
 	}
 	
@@ -14,11 +12,11 @@ public class Color {
 		
 	}
 	
-	public void setColor(String color){
+	public void setColor(ColorEnumeration color){
 		this.color = color;
 	}
 	
-	public String getColor() {
+	public ColorEnumeration getColor() {
 		return this.color;
 	}
 }

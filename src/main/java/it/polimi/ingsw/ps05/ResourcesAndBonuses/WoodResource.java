@@ -2,10 +2,12 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
-public class WoodResource implements Resource {
-	private int amount;
+public class WoodResource implements Resource, ActionResult {
+	//TODO vedi faith
+	private Integer amount;
+	private Integer value;
 	
-	public WoodResource(int amount){
+	public WoodResource(Integer amount){
 		this.amount = amount;
 	}
 	
@@ -13,16 +15,24 @@ public class WoodResource implements Resource {
 		
 	}
 	
-	public void setAmount(int amount){
+	public void setAmount(Integer amount){
 		this.amount = amount;
 	}
 	
-	public int getAmount(){
+	public Integer getAmount(){
 		return this.amount;
+	}
+	
+	public void setValue(Integer value){
+		this.value = value;
+	}
+	
+	public Integer getValue(){
+		return this.value;
 	}
 
 	@Override
-	public void remove(int amount) throws NotEnoughResourcesException {
+	public void remove(Integer amount) throws NotEnoughResourcesException {
 
 	}
 
