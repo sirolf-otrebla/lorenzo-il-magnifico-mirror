@@ -13,8 +13,13 @@ import java.util.ArrayList;
 public abstract class ActionSpace {
 
 	private boolean isOccupied;
-	private int DiceRequirement;
+	private Integer diceRequirement;
+	private final static Integer defaultDiceRequired = 1; //le sotto classi lo usano in un costruttore in cui si passa solo l'effetto, può essere comodo
 
+	public ActionSpace() {
+		diceRequirement = defaultDiceRequired;
+	}
+	
 	private ArrayList<Resource> requirements;
 
 	private Familiar occupant;
@@ -34,6 +39,24 @@ public abstract class ActionSpace {
 	public  ArrayList<Resource> getRequirements(){
 		return requirements;
 	}
+	
+	protected void setDiceRequirement(Integer diceRequirement){
+		this.diceRequirement = diceRequirement;
+	}
+
+	public Integer getDiceRequirement() {
+		return diceRequirement;
+	}
+
+	public Familiar getOccupant() {
+		return occupant;
+	}
+
+	public void setOccupant(Familiar occupant) {
+		this.occupant = occupant;
+	}
+	
+	
 
 	
 }

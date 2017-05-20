@@ -15,5 +15,9 @@ public class VioletCard extends TowerCard  {
 			ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);
 	}
+	
+	public VioletCard(){
+		super();
+	}
 
 }
