@@ -12,6 +12,8 @@ public interface Effect {
 	public EffectType getEffectType();
 
 	public ArrayList<ArrayList<ActionResult>> getResultList();
+
+	public void apply(Familiar familyMember, int alternative);
 	
 	// what other?
 }

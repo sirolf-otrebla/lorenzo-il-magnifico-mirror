@@ -15,9 +15,14 @@ public abstract class ActionSpace {
 	private boolean isOccupied;
 	private int DiceRequirement;
 
-	private ArrayList<Resource> requirements;
+	private ArrayList<ArrayList<Resource>> requirements;
+
 
 	private Familiar occupant;
+
+	public Familiar getOccupant(){
+		return occupant;
+	}
 
 	public void setOccupied(Familiar occupant) {
 		this.occupant = occupant;
@@ -31,9 +36,10 @@ public abstract class ActionSpace {
 
 	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
 
-	public  ArrayList<Resource> getRequirements(){
+	public  ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;
 	}
 
-	
+
+	public abstract void applyEffect();
 }

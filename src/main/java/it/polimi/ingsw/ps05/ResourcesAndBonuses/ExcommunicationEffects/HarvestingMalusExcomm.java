@@ -21,7 +21,12 @@ public class HarvestingMalusExcomm implements ExcommunicationEffect {
 		return null;
 	}
 
-	@Override
+    @Override
+    public void apply() {
+
+    }
+
+    @Override
 	public void applyEffect() {
 		// TODO Auto-generated method stub
 

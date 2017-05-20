@@ -14,5 +14,9 @@ public interface ExcommunicationEffect extends Effect {
 	public void applyEffect();
 	
 	public void inizializeFromJson(JSONObject json);
-	
+
+    @Override
+    default void apply() {
+
+    }
 }
