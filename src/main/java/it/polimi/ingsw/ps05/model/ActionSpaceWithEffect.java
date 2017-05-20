@@ -9,7 +9,7 @@ public class ActionSpaceWithEffect extends ActionSpace {
 	@Override
 	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
-		return null;
+		return effect;
 	}
 
 }

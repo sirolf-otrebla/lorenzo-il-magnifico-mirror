@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class GreenCard extends TowerCard {
+	
+	public GreenCard(){
+		super();
+	}
 
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {

@@ -4,18 +4,36 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+
 public class CouncilSpace extends ActionSpaceWithEffect {
 
-    private ArrayList<Familiar> occupantList;
+	private ArrayList<Familiar> occupantList;
 
-    @Override
-    public void setOccupied(Familiar occupant){
-        occupantList.add(occupant);
-    }
+	ArrayList<ActionResult> effectsOnPositioning;
 
-    public void getOrder() {
-        // TODO
-    }
+	public CouncilSpace() {
+		super();
+	}
 
+	public CouncilSpace(ArrayList<ActionResult> effectsOnPositioning) {
+		super();
+		this.effectsOnPositioning = effectsOnPositioning;
+	}
+
+	public CouncilSpace(Integer diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
+		super();
+		super.setDiceRequirement(diceRequired);
+		this.effectsOnPositioning = effectsOnPositioning;
+	}
+
+	@Override
+	public void setOccupied(Familiar occupant) {
+		occupantList.add(occupant);
+	}
+
+	public void getOrder() {
+		// TODO
+	}
 
 }

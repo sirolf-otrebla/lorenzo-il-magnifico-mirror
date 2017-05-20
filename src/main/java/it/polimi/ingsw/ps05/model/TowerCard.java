@@ -26,6 +26,10 @@ public class TowerCard implements Card {
 		this.cardName = cardName;
 		this.effects = effects;
 	}
+	
+	public TowerCard(){
+		
+	}
 
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
