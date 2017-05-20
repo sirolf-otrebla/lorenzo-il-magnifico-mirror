@@ -15,5 +15,9 @@ public class YellowCard extends TowerCard  {
 			ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);
 	}
+	
+	public YellowCard(){
+		super();
+	}
 
 }

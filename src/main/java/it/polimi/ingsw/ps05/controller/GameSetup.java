@@ -17,7 +17,8 @@ public class GameSetup {
 	
 	private void loadDeck(){
 		CommonJsonParser parser = new CommonJsonParser();
-        deck = parser.loadDeck();
+        deck = parser.loadDeck("./src/main/res/cards.json");
+        board = parser.loadBoard("./src/main/res/board.json");
 	}
 
 }

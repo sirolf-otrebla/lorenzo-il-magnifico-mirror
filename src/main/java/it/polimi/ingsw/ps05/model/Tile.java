@@ -11,8 +11,34 @@ import java.util.ArrayList;
  */
 public class Tile extends ActionSpace implements TowerTileInterface {
 
-    private Tower parentTower;
+    private Tower<?> parentTower;
     private TowerCard card;
+    private Integer diceRequired; //integer o dado??
+    
+    public Tile(){
+    	
+    }
+    
+    public Tile(TowerCard card, Integer diceRequired, Tower<?> parentTower){
+    	
+    }
+    
+    public void setDiceRequired(Integer diceRequired){
+    	this.diceRequired = diceRequired;
+    }
+    public Integer getDiceRequired(){
+    	return diceRequired;
+    }
+    
+    @Override
+    public void setParentTower(Tower<?> parentTower){
+    	this.parentTower = parentTower;
+    }
+    
+    @Override
+    public void setTowerCard(TowerCard card){
+    	this.card = card;
+    }
 
     @Override
     public ArrayList<Effect> getEffects() {
@@ -21,7 +47,6 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     @Override
-
     public boolean isOccupied() throws TowerOccupiedException{
         if (super.isOccupied()) return super.isOccupied();
         /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that

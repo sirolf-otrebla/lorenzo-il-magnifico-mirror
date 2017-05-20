@@ -14,6 +14,10 @@ public class AlternativesList<T> implements Iterable<Alternative<T>> {
 		this.toBeDecorated = toBeDecorated;
 	}
 	
+	public List<List<T>> getList(){
+		return toBeDecorated;
+	}
+	
 	@Override
 	public Iterator<Alternative<T>> iterator() {
 		// TODO Auto-generated method stub
