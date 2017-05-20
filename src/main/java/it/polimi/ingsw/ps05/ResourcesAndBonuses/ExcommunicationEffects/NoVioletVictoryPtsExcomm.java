@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps05.model.Effect;
@@ -16,9 +17,14 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
     }
 
     @Override
-    public ArrayList<ArrayList<Effect>> getResultList() {
+    public ArrayList<ArrayList<ActionResult>> getResultList() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void apply() {
+
     }
 
     @Override

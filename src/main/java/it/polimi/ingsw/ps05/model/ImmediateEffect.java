@@ -28,4 +28,9 @@ public class ImmediateEffect implements Effect {
 		return null;
 	}
 
+    @Override
+    public void apply() {
+
+    }
+
 }
