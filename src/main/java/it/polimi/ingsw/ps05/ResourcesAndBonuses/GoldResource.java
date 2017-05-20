@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class GoldResource implements Resource, ActionResult {
@@ -32,13 +35,23 @@ public class GoldResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void remove(Integer amount) throws NotEnoughResourcesException {
+	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
 
 	}
 
 	@Override
 	public void remove(Resource res) {
 
+	}
+
+	@Override
+	public void removeFromPlayer(Familiar playerFamiliar) {
+
+	}
+
+	@Override
+	public boolean hasEnoughResources(Familiar playerFamiliar) {
+		return false;
 	}
 
 }

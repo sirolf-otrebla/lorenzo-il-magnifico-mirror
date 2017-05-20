@@ -28,4 +28,9 @@ public class EndGameEffect implements Effect {
 		return null;
 	}
 
+    @Override
+    public void apply() {
+
+    }
+
 }
