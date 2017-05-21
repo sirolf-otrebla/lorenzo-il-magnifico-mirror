@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.model;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.GoldResource;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
-import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
 
 import java.util.ArrayList;
 
@@ -61,19 +60,16 @@ public class Tile extends ActionSpace implements TowerTileInterface {
        if (parentTower.isOccupied)
            for (ArrayList<Resource> andAlternative: req)
                andAlternative.add(new GoldResource(this.TOWER_OCCUPIED_PAYMENT));
+       return req;
     }
   
-    public boolean isOccupied() throws TowerOccupiedException{
-        if (super.isOccupied()) return super.isOccupied();
-        /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that
-        the player has to pay X coins;
-         */
-        if (parentTower.isOccupied) throw new TowerOccupiedException(this.parentTower, super.isOccupied());
-        else return super.isOccupied();
+    public boolean isOccupied() {
+        return  super.isOccupied();
     }
 
     @Override
     public void applyEffect() {
-
+        this.card.moveToPlayer();
+        this.card.applyNonActivableEffects(this.getOccupant());
     }
 }

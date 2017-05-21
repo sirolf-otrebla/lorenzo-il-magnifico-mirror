@@ -47,7 +47,7 @@ public class ActivableEffect implements Effect {
 	}
 
     @Override
-    public void apply(Familiar familyMember, int choosenAlternative) {
+    public void apply(PlayerRelated familyMember, int choosenAlternative) {
 
 		if (state == this.STATE_READY){
 			// algorithm:

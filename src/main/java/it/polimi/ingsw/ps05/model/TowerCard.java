@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
-public class TowerCard implements Card {
+public abstract class TowerCard implements Card {
 	
 	public Epoch epoch = new Epoch();
 	public Color color = new Color();
 	public String cardName = new String();
-	public ArrayList<ArrayList<Resource>> requirements = new ArrayList<ArrayList<Resource>>();
-	public ArrayList<Effect> effects = new ArrayList<Effect>();
+	public ArrayList<ArrayList<Resource>> requirements;
+	public ArrayList<Effect> effects;
 
 	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
@@ -33,39 +33,29 @@ public class TowerCard implements Card {
 
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.requirements;
 	}
 
 	@Override
 	public ArrayList<Effect>getEffects() {
 
 		return this.effects;
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		return this.cardName;
+	}
+
+	@Override
+	public EpochEnumeration getEpoch() { // che cazzo???
 		return null;
 	}
 
-	@Override
-	public Epoch getEpoch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isActive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void applyEffect(Object player) {
+	public void applyNonActivableEffects(PlayerRelated player) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	public abstract void moveToPlayer();
 }

@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 
-public class Familiar {
+public class Familiar implements PlayerRelated{
 
 	private ActionSpace position;
 	Dice relatedDice;
@@ -12,10 +12,6 @@ public class Familiar {
 	public Dice  getRelatedDice(){
 
 		return relatedDice;
-	}
-
-	public Player getRelatedPlayer() {
-		return relatedPlayer;
 	}
 
 	public ActionSpace getPosition() {
@@ -30,5 +26,9 @@ public class Familiar {
 
 	public void setPosition(ActionSpace position) {
 		this.position = position;
+	}
+	@Override
+	public Player getRelatedPlayer(){
+		return this.relatedPlayer;
 	}
 }

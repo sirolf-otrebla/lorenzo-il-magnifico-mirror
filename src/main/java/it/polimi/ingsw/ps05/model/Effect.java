@@ -13,7 +13,7 @@ public interface Effect {
 
 	public ArrayList<ArrayList<ActionResult>> getResultList();
 
-	public void apply(Familiar familyMember, int alternative);
+	public void apply(PlayerRelated familyMember, int alternative);
 	
 	// what other?
 }
