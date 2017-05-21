@@ -10,7 +10,7 @@ public abstract class ActionSpaceWithEffect extends ActionSpace {
 		super.setOccupied(occupant);
 	}
 
-	public boolean isOccupied() throws TowerOccupiedException {
+	public boolean isOccupied()  {
 		return super.isOccupied();
 	}
 
