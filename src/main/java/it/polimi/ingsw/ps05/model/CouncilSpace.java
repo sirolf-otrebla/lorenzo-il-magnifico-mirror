@@ -32,6 +32,16 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		occupantList.add(occupant);
 	}
 
+	@Override
+	public ArrayList<Effect> getEffects() {
+		return null;
+	}
+
+	@Override
+	public void applyEffect() {
+
+	}
+
 	public void getOrder() {
 		// TODO
 	}
