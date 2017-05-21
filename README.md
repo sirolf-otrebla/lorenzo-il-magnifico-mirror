@@ -1,3 +1,4 @@
-#*Prova Finale PS05*
+#Lorenzo il Magnifico
+##Gruppo PS05 (Falaschini, Floris, Miotto)
 
-Ha senso creare una classe che astragga un po' quell'orrendo Lista<Lista<Robaacaso>> che usiamo sempre?
+
