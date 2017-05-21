@@ -1,0 +1,229 @@
+{
+	"Tower": 
+	{
+		"Green": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 1
+				},
+
+				{
+					"diceRequired": 3
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"WoodResource": 1
+					}
+				},
+
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"WoodResource": 2
+					}
+				}
+			]
+		},
+
+		"Blue": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 1
+				},
+
+				{
+					"diceRequired": 3
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"StoneResource": 1
+					}
+				},
+
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"StoneResource": 2
+					}
+				}
+			]
+		},
+
+		"Yellow": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 1
+				},
+
+				{
+					"diceRequired": 3
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"MilitaryResource": 1
+					}
+				},
+
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"MilitaryResource": 2
+					}
+				}
+			]
+		},
+
+		"Violet": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 1
+				},
+
+				{
+					"diceRequired": 3
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"GoldResource": 1
+					}
+				},
+
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"GoldResource": 2
+					}
+				}
+			]
+		}
+	},
+
+	"CouncilSpace": 
+	{
+		"Effect": 
+		{
+			"GoldResource": 1,
+			"PrivilegeBonus": 1
+		}
+	},
+
+	"MarketSpace": 
+	[
+		{
+			"GoldResource": 5
+		},
+
+		{
+			"ServantResource": 5
+		},
+
+		{
+			"MilitaryResource": 3,
+			"GoldResource": 2
+		},
+
+		{
+			"PrivilegeBonus": 2
+		}
+	],
+
+	"FaithPath": 
+	[
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		7,
+		9,
+		11,
+		13,
+		15,
+		17,
+		19,
+		22,
+		25,
+		30
+	],
+
+	"MilitaryPath": 
+	[
+		0,
+		0,
+		3,
+		7,
+		12,
+		18
+	],
+
+	"HarvestSpace": 
+	[
+		{
+			"Effect": 
+			{
+				
+			}
+		},
+
+		{
+			"Effect": 
+			{
+				"HarvestBonus": -3
+			}
+		}
+	],
+
+	"ProductionSpace": 
+	[
+		{
+			"Effect": 
+			{
+				
+			}
+		},
+
+		{
+			"Effect": 
+			{
+				"ProductionBonus": -3
+			}
+		}
+	]
+}

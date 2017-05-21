@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 
 /* in preliminary UML this object was called ActivitySpace. I decided to change his name because of
  * the possible ambiguity about the term Activity (e.g. there are other objects that uses "Activity"
@@ -11,6 +12,7 @@ import java.util.Iterator;
  * further comments will be added
  */
 public class HarvestingSpace extends ActionSpaceWithEffect {
+
     private ArrayList<Effect> effectList;
 
     @Override
@@ -26,5 +28,22 @@ public class HarvestingSpace extends ActionSpaceWithEffect {
             cardListIt.next().applyHarvestableEffects(this.getOccupant());
 
     }
+    
+	ArrayList<ActionResult> effectsOnPositioning;
 
+	public HarvestingSpace() {
+		super();
+	}
+
+	public HarvestingSpace(ArrayList<ActionResult> effectsOnPositioning) {
+		super();
+		this.effectsOnPositioning = effectsOnPositioning;
+	}
+
+
+	public HarvestingSpace(Integer diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
+		super();
+		super.setDiceRequirement(diceRequired);
+		this.effectsOnPositioning = effectsOnPositioning;
+	}
 }

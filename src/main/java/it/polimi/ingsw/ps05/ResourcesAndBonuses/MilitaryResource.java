@@ -43,11 +43,10 @@ public class MilitaryResource implements Resource, ActionResult {
 	public void remove(Resource res) {
 
 	}
-
+  
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) {
 
 	}
-
 
 }

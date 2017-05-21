@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class GreenCard extends TowerCard {
+	
+	public GreenCard(){
+		super();
+	}
 
 
 	// selectedEffect has to be set before calling apply* methods;
@@ -68,9 +72,15 @@ public class GreenCard extends TowerCard {
 	public void setToBeActivated(boolean toBeActivated) {
 		this.toBeActivated = toBeActivated;
 	}
+
 	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public GreenCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+			ArrayList<Effect> effects) {
+		super(epoch, color, cardName, requirements, effects);
 	}
 
 }
