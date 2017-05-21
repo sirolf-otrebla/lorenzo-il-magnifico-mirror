@@ -6,5 +6,7 @@ package it.polimi.ingsw.ps05.model;
  *  */
 public interface TowerTileInterface {
 
+	public void setParentTower(Tower<?> tower);
+	public void setTowerCard(TowerCard card);
 	
 }

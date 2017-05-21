@@ -47,6 +47,7 @@ public class Player {
 	    return thisAction;
     }
 
+	
 
 	public ArrayList<GreenCard> getGreenCardList() {
 		return greenCardList;

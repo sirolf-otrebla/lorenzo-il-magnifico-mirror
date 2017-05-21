@@ -34,8 +34,10 @@ public class GoldResource implements Resource, ActionResult {
 		return this.value;
 	}
 
+
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+
 
 	}
 

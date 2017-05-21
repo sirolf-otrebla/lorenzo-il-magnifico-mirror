@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.Familiar;
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.model.Effect;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
 
 public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {

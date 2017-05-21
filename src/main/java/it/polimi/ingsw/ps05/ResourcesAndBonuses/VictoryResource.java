@@ -45,6 +45,7 @@ public class VictoryResource implements Resource, ActionResult {
 	}
 
 	@Override
+
 	public void removeFromPlayer(Familiar playerFamiliar) {
 
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.model.Effect;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
 
 public class ReduceVictoryPtsExcomm implements ExcommunicationEffect {
@@ -16,7 +16,7 @@ public class ReduceVictoryPtsExcomm implements ExcommunicationEffect {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Effect>> getResultList() {
+	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
