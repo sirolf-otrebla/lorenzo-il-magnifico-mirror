@@ -45,7 +45,7 @@ public class GreenCard extends TowerCard {
 		return null;
 	}
 
-	public void applyHarvestableEffects(Familiar familyMember){
+	public void applyHarvestableEffects(PlayerRelated familyMember){
 		/*1st solution: Player selects what cards he want to use BEFORE
 		 * calling action.run() class. references to cards he want to activate are stored
 		  * in a special array/ list/ whatever attribute stored in Player class.

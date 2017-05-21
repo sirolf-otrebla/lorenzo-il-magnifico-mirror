@@ -12,9 +12,9 @@ public interface Card {
 	public ArrayList<Effect> getEffects();
 
 	//better to use Familiar?
-	public void applyEffect(Object /* aka player, substitute */ player);
+	public void applyNonActivableEffects(PlayerRelated player);
 	
-	public Epoch getEpoch();
+	public EpochEnumeration getEpoch();
 	
 	public String getName();
 	
