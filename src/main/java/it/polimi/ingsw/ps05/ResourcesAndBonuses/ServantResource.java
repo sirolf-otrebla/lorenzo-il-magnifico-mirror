@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.Player;
+
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -20,7 +23,7 @@ public class ServantResource implements Resource, ActionResult {
 		this.amount = amount;
 	}
 	
-	public Integer getAmount(){
+	public int getAmount(){
 		return this.amount;
 	}
 	
@@ -28,11 +31,13 @@ public class ServantResource implements Resource, ActionResult {
 		this.value = value;
 	}
 	
-	public Integer getValue(){
+	public int getValue(){
 		return this.value;
 	}
 
-	public void remove(Integer amount) throws NotEnoughResourcesException {
+	@Override
+	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+
 
 	}
 
@@ -42,8 +47,7 @@ public class ServantResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-		// TODO Auto-generated method stub
-		
+	public void removeFromPlayer(Familiar playerFamiliar) {
+
 	}
 }

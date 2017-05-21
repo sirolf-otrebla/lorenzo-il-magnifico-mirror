@@ -24,4 +24,9 @@ public class PermanentEffect implements Effect {
 		return null;
 	}
 
+    @Override
+    public void apply() {
+
+    }
+
 }
