@@ -29,7 +29,7 @@ public abstract class ActionSpace {
 		isOccupied = true;
 	}
 
-	public boolean isOccupied() throws  TowerOccupiedException{
+	public boolean isOccupied() {
 
 		return isOccupied;
 	}

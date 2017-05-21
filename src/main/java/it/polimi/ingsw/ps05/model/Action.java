@@ -44,7 +44,6 @@ public class Action implements Period {
 		Iterator<ArrayList<Resource>> iterator = list.iterator();
 		Iterator<Resource> innerIterator;
 		while (iterator.hasNext()) {
-
 			ArrayList<Resource> thisIteration = iterator.next();
 			if(checkResList(thisIteration)) this.suitableReqAlternatives.add(thisIteration);
 		}
