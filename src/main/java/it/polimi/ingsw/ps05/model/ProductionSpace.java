@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
-
+import java.util.Iterator;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 
 /* in preliminary UML this object was called ActivitySpace. I decided to change his name because of
@@ -36,4 +36,19 @@ public class ProductionSpace extends ActionSpaceWithEffect {
 		
 	}
 
+    private ArrayList<Effect> effectList;
+    @Override
+    public ArrayList<Effect> getEffects() {
+        return effectList;
+    }
+
+    @Override
+    public void applyEffect() {
+        Player player = this.getOccupant().getRelatedPlayer();
+        Iterator<YellowCard> cardListIt = player.getYellowCardList().iterator();
+        while (cardListIt.hasNext())
+            cardListIt.next().applyProductionEffects(this.getOccupant());
+
+
+    }
 }

@@ -15,28 +15,31 @@ public abstract class ActionSpace {
 	private boolean isOccupied;
 	private Integer diceRequirement;
 	private final static Integer defaultDiceRequired = 1; //le sotto classi lo usano in un costruttore in cui si passa solo l'effetto, può essere comodo
+	private ArrayList<ArrayList<Resource>> requirements;
 
 	public ActionSpace() {
 		diceRequirement = defaultDiceRequired;
 	}
-	
-	private ArrayList<Resource> requirements;
 
 	private Familiar occupant;
+
+	public Familiar getOccupant(){
+		return occupant;
+	}
 
 	public void setOccupied(Familiar occupant) {
 		this.occupant = occupant;
 		isOccupied = true;
 	}
 
-	public boolean isOccupied() throws  TowerOccupiedException{
+	public boolean isOccupied() {
 
 		return isOccupied;
 	}
 
 	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
 
-	public  ArrayList<Resource> getRequirements(){
+	public  ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;
 	}
 	
@@ -58,5 +61,6 @@ public abstract class ActionSpace {
 	
 	
 
-	
+
+	public abstract void applyEffect();
 }

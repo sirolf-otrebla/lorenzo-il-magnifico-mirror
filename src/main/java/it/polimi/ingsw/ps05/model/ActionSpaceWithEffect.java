@@ -1,15 +1,24 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
+
 import java.util.ArrayList;
 
-public class ActionSpaceWithEffect extends ActionSpace {
+public abstract class ActionSpaceWithEffect extends ActionSpace {
+
+	public void setOccupied(Familiar occupant) {
+		super.setOccupied(occupant);
+	}
+
+	public boolean isOccupied() throws TowerOccupiedException {
+		return super.isOccupied();
+	}
 
 	private ArrayList<Effect> effect; // this is the bonus directly associated with the action space itself
 
 	@Override
-	public ArrayList<Effect> getEffects() {
-		// TODO Auto-generated method stub
-		return effect;
-	}
+	public abstract ArrayList<Effect> getEffects();
+
+	public abstract void applyEffect();
 
 }

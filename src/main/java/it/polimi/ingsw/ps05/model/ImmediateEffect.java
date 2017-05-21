@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 
 public class ImmediateEffect implements Effect {
 	
-	ArrayList<ActionResult> effctsList;
+	ArrayList<ArrayList<ActionResult>> effctsList;
 
 	public ImmediateEffect() {
 		super();
@@ -26,6 +26,11 @@ public class ImmediateEffect implements Effect {
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void apply(Familiar familyMember, int alternative) {
+
 	}
 
 }
