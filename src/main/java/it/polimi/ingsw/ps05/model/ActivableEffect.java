@@ -54,7 +54,7 @@ public class ActivableEffect implements Effect {
 
             // 1) check dice
             // 1b) if dice not enough, remove servants
-            // 1c) if not enough servants, raise exception
+            // 1c) if not enough servants, rise exception
 			// 2) remove resources
             // 2b) if not enough resources, rise exception
 			// 3) apply

@@ -34,7 +34,7 @@ public class Action implements Period {
 	// 2b) check resources
 	// c) evaluate special effects?
 
-	public final boolean isLegal() {
+	public boolean isLegal() {
 
 		// 1
 		if (this.familiar.isUsed()) return false;
@@ -88,6 +88,8 @@ public class Action implements Period {
 
 
 	private void manageRequirements(ArrayList<Resource> resources) throws NotEnoughResourcesException, DiceTooLowException {
+
+
 		Iterator<Resource> it = resources.iterator();
 		while(it.hasNext())
 			it.next().removeFromPlayer(this.familiar);

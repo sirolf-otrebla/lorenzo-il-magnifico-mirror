@@ -33,9 +33,14 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 
     @Override
 
-    public  ArrayList<Resource> getRequirements(){
+    public  ArrayList<ArrayList<Resource>> getRequirements(){
 
         //TODO
         return null;
+    }
+
+    @Override
+    public void applyEffect() {
+
     }
 }
