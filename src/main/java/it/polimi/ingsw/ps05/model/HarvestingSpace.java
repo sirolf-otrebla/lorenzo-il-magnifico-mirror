@@ -11,11 +11,11 @@ import java.util.Iterator;
  * further comments will be added
  */
 public class HarvestingSpace extends ActionSpaceWithEffect {
-
+    private ArrayList<Effect> effectList;
 
     @Override
     public ArrayList<Effect> getEffects() {
-        return null;
+        return effectList;
     }
 
     @Override

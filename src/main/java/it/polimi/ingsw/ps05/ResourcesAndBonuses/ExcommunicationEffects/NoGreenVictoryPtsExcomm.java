@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+import it.polimi.ingsw.ps05.model.Familiar;
 import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps05.model.Effect;
@@ -22,7 +23,12 @@ public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {
 		return null;
 	}
 
-    @Override
+	@Override
+	public void apply(Familiar familyMember, int alternative) {
+
+	}
+
+	@Override
     public void apply() {
 
     }

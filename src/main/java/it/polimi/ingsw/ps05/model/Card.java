@@ -10,9 +10,8 @@ public interface Card {
 	public ArrayList<ArrayList<Resource>> getRequirements(); 
 	
 	public ArrayList<Effect> getEffects();
-	
-	public boolean isActive(); // for excommunication 
-	
+
+	//better to use Familiar?
 	public void applyEffect(Object /* aka player, substitute */ player);
 	
 	public Epoch getEpoch();
