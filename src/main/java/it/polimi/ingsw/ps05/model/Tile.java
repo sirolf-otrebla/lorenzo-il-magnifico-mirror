@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.GoldResource;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
 
@@ -13,6 +15,9 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 
     private Tower<?> parentTower;
     private TowerCard card;
+    private Dice diceRequirement;
+
+    public static final int TOWER_OCCUPIED_PAYMENT = 3;
     private Integer diceRequired; //integer o dado??
     
     public Tile(){
@@ -47,6 +52,17 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     @Override
+    public  ArrayList<ArrayList<Resource>> getRequirements(){
+        // ADDS DICE REQUIREMENT
+       ArrayList<ArrayList<Resource>> req = card.getRequirements();
+       for (ArrayList<Resource> andAlternative: req)
+           andAlternative.add(diceRequirement);
+       // ADD TOWER OCCUPIED GOLD REQUIREMENT;
+       if (parentTower.isOccupied)
+           for (ArrayList<Resource> andAlternative: req)
+               andAlternative.add(new GoldResource(this.TOWER_OCCUPIED_PAYMENT));
+    }
+  
     public boolean isOccupied() throws TowerOccupiedException{
         if (super.isOccupied()) return super.isOccupied();
         /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that
@@ -57,10 +73,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     @Override
+    public void applyEffect() {
 
-    public  ArrayList<Resource> getRequirements(){
-
-        //TODO
-        return null;
     }
 }

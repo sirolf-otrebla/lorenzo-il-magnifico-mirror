@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+import it.polimi.ingsw.ps05.model.Familiar;
 import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
@@ -19,6 +21,11 @@ public class NoYellowVictoryPtsExcomm implements ExcommunicationEffect {
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void apply(Familiar familyMember, int alternative) {
+
 	}
 
 	@Override

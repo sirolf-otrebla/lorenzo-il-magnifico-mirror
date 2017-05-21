@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -33,17 +35,18 @@ public class MilitaryResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void remove(Resource res) {
-
-	}
-
-	public void remove(Integer amount) {
+	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
 
 	}
 
 	@Override
-	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-		// TODO Auto-generated method stub
-		
+	public void remove(Resource res) {
+
 	}
+  
+	@Override
+	public void removeFromPlayer(Familiar playerFamiliar) {
+
+	}
+
 }

@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
+import javax.xml.crypto.KeySelector;
+
 public class Player {
 	
 	// server information
@@ -13,7 +15,7 @@ public class Player {
 	
 	// game information
 	private Color color;
-	private Familiar familyList;
+	private ArrayList<Familiar> familyList;
 	private BonusTile bonusTile;
 
 	private FaithResource faithPts;
@@ -26,10 +28,10 @@ public class Player {
 	ServantResource servants;
 
 
-	private ArrayList<Card> greenCardList;
-	private ArrayList<Card> blueCardList;
-	private ArrayList<Card> yellowCardList;
-	private ArrayList<Card> purpleCardList;
+	private ArrayList<GreenCard> greenCardList;
+	private ArrayList<BlueCard> blueCardList;
+	private ArrayList<YellowCard> yellowCardList;
+	private ArrayList<VioletCard> purpleCardList;
 	private ArrayList<LeaderCard> leaderCardList;
 
 	private ArrayList<Effect> permanentEffectList;
@@ -37,11 +39,29 @@ public class Player {
 	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
 	    Action thisAction = new Action(this, familiar, position);
-	    thisAction.execute();
+	    try {
+	    	// run actions
+		} catch (Exception e /* create more catch branch */ ){
+
+		}
 	    return thisAction;
     }
 
 	
 
-	
+	public ArrayList<GreenCard> getGreenCardList() {
+		return greenCardList;
+	}
+
+	public ArrayList<YellowCard> getYellowCardList() {
+		return yellowCardList;
+	}
+
+	public ArrayList<BlueCard> getBlueCardList() {
+		return blueCardList;
+	}
+
+	public ArrayList<VioletCard> getPurpleCardList() {
+		return purpleCardList;
+	}
 }
