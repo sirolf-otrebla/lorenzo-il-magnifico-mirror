@@ -1,4 +1,4 @@
-# Lorenzo il Magnifico
+ # <center>Lorenzo il Magnifico</center>
  
 ### Gruppo PS05 (Falaschini, Floris, Miotto)
 
@@ -22,9 +22,9 @@ Per gestire le risorse e gli effetti sono state create due interfacce: _Resource
 
 #### Parser
 Il parser è colui che si occupa di prendere i dati dai file e trasformabili in oggetti usabili per l'esecuzione del programma. La linea base del parser è zero _switch_, pochi _if_ e molta automatizzazione. Per fare questo in tutti i file ogni risorsa, bonus o effetto ha lo stesso nome della che identifica. Il metodo più usato per questo processo è:
-'''java
+```java
  Class.forName("_nome della classe da istanziare_").newIstance();
-'''
+```
 Per quanto riguarda le carte dopo aver istanziato la classe dell'azione, del bonus o della risorsa si esegue un metodo comune a tutte le classi che implementano la classe **ActionResult**, il quale permette di settare il valore del bonus/risorsa effettivo.
 Per la **Board** il procedimento è molto simile, anziché trovare risorse e/o carte, nel file troviamo i vari spazi in cui è possibile piazzare un familiare e quindi eseguire un'azione.
 #### Board
