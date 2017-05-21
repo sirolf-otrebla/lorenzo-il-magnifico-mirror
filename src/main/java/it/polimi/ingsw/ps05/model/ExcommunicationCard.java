@@ -28,13 +28,13 @@ public class ExcommunicationCard implements Card {
 	}
 
 	@Override
-	public void applyEffect(Object player) {
+	public void applyImmediateEffect(Object player) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Epoch getEpoch() {
+	public EpochEnumeration getEpoch() {
 		// TODO Auto-generated method stub
 		return null;
 	}

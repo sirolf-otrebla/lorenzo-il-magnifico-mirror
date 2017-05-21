@@ -79,7 +79,7 @@ public class Action implements Period {
 		//removes requirements from player (pay attention how to handle dices and other familyMember-related resources)
 		manageRequirements(paymentList);
 
-		//position.applyEffect moves the card (if there is any;
+		//position.applyNonActivableEffects moves the card (if there is any;
 		this.position.applyEffect();
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);

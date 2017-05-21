@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
 import javax.xml.crypto.KeySelector;
 
-public class Player {
+public class Player implements PlayerRelated {
 	
 	// server information
 	int playerID;
@@ -64,4 +64,13 @@ public class Player {
 	public ArrayList<VioletCard> getPurpleCardList() {
 		return purpleCardList;
 	}
+
+    @Override
+    public Player getRelatedPlayer() {
+        return this;
+    }
+
+    public ArrayList<LeaderCard> getLeaderCardList() {
+        return leaderCardList;
+    }
 }
