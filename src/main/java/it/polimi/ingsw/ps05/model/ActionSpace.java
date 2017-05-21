@@ -51,10 +51,6 @@ public abstract class ActionSpace {
 		return diceRequirement;
 	}
 
-	public Familiar getOccupant() {
-		return occupant;
-	}
-
 	public void setOccupant(Familiar occupant) {
 		this.occupant = occupant;
 	}
