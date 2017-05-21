@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class YellowCard extends TowerCard  {
 
+
 	private static final int DEFAULT_EFFECT = 0;
 
 	private boolean toBeActivated = true;
@@ -20,6 +21,12 @@ public class YellowCard extends TowerCard  {
 
 	public void setSelectedEffects(int[] selectedEffects) {
 		this.selectedEffects = selectedEffects;
+  }
+	public YellowCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
+		super(epoch, color, cardName, effects);
+		for (Effect a: effects)
+			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
+		  selectedEffects = new int[activableEffectList.size()];
 	}
 	
 	public YellowCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
@@ -51,6 +58,10 @@ public class YellowCard extends TowerCard  {
 
 	public boolean getToBeActivated() {
 		return toBeActivated;
+	}
+	
+	public YellowCard(){
+		super();
 	}
 
 	public void setToBeActivated(boolean toBeActivated) {

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
+
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -33,9 +35,10 @@ public class StoneResource implements Resource, ActionResult {
 	public int getValue(){
 		return this.value;
 	}
-
+  
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+
 
 	}
 
@@ -46,6 +49,6 @@ public class StoneResource implements Resource, ActionResult {
 
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) {
-
+    
 	}
 }

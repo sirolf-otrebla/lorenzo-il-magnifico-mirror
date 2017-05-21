@@ -34,6 +34,7 @@ public class WoodResource implements Resource, ActionResult {
 		return this.value;
 	}
 
+
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
 
@@ -45,7 +46,8 @@ public class WoodResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void removeFromPlayer(Familiar playerFamiliar) {
 
+	public void removeFromPlayer(Familiar playerFamiliar) {
+    
 	}
 }

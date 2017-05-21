@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.model.Effect;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
 
 public class NoMarketExcomm implements ExcommunicationEffect {

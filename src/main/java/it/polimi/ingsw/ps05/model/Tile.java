@@ -13,11 +13,37 @@ import java.util.ArrayList;
  */
 public class Tile extends ActionSpace implements TowerTileInterface {
 
-    private Tower parentTower;
+    private Tower<?> parentTower;
     private TowerCard card;
     private Dice diceRequirement;
 
     public static final int TOWER_OCCUPIED_PAYMENT = 3;
+    private Integer diceRequired; //integer o dado??
+    
+    public Tile(){
+    	
+    }
+    
+    public Tile(TowerCard card, Integer diceRequired, Tower<?> parentTower){
+    	
+    }
+    
+    public void setDiceRequired(Integer diceRequired){
+    	this.diceRequired = diceRequired;
+    }
+    public Integer getDiceRequired(){
+    	return diceRequired;
+    }
+    
+    @Override
+    public void setParentTower(Tower<?> parentTower){
+    	this.parentTower = parentTower;
+    }
+    
+    @Override
+    public void setTowerCard(TowerCard card){
+    	this.card = card;
+    }
 
     @Override
     public ArrayList<Effect> getEffects() {
@@ -26,7 +52,6 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     @Override
-
     public  ArrayList<ArrayList<Resource>> getRequirements(){
         // ADDS DICE REQUIREMENT
        ArrayList<ArrayList<Resource>> req = card.getRequirements();
@@ -36,7 +61,15 @@ public class Tile extends ActionSpace implements TowerTileInterface {
        if (parentTower.isOccupied)
            for (ArrayList<Resource> andAlternative: req)
                andAlternative.add(new GoldResource(this.TOWER_OCCUPIED_PAYMENT));
-       return req;
+    }
+  
+    public boolean isOccupied() throws TowerOccupiedException{
+        if (super.isOccupied()) return super.isOccupied();
+        /* this exception is meant to be a way to communicate with higher level that the tower is already occupied, so that
+        the player has to pay X coins;
+         */
+        if (parentTower.isOccupied) throw new TowerOccupiedException(this.parentTower, super.isOccupied());
+        else return super.isOccupied();
     }
 
     @Override
