@@ -2,8 +2,7 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
 
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.Player;
-
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -15,10 +14,12 @@ public class FaithResource implements Resource, ActionResult {
 
 	public FaithResource(Integer amount) {
 		this.amount = amount;
+		this.value = 0;
 	}
 
 	public FaithResource() {
-
+		this.amount = 0;
+		this.value = 0;
 	}
 
 	public void setAmount(Integer amount) {
@@ -37,7 +38,6 @@ public class FaithResource implements Resource, ActionResult {
 		return this.value;
 	}
 
-
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
 
@@ -52,5 +52,16 @@ public class FaithResource implements Resource, ActionResult {
 	@Override
 
 	public void removeFromPlayer(Familiar playerFamiliar) {
+	}
+
+	@Override
+	public boolean hasEnoughResources(Familiar playerFamiliar) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		playerR.getRelatedPlayer().addFaith(this);
 	}
 }
