@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -12,10 +13,12 @@ public class VictoryResource implements Resource, ActionResult {
 	
 	public VictoryResource(Integer amount){
 		this.amount = amount;
+		this.value = 0;
 	}
 	
 	public VictoryResource() {
-		
+		this.value = 0;
+		this.amount = 0;
 	}
 	
 	public void setAmount(Integer amount){
@@ -48,5 +51,16 @@ public class VictoryResource implements Resource, ActionResult {
 
 	public void removeFromPlayer(Familiar playerFamiliar) {
 
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		playerR.getRelatedPlayer().addVictory(this);
+	}
+
+	@Override
+	public boolean hasEnoughResources(Familiar playerFamiliar) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
