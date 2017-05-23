@@ -95,4 +95,10 @@ public TileWithEffect(){
 	public void setToBeDecorated(Tile toBeDecorated) {
 		this.toBeDecorated = toBeDecorated;
 	}
+
+	@Override
+	public void applyEffect() {
+		// TODO Auto-generated method stub
+		
+	}
 }

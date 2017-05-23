@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 
 public class MoreServantsExcomm implements ExcommunicationEffect {
 
@@ -34,6 +35,12 @@ public class MoreServantsExcomm implements ExcommunicationEffect {
 
 	@Override
 	public void inizializeFromJson(JSONObject json) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void apply(PlayerRelated familyMember, int alternative) {
 		// TODO Auto-generated method stub
 		
 	}

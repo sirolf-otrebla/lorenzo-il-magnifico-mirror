@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 
 public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 
@@ -38,4 +38,10 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void apply(PlayerRelated familyMember, int alternative) {
+		// TODO Auto-generated method stub
+		
+	}
 }

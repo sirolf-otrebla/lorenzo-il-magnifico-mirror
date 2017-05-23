@@ -6,12 +6,12 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 
 /* TODO: write UMLs methods and attributes --Sirolfo */
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MarketSpace extends ActionSpaceWithEffect {
     private ArrayList<Effect> effectList;
     private  int[] selectedEffects;
+    
     @Override
     public ArrayList<Effect> getEffects() {
         return effectList;
@@ -29,8 +29,8 @@ public class MarketSpace extends ActionSpaceWithEffect {
     }
 
     public MarketSpace(ArrayList<Effect> marketEffectList ){
+    	super();
         this.effectList = marketEffectList;
-
     }
 
     public void setSelectedEffects(int[] selectedEffects) {

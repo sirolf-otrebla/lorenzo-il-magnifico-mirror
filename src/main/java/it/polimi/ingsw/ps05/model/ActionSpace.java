@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps05.model;
 
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
-import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
-
 import java.util.ArrayList;
 
 /* represent the generalization of all familiar-usable spaces within the game board

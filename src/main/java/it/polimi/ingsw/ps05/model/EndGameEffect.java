@@ -28,9 +28,14 @@ public class EndGameEffect implements Effect {
 		return null;
 	}
 
-    @Override
     public void apply() {
 
     }
+
+	@Override
+	public void apply(PlayerRelated familyMember, int alternative) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

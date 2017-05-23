@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.model.exceptions.TowerOccupiedException;
-
 import java.util.ArrayList;
 
 public abstract class ActionSpaceWithEffect extends ActionSpace {

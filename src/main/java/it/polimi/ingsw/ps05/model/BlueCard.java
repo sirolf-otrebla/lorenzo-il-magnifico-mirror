@@ -19,6 +19,12 @@ public class BlueCard extends TowerCard {
 	public BlueCard(){
 		super();
 	}
+
+	@Override
+	public void moveToPlayer() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

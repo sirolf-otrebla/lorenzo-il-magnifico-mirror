@@ -28,9 +28,14 @@ public class ImmediateEffect implements Effect {
 		return null;
 	}
 
-	@Override
 	public void apply(Familiar familyMember, int alternative) {
 
+	}
+
+	@Override
+	public void apply(PlayerRelated familyMember, int alternative) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
