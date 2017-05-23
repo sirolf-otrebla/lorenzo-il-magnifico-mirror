@@ -9,7 +9,11 @@ import java.util.ArrayList;
  */
 public class MoreRequirementOptionsException extends Exception {
 
-    private ArrayList<ArrayList<Resource>> options;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<ArrayList<Resource>> options;
     public boolean cancelAction;
     public int choice;
 

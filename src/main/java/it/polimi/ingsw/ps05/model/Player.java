@@ -5,8 +5,6 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
-import javax.xml.crypto.KeySelector;
-
 public class Player implements PlayerRelated {
 	
 	// server information

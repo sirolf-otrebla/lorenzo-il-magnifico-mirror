@@ -67,4 +67,10 @@ public class YellowCard extends TowerCard  {
 	public void setToBeActivated(boolean toBeActivated) {
 		this.toBeActivated = toBeActivated;
 	}
+
+	@Override
+	public void moveToPlayer() {
+		// TODO Auto-generated method stub
+		
+	}
 }

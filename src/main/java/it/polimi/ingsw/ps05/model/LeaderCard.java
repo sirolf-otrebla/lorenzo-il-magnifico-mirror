@@ -28,14 +28,13 @@ public class LeaderCard implements Card {
 		return active;
 	}
 
-	@Override
 	public void applyNonActivableEffects(PlayerRelated player, int[] alternative) {
 		for (int i = 0; i < effects.size(); i++)
 		    effects.get(i).apply(player, alternative[i]);
 	}
 
 	public void discard(PlayerRelated playerRelated){
-        ArrayList<LeaderCard> cardlist = playerRelated.getRelatedPlayer().getLeaderCardList()
+        ArrayList<LeaderCard> cardlist = playerRelated.getRelatedPlayer().getLeaderCardList();
 	    for (LeaderCard card : cardlist){
 	        if (card.equals(this)) cardlist.remove(this);
         }
@@ -43,6 +42,7 @@ public class LeaderCard implements Card {
         priv.setValue(1);
         //TODO: GESTIRE PRIVILEGI
     }
+	
 	@Override
 	public EpochEnumeration getEpoch() {
 		// TODO Auto-generated method stub
@@ -58,6 +58,12 @@ public class LeaderCard implements Card {
 		this.cardName = Name;
 		this.requirements = requirements;
 		this.effects = eff;
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

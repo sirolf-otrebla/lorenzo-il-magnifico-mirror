@@ -21,13 +21,11 @@ public class ExcommunicationCard implements Card {
 		return null;
 	}
 
-	@Override
 	public boolean isActive() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void applyImmediateEffect(Object player) {
 		// TODO Auto-generated method stub
 		
@@ -47,6 +45,12 @@ public class ExcommunicationCard implements Card {
 	
 	public ExcommunicationCard(){
 		// TODO Check constructor
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

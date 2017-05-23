@@ -20,4 +20,10 @@ public class VioletCard extends TowerCard  {
 		super();
 	}
 
+	@Override
+	public void moveToPlayer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

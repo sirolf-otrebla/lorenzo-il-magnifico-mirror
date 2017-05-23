@@ -5,7 +5,6 @@ import java.util.Random;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 import it.polimi.ingsw.ps05.model.Color;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
