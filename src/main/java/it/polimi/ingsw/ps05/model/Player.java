@@ -73,4 +73,34 @@ public class Player implements PlayerRelated {
     public ArrayList<LeaderCard> getLeaderCardList() {
         return leaderCardList;
     }
+    
+    public void addGold(GoldResource gold){
+    	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
+    	this.gold.setAmount(this.gold.getAmount() + gold.getAmount() + gold.getValue());
+    }
+    
+    public void addFaith(FaithResource faith){
+    	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
+    	this.faithPts.setAmount(this.faithPts.getAmount() + faith.getAmount() + faith.getValue());
+    }
+    
+    public void addMilitary(MilitaryResource military){
+    	this.militaryPts.setAmount(this.militaryPts.getAmount() + military.getAmount() + military.getValue());
+    }
+    
+    public void addServant(ServantResource servants){
+    	this.servants.setAmount(this.servants.getAmount() + servants.getAmount() + servants.getValue());
+    }
+    
+    public void addStone(StoneResource stone){
+    	this.stone.setAmount(this.stone.getAmount() + stone.getAmount() + stone.getValue());
+    }
+    
+    public void addWood(WoodResource wood){
+    	this.wood.setAmount(this.wood.getAmount() + wood.getAmount() + wood.getValue());
+    }
+    
+    public void addVictory(VictoryResource victory){
+    	this.victoryPts.setAmount(this.victoryPts.getAmount() + victory.getAmount() + victory.getValue());
+    }
 }

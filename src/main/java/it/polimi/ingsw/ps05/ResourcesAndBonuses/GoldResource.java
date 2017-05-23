@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
@@ -12,10 +13,12 @@ public class GoldResource implements Resource, ActionResult {
 	
 	public GoldResource(Integer amount){
 		this.amount = amount;
+		this.value = 0;
 	}
 	
 	public GoldResource() {
-		
+		this.amount = 0;
+		this.value = 0;
 	}
 	
 	public void setAmount(Integer amount){
@@ -54,6 +57,11 @@ public class GoldResource implements Resource, ActionResult {
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		return false;
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		playerR.getRelatedPlayer().addGold(this);
 	}
 
 }
