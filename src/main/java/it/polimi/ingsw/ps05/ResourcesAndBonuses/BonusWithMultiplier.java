@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
+import it.polimi.ingsw.ps05.model.PlayerRelated;
+
 public class BonusWithMultiplier implements ActionResult {
 	private Float multiplier;
 	private Resource returnResource;
@@ -38,6 +40,12 @@ public class BonusWithMultiplier implements ActionResult {
 
 	public void setCardToCount(Class<?> cardToCount) {
 		this.cardToCount = cardToCount;
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
