@@ -1,7 +1,7 @@
 {
 	"Tower": 
 	{
-		"Green": 
+		"GreenTower": 
 		{
 			"Tile": 
 			[
@@ -34,7 +34,7 @@
 			]
 		},
 
-		"Blue": 
+		"BlueTower": 
 		{
 			"Tile": 
 			[
@@ -67,7 +67,7 @@
 			]
 		},
 
-		"Yellow": 
+		"YellowTower": 
 		{
 			"Tile": 
 			[
@@ -100,7 +100,7 @@
 			]
 		},
 
-		"Violet": 
+		"VioletTower": 
 		{
 			"Tile": 
 			[

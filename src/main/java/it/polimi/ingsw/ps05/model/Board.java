@@ -9,13 +9,13 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
  * 
  */
 public class Board {
-	private ArrayList<Tower<TowerCard>> towerList;
+	private ArrayList<Tower> towerList;
 	private ArrayList<ActionSpace> actionSpace; //da confermare utilizzo lista
 	private ArrayList<Player> playerOnCouncil;
 	private ArrayList<VictoryResource> faithPath; //array da 16? elementi che dice quanti punti vittoria vengono assegnati all'i-esimo posto del tracciato
 	private ArrayList<MilitaryResource> militaryPath; //array da 6 elementi che dice quanti punti militare servono per poter avere "i" territori
 	
-	public Board(ArrayList<Tower<TowerCard>> towerList, ArrayList<ActionSpace> actionSpace,
+	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace,
 			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath) {
 		super();
 		this.towerList = towerList;
@@ -24,7 +24,7 @@ public class Board {
 		this.militaryPath = militaryPath;
 	}
 
-	public ArrayList<Tower<TowerCard>> getTowerList() {
+	public ArrayList<Tower> getTowerList() {
 		return towerList;
 	}
 
@@ -44,7 +44,7 @@ public class Board {
 		return militaryPath;
 	}
 
-	public void setTowerList(ArrayList<Tower<TowerCard>> towerList) {
+	public void setTowerList(ArrayList<Tower> towerList) {
 		this.towerList = towerList;
 	}
 

@@ -14,17 +14,17 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 
 	private Tile toBeDecorated; //?????
 	
-	private Tower<?> parentTower;
+	private Tower parentTower;
     private TowerCard card;
 	
 	private Integer diceRequired; //integer o dado??
 	private ArrayList<ActionResult> effectOnPositioning;
 	
-public TileWithEffect(){
+	public TileWithEffect(){
     	
     }
     
-    public TileWithEffect(TowerCard card, Integer diceRequired, Tower<?> parentTower, ArrayList<ActionResult> effectOnPositioning){
+    public TileWithEffect(TowerCard card, Integer diceRequired, Tower parentTower, ArrayList<ActionResult> effectOnPositioning){
     	
     }
     
@@ -32,7 +32,7 @@ public TileWithEffect(){
     	this.diceRequired = diceRequired;
     }
     
-    public TileWithEffect(Tower<?> parentTower){
+    public TileWithEffect(Tower parentTower){
     	this.parentTower = parentTower;
     }
     
@@ -59,12 +59,12 @@ public TileWithEffect(){
 	}
 
 	@Override
-	public void setParentTower(Tower<?> tower) {
+	public void setParentTower(Tower tower) {
 		this.parentTower = tower;
 		
 	}
 
-	public Tower<?> getParentTower() {
+	public Tower getParentTower() {
 		return parentTower;
 	}
 
@@ -100,5 +100,10 @@ public TileWithEffect(){
 	public void applyEffect() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void removeTowerCard() {
+		this.setCard(null);
 	}
 }

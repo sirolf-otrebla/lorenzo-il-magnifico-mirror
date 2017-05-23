@@ -31,7 +31,6 @@ public abstract class ActionSpace {
 	}
 
 	public boolean isOccupied() {
-
 		return isOccupied;
 	}
 
@@ -51,6 +50,11 @@ public abstract class ActionSpace {
 
 	public void setOccupant(Familiar occupant) {
 		this.occupant = occupant;
+	}
+	
+	public void reset(){
+		isOccupied = false;
+		occupant = null;
 	}
 	
 	

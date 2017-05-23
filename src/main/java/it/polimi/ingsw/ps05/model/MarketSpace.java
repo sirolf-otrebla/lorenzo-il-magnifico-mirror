@@ -37,21 +37,14 @@ public class MarketSpace extends ActionSpaceWithEffect {
         this.selectedEffects = selectedEffects;
     }
 	
-	ArrayList<ActionResult> effectsOnPositioning;
-	
 	public MarketSpace(){
 		super();
 	}
 	
-	public MarketSpace(ArrayList<ActionResult> effectsOnPositioning){
-		super();
-		this.effectsOnPositioning = effectsOnPositioning;
-	}
-	
-	public MarketSpace(Integer diceRequired, ArrayList<ActionResult> effectsOnPositioning){
+	public MarketSpace(Integer diceRequired, ArrayList<Effect> effectList){
 		super();
 		super.setDiceRequirement(diceRequired);
-		this.effectsOnPositioning = effectsOnPositioning;
+		this.effectList = effectList;
 	}
 	
 
