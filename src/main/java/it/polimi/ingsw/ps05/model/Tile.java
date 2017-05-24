@@ -17,23 +17,30 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     private Dice diceRequirement;
 
     public static final int TOWER_OCCUPIED_PAYMENT = 3;
-    private Integer diceRequired; //integer o dado??
     
     public Tile(){
     	
     }
-    
+
+    public TowerCard getCard() {
+        return card;
+    }
+
     public Tile(TowerCard card, Integer diceRequired, Tower<?> parentTower){
     	
     }
     
     public void setDiceRequired(Integer diceRequired){
-    	this.diceRequired = diceRequired;
+    	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
     }
     public Integer getDiceRequired(){
-    	return diceRequired;
+
+        return this.diceRequirement.getValue();
     }
-    
+
+    public Tower<?> getParentTower(){
+        return this.parentTower;
+    }
     @Override
     public void setParentTower(Tower<?> parentTower){
     	this.parentTower = parentTower;

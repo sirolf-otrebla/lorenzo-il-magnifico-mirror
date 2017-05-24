@@ -27,6 +27,14 @@ public class Familiar implements PlayerRelated{
 	public void setPosition(ActionSpace position) {
 		this.position = position;
 	}
+
+	public void resetPosition(){
+	    this.setPosition(null);
+    }
+
+    public void setDice(Dice dice){
+	    this.relatedDice = dice;
+    }
 	@Override
 	public Player getRelatedPlayer(){
 		return this.relatedPlayer;

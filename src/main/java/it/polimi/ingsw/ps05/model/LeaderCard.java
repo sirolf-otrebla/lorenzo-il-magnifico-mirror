@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.PrivilegeBonus;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
@@ -10,6 +11,8 @@ public class LeaderCard implements Card {
 	private ArrayList<ArrayList<Resource>> requirements;
 	private ArrayList<Effect> effects;
 	private String cardName;
+
+	private Observer privilegeListener;
 
 	private boolean active = false;
 	@Override
@@ -38,8 +41,7 @@ public class LeaderCard implements Card {
 	    for (LeaderCard card : cardlist){
 	        if (card.equals(this)) cardlist.remove(this);
         }
-        PrivilegeBonus priv = new PrivilegeBonus();
-        priv.setValue(1);
+        PrivilegeBonus priv = new PrivilegeBonus(1);
         //TODO: GESTIRE PRIVILEGI
     }
 	

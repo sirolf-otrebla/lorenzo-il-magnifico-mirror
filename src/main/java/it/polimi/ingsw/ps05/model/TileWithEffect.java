@@ -13,43 +13,33 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileInterface {
 
 	private Tile toBeDecorated; //?????
-	
-	private Tower<?> parentTower;
-    private TowerCard card;
-	
-	private Integer diceRequired; //integer o dado??
+
 	private ArrayList<ActionResult> effectOnPositioning;
 	
-public TileWithEffect(){
-    	
+    public TileWithEffect(){
+        this.toBeDecorated = new Tile();
     }
     
     public TileWithEffect(TowerCard card, Integer diceRequired, Tower<?> parentTower, ArrayList<ActionResult> effectOnPositioning){
-    	
+    	this.toBeDecorated = new Tile(card, diceRequired, parentTower);
     }
-    
-    public TileWithEffect(Integer diceRequired){
-    	this.diceRequired = diceRequired;
-    }
-    
-    public TileWithEffect(Tower<?> parentTower){
-    	this.parentTower = parentTower;
-    }
+
     
     @Override
-    public void setTowerCard(TowerCard card){
-    	this.card = card;
+    public void setTowerCard(TowerCard card) {
+    	this.toBeDecorated.setTowerCard(card);
     }
     
     public void setDiceRequired(Integer diceRequired){
-    	this.diceRequired = diceRequired;
+
+        this.toBeDecorated.setDiceRequired(diceRequired);
     }
     
     public void setTileEffect(ArrayList<ActionResult> effectOnPositioning){
     	this.effectOnPositioning = effectOnPositioning;
     }
 	
-	public TileWithEffect ( Tile tile){
+	public TileWithEffect(Tile tile){
 		this.setToBeDecorated(tile);
 	}
 
@@ -60,28 +50,24 @@ public TileWithEffect(){
 
 	@Override
 	public void setParentTower(Tower<?> tower) {
-		this.parentTower = tower;
+		this.toBeDecorated.setParentTower(tower);
 		
 	}
 
 	public Tower<?> getParentTower() {
-		return parentTower;
+		return this.toBeDecorated.getParentTower();
 	}
 
 	public TowerCard getCard() {
-		return card;
+		return this.toBeDecorated.getCard();
 	}
 
 	public Integer getDiceRequired() {
-		return diceRequired;
+		return this.toBeDecorated.getDiceRequired();
 	}
 
 	public ArrayList<ActionResult> getEffectOnPositioning() {
 		return effectOnPositioning;
-	}
-
-	public void setCard(TowerCard card) {
-		this.card = card;
 	}
 
 	public void setEffectOnPositioning(ArrayList<ActionResult> effectOnPositioning) {

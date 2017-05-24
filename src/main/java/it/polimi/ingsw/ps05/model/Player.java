@@ -32,7 +32,8 @@ public class Player implements PlayerRelated {
 	private ArrayList<VioletCard> purpleCardList;
 	private ArrayList<LeaderCard> leaderCardList;
 
-	private ArrayList<Effect> permanentEffectList;
+	private ArrayList<ActionResult> permanentEffectResList;
+	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
 
 	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
@@ -45,7 +46,9 @@ public class Player implements PlayerRelated {
 	    return thisAction;
     }
 
-	
+	public void addPermanentEffectRes(ActionResult eff){
+		this.permanentEffectResList.add(eff);
+	}
 
 	public ArrayList<GreenCard> getGreenCardList() {
 		return greenCardList;

@@ -6,9 +6,9 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 
 public class PermanentEffect implements Effect {
 	
-	ArrayList<ActionResult> effectsList;
+	ArrayList<ArrayList<ActionResult>> effectsList;
 	
-	public void setEffectList(ArrayList<ActionResult> effectsList){
+	public void setEffectList(ArrayList<ArrayList<ActionResult>> effectsList){
 		this.effectsList = effectsList;
 	}
 
@@ -24,14 +24,14 @@ public class PermanentEffect implements Effect {
 		return null;
 	}
 
-    public void apply() {
-
-    }
-
 	@Override
 	public void apply(PlayerRelated familyMember, int alternative) {
-		// TODO Auto-generated method stub
-		
+		for (ActionResult act:
+				effectsList.get(alternative)) {
+			familyMember.getRelatedPlayer().addPermanentEffectRes(act);
+			act.applyResult(familyMember);
+		}
+
 	}
 
 }
