@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.Utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -28,7 +29,7 @@ public class CommonJsonParser {
 		File file = new File(path);
 		ArrayList<ActionSpace> notTowerSpace = new ArrayList<ActionSpace>();
 		ArrayList<VictoryResource> faithList = new ArrayList<VictoryResource>();
-		ArrayList<Tower<TowerCard>> towerList = new ArrayList<Tower<TowerCard>>();
+		ArrayList<Tower> towerList = new ArrayList<Tower>();
 		ArrayList<MilitaryResource> militaryList = new ArrayList<MilitaryResource>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
@@ -66,19 +67,19 @@ public class CommonJsonParser {
 		return list;
 	}
 	
-	private ArrayList<Tower<TowerCard>> loadTower(JSONObject json){
-		ArrayList<Tower<TowerCard>> list = new ArrayList<Tower<TowerCard>>();
+	private ArrayList<Tower> loadTower(JSONObject json) throws FileNotFoundException, IOException, ParseException{
+		ArrayList<Tower> list = new ArrayList<Tower>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
 				list.add(loadSingleTower((JSONObject)json.get(json.keySet().toArray()[i]),json.keySet().toArray()[i].toString()));
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
 	
-	private Tower<TowerCard> loadSingleTower(JSONObject json, String keyColor) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
 		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			JSONArray array = (JSONArray)json.get(json.keySet().toArray()[i].toString());
@@ -92,7 +93,24 @@ public class CommonJsonParser {
 			}
 		}
 		
-		return new Tower<TowerCard>((TowerCard)Class.forName(modelPath + keyColor + "Card").newInstance(), list);
+		Object tower = Class.forName(modelPath + key).newInstance();
+		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
+		method.invoke(tower, list);
+		
+		
+		File file = new File("./src/main/res/cards.json");
+		JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+		if (tower instanceof BlueTower){
+			((BlueTower) tower).setDeck(loadBlueCardDeck(obj));
+		} else if (tower instanceof GreenTower){
+			((GreenTower) tower).setDeck(loadGreenCardDeck(obj));
+		} else if (tower instanceof VioletTower){
+			((VioletTower) tower).setDeck(loadVioletCardDeck(obj));
+		} else if (tower instanceof YellowTower){
+			((YellowTower) tower).setDeck(loadYellowCardDeck(obj));
+		}
+		
+		return (Tower)tower;
 	}
 	
 	private TowerTileInterface loadSingleTile(JSONObject json, String keyClass)
@@ -226,7 +244,7 @@ public class CommonJsonParser {
 	}
 	
 	//XXX Metodi per caricamento carte
-	public ArrayList<Deck> loadDeck(String path) {
+	/*public ArrayList<Deck> loadDeck(String path) {
 		ArrayList<Deck> deck = new ArrayList<Deck>();
 		try {
 			File file = new File(path);
@@ -240,7 +258,7 @@ public class CommonJsonParser {
 		}
 		return deck;
 
-	}
+	}*/
 
 	private BlueCardDeck loadBlueCardDeck(JSONObject json){
 		JSONArray list = (JSONArray) json.get("Blue");

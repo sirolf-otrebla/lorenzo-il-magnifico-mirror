@@ -56,6 +56,7 @@ public abstract class TowerCard implements Card {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	public abstract void moveToPlayer();
 }

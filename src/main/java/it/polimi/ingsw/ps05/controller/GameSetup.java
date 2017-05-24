@@ -8,17 +8,22 @@ public class GameSetup {
 
 	Board board;
 	ArrayList<LeaderCard> leaderCardList;
-	ArrayList<Player> playOrder; // da generare casualmente all'inizio
+	ArrayList<Player> playConnected; // da generare casualmente all'inizio
 	ArrayList<Deck> deck;
 	
 	public GameSetup(){
-		loadDeck();
+		//loadDeck();
+		loadBoard();
 	}
 	
-	private void loadDeck(){
+	/*private void loadDeck(){
 		CommonJsonParser parser = new CommonJsonParser();
-        deck = parser.loadDeck("./src/main/res/cards.json");
-        board = parser.loadBoard("./src/main/res/board.json");
+        //deck = parser.loadDeck("./src/main/res/cards.json");
+	}*/
+	
+	private void loadBoard(){
+		CommonJsonParser parser = new CommonJsonParser();
+		board = parser.loadBoard("./src/main/res/board.json");
 	}
 
 }
