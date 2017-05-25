@@ -26,13 +26,19 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		this.notifyObservers();
 		//TODO: BASTA COSI?
 	}
+	
+	public PrivilegeBonus(){
+		this.addObserver(PrivilegeBonusListener.getInstance());
+		this.notifyObservers();
+		//TODO: BASTA COSI?
+	}
 
 
 	public void setValue(Integer value){
 		this.value = value;
 	}
 	
-	public Integer getAmount(){
+	public Integer getValue(){
 		return this.value;
 	}
 

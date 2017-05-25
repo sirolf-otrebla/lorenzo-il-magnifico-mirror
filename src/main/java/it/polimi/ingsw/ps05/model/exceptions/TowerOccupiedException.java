@@ -10,10 +10,10 @@ public class TowerOccupiedException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Tower<?> towerOccupied;
+	private Tower towerOccupied;
     private boolean isActionSpaceOccupied;
 
-    public Tower<?> getTowerOccupied() {
+    public Tower getTowerOccupied() {
         return towerOccupied;
     }
 
@@ -21,11 +21,11 @@ public class TowerOccupiedException extends Exception {
         return this.isActionSpaceOccupied;
     }
 
-    private void setTowerOccupied(Tower<?> towerOccupied) {
+    private void setTowerOccupied(Tower towerOccupied) {
         this.towerOccupied = towerOccupied;
     }
 
-    public TowerOccupiedException(Tower<?> tower, boolean isActionSpaceOccupied){
+    public TowerOccupiedException(Tower tower, boolean isActionSpaceOccupied){
         setTowerOccupied(tower);
         this.isActionSpaceOccupied = isActionSpaceOccupied;
     }

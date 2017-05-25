@@ -17,8 +17,6 @@ public class Turn implements Period {
 		actionHistory = new ArrayList<Action>();
 	}
 	
-	
-	
 	public Epoch getEpoch(){
 		return this.epoch;
 	}
@@ -33,10 +31,6 @@ public class Turn implements Period {
 	
 	public ArrayList<Dice> getDice(){
 		return dice;
-	}
-
-	public ArrayList<Player> getOrder() {
-		return order;
 	}
 
 	public Integer getTurnNumber() {
@@ -55,10 +49,6 @@ public class Turn implements Period {
 	
 	public void setPlayerOrder(ArrayList<Player> orderPlayer){
 		this.order = orderPlayer;
-	}
-
-	public void setOrder(ArrayList<Player> order) {
-		this.order = order;
 	}
 
 	public void setNext(Turn next) {

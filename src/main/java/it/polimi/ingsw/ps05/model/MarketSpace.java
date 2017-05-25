@@ -2,11 +2,9 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
-
-/* TODO: write UMLs methods and attributes --Sirolfo */
-
 import java.util.Iterator;
+
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 
 public class MarketSpace extends ActionSpaceWithEffect {
     private ArrayList<Effect> effectList;
@@ -41,7 +39,7 @@ public class MarketSpace extends ActionSpaceWithEffect {
 		super();
 	}
 	
-	public MarketSpace(Integer diceRequired, ArrayList<Effect> effectList){
+	public MarketSpace(Dice diceRequired, ArrayList<Effect> effectList){
 		super();
 		super.setDiceRequirement(diceRequired);
 		this.effectList = effectList;

@@ -23,7 +23,7 @@ public class PrivilegeBonusListener implements Observer {
     public void update(Observable o, Object arg) {
         // TODO: take resource choice
         PrivilegeBonus privilege = (PrivilegeBonus) o;
-        ArrayList<ActionResult> res = notifyToUI(privilege.getAmount());
+        ArrayList<ActionResult> res = notifyToUI(privilege.getValue());
         privilege.setConvertedResources(res);
     }
     private ArrayList<ActionResult> notifyToUI(int resToChoose){

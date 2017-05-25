@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Tile extends ActionSpace implements TowerTileInterface {
 
-    private Tower<?> parentTower;
+    private Tower parentTower;
     private TowerCard card;
     private Dice diceRequirement;
 
@@ -26,7 +26,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
         return card;
     }
 
-    public Tile(TowerCard card, Integer diceRequired, Tower<?> parentTower){
+    public Tile(TowerCard card, Integer diceRequired, Tower parentTower){
     	
     }
     
@@ -38,11 +38,11 @@ public class Tile extends ActionSpace implements TowerTileInterface {
         return this.diceRequirement.getValue();
     }
 
-    public Tower<?> getParentTower(){
+    public Tower getParentTower(){
         return this.parentTower;
     }
     @Override
-    public void setParentTower(Tower<?> parentTower){
+    public void setParentTower(Tower parentTower){
     	this.parentTower = parentTower;
     }
     
@@ -79,4 +79,10 @@ public class Tile extends ActionSpace implements TowerTileInterface {
         this.card.moveToPlayer();
         this.card.applyNonActivableEffects(this.getOccupant());
     }
+
+	@Override
+	public void removeTowerCard() {
+		// TODO Auto-generated method stub
+		
+	}
 }

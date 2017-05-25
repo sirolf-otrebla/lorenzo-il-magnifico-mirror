@@ -56,7 +56,7 @@ public class Dice implements Resource {
 		return this.value;
 	}
 
-	public Color getColor(){
+	public ColorEnumeration getColor(){
 		return this.color;
 	}
 }

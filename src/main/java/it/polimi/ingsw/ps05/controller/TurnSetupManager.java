@@ -10,17 +10,21 @@ public class TurnSetupManager {
 
 	Turn turn; //vecchio turno
 	ArrayList<Turn> turnHistory;
-	ArrayList<Dice> dice;
 	Board board;
-	ArrayList<Deck> deckList;
 	ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
+	
+	private final static int goldAmountStart = 5;
+	private final static int woodAmountStart = 2;
+	private final static int stoneAmountStart = 2;
+	private final static int servantsAmountStart = 3;
 	
 	public TurnSetupManager(ArrayList<Player> playersConnected, Board board){
 		this.board = board;
 		this.playersConnected = playersConnected;
+		this.turn = setupFirstTurn();
 	}
 	
-	public void updatePlayerOrder(ArrayList<Player> onCouncil){
+	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
 		
 		ArrayList<Player> newOrder = new ArrayList<Player>();
 		for (Player o : onCouncil){
@@ -30,10 +34,10 @@ public class TurnSetupManager {
 			turn.getPlayerOrder().removeAll(newOrder);
 			newOrder.addAll(turn.getPlayerOrder());
 		}
-		turn.getNextTurn().setPlayerOrder(newOrder);
+		next.setPlayerOrder(newOrder);
 	}
 	
-	public void resetBoard(){
+	private void resetBoard(Turn next){
 		//reset degli spazi generici in elenco
 		for (ActionSpace o : board.getActionSpace()){
 			o.reset();
@@ -47,47 +51,83 @@ public class TurnSetupManager {
 		//council, serve spostare anche l'ordine dei giocatori
 		ArrayList<Player> list = board.getPlayerOnCouncil();
 		board.setPlayerOnCouncil(null);
-		updatePlayerOrder(list);
+		updatePlayerOrder(list,next);
 	}
 	
-	public void updateFamiliar(){
-		
-	}
-	
-	public void setUpBoardCard(){
-		for (Tower o : board.getTowerList()){
-			o.setCardInTile(turn.getEpoch());
+	private void updateFamiliar(Turn currentTurn){
+		for (Player o : currentTurn.getPlayerOrder()){
+			for (Familiar f : o.getFamilyList()){
+				for (Dice d : currentTurn.getDice()){
+					if (f.getColor().equals(d.getColor())){
+						f.setDice(d);
+						break;
+					}
+				}
+			}
 		}
 	}
 	
-	public void rollDice(){
-		dice.add(new Dice(new Color(ColorEnumeration.Black)));
-		dice.add(new Dice(new Color(ColorEnumeration.Orange)));
-		dice.add(new Dice(new Color(ColorEnumeration.White)));
+	private void setUpBoardCard(Turn currentTurn){
+		for (Tower o : board.getTowerList()){
+			o.setCardInTile(currentTurn.getEpoch());
+		}
+	}
+	
+	private ArrayList<Dice> rollDice(){
+		ArrayList<Dice> dice = new ArrayList<Dice>();
+		dice.add(new Dice(ColorEnumeration.Black));
+		dice.add(new Dice(ColorEnumeration.Orange));
+		dice.add(new Dice(ColorEnumeration.White));
+		return dice;
 	}
 	
 	public void loadNextTurn(){
-		
+		turnHistory.add(this.turn);
+		Turn next = turn.getNextTurn();
+		next.setDice(rollDice());
+		resetBoard(next);
+		next.setTurnNumber(turn.getTurnNumber() + 1);
+		next.setEpoch(new Epoch(EpochEnumeration.getEpoch(next.getTurnNumber() / 2)));
+		if (!next.getEpoch().getEpoch().equals(turn.getEpoch().getEpoch())){
+			//triggera azione scomunica
+		}
+		updateFamiliar(next);
+		next.setNext(new Turn());
+		setUpBoardCard(next);
+		this.turn = next;
 	}
 	
-	public void setupFirstTurn(){
+	private Turn setupFirstTurn(){
 		Turn firstTurn = new Turn();
-		rollDice();
-		firstTurn.setDice(dice);
+		firstTurn.setDice(rollDice());
 		firstTurn.setPlayerOrder(setRandomPlayerOrder());
 		firstTurn.setTurnNumber(1);
 		firstTurn.setEpoch(new Epoch(EpochEnumeration.FIRST));
 		firstTurn.setNext(new Turn());
+		updateFamiliar(firstTurn);
+		setUpBoardCard(firstTurn);
+		return firstTurn;
 	}
 	
-	public ArrayList<Player> setRandomPlayerOrder(){
+	private ArrayList<Player> setRandomPlayerOrder(){
 		ArrayList<Player> orderToSet = new ArrayList<Player>();
 		for (int i = 0; i < playersConnected.size(); i++){
 			orderToSet.add(playersConnected.get(new Random().nextInt(playersConnected.size())));
 			playersConnected.remove(orderToSet.get(i));
+			
 		}
-		
+		for (int i = 0; i < orderToSet.size(); i++){
+			Player player = orderToSet.get(i);
+			player.addGold(new GoldResource(goldAmountStart + i));
+			player.addWood(new WoodResource(woodAmountStart));
+			player.addStone(new StoneResource(stoneAmountStart));
+			player.addServant(new ServantResource(servantsAmountStart));
+		}
 		return orderToSet;
+	}
+	
+	public Turn getTurn(){
+		return this.turn;
 	}
 	
 	

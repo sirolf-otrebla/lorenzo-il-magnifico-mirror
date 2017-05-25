@@ -19,9 +19,11 @@ public class CommonJsonParser {
 
 	private static final String resourcePath = "it.polimi.ingsw.ps05.ResourcesAndBonuses.";
 	private static final String modelPath = "it.polimi.ingsw.ps05.model.";
+	
+	private int playerConnected;
 
-	public CommonJsonParser(){
-		
+	public CommonJsonParser(int playerConnected){
+		this.playerConnected = playerConnected;
 	}
 
 	//XXX Metodi per caricamento board
@@ -137,7 +139,10 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<MarketSpace> list = new ArrayList<MarketSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadMarketSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadMarketSpace((JSONObject)obj.toArray()[i]));
+			}
+			
 		}
 		return list;
 	}
@@ -147,21 +152,27 @@ public class CommonJsonParser {
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable(json, i));
+				if (!json.keySet().toArray()[i].equals("numPlayer")){
+					list.add(createAllExceptActivable(json, i));
+				}
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
+		ImmediateEffect effect = new ImmediateEffect();
+		effect.setEffectList(list);
+		ArrayList<Effect> effectList = new ArrayList<Effect>();
+		effectList.add(effect);
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
-			return new MarketSpace(list);
+			return new MarketSpace(effectList);
 		}
 		
 		
-		return new MarketSpace(diceRequired, list);
+		return new MarketSpace(diceRequired, effectList);
 	}
 	
 	private CouncilSpace loadCouncilSpace(JSONObject json){
@@ -174,9 +185,9 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new CouncilSpace(list);
 		}
@@ -188,24 +199,26 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<HarvestingSpace> list = new ArrayList<HarvestingSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadHarvestSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadHarvestSpace((JSONObject)obj.toArray()[i]));
+			}
 		}
 		return list;
 	}
 	
 	private HarvestingSpace loadHarvestSpace(JSONObject json){
-		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
+		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable((JSONObject)json.get("Effect"), i));
+				list = (getEffects((JSONObject)json.get("Effect")));
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new HarvestingSpace(list);
 		}
@@ -217,25 +230,27 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<ProductionSpace> list = new ArrayList<ProductionSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadProductionSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadProductionSpace((JSONObject)obj.toArray()[i]));
+			}
 		}
 		return list;
 	}
 	
 	
 	private ProductionSpace loadProductionSpace(JSONObject json){
-		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
+		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable((JSONObject)json.get("Effect"), i));
+				list = (getEffects((JSONObject)json.get("Effect")));
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new ProductionSpace(list);
 		}
