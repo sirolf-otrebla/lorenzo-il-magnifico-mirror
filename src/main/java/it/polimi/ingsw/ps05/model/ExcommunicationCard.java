@@ -2,55 +2,25 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.ExcommunicationEffects.ExcommunicationEffect;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 
 // in this case we have to think if it's useful or not to use the card Interface --Sirolfo
 
-public class ExcommunicationCard implements Card {
+public class ExcommunicationCard{
 
-	@Override
-	public ArrayList<ArrayList<Resource>> getRequirements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private EpochEnumeration epoch;
+	private ExcommunicationEffect excomEffect;
 
-	@Override
-	public ArrayList<Effect> getEffects() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isActive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void applyImmediateEffect(Object player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public EpochEnumeration getEpoch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.epoch;
 	}
 	
-	public ExcommunicationCard(){
-		// TODO Check constructor
-	}
+	public ExcommunicationEffect getExcomEffect(){ return this.excomEffect; }
 
-	@Override
-	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setEpoch(EpochEnumeration epoch) { this.epoch = epoch; }
+
+	public void setExcomEffect(ExcommunicationEffect excomEffect) { this.excomEffect = excomEffect; }
 
 }

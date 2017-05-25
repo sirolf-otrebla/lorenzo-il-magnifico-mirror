@@ -5,8 +5,8 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 public class Familiar implements PlayerRelated{
 
 	private ActionSpace position;
-	Dice relatedDice;
-	ColorEnumeration color;
+	private Dice relatedDice;
+	private ColorEnumeration color;
 	private Player relatedPlayer;
 	
 	public Familiar(){
@@ -28,46 +28,43 @@ public class Familiar implements PlayerRelated{
 		this.color = color;
 	}
 
-	public Dice  getRelatedDice(){
-
-		return relatedDice;
-	}
-
 	public ActionSpace getPosition() {
 		return position;
 	}
 
 	public boolean isUsed(){
-		if (position != null) return true;
-		return false;
+		if (null == position) return false;
+		return true;
 	}
-
 
 	public void setPosition(ActionSpace position) {
 		this.position = position;
+	}
+
+	public void setDice(Dice dice){
+		this.relatedDice = dice;
+	}
+
+	public void setColor(ColorEnumeration color){
+		this.color = color;
+	}
+
+	public void setPlayer(Player player){
+		this.relatedPlayer = player;
 	}
 
 	public void resetPosition(){
 	    this.setPosition(null);
     }
 
-    public void setDice(Dice dice){
-	    this.relatedDice = dice;
-    }
+    public Dice getDice() { return this.relatedDice; }
+
+	public ColorEnumeration getColor(){
+		return this.color;
+	}
+
 	@Override
 	public Player getRelatedPlayer(){
 		return this.relatedPlayer;
-	}
-	
-	public void setColor(ColorEnumeration color){
-		this.color = color;
-	}
-	
-	public void setPlayer(Player player){
-		this.relatedPlayer = player;
-	}
-	
-	public ColorEnumeration getColor(){
-		return this.color;
 	}
 }

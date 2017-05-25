@@ -8,9 +8,9 @@ import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 public class Player implements PlayerRelated {
 	
 	// server information
-	int playerID;
-	String username;
-	ColorEnumeration color;
+	private int playerID;
+	private String username;
+	private ColorEnumeration color;
 	
 	// game information
 	private ArrayList<Familiar> familyList;
@@ -20,11 +20,10 @@ public class Player implements PlayerRelated {
 	private MilitaryResource militaryPts;
 	private VictoryResource victoryPts;
 
-	GoldResource gold;
-	WoodResource wood;
-	StoneResource stone;
-	ServantResource servants;
-
+	private GoldResource gold;
+	private WoodResource wood;
+	private StoneResource stone;
+	private ServantResource servants;
 
 	private ArrayList<GreenCard> greenCardList;
 	private ArrayList<BlueCard> blueCardList;
@@ -83,6 +82,8 @@ public class Player implements PlayerRelated {
     public Player getRelatedPlayer() {
         return this;
     }
+
+    public ColorEnumeration getColor() { return this.color; }
 
     public ArrayList<LeaderCard> getLeaderCardList() {
         return leaderCardList;
