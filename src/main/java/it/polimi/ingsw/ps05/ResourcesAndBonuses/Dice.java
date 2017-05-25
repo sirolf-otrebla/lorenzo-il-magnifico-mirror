@@ -4,23 +4,27 @@ import java.util.Random;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 import it.polimi.ingsw.ps05.model.Color;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class Dice implements Resource {
 
-	Color color;
+	ColorEnumeration color;
 	private int value;
 	
-	public Dice(Color color) {
+	public Dice(ColorEnumeration color) {
 		super();
 		this.color = color;
 		this.value = lanciaDado();
 	}
 
+	public Dice(ColorEnumeration color, Integer diceValue){
+	    this.value = diceValue;
+	    this.color = color;
+    }
 	private int lanciaDado(){
 		Random randomNum = new Random();
 		return randomNum.nextInt(6) + 1;
@@ -52,7 +56,7 @@ public class Dice implements Resource {
 		return this.value;
 	}
 
-	public Color getColor(){
+	public ColorEnumeration getColor(){
 		return this.color;
 	}
 }

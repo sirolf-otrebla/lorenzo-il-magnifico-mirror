@@ -5,6 +5,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 
@@ -21,7 +22,7 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		this.effectsOnPositioning = effectsOnPositioning;
 	}
 
-	public CouncilSpace(Integer diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
+	public CouncilSpace(Dice diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
 		super();
 		super.setDiceRequirement(diceRequired);
 		this.effectsOnPositioning = effectsOnPositioning;

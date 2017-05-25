@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.PrivilegeBonus;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
@@ -10,6 +11,8 @@ public class LeaderCard implements Card {
 	private ArrayList<ArrayList<Resource>> requirements;
 	private ArrayList<Effect> effects;
 	private String cardName;
+
+	private Observer privilegeListener;
 
 	private boolean active = false;
 	@Override
@@ -28,21 +31,20 @@ public class LeaderCard implements Card {
 		return active;
 	}
 
-	@Override
 	public void applyNonActivableEffects(PlayerRelated player, int[] alternative) {
 		for (int i = 0; i < effects.size(); i++)
 		    effects.get(i).apply(player, alternative[i]);
 	}
 
 	public void discard(PlayerRelated playerRelated){
-        ArrayList<LeaderCard> cardlist = playerRelated.getRelatedPlayer().getLeaderCardList()
+        ArrayList<LeaderCard> cardlist = playerRelated.getRelatedPlayer().getLeaderCardList();
 	    for (LeaderCard card : cardlist){
 	        if (card.equals(this)) cardlist.remove(this);
         }
-        PrivilegeBonus priv = new PrivilegeBonus();
-        priv.setValue(1);
+        PrivilegeBonus priv = new PrivilegeBonus(1);
         //TODO: GESTIRE PRIVILEGI
     }
+	
 	@Override
 	public EpochEnumeration getEpoch() {
 		// TODO Auto-generated method stub
@@ -58,6 +60,12 @@ public class LeaderCard implements Card {
 		this.cardName = Name;
 		this.requirements = requirements;
 		this.effects = eff;
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

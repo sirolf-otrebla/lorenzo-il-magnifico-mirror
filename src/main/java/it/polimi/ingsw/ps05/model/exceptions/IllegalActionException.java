@@ -5,7 +5,11 @@ package it.polimi.ingsw.ps05.model.exceptions;
  */
 public class IllegalActionException extends Exception {
 
-    public static final int BAD_PAY_CHOICE = 0xCA220;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final int BAD_PAY_CHOICE = 0xCA220;
     public static final int ACTION_NOT_LEGAL = 0x0DD1;
 
     private final int flag;

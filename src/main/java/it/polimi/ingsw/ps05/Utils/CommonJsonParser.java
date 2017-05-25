@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.Utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -18,9 +19,11 @@ public class CommonJsonParser {
 
 	private static final String resourcePath = "it.polimi.ingsw.ps05.ResourcesAndBonuses.";
 	private static final String modelPath = "it.polimi.ingsw.ps05.model.";
+	
+	private int playerConnected;
 
-	public CommonJsonParser(){
-		
+	public CommonJsonParser(int playerConnected){
+		this.playerConnected = playerConnected;
 	}
 
 	//XXX Metodi per caricamento board
@@ -28,7 +31,7 @@ public class CommonJsonParser {
 		File file = new File(path);
 		ArrayList<ActionSpace> notTowerSpace = new ArrayList<ActionSpace>();
 		ArrayList<VictoryResource> faithList = new ArrayList<VictoryResource>();
-		ArrayList<Tower<TowerCard>> towerList = new ArrayList<Tower<TowerCard>>();
+		ArrayList<Tower> towerList = new ArrayList<Tower>();
 		ArrayList<MilitaryResource> militaryList = new ArrayList<MilitaryResource>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
@@ -66,19 +69,19 @@ public class CommonJsonParser {
 		return list;
 	}
 	
-	private ArrayList<Tower<TowerCard>> loadTower(JSONObject json){
-		ArrayList<Tower<TowerCard>> list = new ArrayList<Tower<TowerCard>>();
+	private ArrayList<Tower> loadTower(JSONObject json) throws FileNotFoundException, IOException, ParseException{
+		ArrayList<Tower> list = new ArrayList<Tower>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
 				list.add(loadSingleTower((JSONObject)json.get(json.keySet().toArray()[i]),json.keySet().toArray()[i].toString()));
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
 	
-	private Tower<TowerCard> loadSingleTower(JSONObject json, String keyColor) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
 		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			JSONArray array = (JSONArray)json.get(json.keySet().toArray()[i].toString());
@@ -92,7 +95,24 @@ public class CommonJsonParser {
 			}
 		}
 		
-		return new Tower<TowerCard>((TowerCard)Class.forName(modelPath + keyColor + "Card").newInstance(), list);
+		Object tower = Class.forName(modelPath + key).newInstance();
+		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
+		method.invoke(tower, list);
+		
+		
+		File file = new File("./src/main/res/cards.json");
+		JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+		if (tower instanceof BlueTower){
+			((BlueTower) tower).setDeck(loadBlueCardDeck(obj));
+		} else if (tower instanceof GreenTower){
+			((GreenTower) tower).setDeck(loadGreenCardDeck(obj));
+		} else if (tower instanceof VioletTower){
+			((VioletTower) tower).setDeck(loadVioletCardDeck(obj));
+		} else if (tower instanceof YellowTower){
+			((YellowTower) tower).setDeck(loadYellowCardDeck(obj));
+		}
+		
+		return (Tower)tower;
 	}
 	
 	private TowerTileInterface loadSingleTile(JSONObject json, String keyClass)
@@ -119,7 +139,10 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<MarketSpace> list = new ArrayList<MarketSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadMarketSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadMarketSpace((JSONObject)obj.toArray()[i]));
+			}
+			
 		}
 		return list;
 	}
@@ -129,21 +152,27 @@ public class CommonJsonParser {
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable(json, i));
+				if (!json.keySet().toArray()[i].equals("numPlayer")){
+					list.add(createAllExceptActivable(json, i));
+				}
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
+		ImmediateEffect effect = new ImmediateEffect();
+		effect.setEffectList(list);
+		ArrayList<Effect> effectList = new ArrayList<Effect>();
+		effectList.add(effect);
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
-			return new MarketSpace(list);
+			return new MarketSpace(effectList);
 		}
 		
 		
-		return new MarketSpace(diceRequired, list);
+		return new MarketSpace(diceRequired, effectList);
 	}
 	
 	private CouncilSpace loadCouncilSpace(JSONObject json){
@@ -156,9 +185,9 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new CouncilSpace(list);
 		}
@@ -170,24 +199,26 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<HarvestingSpace> list = new ArrayList<HarvestingSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadHarvestSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadHarvestSpace((JSONObject)obj.toArray()[i]));
+			}
 		}
 		return list;
 	}
 	
 	private HarvestingSpace loadHarvestSpace(JSONObject json){
-		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
+		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable((JSONObject)json.get("Effect"), i));
+				list = (getEffects((JSONObject)json.get("Effect")));
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new HarvestingSpace(list);
 		}
@@ -199,25 +230,27 @@ public class CommonJsonParser {
 		JSONArray obj = (JSONArray)json;
 		ArrayList<ProductionSpace> list = new ArrayList<ProductionSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
-			list.add(loadProductionSpace((JSONObject)obj.toArray()[i]));
+			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
+				list.add(loadProductionSpace((JSONObject)obj.toArray()[i]));
+			}
 		}
 		return list;
 	}
 	
 	
 	private ProductionSpace loadProductionSpace(JSONObject json){
-		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
+		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
-				list.add(createAllExceptActivable((JSONObject)json.get("Effect"), i));
+				list = (getEffects((JSONObject)json.get("Effect")));
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException
 					| SecurityException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
-		Integer diceRequired;
+		Dice diceRequired;
 		try{
-			diceRequired = Integer.parseInt(json.get("diceRequired").toString());
+			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			return new ProductionSpace(list);
 		}
@@ -226,7 +259,7 @@ public class CommonJsonParser {
 	}
 	
 	//XXX Metodi per caricamento carte
-	public ArrayList<Deck> loadDeck(String path) {
+	/*public ArrayList<Deck> loadDeck(String path) {
 		ArrayList<Deck> deck = new ArrayList<Deck>();
 		try {
 			File file = new File(path);
@@ -240,7 +273,7 @@ public class CommonJsonParser {
 		}
 		return deck;
 
-	}
+	}*/
 
 	private BlueCardDeck loadBlueCardDeck(JSONObject json){
 		JSONArray list = (JSONArray) json.get("Blue");

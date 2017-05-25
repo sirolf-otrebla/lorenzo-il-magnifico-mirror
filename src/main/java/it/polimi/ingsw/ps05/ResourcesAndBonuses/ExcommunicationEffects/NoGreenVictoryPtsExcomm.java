@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
+
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
 
 public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {
@@ -23,7 +24,6 @@ public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {
 		return null;
 	}
 
-	@Override
 	public void apply(Familiar familyMember, int alternative) {
 
 	}
@@ -41,6 +41,12 @@ public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {
 
 	@Override
 	public void inizializeFromJson(JSONObject json) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void apply(PlayerRelated familyMember, int alternative) {
 		// TODO Auto-generated method stub
 		
 	}

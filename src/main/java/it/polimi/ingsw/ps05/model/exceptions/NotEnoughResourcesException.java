@@ -6,4 +6,9 @@ package it.polimi.ingsw.ps05.model.exceptions;
 
 public class NotEnoughResourcesException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

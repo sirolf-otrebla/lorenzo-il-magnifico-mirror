@@ -5,16 +5,14 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
-import javax.xml.crypto.KeySelector;
-
 public class Player implements PlayerRelated {
 	
 	// server information
 	int playerID;
 	String username;
+	ColorEnumeration color;
 	
 	// game information
-	private Color color;
 	private ArrayList<Familiar> familyList;
 	private BonusTile bonusTile;
 
@@ -34,7 +32,21 @@ public class Player implements PlayerRelated {
 	private ArrayList<VioletCard> purpleCardList;
 	private ArrayList<LeaderCard> leaderCardList;
 
-	private ArrayList<Effect> permanentEffectList;
+	private ArrayList<ActionResult> permanentEffectResList;
+	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
+	
+	public Player(int playerID, String username, ColorEnumeration color){
+		this.playerID = playerID;
+		this.username = username;
+		this.color = color;
+		this.faithPts = new FaithResource(0);
+		this.militaryPts = new MilitaryResource(0);
+		this.victoryPts = new VictoryResource(0);
+		this.gold = new GoldResource(0);
+		this.wood = new WoodResource(0);
+		this.stone = new StoneResource(0);
+		this.servants = new ServantResource(0);
+	}
 
 	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
@@ -47,7 +59,9 @@ public class Player implements PlayerRelated {
 	    return thisAction;
     }
 
-	
+	public void addPermanentEffectRes(ActionResult eff){
+		this.permanentEffectResList.add(eff);
+	}
 
 	public ArrayList<GreenCard> getGreenCardList() {
 		return greenCardList;
@@ -102,5 +116,13 @@ public class Player implements PlayerRelated {
     
     public void addVictory(VictoryResource victory){
     	this.victoryPts.setAmount(this.victoryPts.getAmount() + victory.getAmount() + victory.getValue());
+    }
+    
+    public void setFamiliars(ArrayList<Familiar> familyList){
+    	this.familyList = familyList;
+    }
+    
+    public ArrayList<Familiar> getFamilyList(){
+    	return this.familyList;
     }
 }

@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 
 public class ImmediateEffect implements Effect {
 	
-	ArrayList<ArrayList<ActionResult>> effctsList;
+	ArrayList<ArrayList<ActionResult>> effectList;
 
 	public ImmediateEffect() {
 		super();
@@ -29,8 +29,9 @@ public class ImmediateEffect implements Effect {
 	}
 
 	@Override
-	public void apply(Familiar familyMember, int alternative) {
-
+	public void apply(PlayerRelated familyMember, int alternative) {
+		for( ActionResult res : getResultList().get(alternative) )
+			res.applyResult(familyMember);
 	}
 
 }

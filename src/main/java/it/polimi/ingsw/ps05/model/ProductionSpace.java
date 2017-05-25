@@ -2,7 +2,8 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+
+import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 
 /* in preliminary UML this object was called ActivitySpace. I decided to change his name because of
  * the possible ambiguity about the term Activity (e.g. there are other objects that uses "Activity"
@@ -12,22 +13,20 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
  * further comments will be added
  */
 public class ProductionSpace extends ActionSpaceWithEffect {
-	
-	ArrayList<ActionResult> effectsOnPositioning;
 
 	public ProductionSpace() {
 		super();
 	}
 
-	public ProductionSpace(ArrayList<ActionResult> effectsOnPositioning) {
+	public ProductionSpace(ArrayList<Effect> effectList) {
 		super();
-		this.effectsOnPositioning = effectsOnPositioning;
+		this.effectList = effectList;
 	}
 
-	public ProductionSpace(Integer diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
+	public ProductionSpace(Dice diceRequired, ArrayList<Effect> effectList) {
 		super();
 		super.setDiceRequirement(diceRequired);
-		this.effectsOnPositioning = effectsOnPositioning;
+		this.effectList = effectList;
 	}
 	
 	

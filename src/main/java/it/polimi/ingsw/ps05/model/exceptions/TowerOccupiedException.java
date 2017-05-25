@@ -6,7 +6,11 @@ import it.polimi.ingsw.ps05.model.Tower;
  * Created by Alberto on 15/05/2017.
  */
 public class TowerOccupiedException extends Exception {
-    private Tower towerOccupied;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Tower towerOccupied;
     private boolean isActionSpaceOccupied;
 
     public Tower getTowerOccupied() {

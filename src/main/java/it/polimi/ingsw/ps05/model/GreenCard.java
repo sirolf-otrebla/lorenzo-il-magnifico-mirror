@@ -77,10 +77,11 @@ public class GreenCard extends TowerCard {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public GreenCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
-			ArrayList<Effect> effects) {
-		super(epoch, color, cardName, requirements, effects);
+
+	@Override
+	public void moveToPlayer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

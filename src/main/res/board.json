@@ -1,7 +1,7 @@
 {
 	"Tower": 
 	{
-		"Green": 
+		"GreenTower": 
 		{
 			"Tile": 
 			[
@@ -34,7 +34,7 @@
 			]
 		},
 
-		"Blue": 
+		"BlueTower": 
 		{
 			"Tile": 
 			[
@@ -67,7 +67,7 @@
 			]
 		},
 
-		"Yellow": 
+		"YellowTower": 
 		{
 			"Tile": 
 			[
@@ -100,7 +100,7 @@
 			]
 		},
 
-		"Violet": 
+		"VioletTower": 
 		{
 			"Tile": 
 			[
@@ -146,19 +146,23 @@
 	"MarketSpace": 
 	[
 		{
+			"numPlayer" : 2,
 			"GoldResource": 5
 		},
 
 		{
+			"numPlayer" : 2,
 			"ServantResource": 5
 		},
 
 		{
+			"numPlayer" : 4,
 			"MilitaryResource": 3,
 			"GoldResource": 2
 		},
 
 		{
+			"numPlayer" : 4,
 			"PrivilegeBonus": 2
 		}
 	],
@@ -196,6 +200,7 @@
 	"HarvestSpace": 
 	[
 		{
+			"numPlayer" : 2,
 			"Effect": 
 			{
 				
@@ -203,9 +208,12 @@
 		},
 
 		{
+			"numPlayer" : 3,
 			"Effect": 
 			{
+				"ImmediateEffect" : {
 				"HarvestBonus": -3
+				}
 			}
 		}
 	],
@@ -213,6 +221,7 @@
 	"ProductionSpace": 
 	[
 		{
+			"numPlayer" : 2,
 			"Effect": 
 			{
 				
@@ -220,9 +229,12 @@
 		},
 
 		{
+			"numPlayer" : 3,
 			"Effect": 
 			{
+				"ImmediateEffect" : {
 				"ProductionBonus": -3
+				}
 			}
 		}
 	]

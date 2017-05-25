@@ -8,21 +8,26 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.GoldResource;
  * 
  * TODO: add UML methods and attributes. --Sirolfo
  */
-public class Tower <T extends TowerCard> {
+public abstract class Tower {
 
 	public static final int TOWER_RENT_AMNT = 3;
-
-	private T cardColorClass;
 	private GoldResource towerOccupiedGoldResource;
 	boolean isOccupied;
 	ArrayList<TowerTileInterface> tiles; //dove vanno messi i tile
+	Deck deck;
+	
+	public Tower(){
+		this.isOccupied = false;
+		this.towerOccupiedGoldResource = new GoldResource();
+		towerOccupiedGoldResource.setAmount(TOWER_RENT_AMNT);
+		setParentListInTiles();
+	}
 
-	public Tower(T colorCardClass, ArrayList<TowerTileInterface> tiles){
+	public Tower(ArrayList<TowerTileInterface> tiles){
 
 		this.isOccupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
 		towerOccupiedGoldResource.setAmount(TOWER_RENT_AMNT);
-		this.cardColorClass = colorCardClass;
 		this.tiles = tiles;
 		setParentListInTiles();
 	}
@@ -36,13 +41,23 @@ public class Tower <T extends TowerCard> {
 	public GoldResource getRentAmount(){
 		return this.towerOccupiedGoldResource;
 	}
-
-	public T getCardColorClass() {
-		return cardColorClass;
+	
+	public ArrayList<TowerTileInterface> getTiles(){
+		return this.tiles;
 	}
-
-	public void setCardColorClass(T cardColorClass) {
-		this.cardColorClass = cardColorClass;
+	
+	public void setTiles(ArrayList<TowerTileInterface> tiles){
+		this.tiles = tiles;
+	}
+	
+	public void setDeck(Deck deck){
+		this.deck = deck;
+	}
+	
+	public void setCardInTile(Epoch epoch){
+		for (TowerTileInterface o : tiles){
+			o.setTowerCard(deck.getCard(epoch));
+		}
 	}
 	
 	
