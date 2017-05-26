@@ -16,8 +16,9 @@ public class AllBonus implements ActionResult {
 	public void setValue(Integer value){
 		this.value = value;
 	}
-	
-	public Integer getAmount(){
+
+	@Override
+	public Integer getValue(){
 		return this.value;
 	}
 

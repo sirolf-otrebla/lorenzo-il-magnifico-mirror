@@ -6,9 +6,12 @@ import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
 public class Player implements PlayerRelated {
-	
+
+
+
 	// server information
 	int playerID;
+
 	String username;
 	ColorEnumeration color;
 	
@@ -20,10 +23,10 @@ public class Player implements PlayerRelated {
 	private MilitaryResource militaryPts;
 	private VictoryResource victoryPts;
 
-	GoldResource gold;
-	WoodResource wood;
-	StoneResource stone;
-	ServantResource servants;
+	private GoldResource gold;
+	private WoodResource wood;
+	private StoneResource stone;
+	private ServantResource servants;
 
 
 	private ArrayList<GreenCard> greenCardList;
@@ -50,7 +53,7 @@ public class Player implements PlayerRelated {
 
 	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
-	    Action thisAction = new Action(this, familiar, position);
+	    Action thisAction = new Action(familiar, position);
 	    try {
 	    	// run actions
 		} catch (Exception e /* create more catch branch */ ){
@@ -90,32 +93,33 @@ public class Player implements PlayerRelated {
     
     public void addGold(GoldResource gold){
     	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
-    	this.gold.setAmount(this.gold.getAmount() + gold.getAmount() + gold.getValue());
+    	this.gold.setValue(this.gold.getValue() + gold.getValue());
     }
     
     public void addFaith(FaithResource faith){
     	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
-    	this.faithPts.setAmount(this.faithPts.getAmount() + faith.getAmount() + faith.getValue());
+    	this.faithPts.setValue(this.faithPts.getValue() + faith.getValue());
     }
     
     public void addMilitary(MilitaryResource military){
-    	this.militaryPts.setAmount(this.militaryPts.getAmount() + military.getAmount() + military.getValue());
+    	this.militaryPts.setValue(this.militaryPts.getValue() + military.getValue());
     }
     
     public void addServant(ServantResource servants){
-    	this.servants.setAmount(this.servants.getAmount() + servants.getAmount() + servants.getValue());
+    	int val = this.servants.getValue();
+    	this.servants.setValue(val + servants.getValue());
     }
     
     public void addStone(StoneResource stone){
-    	this.stone.setAmount(this.stone.getAmount() + stone.getAmount() + stone.getValue());
+    	this.stone.setValue(this.stone.getValue() + stone.getValue());
     }
     
     public void addWood(WoodResource wood){
-    	this.wood.setAmount(this.wood.getAmount() + wood.getAmount() + wood.getValue());
+    	this.wood.setValue(this.wood.getValue() + wood.getValue());
     }
     
     public void addVictory(VictoryResource victory){
-    	this.victoryPts.setAmount(this.victoryPts.getAmount() + victory.getAmount() + victory.getValue());
+    	this.victoryPts.setValue(this.victoryPts.getValue() + victory.getValue());
     }
     
     public void setFamiliars(ArrayList<Familiar> familyList){
@@ -124,5 +128,41 @@ public class Player implements PlayerRelated {
     
     public ArrayList<Familiar> getFamilyList(){
     	return this.familyList;
+    }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public int getPlayerID() {
+		return playerID;
+	}
+
+    public GoldResource getGold() {
+        return gold;
+    }
+
+    public FaithResource getFaithPts() {
+        return faithPts;
+    }
+
+    public MilitaryResource getMilitaryPts() {
+        return militaryPts;
+    }
+
+    public VictoryResource getVictoryPts() {
+        return victoryPts;
+    }
+
+    public WoodResource getWood() {
+        return wood;
+    }
+
+    public StoneResource getStone() {
+        return stone;
+    }
+
+    public ServantResource getServants() {
+        return servants;
     }
 }

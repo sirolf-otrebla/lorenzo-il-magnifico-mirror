@@ -12,12 +12,18 @@ import java.util.ArrayList;
 public abstract class ActionSpace {
 
 	private boolean isOccupied;
+
+	// this is a REDUNDANT information
 	private Dice diceRequirement;
 	private final static Integer defaultDiceRequired = 1; //le sotto classi lo usano in un costruttore in cui si passa solo l'effetto, può essere comodo
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	public ActionSpace() {
+
 		diceRequirement = new Dice(ColorEnumeration.Any, defaultDiceRequired);
+		requirements = new ArrayList<>();
+		requirements.add(new ArrayList<>());
+		requirements.get(0).add(diceRequirement);
 	}
 
 	private Familiar occupant;
@@ -37,12 +43,16 @@ public abstract class ActionSpace {
 
 	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
 
-	public  ArrayList<ArrayList<Resource>> getRequirements(){
+	public ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;
 	}
-	
+
 	protected void setDiceRequirement(Dice diceRequirement){
+
+		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
 		this.diceRequirement = diceRequirement;
+		for ( ArrayList<Resource> a : requirements)
+			a.set(0, diceRequirement);
 	}
 
 	public Dice getDiceRequirement() {

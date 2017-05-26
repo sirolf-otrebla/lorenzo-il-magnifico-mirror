@@ -21,5 +21,9 @@ public interface Resource {
     public void removeFromPlayer(Familiar playerFamiliar) throws NotEnoughResourcesException, DiceTooLowException;
 
     public boolean hasEnoughResources(Familiar playerFamiliar);
+
+    public void setValue(Integer amount);
+
+    public Integer getValue();
 	
 }

@@ -12,9 +12,13 @@ public class ImmediateEffect implements Effect {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setEffectList(ArrayList<ActionResult> effectsList){
+	public void addEffectList(ArrayList<ActionResult> effectsList){
 		
 	}
+
+	public void setEffectList(ArrayList<ArrayList<ActionResult>> actResList){
+	    this.effectList = actResList;
+    }
 
 	@Override
 	public EffectType getEffectType() {

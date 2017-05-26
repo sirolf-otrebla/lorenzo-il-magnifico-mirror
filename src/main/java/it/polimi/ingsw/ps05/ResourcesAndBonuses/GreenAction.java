@@ -16,7 +16,13 @@ public class GreenAction implements ActionResult {
 	public void setValue(Integer value){
 		this.value = value;
 	}
-	
+
+	@Override
+	public Integer getValue() {
+		return value;
+
+	}
+
 	public Integer getAmount(){
 		return this.value;
 	}

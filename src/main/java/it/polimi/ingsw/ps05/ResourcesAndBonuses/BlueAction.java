@@ -17,7 +17,12 @@ public class BlueAction implements ActionResult {
 	public void setValue(Integer value){
 		this.value = value;
 	}
-	
+
+	@Override
+	public Integer getValue() throws NoSuchMethodException {
+		return value;
+	}
+
 	public Integer getAmount(){
 		return this.value;
 	}

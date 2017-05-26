@@ -8,43 +8,32 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class ServantResource implements Resource, ActionResult {
 	//TODO vedi faith
 	private Integer amount;
-	private Integer value;
-	
-	public ServantResource(Integer amount){
-		this.amount = amount;
-		this.value = 0;
+	public ServantResource(Integer value){
+		this.amount = value;
 	}
 	
 	public ServantResource() {
 		this.amount = 0;
-		this.value = 0;
+
 	}
 	
-	public void setAmount(Integer amount){
+	public void setValue(Integer amount){
 		this.amount = amount;
 	}
 	
-	public int getAmount(){
+	public Integer getValue(){
 		return this.amount;
 	}
-	
-	public void setValue(Integer value){
-		this.value = value;
-	}
-	
-	public int getValue(){
-		return this.value;
-	}
-
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
 
-
+		this.amount -= amount;
 	}
 
 	@Override
 	public void remove(Resource res) throws NotEnoughResourcesException {
 
+		this.amount -= res.getValue();
 	}
 
 	@Override

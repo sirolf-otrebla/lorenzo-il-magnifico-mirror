@@ -162,7 +162,7 @@ public class CommonJsonParser {
 		}
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
-		effect.setEffectList(list);
+		effect.addEffectList(list);
 		ArrayList<Effect> effectList = new ArrayList<Effect>();
 		effectList.add(effect);
 		try{
@@ -367,7 +367,7 @@ public class CommonJsonParser {
 			ArrayList<Resource> resList = new ArrayList<Resource>(); //lista dei singoli componenti
 			for (int j = 0; j < requirementList.keySet().toArray().length; j++){ //ciclo le risorse aggiugnendole ad un arraylist
 				Object object = Class.forName(resourcePath + requirementList.keySet().toArray()[j].toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
-				Method method = object.getClass().getDeclaredMethod("setAmount",Integer.class);
+				Method method = object.getClass().getDeclaredMethod("setValue",Integer.class);
 				method.invoke(object, Integer.parseInt(requirementList.get(requirementList.keySet().toArray()[j].toString()).toString()));
 				resList.add((Resource)object); //cast esplicito a risorsa necessario per aggiungerlo alla lista. L'oggetto in se non perde la propria classe
 			}
@@ -386,7 +386,7 @@ public class CommonJsonParser {
 			} else {
 				ArrayList<ActionResult> resList = new ArrayList<ActionResult>(); //lista dei singoli componenti
 				Object object = Class.forName(modelPath + json.keySet().toArray()[i].toString()).newInstance(); //creo immediate o activable o permanent o endgame
-				Method setList = object.getClass().getDeclaredMethod("setEffectList", resList.getClass()); //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
+				Method setList = object.getClass().getDeclaredMethod("addEffectList", resList.getClass()); //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
 				for (int j = 0; j < effectList.keySet().toArray().length; j++){ //ciclo le risorse/azioni aggiugnendole ad un arraylist
 					if (!effectList.keySet().toArray()[j].toString().equals("Return") & !effectList.keySet().toArray()[j].toString().equals("Multiplier") & !effectList.keySet().toArray()[j].toString().equals("ResourceToCount")){
 						resList.add(createAllExceptActivable(effectList, j)); 

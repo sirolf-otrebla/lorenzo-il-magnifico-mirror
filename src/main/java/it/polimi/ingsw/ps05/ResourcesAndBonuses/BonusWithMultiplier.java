@@ -47,6 +47,18 @@ public class BonusWithMultiplier implements ActionResult {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+	@Override
+	public void setValue(Integer amount) throws NoSuchMethodException {
+		throw new NoSuchMethodException();
+
+	}
+
+	@Override
+	public Integer getValue() throws NoSuchMethodException {
+
+		throw new NoSuchMethodException();
+	}
+
+
 }

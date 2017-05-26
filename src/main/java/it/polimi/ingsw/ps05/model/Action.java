@@ -22,10 +22,10 @@ public class Action implements Period {
 	private ArrayList<ArrayList<Resource>> suitableReqAlternatives;
 	private boolean isLegal = false;
 
-	public Action(Player player, Familiar familiar, ActionSpace position) {
+	public Action(Familiar familiar, ActionSpace position) {
 		this.position = position;
 		this.familiar = familiar;
-		this.suitableReqAlternatives = null;
+		this.suitableReqAlternatives = new ArrayList<>();
 	}
 
 	// 1) check if the family member is already used

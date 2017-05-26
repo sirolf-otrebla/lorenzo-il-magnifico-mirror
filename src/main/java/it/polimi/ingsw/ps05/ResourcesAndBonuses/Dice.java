@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 
 import java.util.Random;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
-import it.polimi.ingsw.ps05.model.Color;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
@@ -49,10 +47,25 @@ public class Dice implements Resource {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
+		int diff = playerFamiliar.getRelatedDice().getValue() - this.getValue();
+		if ( diff > 0) return true;
+		if (Math.abs(diff) < playerFamiliar.getRelatedPlayer().getServants().getValue()){
+			try{
+				playerFamiliar.getRelatedPlayer().getServants().remove(new ServantResource(Math.abs(diff)));
+				return true;
+			} catch (NotEnoughResourcesException e){
+				System.out.println("SOMETHING REALLY BAD HAS HAPPENED!! THIS MESSAGE IT'S NOT MEANT TO BE DISPLAYED EVER");
+			}
+		}
 		return false;
 	}
 
-	public int getValue(){
+    @Override
+    public void setValue(Integer amount) {
+        this.value = amount;
+    }
+
+    public Integer getValue(){
 		return this.value;
 	}
 

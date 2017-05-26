@@ -18,11 +18,11 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 		
 	}
 	
-	public void setAmount(Integer amount){
+	public void setValue(Integer amount){
 		this.amount = amount;
 	}
 	
-	public Integer getAmount(){
+	public Integer getValue(){
 		return this.amount;
 	}
 

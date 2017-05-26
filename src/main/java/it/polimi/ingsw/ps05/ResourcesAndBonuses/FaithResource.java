@@ -9,34 +9,25 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class FaithResource implements Resource, ActionResult {
 
 	//TODO : scegliere se usare due variabili separate o usarne una sola
-	private Integer amount; 
-	private Integer value;
+	private Integer amount;
 
 	public FaithResource(Integer amount) {
 		this.amount = amount;
-		this.value = 0;
+
 	}
 
 	public FaithResource() {
 		this.amount = 0;
-		this.value = 0;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setValue(Integer amount) {
 		this.amount = amount;
 	}
 
-	public Integer getAmount() {
+	public Integer getValue() {
 		return this.amount;
 	}
-	
-	public void setValue(Integer value){ //metodo utilizzato come setter quando la risorsa è il risultato di un effetto
-		this.value = value;
-	}
-	
-	public Integer getValue(){
-		return this.value;
-	}
+
 
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {

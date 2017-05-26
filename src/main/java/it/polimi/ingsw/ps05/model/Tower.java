@@ -19,7 +19,7 @@ public abstract class Tower {
 	public Tower(){
 		this.isOccupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
-		towerOccupiedGoldResource.setAmount(TOWER_RENT_AMNT);
+		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
 		setParentListInTiles();
 	}
 
@@ -27,7 +27,7 @@ public abstract class Tower {
 
 		this.isOccupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
-		towerOccupiedGoldResource.setAmount(TOWER_RENT_AMNT);
+		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
 		this.tiles = tiles;
 		setParentListInTiles();
 	}
