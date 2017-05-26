@@ -57,7 +57,7 @@ public class Familiar implements PlayerRelated{
 	    this.setPosition(null);
     }
 
-    public Dice getDice() { return this.relatedDice; }
+    public Dice getRelatedDice() { return this.relatedDice; }
 
 	public ColorEnumeration getColor(){
 		return this.color;
