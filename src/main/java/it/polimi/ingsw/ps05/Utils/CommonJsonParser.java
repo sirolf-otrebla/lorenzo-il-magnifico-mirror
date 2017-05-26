@@ -46,7 +46,7 @@ public class CommonJsonParser {
 			e.printStackTrace();
 		}
 		
-		return new Board(towerList, notTowerSpace, faithList, militaryList);
+		return Board.initBoard(towerList, notTowerSpace, faithList, militaryList,null);
 	}
 	
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){

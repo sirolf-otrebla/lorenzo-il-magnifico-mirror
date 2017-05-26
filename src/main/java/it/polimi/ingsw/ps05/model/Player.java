@@ -165,4 +165,8 @@ public class Player implements PlayerRelated {
     public ServantResource getServants() {
         return servants;
     }
+    
+    public ColorEnumeration getColor(){
+    	return color;
+    }
 }
