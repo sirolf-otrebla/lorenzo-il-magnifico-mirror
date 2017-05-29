@@ -17,13 +17,13 @@ public class GreenCard extends TowerCard {
 	private static final int DEFAULT_EFFECT = 0;
 
 	private boolean toBeActivated = true;
-	private ArrayList<ActivableEffect> activableEffectList;
+	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
 
 	// meant to be selected BEFORE using HARVEST
 	private int[] selectedEffects;
 
 
-	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects){
+	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects){
 		super(epoch, color, cardName, requirements, effects);
 
 		// NOTE: THIS IS ONLY A PROVISIONAL WORKAROUND. NEED TO CHANGE JSON.
@@ -73,7 +73,7 @@ public class GreenCard extends TowerCard {
 		this.toBeActivated = toBeActivated;
 	}
 
-	public GreenCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
+	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub
 	}

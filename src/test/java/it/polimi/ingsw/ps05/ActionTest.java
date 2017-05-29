@@ -21,7 +21,7 @@ public class ActionTest extends TestCase{
     private Dice testDiceReq;
     private MarketSpace testMarket;
 
-    private static final int DICE_REQ_AMT = 0x0A;
+    private static final int DICE_REQ_AMT = 5;
     private static final int PL_ID_TEST = 0x0dd1;
     public static final String PL_USERNAME_TEST = "romolo_augustolo";
     public static final ColorEnumeration PL_COLOR_TEST = ColorEnumeration.Yellow;
@@ -54,7 +54,7 @@ public class ActionTest extends TestCase{
     public void setUp(){
 
         //TEST SETUP
-        testPl = new Player(this.PL_ID_TEST, PL_USERNAME_TEST, PL_COLOR_TEST);
+        testPl = new Player(ActionTest.PL_ID_TEST, PL_USERNAME_TEST, PL_COLOR_TEST);
         testFm = new Familiar(testPl, ColorEnumeration.Black );
         ArrayList<Familiar> famList = new ArrayList<Familiar>();
         famList.add(this.testFm);
@@ -62,8 +62,8 @@ public class ActionTest extends TestCase{
         testFm.setDice(new Dice(ColorEnumeration.Black));
         testEffectArrayList = new ArrayList<Effect>();
         testEffectArrayList.add(new ImmediateEffect());
-        testGoldRes = new GoldResource(this.AR_GOLD_AMNT);
-        testDiceReq = new Dice(ColorEnumeration.Any, this.DICE_REQ_AMT);
+        testGoldRes = new GoldResource(ActionTest.AR_GOLD_AMNT);
+        testDiceReq = new Dice(ActionTest.PL_COLOR_TEST, ActionTest.DICE_REQ_AMT);
         ArrayList<ActionResult> arl = new ArrayList<ActionResult>();
         arl.add(testGoldRes);
         actionResultEffectList = new ArrayList<>();
@@ -76,12 +76,17 @@ public class ActionTest extends TestCase{
         testMarket = new MarketSpace(testDiceReq, testEffectArrayList);
         this.testActl = new Action(testFm, testMarket);
     }
+    
+    @Test
+    public void testBoard(){
+    	
+    }
 
     @Test
     public  void testPlayer(){
 
-        assertEquals(this.PL_ID_TEST, testPl.getPlayerID());
-        assertEquals(this.PL_USERNAME_TEST, testPl.getUsername());
+        assertEquals(ActionTest.PL_ID_TEST, testPl.getPlayerID());
+        assertEquals(ActionTest.PL_USERNAME_TEST, testPl.getUsername());
         assertSame(this.testFm, testPl.getFamilyList().get(0));
         assertEquals(new Integer(0), (Integer) testPl.getStone().getValue());
         assertEquals(0, (int) testPl.getGold().getValue());
@@ -89,16 +94,28 @@ public class ActionTest extends TestCase{
         assertEquals(0, (int) testPl.getWood().getValue());
         assertEquals(0, (int) testPl.getVictoryPts().getValue());
 
-        WoodResource wood = new WoodResource(this.PL_TEST_WOOD);
+        WoodResource wood = new WoodResource(ActionTest.PL_TEST_WOOD);
         wood.applyResult(testPl);
+        StoneResource stone = new StoneResource(ActionTest.PL_TEST_STONE);
+        stone.applyResult(testPl);
+        FaithResource faith = new FaithResource(ActionTest.PL_TEST_FAITH);
+        faith.applyResult(testPl);
+        MilitaryResource military = new MilitaryResource(ActionTest.PL_TEST_MILITARY);
+        military.applyResult(testPl);
+        VictoryResource victory = new VictoryResource(ActionTest.PL_TEST_MILITARY);
+        victory.applyResult(testPl);
+        ServantResource servant = new ServantResource(ActionTest.PL_TEST_MILITARY);
+        servant.applyResult(testPl);
+        GoldResource gold = new GoldResource(ActionTest.PL_TEST_MILITARY);
+        gold.applyResult(testPl);
 
-        assertEquals(this.PL_TEST_WOOD, (int) testPl.getWood().getValue());
-        assertEquals(this.PL_TEST_STONE, (int) testPl.getStone().getValue());
-        assertEquals(this.PL_TEST_FAITH, (int) testPl.getFaithPts().getValue());
-        assertEquals(this.PL_TEST_MILITARY, (int) testPl.getMilitaryPts().getValue());
-        assertEquals(this.PL_TEST_VICTORY, (int) testPl.getVictoryPts().getValue());
-        assertEquals(this.PL_TEST_SERVANTS, (int) testPl.getServants().getValue());
-        assertEquals(this.PL_TEST_GOLD, (int) testPl.getGold().getValue());
+        assertEquals(ActionTest.PL_TEST_WOOD, (int) testPl.getWood().getValue());
+        assertEquals(ActionTest.PL_TEST_STONE, (int) testPl.getStone().getValue());
+        assertEquals(ActionTest.PL_TEST_FAITH, (int) testPl.getFaithPts().getValue());
+        assertEquals(ActionTest.PL_TEST_MILITARY, (int) testPl.getMilitaryPts().getValue());
+        assertEquals(ActionTest.PL_TEST_VICTORY, (int) testPl.getVictoryPts().getValue());
+        assertEquals(ActionTest.PL_TEST_SERVANTS, (int) testPl.getServants().getValue());
+        assertEquals(ActionTest.PL_TEST_GOLD, (int) testPl.getGold().getValue());
     }
 
     @Test
@@ -116,11 +133,17 @@ public class ActionTest extends TestCase{
     @Test
     public void testDices(){
         // todo
+    	assertEquals(ActionTest.DICE_REQ_AMT,(int) this.testDiceReq.getValue());
+    	assertEquals(ActionTest.PL_COLOR_TEST,this.testDiceReq.getColor());
+    	for (int i = 0; i < 1000000; i++){
+    		Dice dice = new Dice(ActionTest.PL_COLOR_TEST);
+    		assertTrue(1 <= (int)dice.getValue() && (int)dice.getValue() <= 6);
+    	}
     }
 
     @Test
     public void testActionIsLegal(){
-        testPl.addServant(new ServantResource(this.PL_SERVANTS_AMNT));
+        testPl.addServant(new ServantResource(ActionTest.PL_SERVANTS_AMNT));
         assertTrue(this.testActl.isLegal());
     }
 

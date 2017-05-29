@@ -17,7 +17,7 @@ public class MarketSpace extends ActionSpaceWithEffect {
 
     @Override
     public void applyEffect() {
-        Player player = this.getOccupant().getRelatedPlayer();
+        //Player player = this.getOccupant().getRelatedPlayer();
         Iterator<Effect> it = this.getEffects().iterator();
         int index = 0;
         while (it.hasNext()){

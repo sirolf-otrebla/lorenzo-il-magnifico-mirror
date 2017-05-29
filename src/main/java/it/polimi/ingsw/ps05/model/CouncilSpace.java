@@ -3,29 +3,27 @@ package it.polimi.ingsw.ps05.model;
 /* todo: add methods defined in UML  --Sirolfo*/
 
 import java.util.*;
-
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 
 	private ArrayList<Familiar> occupantList;
 
-	private ArrayList<ActionResult> effectsOnPositioning;
+	private ArrayList<Effect> effectList;
 
 	public CouncilSpace() {
 		super();
 	}
 
-	public CouncilSpace(ArrayList<ActionResult> effectsOnPositioning) {
+	public CouncilSpace(ArrayList<Effect> effect) {
 		super();
-		this.effectsOnPositioning = effectsOnPositioning;
+		this.effectList = effect;
 	}
 
-	public CouncilSpace(Dice diceRequired, ArrayList<ActionResult> effectsOnPositioning) {
+	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) {
 		super();
 		super.setDiceRequirement(diceRequired);
-		this.effectsOnPositioning = effectsOnPositioning;
+		this.effectList = effect;
 	}
 
 	@Override
@@ -35,7 +33,7 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 
 	@Override
 	public ArrayList<Effect> getEffects() {
-		return null;
+		return this.effectList;
 	}
 
 	@Override

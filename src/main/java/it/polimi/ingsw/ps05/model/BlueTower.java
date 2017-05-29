@@ -11,5 +11,10 @@ public class BlueTower extends Tower{
 	public BlueTower(){
 		super();
 	}
+	
+	@Override
+	public void setTiles(ArrayList<TowerTileInterface> tiles){
+		super.setTiles(tiles);
+	}
 
 }

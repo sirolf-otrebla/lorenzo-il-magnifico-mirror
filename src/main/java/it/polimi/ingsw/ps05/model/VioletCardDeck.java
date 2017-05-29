@@ -7,17 +7,17 @@ public class VioletCardDeck implements Deck {
 	
 ArrayList<VioletCard> cardList;
 	
-	ArrayList<VioletCard> firstEpochCard;
-	ArrayList<VioletCard> secondEpochCard;
-	ArrayList<VioletCard> thirdEpochCard;
+	ArrayList<VioletCard> firstEpochCard = new ArrayList<VioletCard>();
+	ArrayList<VioletCard> secondEpochCard = new ArrayList<VioletCard>();
+	ArrayList<VioletCard> thirdEpochCard = new ArrayList<VioletCard>();
 	
 	
 	public VioletCardDeck(ArrayList<VioletCard> cardList){
 		this.cardList = cardList;
 		for (VioletCard o : this.cardList) {
-			if (o.getEpoch().equals(EpochEnumeration.FIRST)){
+			if (o.getEpoch() == EpochEnumeration.FIRST){
 				firstEpochCard.add(o);
-			} else if (o.getEpoch().equals(EpochEnumeration.SECOND)){
+			} else if (o.getEpoch() == EpochEnumeration.SECOND){
 				secondEpochCard.add(o);
 			} else {
 				thirdEpochCard.add(o);

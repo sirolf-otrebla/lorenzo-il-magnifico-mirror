@@ -20,7 +20,7 @@ public abstract class Tower {
 		this.isOccupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
 		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
-		setParentListInTiles();
+		//setParentListInTiles();
 	}
 
 	public Tower(ArrayList<TowerTileInterface> tiles){
@@ -29,10 +29,12 @@ public abstract class Tower {
 		this.towerOccupiedGoldResource = new GoldResource();
 		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
 		this.tiles = tiles;
+		System.out.println(tiles.size());
 		setParentListInTiles();
 	}
 	
 	private void setParentListInTiles(){
+		
 		for (TowerTileInterface o : tiles){
 			o.setParentTower(this);
 		}

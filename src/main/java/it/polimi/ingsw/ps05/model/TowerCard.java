@@ -7,12 +7,12 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 public abstract class TowerCard implements Card {
 	
 	public Epoch epoch = new Epoch();
-	public Color color = new Color();
+	public ColorEnumeration color;
 	public String cardName = new String();
 	public ArrayList<ArrayList<Resource>> requirements;
 	public ArrayList<Effect> effects;
 
-	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
+	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
@@ -20,7 +20,7 @@ public abstract class TowerCard implements Card {
 		this.effects = effects;
 	}
 	
-	public TowerCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
+	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
@@ -49,7 +49,7 @@ public abstract class TowerCard implements Card {
 
 	@Override
 	public EpochEnumeration getEpoch() { // che cazzo???
-		return null;
+		return this.epoch.getEpoch();
 	}
 
 	public void applyNonActivableEffects(PlayerRelated player) {

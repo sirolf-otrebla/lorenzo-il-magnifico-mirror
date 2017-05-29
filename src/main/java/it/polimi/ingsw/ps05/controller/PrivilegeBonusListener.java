@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.controller;
 
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.PrivilegeBonus;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -32,8 +31,8 @@ public class PrivilegeBonusListener implements Observer {
         return null;
     }
     public static PrivilegeBonusListener getInstance(){
-        if ( singleton != null)
-            singleton =new PrivilegeBonusListener();
+        if ( singleton == null)
+            singleton = new PrivilegeBonusListener();
         return singleton;
     }
 }

@@ -6,11 +6,15 @@ public class VioletTower extends Tower {
 
 	public VioletTower(ArrayList<TowerTileInterface> tiles) {
 		super(tiles);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public VioletTower(){
 		super();
+	}
+	
+	@Override
+	public void setTiles(ArrayList<TowerTileInterface> tiles){
+		super.setTiles(tiles);
 	}
 
 }

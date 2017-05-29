@@ -25,4 +25,11 @@ public class Epoch {
 	public ExcommunicationCard getExcomunicationCard(){
 		return this.excommunicationCard;
 	}
+
+	@Override
+	public String toString() {
+		return "Epoch [epoch=" + epoch + "]";
+	}
+	
+	
 }

@@ -160,6 +160,7 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
+		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.addEffectList(list);
@@ -185,14 +186,20 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
+		
+		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
+		ImmediateEffect effect = new ImmediateEffect();
+		effect.addEffectList(list);
+		ArrayList<Effect> effectList = new ArrayList<Effect>();
+		effectList.add(effect);
 		try{
 			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
-			return new CouncilSpace(list);
+			return new CouncilSpace(effectList);
 		}
 		
-		return new CouncilSpace(diceRequired, list);
+		return new CouncilSpace(diceRequired, effectList);
 	}
 	
 	private ArrayList<HarvestingSpace> detectNumHarvestingSpace(Object json){
@@ -352,8 +359,8 @@ public class CommonJsonParser {
 		return new Epoch(EpochEnumeration.valueOf(json.get("Epoch").toString()));
 	}
 
-	private Color getCardColor(JSONObject json){
-		return new Color(ColorEnumeration.valueOf(json.get("Color").toString()));
+	private ColorEnumeration getCardColor(JSONObject json){
+		return ColorEnumeration.valueOf(json.get("Color").toString());
 	}
 
 	private String getCardName(JSONObject json){
@@ -386,7 +393,7 @@ public class CommonJsonParser {
 			} else {
 				ArrayList<ActionResult> resList = new ArrayList<ActionResult>(); //lista dei singoli componenti
 				Object object = Class.forName(modelPath + json.keySet().toArray()[i].toString()).newInstance(); //creo immediate o activable o permanent o endgame
-				Method setList = object.getClass().getDeclaredMethod("addEffectList", resList.getClass()); //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
+				Method setList = object.getClass().getDeclaredMethod("setEffectList", resList.getClass()); //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
 				for (int j = 0; j < effectList.keySet().toArray().length; j++){ //ciclo le risorse/azioni aggiugnendole ad un arraylist
 					if (!effectList.keySet().toArray()[j].toString().equals("Return") & !effectList.keySet().toArray()[j].toString().equals("Multiplier") & !effectList.keySet().toArray()[j].toString().equals("ResourceToCount")){
 						resList.add(createAllExceptActivable(effectList, j)); 

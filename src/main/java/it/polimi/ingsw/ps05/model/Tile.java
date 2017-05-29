@@ -66,7 +66,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;
        if (parentTower.isOccupied)
            for (ArrayList<Resource> andAlternative: req)
-               andAlternative.add(new GoldResource(this.TOWER_OCCUPIED_PAYMENT));
+               andAlternative.add(new GoldResource(Tile.TOWER_OCCUPIED_PAYMENT));
        return req;
     }
   

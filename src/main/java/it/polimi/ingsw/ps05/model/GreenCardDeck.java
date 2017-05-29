@@ -7,17 +7,17 @@ public class GreenCardDeck implements Deck {
 	
 	ArrayList<GreenCard> cardList;
 	
-	ArrayList<GreenCard> firstEpochCard;
-	ArrayList<GreenCard> secondEpochCard;
-	ArrayList<GreenCard> thirdEpochCard;
+	ArrayList<GreenCard> firstEpochCard = new ArrayList<GreenCard>();
+	ArrayList<GreenCard> secondEpochCard = new ArrayList<GreenCard>();
+	ArrayList<GreenCard> thirdEpochCard = new ArrayList<GreenCard>();
 	
 	
 	public GreenCardDeck(ArrayList<GreenCard> cardList){
 		this.cardList = cardList;
 		for (GreenCard o : this.cardList) {
-			if (o.getEpoch().equals(EpochEnumeration.FIRST)){
+			if (o.getEpoch() == EpochEnumeration.FIRST){
 				firstEpochCard.add(o);
-			} else if (o.getEpoch().equals(EpochEnumeration.SECOND)){
+			} else if (o.getEpoch() == EpochEnumeration.SECOND){
 				secondEpochCard.add(o);
 			} else {
 				thirdEpochCard.add(o);

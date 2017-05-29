@@ -6,12 +6,12 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class VioletCard extends TowerCard  {
 	
-	public VioletCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
+	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public VioletCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
 			ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);
 	}
@@ -25,5 +25,13 @@ public class VioletCard extends TowerCard  {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String toString() {
+		return "VioletCard [epoch=" + epoch.toString() + ", color=" + color + ", cardName=" + cardName + ", requirements="
+				+ requirements.size() + ", effects=" + effects.size() + "]";
+	}
+	
+	
 
 }

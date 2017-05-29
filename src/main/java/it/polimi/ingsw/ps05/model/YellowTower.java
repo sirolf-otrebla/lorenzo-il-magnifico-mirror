@@ -12,5 +12,9 @@ public class YellowTower extends Tower {
 		super();
 	}
 	
+	@Override
+	public void setTiles(ArrayList<TowerTileInterface> tiles){
+		super.setTiles(tiles);
+	}
 
 }

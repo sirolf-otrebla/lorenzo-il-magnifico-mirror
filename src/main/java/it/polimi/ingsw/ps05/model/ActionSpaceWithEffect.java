@@ -12,7 +12,7 @@ public abstract class ActionSpaceWithEffect extends ActionSpace {
 		return super.isOccupied();
 	}
 
-	private ArrayList<Effect> effect; // this is the bonus directly associated with the action space itself
+	//private ArrayList<Effect> effect; // this is the bonus directly associated with the action space itself
 
 	@Override
 	public abstract ArrayList<Effect> getEffects();

@@ -11,25 +11,19 @@ public class YellowCard extends TowerCard  {
 
 	private boolean toBeActivated = true;
 
-	private ArrayList<ActivableEffect> activableEffectList;
+	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
 	private int[] selectedEffects;
 
 
-	public int[] getSelectedEffects() {
-		return selectedEffects;
-	}
-
-	public void setSelectedEffects(int[] selectedEffects) {
-		this.selectedEffects = selectedEffects;
-  }
-	public YellowCard(Epoch epoch, Color color, String cardName, ArrayList<Effect> effects) {
+	
+	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
-		  selectedEffects = new int[activableEffectList.size()];
+		selectedEffects = new int[activableEffectList.size()];
 	}
-	
-	public YellowCard(Epoch epoch, Color color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+
+	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
 			ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);
 
@@ -37,13 +31,21 @@ public class YellowCard extends TowerCard  {
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
 		selectedEffects = new int[activableEffectList.size()];
 	}
+	
+	public int[] getSelectedEffects() {
+		return selectedEffects;
+	}
+
+	public void setSelectedEffects(int[] selectedEffects) {
+		this.selectedEffects = selectedEffects;
+	}
 
 	public void applyProductionEffects(Familiar familyMember){
 
-			/*1st solution: Player selects what cards he want to use BEFORE
+		/*1st solution: Player selects what cards he want to use BEFORE
 		 * calling action.run() class. references to cards he want to activate are stored
-		  * in a special array/ list/ whatever attribute stored in Player class.
-		  * this solution requires some kind of card related effect which
+		 * in a special array/ list/ whatever attribute stored in Player class.
+		 * this solution requires some kind of card related effect which
 		 */
 
 		// DICE CONTROL IS INSIDE EFFECT
@@ -59,7 +61,7 @@ public class YellowCard extends TowerCard  {
 	public boolean getToBeActivated() {
 		return toBeActivated;
 	}
-	
+
 	public YellowCard(){
 		super();
 	}
@@ -71,6 +73,6 @@ public class YellowCard extends TowerCard  {
 	@Override
 	public void moveToPlayer() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

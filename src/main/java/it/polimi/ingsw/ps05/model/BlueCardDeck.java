@@ -7,17 +7,17 @@ public class BlueCardDeck implements Deck {
 	
 	ArrayList<BlueCard> cardList;
 	
-	ArrayList<BlueCard> firstEpochCard;
-	ArrayList<BlueCard> secondEpochCard;
-	ArrayList<BlueCard> thirdEpochCard;
+	ArrayList<BlueCard> firstEpochCard = new ArrayList<BlueCard>();
+	ArrayList<BlueCard> secondEpochCard = new ArrayList<BlueCard>();
+	ArrayList<BlueCard> thirdEpochCard = new ArrayList<BlueCard>();
 	
 	
 	public BlueCardDeck(ArrayList<BlueCard> cardList){
 		this.cardList = cardList;
 		for (BlueCard o : this.cardList) {
-			if (o.getEpoch().equals(EpochEnumeration.FIRST)){
+			if (o.getEpoch() == EpochEnumeration.FIRST){
 				firstEpochCard.add(o);
-			} else if (o.getEpoch().equals(EpochEnumeration.SECOND)){
+			} else if (o.getEpoch() == EpochEnumeration.SECOND){
 				secondEpochCard.add(o);
 			} else {
 				thirdEpochCard.add(o);

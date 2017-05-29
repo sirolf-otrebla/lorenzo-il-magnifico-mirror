@@ -7,17 +7,17 @@ public class YellowCardDeck implements Deck {
 
 ArrayList<YellowCard> cardList;
 	
-	ArrayList<YellowCard> firstEpochCard;
-	ArrayList<YellowCard> secondEpochCard;
-	ArrayList<YellowCard> thirdEpochCard;
+	ArrayList<YellowCard> firstEpochCard = new ArrayList<YellowCard>();
+	ArrayList<YellowCard> secondEpochCard = new ArrayList<YellowCard>();
+	ArrayList<YellowCard> thirdEpochCard = new ArrayList<YellowCard>();
 	
 	
 	public YellowCardDeck(ArrayList<YellowCard> cardList){
 		this.cardList = cardList;
 		for (YellowCard o : this.cardList) {
-			if (o.getEpoch().equals(EpochEnumeration.FIRST)){
+			if (o.getEpoch() == EpochEnumeration.FIRST){
 				firstEpochCard.add(o);
-			} else if (o.getEpoch().equals(EpochEnumeration.SECOND)){
+			} else if (o.getEpoch() == EpochEnumeration.SECOND){
 				secondEpochCard.add(o);
 			} else {
 				thirdEpochCard.add(o);
