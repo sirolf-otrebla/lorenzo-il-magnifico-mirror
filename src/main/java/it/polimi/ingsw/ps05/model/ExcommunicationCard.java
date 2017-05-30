@@ -17,10 +17,16 @@ public class ExcommunicationCard{
 		return this.epoch;
 	}
 	
-	public ExcommunicationEffect getExcomEffect(){ return this.excomEffect; }
+	public ExcommunicationEffect getExcomEffect(){
+		return this.excomEffect;
+	}
 
-	public void setEpoch(EpochEnumeration epoch) { this.epoch = epoch; }
+	public void setEpoch(EpochEnumeration epoch) {
+		this.epoch = epoch;
+	}
 
-	public void setExcomEffect(ExcommunicationEffect excomEffect) { this.excomEffect = excomEffect; }
+	public void setExcomEffect(ExcommunicationEffect excomEffect) {
+		this.excomEffect = excomEffect;
+	}
 
 }
