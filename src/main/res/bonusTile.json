@@ -1,0 +1,230 @@
+{
+	"Default": 
+	[
+		{
+			"ActivableEffect": 
+			{
+				"Type": "PRODUCTION",
+				"DiceRequired": 1,
+				"Requirement": 
+				{
+					
+				},
+
+				"Effect": 
+				{
+					"First": 
+					{
+						"MilitaryResource": 1,
+						"GoldResource": 2
+					}
+				}
+			}
+		},
+
+		{
+			"ActivableEffect": 
+			{
+				"Type": "HARVEST",
+				"DiceRequired": 1,
+				"Requirement": 
+				{
+					
+				},
+
+				"Effect": 
+				{
+					"First": 
+					{
+						"StoneResource": 1,
+						"WoodResource": 1,
+						"ServantResource": 1
+					}
+				}
+			}
+		}
+	],
+
+	"Custom": 
+	[
+		[
+			{
+				"ActivableEffect": 
+				{
+					"Type": "PRODUCTION",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"ServantResource": 1,
+							"GoldResource": 2
+						}
+					}
+				}
+			},
+
+			{
+				"ActivableEffect": 
+				{
+					"Type": "HARVEST",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"StoneResource": 1,
+							"WoodResource": 1,
+							"MilitaryResource": 1
+						}
+					}
+				}
+			}
+		],
+
+		[
+			{
+				"ActivableEffect": 
+				{
+					"Type": "PRODUCTION",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"GoldResource": 1,
+							"ServantResource": 2
+						}
+					}
+				}
+			},
+
+			{
+				"ActivableEffect": 
+				{
+					"Type": "HARVEST",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"StoneResource": 1,
+							"WoodResource": 1,
+							"MilitaryResource": 1
+						}
+					}
+				}
+			}
+		],
+
+		[
+			{
+				"ActivableEffect": 
+				{
+					"Type": "PRODUCTION",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"MilitaryResource": 2,
+							"GoldResource": 1
+						}
+					}
+				}
+			},
+
+			{
+				"ActivableEffect": 
+				{
+					"Type": "HARVEST",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"StoneResource": 1,
+							"WoodResource": 1,
+							"ServantResource": 1
+						}
+					}
+				}
+			}
+		],
+
+		[
+			{
+				"ActivableEffect": 
+				{
+					"Type": "PRODUCTION",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"MilitaryResource": 2,
+							"ServantResource": 1
+						}
+					}
+				}
+			},
+
+			{
+				"ActivableEffect": 
+				{
+					"Type": "HARVEST",
+					"DiceRequired": 1,
+					"Requirement": 
+					{
+						
+					},
+
+					"Effect": 
+					{
+						"First": 
+						{
+							"StoneResource": 1,
+							"WoodResource": 1,
+							"GoldResource": 1
+						}
+					}
+				}
+			}
+		]
+	]
+}

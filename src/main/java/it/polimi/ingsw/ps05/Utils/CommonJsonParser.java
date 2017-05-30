@@ -243,8 +243,7 @@ public class CommonJsonParser {
 		}
 		return list;
 	}
-	
-	
+
 	private ProductionSpace loadProductionSpace(JSONObject json){
 		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
@@ -263,6 +262,54 @@ public class CommonJsonParser {
 		}
 		
 		return new ProductionSpace(diceRequired, list);
+	}
+	
+	//XXX BonusTiles
+	public ArrayList<BonusTile> loadBonusTiles(String path, BonusTileType type){
+		File file = new File(path);
+		ArrayList<BonusTile> list = new ArrayList<BonusTile>();
+		try {
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			
+			if (type == BonusTileType.Default){
+				JSONArray array =  (JSONArray)obj.get("Default");
+				for (int i = 0; i < playerConnected; i++){
+					try {
+						list.add(loadSingleBonusTile(array, type));
+					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+							| NoSuchMethodException | SecurityException | IllegalArgumentException
+							| InvocationTargetException e) {
+						e.printStackTrace();
+					}
+				}
+			} else {
+				JSONArray array =  (JSONArray)obj.get("Custom");
+				for (int i = 0; i < array.size(); i++){
+					try {
+						list.add(loadSingleBonusTile((JSONArray)array.get(i), type));
+					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+							| NoSuchMethodException | SecurityException | IllegalArgumentException
+							| InvocationTargetException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (IOException | ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
+	private BonusTile loadSingleBonusTile(JSONArray json, BonusTileType type) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		ArrayList<Effect> list = new ArrayList<Effect>();
+		for (int i = 0; i < json.size(); i++){
+			list.addAll(getEffects((JSONObject)json.get(i)));
+		}
+		
+		return new BonusTile(list, type);
 	}
 	
 	//XXX Metodi per caricamento carte

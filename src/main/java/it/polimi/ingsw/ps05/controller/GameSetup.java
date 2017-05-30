@@ -11,6 +11,8 @@ public class GameSetup {
 	ArrayList<Player> playerConnected; // da generare casualmente all'inizio
 	ArrayList<Deck> deck;
 	TurnSetupManager turnSetup;
+	ArrayList<BonusTile> bonusTiles;
+	CommonJsonParser parser;
 	
 	//TODO draft carte leader
 	//TODO scelta scomuniche
@@ -22,9 +24,11 @@ public class GameSetup {
 		//loadDeck();
 		//load deck tolto perché le carte vengono inserite nelle torri alla loro creazione
 		this.playerConnected = players;
+		parser = new CommonJsonParser(playerConnected.size());
 		createFamiliarForPlayers();
 		loadBoard();
 		turnSetup = new TurnSetupManager(playerConnected, board);
+		loadBonusTiles();
 	}
 	
 	private void createFamiliarForPlayers(){
@@ -44,8 +48,12 @@ public class GameSetup {
 	}*/
 	
 	private void loadBoard(){
-		CommonJsonParser parser = new CommonJsonParser(playerConnected.size());
 		board = parser.loadBoard("./src/main/res/board.json");
+	}
+	
+	private void loadBonusTiles(){
+		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
+		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", BonusTileType.Custom);
 	}
 
 }
