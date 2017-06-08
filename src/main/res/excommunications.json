@@ -1,0 +1,131 @@
+{
+  "MilitaryMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "GoldMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "ServantMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "WoodStoneMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "HarvestingMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "ProductionMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "DiceMalus":
+  {
+    "Epoch": "FIRST",
+    "ExcomEffect": 1
+  },
+
+  "GreenCardMalus":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 4
+  },
+
+  "BlueCardMalus":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 4
+  },
+
+  "YellowCardMalus":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 4
+  },
+
+  "VioletCardMalus":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 4
+  },
+
+  "NoMarket":
+  {
+    "Epoch": "SECOND"
+  },
+
+  "MoreServants":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 2
+  },
+
+  "NoAction":
+  {
+    "Epoch": "SECOND",
+    "ExcomEffect": 1
+  },
+
+  "NoBlueVictoryPts":
+  {
+    "Epoch": "THIRD"
+  },
+
+  "NoVioletVictoryPts":
+  {
+    "Epoch": "THIRD"
+  },
+
+  "NoGreenVictoryPts":
+  {
+    "Epoch": "THIRD"
+  },
+
+  "VP-ReduceVictoryPts":
+  {
+    "Epoch": "THIRD",
+    "ExcomEffect": {
+      "Resource": "VictoryPts",
+      "Factor": 5
+    }
+  },
+
+  "MP-ReduceVictoryPts":
+  {
+    "Epoch": "THIRD",
+    "ExcomEffect": {
+      "Resource": "MilitaryPts",
+      "Factor": 5
+    }
+  },
+
+  "RemoveCardCostFromVP":
+  {
+    "Epoch": "THIRD"
+  },
+
+  "Res-ReduceVictoryPts":
+  {
+    "Epoch": "THIRD",
+    "ExcomEffect": {
+      "Resource": "Raw",
+      "Factor": 1
+    }
+  }
+}
