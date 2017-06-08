@@ -3,8 +3,8 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.PrivilegeBonus;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.PrivilegeBonus;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 public class LeaderCard implements Card {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class MarketSpace extends ActionSpaceWithEffect {
     private ArrayList<Effect> effectList;

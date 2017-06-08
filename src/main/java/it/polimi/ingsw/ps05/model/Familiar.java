@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class Familiar implements PlayerRelated{
 

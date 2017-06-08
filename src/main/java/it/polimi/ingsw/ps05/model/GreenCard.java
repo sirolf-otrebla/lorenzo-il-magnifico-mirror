@@ -1,10 +1,8 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 public class GreenCard extends TowerCard {
 	

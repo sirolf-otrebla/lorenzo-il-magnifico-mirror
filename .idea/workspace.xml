@@ -1,7 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="" />
+    <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="nomi package corretti secondo convenzione">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ActionResult.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ActionResult.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/AllBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/AllBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/BlueAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BlueAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/BlueBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BlueBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/BonusWithMultiplier.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BonusWithMultiplier.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/Dice.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/Dice.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/BlueCardMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/BlueCardMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/DiceMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/DiceMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/ExcommunicationEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ExcommunicationEffect.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/GoldMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GoldMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/GreenCardMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GreenCardMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/HarvestingMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/HarvestingMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/MilitaryMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MilitaryMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/MoreServantsExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MoreServantsExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoActionExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoActionExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoBlueVictoryPtsExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoBlueVictoryPtsExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoGreenVictoryPtsExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoGreenVictoryPtsExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoMarketExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoMarketExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoVioletVictoryPtsExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoVioletVictoryPtsExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/ProductionMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ProductionMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/ReduceVictoryPtsExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ReduceVictoryPtsExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/RemoveCardCostFromVPExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/RemoveCardCostFromVPExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/ServantMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ServantMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/VioletCardMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/VioletCardMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/WoodStoneMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/WoodStoneMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/YellowCardMalusExcomm.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/YellowCardMalusExcomm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/package-info.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/FaithResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/FaithResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/FreeAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/FreeAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/GoldResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GoldResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/GoldResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GoldResourceCostBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/GreenAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GreenAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/GreenBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GreenBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/HarvestAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/HarvestAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/HarvestBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/HarvestBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/MilitaryResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/MilitaryResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/MilitaryResourceToSub.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/MilitaryResourceToSub.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/NoColorBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/NoColorBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/PrivilegeBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/PrivilegeBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ProductionAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ProductionAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ProductionBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ProductionBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/RemoveTileEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/RemoveTileEffect.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/Resource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/Resource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ServantResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ServantResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/StoneResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/StoneResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/StoneResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/StoneResourceCostBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/VictoryResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VictoryResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/VioletAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VioletAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/VioletBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VioletBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/WoodResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/WoodResource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/WoodResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/WoodResourceCostBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/YellowAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/YellowAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/YellowBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/YellowBonus.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/Utils/Alternative.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/Alternative.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/Utils/AlternativesList.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/AlternativesList.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/Utils/CommonJsonParser.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/View/gui/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/gui/package-info.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/View/net/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/net/package-info.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/View/package-info.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/package-info.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Game.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Game.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Lobby.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Lobby.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Message/ActionMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Message/ActionMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Message/GameSetupMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Message/GameSetupMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Message/NetMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Message/NetMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Message/RejectedMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Message/RejectedMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/ServerApp.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/ServerApp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/ServerPlayer.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/ServerPlayer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Socket/SocketSide.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Socket/SocketSide.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/Server/Socket/Stream.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Socket/Stream.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/GameSetup.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/GameSetup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/PrivilegeBonusListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/PrivilegeBonusListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActionSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActivableEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActivableEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BlueCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BlueCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Card.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Card.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/CouncilSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/CouncilSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Effect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Effect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EndGameEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EndGameEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ExcommunicationCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ExcommunicationCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Familiar.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Familiar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/GreenCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/GreenCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/HarvestingSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/HarvestingSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ImmediateEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ImmediateEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/LeaderCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/LeaderCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/MarketSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/MarketSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/PermanentEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/PermanentEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ProductionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ProductionSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tile.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TileWithEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TileWithEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tower.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TowerCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TowerCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Turn.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Turn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/VioletCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/VioletCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/YellowCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/YellowCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/DiceTooLowException.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/DiceTooLowException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/MoreRequirementOptionsException.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/MoreRequirementOptionsException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,13 +116,17 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file leaf-file-name="TurnSetupManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="e#865#873#0" expanded="true" />
+                <element signature="e#2088#2094#0" expanded="true" />
+                <element signature="e#3182#3190#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,6 +141,13 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java" />
+      </list>
+    </option>
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -39,13 +155,12 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-12" />
+    <option name="width" value="3854" />
+    <option name="height" value="2172" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -59,9 +174,125 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="it.polimi.ingsw.ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="it.polimi.ingsw.ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -69,6 +300,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -88,6 +320,61 @@
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -113,6 +400,160 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -134,12 +575,80 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ps05" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -170,6 +679,22 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -183,43 +708,45 @@
       <updated>1495726005183</updated>
       <workItem from="1495726025639" duration="47000" />
       <workItem from="1495726362043" duration="571000" />
+      <workItem from="1496937444689" duration="229000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="618000" />
+    <option name="totallyTimeSpent" value="847000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-12" y="0" width="3854" height="2172" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25294432" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +755,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="nomi package corretti secondo convenzione" />
+    <option name="LAST_COMMIT_MESSAGE" value="nomi package corretti secondo convenzione" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -235,9 +766,25 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#865#873#0" expanded="true" />
+            <element signature="e#2088#2094#0" expanded="true" />
+            <element signature="e#3182#3190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#865#873#0" expanded="true" />
+            <element signature="e#2088#2094#0" expanded="true" />
+            <element signature="e#3182#3190#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

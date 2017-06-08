@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.controller;
 import java.util.ArrayList;
 import java.util.Random;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
+import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 
 public class TurnSetupManager {

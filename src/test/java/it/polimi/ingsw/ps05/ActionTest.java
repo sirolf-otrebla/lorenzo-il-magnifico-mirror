@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
+import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 import junit.framework.*;
 import org.junit.Test;

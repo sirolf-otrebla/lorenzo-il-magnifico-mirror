@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.controller;
 
-import it.polimi.ingsw.ps05.Utils.CommonJsonParser;
+import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
 

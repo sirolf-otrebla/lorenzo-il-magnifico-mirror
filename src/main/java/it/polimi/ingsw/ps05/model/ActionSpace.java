@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps05.model;
 
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import java.util.ArrayList;
 
 /* represent the generalization of all familiar-usable spaces within the game board

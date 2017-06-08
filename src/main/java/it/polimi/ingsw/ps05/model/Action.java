@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.exceptions.*;
 
 import java.util.ArrayList;
