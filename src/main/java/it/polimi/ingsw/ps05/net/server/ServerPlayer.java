@@ -3,16 +3,19 @@ package it.polimi.ingsw.ps05.net.server;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Observable;
+import java.util.Observer;
 
 import it.polimi.ingsw.ps05.net.server.Socket.Stream;
 
-public class ServerPlayer extends Observable implements Runnable {
+public class ServerPlayer extends Observable implements Runnable, Observer{
 	private int id;
-	private Socket client;
 	private Stream stream;
+
+	private LimConnection connection;
+
 	//fare costruttore con RMI e impostare parte RMI
 	
-	public ServerPlayer(Socket client, int id){
+	/* public ServerPlayer(Socket client, int id){
 		this.id = id;
 		this.client = client;
 		try {
@@ -21,27 +24,21 @@ public class ServerPlayer extends Observable implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	} */
+
+	public ServerPlayer(LimConnection netHandler, int id){
+	    this.connection = netHandler;
+	    this.id = id;
+    }
 
 	@Override
 	public void run() {
-		//socket
-		if (client != null){
-			while(true){
-				try {
-					Object obj = stream.takeInData();
-					//a chi interessa prendere gli input?
-					//setChanged();
-					//notifyObservers(obj);
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} else { //RMI
-			
-		}
-		
+		if (connection != null)
+		    connection.listen();
 	}
 
+    @Override
+    public void update(Observable o, Object message) {
+        // da completare quando arriva un messaggio
+    }
 }
