@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.net.server.Message;
+package it.polimi.ingsw.ps05.net.message;
 
 public class RejectedMessage implements NetMessage {
 

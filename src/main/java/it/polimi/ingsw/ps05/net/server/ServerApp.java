@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.net.server;
 
-import it.polimi.ingsw.ps05.net.server.Socket.SocketSide;
+import it.polimi.ingsw.ps05.net.server.socket.SocketSide;
 
 public class ServerApp {
 	static //imposto di default una porta, ma all'avvio si potrà far selezionare

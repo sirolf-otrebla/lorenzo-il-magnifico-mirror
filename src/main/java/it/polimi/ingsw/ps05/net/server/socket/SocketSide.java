@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.net.server.Socket;
+package it.polimi.ingsw.ps05.net.server.socket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -25,7 +25,7 @@ public class SocketSide implements Runnable {
 	public void run() {
 		//dentro al ciclo si accettano connessioni
 		while (true){
-			try {
+			/*try {
 				ServerPlayer p = new ServerPlayer(server.accept(), id++);
 				connected.add(p);
 				Thread t = new Thread(p);
@@ -33,7 +33,7 @@ public class SocketSide implements Runnable {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 

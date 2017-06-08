@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.net.server.Socket;
+package it.polimi.ingsw.ps05.net.server.socket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
