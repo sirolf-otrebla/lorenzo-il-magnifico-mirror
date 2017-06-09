@@ -6,8 +6,8 @@ import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class VictoryResource implements Resource, ActionResult {
-	//TODO vedi faith
 	private Integer amount;
+	private String id = "Vittoria";
 	
 	public VictoryResource(Integer amount){
 		this.amount = amount;
@@ -43,12 +43,18 @@ public class VictoryResource implements Resource, ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		playerR.getRelatedPlayer().addVictory(this);
+		playerR.getRelatedPlayer().addResource(this);
 	}
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

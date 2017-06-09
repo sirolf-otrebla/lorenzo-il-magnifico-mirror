@@ -25,5 +25,7 @@ public interface Resource {
     public void setValue(Integer amount);
 
     public Integer getValue();
+    
+    public String getId();
 	
 }

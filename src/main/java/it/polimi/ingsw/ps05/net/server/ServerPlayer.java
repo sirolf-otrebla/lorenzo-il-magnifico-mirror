@@ -1,17 +1,14 @@
 package it.polimi.ingsw.ps05.net.server;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
-
-import it.polimi.ingsw.ps05.net.server.socket.Stream;
 
 
 
 public class ServerPlayer extends Observable implements Runnable, Observer{
 	private int id;
-	private Stream stream;
+	private boolean inGame = false;
+	private boolean active = false;
 
 	private LimConnection connection;
 
@@ -43,47 +40,28 @@ public class ServerPlayer extends Observable implements Runnable, Observer{
     public void update(Observable o, Object message) {
         // da completare quando arriva un messaggio
     }
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	public int getId(){
+		return id;
+	}
     
     
     
 }
-
-
-/*	private int id;
-	private Socket client;
-	private Stream stream;
-	//fare costruttore con RMI e impostare parte RMI
-	
-	public ServerPlayer(Socket client, int id){
-		this.id = id;
-		this.client = client;
-		try {
-			stream = new Stream(client);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void run() {
-		//socket
-		if (client != null){
-			while(true){
-				try {
-					Object obj = stream.takeInData();
-					//a chi interessa prendere gli input?
-					//setChanged();
-					//notifyObservers(obj);
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} else { //RMI
-			
-		}
-		
-	}
-*/
 

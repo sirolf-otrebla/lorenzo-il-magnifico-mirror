@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class GoldResourceCostBonus implements ActionResult, Resource {
 	
 	private Integer value;
+	private String id = "Oro Bonus";
 	
 	public GoldResourceCostBonus(){
 		
@@ -50,6 +51,12 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }
