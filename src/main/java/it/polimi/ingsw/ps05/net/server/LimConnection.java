@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.net.server;
 
 
+import it.polimi.ingsw.ps05.net.server.Message.NetMessage;
+
 import java.util.Observable;
 
 /**
@@ -9,5 +11,12 @@ import java.util.Observable;
 public abstract class LimConnection extends Observable {
 
     public abstract  void listen();
+
+    public abstract void send(NetMessage mess);
+
+    public abstract void flushInBuf();
+
+    public abstract NetMessage getInputMessage();
+
 
 }

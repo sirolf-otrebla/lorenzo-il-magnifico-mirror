@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.net.server.ServerPlayer;
+import it.polimi.ingsw.ps05.net.server.PlayerClient;
 
 public class SocketSide implements Runnable {
 	
 	private ServerSocket server;
 	private int id= 0;
-	private ArrayList<ServerPlayer> connected = new ArrayList<ServerPlayer>();
+	private ArrayList<PlayerClient> connected = new ArrayList<PlayerClient>();
 	
 	public SocketSide(int port){
 		try {
@@ -26,7 +26,7 @@ public class SocketSide implements Runnable {
 		//dentro al ciclo si accettano connessioni
 		while (true){
 			try {
-				ServerPlayer p = new ServerPlayer(server.accept(), id++);
+				PlayerClient p = new PlayerClient(server.accept(), id++);
 				connected.add(p);
 				Thread t = new Thread(p);
 				t.start();
