@@ -21,7 +21,13 @@ public class BlueCard extends TowerCard {
 	}
 
 	@Override
-	public void moveToPlayer() {
+	public void moveToPlayer(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		player.getRelatedPlayer().addBlueCard(this);
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
 		// TODO Auto-generated method stub
 		
 	}

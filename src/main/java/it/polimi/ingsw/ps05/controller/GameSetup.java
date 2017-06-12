@@ -32,13 +32,13 @@ public class GameSetup {
 	}
 	
 	private void createFamiliarForPlayers(){
-		for (Player o : playerConnected){
+		for (Player p : playerConnected){
 			ArrayList<Familiar> familyList = new ArrayList<Familiar>();
-			familyList.add(new Familiar(o, ColorEnumeration.Black));
-			familyList.add(new Familiar(o, ColorEnumeration.Orange));
-			familyList.add(new Familiar(o, ColorEnumeration.White));
-			familyList.add(new Familiar(o, ColorEnumeration.Any));
-			o.setFamiliars(familyList);
+			familyList.add(new Familiar(p, ColorEnumeration.Black));
+			familyList.add(new Familiar(p, ColorEnumeration.Orange));
+			familyList.add(new Familiar(p, ColorEnumeration.White));
+			familyList.add(new Familiar(p, ColorEnumeration.Any));
+			p.setFamiliars(familyList);
 		}
 	}
 	
@@ -58,6 +58,10 @@ public class GameSetup {
 	
 	public Board getBoard(){
 		return board;
+	}
+	
+	public TurnSetupManager getTurnSetupManager(){
+		return turnSetup;
 	}
 
 	public TurnSetupManager getTurnSetup() {

@@ -1,3 +1,4 @@
+
 package it.polimi.ingsw.ps05.net.server;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Player pl = null;
 	private boolean plExists = false;
 	private String username;
+	private boolean active;
 
 	public PlayerClient(LimConnection netHandler, int id){
 	    this.connection = netHandler;
@@ -57,5 +59,27 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	public Player getPlayer(){
     	return this.pl;
 	}
+	
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	public int getId(){
+		return id;
+	}
+    
 
 }
+

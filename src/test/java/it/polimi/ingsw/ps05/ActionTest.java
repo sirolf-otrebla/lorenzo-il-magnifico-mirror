@@ -2,8 +2,15 @@ package it.polimi.ingsw.ps05;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.controller.GameSetup;
+import it.polimi.ingsw.ps05.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import junit.framework.*;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -82,39 +89,104 @@ public class ActionTest extends TestCase{
 
 		testMarket = new MarketSpace(testDiceReq, testEffectArrayList);
 		this.testActl = new Action(testFm, testMarket);
+
 	}
 
 	@Test
 	public void testBoard(){
-		//for (int j = 0; j < 20; j++){
+		ArrayList<Player> list = new ArrayList<Player>();
+		Random randomNum = new Random();
+		int numP = randomNum.nextInt(8);
+		for (int i = 0; i < numP; i++){
+			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
+		}
+		GameSetup gameSetup = new GameSetup(list);
+		Board board = gameSetup.getBoard();
+		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
+		for (int i = 0; i < board.getTowerList().size(); i++){
+			assertEquals(ActionTest.T_TILE_NUMBER,board.getTowerList().get(i).getTiles().size());
+			for (TowerTileInterface t : board.getTowerList().get(i).getTiles()){
+				assertNotNull(t.getParentTower());
+			}
+		}
+		if (numP == 2){
+			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR2,board.getActionSpace().size());
+		} else if (numP == 3){
+			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR3,board.getActionSpace().size());
+		} else if (numP == 4){
+			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR4,board.getActionSpace().size());
+		} else if (numP > 4){
+			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR5_MORE,board.getActionSpace().size());
+		} else if (numP < 2){
+			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR1_LESS,board.getActionSpace().size());
+		}
+		assertEquals(ActionTest.B_FAITH_PATH,board.getFaithPath().size());
+		assertEquals(ActionTest.B_MILITARY_PATH,board.getMilitaryPath().size());
 
-			ArrayList<Player> list = new ArrayList<Player>();
-			Random randomNum = new Random();
-			int numP = randomNum.nextInt(8);
-			for (int i = 0; i < numP; i++){
-				list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
-			}
-			GameSetup gameSetup = new GameSetup(list);
-			Board board = gameSetup.getBoard();
-			assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
-			for (int i = 0; i < board.getTowerList().size(); i++){
-				assertEquals(ActionTest.T_TILE_NUMBER,board.getTowerList().get(i).getTiles().size());
-			}
-			if (numP == 2){
-				assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR2,board.getActionSpace().size());
-			} else if (numP == 3){
-				assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR3,board.getActionSpace().size());
-			} else if (numP == 4){
-				assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR4,board.getActionSpace().size());
-			} else if (numP > 4){
-				assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR5_MORE,board.getActionSpace().size());
-			} else if (numP < 2){
-				assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR1_LESS,board.getActionSpace().size());
-			}
-			assertEquals(ActionTest.B_FAITH_PATH,board.getFaithPath().size());
-			assertEquals(ActionTest.B_MILITARY_PATH,board.getMilitaryPath().size());
+	}
 
-		//}
+	@Test //il tile non restituisce la carta, o se lo fa è da verificare e da applicare gli effetti
+	public void testActionOnTower(){ //tested just with gold
+		ArrayList<Player> list = new ArrayList<Player>();
+		Random randomNum = new Random();
+		int numP = randomNum.nextInt(7) + 1;
+		for (int i = 0; i < numP; i++){
+			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
+		}
+		GameSetup gameSetup = new GameSetup(list);
+		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
+		Turn turn = turnSetup.getTurn();
+		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
+		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2));
+		System.out.println(action.isLegal());
+		if (action.isLegal()){
+			try {
+				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
+				assertTrue(gold != turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue());
+				assertTrue(turn.getPlayerOrder().get(0).getFamilyList().get(0).isUsed());
+				assertTrue(((ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2)).isOccupied());
+				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
+			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Test
+	public void testActionOnSpace(){
+		ArrayList<Player> list = new ArrayList<Player>();
+		Random randomNum = new Random();
+		int numP = randomNum.nextInt(7) + 1;
+		for (int i = 0; i < numP; i++){
+			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
+		}
+		
+		GameSetup gameSetup = new GameSetup(list);
+		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
+		Turn turn = turnSetup.getTurn();
+		ActionSpace space = Board.getInstance().getActionSpace().get(0);
+		for(int i = 0; i < Board.getInstance().getActionSpace().size(); i++){
+			space = Board.getInstance().getActionSpace().get(i);
+			if (Board.getInstance().getActionSpace().get(i) instanceof CouncilSpace){	
+				break;
+			}
+			 
+		}
+		System.out.println(space.getClass().toString());
+		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), space);
+		if (action.isLegal()){
+			System.out.println("isLegal");
+			try {
+				//fallisce perché non ha niente da produrre in marketspace o productspace
+				//applyeffect di councilspace è vuoto
+				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
+				
+			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Test
@@ -155,8 +227,68 @@ public class ActionTest extends TestCase{
 
 	@Test
 	public void testFamiliar(){
+		ArrayList<Player> list = new ArrayList<Player>();
+		Random randomNum = new Random();
+		int numP = randomNum.nextInt(7) + 1;
+		for (int i = 0; i < numP; i++){
+			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
+		}
+		GameSetup gameSetup = new GameSetup(list);
+		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
+		Turn turn = turnSetup.getTurn();
+		assertEquals(numP,turn.getPlayerOrder().size());
+		assertEquals(3, turn.getDice().size());
+		for (Player p : turn.getPlayerOrder()){
+			int white = 0;
+			int black = 0;
+			int orange = 0;
+			int any = 0;
+			for (Familiar f : p.getFamilyList()){
+				if (f.getColor().equals(ColorEnumeration.White)){
+					white++;
+					for (Dice d : turn.getDice()){
+						if (d.getColor().equals(ColorEnumeration.White)){
+							assertEquals(d.getValue(),f.getRelatedDice().getValue());
+						}
+					}
+				} else if (f.getColor().equals(ColorEnumeration.Black)){
+					black++;
+					for (Dice d : turn.getDice()){
+						if (d.getColor().equals(ColorEnumeration.Black)){
+							assertEquals(d.getValue(),f.getRelatedDice().getValue());
+						}
+					}
+				} else if (f.getColor().equals(ColorEnumeration.Orange)){
+					orange++;
+					for (Dice d : turn.getDice()){
+						if (d.getColor().equals(ColorEnumeration.Orange)){
+							assertEquals(d.getValue(),f.getRelatedDice().getValue());
+						}
+					}
+				} else if (f.getColor().equals(ColorEnumeration.Any)){
+					any++;
+				}
+			}
+			assertEquals(1,white);
+			assertEquals(1,black);
+			assertEquals(1,orange);
+			assertEquals(1,any);
+			assertEquals(4,white+orange+black+any);
+		}
 
-		// todo ?
+		for (Player p : turn.getPlayerOrder()){
+			for (Player o : turn.getPlayerOrder()){
+				assertEquals(p.getFamilyList().get(0).getColor(),o.getFamilyList().get(0).getColor());
+				assertEquals(p.getFamilyList().get(1).getColor(),o.getFamilyList().get(1).getColor());
+				assertEquals(p.getFamilyList().get(2).getColor(),o.getFamilyList().get(2).getColor());
+				assertEquals(p.getFamilyList().get(0).getRelatedDice().getValue(),o.getFamilyList().get(0).getRelatedDice().getValue());
+				assertEquals(p.getFamilyList().get(1).getRelatedDice().getValue(),o.getFamilyList().get(1).getRelatedDice().getValue());
+				assertEquals(p.getFamilyList().get(2).getRelatedDice().getValue(),o.getFamilyList().get(2).getRelatedDice().getValue());
+
+			}
+		}
+
+
 
 	}
 

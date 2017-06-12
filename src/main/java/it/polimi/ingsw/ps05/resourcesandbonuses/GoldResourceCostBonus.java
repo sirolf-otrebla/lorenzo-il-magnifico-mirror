@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class GoldResourceCostBonus implements ActionResult, Resource {
 	
 	private Integer value;
-	private String id = "Oro Bonus";
+	public static final String id = "Oro Bonus";
 	
 	public GoldResourceCostBonus(){
 		

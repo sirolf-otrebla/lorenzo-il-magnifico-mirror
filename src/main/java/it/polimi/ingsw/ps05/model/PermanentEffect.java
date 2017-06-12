@@ -17,13 +17,13 @@ public class PermanentEffect implements Effect {
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub
-		return null;
+		return EffectType.PERMANENT;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
-		return null;
+		return effectsList;
 	}
 
 	@Override
@@ -33,6 +33,8 @@ public class PermanentEffect implements Effect {
 			familyMember.getRelatedPlayer().addPermanentEffectRes(act);
 			act.applyResult(familyMember);
 		}
+		
+		
 
 	}
 

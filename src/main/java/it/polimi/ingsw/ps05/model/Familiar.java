@@ -43,6 +43,7 @@ public class Familiar implements PlayerRelated{
 
 	public void setDice(Dice dice){
 		this.relatedDice = dice;
+		//System.out.println(relatedPlayer.getPlayerID() + ": " + dice.getValue() + " setted on color: " + color.toString());
 	}
 
 	public void setColor(ColorEnumeration color){

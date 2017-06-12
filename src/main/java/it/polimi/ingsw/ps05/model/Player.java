@@ -22,11 +22,11 @@ public class Player implements PlayerRelated {
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
 
 
-	private ArrayList<GreenCard> greenCardList;
-	private ArrayList<BlueCard> blueCardList;
-	private ArrayList<YellowCard> yellowCardList;
-	private ArrayList<VioletCard> purpleCardList;
-	private ArrayList<LeaderCard> leaderCardList;
+	private ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
+	private ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
+	private ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
+	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>(); 
+	private ArrayList<LeaderCard> leaderCardList = new ArrayList<LeaderCard>();
 
 	private ArrayList<ActionResult> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
@@ -73,7 +73,7 @@ public class Player implements PlayerRelated {
 	}
 
 	public ArrayList<VioletCard> getPurpleCardList() {
-		return purpleCardList;
+		return violetCardList;
 	}
 
     @Override
@@ -108,7 +108,7 @@ public class Player implements PlayerRelated {
 	public int getPlayerID() {
 		return playerID;
 	}
-
+	
     public Resource getResource(String id){
     	for (Resource r : resourceList){
     		if (r.getId().equals(id)){
@@ -129,4 +129,20 @@ public class Player implements PlayerRelated {
 	public ArrayList<Resource> getResourceList(){
     	return  this.resourceList;
 	}
+    
+    public void addBlueCard(BlueCard card){
+    	blueCardList.add(card);
+    }
+    
+    public void addGreenCard(GreenCard card){
+    	greenCardList.add(card);
+    }
+    
+    public void addYellowCard(YellowCard card){
+    	yellowCardList.add(card);
+    }
+    
+    public void addVioletCard(VioletCard card){
+    	violetCardList.add(card);
+    }
 }

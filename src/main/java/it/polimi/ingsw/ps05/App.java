@@ -3,8 +3,16 @@ package it.polimi.ingsw.ps05;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.controller.*;
+import it.polimi.ingsw.ps05.model.Action;
+import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.Turn;
+import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 /**
  * Hello world!
@@ -24,6 +32,19 @@ public class App
     	list.add(p3);
     	list.add(p4);
     	GameSetup setup = new GameSetup(list);
+    	TurnSetupManager manager = setup.getTurnSetupManager();
+    	Turn turn = manager.getTurn();
+    	Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2));
+    	if (action.isLegal()){
+    		action.getSuitableReqAlternatives();
+    		//mostri quelli
+    		try {
+				action.run(0);
+			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
     }
 }
 

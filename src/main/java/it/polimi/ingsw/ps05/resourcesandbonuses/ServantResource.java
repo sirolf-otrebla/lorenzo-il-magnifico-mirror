@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class ServantResource implements Resource, ActionResult {
 
 	private Integer amount;
-	private String id = "Servitori";
+	public static final String id = "Servitori";
 	
 	public ServantResource(Integer value){
 		this.amount = value;
@@ -28,19 +28,22 @@ public class ServantResource implements Resource, ActionResult {
 	}
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-
-		this.amount -= amount;
+		setValue(this.getValue() - amount);
 	}
 
 	@Override
-	public void remove(Resource res) throws NotEnoughResourcesException {
-
-		this.amount -= res.getValue();
+	public void remove(Resource res) {
+		setValue(this.getValue() - res.getValue());
 	}
 
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) {
-
+		try {
+			playerFamiliar.getRelatedPlayer().getResource(this.getId()).remove(this.getValue());
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class ServantResource implements Resource, ActionResult {
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
-		return false;
+		return (playerFamiliar.getRelatedPlayer().getResource(this.getId()).getValue() >= this.getValue());
 	}
 
 	@Override

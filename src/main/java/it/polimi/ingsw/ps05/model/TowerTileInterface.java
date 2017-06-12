@@ -9,5 +9,8 @@ public interface TowerTileInterface {
 	public void setParentTower(Tower tower);
 	public void setTowerCard(TowerCard card);
 	public void removeTowerCard();
+	public Integer getDiceRequired();
+	public TowerCard getCard();
+	public Tower getParentTower();
 	
 }

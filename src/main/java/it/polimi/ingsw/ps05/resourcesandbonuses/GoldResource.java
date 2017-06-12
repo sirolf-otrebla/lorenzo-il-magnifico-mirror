@@ -8,46 +8,47 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class GoldResource implements Resource, ActionResult {
 	//TODO: vedi faith resource
 	private Integer amount;
-	private String id = "Oro";
+	public static final String id = "Oro";
 
 	public GoldResource(Integer amount){
 		this.amount = amount;
 	}
-	
+
 	public GoldResource() {
 		this.amount = 0;
 	}
-	
+
 	public void setValue(Integer amount){
 		this.amount = amount;
 	}
-	
+
 	public Integer getValue(){
 		return this.amount;
 	}
-	
-
-
 
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-
-
+		setValue(this.getValue() - amount);
 	}
 
 	@Override
 	public void remove(Resource res) {
-
+		setValue(this.getValue() - res.getValue());
 	}
 
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) {
-
+		try {
+			playerFamiliar.getRelatedPlayer().getResource(this.getId()).remove(this.getValue());
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		return false;
+		return (playerFamiliar.getRelatedPlayer().getResource(this.getId()).getValue() >= this.getValue());
 	}
 
 	@Override

@@ -8,7 +8,8 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class MarketSpace extends ActionSpaceWithEffect {
     private ArrayList<Effect> effectList;
-    private  int[] selectedEffects;
+    private int[] selectedEffects = {};
+    public static final int DEFAULT_INDEX = 0;
     
     @Override
     public ArrayList<Effect> getEffects() {
@@ -19,10 +20,9 @@ public class MarketSpace extends ActionSpaceWithEffect {
     public void applyEffect() {
         //Player player = this.getOccupant().getRelatedPlayer();
         Iterator<Effect> it = this.getEffects().iterator();
-        int index = 0;
+        System.out.println("SelectedEffects.size " + selectedEffects.length);
         while (it.hasNext()){
-            it.next().apply(this.getOccupant(), selectedEffects[index]);
-            index++;
+            it.next().apply(this.getOccupant(), selectedEffects[MarketSpace.DEFAULT_INDEX]);
         }
     }
 

@@ -83,5 +83,4 @@ public class Game implements Observer {
         return list;
     }
 
-
 }

@@ -46,19 +46,18 @@ public class Action implements Period {
 
 		// 1
 		if (this.familiar.isUsed()) return false;
+		if (this.position.isOccupied()) return false;
 
 		// 2- 2b)
 		ArrayList<ArrayList<Resource>> list = this.position.getRequirements();
 		Iterator<ArrayList<Resource>> iterator = list.iterator();
-		//Iterator<Resource> innerIterator;
 		while (iterator.hasNext()) {
 			ArrayList<Resource> thisIteration = iterator.next();
 			if(checkResList(thisIteration)) this.suitableReqAlternatives.add(thisIteration);
 		}
-
 		if (this.suitableReqAlternatives.size() == 0) return false;
 		isLegal = true;
-		return  true;
+		return  isLegal;
 
 	}
 
@@ -88,9 +87,10 @@ public class Action implements Period {
 		manageRequirements(paymentList);
 
 		//position.applyNonActivableEffects moves the card (if there is any;
-		this.position.applyEffect();
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);
+		this.position.applyEffect();
+		
 	}
 
 

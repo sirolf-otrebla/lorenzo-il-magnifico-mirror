@@ -71,8 +71,14 @@ public class YellowCard extends TowerCard  {
 	}
 
 	@Override
-	public void moveToPlayer() {
-		// TODO Auto-generated method stub
+	public void moveToPlayer(PlayerRelated player) {
+		player.getRelatedPlayer().addYellowCard(this);
 
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		
 	}
 }

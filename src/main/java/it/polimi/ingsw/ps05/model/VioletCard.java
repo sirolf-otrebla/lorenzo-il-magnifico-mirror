@@ -21,15 +21,21 @@ public class VioletCard extends TowerCard  {
 	}
 
 	@Override
-	public void moveToPlayer() {
+	public void moveToPlayer(PlayerRelated player) {
 		// TODO Auto-generated method stub
+		player.getRelatedPlayer().addVioletCard(this);
 		
 	}
-
 	@Override
 	public String toString() {
 		return "VioletCard [epoch=" + epoch.toString() + ", color=" + color + ", cardName=" + cardName + ", requirements="
 				+ requirements.size() + ", effects=" + effects.size() + "]";
+	}
+
+	@Override
+	public void applyNonActivableEffects(PlayerRelated player) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

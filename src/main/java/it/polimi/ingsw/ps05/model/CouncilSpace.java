@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 
-	private ArrayList<Familiar> occupantList;
+	private ArrayList<Familiar> occupantList = new ArrayList<Familiar>();
 
 	private ArrayList<Effect> effectList;
 
@@ -38,8 +38,11 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 
 	@Override
 	public void applyEffect() {
-
+		for (Effect e : getEffects()){
+			e.apply(occupantList.get(occupantList.size()-1), 0);
+		}
 	}
+	
 
 	public ArrayList<Player> getOrder() {
 		boolean alreadyPresent = false;

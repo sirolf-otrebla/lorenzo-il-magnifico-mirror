@@ -36,9 +36,9 @@ public class Board {
 
 	public static Board initBoard(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace, ArrayList<VictoryResource> faithPath,
 									ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
-		if(instance == null) {
+		//if(instance == null) {
 			instance = new Board(towerList, actionSpace, faithPath, militaryPath, excomCards);
-		}
+		//}
 		return instance;
 	}
 

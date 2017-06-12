@@ -12,12 +12,12 @@ public abstract class Tower {
 
 	public static final int TOWER_RENT_AMNT = 3;
 	private GoldResource towerOccupiedGoldResource;
-	boolean isOccupied;
+	private boolean occupied;
 	ArrayList<TowerTileInterface> tiles; //dove vanno messi i tile
 	Deck deck;
 	
 	public Tower(){
-		this.isOccupied = false;
+		this.occupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
 		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
 		//setParentListInTiles();
@@ -25,7 +25,7 @@ public abstract class Tower {
 
 	public Tower(ArrayList<TowerTileInterface> tiles){
 
-		this.isOccupied = false;
+		this.occupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
 		towerOccupiedGoldResource.setValue(TOWER_RENT_AMNT);
 		this.tiles = tiles;
@@ -38,6 +38,10 @@ public abstract class Tower {
 		for (TowerTileInterface o : tiles){
 			o.setParentTower(this);
 		}
+	}
+	
+	public boolean isOccupied(){
+		return occupied;
 	}
 
 	public GoldResource getRentAmount(){

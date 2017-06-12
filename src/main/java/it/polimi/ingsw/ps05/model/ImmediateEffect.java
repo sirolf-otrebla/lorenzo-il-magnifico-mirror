@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 
 public class ImmediateEffect implements Effect {
 	
-	ArrayList<ArrayList<ActionResult>> effectList;
+	ArrayList<ArrayList<ActionResult>> effectList = new ArrayList<ArrayList<ActionResult>>();
 
 	public ImmediateEffect() {
 		super();
@@ -13,7 +13,7 @@ public class ImmediateEffect implements Effect {
 	}
 	
 	public void addEffectList(ArrayList<ActionResult> effectsList){
-		
+		this.effectList.add(effectsList);
 	}
 
 	public void setEffectList(ArrayList<ArrayList<ActionResult>> actResList){
@@ -23,13 +23,13 @@ public class ImmediateEffect implements Effect {
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub
-		return null;
+		return EffectType.IMMEDIATE;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
-		return null;
+		return effectList;
 	}
 
 	@Override
