@@ -7,13 +7,11 @@ import java.util.Observer;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.server.Message.NetMessage;
-import it.polimi.ingsw.ps05.net.server.Message.RejectedMessage;
-import it.polimi.ingsw.ps05.net.server.Socket.Stream;
+import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
 	private int id;
-	private Stream stream;
 	private boolean isActive = false;
 	private boolean inGame = false;
 	private LimConnection connection;

@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class GoldResource implements Resource, ActionResult {
 	//TODO: vedi faith resource
 	private Integer amount;
+	private String id = "Oro";
 
 	public GoldResource(Integer amount){
 		this.amount = amount;
@@ -51,7 +52,13 @@ public class GoldResource implements Resource, ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		playerR.getRelatedPlayer().addGold(this);
+		playerR.getRelatedPlayer().addResource(this);
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }

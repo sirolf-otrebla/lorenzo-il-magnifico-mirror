@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class WoodResourceCostBonus implements Resource, ActionResult {
 	
 	private Integer value;
+	private String id = "Legno Bonus";
 	
 	public WoodResourceCostBonus(){
 		
@@ -50,6 +51,12 @@ public class WoodResourceCostBonus implements Resource, ActionResult {
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }

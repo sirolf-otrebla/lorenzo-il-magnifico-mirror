@@ -10,7 +10,7 @@ public class GameSetup {
 	ArrayList<LeaderCard> leaderCardList;
 	ArrayList<Player> playerConnected; // da generare casualmente all'inizio
 	ArrayList<Deck> deck;
-	TurnSetupManager turnSetup;
+	private TurnSetupManager turnSetup;
 	ArrayList<BonusTile> bonusTiles;
 	CommonJsonParser parser;
 	
@@ -55,5 +55,12 @@ public class GameSetup {
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
 		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", BonusTileType.Custom);
 	}
+	
+	public Board getBoard(){
+		return board;
+	}
 
+	public TurnSetupManager getTurnSetup() {
+		return turnSetup;
+	}
 }

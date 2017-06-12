@@ -12,6 +12,7 @@ public class Dice implements Resource {
 
 	ColorEnumeration color;
 	private int value;
+	private String id = "Dado";
 	
 	public Dice(ColorEnumeration color) {
 		super();
@@ -49,12 +50,15 @@ public class Dice implements Resource {
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		int diff = playerFamiliar.getRelatedDice().getValue() - this.getValue();
 		if ( diff > 0) return true;
-		if (Math.abs(diff) < playerFamiliar.getRelatedPlayer().getServants().getValue()){
+		if (Math.abs(diff) < playerFamiliar.getRelatedPlayer().getResource("Servitori").getValue()){
 			try{
-				playerFamiliar.getRelatedPlayer().getServants().remove(new ServantResource(Math.abs(diff)));
+				playerFamiliar.getRelatedPlayer().getResource("Servitori").remove(new ServantResource(Math.abs(diff)));
 				return true;
 			} catch (NotEnoughResourcesException e){
 				System.out.println("SOMETHING REALLY BAD HAS HAPPENED!! THIS MESSAGE IT'S NOT MEANT TO BE DISPLAYED EVER");
+			} catch (IllegalMethodCallException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return false;
@@ -71,5 +75,11 @@ public class Dice implements Resource {
 
 	public ColorEnumeration getColor(){
 		return this.color;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

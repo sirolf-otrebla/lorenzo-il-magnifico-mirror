@@ -2,7 +2,9 @@ package it.polimi.ingsw.ps05.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 
-public class FreeAction implements ActionResult {
+import java.util.Observable;
+
+public class FreeAction extends Observable implements ActionResult {
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	
 	public FreeAction(Integer value){

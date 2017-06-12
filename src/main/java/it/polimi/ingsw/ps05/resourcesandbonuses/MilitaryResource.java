@@ -6,8 +6,9 @@ import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class MilitaryResource implements Resource, ActionResult {
-	//TODO vedi faith
+	
 	private Integer amount;
+	public static final String id = "Militare";
 
 	public MilitaryResource(Integer amount){
 		this.amount = amount;
@@ -42,13 +43,19 @@ public class MilitaryResource implements Resource, ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		playerR.getRelatedPlayer().addMilitary(this);
+		playerR.getRelatedPlayer().addResource(this);
 	}
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }

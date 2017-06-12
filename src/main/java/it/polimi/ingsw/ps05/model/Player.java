@@ -18,15 +18,8 @@ public class Player implements PlayerRelated {
 	// game information
 	private ArrayList<Familiar> familyList;
 	private BonusTile bonusTile;
-
-	private FaithResource faithPts;
-	private MilitaryResource militaryPts;
-	private VictoryResource victoryPts;
-
-	private GoldResource gold;
-	private WoodResource wood;
-	private StoneResource stone;
-	private ServantResource servants;
+	
+	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
 
 
 	private ArrayList<GreenCard> greenCardList;
@@ -42,13 +35,14 @@ public class Player implements PlayerRelated {
 		this.playerID = playerID;
 		this.username = username;
 		this.color = color;
-		this.faithPts = new FaithResource(0);
-		this.militaryPts = new MilitaryResource(0);
-		this.victoryPts = new VictoryResource(0);
-		this.gold = new GoldResource(0);
-		this.wood = new WoodResource(0);
-		this.stone = new StoneResource(0);
-		this.servants = new ServantResource(0);
+		
+		resourceList.add(new FaithResource(0));
+		resourceList.add(new MilitaryResource(0));
+		resourceList.add(new VictoryResource(0));
+		resourceList.add(new GoldResource(0));
+		resourceList.add(new WoodResource(0));
+		resourceList.add(new StoneResource(0));
+		resourceList.add(new ServantResource(0));
 	}
 
 	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
@@ -91,35 +85,12 @@ public class Player implements PlayerRelated {
         return leaderCardList;
     }
     
-    public void addGold(GoldResource gold){
-    	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
-    	this.gold.setValue(this.gold.getValue() + gold.getValue());
-    }
-    
-    public void addFaith(FaithResource faith){
-    	//non sai quale dei due valori devi aggiungere ma sai che solo uno dei due sarà diverso da zero
-    	this.faithPts.setValue(this.faithPts.getValue() + faith.getValue());
-    }
-    
-    public void addMilitary(MilitaryResource military){
-    	this.militaryPts.setValue(this.militaryPts.getValue() + military.getValue());
-    }
-    
-    public void addServant(ServantResource servants){
-    	int val = this.servants.getValue();
-    	this.servants.setValue(val + servants.getValue());
-    }
-    
-    public void addStone(StoneResource stone){
-    	this.stone.setValue(this.stone.getValue() + stone.getValue());
-    }
-    
-    public void addWood(WoodResource wood){
-    	this.wood.setValue(this.wood.getValue() + wood.getValue());
-    }
-    
-    public void addVictory(VictoryResource victory){
-    	this.victoryPts.setValue(this.victoryPts.getValue() + victory.getValue());
+    public void addResource(Resource resource){
+    	for (Resource r : resourceList){
+    		if (r.getId().equals(resource.getId())){
+    			r.setValue(r.getValue() + resource.getValue());
+    		}
+    	}
     }
     
     public void setFamiliars(ArrayList<Familiar> familyList){
@@ -138,35 +109,24 @@ public class Player implements PlayerRelated {
 		return playerID;
 	}
 
-    public GoldResource getGold() {
-        return gold;
-    }
-
-    public FaithResource getFaithPts() {
-        return faithPts;
-    }
-
-    public MilitaryResource getMilitaryPts() {
-        return militaryPts;
-    }
-
-    public VictoryResource getVictoryPts() {
-        return victoryPts;
-    }
-
-    public WoodResource getWood() {
-        return wood;
-    }
-
-    public StoneResource getStone() {
-        return stone;
-    }
-
-    public ServantResource getServants() {
-        return servants;
+    public Resource getResource(String id){
+    	for (Resource r : resourceList){
+    		if (r.getId().equals(id)){
+    			return r;
+    		}
+    	}
+    	return null;
     }
     
     public ColorEnumeration getColor(){
     	return color;
     }
+
+    public ArrayList<PermanentEffect> getPermanentEffectList(){
+    	return this.getPermanentEffectList();
+	}
+
+	public ArrayList<Resource> getResourceList(){
+    	return  this.resourceList;
+	}
 }

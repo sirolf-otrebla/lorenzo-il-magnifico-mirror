@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 public class MilitaryResourceToSub implements Resource, ActionResult {
 
 	private Integer amount;
+	private String id = "Militari da Togliere";
 	
 	public MilitaryResourceToSub(Integer amount){
 		this.amount = amount;
@@ -57,5 +58,11 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.net.server.rmi;
 
+import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.server.LimConnection;
 
 
@@ -11,4 +12,27 @@ public class RmiConn extends LimConnection {
     public void listen() {
 
     }
+
+	@Override
+	public void send(NetMessage mess) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void flushInBuff() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NetMessage getInputMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void flushInBuf() {
+
+	}
 }

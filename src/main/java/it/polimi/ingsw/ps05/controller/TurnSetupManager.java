@@ -8,10 +8,10 @@ import it.polimi.ingsw.ps05.model.*;
 
 public class TurnSetupManager {
 
-	Turn turn; //vecchio turno
-	ArrayList<Turn> turnHistory;
-	Board board;
-	ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
+	private Turn turn; //vecchio turno
+	private ArrayList<Turn> turnHistory;
+	private  Board board;
+	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
 	
 	private final static int goldAmountStart = 5;
 	private final static int woodAmountStart = 2;
@@ -118,10 +118,10 @@ public class TurnSetupManager {
 		}
 		for (int i = 0; i < orderToSet.size(); i++){
 			Player player = orderToSet.get(i);
-			player.addGold(new GoldResource(goldAmountStart + i));
-			player.addWood(new WoodResource(woodAmountStart));
-			player.addStone(new StoneResource(stoneAmountStart));
-			player.addServant(new ServantResource(servantsAmountStart));
+			player.addResource(new GoldResource(goldAmountStart + i));
+			player.addResource(new WoodResource(woodAmountStart));
+			player.addResource(new StoneResource(stoneAmountStart));
+			player.addResource(new ServantResource(servantsAmountStart));
 		}
 		return orderToSet;
 	}

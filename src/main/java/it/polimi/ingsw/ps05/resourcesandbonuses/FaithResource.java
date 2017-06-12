@@ -10,6 +10,7 @@ public class FaithResource implements Resource, ActionResult {
 
 	//TODO : scegliere se usare due variabili separate o usarne una sola
 	private Integer amount;
+	private String id = "Fede";
 
 	public FaithResource(Integer amount) {
 		this.amount = amount;
@@ -53,6 +54,12 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		playerR.getRelatedPlayer().addFaith(this);
+		playerR.getRelatedPlayer().addResource(this);
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

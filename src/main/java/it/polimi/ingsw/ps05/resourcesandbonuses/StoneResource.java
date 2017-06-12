@@ -7,9 +7,9 @@ import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class StoneResource implements Resource, ActionResult {
-	//TODO vedi faith
+	
 	private Integer amount;
-
+	private String id = "Pietra";
 	
 	public StoneResource(Integer amount){
 		this.amount = amount;
@@ -46,12 +46,18 @@ public class StoneResource implements Resource, ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		playerR.getRelatedPlayer().addStone(this);
+		playerR.getRelatedPlayer().addResource(this);
 	}
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }
