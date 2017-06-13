@@ -25,7 +25,23 @@ public class App
 {
     public static void main( String[] args )
     {
+    	Scanner keyboard = new Scanner(System.in);
     	
+    	String string = new String();
+    	while(!string.equals("C") && !string.equals("G")){
+    		System.out.println("Vuoi avviare interfaccia GUI (G) o CLI (C)?");
+    		string = keyboard.nextLine();
+    		System.out.println(string);
+    	}
+    	keyboard.close();
+    	if (string.equals("C")){
+    		//istanzia la cli
+    	} else {
+    		//istanzia la gui
+    	}
+    	
+    	
+    	/*
     	Scanner keyboard = new Scanner(System.in);
     	
     	String string = new String();
@@ -53,7 +69,7 @@ public class App
 				}
     		}
     		
-    	}
+    	}*/
     	/*Player p1 = new Player(0, "luca", ColorEnumeration.Blue);
     	Player p2 = new Player(1, "alberto", ColorEnumeration.Green);
     	Player p3 = new Player(2, "andrea", ColorEnumeration.Violet);
