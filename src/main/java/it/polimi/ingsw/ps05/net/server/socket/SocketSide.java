@@ -15,21 +15,19 @@ public class SocketSide implements Runnable {
 	private int id= 0;
 	private ArrayList<PlayerClient> connected = new ArrayList<PlayerClient>();
 	
-	public SocketSide(int port){
-		try {
+	public SocketSide(int port) throws IOException{
 			server = new ServerSocket(port);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void run() {
 		//dentro al ciclo si accettano connessioni
+		System.out.println("Listening");
 		while (true){
 			try {
+				System.out.println("Ciao");
 				SocketConn c = new SocketConn(server.accept());
+				System.out.println("quis");
 				PlayerClient p = new PlayerClient(c, id++);
 				connected.add(p);
 				Lobby.getInstance().addPlayerToLobby(p);
@@ -37,7 +35,7 @@ public class SocketSide implements Runnable {
 				t.start();
 			} catch (IOException e) {
 	// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}

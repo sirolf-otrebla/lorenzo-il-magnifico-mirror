@@ -20,9 +20,8 @@ public class MarketSpace extends ActionSpaceWithEffect {
     public void applyEffect() {
         //Player player = this.getOccupant().getRelatedPlayer();
         Iterator<Effect> it = this.getEffects().iterator();
-        System.out.println("SelectedEffects.size " + selectedEffects.length);
         while (it.hasNext()){
-            it.next().apply(this.getOccupant(), selectedEffects[MarketSpace.DEFAULT_INDEX]);
+            it.next().apply(this.getOccupant(), MarketSpace.DEFAULT_INDEX/*selectedEffects[MarketSpace.DEFAULT_INDEX]*/);
         }
     }
 

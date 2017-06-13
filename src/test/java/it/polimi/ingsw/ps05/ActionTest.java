@@ -8,9 +8,6 @@ import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import junit.framework.*;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -168,7 +165,7 @@ public class ActionTest extends TestCase{
 		ActionSpace space = Board.getInstance().getActionSpace().get(0);
 		for(int i = 0; i < Board.getInstance().getActionSpace().size(); i++){
 			space = Board.getInstance().getActionSpace().get(i);
-			if (Board.getInstance().getActionSpace().get(i) instanceof CouncilSpace){	
+			if (Board.getInstance().getActionSpace().get(i) instanceof MarketSpace){	
 				break;
 			}
 			 

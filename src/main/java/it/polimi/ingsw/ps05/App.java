@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import it.polimi.ingsw.ps05.controller.*;
 import it.polimi.ingsw.ps05.model.Action;
@@ -12,6 +14,7 @@ import it.polimi.ingsw.ps05.model.Turn;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.net.server.ServerApp;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 /**
@@ -22,7 +25,36 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Player p1 = new Player(0, "luca", ColorEnumeration.Blue);
+    	
+    	Scanner keyboard = new Scanner(System.in);
+    	
+    	String string = new String();
+    	while(!string.equals("C") && !string.equals("S")){
+    		System.out.println("Vuoi avviare il server (S) o il client (C)?");
+    		string = keyboard.nextLine();
+    		System.out.println(string);
+    	}
+    	
+    	if (string.equals("C")){
+    		
+    	} else {
+    		int port = 0;
+    		boolean exc = false;
+    		ServerApp server;
+    		while(port == 0 || exc == true){
+    			exc = false;
+    			System.out.println("Inserisci la porta in cui il server accetterà le connessioni: ");
+        		port = keyboard.nextInt();
+        		try {
+					server = new ServerApp(port);
+				} catch (IOException e) {
+					exc = true;
+					e.printStackTrace();
+				}
+    		}
+    		
+    	}
+    	/*Player p1 = new Player(0, "luca", ColorEnumeration.Blue);
     	Player p2 = new Player(1, "alberto", ColorEnumeration.Green);
     	Player p3 = new Player(2, "andrea", ColorEnumeration.Violet);
     	Player p4 = new Player(3, "franco", ColorEnumeration.Yellow);
@@ -44,7 +76,7 @@ public class App
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    	}
+    	}*/
     }
 }
 
