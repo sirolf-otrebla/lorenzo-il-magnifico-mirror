@@ -3,7 +3,8 @@ package it.polimi.ingsw.ps05.ResourcesAndBonuses;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 
 public class AllBonus implements ActionResult {
-	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+
+	private Integer value; //con value si intende il valore del bonus conferito dalla carta
 	
 	public AllBonus(Integer value){
 		this.value = value;
@@ -25,6 +26,6 @@ public class AllBonus implements ActionResult {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

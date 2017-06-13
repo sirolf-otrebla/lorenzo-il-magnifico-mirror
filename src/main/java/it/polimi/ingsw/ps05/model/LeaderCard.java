@@ -8,9 +8,9 @@ import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
 
 public class LeaderCard implements Card {
 
-	private ArrayList<ArrayList<Resource>> requirements;
-	private ArrayList<Effect> effects;
-	private String cardName;
+	private final ArrayList<ArrayList<Resource>> requirements;
+	private final ArrayList<Effect> effects;
+	private final String cardName;
 
 	private Observer privilegeListener;
 

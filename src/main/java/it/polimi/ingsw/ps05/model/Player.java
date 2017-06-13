@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 import it.polimi.ingsw.ps05.ResourcesAndBonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
 public class Player implements PlayerRelated {
@@ -16,7 +17,7 @@ public class Player implements PlayerRelated {
 	ColorEnumeration color;
 	
 	// game information
-	private ArrayList<Familiar> familyList;
+	private ArrayList<Familiar> familyList = null;
 	private BonusTile bonusTile;
 
 	private FaithResource faithPts;
@@ -122,8 +123,12 @@ public class Player implements PlayerRelated {
     	this.victoryPts.setValue(this.victoryPts.getValue() + victory.getValue());
     }
     
-    public void setFamiliars(ArrayList<Familiar> familyList){
-    	this.familyList = familyList;
+    public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
+		if (this.familyList == null) {
+			this.familyList = familyList;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
     }
     
     public ArrayList<Familiar> getFamilyList(){
