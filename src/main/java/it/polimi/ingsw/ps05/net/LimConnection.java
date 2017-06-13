@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.net.server;
+package it.polimi.ingsw.ps05.net;
 
 
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.net.server.LimConnection;
+import it.polimi.ingsw.ps05.net.LimConnection;
 
 /**
  * Created by Alberto on 08/06/2017.

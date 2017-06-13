@@ -1,12 +1,11 @@
 package it.polimi.ingsw.ps05.net.server;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.net.LimConnection;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 
