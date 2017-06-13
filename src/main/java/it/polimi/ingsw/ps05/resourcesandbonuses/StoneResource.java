@@ -5,11 +5,13 @@ import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public class StoneResource implements Resource, ActionResult {
 	
 	private Integer amount;
 	private String id = "Pietra";
+	private Game game;
 	
 	public StoneResource(Integer amount){
 		this.amount = amount;
@@ -59,5 +61,15 @@ public class StoneResource implements Resource, ActionResult {
 	public String getId() {
 		// TODO Auto-generated method stub
 		return id;
+	}
+
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
 	}
 }

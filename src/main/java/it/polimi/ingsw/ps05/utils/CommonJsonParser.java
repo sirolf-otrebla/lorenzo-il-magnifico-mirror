@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public class CommonJsonParser {
 
@@ -21,9 +22,11 @@ public class CommonJsonParser {
 	private static final String modelPath = "it.polimi.ingsw.ps05.model.";
 	
 	private int playerConnected;
+	private Game game;
 
-	public CommonJsonParser(int playerConnected){
+	public CommonJsonParser(int playerConnected, Game game){
 		this.playerConnected = playerConnected;
+		this.game = game;
 	}
 
 	//XXX Metodi per caricamento board
@@ -334,7 +337,8 @@ public class CommonJsonParser {
 		ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
 		for (Object o : list){
 			try {
-				blueCardList.add(loadBlueCard((JSONObject)o));
+				BlueCard card = loadBlueCard((JSONObject)o);
+				blueCardList.add(card);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -349,7 +353,8 @@ public class CommonJsonParser {
 		ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
 		for (Object o : list){
 			try {
-				yellowCardList.add(loadYellowCard((JSONObject)o));
+				YellowCard card = loadYellowCard((JSONObject)o);
+				yellowCardList.add(card);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -363,7 +368,8 @@ public class CommonJsonParser {
 		ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
 		for (Object o : list){
 			try {
-				greenCardList.add(loadGreenCard((JSONObject)o));
+				GreenCard card = loadGreenCard((JSONObject)o);
+				greenCardList.add(card);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -377,7 +383,8 @@ public class CommonJsonParser {
 		ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
 		for (Object o : list){
 			try {
-				violetCardList.add(loadVioletCard((JSONObject)o));
+				VioletCard card = loadVioletCard((JSONObject)o);
+				violetCardList.add(card);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -498,6 +505,8 @@ public class CommonJsonParser {
 		Object actionObject = Class.forName(resourcePath + json.keySet().toArray()[j].toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
 		Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
 		method.invoke(actionObject, Integer.parseInt(json.get(json.keySet().toArray()[j].toString()).toString()));
+		Method method2 = actionObject.getClass().getDeclaredMethod("setGame",Game.class);
+		method2.invoke(actionObject, game);
 		return (ActionResult)actionObject; //cast esplicito a action result necessario per aggiungerlo alla lista. L'oggetto in se non perde la propria classe
 	}
 

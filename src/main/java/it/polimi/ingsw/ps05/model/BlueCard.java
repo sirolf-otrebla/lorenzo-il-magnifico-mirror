@@ -23,7 +23,7 @@ public class BlueCard extends TowerCard {
 	@Override
 	public void moveToPlayer() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 	

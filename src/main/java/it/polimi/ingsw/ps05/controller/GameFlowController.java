@@ -13,13 +13,15 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameFlowController implements Runnable, Observer{
+public class GameFlowController implements Runnable {
 	
 	Turn currentTurn;
 	Player activePlayer;
 	private NetMessage gameInput = null;
 	private Game game;
+	private BonusActionListener bonusActListener;
 	public GameFlowController(Game game){
+		this.bonusActListener = new BonusActionListener(this);
 		this.game = game;
 
 	}
@@ -86,8 +88,11 @@ public class GameFlowController implements Runnable, Observer{
 		}
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	public BonusActionListener getBonusActListener() {
+		return bonusActListener;
+	}
 
+	public Game getGame(){
+		return game;
 	}
 }

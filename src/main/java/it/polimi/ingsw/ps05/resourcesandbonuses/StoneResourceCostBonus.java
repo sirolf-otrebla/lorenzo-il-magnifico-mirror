@@ -5,11 +5,13 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public class StoneResourceCostBonus implements ActionResult, Resource {
 	
 	private Integer value;
 	private String id = "Pietra Bonus";
+	private Game game;
 	
 	public StoneResourceCostBonus(){
 		
@@ -57,6 +59,16 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 	public String getId() {
 		// TODO Auto-generated method stub
 		return id;
+	}
+
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
 	}
 
 }

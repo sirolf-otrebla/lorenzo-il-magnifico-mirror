@@ -46,7 +46,7 @@ public class Game implements Observer {
             list.get(i).BuildPlayer(ColorEnumeration.values()[i]);
             players.add(list.get(i).getPlayer());
         }
-        this.setup = new GameSetup(players);
+        this.setup = new GameSetup(players, this);
         this.flowCrlThread.start();
     }
 
@@ -81,6 +81,10 @@ public class Game implements Observer {
 
     public ArrayList<PlayerClient> getPlayerInGame(){
         return list;
+    }
+
+    public GameFlowController getGameFlowctrl(){
+        return this.flowCtrl;
     }
 
 

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public class BonusWithMultiplier implements ActionResult {
 	private Float multiplier;
 	private Resource returnResource;
 	private Class<?> cardToCount;
+	private Game game;
 	
 	public BonusWithMultiplier() {
 		
@@ -61,4 +63,13 @@ public class BonusWithMultiplier implements ActionResult {
 	}
 
 
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
+	}
 }

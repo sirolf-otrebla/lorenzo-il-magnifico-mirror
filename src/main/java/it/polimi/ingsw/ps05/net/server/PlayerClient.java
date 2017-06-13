@@ -58,4 +58,8 @@ public class PlayerClient extends Observable implements Runnable, Observer{
     	return this.pl;
 	}
 
+	public void sendMessage(NetMessage message){
+		//TODO:
+	}
+
 }
