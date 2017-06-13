@@ -7,12 +7,14 @@ import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public class Dice implements Resource {
 
 	ColorEnumeration color;
 	private int value;
 	private String id = "Dado";
+	private Game game;
 	
 	public Dice(ColorEnumeration color) {
 		super();
@@ -81,5 +83,13 @@ public class Dice implements Resource {
 	public String getId() {
 		// TODO Auto-generated method stub
 		return id;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public Game getGame() {
+		return game;
 	}
 }

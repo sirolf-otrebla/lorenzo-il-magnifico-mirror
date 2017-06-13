@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.controller;
 
+import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
@@ -20,11 +21,11 @@ public class GameSetup {
 	//TODO scelta regole
 	
 	//si presuppone che sia il network adapter o chi per lui a chiamare questa classe
-	public GameSetup(ArrayList<Player> players){
+	public GameSetup(ArrayList<Player> players, Game game){
 		//loadDeck();
 		//load deck tolto perché le carte vengono inserite nelle torri alla loro creazione
 		this.playerConnected = players;
-		parser = new CommonJsonParser(playerConnected.size());
+		parser = new CommonJsonParser(playerConnected.size(), game);
 		createFamiliarForPlayers();
 		loadBoard();
 		turnSetup = new TurnSetupManager(playerConnected, board);

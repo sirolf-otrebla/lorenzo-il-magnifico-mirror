@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.net.server.Game;
 import junit.framework.*;
 import org.junit.Test;
 
@@ -97,7 +98,8 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		GameSetup gameSetup = new GameSetup(list);
+		Game game = new Game(true, true, numP);
+		GameSetup gameSetup = new GameSetup(list,game);
 		Board board = gameSetup.getBoard();
 		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
 		for (int i = 0; i < board.getTowerList().size(); i++){
@@ -130,7 +132,8 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		GameSetup gameSetup = new GameSetup(list);
+		Game game = new Game(true, true, numP);
+		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
@@ -159,7 +162,8 @@ public class ActionTest extends TestCase{
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		
-		GameSetup gameSetup = new GameSetup(list);
+		Game game = new Game(true, true, numP);
+		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		ActionSpace space = Board.getInstance().getActionSpace().get(0);
@@ -230,7 +234,8 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		GameSetup gameSetup = new GameSetup(list);
+		Game game = new Game(true, true, numP);
+		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		assertEquals(numP,turn.getPlayerOrder().size());
