@@ -101,7 +101,9 @@ public class CommonJsonParser {
 		Object tower = Class.forName(modelPath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
-		
+		for (TowerTileInterface t : list){
+			t.setParentTower((Tower)tower);
+		}
 		
 		File file = new File("./src/main/res/cards.json");
 		JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));

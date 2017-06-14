@@ -81,6 +81,7 @@ public class Game implements Observer {
 
     public ArrayList<PlayerClient> getPlayerInGame(){
         return list;
+
     }
 
     public GameFlowController getGameFlowctrl(){

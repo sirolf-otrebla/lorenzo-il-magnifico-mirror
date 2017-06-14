@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
+
+import it.polimi.ingsw.ps05.net.server.Lobby;
+
 import it.polimi.ingsw.ps05.net.server.PlayerClient;
 
 public class SocketSide implements Runnable {
@@ -12,29 +15,28 @@ public class SocketSide implements Runnable {
 	private int id= 0;
 	private ArrayList<PlayerClient> connected = new ArrayList<PlayerClient>();
 	
-	public SocketSide(int port){
-		try {
+	public SocketSide(int port) throws IOException{
 			server = new ServerSocket(port);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void run() {
 		//dentro al ciclo si accettano connessioni
+		System.out.println("Listening");
 		while (true){
-			// try {
-				// TODO: CORREGGERE
-                // PlayerClient p = new PlayerClient(server.accept(), id++);
-				// connected.add(p);
-				// Thread t = new Thread(p);
-				// t.start();
-			//}   catch (IOException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			// }
+			try {
+				System.out.println("Ciao");
+				SocketConn c = new SocketConn(server.accept());
+				System.out.println("quis");
+				PlayerClient p = new PlayerClient(c, id++);
+				connected.add(p);
+				Lobby.getInstance().addPlayerToLobby(p);
+				Thread t = new Thread(p);
+				t.start();
+			} catch (IOException e) {
+	// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

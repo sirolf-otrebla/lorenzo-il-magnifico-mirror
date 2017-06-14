@@ -10,9 +10,10 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class GoldResourceCostBonus implements ActionResult, Resource {
 	
 	private Integer value;
-	private String id = "Oro Bonus";
+
+	public static final String id = "Oro Bonus";
 	private  Game game;
-	
+
 	public GoldResourceCostBonus(){
 		
 	}

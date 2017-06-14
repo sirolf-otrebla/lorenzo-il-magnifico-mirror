@@ -19,15 +19,15 @@ public class Player implements PlayerRelated {
 	// game information
 	private ArrayList<Familiar> familyList = null;
 	private BonusTile bonusTile;
-	
+
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
 
 
-	private ArrayList<GreenCard> greenCardList;
-	private ArrayList<BlueCard> blueCardList;
-	private ArrayList<YellowCard> yellowCardList;
-	private ArrayList<VioletCard> purpleCardList;
-	private ArrayList<LeaderCard> leaderCardList;
+	private ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
+	private ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
+	private ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
+	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
+	private ArrayList<LeaderCard> leaderCardList = new ArrayList<LeaderCard>();
 
 	private ArrayList<ActionResult> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
@@ -36,7 +36,7 @@ public class Player implements PlayerRelated {
 		this.playerID = playerID;
 		this.username = username;
 		this.color = color;
-		
+
 		resourceList.add(new FaithResource(0));
 		resourceList.add(new MilitaryResource(0));
 		resourceList.add(new VictoryResource(0));
@@ -74,7 +74,7 @@ public class Player implements PlayerRelated {
 	}
 
 	public ArrayList<VioletCard> getPurpleCardList() {
-		return purpleCardList;
+		return violetCardList;
 	}
 
     @Override
@@ -94,6 +94,9 @@ public class Player implements PlayerRelated {
     	}
     }
     
+    public void setFamiliars(ArrayList<Familiar> familyList){
+    	this.familyList = familyList;
+
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
 		if (this.familyList == null) {
 			this.familyList = familyList;
@@ -134,4 +137,20 @@ public class Player implements PlayerRelated {
 	public ArrayList<Resource> getResourceList(){
     	return  this.resourceList;
 	}
+
+    public void addBlueCard(BlueCard card){
+    	blueCardList.add(card);
+    }
+
+    public void addGreenCard(GreenCard card){
+    	greenCardList.add(card);
+    }
+
+    public void addYellowCard(YellowCard card){
+    	yellowCardList.add(card);
+    }
+
+    public void addVioletCard(VioletCard card){
+    	violetCardList.add(card);
+    }
 }

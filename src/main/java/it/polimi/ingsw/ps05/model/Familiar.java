@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class Familiar implements PlayerRelated{
 
@@ -46,6 +47,7 @@ public class Familiar implements PlayerRelated{
 
 	public void setDice(Dice dice){
 		this.relatedDice = dice;
+		//System.out.println(relatedPlayer.getPlayerID() + ": " + dice.getValue() + " setted on color: " + color.toString());
 	}
 
 	public void setColor(ColorEnumeration color) throws RepeatedAssignmentException {

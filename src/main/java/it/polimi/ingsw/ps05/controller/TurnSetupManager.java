@@ -59,6 +59,7 @@ public class TurnSetupManager {
 			for (Familiar f : o.getFamilyList()){
 				for (Dice d : currentTurn.getDice()){
 					if (f.getColor().equals(d.getColor())){
+						//System.out.println("Setting " + d.getValue()+ " " + d.getColor().toString() + " for familiar color " + f.getColor().toString());
 						f.setDice(d);
 						break;
 					}
@@ -111,7 +112,8 @@ public class TurnSetupManager {
 	
 	private ArrayList<Player> setRandomPlayerOrder(){
 		ArrayList<Player> orderToSet = new ArrayList<Player>();
-		for (int i = 0; i < playersConnected.size(); i++){
+		int size = playersConnected.size();
+		for (int i = 0; i < size; i++){
 			orderToSet.add(playersConnected.get(new Random().nextInt(playersConnected.size())));
 			playersConnected.remove(orderToSet.get(i));
 			

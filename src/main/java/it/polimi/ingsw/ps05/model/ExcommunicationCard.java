@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.resourcesandbonuses.ExcommunicationEffects.ExcommunicationEffect;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 
@@ -11,6 +12,10 @@ public class ExcommunicationCard{
 
 	public EpochEnumeration getEpoch() {
 		return this.epoch;
+	}
+	
+	public ExcommunicationEffect getExcomEffect(){
+		return this.excomEffect;
 	}
 
 	public void setEpoch(EpochEnumeration epoch) throws RepeatedAssignmentException {

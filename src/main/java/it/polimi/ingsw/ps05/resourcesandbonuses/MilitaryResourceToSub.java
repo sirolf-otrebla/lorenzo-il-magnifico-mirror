@@ -10,9 +10,9 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class MilitaryResourceToSub implements Resource, ActionResult {
 
 	private Integer amount;
-	private String id = "Militari da Togliere";
+	public static final String id = "Militari da Togliere";
 	private Game game;
-	
+
 	public MilitaryResourceToSub(Integer amount){
 		this.amount = amount;
 	}

@@ -33,13 +33,13 @@ public class GameSetup {
 	}
 	
 	private void createFamiliarForPlayers(){
-		for (Player o : playerConnected){
+		for (Player p : playerConnected){
 			ArrayList<Familiar> familyList = new ArrayList<Familiar>();
-			familyList.add(new Familiar(o, ColorEnumeration.Black));
-			familyList.add(new Familiar(o, ColorEnumeration.Orange));
-			familyList.add(new Familiar(o, ColorEnumeration.White));
-			familyList.add(new Familiar(o, ColorEnumeration.Any));
-			o.setFamiliars(familyList);
+			familyList.add(new Familiar(p, ColorEnumeration.Black));
+			familyList.add(new Familiar(p, ColorEnumeration.Orange));
+			familyList.add(new Familiar(p, ColorEnumeration.White));
+			familyList.add(new Familiar(p, ColorEnumeration.Any));
+			p.setFamiliars(familyList);
 		}
 	}
 	
@@ -56,12 +56,18 @@ public class GameSetup {
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
 		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", BonusTileType.Custom);
 	}
-	
+
 	public Board getBoard(){
 		return board;
 	}
 
-	public TurnSetupManager getTurnSetup() {
+	public TurnSetupManager getTurnSetupManager(){
 		return turnSetup;
 	}
+
+	public Board getBoard(){
+		return board;
+	}
+
+
 }

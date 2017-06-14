@@ -55,9 +55,11 @@ public abstract class TowerCard implements Card {
 
 	public void applyNonActivableEffects(PlayerRelated player) {
 		// TODO Auto-generated method stub
-		
+		//ciclare negli effetti, prendere quelli immediati ed attivarli, prendere quelli di fine partita
+		//e non farci niente, verranno conteggiati alla fine
+		//prendere gli attivabili e non farci niente, prendere i permanenti e aggiungerli alla lista
 	}
 	
 
-	public abstract void moveToPlayer();
+	public abstract void moveToPlayer(PlayerRelated player);
 }

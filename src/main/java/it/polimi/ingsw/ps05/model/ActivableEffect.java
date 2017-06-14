@@ -37,19 +37,19 @@ public class ActivableEffect implements Effect {
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub
-		return null;
+		return EffectType.ACTIVABLE;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
-		return null;
+		return effects;
 	}
 
     @Override
     public void apply(PlayerRelated familyMember, int choosenAlternative) {
 
-		if (state == this.STATE_READY){
+		if (state == ActivableEffect.STATE_READY){
 			// algorithm:
 
             // 1) check dice

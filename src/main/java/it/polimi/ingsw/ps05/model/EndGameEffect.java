@@ -18,23 +18,19 @@ public class EndGameEffect implements Effect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
-		return null;
+		return EffectType.END_GAME;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ArrayList<ActionResult>> list = new ArrayList<ArrayList<ActionResult>>();
+		list.add(effectsList);
+		return list;
 	}
-
-    public void apply() {
-
-    }
 
 	@Override
 	public void apply(PlayerRelated familyMember, int alternative) {
-		// TODO Auto-generated method stub
+		//Nothing to do here for now
 		
 	}
 

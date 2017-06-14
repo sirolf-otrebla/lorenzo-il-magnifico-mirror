@@ -30,6 +30,18 @@ public class Board {
 		this.militaryPath = militaryPath;
 	}
 
+	public static Board getInstance() {
+		return instance;
+	}
+
+	public static Board initBoard(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace, ArrayList<VictoryResource> faithPath,
+									ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
+		//if(instance == null) {
+			instance = new Board(towerList, actionSpace, faithPath, militaryPath, excomCards);
+		//}
+		return instance;
+	}
+
 	public ArrayList<Tower> getTowerList() {
 		return towerList;
 	}

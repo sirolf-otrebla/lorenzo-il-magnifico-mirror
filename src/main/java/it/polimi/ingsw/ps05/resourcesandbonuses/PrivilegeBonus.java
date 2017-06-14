@@ -46,9 +46,20 @@ public class PrivilegeBonus extends Observable implements ActionResult {
     }
 	@Override
 	public void applyResult(PlayerRelated playerR){
+		this.setChanged();
+		this.notifyObservers();
 	    for (int i = 0; i < this.value; i++)
             this.resChoosen.get(i).applyResult(playerR);
+	}
 
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
 	}
 
 	@Override

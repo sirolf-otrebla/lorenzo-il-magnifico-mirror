@@ -22,6 +22,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     	
     }
 
+    @Override
     public TowerCard getCard() {
         return card;
     }
@@ -33,14 +34,17 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     public void setDiceRequired(Integer diceRequired){
     	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
     }
+    
+    @Override
     public Integer getDiceRequired(){
 
         return this.diceRequirement.getValue();
     }
-
+    @Override
     public Tower getParentTower(){
         return this.parentTower;
     }
+    
     @Override
     public void setParentTower(Tower parentTower){
     	this.parentTower = parentTower;
@@ -64,7 +68,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
        for (ArrayList<Resource> andAlternative: req)
            andAlternative.add(diceRequirement);
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;
-       if (parentTower.isOccupied)
+       if (parentTower.isOccupied())
            for (ArrayList<Resource> andAlternative: req)
                andAlternative.add(new GoldResource(Tile.TOWER_OCCUPIED_PAYMENT));
        return req;
@@ -76,7 +80,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 
     @Override
     public void applyEffect() {
-        this.card.moveToPlayer();
+        this.card.moveToPlayer(this.getOccupant().getRelatedPlayer());
         this.card.applyNonActivableEffects(this.getOccupant());
     }
 

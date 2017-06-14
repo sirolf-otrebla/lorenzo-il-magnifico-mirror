@@ -53,15 +53,16 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 		this.toBeDecorated.setParentTower(tower);
 		
 	}
-
+	@Override
 	public Tower getParentTower() {
 		return this.toBeDecorated.getParentTower();
 	}
 
+	@Override
 	public TowerCard getCard() {
 		return this.toBeDecorated.getCard();
 	}
-
+	@Override
 	public Integer getDiceRequired() {
 		return this.toBeDecorated.getDiceRequired();
 	}

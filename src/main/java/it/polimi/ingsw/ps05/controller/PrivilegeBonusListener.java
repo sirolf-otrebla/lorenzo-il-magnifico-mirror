@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.controller;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.GoldResource;
 import it.polimi.ingsw.ps05.resourcesandbonuses.PrivilegeBonus;
 
 import java.util.ArrayList;
@@ -27,8 +29,11 @@ public class PrivilegeBonusListener implements Observer {
     }
     private ArrayList<ActionResult> notifyToUI(int resToChoose){
         //TODO:
-
-        return null;
+    	//imposto io un risultato predefinito per la prova
+    	ArrayList<ActionResult> res = new ArrayList<ActionResult>();
+    	res.add(new GoldResource(2));
+    	res.add(new FaithResource(1));
+        return res;
     }
     public static PrivilegeBonusListener getInstance(){
         if ( singleton == null)
