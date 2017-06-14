@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 /* in preliminary UML this object was called ActivitySpace. I decided to change his name because of
@@ -23,7 +24,7 @@ public class ProductionSpace extends ActionSpaceWithEffect {
 		this.effectList = effectList;
 	}
 
-	public ProductionSpace(Dice diceRequired, ArrayList<Effect> effectList) {
+	public ProductionSpace(Dice diceRequired, ArrayList<Effect> effectList) throws RepeatedAssignmentException {
 		super();
 		super.setDiceRequirement(diceRequired);
 		this.effectList = effectList;

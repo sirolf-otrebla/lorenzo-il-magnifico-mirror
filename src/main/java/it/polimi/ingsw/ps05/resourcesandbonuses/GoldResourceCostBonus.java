@@ -57,7 +57,7 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		// TODO Auto-generated method stub
 		return id;
 	}

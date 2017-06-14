@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps05.view.cli;
 
-
-
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 

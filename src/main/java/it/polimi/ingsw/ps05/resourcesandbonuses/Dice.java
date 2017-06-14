@@ -13,7 +13,7 @@ public class Dice implements Resource {
 
 	ColorEnumeration color;
 	private int value;
-	private String id = "Dado";
+	public static final  String ID = "Dado";
 	private Game game;
 	
 	public Dice(ColorEnumeration color) {
@@ -80,9 +80,9 @@ public class Dice implements Resource {
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		// TODO Auto-generated method stub
-		return id;
+		return ID;
 	}
 	
 	@Override

@@ -56,7 +56,7 @@ public class WoodResourceCostBonus implements Resource, ActionResult {
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		// TODO Auto-generated method stub
 		return id;
 	}

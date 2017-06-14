@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
 // in this case we have to think if it's useful or not to use the card Interface --Sirolfo
 
 public class ExcommunicationCard{
+	private ExcommunicationEffect excomEffect;
 	private FaithResource faithRequested;
 	private EpochEnumeration epoch;
 
@@ -39,4 +40,7 @@ public class ExcommunicationCard{
 		this.excomEffect = excomEffect;
 	}
 
+	public void setFaithRequested(FaithResource faithRequested) {
+		this.faithRequested = faithRequested;
+	}
 }

@@ -26,6 +26,6 @@ public interface Resource {
 
     public Integer getValue();
     
-    public String getId();
+    public String getID();
 	
 }

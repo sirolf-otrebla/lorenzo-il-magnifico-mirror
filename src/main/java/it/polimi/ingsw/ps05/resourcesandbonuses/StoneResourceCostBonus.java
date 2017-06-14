@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class StoneResourceCostBonus implements ActionResult, Resource {
 	
 	private Integer value;
-	private String id = "Pietra Bonus";
+	public static final  String ID = "Pietra Bonus";
 	private Game game;
 	
 	public StoneResourceCostBonus(){
@@ -56,9 +56,9 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		// TODO Auto-generated method stub
-		return id;
+		return ID;
 	}
 
 	@Override

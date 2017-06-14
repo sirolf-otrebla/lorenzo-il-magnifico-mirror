@@ -7,8 +7,4 @@ public class GUIMain implements Runnable{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
-
 }

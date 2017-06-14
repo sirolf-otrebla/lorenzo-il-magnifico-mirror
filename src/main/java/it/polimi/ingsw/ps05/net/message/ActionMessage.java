@@ -53,11 +53,4 @@ public class ActionMessage implements NetMessage {
         return familiar;
     }
     
-    public void setSelectedOption(int selectedOption){
-    	this.selectedOption = selectedOption;
-    }
-    
-    public int getSelectedOption(){
-    	return this.selectedOption;
-    }
 }
