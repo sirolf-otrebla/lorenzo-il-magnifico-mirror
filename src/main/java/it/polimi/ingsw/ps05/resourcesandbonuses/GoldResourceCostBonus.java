@@ -71,5 +71,10 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Oro bonus";
+	}
 
 }

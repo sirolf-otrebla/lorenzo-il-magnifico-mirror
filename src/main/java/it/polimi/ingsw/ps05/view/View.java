@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.view;
 
+import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.view.gui.GUIMain;
 
@@ -18,11 +19,12 @@ public class View {
 		t.start();
 	}
 	
-	public void instanceCLI(){
-		CLIMain cli = new CLIMain();
+	public void instanceCLI(Board board){
+		System.out.println("Instance");
+		CLIMain cli = new CLIMain(board);
 		Thread t = new Thread(cli);
 		t.setDaemon(true);
-		t.start();
+		t.run();
 	}
 
 }

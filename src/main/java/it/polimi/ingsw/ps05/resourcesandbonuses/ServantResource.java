@@ -74,4 +74,9 @@ public class ServantResource implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Servitori";
+	}
 }

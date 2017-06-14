@@ -75,4 +75,8 @@ public class GoldResource implements Resource, ActionResult {
 		return game;
 	}
 
+	@Override
+	public String toString(){
+		return "Oro";
+	}
 }

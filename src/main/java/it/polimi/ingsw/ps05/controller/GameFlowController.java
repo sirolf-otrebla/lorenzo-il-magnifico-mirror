@@ -40,7 +40,6 @@ public class GameFlowController implements Runnable {
 				Iterator<Player> plOrdIt = PlayerOrder.iterator();
 				while (plOrdIt.hasNext()) {
 					this.activePlayer = plOrdIt.next();
-					// definire un metodo clone nel giocatore per
 					evaluatePermanentEffect();
 					NetMessage inputMessage = this.getInput();
 					inputMessage.acceptVisitor(this);
@@ -59,9 +58,9 @@ public class GameFlowController implements Runnable {
 	public void visit(ActionMessage mess) throws Exception{
 		Player pl = mess.getPlayerBefore();
 		validatePlayer(pl);
-		this.activePlayer.doAction(mess.getAction().getFamiliar(),
-				mess.getAction().getPosition());
-
+		Action action = this.activePlayer.doAction(mess.getAction().getFamiliar(),
+				mess.getAction().getPosition(), mess.getSelectedOption());
+		
 
 	}
 	public void visit(ExitGameMessage mess){

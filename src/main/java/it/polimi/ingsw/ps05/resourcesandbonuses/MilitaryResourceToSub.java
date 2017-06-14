@@ -77,4 +77,9 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Militare da sub";
+	}
 }

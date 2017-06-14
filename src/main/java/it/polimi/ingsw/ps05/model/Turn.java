@@ -25,7 +25,7 @@ public class Turn implements Period {
 		return order;
 	}
 	
-	public Turn getNextTurn(){
+	public Turn getEmptyTurn(){
 		return next;
 	}
 	

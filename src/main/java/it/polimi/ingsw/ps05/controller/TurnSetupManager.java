@@ -84,7 +84,7 @@ public class TurnSetupManager {
 	
 	public void loadNextTurn(){
 		turnHistory.add(this.turn);
-		Turn next = turn.getNextTurn();
+		Turn next = turn.getEmptyTurn();
 		next.setDice(rollDice());
 		resetBoard(next);
 		next.setTurnNumber(turn.getTurnNumber() + 1);

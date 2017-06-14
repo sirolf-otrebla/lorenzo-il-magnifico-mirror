@@ -12,11 +12,10 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 	
 	public HarvestAction(Integer value){
 		this.value = value;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 	
 	public HarvestAction() {
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		
 	}
 	
 	public void setValue(Integer value){
@@ -41,6 +40,7 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override

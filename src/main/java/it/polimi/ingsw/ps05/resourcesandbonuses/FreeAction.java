@@ -12,11 +12,10 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	
 	public FreeAction(Integer value){
 		this.value = value;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 	
 	public FreeAction() {
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		
 	}
 	
 	public void setValue(Integer value){
@@ -41,6 +40,7 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override

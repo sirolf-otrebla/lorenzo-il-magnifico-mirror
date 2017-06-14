@@ -9,6 +9,8 @@ public class ActionMessage implements NetMessage {
     private PlayerClient playerClient;
     private Player playerBefore;    // state before action
     private Action action;
+    private int selectedOption = DEFAULT_OPTION;
+    private static final int DEFAULT_OPTION = 0;
 
 
     public void acceptVisitor(GameFlowController gfc) throws Exception{
@@ -21,5 +23,13 @@ public class ActionMessage implements NetMessage {
 
     public Action getAction() {
         return action;
+    }
+    
+    public void setSelectedOption(int selectedOption){
+    	this.selectedOption = selectedOption;
+    }
+    
+    public int getSelectedOption(){
+    	return this.selectedOption;
     }
 }

@@ -78,4 +78,9 @@ public class FaithResource implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Punti Fede";
+	}
 }
