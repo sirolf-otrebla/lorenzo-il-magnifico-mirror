@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class StoneResource implements Resource, ActionResult {
 
 	private Integer amount;
-	public static final String id = "Pietra";
+	public static final String ID = "Pietra";
 	private Game game;
 	
 	public StoneResource(Integer amount){
@@ -43,7 +43,7 @@ public class StoneResource implements Resource, ActionResult {
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) {
 		try {
-			playerFamiliar.getRelatedPlayer().getResource(this.getId()).remove(this.getValue());
+			playerFamiliar.getRelatedPlayer().getResource(this.getID()).remove(this.getValue());
 		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,13 +58,13 @@ public class StoneResource implements Resource, ActionResult {
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		// TODO Auto-generated method stub
-		return (playerFamiliar.getRelatedPlayer().getResource(this.getId()).getValue() >= this.getValue());
+		return (playerFamiliar.getRelatedPlayer().getResource(this.getID()).getValue() >= this.getValue());
 	}
 
 	@Override
-	public String getId() {
+	public String getID() {
 		// TODO Auto-generated method stub
-		return id;
+		return ID;
 	}
 
 	@Override

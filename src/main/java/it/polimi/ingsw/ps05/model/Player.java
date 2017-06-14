@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
@@ -92,7 +91,7 @@ public class Player implements PlayerRelated {
     
     public void addResource(Resource resource){
     	for (Resource r : resourceList){
-    		if (r.getId().equals(resource.getId())){
+    		if (r.getID().equals(resource.getID())){
     			r.setValue(r.getValue() + resource.getValue());
     		}
     	}
@@ -120,7 +119,7 @@ public class Player implements PlayerRelated {
 
     public Resource getResource(String id){
     	for (Resource r : resourceList){
-    		if (r.getId().equals(id)){
+    		if (r.getID().equals(id)){
     			return r;
     		}
     	}

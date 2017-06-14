@@ -27,7 +27,7 @@ public class ExcommunicationTriggerListener implements Observer {
         Epoch epoch = (Epoch) arg;
         ExcommunicationCard ex = epoch.getExcomunicationCard();
         for (PlayerClient pl: this.game.getPlayerInGame()){
-            FaithResource faith = (FaithResource) pl.getPlayer().getResource(FaithResource.id);
+            FaithResource faith = (FaithResource) pl.getPlayer().getResource(FaithResource.ID);
             if (ex.getFaithRequested().getValue() < faith.getValue())
                 ex.applyEffect(pl.getPlayer());
         }

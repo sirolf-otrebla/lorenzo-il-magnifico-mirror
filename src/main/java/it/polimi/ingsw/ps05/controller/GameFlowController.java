@@ -8,14 +8,10 @@ import it.polimi.ingsw.ps05.net.message.UpdateMessage;
 import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
 import it.polimi.ingsw.ps05.net.server.PlayerClient;
-import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
-import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
-import java.util.Observer;
 
 public class GameFlowController implements Runnable, NetMessageVisitor {
 	
@@ -95,7 +91,7 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 	private void validatePlayer(Player expected) throws  Exception{
 		ArrayList<Resource> resList = expected.getResourceList();
 		for (Resource res: resList) {
-			if(activePlayer.getResource(res.getId()).getValue() != res.getValue())
+			if(activePlayer.getResource(res.getID()).getValue() != res.getValue())
 				throw new Exception();
 		}
 	}
