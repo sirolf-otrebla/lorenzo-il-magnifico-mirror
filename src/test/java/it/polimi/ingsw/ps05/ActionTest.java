@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.controller.GameSetup;
 import it.polimi.ingsw.ps05.controller.TurnSetupManager;
@@ -70,7 +71,11 @@ public class ActionTest extends TestCase{
 		testFm = new Familiar(testPl, ColorEnumeration.Black );
 		ArrayList<Familiar> famList = new ArrayList<Familiar>();
 		famList.add(this.testFm);
-		testPl.setFamiliars(famList);
+		try {
+			testPl.setFamiliars(famList);
+		} catch (RepeatedAssignmentException e) {
+			//TODO
+		}
 		testFm.setDice(new Dice(ColorEnumeration.Black));
 		testEffectArrayList = new ArrayList<Effect>();
 		testEffectArrayList.add(new ImmediateEffect());
@@ -161,7 +166,7 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		
+
 		Game game = new Game(true, true, numP);
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
@@ -169,10 +174,10 @@ public class ActionTest extends TestCase{
 		ActionSpace space = Board.getInstance().getActionSpace().get(0);
 		for(int i = 0; i < Board.getInstance().getActionSpace().size(); i++){
 			space = Board.getInstance().getActionSpace().get(i);
-			if (Board.getInstance().getActionSpace().get(i) instanceof MarketSpace){	
+			if (Board.getInstance().getActionSpace().get(i) instanceof MarketSpace){
 				break;
 			}
-			 
+
 		}
 		System.out.println(space.getClass().toString());
 		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), space);
@@ -182,7 +187,7 @@ public class ActionTest extends TestCase{
 				//fallisce perché non ha niente da produrre in marketspace o productspace
 				//applyeffect di councilspace è vuoto
 				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
-				
+
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -278,6 +283,7 @@ public class ActionTest extends TestCase{
 			assertEquals(4,white+orange+black+any);
 		}
 
+		// todo ?
 		for (Player p : turn.getPlayerOrder()){
 			for (Player o : turn.getPlayerOrder()){
 				assertEquals(p.getFamilyList().get(0).getColor(),o.getFamilyList().get(0).getColor());

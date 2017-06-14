@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.net.server.Game;
 
 public abstract class TowerCard implements Card {
 	
@@ -50,7 +49,7 @@ public abstract class TowerCard implements Card {
 
 	@Override
 	public EpochEnumeration getEpoch() { // che cazzo???
-		return this.epoch.getEpoch();
+		return this.epoch.getID();
 	}
 
 	public void applyNonActivableEffects(PlayerRelated player) {

@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps05.controller;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 
-public class TurnSetupManager {
+public class TurnSetupManager extends Observable{
 
 	private Turn turn; //vecchio turno
 	private ArrayList<Turn> turnHistory;
@@ -89,8 +90,9 @@ public class TurnSetupManager {
 		resetBoard(next);
 		next.setTurnNumber(turn.getTurnNumber() + 1);
 		next.setEpoch(new Epoch(EpochEnumeration.getEpoch(next.getTurnNumber() / 2)));
-		if (!next.getEpoch().getEpoch().equals(turn.getEpoch().getEpoch())){
-			//triggera azione scomunica
+		if (!next.getEpoch().getID().equals(turn.getEpoch().getID())){
+			this.setChanged();
+			notifyObservers(turn.getEpoch());
 		}
 		updateFamiliar(next);
 		next.setNext(new Turn());

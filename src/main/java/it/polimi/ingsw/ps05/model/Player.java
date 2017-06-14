@@ -1,8 +1,11 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
 public class Player implements PlayerRelated {
@@ -16,16 +19,16 @@ public class Player implements PlayerRelated {
 	ColorEnumeration color;
 	
 	// game information
-	private ArrayList<Familiar> familyList;
+	private ArrayList<Familiar> familyList = null;
 	private BonusTile bonusTile;
-	
+
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
 
 
 	private ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
 	private ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
 	private ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
-	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>(); 
+	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
 	private ArrayList<LeaderCard> leaderCardList = new ArrayList<LeaderCard>();
 
 	private ArrayList<ActionResult> permanentEffectResList;
@@ -35,7 +38,7 @@ public class Player implements PlayerRelated {
 		this.playerID = playerID;
 		this.username = username;
 		this.color = color;
-		
+
 		resourceList.add(new FaithResource(0));
 		resourceList.add(new MilitaryResource(0));
 		resourceList.add(new VictoryResource(0));
@@ -45,7 +48,9 @@ public class Player implements PlayerRelated {
 		resourceList.add(new ServantResource(0));
 	}
 
+
 	public Action doAction(Familiar familiar, ActionSpace position, int selectedOption) throws OccupiedPositionException, RequirementsNotFullfilledException {
+
 
 	    Action thisAction = new Action(familiar, position);
 	    try {
@@ -94,9 +99,13 @@ public class Player implements PlayerRelated {
     		}
     	}
     }
-    
-    public void setFamiliars(ArrayList<Familiar> familyList){
-    	this.familyList = familyList;
+
+    public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
+		if (this.familyList == null) {
+			this.familyList = familyList;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
     }
     
     public ArrayList<Familiar> getFamilyList(){
@@ -110,7 +119,7 @@ public class Player implements PlayerRelated {
 	public int getPlayerID() {
 		return playerID;
 	}
-	
+
     public Resource getResource(String id){
     	for (Resource r : resourceList){
     		if (r.getId().equals(id)){
@@ -131,19 +140,19 @@ public class Player implements PlayerRelated {
 	public ArrayList<Resource> getResourceList(){
     	return  this.resourceList;
 	}
-    
+
     public void addBlueCard(BlueCard card){
     	blueCardList.add(card);
     }
-    
+
     public void addGreenCard(GreenCard card){
     	greenCardList.add(card);
     }
-    
+
     public void addYellowCard(YellowCard card){
     	yellowCardList.add(card);
     }
-    
+
     public void addVioletCard(VioletCard card){
     	violetCardList.add(card);
     }

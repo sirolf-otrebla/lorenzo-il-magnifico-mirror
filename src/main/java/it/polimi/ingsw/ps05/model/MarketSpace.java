@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class MarketSpace extends ActionSpaceWithEffect {
+
     private ArrayList<Effect> effectList;
     private int[] selectedEffects = {};
     public static final int DEFAULT_INDEX = 0;
@@ -40,12 +43,17 @@ public class MarketSpace extends ActionSpaceWithEffect {
 	
 	public MarketSpace(Dice diceRequired, ArrayList<Effect> effectList){
 		super();
-		super.setDiceRequirement(diceRequired);
-		this.effectList = effectList;
+		try {
+		    super.setDiceRequirement(diceRequired);
+            this.effectList = effectList;
+		} catch (RepeatedAssignmentException e){
+		    //todo
+        }
 	}
 	
 
     public int[] getSelectedEffects() {
         return selectedEffects;
     }
+
 }

@@ -12,7 +12,7 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 	private Integer amount;
 	public static final String id = "Militari da Togliere";
 	private Game game;
-	
+
 	public MilitaryResourceToSub(Integer amount){
 		this.amount = amount;
 	}

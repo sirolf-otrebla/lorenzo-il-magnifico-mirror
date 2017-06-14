@@ -28,13 +28,13 @@ public class GreenCardDeck implements Deck {
 
 	@Override
 	public TowerCard getCard(Epoch epoch) {
-		if (epoch.getEpoch().equals(EpochEnumeration.FIRST)){
+		if (epoch.getID().equals(EpochEnumeration.FIRST)){
 			Random randomNum = new Random();
 			Integer theNum =  randomNum.nextInt(firstEpochCard.size());
 			GreenCard card = firstEpochCard.get(theNum);
 			removeCardFromList(card, firstEpochCard);
 			return card;
-		} else if (epoch.getEpoch().equals(EpochEnumeration.SECOND)){
+		} else if (epoch.getID().equals(EpochEnumeration.SECOND)){
 			Random randomNum = new Random();
 			Integer theNum =  randomNum.nextInt(secondEpochCard.size());
 			GreenCard card = secondEpochCard.get(theNum);

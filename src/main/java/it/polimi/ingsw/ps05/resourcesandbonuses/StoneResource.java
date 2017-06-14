@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class StoneResource implements Resource, ActionResult {
-	
+
 	private Integer amount;
 	public static final String id = "Pietra";
 	private Game game;
