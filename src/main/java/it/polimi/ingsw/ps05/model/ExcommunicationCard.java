@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.ExcommunicationEffects.ExcommunicationEffect;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
 
 
@@ -9,7 +10,6 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
 public class ExcommunicationCard{
 	private FaithResource faithRequested;
 	private EpochEnumeration epoch;
-	private ExcommunicationEffect excomEffect;
 
 	public ExcommunicationCard(FaithResource faithRequested, EpochEnumeration epoch,
 							   ExcommunicationEffect excomEffect) {
@@ -29,10 +29,6 @@ public class ExcommunicationCard{
 
 	public EpochEnumeration getEpochID() {
 		return this.epoch;
-	}
-	
-	public ExcommunicationEffect getExcomEffect(){
-		return this.excomEffect;
 	}
 
 	public void setEpoch(EpochEnumeration epoch) {

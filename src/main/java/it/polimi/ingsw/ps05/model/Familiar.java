@@ -1,13 +1,17 @@
 package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
+
+import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class Familiar implements PlayerRelated{
 
 	private ActionSpace position;
 	private Dice relatedDice;
-	private ColorEnumeration color;
-	private Player relatedPlayer;
+	private ColorEnumeration color = NOT_INITIALIZED;
+	private Player relatedPlayer = null;
 	
 	public Familiar(){
 		
@@ -46,19 +50,29 @@ public class Familiar implements PlayerRelated{
 		//System.out.println(relatedPlayer.getPlayerID() + ": " + dice.getValue() + " setted on color: " + color.toString());
 	}
 
-	public void setColor(ColorEnumeration color){
-		this.color = color;
+	public void setColor(ColorEnumeration color) throws RepeatedAssignmentException {
+		if (this.color == NOT_INITIALIZED) {
+			this.color = color;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
 	}
 
-	public void setPlayer(Player player){
-		this.relatedPlayer = player;
+	public void setPlayer(Player player) throws RepeatedAssignmentException {
+		if (this.relatedPlayer == null) {
+			this.relatedPlayer = player;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
 	}
 
 	public void resetPosition(){
 	    this.setPosition(null);
     }
 
-    public Dice getRelatedDice() { return this.relatedDice; }
+    public Dice getRelatedDice() {
+		return this.relatedDice;
+	}
 
 	public ColorEnumeration getColor(){
 		return this.color;

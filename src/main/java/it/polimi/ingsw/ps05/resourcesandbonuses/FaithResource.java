@@ -11,7 +11,7 @@ public class FaithResource implements Resource, ActionResult {
 
 	//TODO : scegliere se usare due variabili separate o usarne una sola
 	private Integer amount;
-	public static final String id = "Fede";
+	private String id = "Fede";
 	private Game game;
 
 	public FaithResource(Integer amount) {

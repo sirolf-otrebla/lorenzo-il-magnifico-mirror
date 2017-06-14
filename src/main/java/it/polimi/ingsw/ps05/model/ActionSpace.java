@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public abstract class ActionSpace {
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	public ActionSpace() {
-
 		diceRequirement = new Dice(ColorEnumeration.Any, defaultDiceRequired);
 		requirements = new ArrayList<>();
 		requirements.add(new ArrayList<>());
@@ -47,12 +47,16 @@ public abstract class ActionSpace {
 		return requirements;
 	}
 
-	protected void setDiceRequirement(Dice diceRequirement){
+	protected void setDiceRequirement (Dice diceRequirement) throws RepeatedAssignmentException {
 
 		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
-		this.diceRequirement = diceRequirement;
-		for ( ArrayList<Resource> a : requirements)
-			a.set(0, diceRequirement);
+		if (this.diceRequirement == null) {
+			this.diceRequirement = diceRequirement;
+			for (ArrayList<Resource> a : requirements)
+				a.set(0, diceRequirement);
+		} else {
+			throw new RepeatedAssignmentException();
+		}
 	}
 
 	public Dice getDiceRequirement() {

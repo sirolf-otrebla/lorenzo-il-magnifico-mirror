@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.controller;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
@@ -39,7 +40,11 @@ public class GameSetup {
 			familyList.add(new Familiar(p, ColorEnumeration.Orange));
 			familyList.add(new Familiar(p, ColorEnumeration.White));
 			familyList.add(new Familiar(p, ColorEnumeration.Any));
-			p.setFamiliars(familyList);
+			try {
+				p.setFamiliars(familyList);
+			} catch (RepeatedAssignmentException e) {
+				//TODO
+			}
 		}
 	}
 	
@@ -56,16 +61,17 @@ public class GameSetup {
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
 		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", BonusTileType.Custom);
 	}
-	
+
 	public Board getBoard(){
 		return board;
 	}
-	
+
 	public TurnSetupManager getTurnSetupManager(){
 		return turnSetup;
 	}
 
-	public TurnSetupManager getTurnSetup() {
+	public TurnSetupManager getTurnSetup(){
 		return turnSetup;
 	}
+
 }

@@ -9,9 +9,9 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class ServantResource implements Resource, ActionResult {
 
 	private Integer amount;
-	public static final String id = "Servitori";
+	private String id = "Servitori";
 	private Game game;
-	
+
 	public ServantResource(Integer value){
 		this.amount = value;
 	}

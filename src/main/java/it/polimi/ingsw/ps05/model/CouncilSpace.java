@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps05.model;
 /* todo: add methods defined in UML  --Sirolfo*/
 
 import java.util.*;
+
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
@@ -22,8 +24,11 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 
 	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) {
 		super();
-		super.setDiceRequirement(diceRequired);
-		this.effectList = effect;
+		try {
+			super.setDiceRequirement(diceRequired);
+		} catch (RepeatedAssignmentException e) {
+			this.effectList = effect;
+		}
 	}
 
 	@Override
