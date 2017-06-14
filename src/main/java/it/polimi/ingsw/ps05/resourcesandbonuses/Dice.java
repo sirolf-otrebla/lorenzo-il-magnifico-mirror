@@ -92,4 +92,5 @@ public class Dice implements Resource {
 	public Game getGame() {
 		return game;
 	}
+
 }

@@ -78,4 +78,6 @@ public class FaithResource implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+
+
 }

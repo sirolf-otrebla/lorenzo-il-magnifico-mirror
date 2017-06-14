@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.PermanentBonus;
 
 public class PermanentEffect implements Effect {
 
@@ -23,19 +24,17 @@ public class PermanentEffect implements Effect {
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
-		return effectsList;
-	}
+		return  effectsList;
+
+		}
 
 	@Override
 	public void apply(PlayerRelated familyMember, int alternative) {
 		for (ActionResult act:
 				effectsList.get(alternative)) {
-			familyMember.getRelatedPlayer().addPermanentEffectRes(act);
+			familyMember.getRelatedPlayer().addPermanentEffectRes((PermanentBonus) act);
 			act.applyResult(familyMember);
 		}
-		
-		
-
 	}
 
 }

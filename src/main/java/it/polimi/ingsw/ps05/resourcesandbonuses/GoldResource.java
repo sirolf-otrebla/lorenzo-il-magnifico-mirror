@@ -75,4 +75,5 @@ public class GoldResource implements Resource, ActionResult {
 		return game;
 	}
 
+
 }
