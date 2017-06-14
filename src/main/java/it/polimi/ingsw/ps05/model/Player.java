@@ -48,13 +48,15 @@ public class Player implements PlayerRelated {
 		resourceList.add(new ServantResource(0));
 	}
 
-	public Action doAction(Familiar familiar, ActionSpace position, int selectedPayment) throws OccupiedPositionException, RequirementsNotFullfilledException {
+
+	public Action doAction(Familiar familiar, ActionSpace position, int selectedOption) throws OccupiedPositionException, RequirementsNotFullfilledException {
+
 
 	    Action thisAction = new Action(familiar, position);
 	    try {
-	    	if(thisAction.isLegal())
-				thisAction.run(selectedPayment);
-	    	// run actions
+	    	if (thisAction.isLegal()){
+	    		thisAction.run(selectedOption);
+	    	}
 		} catch (Exception e /* create more catch branch */ ){
 
 		}

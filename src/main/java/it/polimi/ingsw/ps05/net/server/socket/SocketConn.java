@@ -31,6 +31,7 @@ public class SocketConn extends LimConnection {
     		while (true){
     			try {
 					message = stream.takeInData();
+					
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

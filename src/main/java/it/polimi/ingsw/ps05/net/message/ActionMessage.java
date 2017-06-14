@@ -16,6 +16,7 @@ public class ActionMessage implements NetMessage {
     private int selectedPayment = 0;
 
 
+
     public void acceptVisitor(NetMessageVisitor vi) throws Exception{
         vi.visit(this);
     }
@@ -51,4 +52,5 @@ public class ActionMessage implements NetMessage {
     public Familiar getFamiliar() {
         return familiar;
     }
+    
 }

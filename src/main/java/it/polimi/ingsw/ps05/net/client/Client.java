@@ -16,7 +16,7 @@ public class Client implements Observer {
 			view.instanceGUI();
 		} else {
 			//start cli, ask for server link and port
-			view.instanceCLI();
+			//view.instanceCLI();
 		}
 	}
 

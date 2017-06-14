@@ -13,11 +13,9 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	
 	public GreenAction(Integer value){
 		this.value = value;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 	
 	public GreenAction() {
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 		
 	}
 	
@@ -44,6 +42,7 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override

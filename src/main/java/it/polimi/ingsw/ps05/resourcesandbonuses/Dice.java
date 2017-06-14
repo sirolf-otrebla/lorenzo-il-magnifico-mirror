@@ -84,13 +84,10 @@ public class Dice implements Resource {
 		// TODO Auto-generated method stub
 		return ID;
 	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	public Game getGame() {
-		return game;
+	
+	@Override
+	public String toString(){
+		return "Dado";
 	}
 
 }

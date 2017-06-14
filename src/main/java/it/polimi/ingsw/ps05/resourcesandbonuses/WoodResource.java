@@ -76,4 +76,9 @@ public class WoodResource implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Legno";
+	}
 }

@@ -12,11 +12,10 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	
 	public ProductionAction(Integer value){
 		this.value = value;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 	
 	public ProductionAction() {
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		
 	}
 	
 	public void setValue(Integer value){
@@ -42,6 +41,7 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override

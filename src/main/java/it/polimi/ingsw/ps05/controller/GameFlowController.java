@@ -45,7 +45,7 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 				plOrdIt = PlayerOrder.iterator();
 
 				while (plOrdIt.hasNext()) {
-					// definire un metodo clone nel giocatore per
+					this.activePlayer = plOrdIt.next();
 					evaluatePermanentEffect();
 					NetMessage inputMessage = this.getInput();
 					inputMessage.acceptVisitor(this);

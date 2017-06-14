@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class CommonJsonParser {
@@ -45,7 +46,7 @@ public class CommonJsonParser {
 			faithList = loadFaithPath(obj.get("FaithPath"));
 			towerList = loadTower((JSONObject)obj.get("Tower"));
 			militaryList = loadMilitaryPath(obj.get("MilitaryPath"));
-		} catch (IOException | ParseException e) {
+		} catch (IOException | ParseException | RepeatedAssignmentException e) {
 			e.printStackTrace();
 		}
 		
@@ -207,7 +208,7 @@ public class CommonJsonParser {
 		return new CouncilSpace(diceRequired, effectList);
 	}
 	
-	private ArrayList<HarvestingSpace> detectNumHarvestingSpace(Object json){
+	private ArrayList<HarvestingSpace> detectNumHarvestingSpace(Object json) throws RepeatedAssignmentException{
 		JSONArray obj = (JSONArray)json;
 		ArrayList<HarvestingSpace> list = new ArrayList<HarvestingSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
@@ -218,7 +219,7 @@ public class CommonJsonParser {
 		return list;
 	}
 	
-	private HarvestingSpace loadHarvestSpace(JSONObject json){
+	private HarvestingSpace loadHarvestSpace(JSONObject json) throws RepeatedAssignmentException{
 		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
@@ -238,7 +239,7 @@ public class CommonJsonParser {
 		return new HarvestingSpace(diceRequired, list);
 	}
 	
-	private ArrayList<ProductionSpace> detectNumProductionSpace(Object json){
+	private ArrayList<ProductionSpace> detectNumProductionSpace(Object json) throws RepeatedAssignmentException{
 		JSONArray obj = (JSONArray)json;
 		ArrayList<ProductionSpace> list = new ArrayList<ProductionSpace>();
 		for (int i = 0; i < obj.toArray().length; i++){
@@ -249,7 +250,7 @@ public class CommonJsonParser {
 		return list;
 	}
 
-	private ProductionSpace loadProductionSpace(JSONObject json){
+	private ProductionSpace loadProductionSpace(JSONObject json) throws RepeatedAssignmentException{
 		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {

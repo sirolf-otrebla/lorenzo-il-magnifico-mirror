@@ -73,4 +73,9 @@ public class VictoryResource implements Resource, ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Punit Vittoria";
+	}
 }
