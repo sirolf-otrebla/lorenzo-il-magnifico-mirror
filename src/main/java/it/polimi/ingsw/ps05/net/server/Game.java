@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps05.controller.GameSetup;
 import it.polimi.ingsw.ps05.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
@@ -22,6 +23,7 @@ public class Game implements Observer {
     private TurnSetupManager tManager;
     private ArrayList<PlayerClient> list;
     private Board gBoard;
+    private ArrayList<ExcommunicationCard> excommList;
 
     private boolean useCompleteRules = true;
     private boolean useCustomBonusTiles = false;
@@ -32,6 +34,7 @@ public class Game implements Observer {
         this.useCompleteRules = useCompleteRules;
         this.useCustomBonusTiles = useCustomBonusTiles;
         this.list = new ArrayList<>();
+        this.excommList = new ArrayList<>();
 
     }
 
@@ -41,6 +44,7 @@ public class Game implements Observer {
         this.flowCrlThread = new Thread(flowCtrl);
         this.gBoard = this.setup.getBoard();
         tManager = this.setup.getTurnSetup();
+
         ArrayList<Player> players = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             list.get(i).BuildPlayer(ColorEnumeration.values()[i]);
@@ -61,6 +65,7 @@ public class Game implements Observer {
 
     public void addPlayer(PlayerClient player){
         list.add(player);
+        player.addObserver(this);
     }
 
     public void removePlayer(PlayerClient player){
@@ -88,4 +93,7 @@ public class Game implements Observer {
         return this.flowCtrl;
     }
 
+    public ArrayList<ExcommunicationCard> getExcommList() {
+        return excommList;
+    }
 }

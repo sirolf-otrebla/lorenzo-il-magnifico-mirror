@@ -1,8 +1,10 @@
 package it.polimi.ingsw.ps05.net.server;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Lobby {
+public class Lobby implements Observer {
 	private static Lobby instance = null;
 	private ArrayList<PlayerClient> playerInLobby= new ArrayList<PlayerClient>();
 	private ArrayList<Game> gameList= new ArrayList<Game>();
@@ -21,10 +23,12 @@ public class Lobby {
 	
 	public void addPlayerToLobby(PlayerClient player){
 		playerInLobby.add(player);
+		player.addObserver(this);
 	}
 	
 	private void removePlayerFromLobby(PlayerClient player){
 		playerInLobby.remove(player);
+		player.deleteObserver(this);
 	}
 	
 	public void createGame(boolean useCompleteRules, boolean useCustomBonusTiles, PlayerClient player){
@@ -42,5 +46,10 @@ public class Lobby {
 	public void removePlayerFromGame(PlayerClient player, Game game){
 		game.removePlayer(player);
 		addPlayerToLobby(player);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//TODO
 	}
 }

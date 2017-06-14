@@ -4,7 +4,11 @@ import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 import it.polimi.ingsw.ps05.net.message.ExitGameMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.net.message.UpdateMessage;
 import it.polimi.ingsw.ps05.net.server.Game;
+import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
+import it.polimi.ingsw.ps05.net.server.PlayerClient;
+import it.polimi.ingsw.ps05.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import sun.reflect.annotation.ExceptionProxy;
 
@@ -13,17 +17,21 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameFlowController implements Runnable {
+public class GameFlowController implements Runnable, NetMessageVisitor {
 	
 	Turn currentTurn;
 	Player activePlayer;
 	private NetMessage gameInput = null;
 	private Game game;
 	private BonusActionListener bonusActListener;
+	private Iterator<Player> plOrdIt;
+	private ExcommunicationTriggerListener exTrigger;
+
 	public GameFlowController(Game game){
+		exTrigger = new ExcommunicationTriggerListener(this);
 		this.bonusActListener = new BonusActionListener(this);
 		this.game = game;
-
+		this.game.gettManager().addObserver(exTrigger);
 	}
 
 	public synchronized void setGameInput(NetMessage gameInput) {
@@ -36,15 +44,30 @@ public class GameFlowController implements Runnable {
 		while(game.end){
 			try {
 				Turn thisTurn = this.game.gettManager().getTurn();
+				this.activePlayer = thisTurn.getPlayerOrder().get(0);
 				ArrayList<Player> PlayerOrder = thisTurn.getPlayerOrder();
-				Iterator<Player> plOrdIt = PlayerOrder.iterator();
+				plOrdIt = PlayerOrder.iterator();
+
 				while (plOrdIt.hasNext()) {
-					this.activePlayer = plOrdIt.next();
 					// definire un metodo clone nel giocatore per
 					evaluatePermanentEffect();
 					NetMessage inputMessage = this.getInput();
 					inputMessage.acceptVisitor(this);
+
 				}
+				boolean turnFinished = false;
+				for (Familiar f:
+					 activePlayer.getFamilyList()) {
+					if (!(f.isUsed())) {
+						turnFinished = false;
+						break;
+					}
+					turnFinished = true;
+				}
+				if (turnFinished) {
+					this.game.gettManager().loadNextTurn();
+				}
+
 			} catch (InterruptedException e ){
 
 			} catch (Exception f){
@@ -56,17 +79,6 @@ public class GameFlowController implements Runnable {
 		}
 	}
 
-	public void visit(ActionMessage mess) throws Exception{
-		Player pl = mess.getPlayerBefore();
-		validatePlayer(pl);
-		this.activePlayer.doAction(mess.getAction().getFamiliar(),
-				mess.getAction().getPosition());
-
-
-	}
-	public void visit(ExitGameMessage mess){
-		// gestione permanenza partita
-	}
 
 	private void evaluatePermanentEffect(){
 		for (PermanentEffect e :
@@ -95,4 +107,35 @@ public class GameFlowController implements Runnable {
 	public Game getGame(){
 		return game;
 	}
+
+	public void setNextPlayer(){
+		activePlayer = plOrdIt.next();
+	}
+
+	@Override
+	public void visit(ActionMessage mess) {
+		try {
+			Player pl = mess.getPlayerBefore();
+			validatePlayer(pl);
+			Player thisPl = this.activePlayer;
+			Action act = thisPl.doAction(mess.getFamiliar(),
+					mess.getActionSpace(), mess.getSelectedPayment());
+			UpdateMessage updateMsg = new UpdateMessage(act, thisPl, this.activePlayer);
+			for (PlayerClient client :
+					game.getPlayerInGame()) {
+				client.sendMessage(updateMsg);
+			}
+		} catch (Exception e){
+			//TODO:
+		}
+
+
+	}
+
+	@Override
+	public void visit(ExitGameMessage mess){
+		//TODO:
+		// gestione permanenza partita
+	}
+
 }

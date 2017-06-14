@@ -18,7 +18,7 @@ public class Epoch {
 		this.excommunicationCard = excommunicationCard;
 	}
 	
-	public EpochEnumeration getEpoch() {
+	public EpochEnumeration getID() {
 		return this.epoch;
 	}
 	

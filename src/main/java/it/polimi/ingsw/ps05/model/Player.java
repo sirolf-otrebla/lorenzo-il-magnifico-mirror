@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
@@ -45,10 +47,12 @@ public class Player implements PlayerRelated {
 		resourceList.add(new ServantResource(0));
 	}
 
-	public Action doAction(Familiar familiar, ActionSpace position) throws OccupiedPositionException, RequirementsNotFullfilledException {
+	public Action doAction(Familiar familiar, ActionSpace position, int selectedPayment) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
 	    Action thisAction = new Action(familiar, position);
 	    try {
+	    	if(thisAction.isLegal())
+				thisAction.run(selectedPayment);
 	    	// run actions
 		} catch (Exception e /* create more catch branch */ ){
 

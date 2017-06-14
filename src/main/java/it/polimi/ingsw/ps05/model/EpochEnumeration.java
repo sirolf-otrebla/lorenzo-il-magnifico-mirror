@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 public enum EpochEnumeration {
-	FIRST(1),SECOND(2),THIRD(3), NO_EPOCH(0);
+	FIRST(0),SECOND(1),THIRD(2), NO_EPOCH(3);
 	
 	private int epochIndex;
 
