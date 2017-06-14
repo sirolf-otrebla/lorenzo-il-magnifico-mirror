@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model;
 /* todo: add methods defined in UML  --Sirolfo*/
 
 import java.util.*;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Dice;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 

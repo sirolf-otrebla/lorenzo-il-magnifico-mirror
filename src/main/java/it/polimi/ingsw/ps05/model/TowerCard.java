@@ -2,7 +2,8 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.net.server.Game;
 
 public abstract class TowerCard implements Card {
 	

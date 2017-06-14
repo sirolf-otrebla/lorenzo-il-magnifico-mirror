@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.GoldResource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.GoldResource;
 
 /* See UML for thescription.
  * 

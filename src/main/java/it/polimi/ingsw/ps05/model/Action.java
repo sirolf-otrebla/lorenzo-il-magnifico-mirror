@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.exceptions.*;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class Action implements Period {
 	public static final int THIRD_OPTION = 2;
 
 
-	Player player;
-	Familiar familiar;
-	ActionSpace position;
+	private Player player;
+	private Familiar familiar;
+	private ActionSpace position;
 
 	private ArrayList<ArrayList<Resource>> suitableReqAlternatives;
 	private boolean isLegal = false;
@@ -33,6 +33,14 @@ public class Action implements Period {
 	// 2) check dice
 	// 2b) check resources
 	// c) evaluate special effects?
+
+	public Familiar getFamiliar() {
+		return familiar;
+	}
+
+	public ActionSpace getPosition() {
+		return position;
+	}
 
 	public boolean isLegal() {
 

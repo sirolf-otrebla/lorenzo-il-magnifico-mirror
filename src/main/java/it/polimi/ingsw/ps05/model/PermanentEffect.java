@@ -2,9 +2,11 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 
 public class PermanentEffect implements Effect {
+
+	public static final int NO_ALTERNATIVES = 0; // permanent effetcs do not have alternatives.
 	
 	ArrayList<ArrayList<ActionResult>> effectsList;
 	

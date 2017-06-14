@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.controller;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.PrivilegeBonus;
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.PrivilegeBonus;
 
 import java.util.ArrayList;
 import java.util.Observable;

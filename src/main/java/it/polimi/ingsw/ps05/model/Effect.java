@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 
 import java.util.ArrayList;
 

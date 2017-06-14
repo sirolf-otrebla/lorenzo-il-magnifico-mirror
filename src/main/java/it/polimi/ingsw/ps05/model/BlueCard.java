@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps05.ResourcesAndBonuses.Resource;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 public class BlueCard extends TowerCard {
 	
@@ -23,7 +23,7 @@ public class BlueCard extends TowerCard {
 	@Override
 	public void moveToPlayer() {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 	
