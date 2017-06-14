@@ -75,20 +75,4 @@ public class MilitaryResource implements Resource, ActionResult {
 		return game;
 	}
 
-	@Override
-	public String getId() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-
-	@Override
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	@Override
-	public Game getGame() {
-		return game;
-	}
-
 }

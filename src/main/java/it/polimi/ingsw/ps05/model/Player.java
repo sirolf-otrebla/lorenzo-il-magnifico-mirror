@@ -93,9 +93,6 @@ public class Player implements PlayerRelated {
     		}
     	}
     }
-    
-    public void setFamiliars(ArrayList<Familiar> familyList){
-    	this.familyList = familyList;
 
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
 		if (this.familyList == null) {

@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 
 /* See UML for description

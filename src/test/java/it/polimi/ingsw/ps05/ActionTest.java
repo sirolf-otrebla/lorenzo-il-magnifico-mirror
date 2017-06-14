@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.controller.GameSetup;
 import it.polimi.ingsw.ps05.controller.TurnSetupManager;
@@ -70,7 +71,11 @@ public class ActionTest extends TestCase{
 		testFm = new Familiar(testPl, ColorEnumeration.Black );
 		ArrayList<Familiar> famList = new ArrayList<Familiar>();
 		famList.add(this.testFm);
-		testPl.setFamiliars(famList);
+		try {
+			testPl.setFamiliars(famList);
+		} catch (RepeatedAssignmentException e) {
+			//TODO
+		}
 		testFm.setDice(new Dice(ColorEnumeration.Black));
 		testEffectArrayList = new ArrayList<Effect>();
 		testEffectArrayList.add(new ImmediateEffect());

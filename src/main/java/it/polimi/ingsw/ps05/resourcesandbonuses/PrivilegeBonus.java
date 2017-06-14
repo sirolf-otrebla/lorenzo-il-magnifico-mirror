@@ -61,16 +61,6 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	public Game getGame() {
 		return game;
 	}
-
-	@Override
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	@Override
-	public Game getGame() {
-		return game;
-	}
 }
 
 

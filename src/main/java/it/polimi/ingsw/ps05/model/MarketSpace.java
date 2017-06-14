@@ -43,11 +43,10 @@ public class MarketSpace extends ActionSpaceWithEffect {
 	
 	public MarketSpace(Dice diceRequired, ArrayList<Effect> effectList){
 		super();
-		try{
+		try {
 		    super.setDiceRequirement(diceRequired);
             this.effectList = effectList;
-		}
-		catch (RepeatedAssignmentException e){
+		} catch (RepeatedAssignmentException e){
 		    //todo
         }
 	}

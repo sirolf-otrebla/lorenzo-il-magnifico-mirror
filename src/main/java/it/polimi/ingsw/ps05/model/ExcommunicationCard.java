@@ -13,10 +13,6 @@ public class ExcommunicationCard{
 	public EpochEnumeration getEpoch() {
 		return this.epoch;
 	}
-	
-	public ExcommunicationEffect getExcomEffect(){
-		return this.excomEffect;
-	}
 
 	public void setEpoch(EpochEnumeration epoch) throws RepeatedAssignmentException {
 		if (this.epoch == EpochEnumeration.NO_EPOCH) {

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.controller;
 
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
@@ -39,7 +40,11 @@ public class GameSetup {
 			familyList.add(new Familiar(p, ColorEnumeration.Orange));
 			familyList.add(new Familiar(p, ColorEnumeration.White));
 			familyList.add(new Familiar(p, ColorEnumeration.Any));
-			p.setFamiliars(familyList);
+			try {
+				p.setFamiliars(familyList);
+			} catch (RepeatedAssignmentException e) {
+				//TODO
+			}
 		}
 	}
 	
@@ -65,9 +70,8 @@ public class GameSetup {
 		return turnSetup;
 	}
 
-	public Board getBoard(){
-		return board;
+	public TurnSetupManager getTurnSetup(){
+		return turnSetup;
 	}
-
 
 }
