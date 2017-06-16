@@ -305,7 +305,7 @@ public class CommonJsonParser {
 			e1.printStackTrace();
 		}
 		
-		
+		System.out.println("bonus tile size in parser" + list.size());
 		return list;
 	}
 	
@@ -314,6 +314,7 @@ public class CommonJsonParser {
 		for (int i = 0; i < json.size(); i++){
 			list.addAll(getEffects((JSONObject)json.get(i)));
 		}
+		System.out.println("effect list size for single bonus tile " + list.size());
 		
 		return new BonusTile(list, type);
 	}

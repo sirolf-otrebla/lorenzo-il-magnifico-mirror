@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BonusTile {
 	private Player relatedPlayer;
-	private ArrayList<Effect> effectList;
+	private ArrayList<Effect> effectList = new ArrayList<Effect>();
 	private BonusTileType type;
 	
 	public BonusTile() {

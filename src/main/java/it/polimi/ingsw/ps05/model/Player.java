@@ -78,7 +78,7 @@ public class Player implements PlayerRelated {
 		return blueCardList;
 	}
 
-	public ArrayList<VioletCard> getPurpleCardList() {
+	public ArrayList<VioletCard> getVioletCardList() {
 		return violetCardList;
 	}
 
@@ -155,4 +155,14 @@ public class Player implements PlayerRelated {
     public void addVioletCard(VioletCard card){
     	violetCardList.add(card);
     }
+
+
+	public BonusTile getBonusTile() {
+		return bonusTile;
+	}
+
+
+	public void setBonusTile(BonusTile bonusTile) {
+		this.bonusTile = bonusTile;
+	}
 }
