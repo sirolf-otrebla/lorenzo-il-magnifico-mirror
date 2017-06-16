@@ -158,9 +158,13 @@ public class Player implements PlayerRelated {
     }
 
     public LeaderCard getLeaderCard(String leaderName) throws MissingCardException{
+
 		for (LeaderCard leaderCard:
 			 this.leaderCardList) {
-			if (leaderCard.getName().equals(leaderName)) return leaderCard;
+			if (leaderCard.getName().equals(leaderName)){
+				leaderCardList.remove(leaderCard);
+				return leaderCard;
+			}
 		}
 		throw new MissingCardException();
 	}
