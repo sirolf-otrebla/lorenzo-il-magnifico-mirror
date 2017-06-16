@@ -8,9 +8,9 @@ public class PermanentEffect implements Effect {
 
 	public static final int NO_ALTERNATIVES = 0; // permanent effetcs do not have alternatives.
 	
-	ArrayList<ArrayList<ActionResult>> effectsList;
+	ArrayList<ActionResult> effectsList = new ArrayList<ActionResult>();
 	
-	public void setEffectList(ArrayList<ArrayList<ActionResult>> effectsList){
+	public void setEffectList(ArrayList<ActionResult> effectsList){
 		this.effectsList = effectsList;
 	}
 
@@ -22,20 +22,15 @@ public class PermanentEffect implements Effect {
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		// TODO Auto-generated method stub
-		return effectsList;
+		ArrayList<ArrayList<ActionResult>> list = new ArrayList<ArrayList<ActionResult>>();
+		list.add(effectsList);
+		return list;
 	}
 
 	@Override
 	public void apply(PlayerRelated familyMember, int alternative) {
-		for (ActionResult act:
-				effectsList.get(alternative)) {
-			familyMember.getRelatedPlayer().addPermanentEffectRes(act);
-			act.applyResult(familyMember);
-		}
-		
-		
-
+			familyMember.getRelatedPlayer().addPermanentEffectRes(effectsList.get(alternative));
+			effectsList.get(alternative).applyResult(familyMember);
 	}
 
 }

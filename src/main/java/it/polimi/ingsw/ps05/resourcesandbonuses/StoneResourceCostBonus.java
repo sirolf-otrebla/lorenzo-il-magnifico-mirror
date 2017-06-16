@@ -73,7 +73,7 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 	
 	@Override
 	public String toString(){
-		return "Pietra bonus";
+		return "Costo pietra";
 	}
 
 }

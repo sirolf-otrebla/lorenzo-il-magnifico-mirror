@@ -5,10 +5,17 @@ import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.CouncilSpace;
+import it.polimi.ingsw.ps05.model.Effect;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.MarketSpace;
 import it.polimi.ingsw.ps05.model.ProductionSpace;
+import it.polimi.ingsw.ps05.model.TileWithEffect;
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.BonusWithMultiplier;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.ActivableEffect;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +31,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 public class CLIMain implements Runnable{
 	int currentRow = 0;
 	int currentCol = 0;
-	String[] color = {"Verde", "Blu", "Gialla", "Viola"}; 
+	String[] color = {"Viola", "Gialla", "Blu", "Verde"}; 
 	ArrayList<ArrayList<TerminalPosition>> map;
 	ArrayList<ArrayList<Integer>> offSet;
 	float ratioWidth = 1;
@@ -37,6 +44,8 @@ public class CLIMain implements Runnable{
 	private ArrayList<MarketSpace> marketList = new ArrayList<MarketSpace>();
 	private ArrayList<ProductionSpace> productionList = new ArrayList<ProductionSpace>();
 	private ArrayList<HarvestingSpace> harvestList = new ArrayList<HarvestingSpace>();
+	private CouncilSpace council;
+	private TextGraphics textGraphics;
 
 	public CLIMain(Board board){
 		System.out.println("Fatto");
@@ -45,13 +54,10 @@ public class CLIMain implements Runnable{
 
 	/*
 	 * DA FARE:
-	 * aggiungere spazi mancanti
 	 * aggiungere valori giocatore
-	 * aggiungere info posizione con cursore
 	 * aggiungere effetto tile in torre
 	 * aggiungere controllo occupato in tutti i posti
 	 * aggiungere punteggi
-	 * usare gli screen per fare cose 
 	 * 
 	 */
 
@@ -70,7 +76,7 @@ public class CLIMain implements Runnable{
 			terminal.clearScreen();
 			terminal.setCursorVisible(true);
 
-			final TextGraphics textGraphics = terminal.newTextGraphics();
+			textGraphics = terminal.newTextGraphics();
 
 			textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
 			textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -145,7 +151,7 @@ public class CLIMain implements Runnable{
 						} else if (currentRow != map.get(currentCol).size()-1 && currentCol == map.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
 							currentRow = map.get(currentCol).size()-1; //si allora imposto l'ultima riga disponibile della colonna
 						}
-						
+
 						printInfo(textGraphics, Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
 						terminal.setCursorPosition(map.get(currentCol).get(currentRow));
 					} catch (IndexOutOfBoundsException e) {
@@ -206,12 +212,15 @@ public class CLIMain implements Runnable{
 		marketList = new ArrayList<MarketSpace>();
 		productionList = new ArrayList<ProductionSpace>();
 		harvestList = new ArrayList<HarvestingSpace>();
+
+
+
 		for (int i = 0; i < board.getTowerList().size(); i++){
 			String toWrite = "Torre " + color[i];
 			textGraphics.putString(i*width/8 + 1, 1, toWrite, SGR.BOLD);
 			ArrayList<TerminalPosition> list = new ArrayList<TerminalPosition>();
 			ArrayList<Integer> off = new ArrayList<Integer>();
-			
+
 			for (int j = 0; j < board.getTowerList().get(i).getTiles().size(); j++){
 				off.add(new Integer(((ActionSpace)board.getTowerList().get(i).getTiles().get(j)).isOccupied() ? OCCUPIED.length() :
 					board.getTowerList().get(i).getTiles().get(j).getCard().getName().length()));
@@ -221,6 +230,18 @@ public class CLIMain implements Runnable{
 				textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 4 + j*height/16, "Dado: " + 
 						board.getTowerList().get(i).getTiles().get(j).getDiceRequired().intValue() );
 				list.add(new TerminalPosition(i*width/8 + 1 + off.get(j) + (i!=0 ? 1:0), 3 + j*height/16));
+				if (board.getTowerList().get(i).getTiles().get(j) instanceof TileWithEffect){
+					for (ActionResult result : ((TileWithEffect)board.getTowerList().get(i).getTiles().get(j)).getEffectOnPositioning()){
+						try {
+							textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 5 + j*height/16, result.toString() + " " + result.getValue());
+						} catch (NoSuchMethodException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+
+
 			}
 			off.add(toWrite.length());
 			offSet.add(off);
@@ -233,13 +254,13 @@ public class CLIMain implements Runnable{
 				4*height/16+1);
 
 
-		for (int i = 0; i < board.getActionSpace().size(); i++){
 
-			if (board.getActionSpace().get(i) instanceof MarketSpace){
+		for (ActionSpace action : board.getActionSpace()){
+			if (action instanceof MarketSpace){
 				ArrayList<TerminalPosition> list = map.get(marketList.size());
 				list.add(new TerminalPosition((marketList.size()+1)*width/16 - width/32,
 						6*height/16 - height/32));
-				if (board.getActionSpace().get(i).isOccupied()){
+				if (action.isOccupied()){
 					textGraphics.putString((marketList.size()+1)*width/16 - width/32,
 							6*height/16 - height/32, "X", SGR.BOLD);
 				}
@@ -249,12 +270,12 @@ public class CLIMain implements Runnable{
 						(marketList.size()+1)*width/16,
 						6*height/16
 						);
-				marketList.add((MarketSpace) board.getActionSpace().get(i));
-			} else if (board.getActionSpace().get(i) instanceof ProductionSpace){
+				marketList.add((MarketSpace) action);
+			} else if (action instanceof ProductionSpace){
 				ArrayList<TerminalPosition> list = map.get(productionList.size());
 				list.add(new TerminalPosition((productionList.size()+1)*width/16 - width/32,
 						7*height/16 - height/32));
-				if (board.getActionSpace().get(i).isOccupied()){
+				if (action.isOccupied()){
 					textGraphics.putString((productionList.size()+1)*width/16 - width/32,
 							6*height/16 - height/32, "X", SGR.BOLD);
 				}
@@ -264,15 +285,15 @@ public class CLIMain implements Runnable{
 						(productionList.size()+1)*width/16,
 						7*height/16+2
 						);
-				productionList.add((ProductionSpace)board.getActionSpace().get(i));
+				productionList.add((ProductionSpace)action);
 			}
 		}
-		for (int i = 0; i < board.getActionSpace().size(); i++){
-			if (board.getActionSpace().get(i) instanceof HarvestingSpace){
+		for (ActionSpace action : board.getActionSpace()){
+			if (action instanceof HarvestingSpace){
 				ArrayList<TerminalPosition> list = map.get(productionList.size()+harvestList.size());
 				list.add(new TerminalPosition((productionList.size()+harvestList.size()+1)*width/16 - width/32,
 						7*height/16 - height/32));
-				if (board.getActionSpace().get(i).isOccupied()){
+				if (action.isOccupied()){
 					textGraphics.putString((harvestList.size()+1)*width/16 - width/32,
 							6*height/16 - height/32, "X", SGR.BOLD);
 				}
@@ -282,8 +303,9 @@ public class CLIMain implements Runnable{
 						(productionList.size()+harvestList.size()+1)*width/16,
 						7*height/16+2
 						);
-				harvestList.add((HarvestingSpace)board.getActionSpace().get(i));
-			} else if (board.getActionSpace().get(i) instanceof CouncilSpace){
+				harvestList.add((HarvestingSpace)action);
+			} else if (action instanceof CouncilSpace){
+				council = (CouncilSpace)action;
 				ArrayList<TerminalPosition> list;
 				drawSquare(textGraphics,
 						(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16,
@@ -304,7 +326,7 @@ public class CLIMain implements Runnable{
 							6*height/16));
 					map.add(list);
 				}
-				
+
 			}
 		}
 
@@ -337,70 +359,277 @@ public class CLIMain implements Runnable{
 	}
 
 	private void printInfo(TextGraphics textGraphics, int width, int height){
-		String space = new String(new char[width/8]).replace('\0', ' ');
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 2, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 3, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 4, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 5, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 6, 
-				space);
-		textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 7, 
-				space);
-		
+		String space = new String(new char[width/8 + 3]).replace('\0', ' ');
+		for (int i = 1; i < height/4; i++){
+			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, i, 
+					space);
+		}
+
 		drawSquare(textGraphics,
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2,
 				0,
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2 + width/8,
 				height/4+1);
-		
+
 		if (currentCol < board.getTowerList().size() && currentRow < board.getTowerList().get(currentCol).getTiles().size()){
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-					board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getName());
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 2, 
-					"Costi:");
-			for (int i = 0; i < board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getRequirements().size(); i++){
-				for (int j = 0; j < board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getRequirements().get(i).size(); j++){
-					textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 3+i, 
-							board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getRequirements().get(i).get(j).toString() + " " + 
-									board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getRequirements().get(i).get(j).getValue());
-				}
-				
-			}
+			infoCard(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3,0);
 		} else if(currentCol < board.getTowerList().size() && currentRow == board.getTowerList().get(currentCol).getTiles().size()) {
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-					"Mercato " + (currentCol + 1));
+			infoMarket(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3,0);
 		} else if (currentRow == board.getTowerList().size() + 1 && currentCol < productionList.size()){
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-					"Production " + (currentCol + 1));
+			infoProduction(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3,0);
 		} else if (currentRow == board.getTowerList().size() + 1 && currentCol >= productionList.size() && currentCol < productionList.size() + harvestList.size() ){
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-					"Harvest " + (currentCol + 1 - productionList.size()));
+			infoHarvest(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3,0);
 		} else {
-			textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, 
-					"Council");
+			infoCouncil(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3,0);
 		}
-		
-		
-		//textGraphics.putString(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3, 1, "");
-		
-		/*g.putString(60, 5, "Nome Carta (" + currentCol + "," + currentRow + ")");
-		g.putString(60, 6, "Costo 1-1");
-		g.putString(60, 7, "Costo 2-1");
-		g.putString(60, 9, "Costo 1-2");
-		g.putString(60, 10, "Costo 2-2");
-		g.putString(60, 11, "Costo 3-2");
-		g.putString(60, 13, "Effetti");
-		g.putString(60, 14, "Effetto 1");
-		g.putString(60, 15, "Effetto 2");
-		g.drawLine(59,5,59,16,'|');
-		g.drawLine(78,5,78,16,'|');
-		g.drawLine(59,4,78,4,'-');
-		g.drawLine(59,17,78,17,'-');*/
 	}
+
+	private void infoMarket(int column, int row){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Mercato " + (currentCol + 1));
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		if (marketList.get(currentCol).isOccupied()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					marketList.get(currentCol).getOccupant().getRelatedPlayer().getUsername());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"Fam " + marketList.get(currentCol).getOccupant().getColor().toString());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		} else {
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"Dado: " + marketList.get(currentCol).getDiceRequirement().getValue());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+
+			for (Effect effect : marketList.get(currentCol).getEffects()){
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+						effect.getEffectType().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
+					for (ActionResult result : choseOr) {
+						try {
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
+							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+						} catch (NoSuchMethodException e) {
+							//non fare niente, lanciato solo con moltiplicatori, qui non ci sono
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void infoProduction(int column, int row){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Production " + (currentCol + 1));
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Dado: " + productionList.get(currentCol).getDiceRequirement().getValue());
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		if (productionList.get(currentCol).isOccupied()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
+					productionList.get(currentCol).getOccupant().getRelatedPlayer().getUsername());
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"Fam " + productionList.get(currentCol).getOccupant().getColor().toString());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		}
+		if (!productionList.get(currentCol).isOccupied() && productionList.get(currentCol).getEffects().size() != 0){
+			System.out.println("In");
+			for (Effect effect : productionList.get(currentCol).getEffects()){
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+						effect.getEffectType().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
+					for (ActionResult result : choseOr){
+						try {
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
+									result.toString() + " " + result.getValue());
+							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+						} catch (NoSuchMethodException e) {
+							//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void infoCard(int column, int row){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getName());
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Costi:");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		try {
+			for (ArrayList<Resource> choseOr : board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getRequirements()){
+				for (Resource res : choseOr){
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
+					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				}
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			}
+		} catch (Exception e){
+			//requirementList == null, non fare niente cercare di risolvere
+		}
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		try {
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+			for (Effect effect : board.getTowerList().get(currentCol).getTiles().get(currentRow).getCard().getEffects()){
+				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				if (!(effect instanceof ActivableEffect)) {
+					for (ArrayList<ActionResult> choseOr : effect.getResultList()){
+						for (ActionResult result : choseOr) {
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
+							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+						}
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					}
+				} else {
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, ((ActivableEffect)effect).getActivableEffectType().toString());
+					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Dado " + ((ActivableEffect)effect).getDiceRequired());
+					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+
+					if (((ActivableEffect)effect).getResourceRequired().size() != 0){
+						activableWithResourceRequired(lastPos, (ActivableEffect)effect);
+					} else {
+						for (ArrayList<ActionResult> choseOrRes : ((ActivableEffect)effect).getResultList()){
+							for (ActionResult result : choseOrRes){
+								if ( result instanceof BonusWithMultiplier){
+									lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
+								} else {
+									textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
+									lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+								}
+							}
+							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+						}
+					}
+				}
+			}
+
+		} catch (NoSuchMethodException e){
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+		for (ArrayList<Resource> choseOr : effect.getResourceRequired()){
+			for (Resource resource : choseOr) {
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, resource.getValue() + " " + resource.toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			}
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "-->");
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			for (ArrayList<ActionResult> choseOrRes : ((ActivableEffect)effect).getResultList()){
+				for (ActionResult result : choseOrRes){
+					if ( result instanceof BonusWithMultiplier){
+						lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
+					} else {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					}
+				}
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			}
+		}
+		return lastPos;
+	}
+
+	private TerminalPosition bonusWithMultiplier(TerminalPosition lastPos, BonusWithMultiplier result) throws InstantiationException, IllegalAccessException{
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() , result.getMultiplier()+"x"+
+				result.getCardToCount().newInstance().toString());
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "-->");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getReturnResource().toString());
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		return lastPos;
+	}
+
+	private void infoHarvest(int column, int row){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Harvest " + (currentCol + 1 - productionList.size()));
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Dado: " + harvestList.get(currentCol-productionList.size()).getDiceRequirement().getValue());
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		if (harvestList.get(currentCol-productionList.size()).isOccupied()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
+					harvestList.get(currentCol-productionList.size()).getOccupant().getRelatedPlayer().getUsername());
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"Fam " + harvestList.get(currentCol-productionList.size()).getOccupant().getColor().toString());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		} 
+		if (!harvestList.get(currentCol-productionList.size()).isOccupied() && harvestList.get(currentCol-productionList.size()).getEffects().size() != 0) {
+			for (Effect effect : harvestList.get(currentCol-productionList.size()).getEffects()){
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+						effect.getEffectType().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
+					for (ActionResult result : choseOr){
+						try {
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
+									result.toString() + " " + result.getValue());
+							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+						} catch (NoSuchMethodException e) {
+							//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void infoCouncil(int column, int row){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Council");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1, 
+				council.getDiceRequirement().toString() + " " + council.getDiceRequirement().getValue());
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+
+		for (Effect effect : council.getEffects()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1, 
+					effect.getEffectType().toString());
+			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+			for (ArrayList<ActionResult> choseOr : effect.getResultList()){
+				for (ActionResult result : choseOr){
+					try {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+								result.toString() + " " + result.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+					} catch (NoSuchMethodException e){
+						//qui non fare niente, viene lancio per i moltiplicatori
+					}
+				}
+			}
+		}
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Occupanti: ");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		for (Familiar fam : council.getOccupantList()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					fam.getRelatedPlayer().getUsername());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"fam " + fam.getColor().toString());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		}
+	}
+
+
+
 }

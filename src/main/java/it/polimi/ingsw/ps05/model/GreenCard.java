@@ -15,7 +15,7 @@ public class GreenCard extends TowerCard {
 	private static final int DEFAULT_EFFECT = 0;
 
 	private boolean toBeActivated = true;
-	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
+	private ArrayList<Effect> activableEffectList = new ArrayList<Effect>();
 
 	// meant to be selected BEFORE using HARVEST
 	private int[] selectedEffects;
@@ -30,7 +30,7 @@ public class GreenCard extends TowerCard {
 		selectedEffects = new int[activableEffectList.size()]; // ODIO GLI ARRAY ISTANZIATI A RUNTIME PERÒ È LA COSA PIU SVEGLIA IN QUESTO MOMENTO;
 
 	}
-
+	
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
 		// TODO Auto-generated method stub
@@ -40,7 +40,7 @@ public class GreenCard extends TowerCard {
 	@Override
 	public ArrayList<Effect> getEffects() {
 		// TODO Auto-generated method stub
-		return null;
+		return activableEffectList;
 	}
 
 	public void applyHarvestableEffects(PlayerRelated familyMember){
@@ -56,10 +56,6 @@ public class GreenCard extends TowerCard {
 			for(int i = 0; activableEffectList.size() > i; i++)
 				activableEffectList.get(i).apply(familyMember, selectedEffects[i]);
 		}
-
-
-
-
 	}
 
 	public boolean getToBeActivated() {
@@ -86,6 +82,11 @@ public class GreenCard extends TowerCard {
 	public void applyNonActivableEffects(PlayerRelated player) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public String toString(){
+		return "Carta verde";
 	}
 
 }

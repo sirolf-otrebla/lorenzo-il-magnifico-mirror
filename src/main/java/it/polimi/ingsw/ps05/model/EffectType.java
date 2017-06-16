@@ -1,5 +1,16 @@
 package it.polimi.ingsw.ps05.model;
 
 public enum EffectType {
-	PERMANENT,IMMEDIATE,END_GAME,ACTIVABLE,ONCE_PER_TURN;
+	PERMANENT("Effetto permanente"),IMMEDIATE("Effetto immediato"),END_GAME("Fine gioco"),ACTIVABLE("Attivabile"),ONCE_PER_TURN("Uno per turno");
+	
+	private final String type;
+	
+	private EffectType(String type){
+		this.type = type;
+	}
+	
+	@Override
+	public String toString(){
+		return this.type;
+	}
 }

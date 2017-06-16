@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 public class ActivableEffect implements Effect {
 	
 	ActivableEffectType type;
-	Integer diceRequired;
+	Integer diceRequired = 0;
 	ArrayList<ArrayList<Resource>> resourcesRequired;
 	ArrayList<ArrayList<ActionResult>> effects;
 
@@ -17,6 +17,7 @@ public class ActivableEffect implements Effect {
 	public static final int STATE_NOT_READY = 1;
 	private int state = STATE_READY;
 	private int choosenAlternative;
+	
 	public ActivableEffect(){
 		
 	}
@@ -31,7 +32,13 @@ public class ActivableEffect implements Effect {
 	}
 
 
-
+	public ActivableEffectType getActivableEffectType(){
+		return type;
+	}
+	
+	public Integer getDiceRequired(){
+		return diceRequired;
+	}
 
 
 	@Override
@@ -44,6 +51,10 @@ public class ActivableEffect implements Effect {
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return effects;
+	}
+	
+	public ArrayList<ArrayList<Resource>> getResourceRequired(){
+		return resourcesRequired;
 	}
 
     @Override

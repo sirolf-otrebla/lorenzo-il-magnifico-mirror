@@ -72,4 +72,9 @@ public class BonusWithMultiplier implements ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Bonus moltipl.";
+	}
 }

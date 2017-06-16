@@ -43,4 +43,9 @@ public class HarvestBonus implements ActionResult {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Bonus raccolto";
+	}
 }

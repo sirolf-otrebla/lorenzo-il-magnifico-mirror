@@ -1,7 +1,7 @@
 {
 	"Tower": 
 	{
-		"GreenTower": 
+		"VioletTower": 
 		{
 			"Tile": 
 			[
@@ -20,7 +20,7 @@
 					"diceRequired": 7,
 					"Effect": 
 					{
-						"WoodResource": 2
+						"GoldResource": 2
 					}
 				},
 
@@ -28,44 +28,13 @@
 					"diceRequired": 5,
 					"Effect": 
 					{
-						"WoodResource": 1
+						"GoldResource": 1
 					}
 				}
 			]
 		},
 
-		"BlueTower": 
-		{
-			"Tile": 
-			[
-				{
-					"diceRequired": 3
-				},
-
-				{
-					"diceRequired": 1
-				}
-			],
-
-			"TileWithEffect": 
-			[
-				{
-					"diceRequired": 7,
-					"Effect": 
-					{
-						"StoneResource": 2
-					}
-				},
-
-				{
-					"diceRequired": 5,
-					"Effect": 
-					{
-						"StoneResource": 1
-					}
-				}
-			]
-		},
+		
 
 		"YellowTower": 
 		{
@@ -99,8 +68,7 @@
 				}
 			]
 		},
-
-		"VioletTower": 
+		"BlueTower": 
 		{
 			"Tile": 
 			[
@@ -119,7 +87,7 @@
 					"diceRequired": 7,
 					"Effect": 
 					{
-						"GoldResource": 2
+						"StoneResource": 2
 					}
 				},
 
@@ -127,7 +95,41 @@
 					"diceRequired": 5,
 					"Effect": 
 					{
-						"GoldResource": 1
+						"StoneResource": 1
+					}
+				}
+			]
+		},
+
+		
+	"GreenTower": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 3
+				},
+
+				{
+					"diceRequired": 1
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"WoodResource": 2
+					}
+				},
+
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"WoodResource": 1
 					}
 				}
 			]
