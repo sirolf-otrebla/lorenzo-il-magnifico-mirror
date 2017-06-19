@@ -54,6 +54,7 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}
+
 	
 	@Override
 	public String toString(){

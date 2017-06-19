@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
@@ -30,7 +31,7 @@ public class Player implements PlayerRelated {
 	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
 	private ArrayList<LeaderCard> leaderCardList = new ArrayList<LeaderCard>();
 
-	private ArrayList<ActionResult> permanentEffectResList;
+	private ArrayList<PermanentBonus> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
 	
 	public Player(int playerID, String username, ColorEnumeration color){
@@ -62,7 +63,7 @@ public class Player implements PlayerRelated {
 	    return thisAction;
     }
 
-	public void addPermanentEffectRes(ActionResult eff){
+	public void addPermanentEffectRes(PermanentBonus eff){
 		this.permanentEffectResList.add(eff);
 	}
 
@@ -132,8 +133,8 @@ public class Player implements PlayerRelated {
     	return color;
     }
 
-    public ArrayList<PermanentEffect> getPermanentEffectList(){
-    	return this.getPermanentEffectList();
+    public ArrayList<PermanentBonus> getPermanentBonusList(){
+    	return permanentEffectResList;
 	}
 
 	public ArrayList<Resource> getResourceList(){
@@ -156,7 +157,6 @@ public class Player implements PlayerRelated {
     	violetCardList.add(card);
     }
 
-
 	public BonusTile getBonusTile() {
 		return bonusTile;
 	}
@@ -164,5 +164,21 @@ public class Player implements PlayerRelated {
 
 	public void setBonusTile(BonusTile bonusTile) {
 		this.bonusTile = bonusTile;
+	}
+	
+    public LeaderCard getLeaderCard(String leaderName) throws MissingCardException{
+		for (LeaderCard leaderCard:
+			 this.leaderCardList) {
+			if (leaderCard.getName().equals(leaderName)) return leaderCard;
+		}
+		throw new MissingCardException();
+	}
+
+	public void resetPermanentEffects(){
+		for (PermanentBonus r:
+			 getPermanentBonusList()) {
+
+			r.resetResult(this);
+		}
 	}
 }

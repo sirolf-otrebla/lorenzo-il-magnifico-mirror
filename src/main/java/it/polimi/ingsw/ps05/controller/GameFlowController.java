@@ -1,13 +1,13 @@
 package it.polimi.ingsw.ps05.controller;
 
 import it.polimi.ingsw.ps05.model.*;
-import it.polimi.ingsw.ps05.net.message.ActionMessage;
-import it.polimi.ingsw.ps05.net.message.ExitGameMessage;
-import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.net.message.UpdateMessage;
+import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
+import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
 import it.polimi.ingsw.ps05.net.server.PlayerClient;
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.PermanentBonus;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 import java.util.ArrayList;
@@ -77,9 +77,16 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 
 
 	private void evaluatePermanentEffect(){
-		for (PermanentEffect e :
-				this.activePlayer.getPermanentEffectList()) {
-			e.apply(this.activePlayer, PermanentEffect.NO_ALTERNATIVES );
+		for (PermanentBonus e :
+				this.activePlayer.getPermanentBonusList()) {
+			e.applyResult(this.activePlayer);
+		}
+	}
+
+	private void resetEffects(){
+		for (PermanentBonus e :
+				this.activePlayer.getPermanentBonusList()){
+			e.resetResult(this.activePlayer);
 		}
 	}
 
@@ -132,6 +139,19 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 	public void visit(ExitGameMessage mess){
 		//TODO:
 		// gestione permanenza partita
+	}
+
+	public void visit(LeaderCardMessage lCardMsg){
+		try {
+			LeaderCard card =
+					this.activePlayer.getLeaderCard(lCardMsg.getLeaderCard().getName());
+			if (lCardMsg.getMsgType() == LeaderCardMessage.TYPE_DISCARD)
+				card.discard(this.activePlayer);
+			else
+				card.applyNonActivableEffects(activePlayer, lCardMsg.getEffectChoice());
+		} catch (MissingCardException e){
+			//TODO:
+		}
 	}
 
 }

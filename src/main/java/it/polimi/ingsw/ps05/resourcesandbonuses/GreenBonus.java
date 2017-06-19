@@ -3,18 +3,18 @@ package it.polimi.ingsw.ps05.resourcesandbonuses;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
 
-public class GreenBonus implements ActionResult {
+public class GreenBonus extends PermanentBonus{
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private  Game game;
-	
+
 	public GreenBonus(Integer value){
 		this.value = value;
 	}
-	
+
 	public GreenBonus() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -31,7 +31,7 @@ public class GreenBonus implements ActionResult {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -43,9 +43,14 @@ public class GreenBonus implements ActionResult {
 	public Game getGame() {
 		return game;
 	}
-	
+
 	@Override
 	public String toString(){
 		return "Bonus verde";
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR) {
+		//todo
 	}
 }

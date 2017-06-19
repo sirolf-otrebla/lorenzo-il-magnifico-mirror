@@ -3,18 +3,18 @@ package it.polimi.ingsw.ps05.resourcesandbonuses;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
 
-public class NoColorBonus implements ActionResult {
-private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+public class NoColorBonus extends PermanentBonus {
+	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
-	
+
 	public NoColorBonus(Integer value){
 		this.value = value;
 	}
-	
+
 	public NoColorBonus() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -32,7 +32,7 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -44,9 +44,15 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	public Game getGame() {
 		return game;
 	}
-	
+
+
 	@Override
 	public String toString(){
 		return "Bonus neutro";
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR) {
+		//todo
 	}
 }

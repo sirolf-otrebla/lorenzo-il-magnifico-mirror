@@ -31,7 +31,7 @@ public class ImmediateEffect implements Effect {
 
 	@Override
 	public void apply(PlayerRelated familyMember, int alternative) {
-		for( ActionResult res : getResultList().get(alternative) )
+		for( ActionResult res : effectList.get(alternative) )
 			res.applyResult(familyMember);
 	}
 

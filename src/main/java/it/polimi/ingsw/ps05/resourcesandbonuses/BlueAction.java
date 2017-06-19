@@ -55,10 +55,12 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}
+
 	
 	@Override
 	public String toString(){
 		return "Azione blu";
 	}
+
 }
 

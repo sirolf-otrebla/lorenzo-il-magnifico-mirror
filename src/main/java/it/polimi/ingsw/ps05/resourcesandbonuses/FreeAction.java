@@ -57,4 +57,5 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	public String toString(){
 		return "Azione libera";
 	}
+
 }
