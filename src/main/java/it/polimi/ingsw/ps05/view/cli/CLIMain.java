@@ -519,7 +519,7 @@ public class CLIMain implements Runnable{
 		}
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7, "Carte Viola:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+7);
-		for (VioletCard card : player.getVioletCardList()){
+		for (VioletCard card : player.getPurpleCardList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, card.getName());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			secondColumn.add(lastPos);
@@ -649,7 +649,7 @@ public class CLIMain implements Runnable{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		BonusTile tile = player.getBonusTile();
+		BonusTile tile = player.get();
 		for (Effect effect : tile.getEffectList()){
 			lastPos = activableEffect(lastPos, (ActivableEffect)effect);
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);

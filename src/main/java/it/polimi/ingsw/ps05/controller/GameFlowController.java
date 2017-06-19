@@ -51,9 +51,6 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 					inputMessage.acceptVisitor(this);
 				}
 
-				boolean turnFinished = true;
-				for (Familiar f: activePlayer.getFamilyList())
-					if (!(f.isUsed())) turnFinished = false;
 
 				if (turnFinished) this.game.gettManager().loadNextTurn();
 
@@ -86,14 +83,6 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 	private  NetMessage getInput() throws InterruptedException{
 		if (this.gameInput == null) wait();
 		return  gameInput;
-	}
-
-	private void validatePlayer(Player expected) throws  Exception{
-		ArrayList<Resource> resList = expected.getResourceList();
-		for (Resource res: resList) {
-			if(activePlayer.getResource(res.getID()).getValue() != res.getValue())
-				throw new Exception();
-		}
 	}
 
 	public BonusActionListener getBonusActListener() {

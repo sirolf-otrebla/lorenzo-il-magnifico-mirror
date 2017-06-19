@@ -10,10 +10,6 @@ import java.util.ArrayList;
 public interface Effect {
 	
 	public EffectType getEffectType();
-
-	public ArrayList<ArrayList<ActionResult>> getResultList();
-
-	public void apply(PlayerRelated familyMember, int alternative);
 	
 	// what other?
 }

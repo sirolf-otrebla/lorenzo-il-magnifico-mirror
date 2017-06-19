@@ -31,6 +31,8 @@ public class BonusActionListener implements Observer {
                 client.sendMessage(mess);
         }
 
+
+
     }
 
     public ResultTriggerVisitor getVisitor() {

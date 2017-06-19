@@ -14,7 +14,7 @@ public class Player implements PlayerRelated {
 
 	// server information
 	int playerID;
-
+	public static final int FAMILY_DIM = 4;
 	String username;
 	ColorEnumeration color;
 	
@@ -174,6 +174,13 @@ public class Player implements PlayerRelated {
 			 getPermanentBonusList()) {
 
 			r.resetResult(this);
+		}
+	}
+
+	public void evaluatePermanentEffects(){
+		for (PermanentBonus e :
+				this.getPermanentBonusList()) {
+			e.applyResult(this);
 		}
 	}
 

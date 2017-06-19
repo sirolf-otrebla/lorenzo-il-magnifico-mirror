@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.resourcesandbonuses.PermanentBonus;
 
-public class PermanentEffect implements Effect {
+public class PermanentEffect implements SimpleEffect {
 
 	public static final int NO_ALTERNATIVES = 0; // permanent effetcs do not have alternatives.
 	
-	ArrayList<ArrayList<ActionResult>> effectsList;
+	ArrayList<ActionResult> effectsList;
 	
-	public void setEffectList(ArrayList<ArrayList<ActionResult>> effectsList){
+	public void setEffectList(ArrayList<ActionResult> effectsList){
 		this.effectsList = effectsList;
 	}
 
@@ -22,16 +22,14 @@ public class PermanentEffect implements Effect {
 	}
 
 	@Override
-	public ArrayList<ArrayList<ActionResult>> getResultList() {
+	public ArrayList<ActionResult> getResultList() {
 		// TODO Auto-generated method stub
 		return  effectsList;
+}
 
-		}
-
-	@Override
-	public void apply(PlayerRelated familyMember, int alternative) {
+	public void apply(PlayerRelated familyMember ) {
 		for (ActionResult act:
-				effectsList.get(alternative)) {
+				effectsList) {
 			familyMember.getRelatedPlayer().addPermanentEffectRes((PermanentBonus) act);
 			act.applyResult(familyMember);
 		}

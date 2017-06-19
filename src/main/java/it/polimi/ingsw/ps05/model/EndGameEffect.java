@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 
-public class EndGameEffect implements Effect {
+public class EndGameEffect implements SimpleEffect {
 	
 	ArrayList<ActionResult> effectsList = new ArrayList<ActionResult>();
 	
@@ -29,7 +29,7 @@ public class EndGameEffect implements Effect {
 	}
 
 	@Override
-	public void apply(PlayerRelated familyMember, int alternative) {
+	public void apply(PlayerRelated familyMember) {
 		//Nothing to do here for now
 		
 	}

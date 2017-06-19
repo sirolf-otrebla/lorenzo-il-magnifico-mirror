@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
-public class ActivableEffect implements Effect {
+public class ActivableEffect implements AlternativeEffect {
 	
 	ActivableEffectType type;
 	Integer diceRequired = 0;

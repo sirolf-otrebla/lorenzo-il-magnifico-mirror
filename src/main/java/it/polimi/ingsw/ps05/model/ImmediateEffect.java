@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
 
-public class ImmediateEffect implements Effect {
+public class ImmediateEffect implements SimpleEffect {
 	
 	ArrayList<ActionResult> effectList = new ArrayList<ActionResult>();
 
@@ -23,15 +23,13 @@ public class ImmediateEffect implements Effect {
 	}
 
 	@Override
-	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		ArrayList<ArrayList<ActionResult>> list = new ArrayList<ArrayList<ActionResult>>();
-		list.add(effectList);
-		return list;
+	public ArrayList<ActionResult> getResultList() {
+		return effectList;
 	}
 
 	@Override
-	public void apply(PlayerRelated familyMember, int alternative) {
-		for( ActionResult res : effectList.get(alternative) )
+	public void apply(PlayerRelated familyMember) {
+		for( ActionResult res : effectList )
 			res.applyResult(familyMember);
 	}
 
