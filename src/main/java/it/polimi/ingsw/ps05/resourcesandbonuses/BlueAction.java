@@ -61,6 +61,5 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	public String toString(){
 		return "Azione blu";
 	}
-
 }
 

@@ -49,20 +49,13 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 					evaluatePermanentEffect();
 					NetMessage inputMessage = this.getInput();
 					inputMessage.acceptVisitor(this);
+				}
 
-				}
-				boolean turnFinished = false;
-				for (Familiar f:
-					 activePlayer.getFamilyList()) {
-					if (!(f.isUsed())) {
-						turnFinished = false;
-						break;
-					}
-					turnFinished = true;
-				}
-				if (turnFinished) {
-					this.game.gettManager().loadNextTurn();
-				}
+				boolean turnFinished = true;
+				for (Familiar f: activePlayer.getFamilyList())
+					if (!(f.isUsed())) turnFinished = false;
+
+				if (turnFinished) this.game.gettManager().loadNextTurn();
 
 			} catch (InterruptedException e ){
 
@@ -112,8 +105,14 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 	}
 
 	public void setNextPlayer(){
+		this.activePlayer.resetPermanentEffects();
 		activePlayer = plOrdIt.next();
 	}
+
+	private void evaluateVictoryPts(Player pl){
+
+	}
+
 
 	@Override
 	public void visit(ActionMessage mess) {
@@ -147,8 +146,12 @@ public class GameFlowController implements Runnable, NetMessageVisitor {
 					this.activePlayer.getLeaderCard(lCardMsg.getLeaderCard().getName());
 			if (lCardMsg.getMsgType() == LeaderCardMessage.TYPE_DISCARD)
 				card.discard(this.activePlayer);
-			else
+			else{
 				card.applyNonActivableEffects(activePlayer, lCardMsg.getEffectChoice());
+				this.activePlayer.resetPermanentEffects();
+				this.evaluatePermanentEffect();
+
+			}
 		} catch (MissingCardException e){
 			//TODO:
 		}

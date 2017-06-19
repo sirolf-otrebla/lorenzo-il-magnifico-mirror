@@ -44,6 +44,7 @@ public class GreenBonus extends PermanentBonus{
 		return game;
 	}
 
+
 	@Override
 	public String toString(){
 		return "Bonus verde";
