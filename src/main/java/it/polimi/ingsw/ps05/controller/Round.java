@@ -17,26 +17,28 @@ public class Round {
     private NetMessage inputMessage;
     private GameCommandsVisitor visitor;
 
+    private BonusActionListener bonusActListener;
+    private Iterator<Player> plOrdIt;
+    private ExcommunicationTriggerListener exTrigger;
 
+    private Player activePlayer;
     public Round(ArrayList<Player> playerOrder, Game game){
         this.game = game;
         this.playerOrder = playerOrder;
+        this.bonusActListener = new BonusActionListener(this);
     }
-    public void ExecuteRound(){
-        try {
-            Iterator<Player> iterator = playerOrder.iterator();
-            Player activePlayer = iterator.next();
-            while (iterator.hasNext()) {
-                activePlayer.evaluatePermanentEffects();
-                this.waitCommand();
-                this.executeCommand();
-            }
-        } catch (InterruptedException e){
-            //TODO
-        }
-    }
+    public void executeRound() throws InterruptedException {
+        plOrdIt = playerOrder.iterator();
+        activePlayer = plOrdIt.next();
+        while (plOrdIt.hasNext()) {
+            activePlayer.evaluatePermanentEffects();
+            this.waitCommand();
+            this.executeCommand();
 
-    private void waitCommand()throws InterruptedException{
+        }
+
+    }
+    private void waitCommand() throws InterruptedException {
         if (this.inputMessage == null) wait();
 
     }
@@ -51,5 +53,9 @@ public class Round {
 
     public Game getGame() {
         return game;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 }

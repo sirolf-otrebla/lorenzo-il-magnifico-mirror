@@ -16,12 +16,25 @@ public class RoundController {
     private Turn turn;
     private ArrayList<Player> playerOrder;
     private Game game;
+    private ArrayList<Round> roundList;
 
     public RoundController(Turn turn, Game game){
         this.turn = turn;
-        turn.getPlayerOrder();
+        this.playerOrder = turn.getPlayerOrder();
+        this.roundList = new  ArrayList<Round>();
     }
 
+    public void executeTurn() throws InterruptedException{
+        for (int i = 0; i < Game.FAM_DIM ; i++){
+            Round round = new Round(playerOrder, game);
+            round.executeRound();
+        }
+    }
 
-
+    public Turn getTurn() {
+        return turn;
+    }
+    public ArrayList<Round> getRoundList() {
+        return roundList;
+    }
 }

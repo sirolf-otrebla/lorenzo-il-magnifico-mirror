@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.controller;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.message.BonusActionTriggerMessage;
+import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.net.server.PlayerClient;
 import it.polimi.ingsw.ps05.resourcesandbonuses.BonusAction;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
@@ -12,27 +13,24 @@ import java.util.Observer;
 /**
  * Created by Alberto on 12/06/2017.
  */
+
 public class BonusActionListener implements Observer {
 
     private ResultTriggerVisitor visitor;
-    private GameFlowController gfc;
+    private Round round;
 
-    public BonusActionListener(GameFlowController gfc){
+    public BonusActionListener(Round round){
         this.visitor = new ResultTriggerVisitor();
-        this.gfc = gfc;
+        this.round = round;
     }
     @Override
     public void update(Observable o, Object arg) {
         //TODO: specificare i messaggi
         BonusActionTriggerMessage mess = new BonusActionTriggerMessage();
-        for (PlayerClient client:
-                gfc.getGame().getPlayerInGame()) {
-            if (client.getPlayer() == gfc.activePlayer)
-                client.sendMessage(mess);
-        }
-
-
-
+        PlayerClient client = round.getGame().getPlayerInGame().get(
+                round.getActivePlayer().getPlayerID());
+        client.sendMessage(mess);
+        round.getGame().setActivePlayer(this.round.getActivePlayer());
     }
 
     public ResultTriggerVisitor getVisitor() {

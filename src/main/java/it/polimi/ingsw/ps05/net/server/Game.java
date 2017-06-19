@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,19 +22,23 @@ public class Game implements Observer {
     public boolean end;
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
-    private ArrayList<PlayerClient> list;
+    private HashMap<Integer,PlayerClient> clientHashMap;
     private Board gBoard;
     private ArrayList<ExcommunicationCard> excommList;
+    private Player activePlayer;
+
 
     private boolean useCompleteRules = true;
     private boolean useCustomBonusTiles = false;
+
+    public static final int FAM_DIM = 4;
 
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id){
         this.id = id;
         this.useCompleteRules = useCompleteRules;
         this.useCustomBonusTiles = useCustomBonusTiles;
-        this.list = new ArrayList<>();
+        this.clientHashMap = new HashMap<Integer, PlayerClient>();
         this.excommList = new ArrayList<>();
 
     }
@@ -46,9 +51,9 @@ public class Game implements Observer {
         tManager = this.setup.getTurnSetup();
 
         ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).BuildPlayer(ColorEnumeration.values()[i]);
-            players.add(list.get(i).getPlayer());
+        for (int i = 0; i < clientHashMap.size(); i++) {
+            clientHashMap.get(i).BuildPlayer(ColorEnumeration.values()[i]);
+            players.add(clientHashMap.get(i).getPlayer());
         }
         this.setup = new GameSetup(players, this);
         this.flowCrlThread.start();
@@ -64,12 +69,12 @@ public class Game implements Observer {
     }
 
     public void addPlayer(PlayerClient player){
-        list.add(player);
+        clientHashMap.put(player.getId(), player);
         player.addObserver(this);
     }
 
     public void removePlayer(PlayerClient player){
-        list.remove(player);
+        clientHashMap.remove(player);
     }
 
     public boolean isUsingCompleteRules(){
@@ -84,8 +89,8 @@ public class Game implements Observer {
         return id;
     }
 
-    public ArrayList<PlayerClient> getPlayerInGame(){
-        return list;
+    public HashMap<Integer, PlayerClient> getPlayerInGame(){
+        return clientHashMap;
 
     }
 
@@ -95,5 +100,13 @@ public class Game implements Observer {
 
     public ArrayList<ExcommunicationCard> getExcommList() {
         return excommList;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(Player activePlayer) {
+        this.activePlayer = activePlayer;
     }
 }
