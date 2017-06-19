@@ -10,50 +10,46 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class MarketSpace extends ActionSpaceWithEffect {
 
-    private ArrayList<Effect> effectList;
-    private int[] selectedEffects = {};
-    public static final int DEFAULT_INDEX = 0;
-    
-    @Override
-    public ArrayList<Effect> getEffects() {
-        return effectList;
-    }
+	private ArrayList<Effect> effectList;
+	private int[] selectedEffects = {};
+	public static final int DEFAULT_INDEX = 0;
 
-    @Override
-    public void applyEffect() {
-        //Player player = this.getOccupant().getRelatedPlayer();
-        Iterator<Effect> it = this.getEffects().iterator();
-        while (it.hasNext()){
-        	((SimpleEffect)it.next()).apply(this.getOccupant());
-        }
-    }
+	@Override
+	public ArrayList<Effect> getEffects() {
+		return effectList;
+	}
 
-    public MarketSpace(ArrayList<Effect> marketEffectList ){
-    	super();
-        this.effectList = marketEffectList;
-    }
+	@Override
+	public void applyEffect() {
+		//Player player = this.getOccupant().getRelatedPlayer();
+		Iterator<Effect> it = this.getEffects().iterator();
+		while (it.hasNext()){
+			((SimpleEffect)it.next()).apply(this.getOccupant());
+		}
+	}
 
-    public void setSelectedEffects(int[] selectedEffects) {
-        this.selectedEffects = selectedEffects;
-    }
-	
+	public MarketSpace(ArrayList<Effect> marketEffectList ){
+		super();
+		this.effectList = marketEffectList;
+	}
+
+	public void setSelectedEffects(int[] selectedEffects) {
+		this.selectedEffects = selectedEffects;
+	}
+
 	public MarketSpace(){
 		super();
 	}
-	
+
 	public MarketSpace(Dice diceRequired, ArrayList<Effect> effectList){
 		super();
-		try {
-		    super.setDiceRequirement(diceRequired);
-            this.effectList = effectList;
-		} catch (RepeatedAssignmentException e){
-		    //todo
-        }
+		super.setDiceRequirement(diceRequired);
+		this.effectList = effectList;
 	}
-	
 
-    public int[] getSelectedEffects() {
-        return selectedEffects;
-    }
+
+	public int[] getSelectedEffects() {
+		return selectedEffects;
+	}
 
 }

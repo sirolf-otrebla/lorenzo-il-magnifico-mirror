@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 /*
  * this is a decorator for Tile class, designed to add tile-related effects \
@@ -29,7 +30,7 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
     public void setTowerCard(TowerCard card) {
     	this.toBeDecorated.setTowerCard(card);
     }
-    
+    @Override
     public void setDiceRequired(Integer diceRequired){
 
         this.toBeDecorated.setDiceRequired(diceRequired);
@@ -63,7 +64,7 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 		return this.toBeDecorated.getCard();
 	}
 	@Override
-	public Integer getDiceRequired() {
+	public Dice getDiceRequired() {
 		return this.toBeDecorated.getDiceRequired();
 	}
 

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
 
@@ -31,8 +33,11 @@ public class NoColorBonus extends PermanentBonus {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
-
+		for (Familiar f : playerR.getRelatedPlayer().getFamilyList()){
+			if (f.getColor().equals(ColorEnumeration.Any)) {
+				f.setDice(new Dice(ColorEnumeration.Any, f.getRelatedDice().getValue() + this.value));
+			}
+		}
 	}
 
 	@Override

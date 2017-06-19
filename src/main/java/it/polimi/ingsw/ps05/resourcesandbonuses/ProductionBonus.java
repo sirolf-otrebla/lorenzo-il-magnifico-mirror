@@ -1,6 +1,11 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.ProductionSpace;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class ProductionBonus extends PermanentBonus {
@@ -30,7 +35,12 @@ public class ProductionBonus extends PermanentBonus {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
+		Board board = this.game.getBoard();
+		for (ActionSpace a : board.getActionSpace()){
+			if (a instanceof ProductionSpace){
+				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
+			}
+		}
 
 	}
 

@@ -96,4 +96,8 @@ public class Game implements Observer {
     public ArrayList<ExcommunicationCard> getExcommList() {
         return excommList;
     }
+    
+    public Board getBoard() {
+    	return this.gBoard;
+    }
 }

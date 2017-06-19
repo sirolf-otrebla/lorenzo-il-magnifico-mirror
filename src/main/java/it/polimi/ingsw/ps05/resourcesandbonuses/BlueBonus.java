@@ -1,6 +1,10 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.BlueTower;
+import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.Tower;
+import it.polimi.ingsw.ps05.model.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class BlueBonus implements ActionResult {
@@ -24,13 +28,16 @@ public class BlueBonus implements ActionResult {
 		return value;
 	}
 
-	public Integer getAmount(){
-		return this.value;
-	}
-
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			if (t instanceof BlueTower){
+				for (TowerTileInterface tile : t.getTiles()){
+					tile.setDiceRequired(tile.getDiceRequired().getValue() - this.getValue());
+				}
+			}
+		}
 		
 	}
 
