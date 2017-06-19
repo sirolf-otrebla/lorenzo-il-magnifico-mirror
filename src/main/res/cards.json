@@ -363,12 +363,13 @@
   "Color": "Blue",
   "Requirement": {
     "First": {
-    	"FaithResource": 4
+    	"GoldResource" : 2
     }
   },
   "Effect": {
     "ImmediateEffect": {
-      "RemoveTileEffect" : 1
+      "RemoveTileEffect" : 1,
+      "FaithResource": 4
     }
   },
   "CardName": "Predicatore"

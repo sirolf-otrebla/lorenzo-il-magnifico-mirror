@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.view;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.view.cli.CLIMain;
@@ -20,9 +22,9 @@ public class View {
 		t.start();
 	}
 	
-	public void instanceCLI(Board board, Player player){
+	public void instanceCLI(Board board, Player player, ArrayList<Player> playersList){
 		System.out.println("Instance");
-		CLIMain cli = new CLIMain(board, player);
+		CLIMain cli = new CLIMain(board, player, playersList);
 		Thread t = new Thread(cli);
 		t.setDaemon(true);
 		t.run();

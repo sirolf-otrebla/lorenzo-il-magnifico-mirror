@@ -1,14 +1,15 @@
-package it.polimi.ingsw.ps05.resourcesandbonuses.ExcommunicationEffects;
+package it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 import org.json.simple.JSONObject;
 
-import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.EffectType;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
-public class GreenCardMalusExcomm implements ExcommunicationEffect {
+public class NoMarketExcomm implements ExcommunicationEffect {
 
 	@Override
 	public EffectType getEffectType() {
@@ -43,6 +44,23 @@ public class GreenCardMalusExcomm implements ExcommunicationEffect {
 	public void apply(PlayerRelated familyMember, int alternative) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private ArrayList<ActionResult> malus = null;
+
+	@Override
+	public void setMalus(ArrayList<ActionResult> malus) throws RepeatedAssignmentException{
+		// TODO Auto-generated method stub
+		if (this.malus == null){
+			this.malus = malus;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
+	
+	@Override
+	public String toString(){
+		return "Non puoi usare il mercato";
 	}
 
 }
