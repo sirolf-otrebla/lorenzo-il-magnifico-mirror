@@ -56,6 +56,10 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 		visitor.visit(this, pl );
 	}
 
-
+	
+	@Override
+	public String toString(){
+		return "Azione blu";
+	}
 }
 

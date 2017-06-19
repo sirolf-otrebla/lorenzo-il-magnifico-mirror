@@ -18,8 +18,8 @@ public class OnePerTurnEffect extends ImmediateEffect {
         this.used = false;
     }
     @Override
-    public void apply(PlayerRelated familyMember, int alternative){
-        super.apply(familyMember, alternative);
+    public void apply(PlayerRelated familyMember){
+        super.apply(familyMember);
         this.setUsed();
     }
 }

@@ -24,7 +24,7 @@ public class MarketSpace extends ActionSpaceWithEffect {
         //Player player = this.getOccupant().getRelatedPlayer();
         Iterator<Effect> it = this.getEffects().iterator();
         while (it.hasNext()){
-            it.next().apply(this.getOccupant(), MarketSpace.DEFAULT_INDEX/*selectedEffects[MarketSpace.DEFAULT_INDEX]*/);
+        	((SimpleEffect)it.next()).apply(this.getOccupant());
         }
     }
 

@@ -1,283 +1,139 @@
 {
-  "FIRST": [
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "MilitaryPts",
-        "ResMalus": 1,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "MilitaryMalus"
-    },
+	"FIRST": 
+	{
+		"MilitaryMalusExcomm": 
+		{
+			"MilitaryResource": -1
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "GoldResource",
-        "ResMalus": 1,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "GoldMalus"
-    },
+		"GoldMalusExcomm": 
+		{
+			"GoldResource": -1
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "ServantResource",
-        "ResMalus": 1,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "ServantMalus"
-    },
+		"ServantMalusExcomm": 
+		{
+			"ServantResource": -1
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "RawResource", // to be discussed
-        "ResMalus": 1,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "WoodStoneMalus"
-    },
+		"WoodStoneMalusExcomm": 
+		{
+			"WoodResource": -1,
+			"StoneResource": -1
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": "HarvestAction",
-        "DiceMalus": 3,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "HarvestingMalus"
-    },
+		"HarvestingMalusExcomm": 
+		{
+			"HarvestBonus": -3
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": "ProductionAction",
-        "DiceMalus": 3,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "ProductionMalus"
-    },
+		"ProductionMalusExcomm": 
+		{
+			"ProductionBonus": -3
+		},
 
-    {
-      "Epoch": "FIRST",
-      "ExcomEffect": {
-        "Action": "All", // to be discussed
-        "DiceMalus": 1,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "DiceMalus"
-    }
-  ],
+		"DiceMalusExcomm": 
+		{
+			"AllBonus": -1
+		}
+	},
 
-  "SECOND": [
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "GreenAction",
-        "DiceMalus": 4,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "GreenCardMalus"
-    },
+	"SECOND": 
+	{
+		"GreenCardMalusExcomm": 
+		{
+			"GreenBonus": -4
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "BlueAction",
-        "DiceMalus": 4,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "BlueCardMalus"
-    },
+		"BlueCardMalusExcomm": 
+		{
+			"BlueBonus": -4
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "YellowAction",
-        "DiceMalus": 4,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "YellowCardMalus"
-    },
+		"YellowCardMalusExcomm": 
+		{
+			"YellowBonus": -4
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "VioletAction",
-        "DiceMalus": 4,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "VioletCardMalus"
-    },
+		"VioletCardMalusExcomm": 
+		{
+			"VioletBonus": -4
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "MarketAction",
-        "DiceMalus": 0,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "NoMarket"
-    },
+		"NoMarketExcomm": 
+		{
+			
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "ServantResource",
-        "ResMalus": 0,
-        "ResFactor": 2,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "MoreServants"
-    },
+		"ServantMalusExcomm": 
+		{
+			"ServantResource": 2
+		},
 
-    {
-      "Epoch": "SECOND",
-      "ExcomEffect": {
-        "Action": "All",
-        "DiceMalus": 0,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResFactor": 0,
-        "ResReference": {},
-        "EndgameMalus": {}
-      },
-      "Description": "NoAction"
-    }
-  ],
+		"NoActionExcomm": 
+		{
+			
+		}
+	},
 
-  "THIRD": [
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResFactor": 0,
-        "ResReference": {},
-        "EndgameMalus": "BlueCard"
-      },
-      "Description": "NoBlueVictoryPts"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResFactor": 0,
-        "ResReference": {},
-        "EndgameMalus": "VioletCard"
-      },
-      "Description": "NoVioletVictoryPts"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": {},
-        "ResMalus": 0,
-        "ResFactor": 0,
-        "ResReference": {},
-        "EndgameMalus": "GreenCard"
-      },
-      "Description": "NoGreenVictoryPts"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "VictoryPoints",
-        "ResMalus": 1,
-        "ResFactor": 5,
-        "ResReference": "VictoryPoints",
-        "EndgameMalus": {}
-      },
-      "Description": "VP-ReduceVictoryPts"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "VictoryPoints",
-        "ResMalus": 1,
-        "ResFactor": 1,
-        "ResReference": "MilitaryPoints",
-        "EndgameMalus": {}
-      },
-      "Description": "MP-ReduceVictoryPts"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "VictoryPoints",
-        "ResMalus": 1,
-        "ResFactor": 1,
-        "ResReference": "YellowCard",
-        "EndgameMalus": {}
-      },
-      "Description": "RemoveCardCostFromVP"
-    },
-    {
-      "Epoch": "THIRD",
-      "ExcomEffect": {
-        "Action": {},
-        "DiceMalus": 0,
-        "Resource": "VictoryPoints",
-        "ResMalus": 1,
-        "ResFactor": 1,
-        "ResReference": "RawResource",
-        "EndgameMalus": {}
-      },
-      "Description": "Res-ReduceVictoryPts"
-    }
-  ]
+	"THIRD": 
+	{
+		"NoBlueVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"NoVioletVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"NoGreenVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"ReduceVictoryPtsExcomm": 
+		[
+			{
+				"toCheck": 
+				{
+					"VictoryResource": 5
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"MilitaryResource": 1
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"StoneResource": 1,
+					"WoodResource": 1
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"GoldResource": 1,
+					"ServantResource": 1,
+					"StoneResource": 1,
+					"WoodResource": 1
+				},
+
+				"VictoryResource": -1
+			}
+		]
+	}
 }

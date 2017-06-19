@@ -49,7 +49,7 @@ public class App
     	View view = new View();
     	if (string.equals("C")){
     		//istanzia la cli
-    		view.instanceCLI(setup.getBoard(), p1);
+    		view.instanceCLI(setup.getBoard(), p1, setup.getTurnSetup().getTurn().getPlayerOrder());
     	} else {
     		//istanzia la gui
     		view.instanceGUI();

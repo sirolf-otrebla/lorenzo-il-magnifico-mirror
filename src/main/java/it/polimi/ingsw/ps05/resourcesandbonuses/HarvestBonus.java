@@ -6,15 +6,15 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class HarvestBonus extends PermanentBonus{
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
-	
+
 	public HarvestBonus(Integer value){
 		this.value = value;
 	}
-	
+
 	public HarvestBonus() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -31,7 +31,7 @@ public class HarvestBonus extends PermanentBonus{
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -42,6 +42,12 @@ public class HarvestBonus extends PermanentBonus{
 	@Override
 	public Game getGame() {
 		return game;
+	}
+
+
+	@Override
+	public String toString(){
+		return "Bonus raccolto";
 	}
 
 	@Override

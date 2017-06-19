@@ -62,6 +62,11 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		return game;
 	}
 
+	
+	@Override
+	public String toString(){
+		return "Privilegio";
+	}
 }
 
 

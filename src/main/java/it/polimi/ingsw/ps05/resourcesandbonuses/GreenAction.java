@@ -55,5 +55,9 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		visitor.visit(this, pl );
 	}
 
-
+	
+	@Override
+	public String toString(){
+		return "Azione verde";
+	}
 }

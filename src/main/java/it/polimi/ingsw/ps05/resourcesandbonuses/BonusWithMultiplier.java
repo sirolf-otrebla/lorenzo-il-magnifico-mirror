@@ -8,9 +8,9 @@ public class BonusWithMultiplier extends PermanentBonus {
 	private Resource returnResource;
 	private Class<?> cardToCount;
 	private Game game;
-	
+
 	public BonusWithMultiplier() {
-		
+
 	}
 
 	public BonusWithMultiplier(Float multiplier, Resource returnResource, Class<?> cardToCount) {
@@ -19,7 +19,7 @@ public class BonusWithMultiplier extends PermanentBonus {
 		this.returnResource = returnResource;
 		this.cardToCount = cardToCount;
 	}
-	
+
 	public Float getMultiplier(){
 		return multiplier;
 	}
@@ -47,7 +47,7 @@ public class BonusWithMultiplier extends PermanentBonus {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -72,6 +72,13 @@ public class BonusWithMultiplier extends PermanentBonus {
 	public Game getGame() {
 		return game;
 	}
+
+
+	@Override
+	public String toString(){
+		return "Bonus moltipl.";
+	}
+
 
 
 	@Override

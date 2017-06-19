@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.PermanentBonus;
 
 public class PermanentEffect implements SimpleEffect {
 
+
 	
 	ArrayList<ActionResult> effectsList;
 	
@@ -23,6 +24,7 @@ public class PermanentEffect implements SimpleEffect {
 	@Override
 	public ArrayList<ActionResult> getResultList() {
 		// TODO Auto-generated method stub
+
 		return  effectsList;
 }
 
@@ -31,7 +33,8 @@ public class PermanentEffect implements SimpleEffect {
 				effectsList) {
 			familyMember.getRelatedPlayer().addPermanentEffectRes((PermanentBonus) act);
 			act.applyResult(familyMember);
-		}
+
+		} 
 	}
 
 }

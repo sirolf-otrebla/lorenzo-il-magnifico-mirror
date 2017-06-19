@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.controller;
 
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.net.server.Game;
+import it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.ExcommunicationEffect;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
@@ -28,6 +29,13 @@ public class GameSetup {
 		createFamiliarForPlayers();
 		loadBoard();
 		loadBonusTiles(game.isUsingCustomBonusTiles());
+		ArrayList<ExcommunicationCard> excomm = loadExcommEffect();
+		try {
+			board.setExcomCards(excomm);
+		} catch (RepeatedAssignmentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		turnSetup = new TurnSetupManager(playerConnected, board);
 		
 	}
@@ -45,6 +53,10 @@ public class GameSetup {
 				//TODO
 			}
 		}
+	}
+	
+	private ArrayList<ExcommunicationCard> loadExcommEffect(){
+		return parser.loadExcommunicationCard("./src/main/res/excommunications.json");
 	}
 	
 	private void loadBoard(){

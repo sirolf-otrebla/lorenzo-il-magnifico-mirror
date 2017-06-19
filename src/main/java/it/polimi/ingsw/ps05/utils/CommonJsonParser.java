@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.ExcommunicationEffect;
+import it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.ReduceVictoryPtsExcomm;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.net.server.Game;
@@ -20,8 +23,9 @@ import it.polimi.ingsw.ps05.net.server.Game;
 public class CommonJsonParser {
 
 	private static final String resourcePath = "it.polimi.ingsw.ps05.resourcesandbonuses.";
+	private static final String excommPath = "it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.";
 	private static final String modelPath = "it.polimi.ingsw.ps05.model.";
-	
+
 	private int playerConnected;
 	private Game game;
 
@@ -49,30 +53,30 @@ public class CommonJsonParser {
 		} catch (IOException | ParseException | RepeatedAssignmentException e) {
 			e.printStackTrace();
 		}
-		
+
 		return Board.initBoard(towerList, notTowerSpace, faithList, militaryList,null);
 	}
-	
+
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){
 		JSONArray obj = (JSONArray)json;
 		ArrayList<MilitaryResource> list = new ArrayList<MilitaryResource>();
 		for (int i = 0; i < obj.toArray().length; i++){
 			list.add(new MilitaryResource(Integer.parseInt(obj.toArray()[i].toString())));
 		}
-		
+
 		return list;
 	}
-	
+
 	private ArrayList<VictoryResource> loadFaithPath(Object json){
 		JSONArray obj = (JSONArray)json;
 		ArrayList<VictoryResource> list = new ArrayList<VictoryResource>();
 		for (int i = 0; i < obj.toArray().length; i++){
 			list.add(new VictoryResource(Integer.parseInt(obj.toArray()[i].toString())));
 		}
-		
+
 		return list;
 	}
-	
+
 	private ArrayList<Tower> loadTower(JSONObject json) throws FileNotFoundException, IOException, ParseException{
 		ArrayList<Tower> list = new ArrayList<Tower>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
@@ -84,7 +88,7 @@ public class CommonJsonParser {
 		}
 		return list;
 	}
-	
+
 	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
 		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
@@ -98,14 +102,14 @@ public class CommonJsonParser {
 				}
 			}
 		}
-		
+
 		Object tower = Class.forName(modelPath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
 		for (TowerTileInterface t : list){
 			t.setParentTower((Tower)tower);
 		}
-		
+
 		File file = new File("./src/main/res/cards.json");
 		JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 		if (tower instanceof BlueTower){
@@ -117,10 +121,10 @@ public class CommonJsonParser {
 		} else if (tower instanceof YellowTower){
 			((YellowTower) tower).setDeck(loadYellowCardDeck(obj));
 		}
-		
+
 		return (Tower)tower;
 	}
-	
+
 	private TowerTileInterface loadSingleTile(JSONObject json, String keyClass)
 			throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			InstantiationException, ClassNotFoundException, NoSuchMethodException, SecurityException { // keyClass indica se è un tile o tilewitheffect
@@ -140,7 +144,7 @@ public class CommonJsonParser {
 		}
 		return (TowerTileInterface) tile;
 	}
-	
+
 	private ArrayList<MarketSpace> detectNumMarketSpace(Object json){
 		JSONArray obj = (JSONArray)json;
 		ArrayList<MarketSpace> list = new ArrayList<MarketSpace>();
@@ -148,13 +152,13 @@ public class CommonJsonParser {
 			if (Integer.parseInt(((JSONObject)obj.toArray()[i]).get("numPlayer").toString()) <= playerConnected){
 				list.add(loadMarketSpace((JSONObject)obj.toArray()[i]));
 			}
-			
+
 		}
 		return list;
 	}
-	
+
 	private MarketSpace loadMarketSpace(JSONObject json) {
-		
+
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
@@ -177,11 +181,11 @@ public class CommonJsonParser {
 		} catch (NullPointerException e){
 			return new MarketSpace(effectList);
 		}
-		
-		
+
+
 		return new MarketSpace(diceRequired, effectList);
 	}
-	
+
 	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException{
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
@@ -192,7 +196,7 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		
+
 		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
@@ -204,10 +208,10 @@ public class CommonJsonParser {
 		} catch (NullPointerException e){
 			return new CouncilSpace(effectList);
 		}
-		
+
 		return new CouncilSpace(diceRequired, effectList);
 	}
-	
+
 	private ArrayList<HarvestingSpace> detectNumHarvestingSpace(Object json) throws RepeatedAssignmentException{
 		JSONArray obj = (JSONArray)json;
 		ArrayList<HarvestingSpace> list = new ArrayList<HarvestingSpace>();
@@ -218,7 +222,7 @@ public class CommonJsonParser {
 		}
 		return list;
 	}
-	
+
 	private HarvestingSpace loadHarvestSpace(JSONObject json) throws RepeatedAssignmentException{
 		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
@@ -235,10 +239,10 @@ public class CommonJsonParser {
 		} catch (NullPointerException e){
 			return new HarvestingSpace(list);
 		}
-		
+
 		return new HarvestingSpace(diceRequired, list);
 	}
-	
+
 	private ArrayList<ProductionSpace> detectNumProductionSpace(Object json) throws RepeatedAssignmentException{
 		JSONArray obj = (JSONArray)json;
 		ArrayList<ProductionSpace> list = new ArrayList<ProductionSpace>();
@@ -266,17 +270,17 @@ public class CommonJsonParser {
 		} catch (NullPointerException e){
 			return new ProductionSpace(list);
 		}
-		
+
 		return new ProductionSpace(diceRequired, list);
 	}
-	
+
 	//XXX BonusTiles
 	public ArrayList<BonusTile> loadBonusTiles(String path, BonusTileType type){
 		File file = new File(path);
 		ArrayList<BonusTile> list = new ArrayList<BonusTile>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			
+
 			if (type == BonusTileType.Default){
 				JSONArray array =  (JSONArray)obj.get("Default");
 				for (int i = 0; i < playerConnected; i++){
@@ -301,24 +305,121 @@ public class CommonJsonParser {
 				}
 			}
 		} catch (IOException | ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		System.out.println("bonus tile size in parser" + list.size());
 		return list;
 	}
-	
+
 	private BonusTile loadSingleBonusTile(JSONArray json, BonusTileType type) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		ArrayList<Effect> list = new ArrayList<Effect>();
 		for (int i = 0; i < json.size(); i++){
 			list.addAll(getEffects((JSONObject)json.get(i)));
 		}
 		System.out.println("effect list size for single bonus tile " + list.size());
-		
+
 		return new BonusTile(list, type);
 	}
+
+	//XXX Metodi per caricamento scomuniche
+
+	public ArrayList<ExcommunicationCard> loadExcommunicationCard(String path) {
+		File file = new File(path);
+		System.out.println(path);
+		ArrayList<ExcommunicationCard> toReturn = new ArrayList<ExcommunicationCard>();
+		try {
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			System.out.println(obj.keySet().size());
+			JSONObject firstJson =  (JSONObject)obj.get("FIRST");
+			System.out.println(firstJson.keySet().size());
+			ArrayList<ExcommunicationEffect> first = new ArrayList<ExcommunicationEffect>(); 
+			for (Object exc : firstJson.keySet()){
+				first.add(selectFirstSecondEpochExcommEffect((JSONObject)(firstJson.get(exc.toString())),exc));
+			}
+			JSONObject secondJson =  (JSONObject)obj.get("SECOND");
+			ArrayList<ExcommunicationEffect> second = new ArrayList<ExcommunicationEffect>(); 
+			for (Object exc : secondJson.keySet()){
+				second.add(selectFirstSecondEpochExcommEffect((JSONObject)(secondJson.get(exc.toString())),exc));
+			}
+			
+			JSONObject thirdJson =  (JSONObject)obj.get("THIRD");
+			ArrayList<ExcommunicationEffect> third = new ArrayList<ExcommunicationEffect>();
+			for (Object exc : thirdJson.keySet()){
+				if (exc.toString().equals("ReduceVictoryPtsExcomm")){
+					JSONArray array = (JSONArray)thirdJson.get(exc.toString());
+					ArrayList<ActionResult> toCheck = new ArrayList<ActionResult>();
+					for (Object o : array){
+						for (int i = 0; i < ((JSONObject)o).keySet().size(); i++){
+							ReduceVictoryPtsExcomm excomm = new ReduceVictoryPtsExcomm();
+							if (((JSONObject)o).keySet().toArray()[i].toString().equals("toCheck")){
+								JSONObject checkList = (JSONObject)((JSONObject)o).get("toCheck");
+								for (int j = 0; j < checkList.keySet().size(); j++){
+									toCheck.add(createAllExceptActivable(checkList, j));
+								}
+								excomm.setToCheck(toCheck);
+							} else {
+								ArrayList<ActionResult> result = new ArrayList<ActionResult>();
+										result.add(createAllExceptActivable(((JSONObject)o), i));
+								excomm.setMalus(result);
+							}
+							third.add(excomm);
+						}
+						
+					}
+				} else {
+					third.add(selectThirdEpochExcommEffect(thirdJson.get(exc.toString()),exc));
+				}
+				
+			}
+			Random randomNum = new Random();
+			toReturn.add(new ExcommunicationCard(new FaithResource(3), EpochEnumeration.FIRST, first.get(randomNum.nextInt(first.size()))));
+			toReturn.add(new ExcommunicationCard(new FaithResource(4), EpochEnumeration.SECOND, second.get(randomNum.nextInt(second.size()))));
+			toReturn.add(new ExcommunicationCard(new FaithResource(5), EpochEnumeration.THIRD, third.get(randomNum.nextInt(third.size()))));
+			
+			
+		} catch(IOException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | ParseException | RepeatedAssignmentException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		return toReturn;
+	}
+
+	private ExcommunicationEffect selectFirstSecondEpochExcommEffect(JSONObject json, Object key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, NumberFormatException, IllegalArgumentException, InvocationTargetException{
+		Object actionObject = Class.forName(excommPath + key.toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
+		ArrayList<ActionResult> malus = new ArrayList<ActionResult>();
+		System.out.println(json.keySet().size());
+		for (int i = 0; i < json.keySet().size(); i++){
+			malus.add(createAllExceptActivable(json, i));
+		}
+		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
+		method.invoke(actionObject, malus);
+		
+		System.out.println(actionObject == null);
+		
+		return (ExcommunicationEffect)actionObject;
+	}
 	
+	private ExcommunicationEffect selectThirdEpochExcommEffect(Object json, Object key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, NumberFormatException, IllegalArgumentException, InvocationTargetException{
+		Object actionObject = Class.forName(excommPath + key.toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
+		ArrayList<ActionResult> malus = new ArrayList<ActionResult>();
+		for (int i = 0; i < ((JSONObject)json).keySet().size(); i++){
+			malus.add(createAllExceptActivable((JSONObject)json, i));
+		}
+		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
+		method.invoke(actionObject, malus);
+		
+		System.out.println(actionObject == null);
+		
+		return (ExcommunicationEffect)actionObject;
+	}
+
 	//XXX Metodi per caricamento carte
 	/*public ArrayList<Deck> loadDeck(String path) {
 		ArrayList<Deck> deck = new ArrayList<Deck>();
@@ -407,7 +508,7 @@ public class CommonJsonParser {
 
 	private GreenCard loadGreenCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
 		ArrayList<ArrayList<Resource>> req = getRequirements((JSONObject)json.get("Requirement"));
-		
+
 		return new GreenCard(getCardEpoch(json), getCardColor(json), getCardName(json), req == null ? new ArrayList<ArrayList<Resource>>():req, getEffects((JSONObject)json.get("Effect")));
 	}
 

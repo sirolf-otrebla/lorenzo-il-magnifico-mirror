@@ -4,17 +4,17 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class YellowBonus extends PermanentBonus{
-private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
-	
+
 	public YellowBonus(Integer value){
 		this.value = value;
 	}
-	
+
 	public YellowBonus() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -31,7 +31,7 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -42,6 +42,11 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	@Override
 	public Game getGame() {
 		return game;
+	}
+
+	@Override
+	public String toString(){
+		return "Bonus giallo";
 	}
 
 	@Override

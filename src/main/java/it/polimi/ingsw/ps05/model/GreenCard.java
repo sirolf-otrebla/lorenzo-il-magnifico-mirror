@@ -54,7 +54,7 @@ public class GreenCard extends TowerCard {
 		if(this.getToBeActivated()){
 			// apply selected alternative for each effect which hase state = STATE_READY ( check ActivableEffect for details)
 			for(int i = 0; activableEffectList.size() > i; i++)
-				activableEffectList.get(i).apply(familyMember, selectedEffects[i]);
+				((AlternativeEffect)activableEffectList.get(i)).apply(familyMember, selectedEffects[i]);
 		}
 	}
 

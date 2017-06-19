@@ -82,14 +82,6 @@ public class Player implements PlayerRelated {
 	public ArrayList<VioletCard> getVioletCardList() {
 		return violetCardList;
 	}
-	
-	public BonusTile getBonusTile(){
-		return this.bonusTile;
-	}
-	
-	public void setBonusTile(BonusTile bonusTile){
-		this.bonusTile = bonusTile;
-	}
 
     @Override
     public Player getRelatedPlayer() {
@@ -165,6 +157,15 @@ public class Player implements PlayerRelated {
     	violetCardList.add(card);
     }
 
+	public BonusTile getBonusTile() {
+		return bonusTile;
+	}
+
+
+	public void setBonusTile(BonusTile bonusTile) {
+		this.bonusTile = bonusTile;
+	}
+	
     public LeaderCard getLeaderCard(String leaderName) throws MissingCardException{
 
 		for (LeaderCard leaderCard:
@@ -191,6 +192,5 @@ public class Player implements PlayerRelated {
 			e.applyResult(this);
 		}
 	}
-
 
 }

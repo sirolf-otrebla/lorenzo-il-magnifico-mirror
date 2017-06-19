@@ -2,19 +2,17 @@ package it.polimi.ingsw.ps05.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
-import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
-import java.util.Observable;
+public class AllBonus implements ActionResult {
 
-public class FreeAction extends Observable implements ActionResult, BonusAction {
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	private  Game game;
 	
-	public FreeAction(Integer value){
+	public AllBonus(Integer value){
 		this.value = value;
 	}
 	
-	public FreeAction() {
+	public AllBonus() {
 		
 	}
 	
@@ -23,7 +21,7 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	}
 
 	@Override
-	public Integer getValue() throws NoSuchMethodException {
+	public Integer getValue() {
 		return value;
 	}
 
@@ -40,22 +38,16 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override
 	public Game getGame() {
 		return game;
 	}
-
-	@Override
-	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
-		visitor.visit(this, pl );
-	}
 	
 	@Override
 	public String toString(){
-		return "Azione libera";
+		return "Bonus globale";
 	}
 
 }

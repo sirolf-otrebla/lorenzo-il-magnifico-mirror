@@ -45,7 +45,7 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 	@Override
 	public void applyEffect() {
 		for (Effect e : getEffects()){
-			e.apply(occupantList.get(occupantList.size()-1), 0);
+			((SimpleEffect)e).apply(occupantList.get(occupantList.size()-1));
 		}
 	}
 	
