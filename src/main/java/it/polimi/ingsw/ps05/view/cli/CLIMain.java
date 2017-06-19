@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps05.model.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.MarketSpace;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.ProductionSpace;
+import it.polimi.ingsw.ps05.model.SimpleEffect;
 import it.polimi.ingsw.ps05.model.TileWithEffect;
 import it.polimi.ingsw.ps05.model.TowerCard;
 import it.polimi.ingsw.ps05.model.VioletCard;
@@ -197,7 +198,7 @@ public class CLIMain implements Runnable{
 						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
 						terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 					}
-					
+
 					break;
 				default:
 					break;
@@ -519,7 +520,7 @@ public class CLIMain implements Runnable{
 		}
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7, "Carte Viola:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+7);
-		for (VioletCard card : player.getPurpleCardList()){
+		for (VioletCard card : player.getVioletCardList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, card.getName());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			secondColumn.add(lastPos);
@@ -623,9 +624,9 @@ public class CLIMain implements Runnable{
 					infoFamiliar(colForInfo, 0);
 				} else if (currentRowMyStats < player.getFamilyList().size() + 3){
 					if (currentRowMyStats == player.getFamilyList().size()){
-						
+
 					} else if (currentRowMyStats == player.getFamilyList().size() + 1){
-						
+
 					} else if (currentRowMyStats == player.getFamilyList().size() + 2){
 						try {
 							infoBonusTile(colForInfo,0);
@@ -644,19 +645,19 @@ public class CLIMain implements Runnable{
 
 		}
 	}
-	
+
 	private void infoBonusTile(int column, int row) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		BonusTile tile = player.get();
+		BonusTile tile = player.getBonusTile();
 		for (Effect effect : tile.getEffectList()){
 			lastPos = activableEffect(lastPos, (ActivableEffect)effect);
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
-		
+
 	}
-	
+
 	private void infoFamiliar(int column, int row){
 		Familiar familiar = player.getFamilyList().get(currentRowMyStats);
 		TerminalPosition lastPos = new TerminalPosition(column,row);
@@ -711,14 +712,12 @@ public class CLIMain implements Runnable{
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
-					for (ActionResult result : choseOr) {
-						try {
-							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
-							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-						} catch (NoSuchMethodException e) {
-							//non fare niente, lanciato solo con moltiplicatori, qui non ci sono
-						}
+				for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+					try {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					} catch (NoSuchMethodException e) {
+						//non fare niente, lanciato solo con moltiplicatori, qui non ci sono
 					}
 				}
 			}
@@ -745,18 +744,17 @@ public class CLIMain implements Runnable{
 			for (Effect effect : productionList.get(currentColBoard).getEffects()){
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
-				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
-					for (ActionResult result : choseOr){
-						try {
-							textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
-									result.toString() + " " + result.getValue());
-							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-						} catch (NoSuchMethodException e) {
-							//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
-						}
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);		
+				for (ActionResult result : ((SimpleEffect)effect).getResultList()){
+					try {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
+								result.toString() + " " + result.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					} catch (NoSuchMethodException e) {
+						//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
 					}
 				}
+
 			}
 		}
 	}
@@ -787,13 +785,11 @@ public class CLIMain implements Runnable{
 				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				if (!(effect instanceof ActivableEffect)) {
-					for (ArrayList<ActionResult> choseOr : effect.getResultList()){
-						for (ActionResult result : choseOr) {
-							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
-							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-						}
+					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
 						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 					}
+					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				} else {
 					activableEffect(lastPos,(ActivableEffect)effect);
 				}
@@ -809,7 +805,7 @@ public class CLIMain implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getActivableEffectType().toString());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -826,7 +822,7 @@ public class CLIMain implements Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		return lastPos;
 	}
-	
+
 	private TerminalPosition activableWithOutResourceRequired(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		for (ArrayList<ActionResult> choseOrRes : effect.getResultList()){
 			for (ActionResult result : choseOrRes){
@@ -895,17 +891,16 @@ public class CLIMain implements Runnable{
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-				for (ArrayList<ActionResult> choseOr : effect.getResultList()){
-					for (ActionResult result : choseOr){
-						try {
-							textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
-									result.toString() + " " + result.getValue());
-							lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-						} catch (NoSuchMethodException e) {
-							//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
-						}
+				for (ActionResult result : ((SimpleEffect)effect).getResultList()){
+					try {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1,	
+								result.toString() + " " + result.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					} catch (NoSuchMethodException e) {
+						//non fare niente, lanciata solo con moltiplicatori, qui non ci sono
 					}
 				}
+
 			}
 		}
 	}
@@ -923,15 +918,13 @@ public class CLIMain implements Runnable{
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow()+1, 
 					effect.getEffectType().toString());
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
-			for (ArrayList<ActionResult> choseOr : effect.getResultList()){
-				for (ActionResult result : choseOr){
-					try {
-						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-								result.toString() + " " + result.getValue());
-						lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
-					} catch (NoSuchMethodException e){
-						//qui non fare niente, viene lancio per i moltiplicatori
-					}
+			for (ActionResult result : ((SimpleEffect)effect).getResultList()){
+				try {
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+							result.toString() + " " + result.getValue());
+					lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+				} catch (NoSuchMethodException e){
+					//qui non fare niente, viene lancio per i moltiplicatori
 				}
 			}
 		}

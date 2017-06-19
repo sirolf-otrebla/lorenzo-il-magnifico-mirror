@@ -22,10 +22,8 @@ public class EndGameEffect implements SimpleEffect {
 	}
 
 	@Override
-	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		ArrayList<ArrayList<ActionResult>> list = new ArrayList<ArrayList<ActionResult>>();
-		list.add(effectsList);
-		return list;
+	public ArrayList<ActionResult> getResultList() {
+		return effectsList;
 	}
 
 	@Override

@@ -79,8 +79,16 @@ public class Player implements PlayerRelated {
 		return blueCardList;
 	}
 
-	public ArrayList<VioletCard> getPurpleCardList() {
+	public ArrayList<VioletCard> getVioletCardList() {
 		return violetCardList;
+	}
+	
+	public BonusTile getBonusTile(){
+		return this.bonusTile;
+	}
+	
+	public void setBonusTile(BonusTile bonusTile){
+		this.bonusTile = bonusTile;
 	}
 
     @Override
