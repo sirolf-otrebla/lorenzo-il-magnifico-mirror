@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 
 public abstract class TowerCard implements Card {
@@ -30,6 +31,22 @@ public abstract class TowerCard implements Card {
 	
 	public TowerCard(){
 		
+	}
+	
+	public void addFalseResource(){
+		for (ArrayList<Resource> or : requirements){
+			or.add(new AlwaysUnFullFilledResource());
+		}
+	}
+	
+	public void removeFalseResource(){
+		for (ArrayList<Resource> or : requirements){
+			for (Resource r : or){
+				if (r.getID().equals(AlwaysUnFullFilledResource.id)){
+					or.remove(r);
+				}
+			}
+		}
 	}
 
 	@Override

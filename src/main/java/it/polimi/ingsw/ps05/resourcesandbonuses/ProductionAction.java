@@ -1,23 +1,30 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.ProductionSpace;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.Tower;
+import it.polimi.ingsw.ps05.model.TowerCard;
+import it.polimi.ingsw.ps05.model.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.server.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
 import java.util.Observable;
 
 public class ProductionAction extends Observable implements ActionResult, BonusAction {
-private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
-	
+
 	public ProductionAction(Integer value){
 		this.value = value;
 	}
-	
+
 	public ProductionAction() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -34,8 +41,23 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
-		
+		//crea familiare ghost in player
+		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
+		//modifica la board aggiungendo risorsa sempre falsa
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			for (TowerTileInterface tile : t.getTiles()){
+				TowerCard card = tile.getCard();
+				card.addFalseResource();
+			}
+		}
+		for (ActionSpace a : board.getActionSpace()){
+			if (!(a instanceof ProductionSpace)){
+				a.addFalseResource();
+			}
+		}
+		//notifica observer
+
 	}
 
 	@Override
@@ -53,7 +75,7 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}
-	
+
 	@Override
 	public String toString(){
 		return "Azione produzione";

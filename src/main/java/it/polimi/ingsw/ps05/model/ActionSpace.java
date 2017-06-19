@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model;
 
 
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
+import it.polimi.ingsw.ps05.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
 import java.util.ArrayList;
@@ -66,6 +67,22 @@ public abstract class ActionSpace {
 	public void reset(){
 		isOccupied = false;
 		occupant = null;
+	}
+	
+	public void addFalseResource(){
+		for (ArrayList<Resource> or : requirements){
+			or.add(new AlwaysUnFullFilledResource());
+		}
+	}
+	
+	public void removeFalseResource(){
+		for (ArrayList<Resource> or : requirements){
+			for (Resource r : or){
+				if (r.getID().equals(AlwaysUnFullFilledResource.id)){
+					or.remove(r);
+				}
+			}
+		}
 	}
 
 

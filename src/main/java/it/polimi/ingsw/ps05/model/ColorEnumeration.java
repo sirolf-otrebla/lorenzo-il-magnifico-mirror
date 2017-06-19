@@ -9,6 +9,7 @@ public enum ColorEnumeration {
 	White("Bianco"),
 	Orange("Arancione"),
 	Any("Neutro"),
+	Ghost("Fantasma"),
 	NOT_INITIALIZED("Nessuno");
 	
 	private final String color;
