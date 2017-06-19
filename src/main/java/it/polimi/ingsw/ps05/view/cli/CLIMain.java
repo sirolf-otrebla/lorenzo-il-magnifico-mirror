@@ -564,7 +564,7 @@ public class CLIMain implements Runnable{
 						((ActionSpace)board.getTowerList().get(i).getTiles().get(j)).isOccupied() ? OCCUPIED :
 							board.getTowerList().get(i).getTiles().get(j).getCard().getName());
 				textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 4 + j*height/16, "Dado: " + 
-						board.getTowerList().get(i).getTiles().get(j).getDiceRequired().intValue() );
+						board.getTowerList().get(i).getTiles().get(j).getDiceRequired().getValue() );
 				list.add(new TerminalPosition(i*width/8 + 1 + off.get(j) + (i!=0 ? 1:0), 3 + j*height/16));
 				if (board.getTowerList().get(i).getTiles().get(j) instanceof TileWithEffect){
 					for (ActionResult result : ((TileWithEffect)board.getTowerList().get(i).getTiles().get(j)).getEffectOnPositioning()){
