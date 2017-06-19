@@ -7,7 +7,6 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.PermanentBonus;
 
 public class PermanentEffect implements SimpleEffect {
 
-	public static final int NO_ALTERNATIVES = 0; // permanent effetcs do not have alternatives.
 	
 	ArrayList<ActionResult> effectsList;
 	
