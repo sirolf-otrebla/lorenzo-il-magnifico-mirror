@@ -169,7 +169,7 @@ public class CommonJsonParser {
 		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
-		effect.addEffectList(list);
+		effect.setEffectList(list);
 		ArrayList<Effect> effectList = new ArrayList<Effect>();
 		effectList.add(effect);
 		try{
@@ -182,7 +182,7 @@ public class CommonJsonParser {
 		return new MarketSpace(diceRequired, effectList);
 	}
 	
-	private CouncilSpace loadCouncilSpace(JSONObject json){
+	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException{
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
@@ -196,7 +196,7 @@ public class CommonJsonParser {
 		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
-		effect.addEffectList(list);
+		effect.setEffectList(list);
 		ArrayList<Effect> effectList = new ArrayList<Effect>();
 		effectList.add(effect);
 		try{
@@ -305,7 +305,7 @@ public class CommonJsonParser {
 			e1.printStackTrace();
 		}
 		
-		
+		System.out.println("bonus tile size in parser" + list.size());
 		return list;
 	}
 	
@@ -314,6 +314,7 @@ public class CommonJsonParser {
 		for (int i = 0; i < json.size(); i++){
 			list.addAll(getEffects((JSONObject)json.get(i)));
 		}
+		System.out.println("effect list size for single bonus tile " + list.size());
 		
 		return new BonusTile(list, type);
 	}
@@ -405,7 +406,9 @@ public class CommonJsonParser {
 	}
 
 	private GreenCard loadGreenCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
-		return new GreenCard(getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+		ArrayList<ArrayList<Resource>> req = getRequirements((JSONObject)json.get("Requirement"));
+		
+		return new GreenCard(getCardEpoch(json), getCardColor(json), getCardName(json), req == null ? new ArrayList<ArrayList<Resource>>():req, getEffects((JSONObject)json.get("Effect")));
 	}
 
 	private VioletCard loadVioletCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
@@ -437,7 +440,7 @@ public class CommonJsonParser {
 			}
 			list.add(resList);
 		}
-
+		System.out.println("list null: " + list == null);
 		return list;
 	}
 

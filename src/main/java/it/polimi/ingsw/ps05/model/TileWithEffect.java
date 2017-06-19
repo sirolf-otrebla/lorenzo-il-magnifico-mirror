@@ -14,7 +14,7 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 
 	private Tile toBeDecorated; //?????
 
-	private ArrayList<ActionResult> effectOnPositioning;
+	private ArrayList<ActionResult> effectOnPositioning = new ArrayList<ActionResult>();
 	
     public TileWithEffect(){
         this.toBeDecorated = new Tile();

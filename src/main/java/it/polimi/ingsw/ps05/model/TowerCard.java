@@ -9,8 +9,8 @@ public abstract class TowerCard implements Card {
 	public Epoch epoch = new Epoch();
 	public ColorEnumeration color;
 	public String cardName = new String();
-	public ArrayList<ArrayList<Resource>> requirements;
-	public ArrayList<Effect> effects;
+	public ArrayList<ArrayList<Resource>> requirements = new ArrayList<ArrayList<Resource>>();
+	public ArrayList<Effect> effects = new ArrayList<Effect>();
 
 	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
@@ -25,6 +25,7 @@ public abstract class TowerCard implements Card {
 		this.color = color;
 		this.cardName = cardName;
 		this.effects = effects;
+		this.requirements = new ArrayList<ArrayList<Resource>>();
 	}
 	
 	public TowerCard(){

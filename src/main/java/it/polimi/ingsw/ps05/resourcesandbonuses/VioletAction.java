@@ -48,6 +48,11 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Azione viola";
+	}
 
 	@Override
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {

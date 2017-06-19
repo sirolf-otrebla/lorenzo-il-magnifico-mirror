@@ -26,11 +26,6 @@ public class VioletCard extends TowerCard  {
 		player.getRelatedPlayer().addVioletCard(this);
 		
 	}
-	@Override
-	public String toString() {
-		return "VioletCard [epoch=" + epoch.toString() + ", color=" + color + ", cardName=" + cardName + ", requirements="
-				+ requirements.size() + ", effects=" + effects.size() + "]";
-	}
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
@@ -38,6 +33,9 @@ public class VioletCard extends TowerCard  {
 		
 	}
 	
-	
+	@Override
+	public String toString(){
+		return "Carta Viola";
+	}
 
 }

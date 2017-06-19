@@ -22,15 +22,16 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		this.effectList = effect;
 	}
 
-	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) {
+	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) throws RepeatedAssignmentException {
 		super();
-		try {
-			super.setDiceRequirement(diceRequired);
-		} catch (RepeatedAssignmentException e) {
-			this.effectList = effect;
-		}
+		this.effectList = effect;
+		super.setDiceRequirement(diceRequired);
 	}
 
+	public ArrayList<Familiar> getOccupantList(){
+		return this.occupantList;
+	}
+	
 	@Override
 	public void setOccupied(Familiar occupant) {
 		occupantList.add(occupant);

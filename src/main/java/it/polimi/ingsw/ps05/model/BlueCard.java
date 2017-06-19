@@ -32,5 +32,10 @@ public class BlueCard extends TowerCard {
 
 	}
 	
+	@Override
+	public String toString(){
+		return "Carta blu";
+	}
+	
 	
 }

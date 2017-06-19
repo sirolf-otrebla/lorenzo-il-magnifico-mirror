@@ -74,7 +74,7 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	
 	@Override
 	public String toString(){
-		return "Oro bonus";
+		return "Costo oro";
 	}
 
 }

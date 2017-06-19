@@ -23,14 +23,13 @@ public class GameSetup {
 	
 	//si presuppone che sia il network adapter o chi per lui a chiamare questa classe
 	public GameSetup(ArrayList<Player> players, Game game){
-		//loadDeck();
-		//load deck tolto perché le carte vengono inserite nelle torri alla loro creazione
 		this.playerConnected = players;
 		parser = new CommonJsonParser(playerConnected.size(), game);
 		createFamiliarForPlayers();
 		loadBoard();
+		loadBonusTiles(game.isUsingCustomBonusTiles());
 		turnSetup = new TurnSetupManager(playerConnected, board);
-		loadBonusTiles();
+		
 	}
 	
 	private void createFamiliarForPlayers(){
@@ -48,18 +47,17 @@ public class GameSetup {
 		}
 	}
 	
-	/*private void loadDeck(){
-		CommonJsonParser parser = new CommonJsonParser();
-        //deck = parser.loadDeck("./src/main/res/cards.json");
-	}*/
-	
 	private void loadBoard(){
 		board = parser.loadBoard("./src/main/res/board.json");
 	}
 	
-	private void loadBonusTiles(){
+	private void loadBonusTiles(boolean custom){
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
-		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", BonusTileType.Custom);
+		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", custom ? BonusTileType.Custom : BonusTileType.Default);
+		System.out.println(bonusTiles.size());
+		for (int i = 0; i < playerConnected.size(); i++){
+			playerConnected.get(i).setBonusTile(bonusTiles.get(i));
+		}
 	}
 
 	public Board getBoard(){

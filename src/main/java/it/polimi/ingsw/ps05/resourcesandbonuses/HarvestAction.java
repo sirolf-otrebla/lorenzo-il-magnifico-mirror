@@ -52,4 +52,9 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}
+	
+	@Override
+	public String toString(){
+		return "Azione raccolto";
+	}
 }

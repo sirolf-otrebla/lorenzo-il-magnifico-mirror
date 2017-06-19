@@ -83,12 +83,10 @@ public class ActionTest extends TestCase{
 		testDiceReq = new Dice(ActionTest.PL_COLOR_TEST, ActionTest.DICE_REQ_AMT);
 		ArrayList<ActionResult> arl = new ArrayList<ActionResult>();
 		arl.add(testGoldRes);
-		actionResultEffectList = new ArrayList<>();
-		actionResultEffectList.add(arl);
 
 		// workaround (seteffectlist for all effect or just for immediateEffect??)
 		ImmediateEffect eff = (ImmediateEffect) testEffectArrayList.get(0);
-		eff.setEffectList(actionResultEffectList);
+		eff.setEffectList(arl);
 
 		testMarket = new MarketSpace(testDiceReq, testEffectArrayList);
 		this.testActl = new Action(testFm, testMarket);

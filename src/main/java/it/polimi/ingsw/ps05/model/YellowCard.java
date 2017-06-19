@@ -81,4 +81,9 @@ public class YellowCard extends TowerCard  {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public String toString(){
+		return "Carta gialla";
+	}
 }

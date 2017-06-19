@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps05.resourcesandbonuses.ActionResult;
 
 public class EndGameEffect implements Effect {
 	
-	ArrayList<ActionResult> effectsList;
+	ArrayList<ActionResult> effectsList = new ArrayList<ActionResult>();
 	
 	public EndGameEffect(){
 		

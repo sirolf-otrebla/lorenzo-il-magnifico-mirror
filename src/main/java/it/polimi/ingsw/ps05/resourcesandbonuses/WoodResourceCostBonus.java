@@ -73,7 +73,7 @@ public class WoodResourceCostBonus implements Resource, ActionResult {
 	
 	@Override
 	public String toString(){
-		return "Legno bonus";
+		return "Costo legno";
 	}
 
 }

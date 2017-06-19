@@ -80,6 +80,7 @@ public class TurnSetupManager extends Observable{
 		dice.add(new Dice(ColorEnumeration.Black));
 		dice.add(new Dice(ColorEnumeration.Orange));
 		dice.add(new Dice(ColorEnumeration.White));
+		dice.add(new Dice(ColorEnumeration.Any, 0));
 		return dice;
 	}
 	

@@ -43,4 +43,9 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Rimuovi eff. Tile";
+	}
 }

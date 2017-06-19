@@ -53,4 +53,9 @@ private Integer value; //con value si Integerende il valore del bonus conferito 
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}
+	
+	@Override
+	public String toString(){
+		return "Azione gialla";
+	}
 }
