@@ -2,26 +2,26 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <excludeFromCompile>
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GreenCardMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/GreenCardMalusExcomm.java" />
       <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/ResourcesAndBonuses/ExcommunicationEffects/NoYellowVictoryPtsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoActionExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/BlueCardMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MoreServantsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ReduceVictoryPtsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoGreenVictoryPtsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ServantMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MilitaryMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/HarvestingMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/RemoveCardCostFromVPExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/DiceMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/VioletCardMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoVioletVictoryPtsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/WoodStoneMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoBlueVictoryPtsExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GoldMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoMarketExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/YellowCardMalusExcomm.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ProductionMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/NoActionExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/BlueCardMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/MoreServantsExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/ReduceVictoryPtsExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/NoGreenVictoryPtsExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/ServantMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/MilitaryMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/HarvestingMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/RemoveCardCostFromVPExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/DiceMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/VioletCardMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/NoVioletVictoryPtsExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/WoodStoneMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/NoBlueVictoryPtsExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/GoldMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/NoMarketExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/YellowCardMalusExcomm.java" />
+      <file url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/excommunicationeffects/ProductionMalusExcomm.java" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
