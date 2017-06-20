@@ -1,14 +1,19 @@
 package it.polimi.ingsw.ps05;
 
+import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
-import it.polimi.ingsw.ps05.resourcesandbonuses.*;
-import it.polimi.ingsw.ps05.controller.GameSetup;
-import it.polimi.ingsw.ps05.controller.TurnSetupManager;
+import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
+import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.server.controller.GameSetup;
+import it.polimi.ingsw.ps05.server.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
-import it.polimi.ingsw.ps05.net.server.Game;
+import it.polimi.ingsw.ps05.server.net.Game;
 import junit.framework.*;
 import org.junit.Test;
 

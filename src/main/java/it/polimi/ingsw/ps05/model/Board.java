@@ -2,8 +2,11 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
-import it.polimi.ingsw.ps05.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 
 /* See UML for description
  * 

@@ -1,12 +1,10 @@
 package it.polimi.ingsw.ps05.net.message;
 
-import it.polimi.ingsw.ps05.controller.GameFlowController;
-import it.polimi.ingsw.ps05.model.Action;
-import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
-import it.polimi.ingsw.ps05.net.server.PlayerClient;
+import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
+import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 public class ActionMessage implements NetMessage {
     private PlayerClient playerClient;

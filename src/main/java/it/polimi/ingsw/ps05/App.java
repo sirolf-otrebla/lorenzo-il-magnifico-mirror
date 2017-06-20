@@ -1,23 +1,13 @@
 package it.polimi.ingsw.ps05;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import it.polimi.ingsw.ps05.controller.*;
-import it.polimi.ingsw.ps05.model.Action;
-import it.polimi.ingsw.ps05.model.ActionSpace;
-import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.model.Turn;
-import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
-import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
-import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
-import it.polimi.ingsw.ps05.net.server.Game;
-import it.polimi.ingsw.ps05.net.server.ServerApp;
-import it.polimi.ingsw.ps05.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.view.View;
+import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.client.view.View;
 
 /**
  * Hello world!

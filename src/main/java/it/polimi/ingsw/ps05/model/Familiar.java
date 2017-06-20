@@ -1,10 +1,10 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
-import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
 
 public class Familiar implements PlayerRelated{
 

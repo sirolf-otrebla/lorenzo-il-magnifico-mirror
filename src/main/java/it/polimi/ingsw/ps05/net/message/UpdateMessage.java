@@ -1,11 +1,9 @@
 package it.polimi.ingsw.ps05.net.message;
 
 
-import it.polimi.ingsw.ps05.controller.GameFlowController;
 import it.polimi.ingsw.ps05.model.Action;
-import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
+import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
  * Created by Alberto on 12/06/2017.

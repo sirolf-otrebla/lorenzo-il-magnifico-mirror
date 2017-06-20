@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
-import it.polimi.ingsw.ps05.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
 import java.util.ArrayList;
 

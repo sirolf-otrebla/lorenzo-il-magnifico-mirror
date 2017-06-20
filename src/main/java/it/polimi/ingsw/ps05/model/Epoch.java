@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+
 public class Epoch {
 
 	private EpochEnumeration epoch;
