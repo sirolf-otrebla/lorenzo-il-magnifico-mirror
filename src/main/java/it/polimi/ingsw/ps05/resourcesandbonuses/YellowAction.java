@@ -63,7 +63,7 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		//this.addObserver(game.getGameFlowctrl().getBonusActListener());
 	}
 
 	@Override
