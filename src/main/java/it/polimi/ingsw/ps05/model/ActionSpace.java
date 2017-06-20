@@ -47,16 +47,12 @@ public abstract class ActionSpace {
 		return requirements;
 	}
 
-	protected void setDiceRequirement (Dice diceRequirement) throws RepeatedAssignmentException {
+	public void setDiceRequirement (Dice diceRequirement) {
 
 		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
-		if (this.diceRequirement == null) {
-			this.diceRequirement = diceRequirement;
-			for (ArrayList<Resource> a : requirements)
-				a.set(0, diceRequirement);
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+		this.diceRequirement = diceRequirement;
+		for (ArrayList<Resource> a : requirements)
+			a.set(0, diceRequirement);
 	}
 
 	public Dice getDiceRequirement() {
@@ -66,13 +62,13 @@ public abstract class ActionSpace {
 	public void setOccupant(Familiar occupant) {
 		this.occupant = occupant;
 	}
-	
+
 	public void reset(){
 		isOccupied = false;
 		occupant = null;
 	}
-	
-	
+
+
 
 
 	public abstract void applyEffect();

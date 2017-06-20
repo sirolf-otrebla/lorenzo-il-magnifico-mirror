@@ -1,20 +1,24 @@
 package it.polimi.ingsw.ps05.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ActionSpace;
+import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.net.server.Game;
 
 public class HarvestBonus extends PermanentBonus{
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
-	
+
 	public HarvestBonus(Integer value){
 		this.value = value;
 	}
-	
+
 	public HarvestBonus() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -30,8 +34,12 @@ public class HarvestBonus extends PermanentBonus{
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
-		
+		Board board = this.game.getBoard();
+		for (ActionSpace a : board.getActionSpace()){
+			if (a instanceof HarvestingSpace){
+				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
+			}
+		}
 	}
 
 	@Override
@@ -42,6 +50,12 @@ public class HarvestBonus extends PermanentBonus{
 	@Override
 	public Game getGame() {
 		return game;
+	}
+
+
+	@Override
+	public String toString(){
+		return "Bonus raccolto";
 	}
 
 	@Override

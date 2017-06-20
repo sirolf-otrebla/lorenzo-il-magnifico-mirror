@@ -33,7 +33,7 @@ public class LeaderCard implements Card {
 
 	public void applyNonActivableEffects(PlayerRelated player, int[] alternative) {
 		for (int i = 0; i < effects.size(); i++)
-		    effects.get(i).apply(player, alternative[i]);
+		    ((SimpleEffect)effects.get(i)).apply(player);
 	}
 
 	public void discard(PlayerRelated playerRelated){
@@ -65,7 +65,8 @@ public class LeaderCard implements Card {
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
 		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < effects.size(); i++)
+		    ((SimpleEffect)effects.get(i)).apply(player);
 	}
 
 

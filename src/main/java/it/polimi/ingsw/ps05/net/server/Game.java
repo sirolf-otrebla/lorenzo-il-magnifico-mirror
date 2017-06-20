@@ -109,4 +109,8 @@ public class Game implements Observer {
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }
+
+    public Board getBoard() {
+    	return this.gBoard;
+    }
 }

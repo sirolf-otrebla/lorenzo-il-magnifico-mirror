@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.resourcesandbonuses.ExcommunicationEffects;
+package it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects;
 
 import java.util.ArrayList;
 
@@ -7,17 +7,12 @@ import org.json.simple.JSONObject;
 
 import it.polimi.ingsw.ps05.model.EffectType;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class NoMarketExcomm implements ExcommunicationEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<ArrayList<ActionResult>> getResultList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,11 +33,34 @@ public class NoMarketExcomm implements ExcommunicationEffect {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private ArrayList<ActionResult> malus = null;
 
 	@Override
-	public void apply(PlayerRelated familyMember, int alternative) {
+	public void setMalus(ArrayList<ActionResult> malus) throws RepeatedAssignmentException{
+		// TODO Auto-generated method stub
+		if (this.malus == null){
+			this.malus = malus;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
+	
+	@Override
+	public String toString(){
+		return "Non puoi usare il mercato";
+	}
+	
+	@Override
+	public void apply(PlayerRelated familyMember) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public ArrayList<ActionResult> getResultList() {
+		// TODO Auto-generated method stub
+		return malus;
 	}
 
 }

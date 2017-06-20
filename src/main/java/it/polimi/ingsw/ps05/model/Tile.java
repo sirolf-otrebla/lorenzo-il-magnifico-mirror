@@ -30,15 +30,15 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     public Tile(TowerCard card, Integer diceRequired, Tower parentTower){
     	
     }
-    
+    @Override
     public void setDiceRequired(Integer diceRequired){
     	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
     }
     
     @Override
-    public Integer getDiceRequired(){
+    public Dice getDiceRequired(){
 
-        return this.diceRequirement.getValue();
+        return this.diceRequirement;
     }
     @Override
     public Tower getParentTower(){
