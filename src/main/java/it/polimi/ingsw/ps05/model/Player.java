@@ -192,5 +192,9 @@ public class Player implements PlayerRelated {
 			e.applyResult(this);
 		}
 	}
+	
+	public Familiar createGhostFamiliar(Integer diceRequired) {
+		return new Familiar(new Dice(ColorEnumeration.Ghost,diceRequired),ColorEnumeration.Ghost,this);
+	}
 
 }
