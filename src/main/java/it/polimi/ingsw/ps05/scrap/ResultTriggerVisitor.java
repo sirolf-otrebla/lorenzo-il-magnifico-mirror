@@ -1,8 +1,7 @@
 package it.polimi.ingsw.ps05.scrap;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.net.message.BonusActionTriggerMessage;
-import it.polimi.ingsw.ps05.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 
 /**
  * Created by Alberto on 12/06/2017.

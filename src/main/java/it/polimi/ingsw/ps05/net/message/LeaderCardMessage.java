@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps05.net.message;
 
-import it.polimi.ingsw.ps05.model.LeaderCard;
+import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.server.NetMessageVisitor;
+import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
  * Created by Alberto on 14/06/2017.

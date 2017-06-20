@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model.exceptions;
 
-import it.polimi.ingsw.ps05.model.Tower;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
 
 /**
  * Created by Alberto on 15/05/2017.

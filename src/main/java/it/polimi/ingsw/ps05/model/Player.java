@@ -2,8 +2,12 @@ package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.model.cards.*;
+import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.OnePerTurnEffect;
 import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
-import it.polimi.ingsw.ps05.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
@@ -33,7 +37,9 @@ public class Player implements PlayerRelated {
 
 	private ArrayList<PermanentBonus> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
-	
+	private ArrayList<Effect> temporaryEffectList;
+
+
 	public Player(int playerID, String username, ColorEnumeration color){
 		this.playerID = playerID;
 		this.username = username;
@@ -195,6 +201,18 @@ public class Player implements PlayerRelated {
 	
 	public Familiar createGhostFamiliar(Integer diceRequired) {
 		return new Familiar(new Dice(ColorEnumeration.Ghost,diceRequired),ColorEnumeration.Ghost,this);
+	}
+
+	public ArrayList<PermanentBonus> getPermanentEffectResList() {
+		return permanentEffectResList;
+	}
+
+	public ArrayList<OnePerTurnEffect> getOnePerTurnEffectList() {
+		return onePerTurnEffectList;
+	}
+
+	public ArrayList<Effect> getTemporaryEffectList() {
+		return temporaryEffectList;
 	}
 
 }

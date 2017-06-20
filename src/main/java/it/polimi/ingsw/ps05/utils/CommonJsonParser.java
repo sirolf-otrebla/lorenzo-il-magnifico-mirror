@@ -9,22 +9,28 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 
+import it.polimi.ingsw.ps05.model.cards.*;
+import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
+import it.polimi.ingsw.ps05.model.effects.ActivableEffectType;
+import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
+import it.polimi.ingsw.ps05.model.spaces.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.ExcommunicationEffect;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.ReduceVictoryPtsExcomm;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import it.polimi.ingsw.ps05.resourcesandbonuses.*;
-import it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.ExcommunicationEffect;
-import it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.ReduceVictoryPtsExcomm;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
-import it.polimi.ingsw.ps05.net.server.Game;
+import it.polimi.ingsw.ps05.server.net.Game;
 
 public class CommonJsonParser {
 
-	private static final String resourcePath = "it.polimi.ingsw.ps05.resourcesandbonuses.";
-	private static final String excommPath = "it.polimi.ingsw.ps05.resourcesandbonuses.excommunicationeffects.";
-	private static final String modelPath = "it.polimi.ingsw.ps05.model.";
+	private static final String resourcePath = "it.polimi.ingsw.ps05.model.resourcesandbonuses.";
+	private static final String excommPath = "it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.";
+	private static final String modelPath = "it.polimi.ingsw.ps05.model.effects.";
 
 	private int playerConnected;
 	private Game game;

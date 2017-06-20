@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model.exceptions;
 
-import it.polimi.ingsw.ps05.resourcesandbonuses.ServantResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 
 /**
  * Created by Alberto on 18/05/2017.
