@@ -107,6 +107,7 @@ public class ActionTest extends TestCase{
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		Board board = gameSetup.getBoard();
 		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
@@ -141,6 +142,7 @@ public class ActionTest extends TestCase{
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
@@ -171,6 +173,7 @@ public class ActionTest extends TestCase{
 		}
 
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
@@ -243,6 +246,7 @@ public class ActionTest extends TestCase{
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
