@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
@@ -56,13 +57,27 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 			}
 		}
 		//notifica observer
-
+		setChanged();
+		notify();
+	}
+	
+	public void resetResult(PlayerRelated playerR){
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+				for (TowerTileInterface tile : t.getTiles()){
+					TowerCard card = tile.getCard();
+					card.removeFalseResource();
+				}
+		}
+		for (ActionSpace a : board.getActionSpace()){
+			a.removeFalseResource();
+		}
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		//TODO this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override

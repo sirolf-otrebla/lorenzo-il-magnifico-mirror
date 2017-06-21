@@ -27,6 +27,8 @@ import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -53,8 +55,8 @@ public class CLIMain implements Runnable{
 	boolean inBoard = true;
 	boolean inMyStats = false;
 	boolean inPlayersStats = false;
-	private static final int PREFERRED_WIDTH = 200;
-	private static final int PREFERRED_HEIGHT = 100;
+	private static int PREFERRED_WIDTH = 200;
+	private static int PREFERRED_HEIGHT = 100;
 	private static final String OCCUPIED = "Occupato";
 	private Board board;
 	private ArrayList<MarketSpace> marketList = new ArrayList<MarketSpace>();
@@ -72,6 +74,8 @@ public class CLIMain implements Runnable{
 	 * 
 	 */
 	
+	//mettere nella wiki che per la CLI la risoluzione minima consigliata è 1280*800
+	
 	
 
 	public CLIMain(Board board, Player player, ArrayList<Player> playersList){
@@ -79,6 +83,13 @@ public class CLIMain implements Runnable{
 		this.player = player;
 		this.playersList = playersList;
 		this.playersList.remove(this.player);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Double width = (200*screenSize.getWidth()/1280);
+		PREFERRED_WIDTH = width.intValue();
+		Double height = (100*screenSize.getHeight()/800);
+		PREFERRED_HEIGHT = height.intValue();
+		System.out.println(screenSize.getWidth());
+		System.out.println(screenSize.getHeight());
 	}
 
 
@@ -123,6 +134,18 @@ public class CLIMain implements Runnable{
 					}
 					catch(IOException e) {
 						// Not much we can do here
+						
+						try {
+							terminal.clearScreen();
+							drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));	
+							printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
+							terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+							terminal.flush();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 						throw new RuntimeException(e);
 					}
 				}
@@ -695,8 +718,6 @@ public class CLIMain implements Runnable{
 					infoCard(colForInfo, 0, player.getYellowCardList().get(currentRowMyStats - 3 - player.getFamilyList().size() - player.getYellowCardList().size()));
 				}
 			}
-		} else if (inPlayersStats){
-
 		}
 	}
 
@@ -845,8 +866,9 @@ public class CLIMain implements Runnable{
 					}
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				} else {
-					activableEffect(lastPos,(ActivableEffect)effect);
+					lastPos = activableEffect(lastPos,(ActivableEffect)effect);
 				}
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			}
 
 		} catch (NoSuchMethodException e){
@@ -866,12 +888,10 @@ public class CLIMain implements Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Dado " + effect.getDiceRequired());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 
-		if (((ActivableEffect)effect).getResourceRequired().size() != 0){
-			activableWithResourceRequired(lastPos, (ActivableEffect)effect);
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		if (effect.getResourceRequired().size() != 0){
+			lastPos = activableWithResourceRequired(lastPos,effect);
 		} else {
-			activableWithOutResourceRequired(lastPos, (ActivableEffect) effect);
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			lastPos = activableWithOutResourceRequired(lastPos,effect);
 		}
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		return lastPos;
@@ -893,24 +913,23 @@ public class CLIMain implements Runnable{
 	}
 
 	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
-		for (ArrayList<Resource> choseOr : effect.getResourceRequired()){
-			for (Resource resource : choseOr) {
+		
+		for (int i = 0; i < effect.getResourceRequired().size(); i++){
+			for (Resource resource : effect.getResourceRequired().get(i)) {
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, resource.getValue() + " " + resource.toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			}
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "-->");
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-			for (ArrayList<ActionResult> choseOrRes : ((ActivableEffect)effect).getResultList()){
-				for (ActionResult result : choseOrRes){
-					if ( result instanceof BonusWithMultiplier){
-						lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
-					} else {
-						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
-						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-					}
+			for (ActionResult result : effect.getResultList().get(i)){
+				if ( result instanceof BonusWithMultiplier){
+					lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
+				} else {
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			}
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
 		return lastPos;
 	}

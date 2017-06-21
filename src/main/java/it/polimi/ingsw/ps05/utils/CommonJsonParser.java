@@ -316,7 +316,6 @@ public class CommonJsonParser {
 			e1.printStackTrace();
 		}
 
-		System.out.println("bonus tile size in parser" + list.size());
 		return list;
 	}
 
@@ -325,7 +324,6 @@ public class CommonJsonParser {
 		for (int i = 0; i < json.size(); i++){
 			list.addAll(getEffects((JSONObject)json.get(i)));
 		}
-		System.out.println("effect list size for single bonus tile " + list.size());
 
 		return new BonusTile(list, type);
 	}
@@ -338,9 +336,7 @@ public class CommonJsonParser {
 		ArrayList<ExcommunicationCard> toReturn = new ArrayList<ExcommunicationCard>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			System.out.println(obj.keySet().size());
 			JSONObject firstJson =  (JSONObject)obj.get("FIRST");
-			System.out.println(firstJson.keySet().size());
 			ArrayList<ExcommunicationEffect> first = new ArrayList<ExcommunicationEffect>(); 
 			for (Object exc : firstJson.keySet()){
 				first.add(selectFirstSecondEpochExcommEffect((JSONObject)(firstJson.get(exc.toString())),exc));
@@ -402,14 +398,11 @@ public class CommonJsonParser {
 	private ExcommunicationEffect selectFirstSecondEpochExcommEffect(JSONObject json, Object key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, NumberFormatException, IllegalArgumentException, InvocationTargetException{
 		Object actionObject = Class.forName(excommPath + key.toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
 		ArrayList<ActionResult> malus = new ArrayList<ActionResult>();
-		System.out.println(json.keySet().size());
 		for (int i = 0; i < json.keySet().size(); i++){
 			malus.add(createAllExceptActivable(json, i));
 		}
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
-		
-		System.out.println(actionObject == null);
 		
 		return (ExcommunicationEffect)actionObject;
 	}
@@ -422,8 +415,6 @@ public class CommonJsonParser {
 		}
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
-		
-		System.out.println(actionObject == null);
 		
 		return (ExcommunicationEffect)actionObject;
 	}
@@ -549,7 +540,6 @@ public class CommonJsonParser {
 			}
 			list.add(resList);
 		}
-		System.out.println("list null: " + list == null);
 		return list;
 	}
 

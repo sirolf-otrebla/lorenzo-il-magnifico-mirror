@@ -1,9 +1,12 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
+import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.net.Game;
 
@@ -40,11 +43,24 @@ public class HarvestBonus extends PermanentBonus{
 				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
 			}
 		}
+		setChanged();
+		notify();
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR){
+		Board board = this.getGame().getBoard();
+		for (ActionSpace a : board.getActionSpace()){
+			if (a instanceof HarvestingSpace){
+				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() + this.getValue()));
+			}
+		}
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -56,10 +72,5 @@ public class HarvestBonus extends PermanentBonus{
 	@Override
 	public String toString(){
 		return "Bonus raccolto";
-	}
-
-	@Override
-	public void resetResult(PlayerRelated playerR) {
-		//todo:
 	}
 }

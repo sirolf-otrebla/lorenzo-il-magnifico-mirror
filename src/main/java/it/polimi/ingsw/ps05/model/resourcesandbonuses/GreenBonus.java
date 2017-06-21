@@ -42,12 +42,15 @@ public class GreenBonus extends PermanentBonus{
 				}
 			}
 		}
+		setChanged();
+		notify();
 
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -63,6 +66,13 @@ public class GreenBonus extends PermanentBonus{
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		//todo
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			if (t instanceof GreenTower){
+				for (TowerTileInterface tile : t.getTiles()){
+					tile.setDiceRequired(tile.getDiceRequired().getValue() + this.getValue());
+				}
+			}
+		}
 	}
 }

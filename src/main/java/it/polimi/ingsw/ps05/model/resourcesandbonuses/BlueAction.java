@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -18,16 +19,16 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	//Ex. value 5 è da Integerendersi come un azione con dado 5 sulla colonna blu
 
 	private Game game;
-	
+
 	public BlueAction(Integer value){
 		this.value = value;
 
 	}
-	
+
 	public BlueAction() {
-		
+
 	}
-	
+
 	public void setValue(Integer value){
 		this.value = value;
 	}
@@ -60,12 +61,29 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 			a.addFalseResource();
 		}
 		//notifica observer
+		setChanged();
+		notify();
+	}
+
+	public void resetResult(PlayerRelated playerR){
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			if (!(t instanceof BlueTower)){
+				for (TowerTileInterface tile : t.getTiles()){
+					TowerCard card = tile.getCard();
+					card.removeFalseResource();
+				}
+			}
+		}
+		for (ActionSpace a : board.getActionSpace()){
+			a.removeFalseResource();
+		}
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		//TODO: this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -78,7 +96,7 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 		visitor.visit(this, pl );
 	}
 
-	
+
 	@Override
 	public String toString(){
 		return "Azione blu";

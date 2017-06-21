@@ -38,11 +38,16 @@ public class NoColorBonus extends PermanentBonus {
 				f.setDice(new Dice(ColorEnumeration.Any, f.getRelatedDice().getValue() + this.value));
 			}
 		}
+		setChanged();
+		notify();
 	}
+	
+	
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -58,6 +63,10 @@ public class NoColorBonus extends PermanentBonus {
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		//todo
+		for (Familiar f : playerR.getRelatedPlayer().getFamilyList()){
+			if (f.getColor().equals(ColorEnumeration.Any)) {
+				f.setDice(new Dice(ColorEnumeration.Any, f.getRelatedDice().getValue() - this.value));
+			}
+		}
 	}
 }
