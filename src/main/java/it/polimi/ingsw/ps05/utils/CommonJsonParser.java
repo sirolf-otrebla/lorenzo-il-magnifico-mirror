@@ -34,6 +34,8 @@ public class CommonJsonParser {
 
 	private int playerConnected;
 	private Game game;
+// TODO METTERE CONTROLLO PER NON CREARE PIÙ ACTIONSPACE DEL NECESSARIO
+
 
 	public CommonJsonParser(int playerConnected, Game game){
 		this.playerConnected = playerConnected;

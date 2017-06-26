@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Random;
 
@@ -43,9 +44,13 @@ public class TurnSetupManager extends Observable{
 	
 	private void resetBoard(Turn next){
 		//reset degli spazi generici in elenco
-		for (ActionSpace o : board.getActionSpace()){
-			o.reset();
-		}
+
+		//todo cambiare nome a questa variabile
+		Iterator<ActionSpace> stoCazzoIterator =
+				board.getActSpacesMap().values().iterator();
+		while(stoCazzoIterator.hasNext())
+			stoCazzoIterator.next().reset();
+		//todo da controllare
 		//reset delle carte
 		for (Tower o : board.getTowerList()){
 			for (TowerTileInterface a : o.getTiles()){

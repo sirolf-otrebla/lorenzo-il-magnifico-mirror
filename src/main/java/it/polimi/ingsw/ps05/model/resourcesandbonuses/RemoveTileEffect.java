@@ -47,7 +47,7 @@ public class RemoveTileEffect implements ActionResult {
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			if (!(a instanceof HarvestingSpace)){
 				a.addFalseResource();
 			}

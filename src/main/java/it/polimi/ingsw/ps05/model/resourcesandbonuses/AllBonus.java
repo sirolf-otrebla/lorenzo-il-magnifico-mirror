@@ -43,7 +43,7 @@ public class AllBonus implements ActionResult {
 				tile.setDiceRequired(tile.getDiceRequired().getValue() - this.getValue());
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
 		}
 

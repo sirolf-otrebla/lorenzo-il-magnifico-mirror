@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
@@ -19,17 +20,22 @@ public class Board {
 	public final static int EPOCHS_NUMBER = 3;
 
 	private ArrayList<Tower> towerList = null;
+	private HashMap<Integer, ActionSpace> actSpacesMap;
 	private ArrayList<ActionSpace> actionSpace = null; //da confermare utilizzo lista
 	private ArrayList<Player> playerOnCouncil;
 	private ArrayList<VictoryResource> faithPath = null; //array da 16? elementi che dice quanti punti vittoria vengono assegnati all'i-esimo posto del tracciato
 	private ArrayList<MilitaryResource> militaryPath = null; //array da 6 elementi che dice quanti punti militare servono per poter avere "i" territori
 	private ArrayList<ExcommunicationCard> excomCards = null; //array da 3 elementi che contiene i riferimenti alle carte scomunica pescate ad inizio partita
 
-	private Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace,
+	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
 			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
 		super();
 		this.towerList = towerList;
-		this.actionSpace = actionSpace;
+		this.actSpacesMap = new HashMap<>();
+		for (ActionSpace actSpace : actionSpaceArrayList){
+			actSpacesMap.put(actSpace.getId(),actSpace);
+		}
+		this.actionSpace = actionSpaceArrayList;
 		this.faithPath = faithPath;
 		this.militaryPath = militaryPath;
 	}
@@ -43,6 +49,8 @@ public class Board {
 		//if(instance == null) {
 			instance = new Board(towerList, actionSpace, faithPath, militaryPath, excomCards);
 		//}
+		//TODO CHE CAZZO È QUESTO?
+
 		return instance;
 	}
 
@@ -50,9 +58,9 @@ public class Board {
 		return towerList;
 	}
 
-	public ArrayList<ActionSpace> getActionSpace() {
-		return actionSpace;
-	}
+	// public ArrayList<ActionSpace> getActionSpace() {
+	//	return actionSpace;
+	// }
 
 	public ArrayList<Player> getPlayerOnCouncil() {
 		return playerOnCouncil;
@@ -113,4 +121,11 @@ public class Board {
 			}
 	}
 
+	public HashMap<Integer, ActionSpace> getActSpacesMap() {
+		return actSpacesMap;
+	}
+
+	public void setActSpacesMap(HashMap<Integer, ActionSpace> actSpacesMap) {
+		this.actSpacesMap = actSpacesMap;
+	}
 }

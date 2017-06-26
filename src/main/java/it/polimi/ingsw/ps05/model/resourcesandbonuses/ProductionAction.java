@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.net.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
+import java.util.Iterator;
 import java.util.Observable;
 
 public class ProductionAction extends Observable implements ActionResult, BonusAction {
@@ -51,11 +52,8 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 				card.addFalseResource();
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
-			if (!(a instanceof ProductionSpace)){
-				a.addFalseResource();
-			}
-		}
+		Iterator<ActionSpace> iterator = board.getActSpacesMap().values().iterator();
+		while(iterator.hasNext()) iterator.next().addFalseResource();
 		//notifica observer
 
 	}

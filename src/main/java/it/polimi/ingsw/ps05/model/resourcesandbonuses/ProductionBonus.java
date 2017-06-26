@@ -35,7 +35,7 @@ public class ProductionBonus extends PermanentBonus {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		Board board = this.game.getBoard();
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			if (a instanceof ProductionSpace){
 				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
 			}
