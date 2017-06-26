@@ -85,7 +85,7 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		return "Azione verde";
 	}
 
-	@Override
+
 	public void resetResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
@@ -97,7 +97,7 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

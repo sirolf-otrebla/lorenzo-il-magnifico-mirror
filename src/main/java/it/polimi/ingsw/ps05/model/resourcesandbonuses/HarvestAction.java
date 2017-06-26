@@ -67,7 +67,7 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 					card.removeFalseResource();
 				}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

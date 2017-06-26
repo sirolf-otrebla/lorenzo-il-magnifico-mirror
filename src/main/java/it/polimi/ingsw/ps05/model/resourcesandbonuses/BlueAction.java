@@ -77,7 +77,7 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

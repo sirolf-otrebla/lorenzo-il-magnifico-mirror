@@ -69,7 +69,7 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 					card.removeFalseResource();
 				}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

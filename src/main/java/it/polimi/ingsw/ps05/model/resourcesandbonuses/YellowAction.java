@@ -72,7 +72,7 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

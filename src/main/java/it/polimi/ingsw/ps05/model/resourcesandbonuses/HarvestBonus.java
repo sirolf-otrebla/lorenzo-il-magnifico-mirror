@@ -50,7 +50,7 @@ public class HarvestBonus extends PermanentBonus{
 	@Override
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			if (a instanceof HarvestingSpace){
 				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() + this.getValue()));
 			}
