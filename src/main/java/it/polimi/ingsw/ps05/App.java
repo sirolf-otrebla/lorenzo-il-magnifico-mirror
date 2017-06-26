@@ -35,7 +35,9 @@ public class App
     	list.add(p2);
     	list.add(p3);
     	list.add(p4);
-    	GameSetup setup = new GameSetup(list, new Game(true,true,0));
+    	Game game = new Game(true,true,0);
+    	game.start();
+    	GameSetup setup = new GameSetup(list, game);
     	View view = new View();
     	if (string.equals("C")){
     		//istanzia la cli

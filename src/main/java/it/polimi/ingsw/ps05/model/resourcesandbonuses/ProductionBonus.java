@@ -40,12 +40,14 @@ public class ProductionBonus extends PermanentBonus {
 				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
 			}
 		}
-
+		setChanged();
+		notify();
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -61,6 +63,11 @@ public class ProductionBonus extends PermanentBonus {
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		//todo
+		Board board = this.game.getBoard();
+		for (ActionSpace a : board.getActionSpace()){
+			if (a instanceof ProductionSpace){
+				a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() + this.getValue()));
+			}
+		}
 	}
 }

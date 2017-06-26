@@ -102,11 +102,12 @@ public class ActionTest extends TestCase{
 	public void testBoard(){
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
-		int numP = randomNum.nextInt(8);
+		int numP = randomNum.nextInt(5);
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		Board board = gameSetup.getBoard();
 		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
@@ -136,17 +137,18 @@ public class ActionTest extends TestCase{
 	public void testActionOnTower(){ //tested just with gold
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
-		int numP = randomNum.nextInt(7) + 1;
+		int numP = randomNum.nextInt(4) + 1;
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
 		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2));
-		System.out.println(action.isLegal());
+		System.out.println("islegal: " + action.isLegal());
 		if (action.isLegal()){
 			try {
 				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
@@ -165,12 +167,13 @@ public class ActionTest extends TestCase{
 	public void testActionOnSpace(){
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
-		int numP = randomNum.nextInt(7) + 1;
+		int numP = randomNum.nextInt(4) + 1;
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
@@ -240,16 +243,18 @@ public class ActionTest extends TestCase{
 	public void testFamiliar(){
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
-		int numP = randomNum.nextInt(7) + 1;
+		int numP = randomNum.nextInt(4) + 1;
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 		Game game = new Game(true, true, numP);
+		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		assertEquals(numP,turn.getPlayerOrder().size());
-		assertEquals(3, turn.getDice().size());
+		System.out.println("Dadi " + turn.getDice().size());
+		assertEquals(4, turn.getDice().size());
 		for (Player p : turn.getPlayerOrder()){
 			int white = 0;
 			int black = 0;

@@ -59,13 +59,14 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 			it.next().addFalseResource();
 		}
 		//notifica observer
-
+		setChanged();
+		notify();
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		//TODO: this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -82,5 +83,22 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	@Override
 	public String toString(){
 		return "Azione verde";
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR) {
+		// TODO Auto-generated method stub
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			if (!(t instanceof GreenTower)){
+				for (TowerTileInterface tile : t.getTiles()){
+					TowerCard card = tile.getCard();
+					card.removeFalseResource();
+				}
+			}
+		}
+		for (ActionSpace a : board.getActionSpace()){
+			a.removeFalseResource();
+		}
 	}
 }

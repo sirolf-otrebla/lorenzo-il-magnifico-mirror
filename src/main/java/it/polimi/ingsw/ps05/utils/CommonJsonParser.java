@@ -30,7 +30,9 @@ public class CommonJsonParser {
 
 	private static final String resourcePath = "it.polimi.ingsw.ps05.model.resourcesandbonuses.";
 	private static final String excommPath = "it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.";
-	private static final String modelPath = "it.polimi.ingsw.ps05.model.effects.";
+	private static final String effectPath = "it.polimi.ingsw.ps05.model.effects.";
+	private static final String cardPath = "it.polimi.ingsw.ps05.model.cards.";
+	private static final String spacePath = "it.polimi.ingsw.ps05.model.spaces.";
 
 	private int playerConnected;
 	private Game game;
@@ -111,7 +113,7 @@ public class CommonJsonParser {
 			}
 		}
 
-		Object tower = Class.forName(modelPath + key).newInstance();
+		Object tower = Class.forName(spacePath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
 		for (TowerTileInterface t : list){
@@ -137,7 +139,7 @@ public class CommonJsonParser {
 			throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
 			InstantiationException, ClassNotFoundException, NoSuchMethodException, SecurityException { // keyClass indica se è un tile o tilewitheffect
 
-		Object tile = Class.forName(modelPath + keyClass).newInstance(); // istanza della classe letta da file ed esecuzione del setter per generare la risorsa
+		Object tile = Class.forName(spacePath + keyClass).newInstance(); // istanza della classe letta da file ed esecuzione del setter per generare la risorsa
 		Method method = tile.getClass().getDeclaredMethod("setDiceRequired", Integer.class);
 		method.invoke(tile, Integer.parseInt(json.get("diceRequired").toString()));
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
@@ -316,7 +318,6 @@ public class CommonJsonParser {
 			e1.printStackTrace();
 		}
 
-		System.out.println("bonus tile size in parser" + list.size());
 		return list;
 	}
 
@@ -325,7 +326,6 @@ public class CommonJsonParser {
 		for (int i = 0; i < json.size(); i++){
 			list.addAll(getEffects((JSONObject)json.get(i)));
 		}
-		System.out.println("effect list size for single bonus tile " + list.size());
 
 		return new BonusTile(list, type);
 	}
@@ -338,9 +338,7 @@ public class CommonJsonParser {
 		ArrayList<ExcommunicationCard> toReturn = new ArrayList<ExcommunicationCard>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			System.out.println(obj.keySet().size());
 			JSONObject firstJson =  (JSONObject)obj.get("FIRST");
-			System.out.println(firstJson.keySet().size());
 			ArrayList<ExcommunicationEffect> first = new ArrayList<ExcommunicationEffect>(); 
 			for (Object exc : firstJson.keySet()){
 				first.add(selectFirstSecondEpochExcommEffect((JSONObject)(firstJson.get(exc.toString())),exc));
@@ -402,14 +400,11 @@ public class CommonJsonParser {
 	private ExcommunicationEffect selectFirstSecondEpochExcommEffect(JSONObject json, Object key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, NumberFormatException, IllegalArgumentException, InvocationTargetException{
 		Object actionObject = Class.forName(excommPath + key.toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
 		ArrayList<ActionResult> malus = new ArrayList<ActionResult>();
-		System.out.println(json.keySet().size());
 		for (int i = 0; i < json.keySet().size(); i++){
 			malus.add(createAllExceptActivable(json, i));
 		}
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
-		
-		System.out.println(actionObject == null);
 		
 		return (ExcommunicationEffect)actionObject;
 	}
@@ -422,8 +417,6 @@ public class CommonJsonParser {
 		}
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
-		
-		System.out.println(actionObject == null);
 		
 		return (ExcommunicationEffect)actionObject;
 	}
@@ -549,7 +542,6 @@ public class CommonJsonParser {
 			}
 			list.add(resList);
 		}
-		System.out.println("list null: " + list == null);
 		return list;
 	}
 
@@ -557,11 +549,11 @@ public class CommonJsonParser {
 		ArrayList<Effect> list = new ArrayList<Effect>(); //lista con le liste tra cui scegliere/attivare e basta
 		for (int i = 0; i < json.keySet().toArray().length; i++) { 
 			JSONObject effectList = (JSONObject) json.get(json.keySet().toArray()[i]);//entro in immediate o ecc...
-			if (Class.forName(modelPath + json.keySet().toArray()[i].toString()).equals(ActivableEffect.class)){
+			if (Class.forName(effectPath + json.keySet().toArray()[i].toString()).equals(ActivableEffect.class)){
 				list.add(createActivable(effectList));
 			} else {
 				ArrayList<ActionResult> resList = new ArrayList<ActionResult>(); //lista dei singoli componenti
-				Object object = Class.forName(modelPath + json.keySet().toArray()[i].toString()).newInstance(); //creo immediate o activable o permanent o endgame
+				Object object = Class.forName(effectPath + json.keySet().toArray()[i].toString()).newInstance(); //creo immediate o activable o permanent o endgame
 				Method setList = object.getClass().getDeclaredMethod("setEffectList", resList.getClass()); //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
 				for (int j = 0; j < effectList.keySet().toArray().length; j++){ //ciclo le risorse/azioni aggiugnendole ad un arraylist
 					if (!effectList.keySet().toArray()[j].toString().equals("Return") & !effectList.keySet().toArray()[j].toString().equals("Multiplier") & !effectList.keySet().toArray()[j].toString().equals("ResourceToCount")){
@@ -630,11 +622,17 @@ public class CommonJsonParser {
 		try {
 			bonus = new BonusWithMultiplier(Float.parseFloat(json.get("Multiplier").toString()),
 					(Resource)Class.forName(resourcePath + json.get("Return").toString()).newInstance(),
-					Class.forName(modelPath + json.get("ResourceToCount").toString()));
+					Class.forName(effectPath + json.get("ResourceToCount").toString()));
 		} catch (ClassNotFoundException e){
+			try {
 			bonus = new BonusWithMultiplier(Float.parseFloat(json.get("Multiplier").toString()),
 					(Resource)Class.forName(resourcePath + json.get("Return").toString()).newInstance(),
-					Class.forName(resourcePath + json.get("ResourceToCount").toString()));
+					Class.forName(cardPath + json.get("ResourceToCount").toString()));
+			} catch (Exception e1) {
+				bonus = new BonusWithMultiplier(Float.parseFloat(json.get("Multiplier").toString()),
+						(Resource)Class.forName(resourcePath + json.get("Return").toString()).newInstance(),
+						Class.forName(resourcePath + json.get("ResourceToCount").toString()));
+			}
 		}
 		return bonus;
 	}

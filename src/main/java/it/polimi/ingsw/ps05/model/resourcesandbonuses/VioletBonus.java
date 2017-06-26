@@ -42,12 +42,14 @@ public class VioletBonus extends PermanentBonus{
 				}
 			}
 		}
-
+		setChanged();
+		notify();
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -63,6 +65,13 @@ public class VioletBonus extends PermanentBonus{
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		//todo
+		Board board = this.getGame().getBoard();
+		for (Tower t : board.getTowerList()){
+			if (t instanceof VioletTower){
+				for (TowerTileInterface tile : t.getTiles()){
+					tile.setDiceRequired(tile.getDiceRequired().getValue() + this.value);
+				}
+			}
+		}
 	}
 }
