@@ -113,7 +113,7 @@ public class ActionTest extends TestCase{
 		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
 		for (int i = 0; i < board.getTowerList().size(); i++){
 			assertEquals(ActionTest.T_TILE_NUMBER,board.getTowerList().get(i).getTiles().size());
-			for (TowerTileInterface t : board.getTowerList().get(i).getTiles()){
+			for (TowerTileInterface t : board.getTowerList().get(i).getTiles().values()){
 				assertNotNull(t.getParentTower());
 			}
 		}
@@ -144,17 +144,18 @@ public class ActionTest extends TestCase{
 		Game game = new Game(true, true, numP);
 		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
+		Board board = gameSetup.getBoard();
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
-		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2));
+		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)board.getTowerList().get(2).getTiles().get(2));
 		System.out.println("islegal: " + action.isLegal());
 		if (action.isLegal()){
 			try {
 				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
 				assertTrue(gold != turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue());
 				assertTrue(turn.getPlayerOrder().get(0).getFamilyList().get(0).isUsed());
-				assertTrue(((ActionSpace)Board.getInstance().getTowerList().get(2).getTiles().get(2)).isOccupied());
+				assertTrue(((ActionSpace)board.getTowerList().get(2).getTiles().get(2)).isOccupied());
 				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
 				// TODO Auto-generated catch block

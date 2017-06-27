@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import it.polimi.ingsw.ps05.model.cards.*;
@@ -64,7 +65,7 @@ public class CommonJsonParser {
 			e.printStackTrace();
 		}
 
-		return Board.initBoard(towerList, notTowerSpace, faithList, militaryList,null);
+		return new Board(towerList, notTowerSpace, faithList, militaryList);
 	}
 
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){
@@ -100,12 +101,14 @@ public class CommonJsonParser {
 	}
 
 	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
-		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		//ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		HashMap<Integer, TowerTileInterface> list = new HashMap<Integer, TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			JSONArray array = (JSONArray)json.get(json.keySet().toArray()[i].toString());
 			for (int j = 0; j < array.toArray().length; j++){
 				try {
-					list.add(loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString()));
+					TowerTileInterface tile = loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString());
+					list.put(((ActionSpace)tile).getId(), tile);
 				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 						| SecurityException e) {
 					e.printStackTrace();
@@ -116,7 +119,7 @@ public class CommonJsonParser {
 		Object tower = Class.forName(spacePath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
-		for (TowerTileInterface t : list){
+		for (TowerTileInterface t : list.values()){
 			t.setParentTower((Tower)tower);
 		}
 

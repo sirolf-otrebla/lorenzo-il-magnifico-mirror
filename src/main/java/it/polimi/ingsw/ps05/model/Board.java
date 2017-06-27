@@ -14,12 +14,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  */
 public class Board {
-	private static Board instance;
 
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
 
-	private ArrayList<Tower> towerList = null;
+	private HashMap<ColorEnumeration, Tower> towerList = null;
 	private HashMap<Integer, ActionSpace> actSpacesMap;
 	private ArrayList<ActionSpace> actionSpace = null; //da confermare utilizzo lista
 	private ArrayList<Player> playerOnCouncil;
@@ -28,9 +27,12 @@ public class Board {
 	private ArrayList<ExcommunicationCard> excomCards = null; //array da 3 elementi che contiene i riferimenti alle carte scomunica pescate ad inizio partita
 
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
-			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
+			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath) {
 		super();
-		this.towerList = towerList;
+		this.towerList = new HashMap<>();
+		for (Tower tower : towerList){
+			this.towerList.put(tower.getColor(), tower);
+		}
 		this.actSpacesMap = new HashMap<>();
 		for (ActionSpace actSpace : actionSpaceArrayList){
 			actSpacesMap.put(actSpace.getId(),actSpace);
@@ -40,27 +42,9 @@ public class Board {
 		this.militaryPath = militaryPath;
 	}
 
-	public static Board getInstance() {
-		return instance;
-	}
-
-	public static Board initBoard(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace, ArrayList<VictoryResource> faithPath,
-									ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
-		//if(instance == null) {
-			instance = new Board(towerList, actionSpace, faithPath, militaryPath, excomCards);
-		//}
-		//TODO CHE CAZZO È QUESTO?
-
-		return instance;
-	}
-
-	public ArrayList<Tower> getTowerList() {
+	public HashMap<ColorEnumeration, Tower> getTowerList() {
 		return towerList;
 	}
-
-	// public ArrayList<ActionSpace> getActionSpace() {
-	//	return actionSpace;
-	// }
 
 	public ArrayList<Player> getPlayerOnCouncil() {
 		return playerOnCouncil;
@@ -76,7 +60,7 @@ public class Board {
 
 	public ArrayList<ExcommunicationCard> getExcomCards() { return excomCards; }
 
-	public void setTowerList(ArrayList<Tower> towerList) throws RepeatedAssignmentException {
+	public void setTowerList(HashMap<ColorEnumeration, Tower> towerList) throws RepeatedAssignmentException {
 		if (this.towerList == null) {
 			this.towerList = towerList;
 		} else {

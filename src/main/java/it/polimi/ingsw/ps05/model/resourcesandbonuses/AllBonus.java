@@ -38,8 +38,8 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	public void applyResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
-			for (TowerTileInterface tile : t.getTiles()){
+		for (Tower t : board.getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
 				tile.setDiceRequired(tile.getDiceRequired().getValue() - this.getValue());
 			}
 		}
@@ -53,8 +53,8 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	@Override
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
-			for (TowerTileInterface tile : t.getTiles()){
+		for (Tower t : board.getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
 				tile.setDiceRequired(tile.getDiceRequired().getValue() + this.getValue());
 			}
 		}

@@ -47,8 +47,8 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
-			for (TowerTileInterface tile : t.getTiles()){
+		for (Tower t : board.getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
 				TowerCard card = tile.getCard();
 				card.addFalseResource();
 			}
@@ -63,8 +63,8 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
-				for (TowerTileInterface tile : t.getTiles()){
+		for (Tower t : board.getTowerList().values()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.removeFalseResource();
 				}

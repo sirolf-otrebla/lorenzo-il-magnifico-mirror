@@ -46,9 +46,9 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.addFalseResource();
 				}
@@ -89,9 +89,9 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	public void resetResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.removeFalseResource();
 				}
