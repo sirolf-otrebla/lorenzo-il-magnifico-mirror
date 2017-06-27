@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -15,10 +16,13 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+
 
 public class GUIMain extends Application {
 
 	Stage stage;
+
 
 	public static void main(String[] args) {
 		launch(args);
