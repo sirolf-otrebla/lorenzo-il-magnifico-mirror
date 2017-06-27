@@ -20,6 +20,7 @@ public class Board {
 	public final static int EPOCHS_NUMBER = 3;
 
 	private ArrayList<Tower> towerList = null;
+	private HashMap<ColorEnumeration, Tower> towerHashMap;
 	private HashMap<Integer, ActionSpace> actSpacesMap;
 	private ArrayList<ActionSpace> actionSpace = null; //da confermare utilizzo lista
 	private ArrayList<Player> playerOnCouncil;
@@ -30,7 +31,10 @@ public class Board {
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
 			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
 		super();
+		this.towerHashMap = new HashMap<>();
 		this.towerList = towerList;
+		for (Tower tower: towerList)
+			//todo
 		this.actSpacesMap = new HashMap<>();
 		for (ActionSpace actSpace : actionSpaceArrayList){
 			actSpacesMap.put(actSpace.getId(),actSpace);
