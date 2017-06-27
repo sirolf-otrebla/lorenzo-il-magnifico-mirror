@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.util.*;
 
+import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
@@ -25,16 +26,24 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		this.effectList = effect;
 	}
 
-	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) throws RepeatedAssignmentException {
+	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) throws RepeatedAssignmentException, CouncilDiceAlreadySet {
 		super();
-		this.effectList = effect;
-		super.setDiceRequirement(diceRequired);
+
+		try {
+			super.setDiceRequirement(diceRequired);
+		} catch (RepeatedAssignmentException e) {
+			//TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
+			throw new CouncilDiceAlreadySet();
+		}
+
+		if (this.effectList == null) {
+			this.effectList = effect;
+		} else {
+			//TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
+			throw new RepeatedAssignmentException();
+		}
 	}
 
-	public ArrayList<Familiar> getOccupantList(){
-		return this.occupantList;
-	}
-	
 	@Override
 	public void setOccupied(Familiar occupant) {
 		occupantList.add(occupant);

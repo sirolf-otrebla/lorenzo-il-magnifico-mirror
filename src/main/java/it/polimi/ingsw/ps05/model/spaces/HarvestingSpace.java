@@ -46,7 +46,11 @@ public class HarvestingSpace extends ActionSpaceWithEffect {
 
 	public HarvestingSpace(Dice diceRequired, ArrayList<Effect> effectList) throws RepeatedAssignmentException {
 		super();
-		super.setDiceRequirement(diceRequired);
+		try {
+            super.setDiceRequirement(diceRequired);
+        } catch (RepeatedAssignmentException e) {
+		    //TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
+        }
 		this.effectList = effectList;
 	}
 }

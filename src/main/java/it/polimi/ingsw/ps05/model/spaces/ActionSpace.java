@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.Familiar;
+import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
@@ -58,10 +59,14 @@ public abstract class ActionSpace {
 		return requirements;
 	}
 
-	public void setDiceRequirement (Dice diceRequirement) {
+	public void setDiceRequirement (Dice diceRequirement) throws RepeatedAssignmentException{
 
 		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
-		this.diceRequirement = diceRequirement;
+		if(this.diceRequirement == null) {
+			this.diceRequirement = diceRequirement;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
 		for (ArrayList<Resource> a : requirements)
 			a.set(0, diceRequirement);
 	}
@@ -100,4 +105,5 @@ public abstract class ActionSpace {
 	}
 
 	public abstract void applyEffect();
+
 }
