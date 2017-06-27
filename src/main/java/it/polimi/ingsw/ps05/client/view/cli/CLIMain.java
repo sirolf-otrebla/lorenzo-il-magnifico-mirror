@@ -3,15 +3,12 @@ package it.polimi.ingsw.ps05.client.view.cli;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
-import it.polimi.ingsw.ps05.model.Board;
-import it.polimi.ingsw.ps05.model.BonusTile;
+import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
-import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
 import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
-import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
@@ -31,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -382,13 +380,14 @@ public class CLIMain implements Runnable{
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)),
 				4*height/16+1);
 
-
-		for (ActionSpace action : board.getActionSpace()){
-			if (action instanceof MarketSpace){
+		Iterator<ActionSpace> iterator = board.getActSpacesMap().values().iterator();
+		while(iterator.hasNext()){
+			ActionSpace actionSpace = iterator.next();
+			if (actionSpace instanceof MarketSpace){
 				ArrayList<TerminalPosition> list = mapBoard.get(marketList.size());
 				list.add(new TerminalPosition((marketList.size()+1)*width/16 - width/32,
 						6*height/16 - height/32));
-				if (action.isOccupied()){
+				if (actionSpace.isOccupied()){
 					textGraphics.putString((marketList.size()+1)*width/16 - width/32,
 							6*height/16 - height/32, "X", SGR.BOLD);
 				}
@@ -398,12 +397,12 @@ public class CLIMain implements Runnable{
 						(marketList.size()+1)*width/16,
 						6*height/16
 						);
-				marketList.add((MarketSpace) action);
-			} else if (action instanceof ProductionSpace){
+				marketList.add((MarketSpace) actionSpace);
+			} else if (actionSpace instanceof ProductionSpace){
 				ArrayList<TerminalPosition> list = mapBoard.get(productionList.size());
 				list.add(new TerminalPosition((productionList.size()+1)*width/16 - width/32,
 						7*height/16 - height/32));
-				if (action.isOccupied()){
+				if (actionSpace.isOccupied()){
 					textGraphics.putString((productionList.size()+1)*width/16 - width/32,
 							6*height/16 - height/32, "X", SGR.BOLD);
 				}
@@ -413,10 +412,13 @@ public class CLIMain implements Runnable{
 						(productionList.size()+1)*width/16,
 						7*height/16+2
 						);
-				productionList.add((ProductionSpace)action);
+				productionList.add((ProductionSpace)actionSpace);
 			}
 		}
-		for (ActionSpace action : board.getActionSpace()){
+
+		// separati
+
+		for (ActionSpace action : board.getActSpacesMap().values()){
 			if (action instanceof HarvestingSpace){
 				ArrayList<TerminalPosition> list = mapBoard.get(productionList.size()+harvestList.size());
 				list.add(new TerminalPosition((productionList.size()+harvestList.size()+1)*width/16 - width/32,

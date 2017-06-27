@@ -11,7 +11,10 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.net.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
-public class GreenAction extends PermanentBonus implements ActionResult, BonusAction {
+import java.util.Iterator;
+import java.util.Observable;
+
+public class GreenAction extends Observable implements ActionResult, BonusAction {
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 
@@ -51,8 +54,9 @@ public class GreenAction extends PermanentBonus implements ActionResult, BonusAc
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
-			a.addFalseResource();
+		Iterator<ActionSpace> it = board.getActSpacesMap().values().iterator();
+		while(it.hasNext()){
+			it.next().addFalseResource();
 		}
 		//notifica observer
 		setChanged();
@@ -81,7 +85,7 @@ public class GreenAction extends PermanentBonus implements ActionResult, BonusAc
 		return "Azione verde";
 	}
 
-	@Override
+
 	public void resetResult(PlayerRelated playerR) {
 		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
@@ -93,7 +97,7 @@ public class GreenAction extends PermanentBonus implements ActionResult, BonusAc
 				}
 			}
 		}
-		for (ActionSpace a : board.getActionSpace()){
+		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.removeFalseResource();
 		}
 	}

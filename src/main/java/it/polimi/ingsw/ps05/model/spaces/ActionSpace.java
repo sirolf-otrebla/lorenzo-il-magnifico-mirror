@@ -18,16 +18,24 @@ public abstract class ActionSpace {
 
 	private boolean isOccupied;
 
+	//todo: sistemare sta porcata dello static
+	// serve per assegnare gli id
+	private static int id_counter = 0;
 	// this is a REDUNDANT information
 	private Dice diceRequirement;
 	private final static Integer defaultDiceRequired = 1; //le sotto classi lo usano in un costruttore in cui si passa solo l'effetto, può essere comodo
 	private ArrayList<ArrayList<Resource>> requirements;
+
+	private int id;
+
 
 	public ActionSpace() {
 		diceRequirement = new Dice(ColorEnumeration.Any, defaultDiceRequired);
 		requirements = new ArrayList<>();
 		requirements.add(new ArrayList<>());
 		requirements.get(0).add(diceRequirement);
+		this.id = id_counter;
+		id_counter++;
 	}
 
 	private Familiar occupant;
@@ -92,6 +100,9 @@ public abstract class ActionSpace {
 		}
 	}
 
+	public int getId() {
+		return id;
+	}
 
 	public abstract void applyEffect();
 

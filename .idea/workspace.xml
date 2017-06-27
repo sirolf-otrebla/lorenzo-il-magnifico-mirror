@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="bozza gui">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/marker-blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/marker-green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/marker-red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/marker-yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/prova-small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/prova.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/prova6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/redfamily-black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/redfamily-neutral.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/redfamily-orange.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img/redfamily-white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/fx-style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/structure.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/CouncilDiceAlreadySet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/CouncilSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/CouncilSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/HarvestingSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/HarvestingSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,115 +39,102 @@
     <favorites_list name="lorenzo-il-magnifico" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CommonJsonParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java">
+    <leaf>
+      <file leaf-file-name="ServerInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ServerInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3180">
-              <caret line="219" column="25" lean-forward="false" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="25" />
-              <folding>
-                <marker date="1498486674000" expanded="true" signature="30336:30359" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActionTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-548">
-              <caret line="81" column="18" lean-forward="false" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+            <state relative-caret-position="350">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CouncilDiceAlreadySet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/CouncilDiceAlreadySet.java">
+      <file leaf-file-name="GreenAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+            <state relative-caret-position="3850">
+              <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUIMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java">
+      <file leaf-file-name="BlueAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="125" column="91" lean-forward="false" selection-start-line="125" selection-start-column="91" selection-end-line="125" selection-end-column="91" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#616#617#0" expanded="true" />
-                <element signature="e#635#636#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="structure.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/structure.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="121" lean-forward="false" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActionSpace.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1185">
-              <caret line="96" column="4" lean-forward="false" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
+            <state relative-caret-position="1607">
+              <caret line="79" column="50" lean-forward="false" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CouncilSpace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/CouncilSpace.java">
+      <file leaf-file-name="HarvestBonus.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+            <state relative-caret-position="386">
+              <caret line="52" column="59" lean-forward="false" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fx-style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/fx-style.css">
+      <file leaf-file-name="ProductionBonus.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            <state relative-caret-position="508">
+              <caret line="66" column="59" lean-forward="false" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiceTooLowException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/DiceTooLowException.java">
+      <file leaf-file-name="AllBonus.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding>
-                <marker date="1498486674000" expanded="true" signature="120:164" ph="/**...*/" />
-                <marker date="1498486674000" expanded="true" signature="223:236" ph="/**...*/" />
-                <marker date="1498486674000" expanded="false" signature="378:388" ph=" { " />
-              </folding>
+            <state relative-caret-position="386">
+              <caret line="60" column="29" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java">
+      <file leaf-file-name="VioletAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2100">
-              <caret line="142" column="38" lean-forward="false" selection-start-line="142" selection-start-column="38" selection-end-line="142" selection-end-column="38" />
+            <state relative-caret-position="1257">
+              <caret line="74" column="59" lean-forward="false" selection-start-line="74" selection-start-column="59" selection-end-line="74" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductionAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1257">
+              <caret line="71" column="59" lean-forward="false" selection-start-line="71" selection-start-column="59" selection-end-line="71" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HarvestAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1207">
+              <caret line="69" column="59" lean-forward="false" selection-start-line="69" selection-start-column="59" selection-end-line="69" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YellowAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="74" column="59" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -168,19 +145,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
-        <option value="CSS File" />
-        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="andreami96 &lt;andreami96@gmail.com&gt;" />
-      </list>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -199,19 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/MessageInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/MessageBuilderInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/RmiConn.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/ClientInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/RemoteMessaqeInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/MessageBuilder.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/cli/CLIMain.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/ActionRoundController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/VisitorInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActivableEffect.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EndGameEffect.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Effect.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/SimpleEffect.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ImmediateEffect.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/AlternativeEffect.java" />
@@ -236,7 +193,6 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tower.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/ExcommunicationCard.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/ExcommunicationTriggerListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/BonusActionListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/EndActionListener.java" />
@@ -246,10 +202,24 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/LimitedBonusActListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/fx-style.css" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/structure.fxml" />
+        <option value="$PROJECT_DIR$/ActionSpaceWithEffect.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/presenter.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java" />
+        <option value="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" />
       </list>
     </option>
   </component>
@@ -295,8 +265,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="-16" />
+    <option name="y" value="-16" />
+    <option name="width" value="3872" />
+    <option name="height" value="2192" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -313,8 +285,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -499,8 +469,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="lorenzo-il-magnifico" />
@@ -522,6 +504,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -566,6 +560,206 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rmi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="message" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -633,6 +827,152 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resourcesandbonuses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ctrl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -640,415 +980,23 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="setDice&#9;PSI&#9;JAVA://it.polimi.ingsw.ps05.model.spaces.ActionSpace#setDiceRequirement&#10;setting&#9;ACTION&#9;Database.Settings&#10;presentation mode&#9;ACTION&#9;TogglePresentationMode&#10;presentatiion mode&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="getActionSpace&#9;PSI&#9;JAVA://it.polimi.ingsw.ps05.net.message.ActionMessage#getActionSpace&#10;setting&#9;ACTION&#9;Database.Settings&#10;presentation mode&#9;ACTION&#9;TogglePresentationMode&#10;presentatiion mode&#9;null&#9;null" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.ps05.client.net" />
+      <recent name="it.polimi.ingsw.ps05.server.net" />
       <recent name="it.polimi.ingsw.ps05.client" />
       <recent name="it.polimi.ingsw.ps05.model" />
-      <recent name="it.polimi.ingsw.ps05.server.net" />
       <recent name="it.polimi.ingsw.ps05.server" />
-      <recent name="it.polimi.ingsw.ps05.client.net" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/img" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="it.polimi.ingsw.ps05.net.server.rmi" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/compiler.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ps05.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/App.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BonusTile.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ColorEnumeration.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Epoch.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EpochEnumeration.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Familiar.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Turn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/DiceTooLowException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/MoreRequirementOptionsException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/TowerOccupiedException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/CreateGameMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/EnterGameMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ExitGameMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameSetupMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/NetMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/RejectedMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/UpdateMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/scrap/ResultTriggerVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/res/board.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/res/cards.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/res/excommunications.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/Client.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/View.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/net/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/Card.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/Deck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/ExcommunicationCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/GreenCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/GreenCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/LeaderCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/VioletCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/VioletCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/YellowCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/YellowCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/ActivableEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/ActivableEffectType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/AlternativeEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/Effect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/EffectType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/EndGameEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/ImmediateEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/OnePerTurnEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/PermanentEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/SimpleEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/MissingCardException.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ActionResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AlwaysUnFullFilledResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusWithMultiplier.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/Dice.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FreeAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResourceToSub.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoColorBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PermanentBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/Resource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ServantResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VictoryResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/BlueCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/DiceMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/ExcommunicationEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/GoldMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/GreenCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/HarvestingMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/MilitaryMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/MoreServantsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoActionExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoBlueVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoGreenVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoMarketExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoVioletVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/ProductionMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/ReduceVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/RemoveCardCostFromVPExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/ServantMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/VioletCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/WoodStoneMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/YellowCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpaceWithEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/BlueTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/CouncilSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/GreenTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/HarvestingSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/MarketSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ProductionSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/TileWithEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/TowerTileInterface.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/VioletTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/YellowTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/LeaderCardMessage.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/BonusActionListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ChatManager.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/EndActionListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameSetup.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/LimitedBonusActListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/NetworkAdapter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/PrivilegeBonusListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundInterface.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/VisitorInterface.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/Game.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/LimConnection.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/Lobby.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/LobbyNetMessageVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/ServerApp.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/rmi/MessageBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/rmi/RemoteMessaqeInterface.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/rmi/RmiConn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/SocketConn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/SocketSide.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_lanterna_lanterna_2_1_9.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ActionSpaceWithEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/BonusActionListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/ChatManager.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/EndActionListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/ExcommunicationTriggerListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/GameFlowController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/GameSetup.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/NetworkAdapter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/PrivilegeBonusListener.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/TurnSetupManager.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/controller/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActionSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActionSpaceWithEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActivableEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ActivableEffectType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BlueCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BlueCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BlueTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Card.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/CouncilSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Deck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Effect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EffectType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/EndGameEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ExcommunicationCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/GreenCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/GreenCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/GreenTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/HarvestingSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ImmediateEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/LeaderCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/MarketSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/OnePerTurnEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/PermanentEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ProductionSpace.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tile.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TileWithEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Tower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TowerCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/TowerTileInterface.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/VioletCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/VioletCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/VioletTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/YellowCard.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/YellowCardDeck.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/YellowTower.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/client/Client.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Game.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/LimConnection.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/Lobby.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/LobbyNetMessageVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/NetMessageVisitor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/PlayerClient.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/ServerApp.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/rmi/RmiConn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/socket/SocketConn.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/socket/SocketSide.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/server/socket/Stream.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ActionResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BlueAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BonusAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/BonusWithMultiplier.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/Dice.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/BlueCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/DiceMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ExcommunicationEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GoldMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/GreenCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/HarvestingMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MilitaryMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/MoreServantsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoActionExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoBlueVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoGreenVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoMarketExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/NoVioletVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ProductionMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ReduceVictoryPtsExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/RemoveCardCostFromVPExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/ServantMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/VioletCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/WoodStoneMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/YellowCardMalusExcomm.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ExcommunicationEffects/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/FaithResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/FreeAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GoldResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GoldResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GreenAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/GreenBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/HarvestAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/HarvestBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/MilitaryResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/MilitaryResourceToSub.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/NoColorBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/PrivilegeBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ProductionAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ProductionBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/RemoveTileEffect.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/Resource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/ServantResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/StoneResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/StoneResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VictoryResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VioletAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/VioletBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/WoodResource.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/WoodResourceCostBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/YellowAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/resourcesandbonuses/YellowBonus.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/View.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/cli/CLIMain.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/gui/GUIMain.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/gui/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/net/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/view/package-info.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -1130,6 +1078,61 @@
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1393,9 +1396,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1454,19 +1454,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <working-directory />
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui />
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
       <method />
     </configuration>
@@ -1520,7 +1507,8 @@
       <workItem from="1497882576578" duration="2195000" />
       <workItem from="1497885286286" duration="10159000" />
       <workItem from="1497960485244" duration="911000" />
-      <workItem from="1497961493256" duration="8426000" />
+      <workItem from="1497961493256" duration="11499000" />
+      <workItem from="1498484654170" duration="8325000" />
     </task>
     <task id="LOCAL-00001" summary="nomi package corretti secondo convenzione">
       <created>1496937698774</created>
@@ -1648,7 +1636,28 @@
       <option name="project" value="LOCAL" />
       <updated>1497960912039</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Listeners">
+      <created>1497970625433</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1497970625433</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Aggiunti Listeners per azioni nel package del client, inizio struttura client">
+      <created>1498498175517</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1498498175517</updated>
+    </task>
+    <task id="LOCAL-00021" summary="sync">
+      <created>1498498979887</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1498498979887</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1660,7 +1669,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111511000" />
+    <option name="totallyTimeSpent" value="121217000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1672,54 +1681,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <frame x="-16" y="-16" width="3872" height="2192" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893348" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32893348" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967606" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1984" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31369862" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22386484" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3301282" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16235864" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21390374" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22293334" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14586666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967606" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1984" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22293334" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14586666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22386484" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3301282" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22941177" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1801,21 +1793,15 @@
     <MESSAGE value="prova commit" />
     <MESSAGE value="riscrittura controller" />
     <MESSAGE value="controller modifiche" />
-    <MESSAGE value="sync" />
     <MESSAGE value="migliorata struttura package" />
-    <option name="LAST_COMMIT_MESSAGE" value="migliorata struttura package" />
+    <MESSAGE value="Listeners" />
+    <MESSAGE value="Aggiunti Listeners per azioni nel package del client, inizio struttura client" />
+    <MESSAGE value="sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="sync" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java</url>
-          <line>34</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="11" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1824,146 +1810,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/ImmediateEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#455#456#0" expanded="false" />
-            <element signature="e#496#497#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/RemoveCardCostFromVPExcomm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-240">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/DiceMalusExcomm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/MilitaryMalusExcomm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/NoGreenVictoryPtsExcomm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/Effect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/effects/PermanentEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/package-info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-797">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FreeAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="52" column="8" lean-forward="false" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Turn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="67" column="16" lean-forward="false" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/Lobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="853">
-          <caret line="65" column="15" lean-forward="false" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="853">
-          <caret line="65" column="15" lean-forward="false" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2350">
-          <caret line="64" column="15" lean-forward="false" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2500">
-          <caret line="65" column="15" lean-forward="false" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
-          <caret line="39" column="2" lean-forward="false" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/excommunicationeffects/GoldMalusExcomm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
@@ -1982,13 +1828,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-147">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1996,21 +1836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2314">
-          <caret line="67" column="25" lean-forward="false" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5314">
-          <caret line="464" column="102" lean-forward="false" selection-start-line="464" selection-start-column="102" selection-end-line="464" selection-end-column="102" />
           <folding />
         </state>
       </provider>
@@ -2026,15 +1851,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-50">
           <caret line="2" column="42" lean-forward="false" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3180">
-          <caret line="219" column="25" lean-forward="false" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="25" />
           <folding>
-            <marker date="1498486674000" expanded="true" signature="30336:30359" ph="{...}" />
+            <element signature="e#1016#1017#0" expanded="false" />
+            <element signature="e#1041#1042#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2043,40 +1862,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="67" column="16" lean-forward="false" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/BonusActionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="29" column="70" lean-forward="false" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="57" column="44" lean-forward="true" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-          <folding>
-            <element signature="e#3354#3355#0" expanded="false" />
-            <element signature="e#3382#3383#0" expanded="false" />
-            <element signature="e#3432#3433#0" expanded="false" />
-            <element signature="e#3466#3467#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2087,39 +1873,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/LimitedBonusActListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ActionSpaceWithEffect.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="33" column="41" lean-forward="false" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-869">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/presenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1250">
+          <caret line="32" column="32" lean-forward="false" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/TakeCardListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/LimitedBonusActListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameSetup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-400">
+        <state relative-caret-position="50">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="23" column="49" lean-forward="false" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        <state relative-caret-position="700">
+          <caret line="19" column="10" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="19" column="10" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+        <state relative-caret-position="3094">
+          <caret line="64" column="48" lean-forward="false" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="23" column="49" lean-forward="false" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/BonusActionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1200">
+          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ChatManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2127,90 +1996,239 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="800">
           <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3100">
-          <caret line="64" column="48" lean-forward="false" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="142" column="38" lean-forward="false" selection-start-line="142" selection-start-column="38" selection-end-line="142" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-548">
-          <caret line="81" column="18" lean-forward="false" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/exceptions/CouncilDiceAlreadySet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/fx-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="125" column="91" lean-forward="false" selection-start-line="125" selection-start-column="91" selection-end-line="125" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#616#617#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/structure.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="121" lean-forward="false" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/CouncilSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+        <state relative-caret-position="-269">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="96" column="4" lean-forward="false" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
+        <state relative-caret-position="1350">
+          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="20" />
+          <folding>
+            <element signature="e#2512#2513#0" expanded="true" />
+            <element signature="e#2528#2529#0" expanded="true" />
+            <marker date="1498488369924" expanded="true" signature="2487:2490" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1498498337708" expanded="true" signature="30409:30432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="e#1046#1047#0" expanded="true" />
+            <element signature="e#1081#1082#0" expanded="true" />
+            <element signature="e#1124#1125#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="686">
+          <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1436">
+          <caret line="402" column="8" lean-forward="false" selection-start-line="402" selection-start-column="8" selection-end-line="402" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="49" column="61" lean-forward="false" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ActivateLeaderListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/MoveFamiliarListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PassActionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/DiscardLeaderListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ActionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1405">
+          <caret line="180" column="22" lean-forward="true" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="60" column="6" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="55" />
+          <folding>
+            <element signature="e#4030#4031#0" expanded="true" />
+            <element signature="e#4056#4057#0" expanded="true" />
+            <element signature="e#4132#4133#0" expanded="true" />
+            <element signature="e#4171#4172#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ExcommunicationChoiceListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PrivilegeConversionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/MessageSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ServerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3850">
+          <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="74" column="59" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1257">
+          <caret line="74" column="59" lean-forward="false" selection-start-line="74" selection-start-column="59" selection-end-line="74" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1257">
+          <caret line="71" column="59" lean-forward="false" selection-start-line="71" selection-start-column="59" selection-end-line="71" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="69" column="59" lean-forward="false" selection-start-line="69" selection-start-column="59" selection-end-line="69" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1607">
+          <caret line="79" column="50" lean-forward="false" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="52" column="59" lean-forward="false" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="66" column="59" lean-forward="false" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="60" column="29" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
           <folding />
         </state>
       </provider>
