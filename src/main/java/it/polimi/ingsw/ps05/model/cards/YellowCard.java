@@ -86,8 +86,7 @@ public class YellowCard extends TowerCard {
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
-		
+		super.applyNonActivableEffects(player);
 	}
 	
 	@Override

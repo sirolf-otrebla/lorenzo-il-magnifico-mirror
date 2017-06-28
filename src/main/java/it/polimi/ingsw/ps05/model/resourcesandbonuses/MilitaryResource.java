@@ -59,13 +59,11 @@ public class MilitaryResource implements Resource, ActionResult {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return (playerFamiliar.getRelatedPlayer().getResource(this.getID()).getValue() >= this.getValue());
 	}
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 

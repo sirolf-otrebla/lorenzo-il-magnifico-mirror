@@ -11,7 +11,6 @@ public class GoldResource implements Resource, ActionResult {
 	 * 
 	 */
 	private static final long serialVersionUID = 5857907131060281475L;
-	//TODO: vedi faith resource
 	private Integer amount;
 	public static final String id = "Oro";
 	private Game game;
@@ -65,7 +64,6 @@ public class GoldResource implements Resource, ActionResult {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 

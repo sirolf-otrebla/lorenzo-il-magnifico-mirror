@@ -28,7 +28,7 @@ public class ExcommunicationTriggerListener implements Observer {
         for (PlayerClient pl: this.game.getPlayerInGame().values()){
             FaithResource faith = (FaithResource) pl.getPlayer().getResource(FaithResource.ID);
             if (ex.getFaithRequested().getValue() < faith.getValue());
-              //TODO:  ex.applyEffect(pl.getPlayer());
+              ex.applyEffect(pl.getPlayer());
         }
 
     }

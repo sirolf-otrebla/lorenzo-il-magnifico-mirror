@@ -40,7 +40,6 @@ public class WoodStoneMalusExcomm implements ExcommunicationEffect {
 			try {
 				forRes = forRes + r.toString() + " " + r.getValue() + " ";
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -26,7 +26,6 @@ public class NoMarketExcomm implements ExcommunicationEffect {
 
 	@Override
 	public void setMalus(ArrayList<ActionResult> malus) throws RepeatedAssignmentException{
-		// TODO Auto-generated method stub
 		if (this.malus == null){
 			this.malus = malus;
 		} else {

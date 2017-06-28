@@ -40,7 +40,7 @@ public class BlueCardMalusExcomm implements ExcommunicationEffect {
 			try {
 				forRes = forRes + r.toString() + " " + r.getValue() + "\n";
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
+				//non entra mai qui
 				e.printStackTrace();
 			}
 		}

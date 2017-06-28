@@ -54,7 +54,6 @@ public class LeaderCard implements Card {
 	
 	@Override
 	public EpochEnumeration getEpoch() {
-		// TODO Auto-generated method stub
 		return EpochEnumeration.NO_EPOCH;
 	}
 
@@ -71,7 +70,6 @@ public class LeaderCard implements Card {
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
 		for (int i = 0; i < effects.size(); i++)
 		    ((SimpleEffect)effects.get(i)).apply(player);
 	}

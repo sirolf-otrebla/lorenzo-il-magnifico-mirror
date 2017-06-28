@@ -49,7 +49,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
 		//crea familiare ghost in player
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa

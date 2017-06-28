@@ -60,7 +60,7 @@ public abstract class ActionSpace implements Serializable {
 		return isOccupied;
 	}
 
-	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException; //TODO: implement this method in subclasses;
+	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException;
 
 	public ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;

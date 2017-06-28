@@ -11,7 +11,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
 
 /* See UML for thescription.
  * 
- * TODO: add UML methods and attributes. --Sirolfo
  */
 public abstract class Tower implements Serializable {
 

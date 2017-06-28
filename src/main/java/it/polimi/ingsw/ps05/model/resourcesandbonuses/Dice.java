@@ -85,7 +85,6 @@ public class Dice implements Resource {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 	

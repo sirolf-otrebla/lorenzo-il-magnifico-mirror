@@ -31,8 +31,7 @@ public class ExcommunicationCard implements Serializable {
 	}
 
 	public void applyEffect(Player pl){
-
-		//TODO:
+		excomEffect.apply(pl);
 	}
 
 	public EpochEnumeration getEpochID() {

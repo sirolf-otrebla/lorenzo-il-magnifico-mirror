@@ -61,7 +61,6 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

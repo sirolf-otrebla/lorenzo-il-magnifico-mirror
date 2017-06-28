@@ -94,13 +94,11 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 
 	@Override
 	public void applyEffect() {
-		// TODO Auto-generated method stub
-		
+		toBeDecorated.applyEffect();
 	}
 
 	@Override
 	public void removeTowerCard() {
-		// TODO Auto-generated method stub
-		
+		toBeDecorated.removeTowerCard();
 	}
 }

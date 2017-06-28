@@ -57,7 +57,6 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return (playerFamiliar.getRelatedPlayer().getResource(this.getID()).getValue() >= this.getValue());
 	}
 
@@ -68,7 +67,6 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

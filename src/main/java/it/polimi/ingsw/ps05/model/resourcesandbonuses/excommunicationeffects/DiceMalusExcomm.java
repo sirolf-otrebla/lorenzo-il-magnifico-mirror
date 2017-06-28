@@ -40,7 +40,7 @@ public class DiceMalusExcomm implements ExcommunicationEffect {
 			try {
 				forRes = forRes + r.toString() + " " + r.getValue() + "\n";
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
+				//non si entra mai qui
 				e.printStackTrace();
 			}
 		}

@@ -206,7 +206,6 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -233,7 +232,6 @@ public class CommonJsonParser {
 			}
 		}
 
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -455,21 +453,6 @@ public class CommonJsonParser {
 	}
 
 	//XXX Metodi per caricamento carte
-	/*public ArrayList<Deck> loadDeck(String path) {
-		ArrayList<Deck> deck = new ArrayList<Deck>();
-		try {
-			File file = new File(path);
-			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			deck.add(loadBlueCardDeck(obj));
-			deck.add(loadYellowCardDeck(obj));
-			deck.add(loadGreenCardDeck(obj));
-			deck.add(loadVioletCardDeck(obj));
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-		return deck;
-
-	}*/
 
 	private BlueCardDeck loadBlueCardDeck(JSONObject json){
 		JSONArray list = (JSONArray) json.get("Blue");

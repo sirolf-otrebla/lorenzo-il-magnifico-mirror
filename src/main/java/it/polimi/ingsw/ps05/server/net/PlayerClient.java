@@ -80,7 +80,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
     
 
 	public void sendMessage(NetMessage message){
-		//TODO:
+		connection.send(message);
 	}
 
 }

@@ -20,7 +20,7 @@ public class AlternativesList<T> implements Iterable<Alternative<T>> {
 	
 	@Override
 	public Iterator<Alternative<T>> iterator() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub e questa?
 		return null;
 	}
 

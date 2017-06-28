@@ -19,7 +19,6 @@ public class MoreServantsExcomm implements ExcommunicationEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.EXCOM;
 	}
 	
@@ -41,7 +40,6 @@ public class MoreServantsExcomm implements ExcommunicationEffect {
 			try {
 				forRes = forRes + r.getValue() + " ";
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

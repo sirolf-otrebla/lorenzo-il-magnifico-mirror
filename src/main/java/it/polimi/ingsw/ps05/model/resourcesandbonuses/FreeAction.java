@@ -49,7 +49,7 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		//TODO: this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		this.addObserver(game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override

@@ -15,7 +15,6 @@ public class ImmediateEffect implements SimpleEffect {
 
 	public ImmediateEffect() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setEffectList(ArrayList<ActionResult> actResList){
@@ -24,7 +23,6 @@ public class ImmediateEffect implements SimpleEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.IMMEDIATE;
 	}
 

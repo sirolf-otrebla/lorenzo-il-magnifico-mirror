@@ -58,13 +58,11 @@ public class VictoryResource implements Resource, ActionResult {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

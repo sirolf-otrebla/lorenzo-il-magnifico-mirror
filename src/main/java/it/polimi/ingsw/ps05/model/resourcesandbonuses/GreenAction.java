@@ -91,7 +91,6 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 
 
 	public void resetResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){

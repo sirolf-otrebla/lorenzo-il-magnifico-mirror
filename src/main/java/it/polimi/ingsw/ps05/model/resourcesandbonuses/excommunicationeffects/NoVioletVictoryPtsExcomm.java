@@ -22,7 +22,6 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 
 	@Override
     public EffectType getEffectType() {
-        // TODO Auto-generated method stub
         return EffectType.EXCOM;
     }
 	
@@ -30,7 +29,6 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 
 	@Override
 	public void setMalus(ArrayList<ActionResult> malus) throws RepeatedAssignmentException{
-		// TODO Auto-generated method stub
 		if (this.malus == null){
 			this.malus = malus;
 		} else {

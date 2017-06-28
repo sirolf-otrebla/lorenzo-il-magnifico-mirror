@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -98,6 +99,6 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 	@Override
 	public void removeTowerCard() {
 		// TODO Auto-generated method stub
-		
+		card = null;
 	}
 }

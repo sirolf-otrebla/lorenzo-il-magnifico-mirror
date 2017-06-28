@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public interface ExcommunicationEffect extends SimpleEffect, Serializable {
 
-	//TODO: create classes that implements this interface. how can we represent excommunicationeffects?
 	
 	// bool checkAction(Action a); this checks if an action is possible or not based on ExcommunicationEffect
 	// It is a good solution? --Sirolfo

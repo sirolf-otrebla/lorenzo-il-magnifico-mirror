@@ -22,14 +22,11 @@ public class PermanentEffect implements SimpleEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.PERMANENT;
 	}
 
 	@Override
 	public ArrayList<ActionResult> getResultList() {
-		// TODO Auto-generated method stub
-
 		return  effectsList;
 }
 

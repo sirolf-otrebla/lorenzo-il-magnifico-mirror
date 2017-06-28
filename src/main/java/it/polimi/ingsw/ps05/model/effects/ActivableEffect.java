@@ -48,13 +48,11 @@ public class ActivableEffect implements AlternativeEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.ACTIVABLE;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		// TODO Auto-generated method stub
 		return effects;
 	}
 	
