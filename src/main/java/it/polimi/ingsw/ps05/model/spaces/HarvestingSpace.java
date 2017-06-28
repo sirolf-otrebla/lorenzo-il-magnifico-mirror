@@ -18,22 +18,22 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  */
 public class HarvestingSpace extends ActionSpaceWithEffect {
 
-    private ArrayList<Effect> effectList;
+	private ArrayList<Effect> effectList;
 
-    @Override
-    public ArrayList<Effect> getEffects() {
-        return effectList;
-    }
+	@Override
+	public ArrayList<Effect> getEffects() {
+		return effectList;
+	}
 
-    @Override
-    public void applyEffect() {
-        Player player = this.getOccupant().getRelatedPlayer();
-        Iterator<GreenCard> cardListIt = player.getGreenCardList().iterator();
-        while (cardListIt.hasNext())
-            cardListIt.next().applyHarvestableEffects(this.getOccupant());
+	@Override
+	public void applyEffect() {
+		Player player = this.getOccupant().getRelatedPlayer();
+		Iterator<GreenCard> cardListIt = player.getGreenCardList().iterator();
+		while (cardListIt.hasNext())
+			cardListIt.next().applyHarvestableEffects(this.getOccupant());
 
-    }
-    
+	}
+
 	public HarvestingSpace() {
 		super();
 	}
@@ -46,11 +46,7 @@ public class HarvestingSpace extends ActionSpaceWithEffect {
 
 	public HarvestingSpace(Dice diceRequired, ArrayList<Effect> effectList) throws RepeatedAssignmentException {
 		super();
-		try {
-            super.setDiceRequirement(diceRequired);
-        } catch (RepeatedAssignmentException e) {
-		    //TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
-        }
+		super.setDiceRequirement(diceRequired);
 		this.effectList = effectList;
 	}
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import it.polimi.ingsw.ps05.model.cards.*;
@@ -23,6 +24,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
@@ -60,11 +62,11 @@ public class CommonJsonParser {
 			faithList = loadFaithPath(obj.get("FaithPath"));
 			towerList = loadTower((JSONObject)obj.get("Tower"));
 			militaryList = loadMilitaryPath(obj.get("MilitaryPath"));
-		} catch (IOException | ParseException | RepeatedAssignmentException e) {
+		} catch (IOException | ParseException | RepeatedAssignmentException | CouncilDiceAlreadySet e) {
 			e.printStackTrace();
 		}
 
-		return Board.initBoard(towerList, notTowerSpace, faithList, militaryList,null);
+		return new Board(towerList, notTowerSpace, faithList, militaryList);
 	}
 
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){
@@ -100,12 +102,14 @@ public class CommonJsonParser {
 	}
 
 	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
-		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		//ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		HashMap<Integer, TowerTileInterface> list = new HashMap<Integer, TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			JSONArray array = (JSONArray)json.get(json.keySet().toArray()[i].toString());
 			for (int j = 0; j < array.toArray().length; j++){
 				try {
-					list.add(loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString()));
+					TowerTileInterface tile = loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString());
+					list.put(((ActionSpace)tile).getId(), tile);
 				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 						| SecurityException e) {
 					e.printStackTrace();
@@ -116,7 +120,7 @@ public class CommonJsonParser {
 		Object tower = Class.forName(spacePath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
-		for (TowerTileInterface t : list){
+		for (TowerTileInterface t : list.values()){
 			t.setParentTower((Tower)tower);
 		}
 
@@ -196,7 +200,7 @@ public class CommonJsonParser {
 		return new MarketSpace(diceRequired, effectList);
 	}
 
-	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException{
+	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException, CouncilDiceAlreadySet{
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {

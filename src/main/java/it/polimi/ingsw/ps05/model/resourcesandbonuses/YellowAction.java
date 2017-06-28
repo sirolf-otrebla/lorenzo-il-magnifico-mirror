@@ -47,9 +47,9 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof YellowTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.addFalseResource();
 				}
@@ -64,9 +64,9 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof YellowTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.removeFalseResource();
 				}

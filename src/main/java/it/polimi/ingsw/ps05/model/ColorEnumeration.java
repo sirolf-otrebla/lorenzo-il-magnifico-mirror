@@ -1,10 +1,10 @@
 package it.polimi.ingsw.ps05.model;
 
 public enum ColorEnumeration {
+	Violet("Viola"),
+	Yellow("Giallo"),
+	Blue("Blu"),
 	Green("Verde"),
-	Violet("Viola")
-	,Yellow("Giallo")
-	,Blue("Blu"),
 	Black("Nero"),
 	White("Bianco"),
 	Orange("Arancione"),

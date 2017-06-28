@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.server.net.rmi;
 
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.net.LimConnection;
+import it.polimi.ingsw.ps05.server.net.LimConnection;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;

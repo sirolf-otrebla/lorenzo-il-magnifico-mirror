@@ -1,10 +1,10 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BlueTower extends Tower {
 
-	public BlueTower(ArrayList<TowerTileInterface> tiles) {
+	public BlueTower(HashMap<Integer, TowerTileInterface> tiles) {
 		super(tiles);
 	}
 	
@@ -13,7 +13,7 @@ public class BlueTower extends Tower {
 	}
 	
 	@Override
-	public void setTiles(ArrayList<TowerTileInterface> tiles){
+	public void setTiles(HashMap<Integer, TowerTileInterface> tiles){
 		super.setTiles(tiles);
 	}
 

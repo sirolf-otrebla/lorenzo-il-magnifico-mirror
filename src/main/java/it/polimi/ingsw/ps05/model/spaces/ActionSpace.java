@@ -59,14 +59,10 @@ public abstract class ActionSpace {
 		return requirements;
 	}
 
-	public void setDiceRequirement (Dice diceRequirement) throws RepeatedAssignmentException{
+	public void setDiceRequirement (Dice diceRequirement) {
 
 		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
-		if(this.diceRequirement == null) {
-			this.diceRequirement = diceRequirement;
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+		this.diceRequirement = diceRequirement;
 		for (ArrayList<Resource> a : requirements)
 			a.set(0, diceRequirement);
 	}
@@ -83,13 +79,13 @@ public abstract class ActionSpace {
 		isOccupied = false;
 		occupant = null;
 	}
-	
+
 	public void addFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			or.add(new AlwaysUnFullFilledResource());
 		}
 	}
-	
+
 	public void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			for (Resource r : or){

@@ -22,7 +22,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     public static final int TOWER_OCCUPIED_PAYMENT = 3;
     
     public Tile(){
-    	
+    	super();
     }
 
     @Override
@@ -31,8 +31,12 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     public Tile(TowerCard card, Integer diceRequired, Tower parentTower){
-    	
+    	super();
+    	this.parentTower = parentTower;
+    	this.card = card;
+    	this.diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
     }
+    
     @Override
     public void setDiceRequired(Integer diceRequired){
     	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);

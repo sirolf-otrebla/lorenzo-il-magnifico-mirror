@@ -35,9 +35,9 @@ public class BlueBonus extends Observable implements ActionResult {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (t instanceof BlueTower){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					tile.setDiceRequired(tile.getDiceRequired().getValue() - this.getValue());
 				}
 			}
@@ -48,9 +48,9 @@ public class BlueBonus extends Observable implements ActionResult {
 	
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (t instanceof BlueTower){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					tile.setDiceRequired(tile.getDiceRequired().getValue() + this.getValue());
 				}
 			}

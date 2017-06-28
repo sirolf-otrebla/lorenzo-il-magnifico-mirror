@@ -52,8 +52,8 @@ public class TurnSetupManager extends Observable{
 			stoCazzoIterator.next().reset();
 		//todo da controllare
 		//reset delle carte
-		for (Tower o : board.getTowerList()){
-			for (TowerTileInterface a : o.getTiles()){
+		for (Tower o : board.getTowerList().values()){
+			for (TowerTileInterface a : o.getTiles().values()){
 				a.removeTowerCard();
 			}
 		}
@@ -78,7 +78,7 @@ public class TurnSetupManager extends Observable{
 	}
 	
 	private void setUpBoardCard(Turn currentTurn){
-		for (Tower o : board.getTowerList()){
+		for (Tower o : board.getTowerList().values()){
 			o.setCardInTile(currentTurn.getEpoch());
 		}
 	}

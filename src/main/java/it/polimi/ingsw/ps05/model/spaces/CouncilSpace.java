@@ -29,12 +29,8 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) throws RepeatedAssignmentException, CouncilDiceAlreadySet {
 		super();
 
-		try {
-			super.setDiceRequirement(diceRequired);
-		} catch (RepeatedAssignmentException e) {
-			//TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
-			throw new CouncilDiceAlreadySet();
-		}
+		super.setDiceRequirement(diceRequired);
+
 
 		if (this.effectList == null) {
 			this.effectList = effect;
@@ -61,6 +57,10 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		}
 	}
 	
+	public ArrayList<Familiar> getOccupantList(){
+		return this.occupantList;
+	}
+
 
 	public ArrayList<Player> getOrder() {
 		boolean alreadyPresent = false;
