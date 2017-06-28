@@ -18,22 +18,22 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  */
 public class HarvestingSpace extends ActionSpaceWithEffect {
 
-    private ArrayList<Effect> effectList;
+	private ArrayList<Effect> effectList;
 
-    @Override
-    public ArrayList<Effect> getEffects() {
-        return effectList;
-    }
+	@Override
+	public ArrayList<Effect> getEffects() {
+		return effectList;
+	}
 
-    @Override
-    public void applyEffect() {
-        Player player = this.getOccupant().getRelatedPlayer();
-        Iterator<GreenCard> cardListIt = player.getGreenCardList().iterator();
-        while (cardListIt.hasNext())
-            cardListIt.next().applyHarvestableEffects(this.getOccupant());
+	@Override
+	public void applyEffect() {
+		Player player = this.getOccupant().getRelatedPlayer();
+		Iterator<GreenCard> cardListIt = player.getGreenCardList().iterator();
+		while (cardListIt.hasNext())
+			cardListIt.next().applyHarvestableEffects(this.getOccupant());
 
-    }
-    
+	}
+
 	public HarvestingSpace() {
 		super();
 	}

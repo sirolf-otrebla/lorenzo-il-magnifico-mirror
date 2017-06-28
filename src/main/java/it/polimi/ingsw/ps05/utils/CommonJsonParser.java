@@ -24,6 +24,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
@@ -61,7 +62,7 @@ public class CommonJsonParser {
 			faithList = loadFaithPath(obj.get("FaithPath"));
 			towerList = loadTower((JSONObject)obj.get("Tower"));
 			militaryList = loadMilitaryPath(obj.get("MilitaryPath"));
-		} catch (IOException | ParseException | RepeatedAssignmentException e) {
+		} catch (IOException | ParseException | RepeatedAssignmentException | CouncilDiceAlreadySet e) {
 			e.printStackTrace();
 		}
 
@@ -199,7 +200,7 @@ public class CommonJsonParser {
 		return new MarketSpace(diceRequired, effectList);
 	}
 
-	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException{
+	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException, CouncilDiceAlreadySet{
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {

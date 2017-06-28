@@ -18,7 +18,7 @@ public class Board {
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
 
-	private HashMap<ColorEnumeration, Tower> towerList = null;
+	private HashMap<ColorEnumeration, Tower> towerHashMap;
 	private HashMap<Integer, ActionSpace> actSpacesMap;
 	private ArrayList<ActionSpace> actionSpace = null; //da confermare utilizzo lista
 	private ArrayList<Player> playerOnCouncil;
@@ -29,9 +29,10 @@ public class Board {
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
 			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath) {
 		super();
-		this.towerList = new HashMap<>();
+
+		this.towerHashMap = new HashMap<>();
 		for (Tower tower : towerList){
-			this.towerList.put(tower.getColor(), tower);
+			this.towerHashMap.put(tower.getColor(), tower);
 		}
 		this.actSpacesMap = new HashMap<>();
 		for (ActionSpace actSpace : actionSpaceArrayList){
@@ -43,7 +44,7 @@ public class Board {
 	}
 
 	public HashMap<ColorEnumeration, Tower> getTowerList() {
-		return towerList;
+		return towerHashMap;
 	}
 
 	public ArrayList<Player> getPlayerOnCouncil() {
@@ -61,8 +62,8 @@ public class Board {
 	public ArrayList<ExcommunicationCard> getExcomCards() { return excomCards; }
 
 	public void setTowerList(HashMap<ColorEnumeration, Tower> towerList) throws RepeatedAssignmentException {
-		if (this.towerList == null) {
-			this.towerList = towerList;
+		if (this.towerHashMap == null) {
+			this.towerHashMap = towerList;
 		} else {
 			throw new RepeatedAssignmentException();
 		}

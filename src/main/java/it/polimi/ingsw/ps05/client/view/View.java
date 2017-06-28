@@ -15,9 +15,9 @@ public class View {
 	
 	public void instanceGUI(){
 		GUIMain gui = new GUIMain();
-		Thread t = new Thread(gui);
-		t.setDaemon(true);
-		t.start();
+		//Thread t = new Thread(gui);
+		//t.setDaemon(true);
+		//t.start();
 	}
 	
 	public void instanceCLI(Board board, Player player, ArrayList<Player> playersList){
