@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.LimConnection;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 

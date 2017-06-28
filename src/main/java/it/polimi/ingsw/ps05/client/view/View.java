@@ -9,8 +9,6 @@ import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
 
 public class View {
 	
-	
-	
 	public View(){
 		
 	}
