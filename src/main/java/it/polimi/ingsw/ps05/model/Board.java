@@ -14,7 +14,9 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  * 
  */
+
 public class Board implements Serializable{
+
 
 	/**
 	 * 
