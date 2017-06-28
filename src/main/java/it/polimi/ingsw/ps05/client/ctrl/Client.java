@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
+import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
 /**
@@ -10,6 +12,8 @@ public class Client {
 
     private static Client client;
     private ServerInterface serverInterface;
+
+    private GameStatus gameStatus;
     private Client(){
 
     }

@@ -27,6 +27,8 @@ public abstract class ActionSpace {
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	private int id;
+	private Familiar occupant;
+
 
 
 	public ActionSpace() {
@@ -37,8 +39,6 @@ public abstract class ActionSpace {
 		this.id = id_counter;
 		id_counter++;
 	}
-
-	private Familiar occupant;
 
 	public Familiar getOccupant(){
 		return occupant;

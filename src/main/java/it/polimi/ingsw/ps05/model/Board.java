@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  * 
  */
-public class Board {
+public class Board implements Serializable {
 	private static Board instance;
 
 	public final static int MAX_PLAYERS = 4;

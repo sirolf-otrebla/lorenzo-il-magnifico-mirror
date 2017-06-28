@@ -14,7 +14,6 @@ public class GameFlowController implements Runnable {
 	private Game game;
 
 	public BonusActionListener bonusActListener;
-	private Iterator<Player> plOrdIt;
 	public ExcommunicationTriggerListener exTrigger;
 	public EndActionListener endActionListener;
 	public LimitedBonusActListener limitedBonusActListener;
