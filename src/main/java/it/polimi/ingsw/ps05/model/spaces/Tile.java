@@ -15,7 +15,11 @@ import java.util.ArrayList;
  */
 public class Tile extends ActionSpace implements TowerTileInterface {
 
-    private Tower parentTower;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1979532547287923081L;
+	private Tower parentTower;
     private TowerCard card;
     private Dice diceRequirement;
 

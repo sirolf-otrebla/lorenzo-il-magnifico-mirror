@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class VictoryResource implements Resource, ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 371922522218080021L;
 	private Integer amount;
 	public static final String ID = "Vittoria";
 	private Game game;

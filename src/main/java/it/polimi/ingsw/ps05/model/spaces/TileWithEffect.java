@@ -15,6 +15,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
 public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileInterface {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 675964833623423175L;
+
 	private Tile toBeDecorated; //?????
 
 	private ArrayList<ActionResult> effectOnPositioning = new ArrayList<ActionResult>();

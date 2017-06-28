@@ -10,6 +10,12 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class GreenCard extends TowerCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8383056887622761576L;
+
+
 	public GreenCard(){
 		super();
 	}

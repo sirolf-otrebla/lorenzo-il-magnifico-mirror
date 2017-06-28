@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
 public class AlwaysUnFullFilledResource implements Resource {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7673964039019243366L;
 	public static final String id = "Risorsa sempre falsa";
 
 	@Override

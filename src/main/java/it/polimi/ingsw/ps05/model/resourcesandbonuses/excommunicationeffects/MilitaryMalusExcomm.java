@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class MilitaryMalusExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8447073223673270746L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

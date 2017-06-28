@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class GoldMalusExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7640684466733933533L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

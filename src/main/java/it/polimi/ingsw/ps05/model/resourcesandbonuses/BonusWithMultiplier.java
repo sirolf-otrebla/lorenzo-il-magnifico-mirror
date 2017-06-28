@@ -4,6 +4,10 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class BonusWithMultiplier extends PermanentBonus {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2859778147705557560L;
 	private Float multiplier;
 	private Resource returnResource;
 	private Class<?> cardToCount;

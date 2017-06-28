@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
 public class MarketSpace extends ActionSpaceWithEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3303459183874742240L;
 	private ArrayList<Effect> effectList;
 	private int[] selectedEffects = {};
 	public static final int DEFAULT_INDEX = 0;

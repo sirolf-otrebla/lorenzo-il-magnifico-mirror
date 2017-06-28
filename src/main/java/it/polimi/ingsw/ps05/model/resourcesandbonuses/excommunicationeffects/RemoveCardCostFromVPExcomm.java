@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class RemoveCardCostFromVPExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2317488821311351203L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

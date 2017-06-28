@@ -11,6 +11,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class Dice implements Resource {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3352248065494331274L;
 	ColorEnumeration color;
 	private int value;
 	public static final  String ID = "Dado";

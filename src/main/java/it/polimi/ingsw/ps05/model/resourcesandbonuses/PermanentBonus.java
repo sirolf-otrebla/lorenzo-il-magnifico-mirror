@@ -9,5 +9,10 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
  */
 public abstract class PermanentBonus extends Observable implements ActionResult {
 
-    public abstract  void resetResult(PlayerRelated playerR);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2643486938713305364L;
+
+	public abstract  void resetResult(PlayerRelated playerR);
 }

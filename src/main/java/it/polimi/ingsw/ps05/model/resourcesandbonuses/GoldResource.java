@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class GoldResource implements Resource, ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5857907131060281475L;
 	//TODO: vedi faith resource
 	private Integer amount;
 	public static final String id = "Oro";

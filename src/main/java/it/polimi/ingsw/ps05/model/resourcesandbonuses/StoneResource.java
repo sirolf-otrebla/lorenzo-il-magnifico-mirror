@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class StoneResource implements Resource, ActionResult {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1244888621400064253L;
 	private Integer amount;
 	public static final String ID = "Pietra";
 	private Game game;

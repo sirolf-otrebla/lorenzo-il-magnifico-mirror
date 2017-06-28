@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 public abstract class ActionSpaceWithEffect extends ActionSpace {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6346094062227140134L;
+
 	public void setOccupied(Familiar occupant) {
 		super.setOccupied(occupant);
 	}

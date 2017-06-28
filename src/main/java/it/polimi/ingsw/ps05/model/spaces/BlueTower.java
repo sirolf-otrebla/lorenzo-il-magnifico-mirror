@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 public class BlueTower extends Tower {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6956782003943909289L;
+
 	public BlueTower(HashMap<Integer, TowerTileInterface> tiles) {
 		super(tiles);
 	}

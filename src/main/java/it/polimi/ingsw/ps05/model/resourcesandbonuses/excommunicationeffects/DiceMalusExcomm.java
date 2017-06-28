@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class DiceMalusExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8647656084663944173L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

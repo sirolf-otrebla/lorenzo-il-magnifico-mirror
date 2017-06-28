@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class BlueCard extends TowerCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6589070594892321967L;
+
 	public BlueCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements,
 					ArrayList<Effect> effects) {
 		super(epoch, color, cardName, requirements, effects);

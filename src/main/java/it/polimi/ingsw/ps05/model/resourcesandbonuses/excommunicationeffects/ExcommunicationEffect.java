@@ -5,9 +5,11 @@ import org.json.simple.JSONObject;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface ExcommunicationEffect extends SimpleEffect {
+public interface ExcommunicationEffect extends SimpleEffect, Serializable {
 
 	//TODO: create classes that implements this interface. how can we represent excommunicationeffects?
 	

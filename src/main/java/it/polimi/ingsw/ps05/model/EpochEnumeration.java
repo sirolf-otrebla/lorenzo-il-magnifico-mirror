@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.model;
 
-public enum EpochEnumeration {
+import java.io.Serializable;
+
+public enum EpochEnumeration implements Serializable {
 	FIRST("Prima epoca",0),SECOND("Seconda epoca", 1),THIRD("Terza epoca",2), NO_EPOCH("No epoca",3);
 	
 	private int epochIndex;

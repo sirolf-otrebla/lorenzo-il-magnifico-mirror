@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class HarvestingMalusExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8922189358831556898L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

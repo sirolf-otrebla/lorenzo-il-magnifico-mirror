@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,8 +14,13 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  * 
  */
-public class Board {
+public class Board implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3802284891664073914L;
+	
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
 

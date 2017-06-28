@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model.cards;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
@@ -8,7 +10,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.Exc
 
 // in this case we have to think if it's useful or not to use the card Interface --Sirolfo
 
-public class ExcommunicationCard{
+public class ExcommunicationCard implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8859721604132988242L;
 	private ExcommunicationEffect excomEffect;
 	private FaithResource faithRequested;
 	private EpochEnumeration epoch;

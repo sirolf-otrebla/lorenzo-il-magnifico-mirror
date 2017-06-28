@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class ServantResource implements Resource, ActionResult {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2480704551869981268L;
 	private Integer amount;
 	public static final  String ID = "Servitori";
 	private Game game;

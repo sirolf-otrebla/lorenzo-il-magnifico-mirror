@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class VioletCard extends TowerCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3065175569895619260L;
+
 	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
 		// TODO Auto-generated constructor stub

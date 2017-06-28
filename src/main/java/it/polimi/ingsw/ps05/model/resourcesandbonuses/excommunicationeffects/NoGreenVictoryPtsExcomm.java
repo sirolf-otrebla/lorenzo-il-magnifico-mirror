@@ -13,6 +13,11 @@ import it.polimi.ingsw.ps05.model.effects.EffectType;
 
 public class NoGreenVictoryPtsExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5138547132870452333L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

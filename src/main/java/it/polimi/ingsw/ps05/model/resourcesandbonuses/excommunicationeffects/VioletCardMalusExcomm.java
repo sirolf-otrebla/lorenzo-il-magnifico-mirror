@@ -11,7 +11,12 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class VioletCardMalusExcomm implements ExcommunicationEffect{
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5526622434349388102L;
+
+	@Override
     public EffectType getEffectType() {
         // TODO Auto-generated method stub
         return null;

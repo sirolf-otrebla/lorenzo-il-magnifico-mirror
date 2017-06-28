@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class ReduceVictoryPtsExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5529477371507190656L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

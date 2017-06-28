@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.model.spaces.YellowTower;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class YellowBonus extends PermanentBonus{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8671801209944697132L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 

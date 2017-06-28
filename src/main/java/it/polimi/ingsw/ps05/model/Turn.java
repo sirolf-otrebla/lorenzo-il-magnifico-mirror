@@ -2,10 +2,15 @@ package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Turn implements Period {
+public class Turn implements Period, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4399699310322553340L;
 	private ArrayList<Player> order; // turn order
 	private Turn next; 
 	private ArrayList<Dice> dice;

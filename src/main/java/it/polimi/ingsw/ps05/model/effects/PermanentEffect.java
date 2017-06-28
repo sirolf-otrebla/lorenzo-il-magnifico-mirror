@@ -10,6 +10,10 @@ public class PermanentEffect implements SimpleEffect {
 
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4456589036613595131L;
 	ArrayList<ActionResult> effectsList;
 	
 	public void setEffectList(ArrayList<ActionResult> effectsList){

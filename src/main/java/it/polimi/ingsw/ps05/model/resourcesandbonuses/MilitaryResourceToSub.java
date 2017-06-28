@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class MilitaryResourceToSub implements Resource, ActionResult {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7829022042415624291L;
 	private Integer amount;
 	public static final String id = "Militari da Togliere";
 	private Game game;

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.model.effects;
 
-public enum ActivableEffectType {
+import java.io.Serializable;
+
+public enum ActivableEffectType implements Serializable {
 	HARVEST("Raccolto"),PRODUCTION("Produzione");
 	
 	final String type;

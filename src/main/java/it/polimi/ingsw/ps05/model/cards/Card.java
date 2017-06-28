@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.cards;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
@@ -8,7 +9,7 @@ import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 
 
-public interface Card {
+public interface Card extends Serializable {
 
 	public ArrayList<ArrayList<Resource>> getRequirements(); 
 	

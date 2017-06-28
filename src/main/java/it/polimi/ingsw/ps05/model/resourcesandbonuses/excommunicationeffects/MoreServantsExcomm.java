@@ -11,6 +11,11 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class MoreServantsExcomm implements ExcommunicationEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2072434447683709748L;
+
 	@Override
 	public EffectType getEffectType() {
 		// TODO Auto-generated method stub

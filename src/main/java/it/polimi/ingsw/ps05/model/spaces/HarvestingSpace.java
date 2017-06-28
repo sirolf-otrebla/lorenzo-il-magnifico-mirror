@@ -18,6 +18,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  */
 public class HarvestingSpace extends ActionSpaceWithEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7499949449184129806L;
 	private ArrayList<Effect> effectList;
 
 	@Override

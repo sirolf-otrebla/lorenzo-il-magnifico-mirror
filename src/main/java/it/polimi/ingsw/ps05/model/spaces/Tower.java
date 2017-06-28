@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
@@ -13,8 +13,12 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
  * 
  * TODO: add UML methods and attributes. --Sirolfo
  */
-public abstract class Tower {
+public abstract class Tower implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4656424293015641983L;
 	public static final int TOWER_RENT_AMNT = 3;
 	private GoldResource towerOccupiedGoldResource;
 	private boolean occupied;

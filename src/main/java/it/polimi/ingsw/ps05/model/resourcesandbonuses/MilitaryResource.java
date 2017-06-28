@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class MilitaryResource implements Resource, ActionResult {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7968592953342500243L;
 	private Integer amount;
 	public static final String ID = "Militare";
 	private  Game game;

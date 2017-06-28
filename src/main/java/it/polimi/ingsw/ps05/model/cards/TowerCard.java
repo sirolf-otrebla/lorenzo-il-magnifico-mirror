@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public abstract class TowerCard implements Card {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3659476952391381973L;
 	public Epoch epoch = new Epoch();
 	public ColorEnumeration color;
 	public String cardName = new String();

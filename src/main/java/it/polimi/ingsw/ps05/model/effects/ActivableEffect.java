@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class ActivableEffect implements AlternativeEffect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7676584572036711660L;
 	ActivableEffectType type;
 	Integer diceRequired = 0;
 	ArrayList<ArrayList<Resource>> resourcesRequired;

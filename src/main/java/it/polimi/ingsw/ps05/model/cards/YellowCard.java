@@ -10,6 +10,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 public class YellowCard extends TowerCard {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4527055209026270239L;
+
 	private static final int DEFAULT_EFFECT = 0;
 
 	private boolean toBeActivated = true;

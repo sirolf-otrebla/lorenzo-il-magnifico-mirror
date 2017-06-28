@@ -11,7 +11,12 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4655761429813840579L;
+
+	@Override
     public EffectType getEffectType() {
         // TODO Auto-generated method stub
         return null;

@@ -6,12 +6,16 @@ import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
 import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
 
-public class Familiar implements PlayerRelated{
+public class Familiar implements PlayerRelated {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8175413398375108149L;
 	private ActionSpace position;
 	private Dice relatedDice;
 	private ColorEnumeration color = NOT_INITIALIZED;
-	private Player relatedPlayer = null;
+	private transient Player relatedPlayer = null;
 	
 	public Familiar(){
 		

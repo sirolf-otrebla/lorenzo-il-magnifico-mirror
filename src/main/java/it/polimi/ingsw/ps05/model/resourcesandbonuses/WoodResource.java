@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class WoodResource implements Resource, ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -220328697689674078L;
 	//TODO vedi faith
 	private Integer amount;
 	public static final String ID = "Legno";
