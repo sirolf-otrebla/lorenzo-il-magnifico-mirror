@@ -3,18 +3,25 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /* represent the generalization of all familiar-usable spaces within the game board
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace {
+public abstract class ActionSpace implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3124416903238969687L;
 
 	private boolean isOccupied;
 
@@ -27,6 +34,8 @@ public abstract class ActionSpace {
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	private int id;
+	private Familiar occupant;
+
 
 
 	public ActionSpace() {
@@ -37,8 +46,6 @@ public abstract class ActionSpace {
 		this.id = id_counter;
 		id_counter++;
 	}
-
-	private Familiar occupant;
 
 	public Familiar getOccupant(){
 		return occupant;
@@ -53,20 +60,16 @@ public abstract class ActionSpace {
 		return isOccupied;
 	}
 
-	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
+	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException;
 
 	public ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;
 	}
 
-	public void setDiceRequirement (Dice diceRequirement) throws RepeatedAssignmentException{
+	public void setDiceRequirement (Dice diceRequirement) {
 
 		// NB: 1ST REQUIREMENT IS <<<<<ALWAYS>>>>> diceRequirement
-		if(this.diceRequirement == null) {
-			this.diceRequirement = diceRequirement;
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+		this.diceRequirement = diceRequirement;
 		for (ArrayList<Resource> a : requirements)
 			a.set(0, diceRequirement);
 	}
@@ -83,13 +86,13 @@ public abstract class ActionSpace {
 		isOccupied = false;
 		occupant = null;
 	}
-	
+
 	public void addFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			or.add(new AlwaysUnFullFilledResource());
 		}
 	}
-	
+
 	public void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			for (Resource r : or){

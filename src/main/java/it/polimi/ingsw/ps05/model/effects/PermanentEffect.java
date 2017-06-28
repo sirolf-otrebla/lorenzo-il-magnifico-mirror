@@ -10,6 +10,10 @@ public class PermanentEffect implements SimpleEffect {
 
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4456589036613595131L;
 	ArrayList<ActionResult> effectsList;
 	
 	public void setEffectList(ArrayList<ActionResult> effectsList){
@@ -18,14 +22,11 @@ public class PermanentEffect implements SimpleEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.PERMANENT;
 	}
 
 	@Override
 	public ArrayList<ActionResult> getResultList() {
-		// TODO Auto-generated method stub
-
 		return  effectsList;
 }
 

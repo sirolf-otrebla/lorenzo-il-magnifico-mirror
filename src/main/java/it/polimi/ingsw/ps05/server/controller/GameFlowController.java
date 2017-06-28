@@ -1,6 +1,12 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.Game;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -14,7 +20,6 @@ public class GameFlowController implements Runnable {
 	private Game game;
 
 	public BonusActionListener bonusActListener;
-	private Iterator<Player> plOrdIt;
 	public ExcommunicationTriggerListener exTrigger;
 	public EndActionListener endActionListener;
 	public LimitedBonusActListener limitedBonusActListener;
@@ -58,8 +63,18 @@ public class GameFlowController implements Runnable {
 		}
 	}
 
-	private void evaluateVictoryPts(Player pl){
-
+	public int evaluateVictoryPts(Player pl){
+		int tot = pl.getResource(VictoryResource.ID).getValue();
+		tot = tot + game.getBoard().getBlueCardsConversion().get(pl.getBlueCardList().size()).getValue();
+		tot = tot + game.getBoard().getGreenCardsConversion().get(pl.getGreenCardList().size()).getValue();
+		tot = tot + game.getBoard().getFaithPath().get(pl.getResource(FaithResource.ID).getValue()).getValue();
+		// TODO bisogna controllare chi ha più punti militari tra tutti
+		int ris = pl.getResource(GoldResource.id).getValue();
+		ris = ris + pl.getResource(ServantResource.id).getValue();
+		ris = ris + pl.getResource(StoneResource.id).getValue();
+		ris = ris + pl.getResource(WoodResource.id).getValue();
+		tot = (int) (tot + Math.floor(ris/5));
+		return tot;
 	}
 
 	public Game getGame() {

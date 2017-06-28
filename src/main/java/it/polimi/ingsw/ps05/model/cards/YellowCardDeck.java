@@ -8,6 +8,11 @@ import java.util.Random;
 
 public class YellowCardDeck implements Deck {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3076127639892944906L;
+
 ArrayList<YellowCard> cardList;
 	
 	ArrayList<YellowCard> firstEpochCard = new ArrayList<YellowCard>();

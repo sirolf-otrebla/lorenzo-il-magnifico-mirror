@@ -72,4 +72,19 @@ public class ActionSpaceWidget {
         });
     }
 
+    public ColorEnumeration getFamilyMemberID() {
+        return familyMemberID;
+    }
+
+    public int getOccupantID() {
+        return occupantPlayerID;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) { //TODO VERIFICARE SE È DA USARE QUESTO.
+        this.id = id;
+    }
 }

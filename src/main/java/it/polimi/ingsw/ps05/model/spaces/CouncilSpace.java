@@ -13,6 +13,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3833502039042683186L;
+
 	private ArrayList<Familiar> occupantList = new ArrayList<Familiar>();
 
 	private ArrayList<Effect> effectList;
@@ -29,12 +34,8 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 	public CouncilSpace(Dice diceRequired, ArrayList<Effect> effect) throws RepeatedAssignmentException, CouncilDiceAlreadySet {
 		super();
 
-		try {
-			super.setDiceRequirement(diceRequired);
-		} catch (RepeatedAssignmentException e) {
-			//TODO: il costruttore deve gestire l'eccezione o propagarla al controller?
-			throw new CouncilDiceAlreadySet();
-		}
+		super.setDiceRequirement(diceRequired);
+
 
 		if (this.effectList == null) {
 			this.effectList = effect;
@@ -61,6 +62,10 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		}
 	}
 	
+	public ArrayList<Familiar> getOccupantList(){
+		return this.occupantList;
+	}
+
 
 	public ArrayList<Player> getOrder() {
 		boolean alreadyPresent = false;

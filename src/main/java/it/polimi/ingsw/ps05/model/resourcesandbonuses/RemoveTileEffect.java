@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class RemoveTileEffect implements ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1299547449525139414L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 
@@ -40,8 +44,8 @@ public class RemoveTileEffect implements ActionResult {
 	public void applyResult(PlayerRelated playerR) {
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
-			for (TowerTileInterface tile : t.getTiles()){
+		for (Tower t : board.getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
 				if (tile instanceof TileWithEffect){
 					((TileWithEffect)tile).setEffectOnPositioning(new ArrayList<ActionResult>());
 				}

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.net.LimConnection;
+import it.polimi.ingsw.ps05.server.net.LimConnection;
 
 /**
  * Created by Alberto on 08/06/2017.
@@ -41,7 +41,6 @@ public class SocketConn extends LimConnection {
 
 	@Override
 	public void send(NetMessage mess) {
-		// TODO Auto-generated method stub
 		try {
 			stream.sendData(mess);
 		} catch (IOException e) {

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
-public interface Period {
+import java.io.Serializable;
+
+public interface Period extends Serializable{
 	//TODO
 }

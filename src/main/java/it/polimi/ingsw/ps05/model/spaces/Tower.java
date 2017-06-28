@@ -1,22 +1,29 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.HashMap;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
+import it.polimi.ingsw.ps05.model.EpochEnumeration;
 import it.polimi.ingsw.ps05.model.cards.Deck;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
 
 /* See UML for thescription.
  * 
- * TODO: add UML methods and attributes. --Sirolfo
  */
-public abstract class Tower {
+public abstract class Tower implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4656424293015641983L;
 	public static final int TOWER_RENT_AMNT = 3;
 	private GoldResource towerOccupiedGoldResource;
 	private boolean occupied;
-	ArrayList<TowerTileInterface> tiles; //dove vanno messi i tile
+	HashMap<Integer, TowerTileInterface> tiles; //dove vanno messi i tile
 	Deck deck;
+	private ColorEnumeration color = ColorEnumeration.NOT_INITIALIZED;
 	
 	public Tower(){
 		this.occupied = false;
@@ -25,7 +32,7 @@ public abstract class Tower {
 		//setParentListInTiles();
 	}
 
-	public Tower(ArrayList<TowerTileInterface> tiles){
+	public Tower(HashMap<Integer, TowerTileInterface> tiles){
 
 		this.occupied = false;
 		this.towerOccupiedGoldResource = new GoldResource();
@@ -36,8 +43,7 @@ public abstract class Tower {
 	}
 	
 	private void setParentListInTiles(){
-		
-		for (TowerTileInterface o : tiles){
+		for (TowerTileInterface o : tiles.values()){
 			o.setParentTower(this);
 		}
 	}
@@ -50,20 +56,25 @@ public abstract class Tower {
 		return this.towerOccupiedGoldResource;
 	}
 	
-	public ArrayList<TowerTileInterface> getTiles(){
+	public HashMap<Integer, TowerTileInterface> getTiles(){
 		return this.tiles;
 	}
 	
-	public void setTiles(ArrayList<TowerTileInterface> tiles){
+	public void setTiles(HashMap<Integer, TowerTileInterface> tiles){
 		this.tiles = tiles;
 	}
 	
 	public void setDeck(Deck deck){
 		this.deck = deck;
+		this.color = this.deck.getCard(new Epoch(EpochEnumeration.FIRST)).color;
+	}
+	
+	public ColorEnumeration getColor(){
+		return this.color;
 	}
 	
 	public void setCardInTile(Epoch epoch){
-		for (TowerTileInterface o : tiles){
+		for (TowerTileInterface o : tiles.values()){
 			o.setTowerCard(deck.getCard(epoch));
 		}
 	}

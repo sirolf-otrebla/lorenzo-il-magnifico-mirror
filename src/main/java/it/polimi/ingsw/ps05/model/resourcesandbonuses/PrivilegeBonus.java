@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class PrivilegeBonus extends Observable implements ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2496576331602457912L;
 	private Integer value; //con value si Integerende il numero di privilegi conferiti dalla carta
 						//ricordandosi che i privilegi non possono mai essere uguali tra loro
 	private Game game;

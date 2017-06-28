@@ -4,11 +4,19 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
+import it.polimi.ingsw.ps05.model.effects.PermanentEffect;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.AlwaysUnFullFilledResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.PermanentBonus;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public abstract class TowerCard implements Card {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3659476952391381973L;
 	public Epoch epoch = new Epoch();
 	public ColorEnumeration color;
 	public String cardName = new String();
@@ -73,10 +81,18 @@ public abstract class TowerCard implements Card {
 	}
 
 	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
 		//ciclare negli effetti, prendere quelli immediati ed attivarli, prendere quelli di fine partita
 		//e non farci niente, verranno conteggiati alla fine
 		//prendere gli attivabili e non farci niente, prendere i permanenti e aggiungerli alla lista
+		for (Effect e : effects){
+			if (e instanceof ImmediateEffect){
+				((ImmediateEffect) e).apply(player);
+			} else if (e instanceof PermanentEffect){
+				for (ActionResult b : ((PermanentEffect)e).getResultList()){
+					player.getRelatedPlayer().addPermanentEffectRes((PermanentBonus)b);
+				}
+			}
+		}
 	}
 	
 

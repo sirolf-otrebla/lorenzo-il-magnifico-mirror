@@ -1,10 +1,15 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VioletTower extends Tower {
 
-	public VioletTower(ArrayList<TowerTileInterface> tiles) {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2638508249736005391L;
+
+	public VioletTower(HashMap<Integer, TowerTileInterface> tiles) {
 		super(tiles);
 	}
 	
@@ -13,7 +18,7 @@ public class VioletTower extends Tower {
 	}
 	
 	@Override
-	public void setTiles(ArrayList<TowerTileInterface> tiles){
+	public void setTiles(HashMap<Integer, TowerTileInterface> tiles){
 		super.setTiles(tiles);
 	}
 

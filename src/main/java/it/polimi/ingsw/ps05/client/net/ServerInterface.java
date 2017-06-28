@@ -19,4 +19,6 @@ public class ServerInterface {
     public void setHostUrl(String hostUrl) {
         this.hostUrl = hostUrl;
     }
+
+
 }

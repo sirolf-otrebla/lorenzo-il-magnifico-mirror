@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class StoneResourceCostBonus implements ActionResult, Resource {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 375568512526772790L;
 	private Integer value;
 	public static final  String ID = "Pietra Bonus";
 	private Game game;
@@ -57,7 +61,6 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

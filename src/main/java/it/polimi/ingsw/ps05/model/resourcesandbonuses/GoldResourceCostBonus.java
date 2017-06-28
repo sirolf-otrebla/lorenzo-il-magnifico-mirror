@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class GoldResourceCostBonus implements ActionResult, Resource {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5951593920487375809L;
+
 	private Integer value;
 
 	public static final String id = "Oro Bonus";

@@ -9,7 +9,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class FaithResource implements Resource, ActionResult {
 
-	//TODO : scegliere se usare due variabili separate o usarne una sola
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6402482453007722862L;
 	private Integer amount;
 	public static final String ID = "Fede";
 	private Game game;
@@ -54,7 +57,6 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return (playerFamiliar.getRelatedPlayer().getResource(this.getID()).getValue() >= this.getValue());
 	}
 
@@ -65,7 +67,6 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 

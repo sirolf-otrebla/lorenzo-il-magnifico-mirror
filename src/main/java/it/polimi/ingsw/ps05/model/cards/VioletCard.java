@@ -10,9 +10,13 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class VioletCard extends TowerCard {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3065175569895619260L;
+
 	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
@@ -26,14 +30,13 @@ public class VioletCard extends TowerCard {
 
 	@Override
 	public void moveToPlayer(PlayerRelated player) {
-		// TODO Auto-generated method stub
 		player.getRelatedPlayer().addVioletCard(this);
 		
 	}
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
+		super.applyNonActivableEffects(player);
 		
 	}
 	

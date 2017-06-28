@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.spaces.VioletTower;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
-import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
@@ -16,6 +15,10 @@ import java.util.Iterator;
 import java.util.Observable;
 
 public class VioletAction extends Observable implements ActionResult, BonusAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6255109269626199139L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 
@@ -47,9 +50,9 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof VioletTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.addFalseResource();
 				}
@@ -64,9 +67,9 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 	
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof VioletTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.removeFalseResource();
 				}

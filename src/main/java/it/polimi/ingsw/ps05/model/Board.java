@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,13 +14,19 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  * 
  */
-public class Board {
-	private static Board instance;
 
+public class Board implements Serializable{
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3802284891664073914L;
+	
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
+	public final static int RESOURCE_CONVERSION_RATIO = 5;
 
-	private ArrayList<Tower> towerList = null;
 	private HashMap<ColorEnumeration, Tower> towerHashMap;
 	private HashMap<Integer, ActionSpace> actSpacesMap;
 	private ArrayList<ActionSpace> actionSpace = null; //da confermare utilizzo lista
@@ -27,14 +34,19 @@ public class Board {
 	private ArrayList<VictoryResource> faithPath = null; //array da 16? elementi che dice quanti punti vittoria vengono assegnati all'i-esimo posto del tracciato
 	private ArrayList<MilitaryResource> militaryPath = null; //array da 6 elementi che dice quanti punti militare servono per poter avere "i" territori
 	private ArrayList<ExcommunicationCard> excomCards = null; //array da 3 elementi che contiene i riferimenti alle carte scomunica pescate ad inizio partita
-
+	private ArrayList<VictoryResource> greenCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
+	private ArrayList<VictoryResource> blueCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
+	
+	
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
-			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
+			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath,
+			ArrayList<VictoryResource> blueConversion, ArrayList<VictoryResource> greenConversion) {
 		super();
+
 		this.towerHashMap = new HashMap<>();
-		this.towerList = towerList;
-		for (Tower tower: towerList)
-			//todo
+		for (Tower tower : towerList){
+			this.towerHashMap.put(tower.getColor(), tower);
+		}
 		this.actSpacesMap = new HashMap<>();
 		for (ActionSpace actSpace : actionSpaceArrayList){
 			actSpacesMap.put(actSpace.getId(),actSpace);
@@ -42,29 +54,21 @@ public class Board {
 		this.actionSpace = actionSpaceArrayList;
 		this.faithPath = faithPath;
 		this.militaryPath = militaryPath;
+		this.greenCardsConversion = greenConversion;
+		this.blueCardsConversion = blueConversion;
+	}
+	
+	public ArrayList<VictoryResource> getGreenCardsConversion() {
+		return greenCardsConversion;
+	}
+	
+	public ArrayList<VictoryResource> getBlueCardsConversion() {
+		return blueCardsConversion;
 	}
 
-	public static Board getInstance() {
-		return instance;
+	public HashMap<ColorEnumeration, Tower> getTowerList() {
+		return towerHashMap;
 	}
-
-	public static Board initBoard(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpace, ArrayList<VictoryResource> faithPath,
-									ArrayList<MilitaryResource> militaryPath, ArrayList<ExcommunicationCard> excomCards) {
-		//if(instance == null) {
-			instance = new Board(towerList, actionSpace, faithPath, militaryPath, excomCards);
-		//}
-		//TODO CHE CAZZO È QUESTO?
-
-		return instance;
-	}
-
-	public ArrayList<Tower> getTowerList() {
-		return towerList;
-	}
-
-	// public ArrayList<ActionSpace> getActionSpace() {
-	//	return actionSpace;
-	// }
 
 	public ArrayList<Player> getPlayerOnCouncil() {
 		return playerOnCouncil;
@@ -79,10 +83,26 @@ public class Board {
 	}
 
 	public ArrayList<ExcommunicationCard> getExcomCards() { return excomCards; }
+	
+	public void setGreenCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException{
+		if (this.greenCardsConversion == null) {
+			this.greenCardsConversion = conversion;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
+	
+	public void setBlueCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException {
+		if (this.blueCardsConversion == null) {
+			this.blueCardsConversion = conversion;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
 
-	public void setTowerList(ArrayList<Tower> towerList) throws RepeatedAssignmentException {
-		if (this.towerList == null) {
-			this.towerList = towerList;
+	public void setTowerList(HashMap<ColorEnumeration, Tower> towerList) throws RepeatedAssignmentException {
+		if (this.towerHashMap == null) {
+			this.towerHashMap = towerList;
 		} else {
 			throw new RepeatedAssignmentException();
 		}

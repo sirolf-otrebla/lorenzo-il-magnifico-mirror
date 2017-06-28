@@ -1,7 +1,7 @@
 {
 	"Tower": 
 	{
-		"VioletTower": 
+		"GreenTower": 
 		{
 			"Tile": 
 			[
@@ -20,7 +20,7 @@
 					"diceRequired": 7,
 					"Effect": 
 					{
-						"GoldResource": 2
+						"WoodResource": 2
 					}
 				},
 
@@ -28,46 +28,12 @@
 					"diceRequired": 5,
 					"Effect": 
 					{
-						"GoldResource": 1
+						"WoodResource": 1
 					}
 				}
 			]
 		},
 
-		
-
-		"YellowTower": 
-		{
-			"Tile": 
-			[
-				{
-					"diceRequired": 3
-				},
-
-				{
-					"diceRequired": 1
-				}
-			],
-
-			"TileWithEffect": 
-			[
-				{
-					"diceRequired": 7,
-					"Effect": 
-					{
-						"MilitaryResource": 2
-					}
-				},
-
-				{
-					"diceRequired": 5,
-					"Effect": 
-					{
-						"MilitaryResource": 1
-					}
-				}
-			]
-		},
 		"BlueTower": 
 		{
 			"Tile": 
@@ -101,8 +67,7 @@
 			]
 		},
 
-		
-	"GreenTower": 
+		"YellowTower": 
 		{
 			"Tile": 
 			[
@@ -121,7 +86,7 @@
 					"diceRequired": 7,
 					"Effect": 
 					{
-						"WoodResource": 2
+						"MilitaryResource": 2
 					}
 				},
 
@@ -129,7 +94,40 @@
 					"diceRequired": 5,
 					"Effect": 
 					{
-						"WoodResource": 1
+						"MilitaryResource": 1
+					}
+				}
+			]
+		},
+
+		"VioletTower": 
+		{
+			"Tile": 
+			[
+				{
+					"diceRequired": 3
+				},
+
+				{
+					"diceRequired": 1
+				}
+			],
+
+			"TileWithEffect": 
+			[
+				{
+					"diceRequired": 7,
+					"Effect": 
+					{
+						"GoldResource": 2
+					}
+				},
+
+				{
+					"diceRequired": 5,
+					"Effect": 
+					{
+						"GoldResource": 1
 					}
 				}
 			]
@@ -148,23 +146,23 @@
 	"MarketSpace": 
 	[
 		{
-			"numPlayer" : 2,
+			"numPlayer": 2,
 			"GoldResource": 5
 		},
 
 		{
-			"numPlayer" : 2,
+			"numPlayer": 2,
 			"ServantResource": 5
 		},
 
 		{
-			"numPlayer" : 4,
+			"numPlayer": 4,
 			"MilitaryResource": 3,
 			"GoldResource": 2
 		},
 
 		{
-			"numPlayer" : 4,
+			"numPlayer": 4,
 			"PrivilegeBonus": 2
 		}
 	],
@@ -193,16 +191,39 @@
 	[
 		0,
 		0,
+		0,
 		3,
 		7,
 		12,
+		18
+	],
+	
+	"GreenConversion": 
+	[
+		0,
+		0,
+		0,
+		1,
+		4,
+		10,
+		20
+	],
+	
+	"BlueConversion": 
+	[
+		0,
+		1,
+		3,
+		6,
+		1,
+		21,
 		18
 	],
 
 	"HarvestSpace": 
 	[
 		{
-			"numPlayer" : 2,
+			"numPlayer": 2,
 			"Effect": 
 			{
 				
@@ -210,11 +231,12 @@
 		},
 
 		{
-			"numPlayer" : 3,
+			"numPlayer": 3,
 			"Effect": 
 			{
-				"ImmediateEffect" : {
-				"HarvestBonus": -3
+				"ImmediateEffect": 
+				{
+					"HarvestBonus": -3
 				}
 			}
 		}
@@ -223,7 +245,7 @@
 	"ProductionSpace": 
 	[
 		{
-			"numPlayer" : 2,
+			"numPlayer": 2,
 			"Effect": 
 			{
 				
@@ -231,11 +253,12 @@
 		},
 
 		{
-			"numPlayer" : 3,
+			"numPlayer": 3,
 			"Effect": 
 			{
-				"ImmediateEffect" : {
-				"ProductionBonus": -3
+				"ImmediateEffect": 
+				{
+					"ProductionBonus": -3
 				}
 			}
 		}

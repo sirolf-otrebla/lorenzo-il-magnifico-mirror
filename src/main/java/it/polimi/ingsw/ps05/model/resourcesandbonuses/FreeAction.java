@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 import java.util.Observable;
 
 public class FreeAction extends Observable implements ActionResult, BonusAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6755046862889487264L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 
@@ -45,7 +49,7 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		//TODO: this.addObserver(game.getGameFlowctrl().getBonusActListener());
+		this.addObserver(game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override

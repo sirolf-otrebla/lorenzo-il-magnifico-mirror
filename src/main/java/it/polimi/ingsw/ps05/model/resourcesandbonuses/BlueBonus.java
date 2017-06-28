@@ -1,10 +1,8 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
-import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.net.Game;
@@ -12,6 +10,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 import java.util.Observable;
 
 public class BlueBonus extends Observable implements ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3795604773294229746L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private  Game game;
 	
@@ -35,9 +37,9 @@ public class BlueBonus extends Observable implements ActionResult {
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (t instanceof BlueTower){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					tile.setDiceRequired(tile.getDiceRequired().getValue() - this.getValue());
 				}
 			}
@@ -48,9 +50,9 @@ public class BlueBonus extends Observable implements ActionResult {
 	
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (t instanceof BlueTower){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					tile.setDiceRequired(tile.getDiceRequired().getValue() + this.getValue());
 				}
 			}

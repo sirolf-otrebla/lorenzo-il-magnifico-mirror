@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.model;
 
-public enum RulesEnumeration {
+import java.io.Serializable;
+
+public enum RulesEnumeration implements Serializable {
 	SIMPLIFIED,EXTENDED;
 }

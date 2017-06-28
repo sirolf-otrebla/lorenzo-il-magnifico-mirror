@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -16,6 +15,11 @@ import java.util.Iterator;
 import java.util.Observable;
 
 public class BlueAction extends Observable implements ActionResult, BonusAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3121318190477832098L;
+
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	//Ex. value 5 è da Integerendersi come un azione con dado 5 sulla colonna blu
 
@@ -45,14 +49,13 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
 		//crea familiare ghost in player
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof BlueTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.addFalseResource();
 				}
@@ -69,9 +72,9 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 
 	public void resetResult(PlayerRelated playerR){
 		Board board = this.getGame().getBoard();
-		for (Tower t : board.getTowerList()){
+		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof BlueTower)){
-				for (TowerTileInterface tile : t.getTiles()){
+				for (TowerTileInterface tile : t.getTiles().values()){
 					TowerCard card = tile.getCard();
 					card.removeFalseResource();
 				}

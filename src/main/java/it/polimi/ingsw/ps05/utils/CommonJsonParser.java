@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import it.polimi.ingsw.ps05.model.cards.*;
@@ -23,6 +24,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
@@ -51,6 +53,8 @@ public class CommonJsonParser {
 		ArrayList<VictoryResource> faithList = new ArrayList<VictoryResource>();
 		ArrayList<Tower> towerList = new ArrayList<Tower>();
 		ArrayList<MilitaryResource> militaryList = new ArrayList<MilitaryResource>();
+		ArrayList<VictoryResource> blueConv = new ArrayList<VictoryResource>();
+		ArrayList<VictoryResource> greenConv = new ArrayList<VictoryResource>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 			notTowerSpace.addAll(detectNumMarketSpace(obj.get("MarketSpace")));
@@ -60,11 +64,31 @@ public class CommonJsonParser {
 			faithList = loadFaithPath(obj.get("FaithPath"));
 			towerList = loadTower((JSONObject)obj.get("Tower"));
 			militaryList = loadMilitaryPath(obj.get("MilitaryPath"));
-		} catch (IOException | ParseException | RepeatedAssignmentException e) {
+			blueConv = loadBlueConversionPath(obj.get("BlueConversion"));
+			greenConv = loadGreenConversionPath(obj.get("GreenConversion"));
+		} catch (IOException | ParseException | RepeatedAssignmentException | CouncilDiceAlreadySet e) {
 			e.printStackTrace();
 		}
 
-		return Board.initBoard(towerList, notTowerSpace, faithList, militaryList,null);
+		return new Board(towerList, notTowerSpace, faithList, militaryList, blueConv, greenConv);
+	}
+	
+	private ArrayList<VictoryResource> loadBlueConversionPath(Object json){
+		JSONArray obj = (JSONArray)json;
+		ArrayList<VictoryResource> list = new ArrayList<VictoryResource>();
+		for (int i = 0; i < obj.toArray().length; i++){
+			list.add(new VictoryResource(Integer.parseInt(obj.toArray()[i].toString())));
+		}
+		return list;
+	}
+	
+	private ArrayList<VictoryResource> loadGreenConversionPath(Object json){
+		JSONArray obj = (JSONArray)json;
+		ArrayList<VictoryResource> list = new ArrayList<VictoryResource>();
+		for (int i = 0; i < obj.toArray().length; i++){
+			list.add(new VictoryResource(Integer.parseInt(obj.toArray()[i].toString())));
+		}
+		return list;
 	}
 
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){
@@ -100,12 +124,14 @@ public class CommonJsonParser {
 	}
 
 	private Tower loadSingleTower(JSONObject json, String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, FileNotFoundException, IOException, ParseException{
-		ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		//ArrayList<TowerTileInterface> list = new ArrayList<TowerTileInterface>();
+		HashMap<Integer, TowerTileInterface> list = new HashMap<Integer, TowerTileInterface>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			JSONArray array = (JSONArray)json.get(json.keySet().toArray()[i].toString());
 			for (int j = 0; j < array.toArray().length; j++){
 				try {
-					list.add(loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString()));
+					TowerTileInterface tile = loadSingleTile((JSONObject)array.toArray()[j],json.keySet().toArray()[i].toString());
+					list.put(((ActionSpace)tile).getId(), tile);
 				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 						| SecurityException e) {
 					e.printStackTrace();
@@ -116,7 +142,7 @@ public class CommonJsonParser {
 		Object tower = Class.forName(spacePath + key).newInstance();
 		Method method = tower.getClass().getDeclaredMethod("setTiles", list.getClass());
 		method.invoke(tower, list);
-		for (TowerTileInterface t : list){
+		for (TowerTileInterface t : list.values()){
 			t.setParentTower((Tower)tower);
 		}
 
@@ -180,7 +206,6 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -196,7 +221,7 @@ public class CommonJsonParser {
 		return new MarketSpace(diceRequired, effectList);
 	}
 
-	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException{
+	private CouncilSpace loadCouncilSpace(JSONObject json) throws RepeatedAssignmentException, CouncilDiceAlreadySet{
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < ((JSONObject)json.get("Effect")).keySet().toArray().length; i++){
 			try {
@@ -207,7 +232,6 @@ public class CommonJsonParser {
 			}
 		}
 
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -358,6 +382,7 @@ public class CommonJsonParser {
 					for (Object o : array){
 						for (int i = 0; i < ((JSONObject)o).keySet().size(); i++){
 							ReduceVictoryPtsExcomm excomm = new ReduceVictoryPtsExcomm();
+							excomm.setGame(game);
 							if (((JSONObject)o).keySet().toArray()[i].toString().equals("toCheck")){
 								JSONObject checkList = (JSONObject)((JSONObject)o).get("toCheck");
 								for (int j = 0; j < checkList.keySet().size(); j++){
@@ -406,6 +431,9 @@ public class CommonJsonParser {
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
 		
+		Method method1 = actionObject.getClass().getDeclaredMethod("setGame",game.getClass());
+		method1.invoke(actionObject, game);
+		
 		return (ExcommunicationEffect)actionObject;
 	}
 	
@@ -418,25 +446,13 @@ public class CommonJsonParser {
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
 		
+		Method method1 = actionObject.getClass().getDeclaredMethod("setGame",game.getClass());
+		method1.invoke(actionObject, game);
+		
 		return (ExcommunicationEffect)actionObject;
 	}
 
 	//XXX Metodi per caricamento carte
-	/*public ArrayList<Deck> loadDeck(String path) {
-		ArrayList<Deck> deck = new ArrayList<Deck>();
-		try {
-			File file = new File(path);
-			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			deck.add(loadBlueCardDeck(obj));
-			deck.add(loadYellowCardDeck(obj));
-			deck.add(loadGreenCardDeck(obj));
-			deck.add(loadVioletCardDeck(obj));
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-		return deck;
-
-	}*/
 
 	private BlueCardDeck loadBlueCardDeck(JSONObject json){
 		JSONArray list = (JSONArray) json.get("Blue");

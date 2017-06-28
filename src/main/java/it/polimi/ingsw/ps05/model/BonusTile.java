@@ -2,9 +2,14 @@ package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.model.effects.Effect;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BonusTile {
+public class BonusTile implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2084387351064961858L;
 	private Player relatedPlayer;
 	private ArrayList<Effect> effectList = new ArrayList<Effect>();
 	private BonusTileType type;

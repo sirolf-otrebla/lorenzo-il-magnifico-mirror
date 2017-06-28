@@ -20,7 +20,6 @@ public class GameSetup {
 	CommonJsonParser parser;
 	
 	//TODO draft carte leader
-	//TODO scelta scomuniche
 	//TODO scelta pezzo aggiuntivo plancia
 	//TODO scelta regole
 	

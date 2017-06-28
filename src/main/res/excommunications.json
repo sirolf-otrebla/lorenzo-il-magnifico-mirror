@@ -62,7 +62,7 @@
 
 		"NoMarketExcomm": 
 		{
-			
+			"NoMarket" : 0
 		},
 
 		"ServantMalusExcomm": 
@@ -72,7 +72,7 @@
 
 		"NoActionExcomm": 
 		{
-			
+			"NoFirstAction" : 0
 		}
 	},
 

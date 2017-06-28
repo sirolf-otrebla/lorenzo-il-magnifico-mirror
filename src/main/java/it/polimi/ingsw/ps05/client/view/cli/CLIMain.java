@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
+import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.cards.VioletCard;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
@@ -28,6 +30,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import com.googlecode.lanterna.SGR;
@@ -43,7 +46,6 @@ public class CLIMain implements Runnable{
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;
 	int currentColMyStats = 0;
-	String[] color = {"Viola", "Gialla", "Blu", "Verde"}; 
 	ArrayList<ArrayList<TerminalPosition>> mapBoard;
 	ArrayList<ArrayList<TerminalPosition>> mapMyStats;
 	ArrayList<ArrayList<Integer>> offSet;
@@ -65,6 +67,19 @@ public class CLIMain implements Runnable{
 	private Player player;
 	private ArrayList<Player> playersList;
 	private Terminal terminal = null;
+	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{
+		add(ColorEnumeration.Green);
+		add(ColorEnumeration.Blue);
+		add(ColorEnumeration.Yellow);
+		add(ColorEnumeration.Violet);
+		
+	}};
+	private ArrayList<ArrayList<Integer>> tileIdForTower = new ArrayList<ArrayList<Integer>>();
 	
 	/*
 	 * fare selezione privilegi
@@ -140,8 +155,8 @@ public class CLIMain implements Runnable{
 							terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 							terminal.flush();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
+							System.exit(1);
 						}
 						
 						throw new RuntimeException(e);
@@ -165,8 +180,8 @@ public class CLIMain implements Runnable{
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			terminal.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
 		
 	}
@@ -477,6 +492,20 @@ public class CLIMain implements Runnable{
 				,6*height/16+1, "Produzione");
 		textGraphics.putString((int) (Math.ceil((productionList.size()+harvestList.size())/2.0))*width/16+1
 				,6*height/16+1, "Raccolto");
+		
+		checkPositionCorrect();
+	}
+	
+	private void checkPositionCorrect(){
+		for (ArrayList<TerminalPosition> column : mapBoard){
+			for (int i = 0; i < column.size() - 1; i++ ){
+				if (column.get(i).getRow() > column.get(i + 1).getRow()){
+					TerminalPosition infra = column.get(i);
+					column.set(i, column.get(i + 1));
+					column.set(i + 1, infra);
+				}
+			}
+		}
 	}
 
 	private void drawExcomunication(int width, int height){
@@ -576,34 +605,40 @@ public class CLIMain implements Runnable{
 	}
 
 	private void drawBoard(int width, int height){
-		for (int i = 0; i < board.getTowerList().size(); i++){
-			String toWrite = "Torre " + color[i];
-			textGraphics.putString(i*width/8 + 1, 1, toWrite, SGR.BOLD);
+		for (int a = 0; a < board.getTowerList().size(); a++){
+			Tower tower = board.getTowerList().get(towerOrder.get(a));
+			String toWrite = "Torre " + tower.getColor().toString();
+			textGraphics.putString(a*width/8 + 1, 1, toWrite, SGR.BOLD);
 			ArrayList<TerminalPosition> list = new ArrayList<TerminalPosition>();
 			ArrayList<Integer> off = new ArrayList<Integer>();
-
-			for (int j = 0; j < board.getTowerList().get(i).getTiles().size(); j++){
-				off.add(new Integer(((ActionSpace)board.getTowerList().get(i).getTiles().get(j)).isOccupied() ? OCCUPIED.length() :
-					board.getTowerList().get(i).getTiles().get(j).getCard().getName().length()));
-				textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 3 + j*height/16, 
-						((ActionSpace)board.getTowerList().get(i).getTiles().get(j)).isOccupied() ? OCCUPIED :
-							board.getTowerList().get(i).getTiles().get(j).getCard().getName());
-				textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 4 + j*height/16, "Dado: " + 
-						board.getTowerList().get(i).getTiles().get(j).getDiceRequired().getValue() );
-				list.add(new TerminalPosition(i*width/8 + 1 + off.get(j) + (i!=0 ? 1:0), 3 + j*height/16));
-				if (board.getTowerList().get(i).getTiles().get(j) instanceof TileWithEffect){
-					for (ActionResult result : ((TileWithEffect)board.getTowerList().get(i).getTiles().get(j)).getEffectOnPositioning()){
+			ArrayList<Integer> ids = new ArrayList<>();
+			for (TowerTileInterface tile : tower.getTiles().values()){
+				ids.add(((ActionSpace)tile).getId());
+			}
+			Comparator<Integer> comp = (Integer x, Integer y) -> {
+			    return x.compareTo(y);
+			};
+			ids.sort(comp);
+			for (int b = 0; b < tower.getTiles().size(); b++){
+				TowerTileInterface tile = tower.getTiles().get(ids.get(b));
+				off.add(((ActionSpace)tile).isOccupied() ? OCCUPIED.length() : tile.getCard().getName().length());
+				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 3 + b*height/16, tile.getCard().getName());
+				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 4 + b*height/16, "Dado: " + tile.getDiceRequired().getValue());
+				list.add(new TerminalPosition(a*width/8 + 1 + off.get(b) + (a!=0 ? 1:0), 3 + b*height/16));
+				ids.add(((ActionSpace)tile).getId());
+				if (tile instanceof TileWithEffect){
+					for (ActionResult result : ((TileWithEffect)tile).getEffectOnPositioning()){
 						try {
-							textGraphics.putString(i*width/8 + 1 + (i!=0 ? 1:0), 5 + j*height/16, result.toString() + " " + result.getValue());
+							textGraphics.putString(a*width/8 + 1 + (a!=0 ? 1:0),
+									5 + b*height/16, result.toString() + " " + result.getValue());
 						} catch (NoSuchMethodException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
+							//niente da fare in teoria non viene lanciata mai
 						}
 					}
 				}
-
-
 			}
+			tileIdForTower.add(ids);
 			off.add(toWrite.length());
 			offSet.add(off);
 			mapBoard.add(list);
@@ -675,9 +710,9 @@ public class CLIMain implements Runnable{
 
 
 		if (inBoard){
-			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(currentColBoard).getTiles().size()){
-				infoCard(colForInfo,0,board.getTowerList().get(currentColBoard).getTiles().get(currentRowBoard).getCard());
-			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(currentColBoard).getTiles().size()) {
+			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
+				infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard());
+			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 				infoMarket(colForInfo,0);
 			} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
 				infoProduction(colForInfo,0);
