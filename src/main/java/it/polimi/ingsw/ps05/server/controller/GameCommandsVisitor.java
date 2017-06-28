@@ -44,8 +44,11 @@ public class GameCommandsVisitor implements VisitorInterface {
             Player pl = mess.getPlayerBefore();
             validatePlayer(pl);
             Player thisPl = this.activePlayer;
-            Action act = thisPl.doAction(mess.getFamiliar(),
-                    mess.getActionSpace(), mess.getSelectedPayment());
+
+            Action act = thisPl.doAction(this.activePlayer.getFamilyMap().get(mess.getFamiliarID()),
+                    round.getGame().getBoard().getActSpacesMap().get(mess.getActionSpaceID()),
+                    mess.getSelectedPayment());
+
             UpdateMessage updateMsg = new UpdateMessage(act, thisPl, this.activePlayer);
            // for (PlayerClient client :
                    //TODO: round.getGame().getPlayerInGame()) {

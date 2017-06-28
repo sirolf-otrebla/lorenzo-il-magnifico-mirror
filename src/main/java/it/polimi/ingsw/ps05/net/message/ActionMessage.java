@@ -11,6 +11,7 @@ public class ActionMessage implements NetMessage {
     private PlayerClient playerClient;
     private int actionSpaceID;
     private ColorEnumeration familiarID;
+    private Player playerBefore;
     private int selectedPayment = 0;
 
 
@@ -24,10 +25,22 @@ public class ActionMessage implements NetMessage {
     }
 
     public ActionMessage( ColorEnumeration fam,
-                         int actionSpace, int selectedPayment){
+                         int actionSpace, int selectedPayment, Player playerBefore){
         this.actionSpaceID = actionSpace;
         this.familiarID = fam;
         this.selectedPayment = selectedPayment;
+        this.playerBefore = playerBefore;
     }
-    
+
+    public Player getPlayerBefore() {
+        return playerBefore;
+    }
+
+    public int getActionSpaceID() {
+        return actionSpaceID;
+    }
+
+    public ColorEnumeration getFamiliarID() {
+        return familiarID;
+    }
 }

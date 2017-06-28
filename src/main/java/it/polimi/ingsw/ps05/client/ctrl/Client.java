@@ -12,7 +12,6 @@ public class Client {
 
     private static Client client;
     private ServerInterface serverInterface;
-
     private GameStatus gameStatus;
     private Client(){
 
@@ -22,10 +21,6 @@ public class Client {
         if (client== null)
             client = new Client();
         return client;
-    }
-
-    public void waitUpdate(){
-        //todo
     }
 
     public void sendToServer(NetMessage message){

@@ -771,7 +771,7 @@ public class CLIMain implements Runnable{
 	}
 
 	private void infoFamiliar(int column, int row){
-		Familiar familiar = player.getFamilyList().get(currentRowMyStats);
+		Familiar familiar = (Familiar) player.getFamilyList().toArray()[currentRowMyStats];
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, familiar.getColor().toString() + " " + familiar.getRelatedDice().getValue());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);

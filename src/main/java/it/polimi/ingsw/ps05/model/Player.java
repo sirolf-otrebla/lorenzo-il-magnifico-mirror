@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.polimi.ingsw.ps05.model.cards.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -23,7 +26,7 @@ public class Player implements PlayerRelated {
 	ColorEnumeration color;
 	
 	// game information
-	private ArrayList<Familiar> familyList = null;
+	private HashMap<ColorEnumeration, Familiar> familyMap;
 	private BonusTile bonusTile;
 
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
@@ -107,15 +110,16 @@ public class Player implements PlayerRelated {
     }
 
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
-		if (this.familyList == null) {
-			this.familyList = familyList;
+		if (this.familyMap == null) {
+			for (Familiar f: familyList)
+				this.familyMap.put(f.getColor(), f);
 		} else {
 			throw new RepeatedAssignmentException();
 		}
     }
     
-    public ArrayList<Familiar> getFamilyList(){
-    	return this.familyList;
+    public Collection<Familiar> getFamilyList(){
+    	return this.familyMap.values();
     }
 
 	public String getUsername() {
@@ -134,7 +138,10 @@ public class Player implements PlayerRelated {
     	}
     	return null;
     }
-    
+
+    public Map<ColorEnumeration, Familiar> getFamilyMap(){
+    	return familyMap;
+	}
     public ColorEnumeration getColor(){
     	return color;
     }

@@ -148,13 +148,14 @@ public class ActionTest extends TestCase{
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
 		Turn turn = turnSetup.getTurn();
 		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
-		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), (ActionSpace)board.getTowerList().get(2).getTiles().get(2));
+		Action action = new Action((Familiar) turn.getPlayerOrder().get(0).getFamilyList().toArray()[0],
+				(ActionSpace)board.getTowerList().get(2).getTiles().get(2));
 		System.out.println("islegal: " + action.isLegal());
 		if (action.isLegal()){
 			try {
 				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
 				assertTrue(gold != turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue());
-				assertTrue(turn.getPlayerOrder().get(0).getFamilyList().get(0).isUsed());
+				assertTrue(((Familiar)turn.getPlayerOrder().get(0).getFamilyList().toArray()[0]).isUsed());
 				assertTrue(((ActionSpace)board.getTowerList().get(2).getTiles().get(2)).isOccupied());
 				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
@@ -209,7 +210,7 @@ public class ActionTest extends TestCase{
 
 		assertEquals(ActionTest.PL_ID_TEST, testPl.getPlayerID());
 		assertEquals(ActionTest.PL_USERNAME_TEST, testPl.getUsername());
-		assertSame(this.testFm, testPl.getFamilyList().get(0));
+		assertSame(this.testFm, testPl.getFamilyList().toArray()[0]);
 		assertEquals(new Integer(0), (Integer) testPl.getResource("Pietra").getValue());
 		assertEquals(0, (int) testPl.getResource("Oro").getValue());
 		assertEquals(0, (int) testPl.getResource("Fede").getValue());
@@ -297,12 +298,19 @@ public class ActionTest extends TestCase{
 		// todo ?
 		for (Player p : turn.getPlayerOrder()){
 			for (Player o : turn.getPlayerOrder()){
-				assertEquals(p.getFamilyList().get(0).getColor(),o.getFamilyList().get(0).getColor());
-				assertEquals(p.getFamilyList().get(1).getColor(),o.getFamilyList().get(1).getColor());
-				assertEquals(p.getFamilyList().get(2).getColor(),o.getFamilyList().get(2).getColor());
-				assertEquals(p.getFamilyList().get(0).getRelatedDice().getValue(),o.getFamilyList().get(0).getRelatedDice().getValue());
-				assertEquals(p.getFamilyList().get(1).getRelatedDice().getValue(),o.getFamilyList().get(1).getRelatedDice().getValue());
-				assertEquals(p.getFamilyList().get(2).getRelatedDice().getValue(),o.getFamilyList().get(2).getRelatedDice().getValue());
+				assertEquals(((Familiar) p.getFamilyList().toArray()[0]).getColor(),
+						((Familiar) o.getFamilyList().toArray()[0]).getColor());
+				assertEquals(((Familiar) p.getFamilyList().toArray()[1]).getColor(),
+						((Familiar) o.getFamilyList().toArray()[1]).getColor());
+				assertEquals(((Familiar) p.getFamilyList().toArray()[2]).getColor(),
+						((Familiar) o.getFamilyList().toArray()[2]).getColor());
+				assertEquals(((Familiar) p.getFamilyList().toArray()[3]).getColor(),
+						((Familiar) o.getFamilyList().toArray()[3]).getColor());
+
+				assertEquals(((Familiar) p.getFamilyList().toArray()[1]).getRelatedDice().getValue(),
+						((Familiar) p.getFamilyList().toArray()[1]).getRelatedDice().getValue());
+				assertEquals(((Familiar) p.getFamilyList().toArray()[2]).getRelatedDice().getValue(),
+						((Familiar) p.getFamilyList().toArray()[2]).getRelatedDice().getValue());
 
 			}
 		}
