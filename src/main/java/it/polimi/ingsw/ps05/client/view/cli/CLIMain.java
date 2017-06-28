@@ -155,8 +155,8 @@ public class CLIMain implements Runnable{
 							terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 							terminal.flush();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
+							System.exit(1);
 						}
 						
 						throw new RuntimeException(e);
@@ -180,8 +180,8 @@ public class CLIMain implements Runnable{
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			terminal.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
 		
 	}
@@ -632,8 +632,8 @@ public class CLIMain implements Runnable{
 							textGraphics.putString(a*width/8 + 1 + (a!=0 ? 1:0),
 									5 + b*height/16, result.toString() + " " + result.getValue());
 						} catch (NoSuchMethodException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
+							//niente da fare in teoria non viene lanciata mai
 						}
 					}
 				}

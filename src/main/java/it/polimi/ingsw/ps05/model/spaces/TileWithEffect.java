@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -52,8 +53,8 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 	}
 
 	@Override
-	public ArrayList<Effect> getEffects() {  //TODO
-		return null;
+	public ArrayList<Effect> getEffects() throws IllegalMethodCallException { 
+		throw new IllegalMethodCallException();
 	}
 
 	@Override

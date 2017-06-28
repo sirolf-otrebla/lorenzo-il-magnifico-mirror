@@ -40,6 +40,9 @@ public class Player implements PlayerRelated {
 	private ArrayList<PermanentBonus> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
 	private ArrayList<Effect> temporaryEffectList;
+	
+	//TODO arraylist di scomuniche
+	//TODO fare controllo se prima azione del turno nel controller (una scomunica lo richiede)
 
 
 	public Player(int playerID, String username, ColorEnumeration color){
@@ -215,6 +218,14 @@ public class Player implements PlayerRelated {
 
 	public ArrayList<Effect> getTemporaryEffectList() {
 		return temporaryEffectList;
+	}
+	
+	public void removeBlueCard() {
+		this.blueCardList = new ArrayList<BlueCard>();
+	}
+	
+	public void removeGreenCard() {
+		this.greenCardList = new ArrayList<GreenCard>();
 	}
 
 }

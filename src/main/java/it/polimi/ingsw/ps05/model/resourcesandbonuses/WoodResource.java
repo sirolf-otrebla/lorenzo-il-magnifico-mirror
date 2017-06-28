@@ -13,7 +13,7 @@ public class WoodResource implements Resource, ActionResult {
 	private static final long serialVersionUID = -220328697689674078L;
 	//TODO vedi faith
 	private Integer amount;
-	public static final String ID = "Legno";
+	public static final String id = "Legno";
 	private Game game;
 	
 	public WoodResource(Integer amount){
@@ -68,7 +68,7 @@ public class WoodResource implements Resource, ActionResult {
 	@Override
 	public String getID() {
 		// TODO Auto-generated method stub
-		return ID;
+		return id;
 	}
 
 	@Override

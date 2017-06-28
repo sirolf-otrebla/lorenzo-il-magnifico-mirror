@@ -13,7 +13,7 @@ public class ServantResource implements Resource, ActionResult {
 	 */
 	private static final long serialVersionUID = 2480704551869981268L;
 	private Integer amount;
-	public static final  String ID = "Servitori";
+	public static final  String id = "Servitori";
 	private Game game;
 
 	public ServantResource(Integer value){
@@ -66,7 +66,7 @@ public class ServantResource implements Resource, ActionResult {
 	@Override
 	public String getID() {
 		// TODO Auto-generated method stub
-		return ID;
+		return id;
 	}
 
 	@Override

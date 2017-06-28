@@ -1,10 +1,9 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects;
 
-import org.json.simple.JSONObject;
-
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.server.net.Game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,11 +16,6 @@ public interface ExcommunicationEffect extends SimpleEffect, Serializable {
 	// It is a good solution? --Sirolfo
 	public void setMalus(ArrayList<ActionResult> malus) throws RepeatedAssignmentException;
 	
-	public void applyEffect();
+	public void setGame(Game game);
 	
-	public void inizializeFromJson(JSONObject json);
-
-    default void apply() {
-
-    }
 }

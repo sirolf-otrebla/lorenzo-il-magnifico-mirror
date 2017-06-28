@@ -25,6 +25,7 @@ public class Board implements Serializable{
 	
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
+	public final static int RESOURCE_CONVERSION_RATIO = 5;
 
 	private HashMap<ColorEnumeration, Tower> towerHashMap;
 	private HashMap<Integer, ActionSpace> actSpacesMap;
@@ -33,9 +34,13 @@ public class Board implements Serializable{
 	private ArrayList<VictoryResource> faithPath = null; //array da 16? elementi che dice quanti punti vittoria vengono assegnati all'i-esimo posto del tracciato
 	private ArrayList<MilitaryResource> militaryPath = null; //array da 6 elementi che dice quanti punti militare servono per poter avere "i" territori
 	private ArrayList<ExcommunicationCard> excomCards = null; //array da 3 elementi che contiene i riferimenti alle carte scomunica pescate ad inizio partita
-
+	private ArrayList<VictoryResource> greenCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
+	private ArrayList<VictoryResource> blueCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
+	
+	
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
-			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath) {
+			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath,
+			ArrayList<VictoryResource> blueConversion, ArrayList<VictoryResource> greenConversion) {
 		super();
 
 		this.towerHashMap = new HashMap<>();
@@ -49,6 +54,16 @@ public class Board implements Serializable{
 		this.actionSpace = actionSpaceArrayList;
 		this.faithPath = faithPath;
 		this.militaryPath = militaryPath;
+		this.greenCardsConversion = greenConversion;
+		this.blueCardsConversion = blueConversion;
+	}
+	
+	public ArrayList<VictoryResource> getGreenCardsConversion() {
+		return greenCardsConversion;
+	}
+	
+	public ArrayList<VictoryResource> getBlueCardsConversion() {
+		return blueCardsConversion;
 	}
 
 	public HashMap<ColorEnumeration, Tower> getTowerList() {
@@ -68,6 +83,22 @@ public class Board implements Serializable{
 	}
 
 	public ArrayList<ExcommunicationCard> getExcomCards() { return excomCards; }
+	
+	public void setGreenCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException{
+		if (this.greenCardsConversion == null) {
+			this.greenCardsConversion = conversion;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
+	
+	public void setBlueCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException {
+		if (this.blueCardsConversion == null) {
+			this.blueCardsConversion = conversion;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
+	}
 
 	public void setTowerList(HashMap<ColorEnumeration, Tower> towerList) throws RepeatedAssignmentException {
 		if (this.towerHashMap == null) {

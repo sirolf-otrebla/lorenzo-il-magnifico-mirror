@@ -14,7 +14,7 @@ public class StoneResource implements Resource, ActionResult {
 	 */
 	private static final long serialVersionUID = 1244888621400064253L;
 	private Integer amount;
-	public static final String ID = "Pietra";
+	public static final String id = "Pietra";
 	private Game game;
 	
 	public StoneResource(Integer amount){
@@ -68,7 +68,7 @@ public class StoneResource implements Resource, ActionResult {
 	@Override
 	public String getID() {
 		// TODO Auto-generated method stub
-		return ID;
+		return id;
 	}
 
 	@Override

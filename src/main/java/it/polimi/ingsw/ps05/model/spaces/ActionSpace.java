@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -59,7 +60,7 @@ public abstract class ActionSpace implements Serializable {
 		return isOccupied;
 	}
 
-	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
+	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException; //TODO: implement this method in subclasses;
 
 	public ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;

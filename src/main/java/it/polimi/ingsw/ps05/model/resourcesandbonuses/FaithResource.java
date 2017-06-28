@@ -13,7 +13,6 @@ public class FaithResource implements Resource, ActionResult {
 	 * 
 	 */
 	private static final long serialVersionUID = -6402482453007722862L;
-	//TODO : scegliere se usare due variabili separate o usarne una sola
 	private Integer amount;
 	public static final String ID = "Fede";
 	private Game game;

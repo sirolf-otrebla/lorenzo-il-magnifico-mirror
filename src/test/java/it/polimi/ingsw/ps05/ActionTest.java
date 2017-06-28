@@ -79,7 +79,7 @@ public class ActionTest extends TestCase{
 		try {
 			testPl.setFamiliars(famList);
 		} catch (RepeatedAssignmentException e) {
-			//TODO
+			
 		}
 		testFm.setDice(new Dice(ColorEnumeration.Black));
 		testEffectArrayList = new ArrayList<Effect>();
