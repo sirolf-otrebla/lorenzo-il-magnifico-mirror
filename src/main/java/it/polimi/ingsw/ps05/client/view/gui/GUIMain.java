@@ -96,18 +96,6 @@ public class GUIMain extends Application {
 		commands.setLayoutX(770);
 		commands.setLayoutY(60);
 
-        /*
-        HBox commands = new HBox();
-        Button quitButton = new Button("Esci");
-        Button chatButton = new Button("Chat");
-        commands.getChildren().addAll(quitButton, chatButton);
-
-
-        AnchorPane.setRightAnchor(commands, 10.0);
-        AnchorPane.setBottomAnchor(commands, 10.0);
-        board.getChildren().add(commands);
-        */
-
 		board.maxWidthProperty().bind(stage.widthProperty());
 		board.maxHeightProperty().bind(stage.heightProperty());
 
@@ -119,23 +107,23 @@ public class GUIMain extends Application {
 
         /* Adding tower action spaces */
 		insertActionSpace(greenTowerSpace7, board, 7, 102, 66);
-		insertActionSpace(blueTowerSpace7, board, 7, 224, 66);
-		insertActionSpace(yellowTowerSpace7, board, 7, 347, 66);
-		insertActionSpace(violetTowerSpace7, board, 7, 469, 66);
-
 		insertActionSpace(greenTowerSpace5, board, 5, 102, 177);
-		insertActionSpace(blueTowerSpace5, board, 5, 224, 177);
-		insertActionSpace(yellowTowerSpace5, board, 5, 347, 177);
-		insertActionSpace(violetTowerSpace5, board, 5, 469, 177);
-
 		insertActionSpace(greenTowerSpace3, board, 3, 102, 287);
-		insertActionSpace(blueTowerSpace3, board, 3, 224, 287);
-		insertActionSpace(yellowTowerSpace3, board, 3, 347, 287);
-		insertActionSpace(violetTowerSpace3, board, 3, 469, 287);
-
 		insertActionSpace(greenTowerSpace1, board, 1, 102, 398);
+
+		insertActionSpace(blueTowerSpace7, board, 7, 224, 66);
+		insertActionSpace(blueTowerSpace5, board, 5, 224, 177);
+		insertActionSpace(blueTowerSpace3, board, 3, 224, 287);
 		insertActionSpace(blueTowerSpace1, board, 1, 224, 398);
+
+		insertActionSpace(yellowTowerSpace7, board, 7, 347, 66);
+		insertActionSpace(yellowTowerSpace5, board, 5, 347, 177);
+		insertActionSpace(yellowTowerSpace3, board, 3, 347, 287);
 		insertActionSpace(yellowTowerSpace1, board, 1, 347, 398);
+
+		insertActionSpace(violetTowerSpace7, board, 7, 469, 66);
+		insertActionSpace(violetTowerSpace5, board, 5, 469, 177);
+		insertActionSpace(violetTowerSpace3, board, 3, 469, 287);
 		insertActionSpace(violetTowerSpace1, board, 1, 469, 398);
 
         /* Adding market action spaces */
@@ -150,20 +138,20 @@ public class GUIMain extends Application {
 
         /* Adding points markers */
 		// Military
-		insertMarker(greenMilitaryMarker, "source/img/marker-green.png", board, 537, 98);
-		insertMarker(redMilitaryMarker, "source/img/marker-red.png", board, 537, 138);
-		insertMarker(blueMilitaryMarker, "source/img/marker-blue.png", board, 537, 178);
-		insertMarker(yellowMilitaryMarker, "source/img/marker-yellow.png", board, 537, 218);
+		insertMarker(greenMilitaryMarker, board, 537, 98);
+		insertMarker(redMilitaryMarker, board, 537, 138);
+		insertMarker(blueMilitaryMarker, board, 537, 178);
+		insertMarker(yellowMilitaryMarker, board, 537, 218);
 		// Victory
-		insertMarker(greenVictoryMarker, "source/img/marker-green.png", board, 675, 98);
-		insertMarker(redVictoryMarker, "source/img/marker-red.png", board, 675, 138);
-		insertMarker(blueVictoryMarker, "source/img/marker-blue.png", board, 675, 178);
-		insertMarker(yellowVictoryMarker, "source/img/marker-yellow.png", board, 675, 218);
+		insertMarker(greenVictoryMarker, board, 675, 98);
+		insertMarker(redVictoryMarker, board, 675, 138);
+		insertMarker(blueVictoryMarker, board, 675, 178);
+		insertMarker(yellowVictoryMarker, board, 675, 218);
 		// Faith
-		insertMarker(greenFaithMarker, "source/img/marker-green.png", board, 580, 438);
-		insertMarker(redFaithMarker, "source/img/marker-red.png", board, 615, 438);
-		insertMarker(blueFaithMarker, "source/img/marker-blue.png", board, 650, 438);
-		insertMarker(yellowFaithMarker, "source/img/marker-yellow.png", board, 685, 438);
+		insertMarker(greenFaithMarker, board, 580, 438);
+		insertMarker(redFaithMarker, board, 615, 438);
+		insertMarker(blueFaithMarker, board, 650, 438);
+		insertMarker(yellowFaithMarker, board, 685, 438);
 
 		board.getChildren().add(commands);
 
@@ -198,17 +186,13 @@ public class GUIMain extends Application {
 
 	}
 
-	void insertMarker(MarkerWidget marker, String imagePath, Pane pane, double x, double y) {
+	void insertMarker(MarkerWidget marker, Pane pane, double x, double y) {
 
-		int radius = 14; // DA CAMBIARE
-
-		Image markerImage = new Image(imagePath, radius*2, radius*2, true, true);
-		marker.getMarkerCircle().setRadius(radius);
 		marker.getMarkerCircle().setCenterX(x);
 		marker.getMarkerCircle().setCenterY(y);
-		marker.getMarkerCircle().setFill(new ImagePattern(markerImage));
 
 		pane.getChildren().add(marker.getMarkerCircle());
+
 	}
 
 	void setupGestureTarget(Circle target) {

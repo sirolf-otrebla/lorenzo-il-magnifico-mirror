@@ -36,7 +36,14 @@ public class MultipleSpaceWidget {
     }
 
     public void setupGestureTarget() {
+        /* Setting up drag event handlers */
+        setupDragOver();
+        setupDragEntered();
+        setupDragExited();
+        setupDragDropped();
+    }
 
+    public void setupDragOver() {
         scrollPane.setOnDragOver((DragEvent e) -> {
 
             /* source is dragged over the scrollbar */
@@ -47,7 +54,9 @@ public class MultipleSpaceWidget {
 
             //e.consume();
         });
+    }
 
+    public void setupDragEntered() {
         scrollPane.setOnDragEntered((DragEvent e) -> {
             if (e.getGestureSource() != scrollPane && e.getDragboard().hasImage()) {
                 scrollPane.setStyle("-fx-border-style: outset");
@@ -57,14 +66,18 @@ public class MultipleSpaceWidget {
 
             //e.consume();
         });
+    }
 
+    public void setupDragExited() {
         scrollPane.setOnDragExited((DragEvent e) -> {
 
             scrollPane.setStyle("-fx-border-style: none");
             //e.consume();
 
         });
+    }
 
+    public void setupDragDropped() {
         scrollPane.setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;

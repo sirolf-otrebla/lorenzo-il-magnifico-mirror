@@ -13,9 +13,10 @@ public class CardWidget {
     public static final double CARD_MIN_WIDTH = 70;
 
     private int referenceID;
-    private boolean empty;
     private ImageView cardImage;
     private String imagePath;
+    private String cardName;
+    private boolean payAlternatives;
 
     public CardWidget() {
 
@@ -32,8 +33,11 @@ public class CardWidget {
         });
     }
 
-    public boolean isEmpty() {
-        return this.empty;
+    public boolean hasPayAlternatives() {
+        return this.payAlternatives;
     }
 
+    public String getCardName() {
+        return cardName;
+    }
 }
