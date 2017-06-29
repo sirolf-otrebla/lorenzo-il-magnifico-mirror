@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 public interface ActionResult extends Serializable {
 

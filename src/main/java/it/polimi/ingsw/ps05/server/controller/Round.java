@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.net.message.GameMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.server.net.Game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,10 +10,10 @@ import java.util.Iterator;
 /**
  * Created by Alberto on 19/06/2017.
  */
-public class Round implements RoundInterface {
+public class Round {
     private ArrayList<Player> playerOrder;
     private Game game;
-    private NetMessage inputMessage;
+    private GameMessage inputMessage;
     private GameCommandsVisitor visitor;
 
     /* result listeners */
@@ -55,14 +55,18 @@ public class Round implements RoundInterface {
     }
 
 
-    @Override
     public void nextState() {
         if (this.plOrdIt.hasNext())
         game.setActivePlayer(this.plOrdIt.next());
 
+
         else {
-            //todo
-            System.out.println("turn finished");
+            //TODO (MANCA QUALCOSA?)
+            System.out.println("round finished");
         }
+    }
+
+    public void setInputMessage(GameMessage inputMessage) {
+        this.inputMessage = inputMessage;
     }
 }

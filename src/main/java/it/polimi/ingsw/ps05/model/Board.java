@@ -152,4 +152,8 @@ public class Board implements Serializable{
 	public void setActSpacesMap(HashMap<Integer, ActionSpace> actSpacesMap) {
 		this.actSpacesMap = actSpacesMap;
 	}
+
+	public ActionSpace getActionSpace(Integer referenceID){
+		return this.getActSpacesMap().get(referenceID);
+	}
 }

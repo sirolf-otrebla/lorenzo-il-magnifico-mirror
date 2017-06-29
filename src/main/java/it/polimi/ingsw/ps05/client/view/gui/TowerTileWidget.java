@@ -6,6 +6,7 @@ package it.polimi.ingsw.ps05.client.view.gui;
 public class TowerTileWidget extends ActionSpaceWidget {
 
     private CardWidget associatedCard;
+    private boolean morePaymentOptions;
 
     public TowerTileWidget() {
         super();
@@ -18,7 +19,6 @@ public class TowerTileWidget extends ActionSpaceWidget {
     public void setAssociatedCard(CardWidget associatedCard) {
         this.associatedCard = associatedCard;
     }
-    private boolean morePaymentOptions;
 
 
     public boolean hasMorePaymentOptions() {

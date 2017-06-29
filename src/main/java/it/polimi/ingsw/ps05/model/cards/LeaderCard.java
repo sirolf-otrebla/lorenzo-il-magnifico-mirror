@@ -15,9 +15,13 @@ public class LeaderCard implements Card {
 	 * 
 	 */
 	private static final long serialVersionUID = -294844779735811229L;
-	private final ArrayList<ArrayList<Resource>> requirements;
-	private final ArrayList<Effect> effects;
-	private final String cardName;
+	private  ArrayList<ArrayList<Resource>> requirements;
+	private  ArrayList<Effect> effects;
+	private  String cardName;
+
+	private final Integer referenceID;
+
+	private static int count = 0;
 
 	private Observer privilegeListener;
 
@@ -62,10 +66,23 @@ public class LeaderCard implements Card {
         return cardName;
     }
 
-    public LeaderCard(String Name, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> eff){
-		this.cardName = Name;
+
+	public LeaderCard(){
+    	super();
+    	this.referenceID = LeaderCard.count; //TODO VEDI SE ESISTE UN METODO MIGLIORE
+    	LeaderCard.count++;
+	}
+
+	public void setRequirements(ArrayList<ArrayList<Resource>> requirements) {
 		this.requirements = requirements;
-		this.effects = eff;
+	}
+
+	public void setEffects(ArrayList<Effect> effects) {
+		this.effects = effects;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
 	}
 
 	@Override

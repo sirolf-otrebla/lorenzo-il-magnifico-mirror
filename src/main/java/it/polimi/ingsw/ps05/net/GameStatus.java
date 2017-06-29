@@ -14,6 +14,7 @@ public class GameStatus {
     private HashMap<Integer, Player> playerHashMap;
     private Board gameBoard;
     private Player thisPlayer;
+    private Integer activePlayerId;
 
     public Player getThisPlayer() {
         return thisPlayer;
@@ -27,11 +28,12 @@ public class GameStatus {
         return gameBoard;
     }
 
-    public GameStatus(ArrayList<Player> playerList, Board gameBoard, Player thisPlayer) {
+    public GameStatus(ArrayList<Player> playerList, Board gameBoard, Player thisPlayer, Integer activePlayerId) {
         this.playerHashMap = new HashMap<>();
         for (Player p : playerList)
             this.playerHashMap.put(p.getPlayerID(), p);
         this.gameBoard = gameBoard;
+        this.activePlayerId = activePlayerId;
 
         this.thisPlayer = thisPlayer;
     }

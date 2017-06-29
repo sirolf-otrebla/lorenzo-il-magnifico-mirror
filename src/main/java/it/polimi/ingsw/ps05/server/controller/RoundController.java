@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.Turn;
-import it.polimi.ingsw.ps05.server.net.Game;
 
 import java.util.ArrayList;
 

@@ -5,7 +5,7 @@ import java.util.Observable;
 
 import it.polimi.ingsw.ps05.server.controller.PrivilegeBonusListener;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class PrivilegeBonus extends Observable implements ActionResult {
 	/**

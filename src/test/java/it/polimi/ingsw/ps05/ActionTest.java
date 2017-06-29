@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 import junit.framework.*;
 import org.junit.Test;
 

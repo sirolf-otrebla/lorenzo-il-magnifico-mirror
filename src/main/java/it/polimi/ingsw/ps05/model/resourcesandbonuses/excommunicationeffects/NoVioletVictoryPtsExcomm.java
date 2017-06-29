@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.EffectType;

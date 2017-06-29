@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 import java.io.Serializable;
 import java.util.ArrayList;

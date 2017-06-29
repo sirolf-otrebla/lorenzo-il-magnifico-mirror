@@ -1,14 +1,11 @@
-package it.polimi.ingsw.ps05.server.net;
+package it.polimi.ingsw.ps05.server.controller;
 
-import it.polimi.ingsw.ps05.server.controller.GameFlowController;
-import it.polimi.ingsw.ps05.server.controller.GameSetup;
-import it.polimi.ingsw.ps05.server.controller.RoundInterface;
-import it.polimi.ingsw.ps05.server.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +24,7 @@ public class Game implements Observer {
     private Board gBoard;
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
-    private RoundInterface state;
+    private Round state;
 
 
     private boolean useCompleteRules = true;
@@ -107,19 +104,25 @@ public class Game implements Observer {
         return activePlayer;
     }
 
-    public void setActivePlayer(Player activePlayer) {
-        this.activePlayer = activePlayer;
+    public void setActivePlayer(Player nextPlayer) {
+        this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
+        this.activePlayer = nextPlayer;
+        this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
     }
 
     public Board getBoard() {
     	return this.gBoard;
     }
 
-    public RoundInterface getState() {
+    public Round getState() {
         return state;
     }
 
-    public void setState(RoundInterface state) {
+    public void setState(Round state) {
         this.state = state;
+    }
+
+    public PlayerClient getPlayerClient(Integer id){
+        return this.clientHashMap.get(id);
     }
 }

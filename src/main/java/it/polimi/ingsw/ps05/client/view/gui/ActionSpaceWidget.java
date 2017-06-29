@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -14,6 +15,9 @@ public class ActionSpaceWidget {
     private int referenceID;
     private boolean isOccupied;
     private Circle occupationCircle;
+    private ColorEnumeration familyMemberID;
+    private Integer occupantPlayerID;
+    private Integer id;
 
     public ActionSpaceWidget() {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
@@ -84,7 +88,7 @@ public class ActionSpaceWidget {
         return id;
     }
 
-    public void setId(int id) { //TODO VERIFICARE SE È DA USARE QUESTO.
+    public void setId(Integer id) {
         this.id = id;
     }
 }
