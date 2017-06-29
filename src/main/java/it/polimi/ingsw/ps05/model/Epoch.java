@@ -1,9 +1,15 @@
 package it.polimi.ingsw.ps05.model;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 
-public class Epoch {
+public class Epoch implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7674672173965107029L;
 	private EpochEnumeration epoch;
 	private ExcommunicationCard excommunicationCard;
 

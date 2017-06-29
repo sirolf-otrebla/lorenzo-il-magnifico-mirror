@@ -53,6 +53,8 @@ public class CommonJsonParser {
 		ArrayList<VictoryResource> faithList = new ArrayList<VictoryResource>();
 		ArrayList<Tower> towerList = new ArrayList<Tower>();
 		ArrayList<MilitaryResource> militaryList = new ArrayList<MilitaryResource>();
+		ArrayList<VictoryResource> blueConv = new ArrayList<VictoryResource>();
+		ArrayList<VictoryResource> greenConv = new ArrayList<VictoryResource>();
 		try {
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 			notTowerSpace.addAll(detectNumMarketSpace(obj.get("MarketSpace")));
@@ -62,11 +64,31 @@ public class CommonJsonParser {
 			faithList = loadFaithPath(obj.get("FaithPath"));
 			towerList = loadTower((JSONObject)obj.get("Tower"));
 			militaryList = loadMilitaryPath(obj.get("MilitaryPath"));
+			blueConv = loadBlueConversionPath(obj.get("BlueConversion"));
+			greenConv = loadGreenConversionPath(obj.get("GreenConversion"));
 		} catch (IOException | ParseException | RepeatedAssignmentException | CouncilDiceAlreadySet e) {
 			e.printStackTrace();
 		}
 
-		return new Board(towerList, notTowerSpace, faithList, militaryList);
+		return new Board(towerList, notTowerSpace, faithList, militaryList, blueConv, greenConv);
+	}
+	
+	private ArrayList<VictoryResource> loadBlueConversionPath(Object json){
+		JSONArray obj = (JSONArray)json;
+		ArrayList<VictoryResource> list = new ArrayList<VictoryResource>();
+		for (int i = 0; i < obj.toArray().length; i++){
+			list.add(new VictoryResource(Integer.parseInt(obj.toArray()[i].toString())));
+		}
+		return list;
+	}
+	
+	private ArrayList<VictoryResource> loadGreenConversionPath(Object json){
+		JSONArray obj = (JSONArray)json;
+		ArrayList<VictoryResource> list = new ArrayList<VictoryResource>();
+		for (int i = 0; i < obj.toArray().length; i++){
+			list.add(new VictoryResource(Integer.parseInt(obj.toArray()[i].toString())));
+		}
+		return list;
 	}
 
 	private ArrayList<MilitaryResource> loadMilitaryPath(Object json){
@@ -184,7 +206,6 @@ public class CommonJsonParser {
 				e.printStackTrace();
 			}
 		}
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -211,7 +232,6 @@ public class CommonJsonParser {
 			}
 		}
 
-		//TODO modificare json per rendere automatica questa creazione
 		Dice diceRequired;
 		ImmediateEffect effect = new ImmediateEffect();
 		effect.setEffectList(list);
@@ -362,6 +382,7 @@ public class CommonJsonParser {
 					for (Object o : array){
 						for (int i = 0; i < ((JSONObject)o).keySet().size(); i++){
 							ReduceVictoryPtsExcomm excomm = new ReduceVictoryPtsExcomm();
+							excomm.setGame(game);
 							if (((JSONObject)o).keySet().toArray()[i].toString().equals("toCheck")){
 								JSONObject checkList = (JSONObject)((JSONObject)o).get("toCheck");
 								for (int j = 0; j < checkList.keySet().size(); j++){
@@ -410,6 +431,9 @@ public class CommonJsonParser {
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
 		
+		Method method1 = actionObject.getClass().getDeclaredMethod("setGame",game.getClass());
+		method1.invoke(actionObject, game);
+		
 		return (ExcommunicationEffect)actionObject;
 	}
 	
@@ -422,25 +446,13 @@ public class CommonJsonParser {
 		Method method = actionObject.getClass().getDeclaredMethod("setMalus",malus.getClass());
 		method.invoke(actionObject, malus);
 		
+		Method method1 = actionObject.getClass().getDeclaredMethod("setGame",game.getClass());
+		method1.invoke(actionObject, game);
+		
 		return (ExcommunicationEffect)actionObject;
 	}
 
 	//XXX Metodi per caricamento carte
-	/*public ArrayList<Deck> loadDeck(String path) {
-		ArrayList<Deck> deck = new ArrayList<Deck>();
-		try {
-			File file = new File(path);
-			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
-			deck.add(loadBlueCardDeck(obj));
-			deck.add(loadYellowCardDeck(obj));
-			deck.add(loadGreenCardDeck(obj));
-			deck.add(loadVioletCardDeck(obj));
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-		return deck;
-
-	}*/
 
 	private BlueCardDeck loadBlueCardDeck(JSONObject json){
 		JSONArray list = (JSONArray) json.get("Blue");

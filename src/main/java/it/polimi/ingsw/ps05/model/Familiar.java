@@ -8,12 +8,18 @@ import java.io.Serializable;
 
 import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
 
-public class Familiar implements PlayerRelated, Serializable{
+public class Familiar implements PlayerRelated {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8175413398375108149L;
 	private transient ActionSpace position;
 	private Dice relatedDice;
 	private ColorEnumeration color = NOT_INITIALIZED;
 	private transient Player relatedPlayer = null;
+
 
 	private Integer relatedPlayerID;
 	

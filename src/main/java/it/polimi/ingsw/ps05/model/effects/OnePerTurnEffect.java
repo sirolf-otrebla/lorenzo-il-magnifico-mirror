@@ -6,7 +6,11 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
  * Created by Alberto on 23/05/2017.
  */
 public class OnePerTurnEffect extends ImmediateEffect {
-    private boolean used = false;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 533058130936628967L;
+	private boolean used = false;
 
     public boolean isUsed() {
         return used;

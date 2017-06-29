@@ -12,6 +12,10 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class RemoveTileEffect implements ActionResult {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1299547449525139414L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 

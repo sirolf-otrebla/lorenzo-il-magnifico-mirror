@@ -41,7 +41,6 @@ public class SocketConn extends LimConnection {
 
 	@Override
 	public void send(NetMessage mess) {
-		// TODO Auto-generated method stub
 		try {
 			stream.sendData(mess);
 		} catch (IOException e) {

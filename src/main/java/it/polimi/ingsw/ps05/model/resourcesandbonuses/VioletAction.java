@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.spaces.VioletTower;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
-import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
@@ -16,6 +15,10 @@ import java.util.Iterator;
 import java.util.Observable;
 
 public class VioletAction extends Observable implements ActionResult, BonusAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6255109269626199139L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 

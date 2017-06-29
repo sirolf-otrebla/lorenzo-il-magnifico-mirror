@@ -9,6 +9,10 @@ import java.util.Iterator;
 
 public class Action implements Period {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5391868345452935447L;
 	//constants (not useful) for payment choice
 	public static final int NO_OPTIONS = 0;
 	public static final int FIRST_OPTION = 0;

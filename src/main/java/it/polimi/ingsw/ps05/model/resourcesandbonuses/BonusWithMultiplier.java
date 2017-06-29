@@ -1,9 +1,17 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.cards.BlueCard;
+import it.polimi.ingsw.ps05.model.cards.GreenCard;
+import it.polimi.ingsw.ps05.model.cards.VioletCard;
+import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class BonusWithMultiplier extends PermanentBonus {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2859778147705557560L;
 	private Float multiplier;
 	private Resource returnResource;
 	private Class<?> cardToCount;
@@ -46,8 +54,23 @@ public class BonusWithMultiplier extends PermanentBonus {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
-
+		Resource copy = returnResource;
+		if (cardToCount.equals(MilitaryResource.class)){
+			copy.setValue((int)	Math.floor(playerR.getRelatedPlayer().getResource(MilitaryResource.id).getValue()*multiplier));
+			playerR.getRelatedPlayer().addResource(copy);
+		} else if (cardToCount.equals(GreenCard.class)){
+			copy.setValue((int)	Math.floor(playerR.getRelatedPlayer().getGreenCardList().size()*multiplier));
+			playerR.getRelatedPlayer().addResource(copy);
+		} else if (cardToCount.equals(BlueCard.class)){
+			copy.setValue((int)	Math.floor(playerR.getRelatedPlayer().getBlueCardList().size()*multiplier));
+			playerR.getRelatedPlayer().addResource(copy);
+		} else if (cardToCount.equals(YellowCard.class)){
+			copy.setValue((int)	Math.floor(playerR.getRelatedPlayer().getYellowCardList().size()*multiplier));
+			playerR.getRelatedPlayer().addResource(copy);
+		} else if (cardToCount.equals(VioletCard.class)){
+			copy.setValue((int)	Math.floor(playerR.getRelatedPlayer().getVioletCardList().size()*multiplier));
+			playerR.getRelatedPlayer().addResource(copy);
+		}
 	}
 
 	@Override

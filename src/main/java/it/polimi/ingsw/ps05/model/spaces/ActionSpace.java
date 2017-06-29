@@ -3,18 +3,25 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.AlwaysUnFullFilledResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /* represent the generalization of all familiar-usable spaces within the game board
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace {
+public abstract class ActionSpace implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3124416903238969687L;
 
 	private boolean isOccupied;
 
@@ -53,7 +60,7 @@ public abstract class ActionSpace {
 		return isOccupied;
 	}
 
-	public abstract ArrayList<Effect> getEffects(); //TODO: implement this method in subclasses;
+	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException;
 
 	public ArrayList<ArrayList<Resource>> getRequirements(){
 		return requirements;

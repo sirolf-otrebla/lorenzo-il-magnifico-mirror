@@ -6,10 +6,17 @@ import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.effects.AlternativeEffect;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class GreenCard extends TowerCard {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8383056887622761576L;
+
+
 	public GreenCard(){
 		super();
 	}
@@ -34,24 +41,22 @@ public class GreenCard extends TowerCard {
 		selectedEffects = new int[activableEffectList.size()]; // ODIO GLI ARRAY ISTANZIATI A RUNTIME PERÒ È LA COSA PIU SVEGLIA IN QUESTO MOMENTO;
 
 	}
-	
+
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		return requirements;
 	}
 
 	@Override
 	public ArrayList<Effect> getEffects() {
-		// TODO Auto-generated method stub
 		return activableEffectList;
 	}
 
 	public void applyHarvestableEffects(PlayerRelated familyMember){
 		/*1st solution: Player selects what cards he want to use BEFORE
 		 * calling action.run() class. references to cards he want to activate are stored
-		  * in a special array/ list/ whatever attribute stored in Player class.
-		  * this solution requires some kind of card related effect which
+		 * in a special array/ list/ whatever attribute stored in Player class.
+		 * this solution requires some kind of card related effect which
 		 */
 
 		// DICE CONTROL IS INSIDE EFFECT
@@ -63,7 +68,6 @@ public class GreenCard extends TowerCard {
 	}
 
 	public boolean getToBeActivated() {
-		// TODO Auto-generated method stub
 		return toBeActivated;
 	}
 
@@ -73,21 +77,18 @@ public class GreenCard extends TowerCard {
 
 	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		super(epoch, color, cardName, effects);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void moveToPlayer(PlayerRelated player) {
-		// TODO Auto-generated method stub
 		player.getRelatedPlayer().addGreenCard(this);
 	}
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
-		// TODO Auto-generated method stub
-		
+		super.applyNonActivableEffects(player);
 	}
-	
+
 	@Override
 	public String toString(){
 		return "Carta verde";

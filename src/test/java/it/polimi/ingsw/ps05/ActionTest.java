@@ -79,7 +79,7 @@ public class ActionTest extends TestCase{
 		try {
 			testPl.setFamiliars(famList);
 		} catch (RepeatedAssignmentException e) {
-			//TODO
+			
 		}
 		testFm.setDice(new Dice(ColorEnumeration.Black));
 		testEffectArrayList = new ArrayList<Effect>();
@@ -159,7 +159,6 @@ public class ActionTest extends TestCase{
 				assertTrue(((ActionSpace)board.getTowerList().get(2).getTiles().get(2)).isOccupied());
 				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -186,7 +185,7 @@ public class ActionTest extends TestCase{
 		//		break;
 		//	}
 		// }
-		//TODO RISISTEMARE STA ROBA SU
+		// RISISTEMARE STA ROBA SU
 		/* System.out.println(space.getClass().toString());
 		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), space);
 		if (action.isLegal()){
@@ -197,7 +196,7 @@ public class ActionTest extends TestCase{
 				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
 
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
-				// TODO Auto-generated catch block
+				//  Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -295,7 +294,7 @@ public class ActionTest extends TestCase{
 			assertEquals(4,white+orange+black+any);
 		}
 
-		// todo ?
+		//  ?
 		for (Player p : turn.getPlayerOrder()){
 			for (Player o : turn.getPlayerOrder()){
 				assertEquals(((Familiar) p.getFamilyList().toArray()[0]).getColor(),
@@ -321,12 +320,11 @@ public class ActionTest extends TestCase{
 
 	@Test
 	public void testEffects(){
-		// todo
+		// 
 	}
 
 	@Test
 	public void testDices(){
-		// todo
 		assertEquals(ActionTest.DICE_REQ_AMT,(int) this.testDiceReq.getValue());
 		assertEquals(ActionTest.PL_COLOR_TEST,this.testDiceReq.getColor());
 		for (int i = 0; i < 1000000; i++){

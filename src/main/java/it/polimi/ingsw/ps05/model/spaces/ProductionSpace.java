@@ -19,6 +19,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  */
 public class ProductionSpace extends ActionSpaceWithEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5391097080685286028L;
 	public ProductionSpace() {
 		super();
 	}

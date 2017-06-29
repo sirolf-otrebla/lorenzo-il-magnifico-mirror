@@ -8,6 +8,11 @@ import java.util.Random;
 
 public class VioletCardDeck implements Deck {
 	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2226102373824889535L;
+
 ArrayList<VioletCard> cardList;
 	
 	ArrayList<VioletCard> firstEpochCard = new ArrayList<VioletCard>();

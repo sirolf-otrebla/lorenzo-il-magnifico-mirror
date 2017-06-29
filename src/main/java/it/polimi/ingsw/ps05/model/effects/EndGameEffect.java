@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 
 public class EndGameEffect implements SimpleEffect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8489100215029222511L;
 	ArrayList<ActionResult> effectsList = new ArrayList<ActionResult>();
 	
 	public EndGameEffect(){

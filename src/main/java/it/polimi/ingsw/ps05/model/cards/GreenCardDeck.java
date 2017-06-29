@@ -8,6 +8,11 @@ import java.util.Random;
 
 public class GreenCardDeck implements Deck {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1646027742455082138L;
+
 	ArrayList<GreenCard> cardList;
 	
 	ArrayList<GreenCard> firstEpochCard = new ArrayList<GreenCard>();

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 
-public interface Resource {
+public interface Resource extends Serializable {
 
 	// public int getResourceValue();
 	

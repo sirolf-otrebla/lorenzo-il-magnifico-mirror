@@ -15,6 +15,10 @@ import java.util.Iterator;
 import java.util.Observable;
 
 public class GreenAction extends Observable implements ActionResult, BonusAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7255786539292915638L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private Game game;
 
@@ -87,7 +91,6 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 
 
 	public void resetResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){

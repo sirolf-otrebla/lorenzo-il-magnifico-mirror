@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class AllBonus extends PermanentBonus implements ActionResult {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5972328530854839238L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private  Game game;
 
@@ -36,7 +40,6 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){
 			for (TowerTileInterface tile : t.getTiles().values()){

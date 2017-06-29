@@ -7,9 +7,12 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.net.Game;
 
 public class WoodResource implements Resource, ActionResult {
-	//TODO vedi faith
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -220328697689674078L;
 	private Integer amount;
-	public static final String ID = "Legno";
+	public static final String id = "Legno";
 	private Game game;
 	
 	public WoodResource(Integer amount){
@@ -57,14 +60,12 @@ public class WoodResource implements Resource, ActionResult {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return (playerFamiliar.getRelatedPlayer().getResource(this.getID()).getValue() >= this.getValue());
 	}
 
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
-		return ID;
+		return id;
 	}
 
 	@Override

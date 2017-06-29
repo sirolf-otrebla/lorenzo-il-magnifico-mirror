@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class ActivableEffect implements AlternativeEffect {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7676584572036711660L;
 	ActivableEffectType type;
 	Integer diceRequired = 0;
 	ArrayList<ArrayList<Resource>> resourcesRequired;
@@ -44,13 +48,11 @@ public class ActivableEffect implements AlternativeEffect {
 
 	@Override
 	public EffectType getEffectType() {
-		// TODO Auto-generated method stub
 		return EffectType.ACTIVABLE;
 	}
 
 	@Override
 	public ArrayList<ArrayList<ActionResult>> getResultList() {
-		// TODO Auto-generated method stub
 		return effects;
 	}
 	

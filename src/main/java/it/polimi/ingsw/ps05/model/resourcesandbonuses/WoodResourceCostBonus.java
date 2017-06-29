@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps05.server.net.Game;
 
 public class WoodResourceCostBonus implements Resource, ActionResult {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -268984970403190284L;
 	private Integer value;
 	private String id = "Legno Bonus";
 	private Game game;

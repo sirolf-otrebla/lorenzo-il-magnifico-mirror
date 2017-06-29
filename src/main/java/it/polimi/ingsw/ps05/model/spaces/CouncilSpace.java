@@ -13,6 +13,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
 public class CouncilSpace extends ActionSpaceWithEffect {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3833502039042683186L;
+
 	private ArrayList<Familiar> occupantList = new ArrayList<Familiar>();
 
 	private ArrayList<Effect> effectList;
