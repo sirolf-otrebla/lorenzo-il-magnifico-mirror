@@ -16,4 +16,11 @@ public class LeaderWidget {
         //TODO
     }
 
+    public int getReferenceID() {
+        return referenceID;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
 }

@@ -1,16 +1,17 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Action;
+import it.polimi.ingsw.ps05.model.cards.GreenCard;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
-import it.polimi.ingsw.ps05.net.message.ActionMessage;
-import it.polimi.ingsw.ps05.net.message.ExitGameMessage;
-import it.polimi.ingsw.ps05.net.message.LeaderCardMessage;
-import it.polimi.ingsw.ps05.net.message.UpdateMessage;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ProductionAction;
+import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Alberto on 19/06/2017.
@@ -21,7 +22,29 @@ public class GameCommandsVisitor implements VisitorInterface {
     private Round round;
 
 
+    public void visit(HarvestActionMessage msg){
+        HashMap<Integer, GreenCard> map = this.activePlayer.getGreenCardHashMap();
+        for (Integer i: msg.getActiveCardsIds() )
+            map.get(i).setToBeActivated(true);
+        msg.getActionMessage().acceptVisitor(this);
 
+    }
+
+    public void visit(ProductionActionMessage msg){
+        HashMap<Integer, YellowCard> map = this.activePlayer.getYellowCardHashMap();
+        for (Integer i : msg.getActiveCardsIds())
+            map.get(i).setToBeActivated(true);
+        msg.getActionMessage().acceptVisitor(this);
+    }
+
+    public void visit(DiscardLeaderMessage msg){
+
+        //TODO
+    }
+
+    public void visit(PassActionMessage msg){
+        //TODO
+    }
     public void visit(LeaderCardMessage lCardMsg){
         try {
             LeaderCard card =
@@ -44,9 +67,11 @@ public class GameCommandsVisitor implements VisitorInterface {
             Player pl = mess.getPlayerBefore();
             validatePlayer(pl);
             Player thisPl = this.activePlayer;
-            Action act = thisPl.doAction(mess.getFamiliar(),
-                    mess.getActionSpace(), mess.getSelectedPayment());
-            UpdateMessage updateMsg = new UpdateMessage(act, thisPl, this.activePlayer);
+
+            Action act = thisPl.doAction(this.activePlayer.getFamilyMap().get(mess.getFamiliarID()),
+                    round.getGame().getBoard().getActSpacesMap().get(mess.getActionSpaceID()),
+                    mess.getSelectedPayment());
+
            // for (PlayerClient client :
                    //TODO: round.getGame().getPlayerInGame()) {
           //      client.sendMessage(updateMsg);

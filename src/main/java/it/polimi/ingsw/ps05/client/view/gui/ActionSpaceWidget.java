@@ -14,8 +14,11 @@ import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_S
 public class ActionSpaceWidget {
 
     private int referenceID;
-    boolean isOccupied;
-    Circle occupationCircle;
+    private boolean isOccupied;
+    private Circle occupationCircle;
+    private ColorEnumeration familyMemberID;
+    private Integer occupantPlayerID;
+    private Integer id;
 
     public ActionSpaceWidget() {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
@@ -88,7 +91,6 @@ public class ActionSpaceWidget {
         });
     }
 
-    /*
     public ColorEnumeration getFamilyMemberID() {
         return familyMemberID;
     }
@@ -101,8 +103,7 @@ public class ActionSpaceWidget {
         return id;
     }
 
-    public void setId(int id) { //TODO VERIFICARE SE È DA USARE QUESTO.
+    public void setId(Integer id) {
         this.id = id;
     }
-    */
 }

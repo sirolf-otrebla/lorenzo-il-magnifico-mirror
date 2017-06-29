@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps05.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.polimi.ingsw.ps05.model.cards.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -25,17 +28,17 @@ public class Player implements PlayerRelated {
 	ColorEnumeration color;
 	
 	// game information
-	private ArrayList<Familiar> familyList = null;
+	private HashMap<ColorEnumeration, Familiar> familyMap;
 	private BonusTile bonusTile;
 
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
 
 
-	private ArrayList<GreenCard> greenCardList = new ArrayList<GreenCard>();
-	private ArrayList<BlueCard> blueCardList = new ArrayList<BlueCard>();
-	private ArrayList<YellowCard> yellowCardList = new ArrayList<YellowCard>();
-	private ArrayList<VioletCard> violetCardList = new ArrayList<VioletCard>();
-	private ArrayList<LeaderCard> leaderCardList = new ArrayList<LeaderCard>();
+	private HashMap<Integer, GreenCard> greenCardHashMap = new HashMap<>();
+	private HashMap<Integer, BlueCard> blueCardHashMap = new HashMap<>();
+	private HashMap<Integer, YellowCard> yellowCardHashMap = new HashMap<>();
+	private HashMap<Integer, VioletCard> violetCardHashMap = new HashMap<>();
+	private HashMap<Integer, LeaderCard> leaderCardHashMap = new HashMap<>();
 
 	private ArrayList<PermanentBonus> permanentEffectResList;
 	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
@@ -79,19 +82,19 @@ public class Player implements PlayerRelated {
 	}
 
 	public ArrayList<GreenCard> getGreenCardList() {
-		return greenCardList;
+		return new ArrayList<GreenCard>( this.greenCardHashMap.values());
 	}
 
 	public ArrayList<YellowCard> getYellowCardList() {
-		return yellowCardList;
+		return  new ArrayList<>(this.yellowCardHashMap.values());
 	}
 
 	public ArrayList<BlueCard> getBlueCardList() {
-		return blueCardList;
+		return  new ArrayList<>(this.blueCardHashMap.values());
 	}
 
 	public ArrayList<VioletCard> getVioletCardList() {
-		return violetCardList;
+		return  new ArrayList<>(this.violetCardHashMap.values());
 	}
 
     @Override
@@ -100,7 +103,7 @@ public class Player implements PlayerRelated {
     }
 
     public ArrayList<LeaderCard> getLeaderCardList() {
-        return leaderCardList;
+        return  new ArrayList<>(this.leaderCardHashMap.values());
     }
     
     public void addResource(Resource resource){
@@ -112,15 +115,16 @@ public class Player implements PlayerRelated {
     }
 
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
-		if (this.familyList == null) {
-			this.familyList = familyList;
+		if (this.familyMap == null) {
+			for (Familiar f: familyList)
+				this.familyMap.put(f.getColor(), f);
 		} else {
 			throw new RepeatedAssignmentException();
 		}
     }
     
-    public ArrayList<Familiar> getFamilyList(){
-    	return this.familyList;
+    public Collection<Familiar> getFamilyList(){
+    	return this.familyMap.values();
     }
 
 	public String getUsername() {
@@ -139,7 +143,10 @@ public class Player implements PlayerRelated {
     	}
     	return null;
     }
-    
+
+    public Map<ColorEnumeration, Familiar> getFamilyMap(){
+    	return familyMap;
+	}
     public ColorEnumeration getColor(){
     	return color;
     }
@@ -153,19 +160,19 @@ public class Player implements PlayerRelated {
 	}
 
     public void addBlueCard(BlueCard card){
-    	blueCardList.add(card);
+    	blueCardHashMap.put(card.getReferenceID(), card);
     }
 
     public void addGreenCard(GreenCard card){
-    	greenCardList.add(card);
+    	greenCardHashMap.put(card.getReferenceID(), card);
     }
 
     public void addYellowCard(YellowCard card){
-    	yellowCardList.add(card);
+    	yellowCardHashMap.put(card.getReferenceID(),card);
     }
 
     public void addVioletCard(VioletCard card){
-    	violetCardList.add(card);
+    	violetCardHashMap.put(card.getReferenceID(), card);
     }
 
 	public BonusTile getBonusTile() {
@@ -180,9 +187,9 @@ public class Player implements PlayerRelated {
     public LeaderCard getLeaderCard(String leaderName) throws MissingCardException{
 
 		for (LeaderCard leaderCard:
-			 this.leaderCardList) {
+			 this.leaderCardHashMap.values()) {
 			if (leaderCard.getName().equals(leaderName)){
-				leaderCardList.remove(leaderCard);
+				leaderCardHashMap.remove(leaderCard);
 				return leaderCard;
 			}
 		}
@@ -221,11 +228,34 @@ public class Player implements PlayerRelated {
 	}
 	
 	public void removeBlueCard() {
-		this.blueCardList = new ArrayList<BlueCard>();
+		this.blueCardHashMap.clear();
 	}
 	
 	public void removeGreenCard() {
-		this.greenCardList = new ArrayList<GreenCard>();
+		this.greenCardHashMap.clear(); ;
 	}
 
+	public HashMap<Integer, GreenCard> getGreenCardHashMap() {
+		return greenCardHashMap;
+	}
+
+	public HashMap<Integer, BlueCard> getBlueCardHashMap() {
+		return blueCardHashMap;
+	}
+
+	public HashMap<Integer, YellowCard> getYellowCardHashMap() {
+		return yellowCardHashMap;
+	}
+
+	public HashMap<Integer, VioletCard> getVioletCardHashMap() {
+		return violetCardHashMap;
+	}
+
+	public HashMap<Integer, LeaderCard> getLeaderCardHashMap() {
+		return leaderCardHashMap;
+	}
+
+	public Familiar getFamilyMember(ColorEnumeration c){
+		return this.getFamilyMap().get(c);
+	}
 }

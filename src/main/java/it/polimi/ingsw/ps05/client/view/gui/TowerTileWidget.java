@@ -10,6 +10,7 @@ import javafx.scene.paint.ImagePattern;
 public class TowerTileWidget extends ActionSpaceWidget {
 
     private CardWidget associatedCard;
+    private boolean morePaymentOptions;
 
     public TowerTileWidget() {
         super();
@@ -49,5 +50,10 @@ public class TowerTileWidget extends ActionSpaceWidget {
 
     public void setAssociatedCard(CardWidget associatedCard) {
         this.associatedCard = associatedCard;
+    }
+
+
+    public boolean hasMorePaymentOptions() {
+        return morePaymentOptions;
     }
 }

@@ -29,6 +29,8 @@ public class BonusActionListener implements Observer {
         client.sendMessage(mess);
         // inutile
         gfc.getGame().setActivePlayer(this.gfc.getGame().getActivePlayer());
+        this.gfc.sendUpdateMsg();
+
     }
 
     public ResultTriggerVisitor getVisitor() {
