@@ -1,10 +1,15 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -18,12 +23,11 @@ import java.util.ArrayList;
  */
 public class PaymentPopup {
 
-    ArrayList<Integer> resIdArrayList = new ArrayList<>();
 
     static boolean answer = true; // usato per comunicare che il giocatore ha annullato l'azione
 
     /* TODO aggiungere parametri al metodo display per visualizzare le immagini delle risorse durante la scelta */
-    public static boolean display(String cardName) {
+    public static boolean display(String cardName, ArrayList<ArrayList<String>> resArrayList) {
 
         Stage popup = new Stage();
 
@@ -36,24 +40,55 @@ public class PaymentPopup {
         /* Creating buttons for the selection */
         Button firstAltButton = new Button();
         Button secondAltButton = new Button();
+        ToggleGroup toggleGroup = new ToggleGroup();
+
+        VBox verticalBox = new VBox();
+        ArrayList<RadioButton> buttonList = new ArrayList<RadioButton>();
 
         //TODO: in base a parametri da aggiungere i pulsanti avranno l'immagine della risorsa 'resimage' come sfondo e il valore 'resValue' come testo
 
-        /*
-        firstAltButton.setStyle("-fx-background-image: " + resImage1);
-        firstAltButton.setText(resValue1.toString());
-        firstAltButton.setOnAction((ActionEvent e) -> {
-            //TODO: comunicare la scelta al controller
-        });
+        for (ArrayList<String> resList : resArrayList) {
+            String text = new String();
+            for (String res : resList) text += res + ",";
+            RadioButton rb = new RadioButton(text);
+            buttonList.add(rb);
+            rb.setToggleGroup(toggleGroup);
+            verticalBox.getChildren().add(rb);
+        }
 
-        secondAltButton.setStyle("-fx-background-image: " + resImage2);
-        secondAltButton.setText(resValue2.toString());
-        secondAltButton.setOnAction((ActionEvent e) -> {
-            //TODO: comunicare la scelta al controller
-        });
-        */
+        //TODO FINIRE
 
-        /* Setting layout for the payment selection buttons */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         HBox hbox = new HBox(40);
         hbox.getChildren().addAll(firstAltButton, secondAltButton);
 
@@ -80,3 +115,24 @@ public class PaymentPopup {
         this.resIdArrayList = resIdArrayList;
     }
 }
+
+
+
+
+
+        /*
+        firstAltButton.setStyle("-fx-background-image: " + resImage1);
+        firstAltButton.setText(resValue1.toString());
+        firstAltButton.setOnAction((ActionEvent e) -> {
+            //TODO: comunicare la scelta al controller
+        });
+
+        secondAltButton.setStyle("-fx-background-image: " + resImage2);
+        secondAltButton.setText(resValue2.toString());
+        secondAltButton.setOnAction((ActionEvent e) -> {
+            //TODO: comunicare la scelta al controller
+        });
+
+
+
+        /* Setting layout for the payment selection buttons */

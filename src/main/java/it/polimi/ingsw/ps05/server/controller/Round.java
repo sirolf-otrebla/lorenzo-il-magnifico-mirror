@@ -35,9 +35,8 @@ public class Round {
         }
 
     }
-    private void waitCommand() throws InterruptedException {
-        if (this.inputMessage == null) wait();
-
+    private synchronized void waitCommand() throws InterruptedException {
+        while (this.inputMessage==null) wait();
     }
 
     private void executeCommand(){
@@ -57,9 +56,7 @@ public class Round {
 
     public void nextState() {
         if (this.plOrdIt.hasNext())
-        game.setActivePlayer(this.plOrdIt.next());
-
-
+            game.setActivePlayer(this.plOrdIt.next());
         else {
             //TODO (MANCA QUALCOSA?)
             System.out.println("round finished");

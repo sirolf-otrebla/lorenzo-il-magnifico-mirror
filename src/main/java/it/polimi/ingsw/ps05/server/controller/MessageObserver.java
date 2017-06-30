@@ -16,6 +16,15 @@ import java.util.Observer;
 public class MessageObserver implements Observer, NetMessageVisitor {
 
     private PlayerClient client;
+    private static MessageObserver instance = null;
+    private MessageObserver(){
+        //TODO
+    }
+
+    public static MessageObserver getInstance(){
+        if (instance ==  null) instance = new MessageObserver();
+        return instance;
+    }
     @Override
     public void update(Observable o, Object arg) {
         this.client = (PlayerClient) o;

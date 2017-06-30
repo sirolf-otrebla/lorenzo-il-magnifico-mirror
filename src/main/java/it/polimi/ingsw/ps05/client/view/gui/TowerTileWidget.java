@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.client.view.gui;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * Created by miotto on 27/06/17.
@@ -18,7 +19,7 @@ public class TowerTileWidget extends ActionSpaceWidget {
 
     @Override
     public void setupDragDropped() {
-        occupationCircle.setOnDragDropped((DragEvent e) -> {
+         super.getOccupationCircle().setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;
 
@@ -28,7 +29,7 @@ public class TowerTileWidget extends ActionSpaceWidget {
                     /* Showing selection window if card has payment alternatives */
                     if (PaymentPopup.display(this.getAssociatedCard().getCardName())) {
                         /* Enter 'if' when the player succesfully select the payment, without canceling action */
-                        this.isOccupied = true;
+                        super.isOccupied = true;
                         System.out.println("inside if");
                         Image source = e.getDragboard().getImage();
                         occupationCircle.setOpacity(1);
