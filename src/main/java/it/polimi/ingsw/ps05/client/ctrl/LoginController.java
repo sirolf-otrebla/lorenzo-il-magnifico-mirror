@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps05.client.net.ServerInterface;
 import it.polimi.ingsw.ps05.client.net.socket.SocketConnection;
 import it.polimi.ingsw.ps05.client.view.gui.Login;
 import it.polimi.ingsw.ps05.net.message.LoginMessage;
+import it.polimi.ingsw.ps05.net.message.NetMessage;
 
 public class LoginController {
 	
@@ -79,14 +80,18 @@ public class LoginController {
 			} catch (IOException e) {
 				serverAddress = null;
 				serverPort = null;
-				e.printStackTrace();
+				System.out.println("connessione fallita");
+				//e.printStackTrace();
 			}
+		} else {
+			
 		}
 	}
 	
 	private void tryLogin() {
 		LoginMessage mess = new LoginMessage(username, password);
 		connToUse.send(mess);
+		NetMessage recMess = connToUse.getInputMessage();
 	}
 
 }

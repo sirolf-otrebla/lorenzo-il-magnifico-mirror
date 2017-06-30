@@ -15,7 +15,14 @@ public class LoginMessage implements LobbyMessage {
 	@Override
 	public void acceptVisitor(NetMessageVisitor vi) throws Exception {
 		vi.visit(this);
-
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+	
+	public String getPassword(){
+		return password;
 	}
 
 }

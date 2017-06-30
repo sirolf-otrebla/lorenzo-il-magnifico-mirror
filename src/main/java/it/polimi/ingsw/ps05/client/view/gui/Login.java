@@ -32,26 +32,39 @@ public class Login extends Application implements Observable{
 
 	static StringProperty serverString = new SimpleStringProperty();
 	static StringProperty portString = new SimpleStringProperty();
-	static StringProperty connection = new SimpleStringProperty("Socket");
+	static StringProperty connection = new SimpleStringProperty();
 
 	static StringProperty username = new SimpleStringProperty();
 	static StringProperty password = new SimpleStringProperty();
 
 	static boolean GUI = true;
 
-	GridPane grid;
-	Scene scene;
-	TextField serverTextField;
-	TextField portTextField;
-	Button btn1;
-	Label connesso;
+	static GridPane grid;
+	static Scene scene;
+	static TextField serverTextField;
+	static TextField portTextField;
+	static Button btn1;
+	static Label connesso;
+	static RadioButton rb3,rb1,rb2;
+	static RadioButton rb4;
+	static TextField userTextField;
+	static TextField pwBox;
+	static Button btn;
 
 	public void setConnected(){
+		System.out.println("aggiorno");
 		connesso.setText("Connesso");
 		connesso.setTextFill(Color.GREEN);
 		btn1.setDisable(true);
 		serverTextField.setEditable(false);
 		portTextField.setEditable(false);
+		rb3.setDisable(true);
+		rb4.setDisable(true);
+		rb1.setDisable(false);
+		rb2.setDisable(false);
+		userTextField.setEditable(true);
+		pwBox.setEditable(true);
+		btn.setDisable(false);
 	}
 
 
@@ -80,7 +93,7 @@ public class Login extends Application implements Observable{
 		portTextField = new TextField();
 		grid.add(portTextField, 1, 2);
 
-		Label connesso = new Label("Non connesso");
+		connesso = new Label("Non connesso");
 		connesso.setTextFill(Color.RED);
 		grid.add(connesso, 0, 4);
 
@@ -92,11 +105,12 @@ public class Login extends Application implements Observable{
 		
 		final ToggleGroup group1 = new ToggleGroup();
 
-		RadioButton rb3 = new RadioButton("Socket");
+		rb3 = new RadioButton("Socket");
 		rb3.setToggleGroup(group1);
 		rb3.setSelected(true);
+		connection.set("Socket");
 
-		RadioButton rb4 = new RadioButton("RMI");
+		rb4 = new RadioButton("RMI");
 		rb4.setToggleGroup(group1);
 		grid.add(rb3, 0, 3);
 		grid.add(rb4, 1, 3);
@@ -113,18 +127,18 @@ public class Login extends Application implements Observable{
 		Label userName = new Label("User Name:");
 		grid.add(userName, 0, 6);
 
-		TextField userTextField = new TextField();
+		userTextField = new TextField();
 		userTextField.setEditable(false);
 		grid.add(userTextField, 1, 6);
 
 		Label pw = new Label("Password:");
 		grid.add(pw, 0, 7);
 
-		PasswordField pwBox = new PasswordField();
+		pwBox = new PasswordField();
 		grid.add(pwBox, 1, 7);
 		pwBox.setEditable(false);
 
-		Button btn = new Button("Sign in");
+		btn = new Button("Sign in");
 		btn.setDisable(true);
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -133,11 +147,11 @@ public class Login extends Application implements Observable{
 
 		final ToggleGroup group = new ToggleGroup();
 
-		RadioButton rb1 = new RadioButton("GUI");
+		rb1 = new RadioButton("GUI");
 		rb1.setToggleGroup(group);
 		rb1.setSelected(true);
 
-		RadioButton rb2 = new RadioButton("CLI");
+		rb2 = new RadioButton("CLI");
 		rb2.setToggleGroup(group);
 		grid.add(rb1, 0, 9);
 		grid.add(rb2, 1, 9);
