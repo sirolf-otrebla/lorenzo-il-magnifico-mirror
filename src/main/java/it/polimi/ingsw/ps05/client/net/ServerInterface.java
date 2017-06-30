@@ -5,7 +5,7 @@ package it.polimi.ingsw.ps05.client.net;
  */
 public class ServerInterface {
 
-    private String hostUrl;
+    private Connection connection;
     public static ServerInterface serverInterface;
 
     private ServerInterface(){
@@ -16,8 +16,12 @@ public class ServerInterface {
         else return  serverInterface;
     }
 
-    public void setHostUrl(String hostUrl) {
-        this.hostUrl = hostUrl;
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
+    public Connection getConnection(){
+    	return connection;
     }
 
 

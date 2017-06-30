@@ -18,12 +18,15 @@ public class Client {
     private static Client client;
     private ServerInterface serverInterface;
     private GameStatus gameStatus;
+    private String username;
+    private Integer id;
     private Client(){
         //TODO ATTIVA LOBBY
-        // TODO GESTISCE CONNESSIONE
+        //TODO GESTISCE CONNESSIONE
+    	getConnection();
     }
 
-    private void createConnection(String Url){
+    private void getConnection(){
         this.serverInterface = ServerInterface.getInstance();
     }
 
@@ -34,11 +37,27 @@ public class Client {
     }
 
     public void sendToServer(NetMessage message){
-
+    	serverInterface.getConnection().send(message);
     }
 
     public GameStatus getGameStatus() {
         return gameStatus;
     }
 
+    
+    public void setUsername(String username){
+    	this.username = username;
+    }
+    
+    public void setId(Integer id){
+    	this.id = id;
+    }
+    
+    public String getUsername(){
+    	return username;
+    }
+    
+    public Integer getId(){
+    	return id;
+    }
 }
