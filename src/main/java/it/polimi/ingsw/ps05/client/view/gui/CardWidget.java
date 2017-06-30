@@ -12,6 +12,7 @@ public class CardWidget {
     public static final double CARD_MIN_HEIGHT = 100;
     public static final double CARD_MIN_WIDTH = 70;
 
+    private boolean taken;
     private int referenceID;
     private ImageView cardImage;
     private String imagePath;

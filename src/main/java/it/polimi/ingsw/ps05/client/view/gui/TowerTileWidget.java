@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * Created by miotto on 27/06/17.
@@ -11,6 +12,7 @@ import javafx.scene.paint.ImagePattern;
 public class TowerTileWidget extends ActionSpaceWidget {
 
     private CardWidget associatedCard;
+    private boolean morePaymentOptions;
 
     public TowerTileWidget() {
         super();
@@ -56,4 +58,8 @@ public class TowerTileWidget extends ActionSpaceWidget {
         this.associatedCard = associatedCard;
     }
 
+
+    public boolean hasMorePaymentOptions() {
+        return morePaymentOptions;
+    }
 }

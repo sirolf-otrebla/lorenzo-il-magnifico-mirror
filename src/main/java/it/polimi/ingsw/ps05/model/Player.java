@@ -116,6 +116,7 @@ public class Player implements PlayerRelated {
 
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
 		if (this.familyMap == null) {
+			this.familyMap = new HashMap<>();
 			for (Familiar f: familyList)
 				this.familyMap.put(f.getColor(), f);
 		} else {

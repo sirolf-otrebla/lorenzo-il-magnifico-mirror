@@ -80,6 +80,6 @@ public class WoodResource implements Resource, ActionResult {
 	
 	@Override
 	public String toString(){
-		return "Legno";
+		return new String("Legno" + this.getValue().toString());
 	}
 }

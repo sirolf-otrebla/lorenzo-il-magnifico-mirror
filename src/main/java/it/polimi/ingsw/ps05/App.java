@@ -7,7 +7,10 @@ import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.server.controller.Game;
+import it.polimi.ingsw.ps05.server.database.Database;
+import it.polimi.ingsw.ps05.client.ctrl.LoginController;
 import it.polimi.ingsw.ps05.client.view.View;
+import it.polimi.ingsw.ps05.client.view.gui.Login;
 
 /**
  * Hello world!
@@ -17,7 +20,9 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Scanner keyboard = new Scanner(System.in);
+    	
+    	LoginController l = new LoginController();
+    	/*Scanner keyboard = new Scanner(System.in);
     	
     	String string = new String("C");
     	while(!string.equals("C") && !string.equals("G")){
@@ -45,7 +50,7 @@ public class App
     	} else {
     		//istanzia la gui
     		view.instanceGUI();
-    	}
+    	}*/
     }
 }
 
