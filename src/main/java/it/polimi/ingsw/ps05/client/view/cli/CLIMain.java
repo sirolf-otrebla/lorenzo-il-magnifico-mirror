@@ -46,15 +46,18 @@ public class CLIMain implements Runnable{
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;
 	int currentColMyStats = 0;
+	int currentRowPlayers = 0;
+	int currentColPlayers = 0;
 	ArrayList<ArrayList<TerminalPosition>> mapBoard;
 	ArrayList<ArrayList<TerminalPosition>> mapMyStats;
+	ArrayList<ArrayList<TerminalPosition>> mapPlayers;
 	ArrayList<ArrayList<Integer>> offSet;
 	float ratioWidth = 1;
 	float ratioHeight = 1;
 	boolean ratioSet = false;
 	boolean inBoard = true;
 	boolean inMyStats = false;
-	boolean inPlayersStats = false;
+	boolean inPlayers = false;
 	private static int PREFERRED_WIDTH = 200;
 	private static int PREFERRED_HEIGHT = 100;
 	private static final String OCCUPIED = "Occupato";
@@ -63,10 +66,10 @@ public class CLIMain implements Runnable{
 	private ArrayList<ProductionSpace> productionList = new ArrayList<ProductionSpace>();
 	private ArrayList<HarvestingSpace> harvestList = new ArrayList<HarvestingSpace>();
 	private CouncilSpace council;
-	private TextGraphics textGraphics;
 	private Player player;
 	private ArrayList<Player> playersList;
 	private Terminal terminal = null;
+	TextGraphics graphics;
 	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
 		 * 
 		 */
@@ -103,6 +106,13 @@ public class CLIMain implements Runnable{
 		PREFERRED_HEIGHT = height.intValue();
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
+		for (TowerTileInterface tile : board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
+			player.addBlueCard((BlueCard)tile.getCard());
+			playersList.get(0).addBlueCard((BlueCard)tile.getCard());
+		}
+		for (TowerTileInterface tile : board.getTowerList().get(ColorEnumeration.Green).getTiles().values()) {
+			playersList.get(1).addGreenCard((GreenCard)tile.getCard());
+		}
 	}
 
 
@@ -118,14 +128,14 @@ public class CLIMain implements Runnable{
 			terminal.clearScreen();
 			terminal.setCursorVisible(true);
 
-			textGraphics = terminal.newTextGraphics();
-
+			TextGraphics textGraphics = terminal.newTextGraphics();
+			graphics = textGraphics;
 			textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
 			textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 
 
-			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows());
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
+			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows(),textGraphics);
+			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			terminal.flush();
 
@@ -140,9 +150,16 @@ public class CLIMain implements Runnable{
 						}
 
 						terminal.clearScreen();
-						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));	
-						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-						terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
+						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+						if (inBoard){
+							terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+						} else if (inMyStats) {
+							terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+						} else if (inPlayers){
+							terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+						}
+						
 						terminal.flush();
 					}
 					catch(IOException e) {
@@ -150,9 +167,15 @@ public class CLIMain implements Runnable{
 						
 						try {
 							terminal.clearScreen();
-							drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));	
-							printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-							terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+							drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
+							printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+							if (inBoard){
+								terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+							} else if (inMyStats) {
+								terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+							} else if (inPlayers){
+								terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+							}
 							terminal.flush();
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -164,7 +187,7 @@ public class CLIMain implements Runnable{
 				}
 			});
 			
-			movePointer();
+			movePointer(textGraphics);
 
 		}
 		catch(IOException e) {
@@ -175,8 +198,8 @@ public class CLIMain implements Runnable{
 	public void updateBoard(Board board){
 		this.board = board;
 		try {
-			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows());
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
+			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows(),graphics);
+			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),graphics);
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			terminal.flush();
 		} catch (IOException e) {
@@ -186,42 +209,34 @@ public class CLIMain implements Runnable{
 		
 	}
 	
-	private void movePointer() throws IOException{
+	private void movePointer(TextGraphics textGraphics) throws IOException{
 		KeyStroke keyStroke = terminal.readInput();
 		while(true) {
 			switch(keyStroke.getKeyType()){
 			case ArrowDown: 
-				if (inBoard){
-					moveInBoardDown();
-				} else if (inMyStats){
-					moveInMyStatsDown();
-				}
-
+				moveDown(textGraphics);
 				break;
 			case ArrowLeft:
-				if (inBoard){
-					moveInBoardLeft();
-				} else if (inMyStats){
-					moveInMyStatsLeft();
-				}
-
+				moveLeft(textGraphics);
 				break;
 			case ArrowRight:
-				if (inBoard){
-					moveInBoardRight();
-				} else if (inMyStats){
-					moveInMyStatsRight();
-				}
+				moveRight(textGraphics);
 				break;
 			case ArrowUp:
-				if (inBoard){
-					moveInBoardUp();
-				} else if (inMyStats){
-					moveInPlayerStatsUp();
-				}
+				moveUp(textGraphics);
 				break;
 			case Enter:
-				//terminal.setCursorPosition(70, 6);
+				if (inPlayers){
+					if (currentRowPlayers == 0) {
+						showCardsInNewTerminal(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
+					} else if (currentRowPlayers == 1) {
+						showCardsInNewTerminal(playersList.get(currentColPlayers).getBlueCardList(), textGraphics.getSize().getColumns());
+					} else if (currentRowPlayers == 2) {
+						showCardsInNewTerminal(playersList.get(currentColPlayers).getYellowCardList(), textGraphics.getSize().getColumns());
+					} else if (currentRowPlayers == 3) {
+						showCardsInNewTerminal(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
+					}
+				}
 				break;
 			case Escape:
 				//terminal.setCursorPosition(currentCol, currentRow);
@@ -230,14 +245,20 @@ public class CLIMain implements Runnable{
 				if (inBoard){
 					inBoard = false;
 					inMyStats = true;
-					inPlayersStats = false;
-					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
+					inPlayers = false;
+					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 					terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 				} else if (inMyStats){
+					inBoard = false;
+					inMyStats = false;
+					inPlayers = true;
+					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+					terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+				} else if (inPlayers){
 					inBoard = true;
 					inMyStats = false;
-					inPlayersStats = false;
-					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
+					inPlayers = false;
+					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 					terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 				}
 
@@ -249,151 +270,208 @@ public class CLIMain implements Runnable{
 			keyStroke = terminal.readInput();
 		}
 	}
-
-	private void moveInPlayerStatsUp() throws IOException{
-		try{
-			currentRowMyStats--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare su");
-			currentRowMyStats++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		}
-	}
-
-	private void moveInBoardUp() throws IOException{
-		try{
-			currentRowBoard--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare su");
-			currentRowBoard++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		}
-	}
-
-	private void moveInBoardRight() throws IOException{
-		try {
-			currentColBoard++;
-			//se è la riga finale di una colonna e quella dopo ha meno o più colonne, scorrendo a destra
-			//mi posiziono sulla sua ultima
-			if (currentRowBoard == mapBoard.get(currentColBoard-1).size()-1){ //è l'ultima riga?
-				currentRowBoard = mapBoard.get(currentColBoard).size()-1; // si allora metto l'ultima riga della nuova colonna
-			} else if (currentRowBoard > mapBoard.get(currentColBoard).size()-1 && currentColBoard == mapBoard.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
-				currentRowBoard = mapBoard.get(currentColBoard).size()-1; //si allora imposto l'ultima riga disponibile della colonna
+	
+	private void moveUp(TextGraphics textGraphics) throws IOException {
+		if (inBoard){
+			try{
+				currentRowBoard--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare su");
+				currentRowBoard++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			}
-
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare a destra");
-			currentColBoard--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		}
-	}
-
-	private void moveInMyStatsRight() throws IOException{
-		try {
-			currentColMyStats++;
-			//se è la riga finale di una colonna e quella dopo ha meno o più colonne, scorrendo a destra
-			//mi posiziono sulla sua ultima
-			if (currentRowMyStats == mapMyStats.get(currentColMyStats-1).size()-1){ //è l'ultima riga?
-				System.out.println("ultima riga");
-				currentRowMyStats = mapMyStats.get(currentColMyStats).size()-1; // si allora metto l'ultima riga della nuova colonna
-			} else if (currentRowMyStats > mapMyStats.get(currentColMyStats).size()-1 && currentColMyStats == mapMyStats.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
-				System.out.println("no riga a dx");
-				currentRowMyStats = mapMyStats.get(currentColMyStats).size()-1; //si allora imposto l'ultima riga disponibile della colonna
+		} else if (inMyStats){
+			try{
+				currentRowMyStats--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare su");
+				currentRowMyStats++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 			}
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare a destra");
-			currentColMyStats--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		}
-	}
-
-	private void moveInBoardDown() throws IOException{
-		try{
-			currentRowBoard++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		} catch(IndexOutOfBoundsException e){
-			System.out.println("Impossibile andare giù");
-			currentRowBoard--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		}
-	}
-
-	private void moveInMyStatsDown() throws IOException{
-		try{
-			currentRowMyStats++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		} catch(IndexOutOfBoundsException e){
-			System.out.println("Impossibile andare giù");
-			currentRowMyStats--;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		}
-	}
-
-	private void moveInBoardLeft() throws IOException{
-		try{
-			currentColBoard--;
-			if (currentRowBoard == mapBoard.get(currentColBoard+1).size()-1){
-				currentRowBoard = mapBoard.get(currentColBoard).size()-1;
+		} else if (inPlayers){
+			try{
+				currentRowPlayers--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare su");
+				currentRowPlayers++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
 			}
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare a sinistra");
-			currentColBoard++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 		}
 	}
 
-	private void moveInMyStatsLeft() throws IOException{
-		try{
-			currentColMyStats--;
-			if (currentColMyStats == mapMyStats.get(currentColMyStats+1).size()-1){
-				currentColMyStats = mapMyStats.get(currentColMyStats).size()-1;
+	private void moveRight(TextGraphics textGraphics) throws IOException {
+		if (inBoard){
+			try {
+				currentColBoard++;
+				//se è la riga finale di una colonna e quella dopo ha meno o più colonne, scorrendo a destra
+				//mi posiziono sulla sua ultima
+				if (currentRowBoard == mapBoard.get(currentColBoard-1).size()-1){ //è l'ultima riga?
+					currentRowBoard = mapBoard.get(currentColBoard).size()-1; // si allora metto l'ultima riga della nuova colonna
+				} else if (currentRowBoard > mapBoard.get(currentColBoard).size()-1 && currentColBoard == mapBoard.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
+					currentRowBoard = mapBoard.get(currentColBoard).size()-1; //si allora imposto l'ultima riga disponibile della colonna
+				}
+
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a destra");
+				currentColBoard--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			}
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Impossibile andare a sinistra");
-			currentColMyStats++;
-			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()));
-			terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+		} else if (inMyStats){
+			try {
+				currentColMyStats++;
+				//se è la riga finale di una colonna e quella dopo ha meno o più colonne, scorrendo a destra
+				//mi posiziono sulla sua ultima
+				if (currentRowMyStats == mapMyStats.get(currentColMyStats-1).size()-1){ //è l'ultima riga?
+					System.out.println("ultima riga");
+					currentRowMyStats = mapMyStats.get(currentColMyStats).size()-1; // si allora metto l'ultima riga della nuova colonna
+				} else if (currentRowMyStats > mapMyStats.get(currentColMyStats).size()-1 && currentColMyStats == mapMyStats.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
+					System.out.println("no riga a dx");
+					currentRowMyStats = mapMyStats.get(currentColMyStats).size()-1; //si allora imposto l'ultima riga disponibile della colonna
+				}
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a destra");
+				currentColMyStats--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			}
+		} else if (inPlayers){
+			try {
+				currentColPlayers++;
+				//se è la riga finale di una colonna e quella dopo ha meno o più colonne, scorrendo a destra
+				//mi posiziono sulla sua ultima
+				if (currentRowPlayers == mapPlayers.get(currentColPlayers-1).size()-1){ //è l'ultima riga?
+					System.out.println("ultima riga");
+					currentRowPlayers = mapPlayers.get(currentColPlayers).size()-1; // si allora metto l'ultima riga della nuova colonna
+				} else if (currentRowPlayers > mapPlayers.get(currentColPlayers).size()-1 && currentColPlayers == mapPlayers.size()-1){ //la riga non c'è nella nuova colonna e la nuova colonna è l'ultima?
+					System.out.println("no riga a dx");
+					currentRowPlayers = mapPlayers.get(currentColPlayers).size()-1; //si allora imposto l'ultima riga disponibile della colonna
+				}
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a destra");
+				currentColPlayers--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			}
 		}
 	}
 
-	private void drawGraphics(int width, int height){
+	private void moveDown(TextGraphics textGraphics) throws IOException{
+		if (inBoard){
+			try{
+				currentRowBoard++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			} catch(IndexOutOfBoundsException e){
+				System.out.println("Impossibile andare giù");
+				currentRowBoard--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			}
+		} else if (inMyStats){
+			try{
+				currentRowMyStats++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} catch(IndexOutOfBoundsException e){
+				System.out.println("Impossibile andare giù");
+				currentRowMyStats--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			}
+		} else if (inPlayers){
+			try{
+				currentRowPlayers++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} catch(IndexOutOfBoundsException e){
+				System.out.println("Impossibile andare giù");
+				currentRowPlayers--;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			}
+		}
+	}
+
+	private void moveLeft(TextGraphics textGraphics) throws IOException {
+		if (inBoard){
+			try{
+				currentColBoard--;
+				if (currentRowBoard == mapBoard.get(currentColBoard+1).size()-1){
+					currentRowBoard = mapBoard.get(currentColBoard).size()-1;
+				}
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a sinistra");
+				currentColBoard++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			}
+		} else if (inMyStats) {
+			try{
+				currentColMyStats--;
+				if (currentColMyStats == mapMyStats.get(currentColMyStats+1).size()-1){
+					currentColMyStats = mapMyStats.get(currentColMyStats).size()-1;
+				}
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a sinistra");
+				currentColMyStats++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			}
+		} else if (inPlayers) {
+			try{
+				currentColPlayers--;
+				if (currentColPlayers == mapPlayers.get(currentColPlayers+1).size()-1){
+					currentColPlayers = mapPlayers.get(currentColPlayers).size()-1;
+				}
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Impossibile andare a sinistra");
+				currentColPlayers++;
+				printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			}
+		}
+	}
+
+	private void drawGraphics(int width, int height, TextGraphics textGraphics){
 		mapBoard = new ArrayList<ArrayList<TerminalPosition>>();
 		offSet = new ArrayList<ArrayList<Integer>>();
 		marketList = new ArrayList<MarketSpace>();
 		productionList = new ArrayList<ProductionSpace>();
 		harvestList = new ArrayList<HarvestingSpace>();
 		mapMyStats = new ArrayList<ArrayList<TerminalPosition>>();
+		mapPlayers = new ArrayList<ArrayList<TerminalPosition>>();
 
 
 
-		drawBoard(width,height);
+		drawBoard(width,height,textGraphics);
 
 		drawSquare(
 				0,
 				0,
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)),
-				4*height/16+1);
+				4*height/16+1,textGraphics);
 
 		Iterator<ActionSpace> iterator = board.getActSpacesMap().values().iterator();
 		while(iterator.hasNext()){
@@ -410,7 +488,7 @@ public class CLIMain implements Runnable{
 						marketList.size()*width/16,
 						5*height/16,
 						(marketList.size()+1)*width/16,
-						6*height/16
+						6*height/16,textGraphics
 						);
 				marketList.add((MarketSpace) actionSpace);
 			} else if (actionSpace instanceof ProductionSpace){
@@ -425,7 +503,8 @@ public class CLIMain implements Runnable{
 						productionList.size()*width/16,
 						6*height/16+2,
 						(productionList.size()+1)*width/16,
-						7*height/16+2
+						7*height/16+2,
+						textGraphics
 						);
 				productionList.add((ProductionSpace)actionSpace);
 			}
@@ -446,7 +525,8 @@ public class CLIMain implements Runnable{
 						(productionList.size()+harvestList.size())*width/16,
 						6*height/16+2,
 						(productionList.size()+harvestList.size()+1)*width/16,
-						7*height/16+2
+						7*height/16+2,
+						textGraphics
 						);
 				harvestList.add((HarvestingSpace)action);
 			} else if (action instanceof CouncilSpace){
@@ -456,7 +536,8 @@ public class CLIMain implements Runnable{
 						(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16,
 						5*height/16,
 						(Math.max(marketList.size(), productionList.size()+harvestList.size())+2)*width/16,
-						7*height/16+2
+						7*height/16+2,
+						textGraphics
 						);
 				try {
 					list = mapBoard.get(marketList.size());
@@ -475,11 +556,11 @@ public class CLIMain implements Runnable{
 			}
 		}
 
-		drawPlayerInfo(width,height);
+		drawPlayerInfo(width,height,textGraphics);
 
-		drawExcomunication(width, height);
+		drawExcomunication(width, height, textGraphics);
 
-		drawPlayerStats(width,height);
+		drawPlayerStats(width,height,textGraphics);
 
 		//Aggiungere scritta consiglio
 		textGraphics.putString((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16
@@ -508,18 +589,20 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void drawExcomunication(int width, int height){
+	private void drawExcomunication(int width, int height, TextGraphics textGraphics){
 		int x = (Math.max(marketList.size(), productionList.size()+harvestList.size())+3)*width/16 - width/32;
 		drawSquare(
 				(Math.max(marketList.size(), productionList.size()+harvestList.size())+3)*width/16 - width/32,
 				5*height/16,
 				(Math.max(marketList.size(), productionList.size()+harvestList.size())+4)*width/16 + width/32,
-				7*height/16+2
+				7*height/16+2,
+				textGraphics
 				);
-		textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
-		textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
-				board.getExcomCards().get(0).getFaithRequested().getValue());
-		String toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
+		//TODO
+		//textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
+		//textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
+		//		board.getExcomCards().get(0).getFaithRequested().getValue());
+		String toWrite = "";//board.getExcomCards().get(0).getExcommEffect().toString();
 
 		int size = (Math.max(marketList.size(), productionList.size()+harvestList.size())+4)*width/16 + width/32 - x;
 		int i = 0;
@@ -537,9 +620,9 @@ public class CLIMain implements Runnable{
 
 	}
 
-	private void drawPlayerInfo(int width, int height){
+	private void drawPlayerInfo(int width, int height, TextGraphics textGraphics){
 		int chosenColStart = Math.max(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 6 + width/8 , 5*width/8);
-		drawSquare(chosenColStart,0,width - 1, 4*height/16 + 1);
+		drawSquare(chosenColStart,0,width - 1, 4*height/16 + 1,textGraphics);
 		TerminalPosition lastPos = new TerminalPosition(chosenColStart + 1, 0);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, player.getUsername());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -604,7 +687,7 @@ public class CLIMain implements Runnable{
 		mapMyStats.add(secondColumn);
 	}
 
-	private void drawBoard(int width, int height){
+	private void drawBoard(int width, int height, TextGraphics textGraphics){
 		for (int a = 0; a < board.getTowerList().size(); a++){
 			Tower tower = board.getTowerList().get(towerOrder.get(a));
 			String toWrite = "Torre " + tower.getColor().toString();
@@ -645,17 +728,19 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void drawPlayerStats(int width, int height){
+	private void drawPlayerStats(int width, int height, TextGraphics textGraphics){
 		drawSquare(
 				(Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1,
 				5*height/16,
 				width-1,
-				7*height/16+2
+				7*height/16+2,
+				textGraphics
 				);
 
 		int startCol = (Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1;
 		int dist = width-1 - ((Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1);
 		for (int i = 0; i < playersList.size(); i++){
+			ArrayList<TerminalPosition> list = new ArrayList<>();
 			TerminalPosition lastPos = new TerminalPosition(startCol + 1 + i*dist/3,5*height/16);
 			Player p = playersList.get(i);
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, p.getUsername());
@@ -666,18 +751,22 @@ public class CLIMain implements Runnable{
 			}
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte verdi " + p.getGreenCardList().size());
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+			list.add(lastPos);
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte blu " + p.getBlueCardList().size());
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+			list.add(lastPos);
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte gialle " + p.getYellowCardList().size());
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
+			list.add(lastPos);
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte viola " + p.getVioletCardList().size());
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
-
+			list.add(lastPos);
+			mapPlayers.add(list);
 		}
-
 	}
 
-	private void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd){
+	private void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd, TextGraphics textGraphics){
+		System.out.println("draw square");
 		textGraphics.drawLine(colStart,rowStart,colStart,rowEnd,'|');
 		textGraphics.drawLine(colEnd,rowStart,colEnd,rowEnd,'|');
 		textGraphics.drawLine(colStart,rowStart,colEnd,rowStart,'-');
@@ -694,7 +783,7 @@ public class CLIMain implements Runnable{
 		return max;
 	}
 
-	private void printInfo(int width, int height){
+	private void printInfo(int width, int height, TextGraphics textGraphics){
 		int colForInfo = 3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3;
 		String space = new String(new char[width/8 + 3]).replace('\0', ' ');
 		for (int i = 1; i < height/4; i++){
@@ -706,36 +795,37 @@ public class CLIMain implements Runnable{
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2,
 				0,
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2 + width/8,
-				height/4+1);
-
+				height/4+1,
+				textGraphics);
+		System.out.println(height);
 
 		if (inBoard){
 			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
-				infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard());
+				infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
 			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
-				infoMarket(colForInfo,0);
+				infoMarket(colForInfo,0,textGraphics);
 			} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
-				infoProduction(colForInfo,0);
+				infoProduction(colForInfo,0,textGraphics);
 			} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard >= productionList.size() && currentColBoard < productionList.size() + harvestList.size() ){
-				infoHarvest(colForInfo,0);
+				infoHarvest(colForInfo,0,textGraphics);
 			} else {
-				infoCouncil(colForInfo,0);
+				infoCouncil(colForInfo,0,textGraphics);
 			}
 		} else if (inMyStats){
 			if (currentColMyStats == 0){
 				if (currentRowMyStats < player.getResourceList().size()){
 					//risorse
-					infoResource(colForInfo,0);
+					infoResource(colForInfo,0,textGraphics);
 				} else if (currentRowMyStats < player.getResourceList().size() + player.getGreenCardList().size()){
 					//carta verde
-					infoCard(colForInfo, 0, player.getGreenCardList().get(currentRowMyStats-player.getResourceList().size()));
+					infoCard(colForInfo, 0, player.getGreenCardList().get(currentRowMyStats-player.getResourceList().size()), textGraphics);
 				} else {
 					//carta blu
-					infoCard(colForInfo, 0, player.getBlueCardList().get(currentRowMyStats-player.getResourceList().size()-player.getGreenCardList().size()));
+					infoCard(colForInfo, 0, player.getBlueCardList().get(currentRowMyStats-player.getResourceList().size()-player.getGreenCardList().size()), textGraphics);
 				}
 			} else {
 				if (currentRowMyStats < player.getFamilyList().size()){
-					infoFamiliar(colForInfo, 0);
+					infoFamiliar(colForInfo, 0,textGraphics);
 				} else if (currentRowMyStats < player.getFamilyList().size() + 3){
 					if (currentRowMyStats == player.getFamilyList().size()){
 
@@ -743,34 +833,35 @@ public class CLIMain implements Runnable{
 
 					} else if (currentRowMyStats == player.getFamilyList().size() + 2){
 						try {
-							infoBonusTile(colForInfo,0);
+							infoBonusTile(colForInfo,0,textGraphics);
 						} catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 				} else if (currentRowMyStats < player.getFamilyList().size() + 3 + player.getYellowCardList().size()){
-					infoCard(colForInfo, 0, player.getYellowCardList().get(currentRowMyStats - 3 - player.getFamilyList().size()));
+					infoCard(colForInfo, 0, player.getYellowCardList().get(currentRowMyStats - 3 - player.getFamilyList().size()), textGraphics);
 				} else {
-					infoCard(colForInfo, 0, player.getYellowCardList().get(currentRowMyStats - 3 - player.getFamilyList().size() - player.getYellowCardList().size()));
+					infoCard(colForInfo, 0, player.getYellowCardList().get(currentRowMyStats - 3 - player.getFamilyList().size() - player.getYellowCardList().size()), textGraphics);
 				}
 			}
 		}
 	}
 
-	private void infoBonusTile(int column, int row) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+	private void infoBonusTile(int column, int row, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		BonusTile tile = player.getBonusTile();
 		for (Effect effect : tile.getEffectList()){
-			lastPos = activableEffect(lastPos, (ActivableEffect)effect);
+			lastPos = activableEffect(lastPos, (ActivableEffect)effect,textGraphics);
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
 
 	}
 
-	private void infoFamiliar(int column, int row){
+
+	private void infoFamiliar(int column, int row, TextGraphics textGraphics){
 		Familiar familiar = (Familiar) player.getFamilyList().toArray()[currentRowMyStats];
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, familiar.getColor().toString() + " " + familiar.getRelatedDice().getValue());
@@ -781,7 +872,7 @@ public class CLIMain implements Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 	}
 
-	private void infoResource(int column, int row){
+	private void infoResource(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, player.getResourceList().get(currentRowMyStats).toString() + " " +
 				player.getResourceList().get(currentRowMyStats).getValue());
@@ -803,7 +894,7 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void infoMarket(int column, int row){
+	private void infoMarket(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Mercato " + (currentColBoard + 1));
@@ -836,7 +927,7 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void infoProduction(int column, int row){
+	private void infoProduction(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Production " + (currentColBoard + 1));
@@ -871,7 +962,7 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void infoCard(int column, int row, TowerCard card){
+	private void infoCard(int column, int row, TowerCard card, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				card.getName());
@@ -903,7 +994,7 @@ public class CLIMain implements Runnable{
 					}
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				} else {
-					lastPos = activableEffect(lastPos,(ActivableEffect)effect);
+					lastPos = activableEffect(lastPos,(ActivableEffect)effect,textGraphics);
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			}
@@ -919,26 +1010,26 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getActivableEffectType().toString());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Dado " + effect.getDiceRequired());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 
 		if (effect.getResourceRequired().size() != 0){
-			lastPos = activableWithResourceRequired(lastPos,effect);
+			lastPos = activableWithResourceRequired(lastPos,effect,textGraphics);
 		} else {
-			lastPos = activableWithOutResourceRequired(lastPos,effect);
+			lastPos = activableWithOutResourceRequired(lastPos,effect,textGraphics);
 		}
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		return lastPos;
 	}
 
-	private TerminalPosition activableWithOutResourceRequired(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+	private TerminalPosition activableWithOutResourceRequired(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		for (ArrayList<ActionResult> choseOrRes : effect.getResultList()){
 			for (ActionResult result : choseOrRes){
 				if ( result instanceof BonusWithMultiplier){
-					lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
+					lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result,textGraphics);
 				} else {
 					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -949,7 +1040,7 @@ public class CLIMain implements Runnable{
 		return lastPos;
 	}
 
-	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		
 		for (int i = 0; i < effect.getResourceRequired().size(); i++){
 			for (Resource resource : effect.getResourceRequired().get(i)) {
@@ -960,7 +1051,7 @@ public class CLIMain implements Runnable{
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			for (ActionResult result : effect.getResultList().get(i)){
 				if ( result instanceof BonusWithMultiplier){
-					lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result);
+					lastPos = bonusWithMultiplier(lastPos,(BonusWithMultiplier)result,textGraphics);
 				} else {
 					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.getValue() + " " + result.toString());
 				}
@@ -971,7 +1062,7 @@ public class CLIMain implements Runnable{
 		return lastPos;
 	}
 
-	private TerminalPosition bonusWithMultiplier(TerminalPosition lastPos, BonusWithMultiplier result) throws InstantiationException, IllegalAccessException{
+	private TerminalPosition bonusWithMultiplier(TerminalPosition lastPos, BonusWithMultiplier result, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() , result.getMultiplier()+"x"+
 				result.getCardToCount().newInstance().toString());
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "-->");
@@ -981,7 +1072,7 @@ public class CLIMain implements Runnable{
 		return lastPos;
 	}
 
-	private void infoHarvest(int column, int row){
+	private void infoHarvest(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Harvest " + (currentColBoard + 1 - productionList.size()));
@@ -1015,7 +1106,7 @@ public class CLIMain implements Runnable{
 		}
 	}
 
-	private void infoCouncil(int column, int row){
+	private void infoCouncil(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Council");
@@ -1052,6 +1143,38 @@ public class CLIMain implements Runnable{
 		}
 	}
 
+	private void showCardsInNewTerminal(ArrayList<?> cards, int width){
+		if (cards.size() != 0){
+			
+			try {
+				DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
+				int height = 30;
+				int currentWidth = cards.size()*width/6;
+				defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(currentWidth, height));
+				Terminal cardTerminal = defaultTerminalFactory.createTerminal();
+				
+				cardTerminal.enterPrivateMode();
+				cardTerminal.clearScreen();
+				cardTerminal.setCursorVisible(true);
 
+				TextGraphics cardTextGraphics = cardTerminal.newTextGraphics();
+				cardTextGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+				cardTextGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
+				for (int i = 0; i < cards.size(); i++) {
+					drawSquare(
+							(i*currentWidth)/cards.size(),
+							0,
+							((i+1)*currentWidth/cards.size())-1,
+							height-1 ,
+							cardTextGraphics);
+					infoCard((i*currentWidth)/cards.size() + 1, 0, (TowerCard)cards.get(i), cardTextGraphics);
+				}
+				cardTerminal.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 
 }
