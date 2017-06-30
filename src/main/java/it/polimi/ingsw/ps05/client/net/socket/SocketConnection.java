@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * Created by Alberto on 27/06/2017.
  */
-public class socketConnection extends Connection{
+public class SocketConnection extends Connection{
 
     public static final int port = 54322;
 
@@ -20,8 +20,8 @@ public class socketConnection extends Connection{
 
 
     //todo throwa o gestisce?
-    public socketConnection(String server) throws IOException {
-        socket = new Socket(server, socketConnection.port);
+    public SocketConnection(String server) throws IOException {
+        socket = new Socket(server, SocketConnection.port);
         this.stream = new Stream(this.socket);
     }
 
