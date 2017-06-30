@@ -7,6 +7,7 @@ public enum ColorEnumeration implements Serializable  {
 	Yellow("Giallo"),
 	Blue("Blu"),
 	Green("Verde"),
+	Red("Rosso"),
 	Black("Nero"),
 	White("Bianco"),
 	Orange("Arancione"),

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -18,12 +19,8 @@ public class GUIMain extends Application {
 	TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
 	private VBox[] towerOccupationCircesArray = new VBox[4];
 	private VBox[] towerCardSpacesArray = new VBox[4];
-
-	FamiliarWidget redFamiliar_black = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-black.png");
-	FamiliarWidget redFamiliar_white = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-white.png");
-	FamiliarWidget redFamiliar_orange = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-orange.png");
-	FamiliarWidget redFamiliar_neutral = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-neutral.png");
-
+	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
+	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 
 	ProductionSpaceWidget productionSpace = new ProductionSpaceWidget();
 	// MultipleSpaceWidget secondaryProductionSpace = new MultipleSpaceWidget();
@@ -83,9 +80,12 @@ public class GUIMain extends Application {
 			j++;
 		}
 
+		for (int i = 0; i < familiarWidgetLists.length; i++)
+			for (int j = 0; i < familiarWidgetLists[i].length; j++)
+				familiarWidgetLists[i][j] = new FamiliarWidget(
+						ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
-
-
+		for (int i = 0;)
 
 		final HBox commands = new HBox(50);
 		final Button showCardsButton = new Button("Carte sviluppo");
