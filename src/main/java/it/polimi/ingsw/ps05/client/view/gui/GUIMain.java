@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;
