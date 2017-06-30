@@ -59,11 +59,6 @@ public class MarkerWidget {
         markerCircle.setFill(new ImagePattern(markerImage));
     }
 
-    public void setLayout(double x, double y) {
-        stack.setLayoutX(x);
-        stack.setLayoutY(y);
-    }
-
     public void setID(int ID) {
         referenceID = ID;
     }
@@ -75,5 +70,6 @@ public class MarkerWidget {
     public Circle getMarkerCircle() {
         return markerCircle;
     }
+
 }
 

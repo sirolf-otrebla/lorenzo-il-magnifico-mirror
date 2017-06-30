@@ -26,6 +26,7 @@ public class LeaderCard implements Card {
 	private Observer privilegeListener;
 
 	private boolean active = false;
+
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
 
