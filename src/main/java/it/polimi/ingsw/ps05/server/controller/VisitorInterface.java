@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 /**
  * Created by Alberto on 19/06/2017.
  */
-public interface VisitorInterface extends NetMessageVisitor{
+public interface VisitorInterface {
 
     public void visit(ActionMessage mess);
 

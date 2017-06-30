@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.model.cards.BlueCard;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
 import it.polimi.ingsw.ps05.model.cards.VioletCard;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class BonusWithMultiplier extends PermanentBonus {
 	/**

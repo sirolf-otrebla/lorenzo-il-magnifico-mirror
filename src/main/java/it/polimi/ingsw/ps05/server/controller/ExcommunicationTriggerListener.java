@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
-import it.polimi.ingsw.ps05.server.net.Game;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 

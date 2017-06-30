@@ -2,12 +2,13 @@ package it.polimi.ingsw.ps05.net.message;
 
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
  * Created by Alberto on 14/06/2017.
  */
-public class LeaderCardMessage implements NetMessage {
+public class LeaderCardMessage implements GameMessage {
 
     public static final int TYPE_DISCARD = 0;
     public static final int TYPE_ACTIVATE = 1;
@@ -44,5 +45,10 @@ public class LeaderCardMessage implements NetMessage {
 
     public int[] getEffectChoice() {
         return effectChoice;
+    }
+
+    @Override
+    public void acceptVisitor(GameCommandsVisitor vi) {
+
     }
 }

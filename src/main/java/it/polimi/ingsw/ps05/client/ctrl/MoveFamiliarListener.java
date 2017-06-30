@@ -21,8 +21,8 @@ public class MoveFamiliarListener implements Observer {
 
         ActionSpaceWidget spaceWidget = (ActionSpaceWidget) arg;
         ActionMessage msg =
-                new ActionMessage( spaceWidget.getFamilyMemberID(), spaceWidget.getId(), 0);
+                new ActionMessage( spaceWidget.getFamilyMemberID(), spaceWidget.getId(), 0, null); //todo
         Client.getInstance().sendToServer(msg);
-        Client.getInstance().waitUpdate();
+
     }
 }

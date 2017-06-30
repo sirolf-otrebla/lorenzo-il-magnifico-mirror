@@ -6,7 +6,7 @@ import java.util.Scanner;
 import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.client.view.View;
 
 /**

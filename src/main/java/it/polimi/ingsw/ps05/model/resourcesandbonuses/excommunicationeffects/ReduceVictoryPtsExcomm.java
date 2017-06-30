@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.model.effects.EffectType;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;

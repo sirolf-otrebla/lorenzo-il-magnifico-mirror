@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class RemoveTileEffect implements ActionResult {
 	/**

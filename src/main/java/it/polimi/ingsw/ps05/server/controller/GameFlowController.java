@@ -7,11 +7,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
+import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.*;
-import it.polimi.ingsw.ps05.server.net.Game;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public class GameFlowController implements Runnable {
 
@@ -38,6 +38,19 @@ public class GameFlowController implements Runnable {
 		notifyAll();
 	}
 
+	public void sendUpdateMsg(){
+		Board board = this.game.getBoard();
+		Integer activePlayerId = this.game.getActivePlayer().getPlayerID();
+		ArrayList<Player> playerStatusList = new ArrayList<Player>();
+		for (PlayerClient p : this.game.getPlayerInGame().values())
+			playerStatusList.add(p.getPlayer());
+		for (PlayerClient p : this.game.getPlayerInGame().values()){
+			GameStatus status = new GameStatus(playerStatusList, board, p.getPlayer(), activePlayerId);
+			UpdateMessage updateMessage = new UpdateMessage(status);
+		}
+
+	}
+
 	@Override
 	public void run()  {
 		while(game.end){
@@ -46,7 +59,7 @@ public class GameFlowController implements Runnable {
 				Turn thisTurn = this.game.gettManager().getTurn();
 				PlayerClient plClient =
                         game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0));
-				plClient.setActive(true);
+				plClient.setActive();
 				Player c= thisTurn.getPlayerOrder().get(0);
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();

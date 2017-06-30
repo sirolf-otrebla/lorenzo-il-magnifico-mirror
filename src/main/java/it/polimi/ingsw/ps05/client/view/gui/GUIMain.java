@@ -1,28 +1,69 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
+
 import javafx.application.Application;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-
-import java.util.HashMap;
-
+import javafx.stage.*;
 
 public class GUIMain extends Application {
 
-	Stage stage;
+	private Stage stage;
 
+	FamiliarWidget redFamiliar_black = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-black.png");
+	FamiliarWidget redFamiliar_white = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-white.png");
+	FamiliarWidget redFamiliar_orange = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-orange.png");
+	FamiliarWidget redFamiliar_neutral = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/redfamily-neutral.png");
+
+	TowerTileWidget greenTowerSpace1 = new TowerTileWidget();
+	TowerTileWidget greenTowerSpace3 = new TowerTileWidget();
+	TowerTileWidget greenTowerSpace5 = new TowerTileWidget();
+	TowerTileWidget greenTowerSpace7 = new TowerTileWidget();
+	TowerTileWidget blueTowerSpace1 = new TowerTileWidget();
+	TowerTileWidget blueTowerSpace3 = new TowerTileWidget();
+	TowerTileWidget blueTowerSpace5 = new TowerTileWidget();
+	TowerTileWidget blueTowerSpace7 = new TowerTileWidget();
+	TowerTileWidget yellowTowerSpace1 = new TowerTileWidget();
+	TowerTileWidget yellowTowerSpace3 = new TowerTileWidget();
+	TowerTileWidget yellowTowerSpace5 = new TowerTileWidget();
+	TowerTileWidget yellowTowerSpace7 = new TowerTileWidget();
+	TowerTileWidget violetTowerSpace1 = new TowerTileWidget();
+	TowerTileWidget violetTowerSpace3 = new TowerTileWidget();
+	TowerTileWidget violetTowerSpace5 = new TowerTileWidget();
+	TowerTileWidget violetTowerSpace7 = new TowerTileWidget();
+
+	ProductionSpaceWidget productionSpace = new ProductionSpaceWidget();
+	// MultipleSpaceWidget secondaryProductionSpace = new MultipleSpaceWidget();
+	HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget();
+	// MultipleSpaceWidget secondaryHarvestingSpace = new MultipleSpaceWidget();
+
+	MarketSpaceWidget goldMarketSpace = new MarketSpaceWidget();
+	MarketSpaceWidget servantsMarketSpace = new MarketSpaceWidget();
+	MarketSpaceWidget militaryMarketSpace = new MarketSpaceWidget();
+	MarketSpaceWidget privilegesMarketSpace = new MarketSpaceWidget();
+
+	// MultipleSpaceWidget councilSpace = new MultipleSpaceWidget();
+
+	MarkerWidget redFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
+	MarkerWidget greenFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
+	MarkerWidget blueFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
+	MarkerWidget yellowFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
+
+	MarkerWidget redVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
+	MarkerWidget greenVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
+	MarkerWidget blueVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
+	MarkerWidget yellowVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
+
+	MarkerWidget redMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
+	MarkerWidget greenMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
+	MarkerWidget blueMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
+	MarkerWidget yellowMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
 
 	public static void main(String[] args) {
 		launch(args);
@@ -37,184 +78,127 @@ public class GUIMain extends Application {
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
 
-		Pane root = new Pane();
+		final Pane root = new Pane();
 		root.setId("root");
 		root.setMinSize(1120, 640);
 
-		Pane board = new AnchorPane();
+		final Pane board = new AnchorPane();
 		board.setId("board");
 		board.setMinSize(1120,640);
 
 
 		root.getChildren().add(board);
 
-		HBox commands = new HBox(50);
-		Button showCardsButton = new Button("Carte sviluppo");
-		Button showLeaderButton = new Button("Carte Leader");
+		final HBox commands = new HBox(50);
+		final Button showCardsButton = new Button("Carte sviluppo");
+		final Button showLeaderButton = new Button("Carte Leader");
 		commands.getChildren().addAll(showCardsButton, showLeaderButton);
 		commands.setLayoutX(770);
 		commands.setLayoutY(60);
-
-        /*
-        HBox commands = new HBox();
-        Button quitButton = new Button("Esci");
-        Button chatButton = new Button("Chat");
-        commands.getChildren().addAll(quitButton, chatButton);
-
-
-        AnchorPane.setRightAnchor(commands, 10.0);
-        AnchorPane.setBottomAnchor(commands, 10.0);
-        board.getChildren().add(commands);
-        */
 
 		board.maxWidthProperty().bind(stage.widthProperty());
 		board.maxHeightProperty().bind(stage.heightProperty());
 
         /* Adding playable familiars */
-		insertDraggableFamiliar(new Image("source/img/redfamily-black.png", 40, 40, true, true), board, 740, 140);
-		insertDraggableFamiliar(new Image("source/img/redfamily-white.png", 40, 40, true, true), board, 790, 140);
-		insertDraggableFamiliar(new Image("source/img/redfamily-orange.png", 40, 40, true, true), board, 840, 140);
-		insertDraggableFamiliar(new Image("source/img/redfamily-neutral.png", 40, 40, true, true), board, 890, 140);
+		insertDraggableFamiliar(redFamiliar_black, board, 740, 140);
+		insertDraggableFamiliar(redFamiliar_white, board, 790, 140);
+		insertDraggableFamiliar(redFamiliar_orange, board, 840, 140);
+		insertDraggableFamiliar(redFamiliar_neutral, board, 890, 140);
 
         /* Adding tower action spaces */
-		insertActionSpace(new Circle(), board, 7, 102, 66);
-		insertActionSpace(new Circle(), board, 7, 224, 66);
-		insertActionSpace(new Circle(), board, 7, 347, 66);
-		insertActionSpace(new Circle(), board, 7, 469, 66);
+		insertActionSpace(greenTowerSpace7, board, 7, 102, 66);
+		insertActionSpace(greenTowerSpace5, board, 5, 102, 177);
+		insertActionSpace(greenTowerSpace3, board, 3, 102, 287);
+		insertActionSpace(greenTowerSpace1, board, 1, 102, 398);
 
-		insertActionSpace(new Circle(), board, 5, 102, 177);
-		insertActionSpace(new Circle(), board, 5, 224, 177);
-		insertActionSpace(new Circle(), board, 5, 347, 177);
-		insertActionSpace(new Circle(), board, 5, 469, 177);
+		insertActionSpace(blueTowerSpace7, board, 7, 224, 66);
+		insertActionSpace(blueTowerSpace5, board, 5, 224, 177);
+		insertActionSpace(blueTowerSpace3, board, 3, 224, 287);
+		insertActionSpace(blueTowerSpace1, board, 1, 224, 398);
 
-		insertActionSpace(new Circle(), board, 3, 102, 287);
-		insertActionSpace(new Circle(), board, 3, 224, 287);
-		insertActionSpace(new Circle(), board, 3, 347, 287);
-		insertActionSpace(new Circle(), board, 3, 469, 287);
+		insertActionSpace(yellowTowerSpace7, board, 7, 347, 66);
+		insertActionSpace(yellowTowerSpace5, board, 5, 347, 177);
+		insertActionSpace(yellowTowerSpace3, board, 3, 347, 287);
+		insertActionSpace(yellowTowerSpace1, board, 1, 347, 398);
 
-		insertActionSpace(new Circle(), board, 1, 102, 398);
-		insertActionSpace(new Circle(), board, 1, 224, 398);
-		insertActionSpace(new Circle(), board, 1, 347, 398);
-		insertActionSpace(new Circle(), board, 1, 469, 398);
+		insertActionSpace(violetTowerSpace7, board, 7, 469, 66);
+		insertActionSpace(violetTowerSpace5, board, 5, 469, 177);
+		insertActionSpace(violetTowerSpace3, board, 3, 469, 287);
+		insertActionSpace(violetTowerSpace1, board, 1, 469, 398);
 
         /* Adding market action spaces */
-		insertActionSpace(new Circle(), board, 1, 317, 513); // gold
-		insertActionSpace(new Circle(), board, 1, 371, 513); // servants
-		insertActionSpace(new Circle(), board, 1, 423, 529); // military + gold
-		insertActionSpace(new Circle(), board, 1, 462, 568); // privileges
+		insertActionSpace(goldMarketSpace, board, 1, 317, 513); // gold
+		insertActionSpace(servantsMarketSpace, board, 1, 371, 513); // servants
+		insertActionSpace(militaryMarketSpace, board, 1, 423, 529); // military + gold
+		insertActionSpace(privilegesMarketSpace, board, 1, 462, 568); // privileges
 
         /* Adding harvest and production action spaces */
-		insertActionSpace(new Circle(), board, 1, 31, 528); // production
-		insertActionSpace(new Circle(), board, 1, 31, 599); // harvest
+		insertActionSpace(productionSpace, board, 1, 31, 528); // production
+		insertActionSpace(harvestingSpace, board, 1, 31, 599); // harvest
 
         /* Adding points markers */
 		// Military
-		insertMarker(new Circle(), "source/img/marker-green.png", board, 537, 98);
-		insertMarker(new Circle(), "source/img/marker-red.png", board, 537, 138);
-		insertMarker(new Circle(), "source/img/marker-blue.png", board, 537, 178);
-		insertMarker(new Circle(), "source/img/marker-yellow.png", board, 537, 218);
+		insertMarker(greenMilitaryMarker, board, 537, 98);
+		insertMarker(redMilitaryMarker, board, 537, 138);
+		insertMarker(blueMilitaryMarker, board, 537, 178);
+		insertMarker(yellowMilitaryMarker, board, 537, 218);
 		// Victory
-		insertMarker(new Circle(), "source/img/marker-green.png", board, 675, 98);
-		insertMarker(new Circle(), "source/img/marker-red.png", board, 675, 138);
-		insertMarker(new Circle(), "source/img/marker-blue.png", board, 675, 178);
-		insertMarker(new Circle(), "source/img/marker-yellow.png", board, 675, 218);
+		insertMarker(greenVictoryMarker, board, 675, 98);
+		insertMarker(redVictoryMarker, board, 675, 138);
+		insertMarker(blueVictoryMarker, board, 675, 178);
+		insertMarker(yellowVictoryMarker, board, 675, 218);
 		// Faith
-		insertMarker(new Circle(), "source/img/marker-green.png", board, 580, 438);
-		insertMarker(new Circle(), "source/img/marker-red.png", board, 615, 438);
-		insertMarker(new Circle(), "source/img/marker-blue.png", board, 650, 438);
-		insertMarker(new Circle(), "source/img/marker-yellow.png", board, 685, 438);
+		insertMarker(greenFaithMarker, board, 580, 438);
+		insertMarker(redFaithMarker, board, 615, 438);
+		insertMarker(blueFaithMarker, board, 650, 438);
+		insertMarker(yellowFaithMarker, board, 685, 438);
 
 		board.getChildren().add(commands);
 
 		Scene mainScene = new Scene(root, 1120, 640);
-		mainScene.getStylesheets().addAll(this.getClass().getResource("fx-style.css").toExternalForm());
+		mainScene.getStylesheets().addAll(this.getClass().getResource("style-prova.css").toExternalForm());
 
 		stage.setScene(mainScene);
 		stage.show();
 	}
 
-	void insertDraggableFamiliar(Image i, Pane pane, double x, double y) {
+	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double x, double y) {
 
-		ImageView imageElement = new ImageView();
-		imageElement.setImage(i);
-		imageElement.setX(x);
-		imageElement.setY(y);
+		familiar.getImageElement().setX(x);
+		familiar.getImageElement().setY(y);
 
-		setupGestureSource(imageElement);
+		familiar.setupGestureSource();
 
-		pane.getChildren().add(imageElement);
+		pane.getChildren().add(familiar.getImageElement());
 
 	}
 
-	void insertActionSpace(Circle actionSpace, Pane pane, int minDice, double x, double y) {
+	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double x, double y) {
 
-		actionSpace.setRadius(20);
-		actionSpace.setCenterX(x);
-		actionSpace.setCenterY(y);
-		actionSpace.setFill(Color.TRANSPARENT);
+		actionSpace.getOccupationCircle().setRadius(20);
+		actionSpace.getOccupationCircle().setCenterX(x);
+		actionSpace.getOccupationCircle().setCenterY(y);
+		actionSpace.getOccupationCircle().setFill(Color.TRANSPARENT);
 
-		setupGestureTarget(actionSpace);
+		actionSpace.setupGestureTarget();
 
-		pane.getChildren().add(actionSpace);
+		pane.getChildren().add(actionSpace.getOccupationCircle());
 
 	}
 
-	void insertMarker(Circle marker, String imagePath, Pane pane, double x, double y) {
+	void insertMarker(MarkerWidget marker, Pane pane, double x, double y) {
 
-		int radius = 14;
+		marker.getMarkerCircle().setCenterX(x);
+		marker.getMarkerCircle().setCenterY(y);
 
-		Image markerImage = new Image(imagePath, radius*2, radius*2, true, true);
-		marker.setRadius(radius);
-		marker.setCenterX(x);
-		marker.setCenterY(y);
-		marker.setFill(new ImagePattern(markerImage));
-
-		pane.getChildren().add(marker);
-	}
-
-
-	void setupGestureSource(ImageView source) {
-
-		source.setOnDragDetected((MouseEvent e) -> {
-
-			source.setCursor(Cursor.CLOSED_HAND);
-            /* drag was detected, start a drag-and-drop gesture */
-            /* allow MOVE transfer mode */
-			Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
-
-            /* Put the image on the dragboard */
-			ClipboardContent content = new ClipboardContent();
-			Image sourceImage = source.getImage();
-			content.putImage(sourceImage);
-			db.setContent(content);
-
-            /* Check which targets are allowed */
-			//TODO: per controllare quali posti azione sono utilizzabili bisogna passare oltre all'immagine del familiare
-			//TODO: anche il valore del dado (volendo anche le risorse così si controlla oltre al dado anche il costo delle carta
-			showAllowedActionSpaces();
-
-			//e.consume();
-
-		});
-
-		source.setOnMouseEntered((MouseEvent e) -> {
-			source.setCursor(Cursor.HAND);
-		});
-
-		source.setOnDragDone((DragEvent e) -> {
-            /* Actions to be performed after the drag is completed */
-			if (e.getTransferMode() == TransferMode.MOVE) {
-				source.setImage(null);
-			}
-
-			//e.consume();
-		});
+		pane.getChildren().add(marker.getMarkerCircle());
 
 	}
 
 	void setupGestureTarget(Circle target) {
 
 		target.setOnDragOver((DragEvent e) -> {
+
             /* source is dragged over the target */
 
 			if (e.getGestureSource() != target && e.getDragboard().hasImage()) {
@@ -244,10 +228,12 @@ public class GUIMain extends Application {
             /* What to do when the source is dropped */
 			boolean success = false;
 
+			System.out.println("starting if");
 			if(e.getDragboard().hasImage()) {
+				System.out.println("inside if");
 				Image source = e.getDragboard().getImage();
 				target.setOpacity(1);
-				target.setFill(new ImagePattern(source));
+				target.setFill(Color.ALICEBLUE/*new ImagePattern(source)*/);
 				success = true;
 			}
 

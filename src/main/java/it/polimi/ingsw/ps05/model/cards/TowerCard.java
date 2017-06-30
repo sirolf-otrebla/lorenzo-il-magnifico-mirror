@@ -22,6 +22,8 @@ public abstract class TowerCard implements Card {
 	public String cardName = new String();
 	public ArrayList<ArrayList<Resource>> requirements = new ArrayList<ArrayList<Resource>>();
 	public ArrayList<Effect> effects = new ArrayList<Effect>();
+	private static int counter = 0;
+	private Integer referenceID;
 
 	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
@@ -29,6 +31,8 @@ public abstract class TowerCard implements Card {
 		this.cardName = cardName;
 		this.requirements = requirements;
 		this.effects = effects;
+		this.referenceID = counter;
+		counter++;
 	}
 	
 	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
@@ -37,10 +41,13 @@ public abstract class TowerCard implements Card {
 		this.cardName = cardName;
 		this.effects = effects;
 		this.requirements = new ArrayList<ArrayList<Resource>>();
+		this.referenceID = counter;
+		counter++;
 	}
 	
 	public TowerCard(){
-		
+		this.referenceID = counter;
+		counter++;
 	}
 	
 	public void addFalseResource(){
@@ -94,7 +101,10 @@ public abstract class TowerCard implements Card {
 			}
 		}
 	}
-	
+
+	public Integer getReferenceID() {
+		return referenceID;
+	}
 
 	public abstract void moveToPlayer(PlayerRelated player);
 }

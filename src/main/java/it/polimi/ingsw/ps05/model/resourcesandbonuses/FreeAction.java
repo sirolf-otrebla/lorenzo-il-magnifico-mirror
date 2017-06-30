@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.server.net.Game;
+import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
 import java.util.Observable;

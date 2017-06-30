@@ -1,13 +1,14 @@
 package it.polimi.ingsw.ps05.server.net;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import it.polimi.ingsw.ps05.server.controller.Game;
+
+import java.util.*;
 
 public class Lobby implements Observer {
 	private static Lobby instance = null;
 	private ArrayList<PlayerClient> playerInLobby= new ArrayList<PlayerClient>();
-	private ArrayList<Game> gameList= new ArrayList<Game>();
+	private HashMap<Integer, Game> gameList= new HashMap<>();
+
 	private int gameId = 0;
 	
 	private Lobby(){
@@ -34,7 +35,7 @@ public class Lobby implements Observer {
 	public void createGame(boolean useCompleteRules, boolean useCustomBonusTiles, PlayerClient player){
 		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId++);
 		game.addPlayer(player);
-		gameList.add(game);
+		gameList.put(gameId, game);
 		removePlayerFromLobby(player);
 	}
 	
@@ -51,5 +52,14 @@ public class Lobby implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		//TODO
+	}
+
+	public HashMap<Integer, Game> getGameMap() {
+		return this.gameList;
+	}
+
+	private void EnterGame(Integer GameId, PlayerClient playerClient){
+		this.gameList.get(GameId).addPlayer(playerClient);
+		this.removePlayerFromLobby(playerClient);
 	}
 }

@@ -20,6 +20,7 @@ public class EndActionListener implements Observer {
     public void update(Observable o, Object arg) {
         ActionResult res = (ActionResult) o;
         this.gameFlowController.getGame().getState().nextState();
+        this.gameFlowController.sendUpdateMsg();
 
     }
 }
