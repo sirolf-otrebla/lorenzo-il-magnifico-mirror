@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
@@ -59,4 +60,9 @@ public class ProductionSpace extends ActionSpaceWithEffect {
 
 
     }
+
+	@Override
+	public void acceptVisitor(updateViewVisitor vi) {
+
+	}
 }

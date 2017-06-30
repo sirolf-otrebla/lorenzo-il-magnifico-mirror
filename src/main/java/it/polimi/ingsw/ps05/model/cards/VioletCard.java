@@ -13,15 +13,16 @@ public class VioletCard extends TowerCard {
 	/**
 	 * 
 	 */
+
 	private static final long serialVersionUID = -3065175569895619260L;
 
-	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public VioletCard(int id, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
+		super(id, epoch, color, cardName, effects);
 	}
 	
-	public VioletCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+	public VioletCard(int id, Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
 			ArrayList<Effect> effects) {
-		super(epoch, color, cardName, requirements, effects);
+		super(id, epoch, color, cardName, requirements, effects);
 	}
 	
 	public VioletCard(){

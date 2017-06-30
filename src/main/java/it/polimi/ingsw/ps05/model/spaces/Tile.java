@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
+import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -101,4 +102,9 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 		// TODO Auto-generated method stub
 		card = null;
 	}
+
+    @Override
+    public void acceptVisitor(updateViewVisitor vi) {
+
+    }
 }

@@ -13,8 +13,8 @@ public class TowerTileWidget extends ActionSpaceWidget {
     private CardWidget associatedCard;
     private boolean morePaymentOptions;
 
-    public TowerTileWidget() {
-        super();
+    public TowerTileWidget(int minDie) {
+        super(minDie);
     }
 
     @Override
@@ -27,15 +27,15 @@ public class TowerTileWidget extends ActionSpaceWidget {
             if(e.getDragboard().hasImage()) {
                 if(this.associatedCard.hasPayAlternatives()) {
                     /* Showing selection window if card has payment alternatives */
-                    if (PaymentPopup.display(this.getAssociatedCard().getCardName())) {
+                    /* if (PaymentPopup.display(this.getAssociatedCard().getCardName())) {
                         /* Enter 'if' when the player succesfully select the payment, without canceling action */
-                        super.isOccupied = true;
+                       /* super.isOccupied = true;
                         System.out.println("inside if");
                         Image source = e.getDragboard().getImage();
                         occupationCircle.setOpacity(1);
                         occupationCircle.setFill(new ImagePattern(source));
                         success = true;
-                    }
+                    }  */
                 }
             }
 

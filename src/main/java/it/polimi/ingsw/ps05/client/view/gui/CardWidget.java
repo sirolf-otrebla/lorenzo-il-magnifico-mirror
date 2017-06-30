@@ -41,4 +41,12 @@ public class CardWidget {
     public String getCardName() {
         return cardName;
     }
+
+    public ImageView getCardImage() {
+        return cardImage;
+    }
+
+    public void setCardImage(ImageView cardImage) {
+        this.cardImage = cardImage;
+    }
 }

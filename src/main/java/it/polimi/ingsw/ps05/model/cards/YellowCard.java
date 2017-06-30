@@ -13,6 +13,8 @@ public class YellowCard extends TowerCard {
 	/**
 	 * 
 	 */
+
+
 	private static final long serialVersionUID = -4527055209026270239L;
 
 	private static final int DEFAULT_EFFECT = 0;
@@ -24,16 +26,16 @@ public class YellowCard extends TowerCard {
 
 
 	
-	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public YellowCard(int id, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
+		super(id, epoch, color, cardName, effects);
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
 		selectedEffects = new int[activableEffectList.size()];
 	}
 
-	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
+	public YellowCard(int id, Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
 			ArrayList<Effect> effects) {
-		super(epoch, color, cardName, requirements, effects);
+		super(id, epoch, color, cardName, requirements, effects);
 
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);

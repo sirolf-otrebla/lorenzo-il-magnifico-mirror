@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 
+import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -56,4 +57,8 @@ public class MarketSpace extends ActionSpaceWithEffect {
 		return selectedEffects;
 	}
 
+	@Override
+	public void acceptVisitor(updateViewVisitor vi) {
+
+	}
 }

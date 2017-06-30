@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.util.*;
 
+import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
 import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -98,4 +99,8 @@ public class CouncilSpace extends ActionSpaceWithEffect {
 		return playerOrder;
 	}
 
+	@Override
+	public void acceptVisitor(updateViewVisitor vi) {
+
+	}
 }

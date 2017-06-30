@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Visitable;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace implements Serializable {
+public abstract class ActionSpace implements Serializable, Visitable {
 
 	/**
 	 * 
@@ -108,5 +109,7 @@ public abstract class ActionSpace implements Serializable {
 	}
 
 	public abstract void applyEffect();
+
+
 
 }

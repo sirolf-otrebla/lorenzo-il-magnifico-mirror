@@ -24,16 +24,15 @@ public class GreenCard extends TowerCard {
 
 	// selectedEffect has to be set before calling apply* methods;
 	private static final int DEFAULT_EFFECT = 0;
-
+	private int referenceId;
 	private boolean toBeActivated = true;
 	private ArrayList<Effect> activableEffectList = new ArrayList<Effect>();
 
 	// meant to be selected BEFORE using HARVEST
 	private int[] selectedEffects;
 
-
-	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects){
-		super(epoch, color, cardName, requirements, effects);
+	public GreenCard(int id, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects){
+		super(id, epoch, color, cardName, requirements, effects);
 
 		// NOTE: THIS IS ONLY A PROVISIONAL WORKAROUND. NEED TO CHANGE JSON.
 		for (Effect a: effects)
@@ -75,8 +74,8 @@ public class GreenCard extends TowerCard {
 		this.toBeActivated = toBeActivated;
 	}
 
-	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public GreenCard(int id, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
+		super(id , epoch, color, cardName, effects);
 	}
 
 	@Override
@@ -91,7 +90,9 @@ public class GreenCard extends TowerCard {
 
 	@Override
 	public String toString(){
-		return "Carta verde";
+		return "Carta verde"; //CHI È IL GENIO?
 	}
+
+
 
 }

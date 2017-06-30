@@ -19,10 +19,12 @@ public class ActionSpaceWidget {
     private ColorEnumeration familyMemberID;
     private Integer occupantPlayerID;
     private Integer id;
+    private Integer minDie;
 
-    public ActionSpaceWidget() {
+    public ActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
         isOccupied = false;
+        this.minDie = minimumDie;
     }
 
     public Circle getOccupationCircle() {
