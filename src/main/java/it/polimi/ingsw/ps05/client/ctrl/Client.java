@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
+import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
+import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Created by Alberto on 27/06/2017.
@@ -40,6 +43,7 @@ public class Client {
     public GameStatus getGameStatus() {
         return gameStatus;
     }
+
     
     public void setUsername(String username){
     	this.username = username;

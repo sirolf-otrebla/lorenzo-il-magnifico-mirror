@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.InactivePlayerTask;
+import it.polimi.ingsw.ps05.server.controller.MessageObserver;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
 	private int id;
@@ -29,10 +30,10 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private String username;
 	private boolean active;
 
-	public PlayerClient(LimConnection netHandler, int id, Observer messageObserver){
+	public PlayerClient(LimConnection netHandler, int id){
 	    this.connection = netHandler;
 	    this.id = id;
-	    this.messageObserver = messageObserver;
+	    this.messageObserver = MessageObserver.getInstance();
 		this.timer = new Timer();
 
     }
