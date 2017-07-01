@@ -50,6 +50,7 @@ public class Action implements Period {
 	public boolean isLegal() {
 
 		// 1
+		if (this.isLegal) return true;
 		if (this.familiar.isUsed()) return false;
 		if (this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
 

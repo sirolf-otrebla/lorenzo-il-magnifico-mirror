@@ -24,6 +24,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
@@ -74,6 +75,7 @@ public class CLIMain implements LimView, Runnable{
 	TextGraphics graphics;
 	boolean meActive = true;
 	int selectedFam = 0;
+	int selectedOpt = 0;
 	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
 		 * 
 		 */
@@ -216,6 +218,7 @@ public class CLIMain implements LimView, Runnable{
 		ActionSpace space;
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			space = ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+			space.setDiceRequirement(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getDiceRequired());
 			
 		} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 			//Market
@@ -230,11 +233,12 @@ public class CLIMain implements LimView, Runnable{
 			//Council
 			space = council;
 		}
-		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam - 1], space);
+		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam], space);
 		System.out.println(space.getDiceRequirement().getValue());
-		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getRelatedDice().getValue());
+		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam ]).getRelatedDice().getValue());
 		System.out.println(space.toString());
 		System.out.println("Action legal " + action.isLegal());
+		
 	}
 	
 	public void updateBoard(Board board){
@@ -253,17 +257,17 @@ public class CLIMain implements LimView, Runnable{
 	
 	private void analizeChar(Character c){
 		if (c == 'q' || c == 'Q'){
-			selectedFam = 1;
+			selectedFam = 0;
 		} else if (c == 'w' || c == 'W') {
-			selectedFam = 2;
+			selectedFam = 1;
 		} else if (c == 'e' || c == 'E') {
-			selectedFam = 3;
+			selectedFam = 2;
 		} else if (c == 'r' || c == 'R') {
-			selectedFam = 4;
+			selectedFam = 3;
 		} else if (c == '1') {
-			
+			selectedOpt = 0;
 		} else if (c == '2') {
-			
+			selectedOpt = 1;
 		}
 		
 	}
@@ -731,11 +735,11 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		int i = 0;
 		for (Familiar familiar : player.getFamilyList()){
-			i++;
+			
 			if (i == selectedFam && !familiar.isUsed()){
 				textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
 			}
-			
+			i++;
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, (familiar.isUsed() ? "-":"+") +
 					familiar.getColor().toString() + " " + 
 					familiar.getRelatedDice().getValue());
@@ -881,7 +885,6 @@ public class CLIMain implements LimView, Runnable{
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2 + width/8,
 				height/4+1,
 				textGraphics);
-		System.out.println(height);
 
 		if (inBoard){
 			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
@@ -1037,7 +1040,6 @@ public class CLIMain implements LimView, Runnable{
 			infoOccupied(lastPos.getColumn(), lastPos.getRow(), textGraphics, ((ActionSpace)productionList.get(currentColBoard)));
 		} 
 		if (!productionList.get(currentColBoard).isOccupied() && productionList.get(currentColBoard).getEffects().size() != 0){
-			System.out.println("In");
 			for (Effect effect : productionList.get(currentColBoard).getEffects()){
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
@@ -1223,6 +1225,7 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Occupanti: ");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		System.out.println("size: " + council.getOccupantList().size());
 		for (Familiar fam : council.getOccupantList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					fam.getRelatedPlayer().getUsername());

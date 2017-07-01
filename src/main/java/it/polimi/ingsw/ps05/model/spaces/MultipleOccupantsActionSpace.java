@@ -21,7 +21,9 @@ public abstract class MultipleOccupantsActionSpace extends ActionSpaceWithEffect
 	public ArrayList<Familiar> getOccupantList(){
     	ArrayList<Familiar> list = new ArrayList<>();
     	
-    	list.add(super.getOccupant());
+    	if (super.getOccupant() != null){
+    		list.add(super.getOccupant());
+    	}
     	list.addAll(super.getAdditionalOccupant());
     	
         return list;
