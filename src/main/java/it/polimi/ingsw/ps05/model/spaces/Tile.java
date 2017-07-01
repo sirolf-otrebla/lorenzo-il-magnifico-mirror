@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -23,6 +24,7 @@ public class Tile extends TowerTileInterface {
 	private Tower parentTower;
     private TowerCard card;
 
+    private Boolean hasMorePaymentOptions = false;
     public static final int TOWER_OCCUPIED_PAYMENT = 3;
     
     public Tile(){
@@ -36,6 +38,7 @@ public class Tile extends TowerTileInterface {
 
     public Tile(TowerCard card, Integer diceRequired, Tower parentTower){
     	super();
+        if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.parentTower = parentTower;
     	this.card = card;
     	super.setDiceRequirement( new Dice(ColorEnumeration.Any, diceRequired));
@@ -58,6 +61,7 @@ public class Tile extends TowerTileInterface {
     
     @Override
     public void setTowerCard(TowerCard card){
+        if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.card = card;
     }
 
@@ -109,5 +113,10 @@ public class Tile extends TowerTileInterface {
     @Override
     public String toString(){
     	return "Tower " + parentTower.getColor().toString() + " T. " + getDiceRequired().getValue();
+    }
+
+    @Override
+    public boolean hasMorePaymentOptions() {
+        return this.hasMorePaymentOptions;
     }
 }

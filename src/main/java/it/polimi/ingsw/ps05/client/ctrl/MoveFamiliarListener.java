@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
 import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
+import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.model.Action;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 
@@ -19,7 +20,7 @@ public class MoveFamiliarListener implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        ActionSpaceWidget spaceWidget = (ActionSpaceWidget) arg;
+        ActionSpaceViewObject spaceWidget = (ActionSpaceViewObject) arg;
         ActionMessage msg =
                 new ActionMessage( spaceWidget.getFamilyMemberID(), spaceWidget.getId(), 0, null); //todo
         Client.getInstance().sendToServer(msg);
