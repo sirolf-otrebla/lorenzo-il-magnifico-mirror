@@ -68,10 +68,9 @@ public class LeaderCard implements Card {
     }
 
 
-	public LeaderCard(){
+	public LeaderCard(Integer id){
     	super();
-    	this.referenceID = LeaderCard.count; //TODO VEDI SE ESISTE UN METODO MIGLIORE
-    	LeaderCard.count++;
+    	this.referenceID = id;
 	}
 
 	public void setRequirements(ArrayList<ArrayList<Resource>> requirements) {
@@ -90,6 +89,11 @@ public class LeaderCard implements Card {
 	public void applyNonActivableEffects(PlayerRelated player) {
 		for (int i = 0; i < effects.size(); i++)
 		    ((SimpleEffect)effects.get(i)).apply(player);
+	}
+
+	@Override
+	public Integer getId() {
+		return referenceID;
 	}
 
 
