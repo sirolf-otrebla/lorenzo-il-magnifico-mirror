@@ -13,10 +13,18 @@ import java.util.ArrayList;
  */
 public abstract class MultipleOccupantsActionSpace extends ActionSpaceWithEffect {
 
-    private ArrayList<Familiar> occupantList = new ArrayList<Familiar>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8263755224788573779L;
 
-    public ArrayList<Familiar> getOccupantList(){
-        return this.occupantList;
+	public ArrayList<Familiar> getOccupantList(){
+    	ArrayList<Familiar> list = new ArrayList<>();
+    	
+    	list.add(super.getOccupant());
+    	list.addAll(super.getAdditionalOccupant());
+    	
+        return list;
     }
 
 }

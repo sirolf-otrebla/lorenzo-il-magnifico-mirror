@@ -35,8 +35,8 @@ public abstract class ActionSpace implements Serializable, Visitable {
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	private int id;
-	private Familiar firstOccupant;
-	private Familiar additionalOccupant;
+	private Familiar firstOccupant = null;
+	private ArrayList<Familiar> additionalOccupant = new ArrayList<>();
 
 
 
@@ -51,7 +51,12 @@ public abstract class ActionSpace implements Serializable, Visitable {
 
 
 	public void setOccupied(Familiar occupant) {
-		this.firstOccupant = occupant;
+		if (this.firstOccupant == null){
+			this.firstOccupant = occupant;
+		} else {
+			this.additionalOccupant.add(occupant);
+		}
+		
 		isOccupied = true;
 	}
 
@@ -80,6 +85,7 @@ public abstract class ActionSpace implements Serializable, Visitable {
 	public void reset(){
 		isOccupied = false;
 		firstOccupant = null;
+		additionalOccupant = new ArrayList<>();
 	}
 
 	public void addFalseResource(){
@@ -103,8 +109,14 @@ public abstract class ActionSpace implements Serializable, Visitable {
 	}
 
 	public abstract void applyEffect(Familiar pl);
-
-
+	
+	public Familiar getOccupant(){
+		return firstOccupant;
+	}
+	
+	public ArrayList<Familiar> getAdditionalOccupant(){
+		return additionalOccupant;
+	}
 
 
 }

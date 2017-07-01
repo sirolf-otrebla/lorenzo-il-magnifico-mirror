@@ -7,14 +7,18 @@ import it.polimi.ingsw.ps05.model.Familiar;
  */
 public abstract class SingleOccupantActionSpace extends ActionSpaceWithEffect {
 
-    private Familiar occupant;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6904353010062127223L;
+	private Familiar occupant;
 
     public Familiar getOccupant(){
-        return occupant;
+        return super.getOccupant();
     }
 
 
     public void setOccupant(Familiar firstOccupant) {
-        this.occupant = firstOccupant;
+    	super.setOccupied(firstOccupant);
     }
 }

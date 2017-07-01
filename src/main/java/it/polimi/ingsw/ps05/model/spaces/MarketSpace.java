@@ -19,6 +19,7 @@ public class MarketSpace extends SingleOccupantActionSpace {
 	private ArrayList<Effect> effectList;
 	private int[] selectedEffects = {};
 	public static final int DEFAULT_INDEX = 0;
+	private Integer marketSpaceTypeID;
 
 	@Override
 	public ArrayList<Effect> getEffects() {
@@ -57,9 +58,18 @@ public class MarketSpace extends SingleOccupantActionSpace {
 	public int[] getSelectedEffects() {
 		return selectedEffects;
 	}
+	
+	public Integer getMarketSpaceTypeID() {
+		return marketSpaceTypeID;
+	}
+	
+	public void setMarketSpaceTypeID(Integer marketSpaceTypeID){
+		this.marketSpaceTypeID = marketSpaceTypeID;
+	}
+	
 
 	@Override
 	public void acceptVisitor(UpdateViewVisitor vi) {
-
+		//TODO vuoto
 	}
 }

@@ -147,23 +147,27 @@
 	[
 		{
 			"numPlayer": 2,
-			"GoldResource": 5
+			"GoldResource": 5,
+			"ID" : 1
 		},
 
 		{
 			"numPlayer": 2,
-			"ServantResource": 5
+			"ServantResource": 5,
+			"ID" : 2
 		},
 
 		{
 			"numPlayer": 4,
 			"MilitaryResource": 3,
-			"GoldResource": 2
+			"GoldResource": 2,
+			"ID" : 3
 		},
 
 		{
 			"numPlayer": 4,
-			"PrivilegeBonus": 2
+			"PrivilegeBonus": 2,
+			"ID" : 4
 		}
 	],
 

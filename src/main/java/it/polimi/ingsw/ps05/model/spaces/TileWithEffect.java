@@ -108,4 +108,9 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 	public void acceptVisitor(UpdateViewVisitor vi) {
 
 	}
+	
+	@Override
+    public String toString(){
+    	return "Tower " + toBeDecorated.getParentTower().getColor().toString() + " T. " + toBeDecorated.getDiceRequirement().getValue();
+    }
 }

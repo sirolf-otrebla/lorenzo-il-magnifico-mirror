@@ -214,10 +214,13 @@ public class CommonJsonParser {
 		try{
 			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
-			return new MarketSpace(effectList);
+			MarketSpace space = new MarketSpace(effectList);
+			space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
+			return space;
 		}
 
-
+		MarketSpace space = new MarketSpace(diceRequired, effectList);
+		space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
 		return new MarketSpace(diceRequired, effectList);
 	}
 

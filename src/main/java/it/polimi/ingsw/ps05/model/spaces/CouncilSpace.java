@@ -47,7 +47,7 @@ public class CouncilSpace extends MultipleOccupantsActionSpace {
 
 	@Override
 	public void setOccupied(Familiar occupant) {
-		super.getOccupantList().add(occupant);
+		super.setOccupied(occupant);;
 	}
 
 	@Override

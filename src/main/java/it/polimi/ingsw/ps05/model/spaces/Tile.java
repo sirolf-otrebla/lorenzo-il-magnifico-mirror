@@ -106,4 +106,9 @@ public class Tile extends SingleOccupantActionSpace implements TowerTileInterfac
     public void acceptVisitor(UpdateViewVisitor vi) {
 
     }
+    
+    @Override
+    public String toString(){
+    	return "Tower " + parentTower.getColor().toString() + " T. " + diceRequirement.getValue();
+    }
 }
