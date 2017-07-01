@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.client.view.cli;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
+import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -12,6 +13,7 @@ import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
+import it.polimi.ingsw.ps05.model.spaces.Tile;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
@@ -41,7 +43,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
-public class CLIMain implements Runnable{
+public class CLIMain implements LimView, Runnable{
 	int currentRowBoard = 0;
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;
@@ -70,6 +72,8 @@ public class CLIMain implements Runnable{
 	private ArrayList<Player> playersList;
 	private Terminal terminal = null;
 	TextGraphics graphics;
+	boolean meActive = true;
+	int selectedFam = 0;
 	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
 		 * 
 		 */
@@ -106,16 +110,29 @@ public class CLIMain implements Runnable{
 		PREFERRED_HEIGHT = height.intValue();
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
-		for (TowerTileInterface tile : board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
+		//trySys();
+	}
+
+	public void trySys(){
+		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
 			player.addBlueCard((BlueCard)tile.getCard());
 			playersList.get(0).addBlueCard((BlueCard)tile.getCard());
 		}
-		for (TowerTileInterface tile : board.getTowerList().get(ColorEnumeration.Green).getTiles().values()) {
+		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Green).getTiles().values()) {
 			playersList.get(1).addGreenCard((GreenCard)tile.getCard());
 		}
+		for (ActionSpace s : this.board.getActSpacesMap().values()) {
+			s.setOccupied(this.player.getFamilyMember(ColorEnumeration.White));
+			this.player.getFamilyMember(ColorEnumeration.White).setPosition(s);
+			System.out.println("s : " + s.isOccupied() + " " + s.getId() + " " + s.getClass());
+			
+		}
+		for (TowerTileInterface t : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
+			((TileWithEffect)t).setOccupied(this.player.getFamilyMember(ColorEnumeration.Black));
+			this.player.getFamilyMember(ColorEnumeration.Black).setPosition((ActionSpace)t);
+			break;
+		}
 	}
-
-
 
 	@Override
 	public void run() {
@@ -195,6 +212,31 @@ public class CLIMain implements Runnable{
 		}
 	}
 	
+	public void tryAction(){
+		ActionSpace space;
+		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
+			space = ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+			
+		} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
+			//Market
+			space = (ActionSpace)marketList.get(currentColBoard);
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
+			//production
+			space = (ActionSpace)productionList.get(currentColBoard);
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard >= productionList.size() && currentColBoard < productionList.size() + harvestList.size() ){
+			//Harvest
+			space = (ActionSpace)harvestList.get(currentColBoard - productionList.size());
+		} else {
+			//Council
+			space = council;
+		}
+		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam - 1], space);
+		System.out.println(space.getDiceRequirement().getValue());
+		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getRelatedDice().getValue());
+		System.out.println(space.toString());
+		System.out.println("Action legal " + action.isLegal());
+	}
+	
 	public void updateBoard(Board board){
 		this.board = board;
 		try {
@@ -209,10 +251,32 @@ public class CLIMain implements Runnable{
 		
 	}
 	
+	private void analizeChar(Character c){
+		if (c == 'q' || c == 'Q'){
+			selectedFam = 1;
+		} else if (c == 'w' || c == 'W') {
+			selectedFam = 2;
+		} else if (c == 'e' || c == 'E') {
+			selectedFam = 3;
+		} else if (c == 'r' || c == 'R') {
+			selectedFam = 4;
+		} else if (c == '1') {
+			
+		} else if (c == '2') {
+			
+		}
+		
+	}
+	
 	private void movePointer(TextGraphics textGraphics) throws IOException{
 		KeyStroke keyStroke = terminal.readInput();
 		while(true) {
 			switch(keyStroke.getKeyType()){
+			case Character:
+				analizeChar(keyStroke.getCharacter());
+				drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
+						Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				break;
 			case ArrowDown: 
 				moveDown(textGraphics);
 				break;
@@ -236,6 +300,8 @@ public class CLIMain implements Runnable{
 					} else if (currentRowPlayers == 3) {
 						showCardsInNewTerminal(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
 					}
+				} else if(meActive && inBoard){
+					tryAction();
 				}
 				break;
 			case Escape:
@@ -247,24 +313,30 @@ public class CLIMain implements Runnable{
 					inMyStats = true;
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 				} else if (inMyStats){
 					inBoard = false;
 					inMyStats = false;
 					inPlayers = true;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
 				} else if (inPlayers){
 					inBoard = true;
 					inMyStats = false;
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 				}
 
 				break;
 			default:
+				System.out.println("Default");
 				break;
+			}
+			System.out.println(terminal.getCursorPosition() + " " + currentColBoard + " " + currentRowBoard);
+			if (inMyStats){
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} else if (inPlayers){
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} else if (inBoard){
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			}
 			terminal.flush();
 			keyStroke = terminal.readInput();
@@ -497,7 +569,7 @@ public class CLIMain implements Runnable{
 						7*height/16 - height/32));
 				if (actionSpace.isOccupied()){
 					textGraphics.putString((productionList.size()+1)*width/16 - width/32,
-							6*height/16 - height/32, "X", SGR.BOLD);
+							7*height/16 - height/32, "X", SGR.BOLD);
 				}
 				drawSquare(
 						productionList.size()*width/16,
@@ -518,8 +590,8 @@ public class CLIMain implements Runnable{
 				list.add(new TerminalPosition((productionList.size()+harvestList.size()+1)*width/16 - width/32,
 						7*height/16 - height/32));
 				if (action.isOccupied()){
-					textGraphics.putString((harvestList.size()+1)*width/16 - width/32,
-							6*height/16 - height/32, "X", SGR.BOLD);
+					textGraphics.putString((productionList.size() + harvestList.size()+1)*width/16 - width/32,
+							7*height/16 - height/32, "X", SGR.BOLD);
 				}
 				drawSquare(
 						(productionList.size()+harvestList.size())*width/16,
@@ -579,12 +651,16 @@ public class CLIMain implements Runnable{
 	
 	private void checkPositionCorrect(){
 		for (ArrayList<TerminalPosition> column : mapBoard){
+			System.out.println("Righe: " + column.size());
 			for (int i = 0; i < column.size() - 1; i++ ){
 				if (column.get(i).getRow() > column.get(i + 1).getRow()){
 					TerminalPosition infra = column.get(i);
 					column.set(i, column.get(i + 1));
 					column.set(i + 1, infra);
 				}
+			}
+			for (int i = 0; i < column.size(); i++ ){
+				System.out.println(column.get(i));
 			}
 		}
 	}
@@ -653,13 +729,21 @@ public class CLIMain implements Runnable{
 		lastPos = new TerminalPosition((chosenColStart+width-1)/2 ,0);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Familiari:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		int i = 0;
 		for (Familiar familiar : player.getFamilyList()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, familiar.isUsed()? "-":"+" +
+			i++;
+			if (i == selectedFam && !familiar.isUsed()){
+				textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
+			}
+			
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, (familiar.isUsed() ? "-":"+") +
 					familiar.getColor().toString() + " " + 
 					familiar.getRelatedDice().getValue());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			secondColumn.add(lastPos);
+			textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 		}
+		
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Scomuniche");
 		lastPos = new TerminalPosition(lastPos.getColumn() ,lastPos.getRow() + 1);
 		secondColumn.add(lastPos);
@@ -705,7 +789,7 @@ public class CLIMain implements Runnable{
 			for (int b = 0; b < tower.getTiles().size(); b++){
 				TowerTileInterface tile = tower.getTiles().get(ids.get(b));
 				off.add(((ActionSpace)tile).isOccupied() ? OCCUPIED.length() : tile.getCard().getName().length());
-				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 3 + b*height/16, tile.getCard().getName());
+				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 3 + b*height/16, ((ActionSpace)tile).isOccupied() ? OCCUPIED : tile.getCard().getName());
 				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 4 + b*height/16, "Dado: " + tile.getDiceRequired().getValue());
 				list.add(new TerminalPosition(a*width/8 + 1 + off.get(b) + (a!=0 ? 1:0), 3 + b*height/16));
 				ids.add(((ActionSpace)tile).getId());
@@ -801,7 +885,12 @@ public class CLIMain implements Runnable{
 
 		if (inBoard){
 			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
-				infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
+				if (((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
+					infoOccupied(colForInfo,0,textGraphics, ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))));
+				} else {
+					infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
+				}
+				
 			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 				infoMarket(colForInfo,0,textGraphics);
 			} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
@@ -847,6 +936,21 @@ public class CLIMain implements Runnable{
 			}
 		}
 	}
+	
+	private void infoOccupied(int column, int row, TextGraphics textGraphics, ActionSpace space){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		ArrayList<Familiar> list = new ArrayList<>();
+		list.add(space.getOccupant());
+		list.addAll(space.getAdditionalOccupant());
+		for (Familiar f : list){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+					f.getRelatedPlayer().getUsername());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+					"Fam " + f.getColor().toString() + " " + f.getRelatedDice().getValue());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		}
+	}
 
 	private void infoBonusTile(int column, int row, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
@@ -859,7 +963,6 @@ public class CLIMain implements Runnable{
 		}
 
 	}
-
 
 	private void infoFamiliar(int column, int row, TextGraphics textGraphics){
 		Familiar familiar = (Familiar) player.getFamilyList().toArray()[currentRowMyStats];
@@ -900,12 +1003,7 @@ public class CLIMain implements Runnable{
 				"Mercato " + (currentColBoard + 1));
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		if (marketList.get(currentColBoard).isOccupied()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					marketList.get(currentColBoard).getOccupant().getRelatedPlayer().getUsername());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					"Fam " + marketList.get(currentColBoard).getOccupant().getColor().toString());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			infoOccupied(lastPos.getColumn(), lastPos.getRow(), textGraphics, ((ActionSpace)marketList.get(currentColBoard)));
 		} else {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					"Dado: " + marketList.get(currentColBoard).getDiceRequirement().getValue());
@@ -936,12 +1034,8 @@ public class CLIMain implements Runnable{
 				"Dado: " + productionList.get(currentColBoard).getDiceRequirement().getValue());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		if (productionList.get(currentColBoard).isOccupied()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
-					productionList.get(currentColBoard).getOccupant().getRelatedPlayer().getUsername());
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					"Fam " + productionList.get(currentColBoard).getOccupant().getColor().toString());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		}
+			infoOccupied(lastPos.getColumn(), lastPos.getRow(), textGraphics, ((ActionSpace)productionList.get(currentColBoard)));
+		} 
 		if (!productionList.get(currentColBoard).isOccupied() && productionList.get(currentColBoard).getEffects().size() != 0){
 			System.out.println("In");
 			for (Effect effect : productionList.get(currentColBoard).getEffects()){
@@ -1081,11 +1175,7 @@ public class CLIMain implements Runnable{
 				"Dado: " + harvestList.get(currentColBoard-productionList.size()).getDiceRequirement().getValue());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		if (harvestList.get(currentColBoard-productionList.size()).isOccupied()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
-					harvestList.get(currentColBoard-productionList.size()).getOccupant().getRelatedPlayer().getUsername());
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					"Fam " + harvestList.get(currentColBoard-productionList.size()).getOccupant().getColor().toString());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			infoOccupied(lastPos.getColumn(), lastPos.getRow(), textGraphics, ((ActionSpace)harvestList.get(-productionList.size() + currentColBoard)));
 		} 
 		if (!harvestList.get(currentColBoard-productionList.size()).isOccupied() && harvestList.get(currentColBoard-productionList.size()).getEffects().size() != 0) {
 			for (Effect effect : harvestList.get(currentColBoard-productionList.size()).getEffects()){
@@ -1176,5 +1266,7 @@ public class CLIMain implements Runnable{
 		}
 	}
 	
-
+	public void setActive (boolean active){
+		this.meActive = active;
+	}
 }

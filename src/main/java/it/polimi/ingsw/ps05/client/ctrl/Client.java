@@ -60,4 +60,5 @@ public class Client {
     public Integer getId(){
     	return id;
     }
+
 }

@@ -36,20 +36,19 @@ public class Login extends Application implements Observable{
 
 	static StringProperty username = new SimpleStringProperty();
 	static StringProperty password = new SimpleStringProperty();
-
-	static boolean GUI = true;
+	static StringProperty UI = new SimpleStringProperty();
+	static StringProperty registration = new SimpleStringProperty();
 
 	static GridPane grid;
 	static Scene scene;
 	static TextField serverTextField;
 	static TextField portTextField;
-	static Button btn1;
 	static Label connesso;
 	static RadioButton rb3,rb1,rb2;
 	static RadioButton rb4;
 	static TextField userTextField;
 	static TextField pwBox;
-	static Button btn;
+	static Button btn,btn1,btn2;
 
 	public void setConnected(){
 		System.out.println("aggiorno");
@@ -65,6 +64,7 @@ public class Login extends Application implements Observable{
 		userTextField.setEditable(true);
 		pwBox.setEditable(true);
 		btn.setDisable(false);
+		btn2.setDisable(false);
 	}
 
 
@@ -144,12 +144,20 @@ public class Login extends Application implements Observable{
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 1, 12);
+		
+		btn2 = new Button("Register");
+		btn2.setDisable(true);
+		HBox hbBtn2 = new HBox(10);
+		hbBtn2.setAlignment(Pos.BOTTOM_LEFT);
+		hbBtn2.getChildren().add(btn2);
+		grid.add(hbBtn2, 0, 12);
 
 		final ToggleGroup group = new ToggleGroup();
 
 		rb1 = new RadioButton("GUI");
 		rb1.setToggleGroup(group);
 		rb1.setSelected(true);
+		UI.set("GUI");
 
 		rb2 = new RadioButton("CLI");
 		rb2.setToggleGroup(group);
@@ -161,7 +169,7 @@ public class Login extends Application implements Observable{
 			public void changed(ObservableValue<? extends Toggle> ov,
 					Toggle old_toggle, Toggle new_toggle) {
 				if (group.getSelectedToggle() != null) {
-
+					UI.set(((RadioButton)group.getSelectedToggle()).getText());
 				}                
 			}
 		});
@@ -171,7 +179,9 @@ public class Login extends Application implements Observable{
 
 			@Override
 			public void handle(ActionEvent e) {
-
+				username.set(userTextField.getText());
+				password.set(pwBox.getText());
+				registration.set("Login");
 			}
 		});
 		btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -180,6 +190,16 @@ public class Login extends Application implements Observable{
 			public void handle(ActionEvent e) {
 				serverString.set(serverTextField.getText());
 				portString.set(portTextField.getText());
+			}
+		});
+		btn2.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent e) {
+				username.set(userTextField.getText());
+				password.set(pwBox.getText());
+				registration.set("Registration");
+				
 			}
 		});
 
@@ -225,5 +245,13 @@ public class Login extends Application implements Observable{
 	
 	public StringProperty getConnection(){
 		return connection;
+	}
+	
+	public StringProperty getRegistration(){
+		return registration;
+	}
+	
+	public StringProperty getUI(){
+		return UI;
 	}
 }

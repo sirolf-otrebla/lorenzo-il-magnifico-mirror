@@ -24,10 +24,11 @@ import java.util.ArrayList;
 public class PaymentPopup {
 
 
+    private ArrayList<ArrayList<String>> resArrayList;
     static boolean answer = true; // usato per comunicare che il giocatore ha annullato l'azione
 
     /* TODO aggiungere parametri al metodo display per visualizzare le immagini delle risorse durante la scelta */
-    public static boolean display(String cardName, ArrayList<ArrayList<String>> resArrayList) {
+    public  boolean display(String cardName) {
 
         Stage popup = new Stage();
 
@@ -59,36 +60,6 @@ public class PaymentPopup {
         //TODO FINIRE
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         HBox hbox = new HBox(40);
         hbox.getChildren().addAll(firstAltButton, secondAltButton);
 
@@ -111,8 +82,12 @@ public class PaymentPopup {
         return answer;
     }
 
-    public void setResIdArrayList(ArrayList<Integer> resIdArrayList) {
-        this.resIdArrayList = resIdArrayList;
+    public ArrayList<ArrayList<String>> getResArrayList() {
+        return resArrayList;
+    }
+
+    public void setResArrayList(ArrayList<ArrayList<String>> resArrayList) {
+        this.resArrayList = resArrayList;
     }
 }
 

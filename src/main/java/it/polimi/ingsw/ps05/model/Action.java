@@ -51,7 +51,7 @@ public class Action implements Period {
 
 		// 1
 		if (this.familiar.isUsed()) return false;
-		if (this.position.isOccupied()) return false;
+		if (this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
 
 		// 2- 2b)
 		ArrayList<ArrayList<Resource>> list = this.position.getRequirements();
@@ -94,7 +94,7 @@ public class Action implements Period {
 		//position.applyNonActivableEffects moves the card (if there is any;
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);
-		this.position.applyEffect();
+		this.position.applyEffect(this.familiar);
 		
 	}
 

@@ -20,17 +20,14 @@ public class ActionSpaceWidget {
     private ColorEnumeration familyMemberId;
     private ColorEnumeration occupantPlayerId;
     private Integer id;
-    private GraphicMap graphicMap = new GraphicMap();
+    private boolean isOccupied;
+    private GraphicResources graphicMap = new GraphicResources();
     private int minDie;
-
-    public ActionSpaceWidget() {
-
-    }
 
     public ActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
-        occupied = false;
-        minDie = minimumDie;
+        isOccupied = false;
+        this.minDie = minimumDie;
     }
 
     public void setupGestureTarget() {
@@ -99,8 +96,9 @@ public class ActionSpaceWidget {
 
     public void repaint() {
         if(occupied) {
+            Image img = new Image(this.graphicMap.getFamiliarPath(this.occupantPlayerId, this.familyMemberId));
             occupationCircle.setOpacity(1);
-            occupationCircle.setFill(new ImagePattern(graphicMap.familiarColorMap.get(occupantPlayerId, familyMemberId)));
+            occupationCircle.setFill(new ImagePattern(img));
         }
         else {
             occupationCircle.setFill(Color.TRANSPARENT);
@@ -119,6 +117,10 @@ public class ActionSpaceWidget {
         this.id = id;
     }
 
+    public int getMinDie() {
+        return minDie;
+    }
+
     public Circle getOccupationCircle() {
         return this.occupationCircle;
     }
@@ -133,5 +135,21 @@ public class ActionSpaceWidget {
 
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
+    }
+
+    public ColorEnumeration getFamilyMemberId() {
+        return familyMemberId;
+    }
+
+    public void setFamilyMemberId(ColorEnumeration familyMemberId) {
+        this.familyMemberId = familyMemberId;
+    }
+
+    public ColorEnumeration getOccupantPlayerId() {
+        return occupantPlayerId;
+    }
+
+    public void setOccupantPlayerId(ColorEnumeration occupantPlayerId) {
+        this.occupantPlayerId = occupantPlayerId;
     }
 }

@@ -21,8 +21,8 @@ public class App
     public static void main( String[] args )
     {
     	
-    	LoginController l = new LoginController();
-    	/*Scanner keyboard = new Scanner(System.in);
+    	//LoginController l = new LoginController();
+    	Scanner keyboard = new Scanner(System.in);
     	
     	String string = new String("C");
     	while(!string.equals("C") && !string.equals("G")){
@@ -50,7 +50,7 @@ public class App
     	} else {
     		//istanzia la gui
     		view.instanceGUI();
-    	}*/
+    	}
     }
 }
 

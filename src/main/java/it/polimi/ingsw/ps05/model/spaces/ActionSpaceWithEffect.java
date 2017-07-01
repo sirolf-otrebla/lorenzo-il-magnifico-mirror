@@ -26,6 +26,6 @@ public abstract class ActionSpaceWithEffect extends ActionSpace {
 	@Override
 	public abstract ArrayList<Effect> getEffects() throws IllegalMethodCallException;
 
-	public abstract void applyEffect();
+	public abstract void applyEffect(Familiar pl);
 
 }

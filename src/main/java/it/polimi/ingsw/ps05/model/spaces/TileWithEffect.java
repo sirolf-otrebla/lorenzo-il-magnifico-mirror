@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
@@ -14,7 +16,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  * further commments will be added.
  */
 
-public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileInterface {
+public class TileWithEffect extends TowerTileInterface {
 
 	/**
 	 * 
@@ -93,12 +95,22 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 	}
 
 	@Override
-	public void applyEffect() {
-		toBeDecorated.applyEffect();
+	public void applyEffect(Familiar pl) {
+		toBeDecorated.applyEffect(pl);
 	}
 
 	@Override
 	public void removeTowerCard() {
 		toBeDecorated.removeTowerCard();
 	}
+
+	@Override
+	public void acceptVisitor(ViewVisitorInterface vi) {
+
+	}
+	
+	@Override
+    public String toString(){
+    	return "Tower " + toBeDecorated.getParentTower().getColor().toString() + " T. " + toBeDecorated.getDiceRequirement().getValue();
+    }
 }

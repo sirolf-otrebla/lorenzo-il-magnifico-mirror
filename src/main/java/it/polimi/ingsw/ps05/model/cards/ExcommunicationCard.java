@@ -14,6 +14,7 @@ public class ExcommunicationCard implements Serializable {
 	/**
 	 * 
 	 */
+	private Integer referenceID;
 	private static final long serialVersionUID = 8859721604132988242L;
 	private ExcommunicationEffect excomEffect;
 	private FaithResource faithRequested;
@@ -52,5 +53,13 @@ public class ExcommunicationCard implements Serializable {
 	
 	public ExcommunicationEffect getExcommEffect() {
 		return this.excomEffect;
+	}
+
+	public Integer getReferenceID() {
+		return referenceID;
+	}
+
+	public void setReferenceID(Integer referenceID) {
+		this.referenceID = referenceID;
 	}
 }

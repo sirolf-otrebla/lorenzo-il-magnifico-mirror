@@ -14,15 +14,17 @@ public class BlueCard extends TowerCard {
 	/**
 	 * 
 	 */
+	private int referenceId;
+
 	private static final long serialVersionUID = 6589070594892321967L;
 
-	public BlueCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements,
+	public BlueCard(int id, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements,
 					ArrayList<Effect> effects) {
-		super(epoch, color, cardName, requirements, effects);
+		super( id,epoch, color, cardName, requirements, effects);
 	}
 
-	public BlueCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public BlueCard(int id,Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
+		super(id, epoch, color, cardName, effects);
 	}
 	
 	public BlueCard(){
@@ -43,6 +45,6 @@ public class BlueCard extends TowerCard {
 	public String toString(){
 		return "Carta blu";
 	}
-	
-	
+
+
 }

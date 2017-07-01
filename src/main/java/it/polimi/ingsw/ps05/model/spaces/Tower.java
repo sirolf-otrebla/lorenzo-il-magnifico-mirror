@@ -3,16 +3,18 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
+import it.polimi.ingsw.ps05.model.VisitableFromView;
 import it.polimi.ingsw.ps05.model.cards.Deck;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
 
 /* See UML for thescription.
  * 
  */
-public abstract class Tower implements Serializable {
+public abstract class Tower implements Serializable, VisitableFromView {
 
 	/**
 	 * 
@@ -77,6 +79,12 @@ public abstract class Tower implements Serializable {
 		for (TowerTileInterface o : tiles.values()){
 			o.setTowerCard(deck.getCard(epoch));
 		}
+	}
+
+
+	@Override
+	public void acceptVisitor(ViewVisitorInterface vi) {
+
 	}
 	
 	

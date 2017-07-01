@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
@@ -12,9 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
+
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
 public class GUIMain extends Application {
+
+
 
 	private Stage stage;
 
@@ -22,6 +26,18 @@ public class GUIMain extends Application {
 	public static final int ORIGINAL_WIDTH = 1120;
 
 	private GraphicMap map = new GraphicMap();
+	TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
+	private VBox[] towerOccupationCircesArray = new VBox[4];
+	private VBox[] towerCardSpacesArray = new VBox[4];
+	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
+	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
+	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
+	private GraphicResources map = new GraphicResources();
+	private Integer[] faithPath = new Integer[16];
+	private Integer[] militaryPath = new Integer[6];
+	private Integer[] greenCardsConversion = new Integer[6];
+	private Integer[] blueCardsConversion = new  Integer[6];
+	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
 	private FamiliarWidget redFamiliar_black = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/black.png");
 	private FamiliarWidget redFamiliar_white = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/white.png");
@@ -32,16 +48,11 @@ public class GUIMain extends Application {
 	private final VBox[] towerOccupationCirclesArray = new VBox[4];
 	private final VBox[] towerCardSpacesArray = new VBox[4];
 
-	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget();
-	// MultipleSpaceWidget secondaryProductionSpace = new MultipleSpaceWidget();
-	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget();
+	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
+	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(2);
 	// MultipleSpaceWidget secondaryHarvestingSpace = new MultipleSpaceWidget();
 
 
-	private MarketSpaceWidget goldMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget servantsMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget militaryMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget privilegesMarketSpace = new MarketSpaceWidget();
 
 	// MultipleSpaceWidget councilSpace = new MultipleSpaceWidget();
 
@@ -119,6 +130,8 @@ public class GUIMain extends Application {
         i = 0;
         j = 0;
 		for (TowerTileWidget[] tower: this.towerTileWidgetList) {
+			int i = 0;
+			int j = 0;
 			this.towerOccupationCirclesArray[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
 			towerOccupationCirclesArray[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
 			for (TowerTileWidget widget : tower) {
@@ -135,6 +148,11 @@ public class GUIMain extends Application {
 		towerOccupationCirclesArray[1].setLayoutX(stageWidth * 0.2); // blue tower
 		towerOccupationCirclesArray[2].setLayoutX(stageWidth * 0.309821); // yellow tower
 		towerOccupationCirclesArray[3].setLayoutX(stageWidth * 0.41875); // violet tower
+
+        for (int i = 0; i < familiarWidgetLists.length; i++)
+            for (int j = 0; i < familiarWidgetLists[i].length; j++)
+                familiarWidgetLists[i][j] = new FamiliarWidget(
+                        ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
 		/* righe mantenute perché contengono le coordinate dei posti azione
 
@@ -161,11 +179,11 @@ public class GUIMain extends Application {
 		*/
 
         /* Adding market action spaces */
-		insertActionSpace(goldMarketSpace, root, 1, 28.3036, 80.1562); // gold
+		/* insertActionSpace(goldMarketSpace, root, 1, 28.3036, 80.1562); // gold
 		insertActionSpace(servantsMarketSpace, root, 1, 33.125, 80.1562); // servants
 		insertActionSpace(militaryMarketSpace, root, 1, 37.7679, 82.6562); // military + gold
 		insertActionSpace(privilegesMarketSpace, root, 1, 41.25, 88.75); // privileges
-
+*/
         /* Adding harvest and production action spaces */
 		insertActionSpace(productionSpace, root, 1, 2.7679, 82.5); // production
 		insertActionSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
@@ -174,10 +192,9 @@ public class GUIMain extends Application {
 		//TODO
 
         /* Adding points markers */
-		i = 0;
-		j = 0;
-
         for (MarkerWidget[] track: this.markerWidgetList) {
+        	int i = 0;
+			int j = 0;
 			if(i < 2) {
 				this.trackBoxesArray[i] = new HBox(20);
 			} else {
@@ -266,8 +283,33 @@ public class GUIMain extends Application {
 	}
 
 	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double percX, double percY) {
+	public TowerTileWidget[][] getTowerTileWidgetList() {
+		return towerTileWidgetList;
+	}
 
-		actionSpace.getOccupationCircle().setRadius(20);
+	public FamiliarWidget[][] getFamiliarWidgetLists() {
+		return familiarWidgetLists;
+	}
+
+	public MarketSpaceWidget[] getMarketSpaceWidgets() {
+		return marketSpaceWidgets;
+	}
+
+	public MarkerWidget[][] getMarkerWidgetList() {
+		return markerWidgetList;
+	}
+
+	public ProductionSpaceWidget getProductionSpace() {
+		return productionSpace;
+	}
+
+	public HarvestingSpaceWidget getHarvestingSpace() {
+		return harvestingSpace;
+	}
+
+	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double percX, double percY) {
+
+		actionSpace.getOccupationCircle().setRadius(20 * resize);
 		actionSpace.getOccupationCircle().setCenterX(percX * stageWidth);
 		actionSpace.getOccupationCircle().setCenterY(percY * stageHeight);
 		actionSpace.getOccupationCircle().setFill(Color.TRANSPARENT);
@@ -336,5 +378,48 @@ public class GUIMain extends Application {
 
 	}
 
+	public CouncilSpaceWidget getCouncilSpaceWidget() {
+		return councilSpaceWidget;
+	}
+
+	public Integer[] getFaithPath() {
+		return faithPath;
+	}
+
+	public void setFaithPath(Integer[] faithPath) {
+		this.faithPath = faithPath;
+	}
+
+	public Integer[] getMilitaryPath() {
+		return militaryPath;
+	}
+
+	public void setMilitaryPath(Integer[] militaryPath) {
+		this.militaryPath = militaryPath;
+	}
+
+	public Integer[] getGreenCardsConversion() {
+		return greenCardsConversion;
+	}
+
+	public void setGreenCardsConversion(Integer[] greenCardsConversion) {
+		this.greenCardsConversion = greenCardsConversion;
+	}
+
+	public Integer[] getBlueCardsConversion() {
+		return blueCardsConversion;
+	}
+
+	public void setBlueCardsConversion(Integer[] blueCardsConversion) {
+		this.blueCardsConversion = blueCardsConversion;
+	}
+
+	public ExcomWidget[] getExcomWidgets() {
+		return excomWidgets;
+	}
+
+	public void setExcomWidgets(ExcomWidget[] excomWidgets) {
+		this.excomWidgets = excomWidgets;
+	}
 }
 

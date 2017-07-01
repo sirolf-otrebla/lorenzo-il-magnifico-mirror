@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.cards.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.OnePerTurnEffect;
@@ -15,7 +16,7 @@ import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
-public class Player implements PlayerRelated {
+public class Player implements PlayerRelated, VisitableFromView {
 
 	/**
 	 * 
@@ -258,5 +259,10 @@ public class Player implements PlayerRelated {
 
 	public Familiar getFamilyMember(ColorEnumeration c){
 		return this.getFamilyMap().get(c);
+	}
+
+	@Override
+	public void acceptVisitor(ViewVisitorInterface vi) {
+
 	}
 }

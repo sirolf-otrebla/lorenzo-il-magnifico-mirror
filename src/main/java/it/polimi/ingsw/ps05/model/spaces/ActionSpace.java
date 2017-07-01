@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.VisitableFromView;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace implements Serializable {
+public abstract class ActionSpace implements Serializable, VisitableFromView {
 
 	/**
 	 * 
@@ -34,7 +35,8 @@ public abstract class ActionSpace implements Serializable {
 	private ArrayList<ArrayList<Resource>> requirements;
 
 	private int id;
-	private Familiar occupant;
+	private Familiar firstOccupant = null;
+	private ArrayList<Familiar> additionalOccupant = new ArrayList<>();
 
 
 
@@ -47,12 +49,14 @@ public abstract class ActionSpace implements Serializable {
 		id_counter++;
 	}
 
-	public Familiar getOccupant(){
-		return occupant;
-	}
 
 	public void setOccupied(Familiar occupant) {
-		this.occupant = occupant;
+		if (this.firstOccupant == null){
+			this.firstOccupant = occupant;
+		} else {
+			this.additionalOccupant.add(occupant);
+		}
+		
 		isOccupied = true;
 	}
 
@@ -78,13 +82,10 @@ public abstract class ActionSpace implements Serializable {
 		return diceRequirement;
 	}
 
-	public void setOccupant(Familiar occupant) {
-		this.occupant = occupant;
-	}
-
 	public void reset(){
 		isOccupied = false;
-		occupant = null;
+		firstOccupant = null;
+		additionalOccupant = new ArrayList<>();
 	}
 
 	public void addFalseResource(){
@@ -107,6 +108,15 @@ public abstract class ActionSpace implements Serializable {
 		return id;
 	}
 
-	public abstract void applyEffect();
+	public abstract void applyEffect(Familiar pl);
+	
+	public Familiar getOccupant(){
+		return firstOccupant;
+	}
+	
+	public ArrayList<Familiar> getAdditionalOccupant(){
+		return additionalOccupant;
+	}
+
 
 }
