@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps05.client.net.socket.SocketConnection;
 import it.polimi.ingsw.ps05.client.view.gui.Login;
 import it.polimi.ingsw.ps05.net.message.LoginMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.net.message.RegistrationMessage;
 
 public class LoginController {
 	
@@ -18,6 +19,7 @@ public class LoginController {
 	Connection connToUse = null;
 	String username = null;
 	String password = null;
+	String registration = null;
 	
 	public LoginController() {
 		l = new Login();
@@ -32,7 +34,7 @@ public class LoginController {
 		l.getUsername().addListener((observable, oldValue, newValue) -> {
 			System.out.println(newValue);
 			username = newValue;
-			if (password != null){
+			if (password != null && registration.equals("Login")){
 				tryLogin();
 			}
 		});
@@ -40,7 +42,7 @@ public class LoginController {
 		l.getPassword().addListener((observable, oldValue, newValue) -> {
 			System.out.println(newValue);
 			password = newValue;
-			if (username != null){
+			if (username != null && registration.equals("Login")){
 				tryLogin();
 			}
 		});
@@ -67,6 +69,14 @@ public class LoginController {
 				openConnection();
 			}
 		});
+		
+		l.getRegistration().addListener((observable, oldValue, newValue) -> {
+			System.out.println(newValue);
+			registration = newValue;
+			if (username != null && password != null){
+				tryRegistration();
+			}
+		});
 	}
 	
 	private void openConnection(){
@@ -90,6 +100,12 @@ public class LoginController {
 	
 	private void tryLogin() {
 		LoginMessage mess = new LoginMessage(username, password);
+		connToUse.send(mess);
+		NetMessage recMess = connToUse.getInputMessage();
+	}
+	
+	private void tryRegistration() {
+		RegistrationMessage mess = new RegistrationMessage(username, password);
 		connToUse.send(mess);
 		NetMessage recMess = connToUse.getInputMessage();
 	}
