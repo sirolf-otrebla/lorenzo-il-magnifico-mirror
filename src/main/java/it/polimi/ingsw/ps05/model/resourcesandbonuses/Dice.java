@@ -56,9 +56,9 @@ public class Dice implements Resource {
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
 		int diff = playerFamiliar.getRelatedDice().getValue() - this.getValue();
 		if ( diff > 0) return true;
-		if (Math.abs(diff) < playerFamiliar.getRelatedPlayer().getResource("Servitori").getValue()){
+		if (Math.abs(diff) <= playerFamiliar.getRelatedPlayer().getResource(ServantResource.id).getValue()){
 			try{
-				playerFamiliar.getRelatedPlayer().getResource("Servitori").remove(new ServantResource(Math.abs(diff)));
+				playerFamiliar.getRelatedPlayer().getResource(ServantResource.id).remove(new ServantResource(Math.abs(diff)));
 				return true;
 			} catch (NotEnoughResourcesException e){
 				System.out.println("SOMETHING REALLY BAD HAS HAPPENED!! THIS MESSAGE IT'S NOT MEANT TO BE DISPLAYED EVER");

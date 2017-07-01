@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
+import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -24,6 +25,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
@@ -42,8 +44,13 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import javafx.scene.layout.VBox;
 
 public class CLIMain implements LimView, Runnable{
+
+
+	/* view objects */
+
 	int currentRowBoard = 0;
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;
@@ -74,6 +81,7 @@ public class CLIMain implements LimView, Runnable{
 	TextGraphics graphics;
 	boolean meActive = true;
 	int selectedFam = 0;
+	int selectedOpt = 0;
 	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
 		 * 
 		 */
@@ -110,6 +118,7 @@ public class CLIMain implements LimView, Runnable{
 		PREFERRED_HEIGHT = height.intValue();
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
+		System.out.println(width + ": " + height);
 		//trySys();
 	}
 
@@ -140,6 +149,8 @@ public class CLIMain implements LimView, Runnable{
 		defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(PREFERRED_WIDTH, PREFERRED_HEIGHT));
 		try {
 			terminal = defaultTerminalFactory.createTerminal();
+			System.out.println(terminal.getTerminalSize().toString());
+			System.out.println("Creating terminal");
 			//"private mode" is a separate buffer for the text content that does not support any scrolling.
 			terminal.enterPrivateMode();
 			terminal.clearScreen();
@@ -159,6 +170,7 @@ public class CLIMain implements LimView, Runnable{
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
+					System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
 					try {
 						if (!ratioSet){
 							ratioWidth = PREFERRED_WIDTH / newSize.getColumns();
@@ -216,6 +228,7 @@ public class CLIMain implements LimView, Runnable{
 		ActionSpace space;
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			space = ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+			space.setDiceRequirement(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getDiceRequired());
 			
 		} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 			//Market
@@ -230,11 +243,12 @@ public class CLIMain implements LimView, Runnable{
 			//Council
 			space = council;
 		}
-		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam - 1], space);
+		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam], space);
 		System.out.println(space.getDiceRequirement().getValue());
-		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getRelatedDice().getValue());
+		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam ]).getRelatedDice().getValue());
 		System.out.println(space.toString());
 		System.out.println("Action legal " + action.isLegal());
+		
 	}
 	
 	public void updateBoard(Board board){
@@ -253,17 +267,17 @@ public class CLIMain implements LimView, Runnable{
 	
 	private void analizeChar(Character c){
 		if (c == 'q' || c == 'Q'){
-			selectedFam = 1;
+			selectedFam = 0;
 		} else if (c == 'w' || c == 'W') {
-			selectedFam = 2;
+			selectedFam = 1;
 		} else if (c == 'e' || c == 'E') {
-			selectedFam = 3;
+			selectedFam = 2;
 		} else if (c == 'r' || c == 'R') {
-			selectedFam = 4;
+			selectedFam = 3;
 		} else if (c == '1') {
-			
+			selectedOpt = 0;
 		} else if (c == '2') {
-			
+			selectedOpt = 1;
 		}
 		
 	}
@@ -613,6 +627,7 @@ public class CLIMain implements LimView, Runnable{
 						);
 				try {
 					list = mapBoard.get(marketList.size());
+
 					list.add(new TerminalPosition((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16 +
 							(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/32,
 							6*height/16));
@@ -731,11 +746,11 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		int i = 0;
 		for (Familiar familiar : player.getFamilyList()){
-			i++;
+			
 			if (i == selectedFam && !familiar.isUsed()){
 				textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
 			}
-			
+			i++;
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, (familiar.isUsed() ? "-":"+") +
 					familiar.getColor().toString() + " " + 
 					familiar.getRelatedDice().getValue());
@@ -881,7 +896,6 @@ public class CLIMain implements LimView, Runnable{
 				3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 2 + width/8,
 				height/4+1,
 				textGraphics);
-		System.out.println(height);
 
 		if (inBoard){
 			if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
@@ -1037,7 +1051,6 @@ public class CLIMain implements LimView, Runnable{
 			infoOccupied(lastPos.getColumn(), lastPos.getRow(), textGraphics, ((ActionSpace)productionList.get(currentColBoard)));
 		} 
 		if (!productionList.get(currentColBoard).isOccupied() && productionList.get(currentColBoard).getEffects().size() != 0){
-			System.out.println("In");
 			for (Effect effect : productionList.get(currentColBoard).getEffects()){
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
@@ -1223,6 +1236,7 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Occupanti: ");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		System.out.println("size: " + council.getOccupantList().size());
 		for (Familiar fam : council.getOccupantList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					fam.getRelatedPlayer().getUsername());

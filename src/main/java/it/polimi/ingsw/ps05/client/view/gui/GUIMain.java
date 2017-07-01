@@ -14,8 +14,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
 
-import java.io.File;
-
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
 public class GUIMain extends Application {
@@ -27,7 +25,9 @@ public class GUIMain extends Application {
 	public static double stageWidth, stageHeight, resize;
 	public static final int ORIGINAL_WIDTH = 1120;
 
-	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
+	private FamiliarWidget[] thisPlayerFamiliarWidgetList = new FamiliarWidget[4];
+	private ColorEnumeration thisPlayerColor;
+	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
 	private GraphicResources map = new GraphicResources();
@@ -374,10 +374,26 @@ public class GUIMain extends Application {
 		this.excomWidgets = excomWidgets;
 	}
 
+    public ColorEnumeration getThisPlayerColor() {
+        return thisPlayerColor;
+    }
+
+    public void setThisPlayerColor(ColorEnumeration thisPlayerColor) {
+        this.thisPlayerColor = thisPlayerColor;
+    }
+
+    public FamiliarWidget[] getThisPlayerFamiliarWidgetList() {
+        return thisPlayerFamiliarWidgetList;
+    }
+
+    public void setThisPlayerFamiliarWidgetList(FamiliarWidget[] thisPlayerFamiliarWidgetList) {
+        this.thisPlayerFamiliarWidgetList = thisPlayerFamiliarWidgetList;
+    }
 
 
 
-	
+
+
 	/*
 		insertActionSpace(greenTowerSpace7, root, 7, 102, 66);
 		insertActionSpace(greenTowerSpace5, root, 5, 102, 177);
@@ -408,5 +424,7 @@ public class GUIMain extends Application {
 		faithBox.setLayoutX(580);
 		faithBox.setLayoutY(438);
 		*/
+
+
 }
 

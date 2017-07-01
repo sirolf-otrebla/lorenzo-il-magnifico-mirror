@@ -15,7 +15,6 @@ import java.awt.*;
 public class FamiliarWidget {
 
     public static final double FAMILIAR_MIN_SIZE = 40;
-    private int referenceID;
     private boolean isPlaced;
     private ImageView imageElement;
     private String imagePath;
@@ -83,5 +82,10 @@ public class FamiliarWidget {
     private void showAllowedActionSpaces() {
         //TODO: capire come mostrare gli spazi azione abilitati in base al valore del familiare e ai servitori del giocatore
     }
+
+    public ColorEnumeration getFamiliarColor() {
+        return FamiliarColor;
+    }
+
 
 }

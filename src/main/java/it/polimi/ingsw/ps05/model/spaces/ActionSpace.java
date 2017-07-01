@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
 
+import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.VisitableFromView;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace implements Serializable, VisitableFromView {
+public abstract class ActionSpace implements Serializable, VisitableFromView, ActionSpaceViewObject{
 
 	/**
 	 * 
@@ -104,7 +105,7 @@ public abstract class ActionSpace implements Serializable, VisitableFromView {
 		}
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -118,5 +119,9 @@ public abstract class ActionSpace implements Serializable, VisitableFromView {
 		return additionalOccupant;
 	}
 
-
+	public ColorEnumeration getFamilyMemberID(){
+		if (this.firstOccupant != null)
+			return this.firstOccupant.getColor();
+		return null;
+	}
 }
