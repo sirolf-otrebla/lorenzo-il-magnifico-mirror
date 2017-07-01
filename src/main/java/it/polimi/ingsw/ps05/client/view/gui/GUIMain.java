@@ -21,7 +21,9 @@ public class GUIMain extends Application {
 	TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
 	private VBox[] towerOccupationCircesArray = new VBox[4];
 	private VBox[] towerCardSpacesArray = new VBox[4];
-	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
+	private FamiliarWidget[] thisPlayerFamiliarWidgetList = new FamiliarWidget[4];
+	private ColorEnumeration thisPlayerColor;
+	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
 	private GraphicResources map = new GraphicResources();
@@ -330,6 +332,22 @@ public class GUIMain extends Application {
 
 	public void setExcomWidgets(ExcomWidget[] excomWidgets) {
 		this.excomWidgets = excomWidgets;
+	}
+
+	public ColorEnumeration getThisPlayerColor() {
+		return thisPlayerColor;
+	}
+
+	public void setThisPlayerColor(ColorEnumeration thisPlayerColor) {
+		this.thisPlayerColor = thisPlayerColor;
+	}
+
+	public FamiliarWidget[] getThisPlayerFamiliarWidgetList() {
+		return thisPlayerFamiliarWidgetList;
+	}
+
+	public void setThisPlayerFamiliarWidgetList(FamiliarWidget[] thisPlayerFamiliarWidgetList) {
+		this.thisPlayerFamiliarWidgetList = thisPlayerFamiliarWidgetList;
 	}
 }
 

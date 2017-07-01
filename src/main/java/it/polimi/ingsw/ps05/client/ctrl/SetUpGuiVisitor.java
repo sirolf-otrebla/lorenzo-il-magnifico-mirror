@@ -1,11 +1,9 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
-import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
-import it.polimi.ingsw.ps05.client.view.gui.MarketSpaceWidget;
-import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
+import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -26,6 +24,7 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
 
     @Override
     public void visit(GameStatus status) {
+        this.gui.setThisPlayerColor(status.getThisPlayer().getColor());
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {
@@ -87,6 +86,27 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
 
     @Override
     public void visit(Player player) {
+        if (this.gui.getThisPlayerColor() == player.getColor()){
+            int i = 0;
+            for (Familiar f: player.getFamilyList()) {
+                this.gui.getThisPlayerFamiliarWidgetList()[i] = new FamiliarWidget(player.getColor(), f.getColor());
+                i++;
+            }
+        }
+        else {
+
+            for (int j = 0; j < this.gui.getFamiliarWidgetLists().length; j++){
+                if (this.gui.getFamiliarWidgetLists()[j][0] == null){
+                    int i = 0;
+                    for (Familiar f: player.getFamilyList()) {
+                        this.gui.getFamiliarWidgetLists()[j][i] = new FamiliarWidget(player.getColor(), f.getColor());
+                        i++;
+                    }
+                    break;
+                }
+
+            }
+        }
 
         //TODO
     }

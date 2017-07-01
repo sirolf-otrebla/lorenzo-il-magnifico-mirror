@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
+import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -42,8 +43,13 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import javafx.scene.layout.VBox;
 
 public class CLIMain implements LimView, Runnable{
+
+
+	/* view objects */
+
 	int currentRowBoard = 0;
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;
@@ -110,6 +116,7 @@ public class CLIMain implements LimView, Runnable{
 		PREFERRED_HEIGHT = height.intValue();
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
+		System.out.println(width + ": " + height);
 		//trySys();
 	}
 
@@ -140,6 +147,8 @@ public class CLIMain implements LimView, Runnable{
 		defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(PREFERRED_WIDTH, PREFERRED_HEIGHT));
 		try {
 			terminal = defaultTerminalFactory.createTerminal();
+			System.out.println(terminal.getTerminalSize().toString());
+			System.out.println("Creating terminal");
 			//"private mode" is a separate buffer for the text content that does not support any scrolling.
 			terminal.enterPrivateMode();
 			terminal.clearScreen();
@@ -159,6 +168,7 @@ public class CLIMain implements LimView, Runnable{
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
+					System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
 					try {
 						if (!ratioSet){
 							ratioWidth = PREFERRED_WIDTH / newSize.getColumns();
@@ -613,6 +623,7 @@ public class CLIMain implements LimView, Runnable{
 						);
 				try {
 					list = mapBoard.get(marketList.size());
+
 					list.add(new TerminalPosition((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16 +
 							(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/32,
 							6*height/16));
