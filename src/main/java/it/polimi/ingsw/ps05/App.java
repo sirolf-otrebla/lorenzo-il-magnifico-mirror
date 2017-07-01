@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.database.Database;
 import it.polimi.ingsw.ps05.client.ctrl.LoginController;
 import it.polimi.ingsw.ps05.client.view.View;
+import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
 import it.polimi.ingsw.ps05.client.view.gui.Login;
 
 /**
@@ -20,9 +21,14 @@ public class App
 {
     public static void main( String[] args )
     {
-    	
+    	new Thread() {
+			@Override
+			public void run(){
+				javafx.application.Application.launch(GUIMain.class);
+			}
+		}.start();
     	//LoginController l = new LoginController();
-    	Scanner keyboard = new Scanner(System.in);
+    	/*Scanner keyboard = new Scanner(System.in);
     	
     	String string = new String("C");
     	while(!string.equals("C") && !string.equals("G")){
@@ -50,7 +56,7 @@ public class App
     	} else {
     		//istanzia la gui
     		view.instanceGUI();
-    	}
+    	}*/
     }
 }
 

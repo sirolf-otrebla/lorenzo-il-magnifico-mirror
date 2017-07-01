@@ -8,6 +8,8 @@ import javafx.scene.input.*;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
 
 /**
  * Created by miotto on 28/06/17.
@@ -28,11 +30,36 @@ public class FamiliarWidget {
     }
 
     public FamiliarWidget(String path) {
-        Image i = new Image(path, FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
-        imageElement = new ImageView();
-        imageElement.setImage(i);
+    	System.out.println(path);
+    	File crDir = new File(path);
+    	System.out.println(crDir.exists());
+    	//getAllFile(crDir);
+    	try{
+    		
+    		Image i = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+            imageElement = new ImageView();
+            imageElement.setImage(i);
+    	} catch (IllegalArgumentException e){
+    		e.printStackTrace();
+    	} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 
         setupGestureSource();
+    }
+    
+    private void getAllFile(File crDir){
+    	File[] fileList = crDir.listFiles();
+    	for (File f : fileList){
+    		if (f.isDirectory()){
+    			getAllFile(f);
+    		}
+    		if (f.isFile()){
+    			System.out.println(f.getPath());
+    		}
+    	}
     }
 
     void setupGestureSource() {

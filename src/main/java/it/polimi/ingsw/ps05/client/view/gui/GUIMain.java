@@ -24,6 +24,7 @@ public class GUIMain extends Application {
 
 	public static double stageWidth, stageHeight, resize;
 	public static final int ORIGINAL_WIDTH = 1120;
+	private static final String path = "./src/main/res/img/";
 
 	private FamiliarWidget[] thisPlayerFamiliarWidgetList = new FamiliarWidget[4];
 	private ColorEnumeration thisPlayerColor;
@@ -60,8 +61,6 @@ public class GUIMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 
-		System.out.println(System.getProperty("user.dir"));
-
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		double screenWidth = primaryScreenBounds.getWidth();
 		double screenHeight = primaryScreenBounds.getHeight();
@@ -96,6 +95,10 @@ public class GUIMain extends Application {
 		root.prefHeightProperty().bind(stage.heightProperty());
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
+		
+		for (int i = 0; i < 4; i++){
+			towerCardSpacesArray[i] = new VBox();
+		}
 
         /* Adding playable familiars */
         /*
@@ -109,7 +112,8 @@ public class GUIMain extends Application {
 			j++;
 		}
 		*/
-		insertDraggableFamiliar(familiarWidgetLists[0][0] = new FamiliarWidget("../res/img/redpl/black.png"), root, 66.07, 21.87);
+		familiarWidgetLists[0][0] = new FamiliarWidget(path + "redpl/black.png");
+		insertDraggableFamiliar(familiarWidgetLists[0][0], root, 66.07, 21.87);
 		/*
 		insertDraggableFamiliar(familiarWidgetLists[0][1] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/white.png"), root, 70.5357, 21.87);
 		insertDraggableFamiliar(familiarWidgetLists[0][2] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/orange.png"), root, 75, 21.87);
@@ -126,6 +130,7 @@ public class GUIMain extends Application {
 				widget = new TowerTileWidget(2*i + 1);
 				i++;
 				towerOccupationCirclesArray[j].getChildren().add(widget.getOccupationCircle());
+				//XXX eccezione in questa riga, ho popolato towerCardSpacesArray, ma widget non ha nessuna carta
 				towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
 			}
 			j++;
@@ -166,7 +171,7 @@ public class GUIMain extends Application {
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
-				playerMarker = new MarkerWidget("../res/img/marker-"
+				playerMarker = new MarkerWidget(path + "marker-"
 						+ map.playerColorMap.get(j) + ".png");
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
