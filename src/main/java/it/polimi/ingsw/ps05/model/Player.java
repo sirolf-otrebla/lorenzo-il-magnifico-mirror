@@ -161,19 +161,19 @@ public class Player implements PlayerRelated {
 	}
 
     public void addBlueCard(BlueCard card){
-    	blueCardHashMap.put(card.getReferenceID(), card);
+    	blueCardHashMap.put(card.getId(), card);
     }
 
     public void addGreenCard(GreenCard card){
-    	greenCardHashMap.put(card.getReferenceID(), card);
+    	greenCardHashMap.put(card.getId(), card);
     }
 
     public void addYellowCard(YellowCard card){
-    	yellowCardHashMap.put(card.getReferenceID(),card);
+    	yellowCardHashMap.put(card.getId(),card);
     }
 
     public void addVioletCard(VioletCard card){
-    	violetCardHashMap.put(card.getReferenceID(), card);
+    	violetCardHashMap.put(card.getId(), card);
     }
 
 	public BonusTile getBonusTile() {

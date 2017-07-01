@@ -24,16 +24,16 @@ public class YellowCard extends TowerCard {
 
 
 	
-	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects, Integer id) {
+		super(epoch, color, cardName, effects, id);
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
 		selectedEffects = new int[activableEffectList.size()];
 	}
 
 	public YellowCard(Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
-			ArrayList<Effect> effects) {
-		super(epoch, color, cardName, requirements, effects);
+			ArrayList<Effect> effects, Integer id) {
+		super(epoch, color, cardName, requirements, effects, id);
 
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);

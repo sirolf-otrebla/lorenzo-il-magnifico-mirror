@@ -25,24 +25,22 @@ public abstract class TowerCard implements Card {
 	private static int counter = 0;
 	private Integer referenceID;
 
-	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
+	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects, Integer id) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
 		this.requirements = requirements;
 		this.effects = effects;
-		this.referenceID = counter;
-		counter++;
+		this.referenceID = id;
 	}
 	
-	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
+	public TowerCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects, Integer id) {
 		this.epoch = epoch;
 		this.color = color;
 		this.cardName = cardName;
 		this.effects = effects;
 		this.requirements = new ArrayList<ArrayList<Resource>>();
-		this.referenceID = counter;
-		counter++;
+		this.referenceID = id;
 	}
 	
 	public TowerCard(){
@@ -101,8 +99,8 @@ public abstract class TowerCard implements Card {
 			}
 		}
 	}
-
-	public Integer getReferenceID() {
+	@Override
+	public Integer getId() {
 		return referenceID;
 	}
 

@@ -32,8 +32,8 @@ public class GreenCard extends TowerCard {
 	private int[] selectedEffects;
 
 
-	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects){
-		super(epoch, color, cardName, requirements, effects);
+	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects, Integer id){
+		super(epoch, color, cardName, requirements, effects, id);
 
 		// NOTE: THIS IS ONLY A PROVISIONAL WORKAROUND. NEED TO CHANGE JSON.
 		for (Effect a: effects)
@@ -75,8 +75,8 @@ public class GreenCard extends TowerCard {
 		this.toBeActivated = toBeActivated;
 	}
 
-	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
-		super(epoch, color, cardName, effects);
+	public GreenCard(Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects, Integer id) {
+		super(epoch, color, cardName, effects, id);
 	}
 
 	@Override
