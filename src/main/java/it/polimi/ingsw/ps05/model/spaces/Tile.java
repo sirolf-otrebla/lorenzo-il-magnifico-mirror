@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -15,14 +15,13 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public class Tile extends SingleOccupantActionSpace implements TowerTileInterface {
+public class Tile extends TowerTileInterface {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1979532547287923081L;
 	private Tower parentTower;
     private TowerCard card;
-    private Dice diceRequirement;
 
     public static final int TOWER_OCCUPIED_PAYMENT = 3;
     
@@ -39,26 +38,19 @@ public class Tile extends SingleOccupantActionSpace implements TowerTileInterfac
     	super();
     	this.parentTower = parentTower;
     	this.card = card;
-    	this.diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
-    	super.setDiceRequirement(this.diceRequirement);
+    	super.setDiceRequirement( new Dice(ColorEnumeration.Any, diceRequired));
     }
     
-    @Override
-    public void setDiceRequired(Integer diceRequired){
-    	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
-    	super.setDiceRequirement(diceRequirement);
-    }
-    
-    @Override
-    public Dice getDiceRequired(){
-    	
-        return this.diceRequirement;
-    }
     @Override
     public Tower getParentTower(){
         return this.parentTower;
     }
-    
+
+    @Override
+    public void setDiceRequired(Integer dice) {
+        super.setDiceRequirement(new Dice(ColorEnumeration.Any, dice));
+    }
+
     @Override
     public void setParentTower(Tower parentTower){
     	this.parentTower = parentTower;
@@ -80,7 +72,7 @@ public class Tile extends SingleOccupantActionSpace implements TowerTileInterfac
         // ADDS DICE REQUIREMENT
        ArrayList<ArrayList<Resource>> req = card.getRequirements();
        for (ArrayList<Resource> andAlternative: req)
-           andAlternative.add(diceRequirement);
+           andAlternative.add(super.getDiceRequirement());
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;
        if (parentTower.isOccupied())
            for (ArrayList<Resource> andAlternative: req)
@@ -105,12 +97,17 @@ public class Tile extends SingleOccupantActionSpace implements TowerTileInterfac
 	}
 
     @Override
-    public void acceptVisitor(UpdateViewVisitor vi) {
+    public Dice getDiceRequired() {
+        return super.getDiceRequirement();
+    }
+
+    @Override
+    public void acceptVisitor(ViewVisitorInterface vi) {
 
     }
     
     @Override
     public String toString(){
-    	return "Tower " + parentTower.getColor().toString() + " T. " + diceRequirement.getValue();
+    	return "Tower " + parentTower.getColor().toString() + " T. " + getDiceRequired().getValue();
     }
 }

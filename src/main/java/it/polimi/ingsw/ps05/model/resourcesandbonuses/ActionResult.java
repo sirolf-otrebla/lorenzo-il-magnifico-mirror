@@ -17,5 +17,8 @@ public interface ActionResult extends Serializable {
 
     public Game getGame();
 
+    @Override
+    public String toString();
+
 
 }

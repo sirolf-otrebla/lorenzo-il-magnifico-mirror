@@ -6,7 +6,6 @@ import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import javafx.util.Pair;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 /**
  * Created by Alberto on 30/06/2017.
  */
-public class UpdateViewVisitor {
+public class UpdateViewVisitor implements ViewVisitorInterface{
     private HashMap<Integer, ActionSpaceWidget> actionSpaceWidgetHashMap;
     private GUIMain guiMain;
     private Client client;
@@ -31,11 +30,13 @@ public class UpdateViewVisitor {
                 actionSpaceWidgetHashMap.put(tileWidget.getId(), tileWidget);
     }
 
+    @Override
     public void visit(GameStatus status){
 
 
     }
 
+    @Override
     public void visit(Board board){
         for (ActionSpace actionSpace:
                 board.getActSpacesMap().values()) {
@@ -47,6 +48,8 @@ public class UpdateViewVisitor {
 
 
     }
+
+    @Override
     public void visit(Tile tile){
         TowerTileWidget widget = (TowerTileWidget) actionSpaceWidgetHashMap.get(tile.getId());
         if (tile.isOccupied()){
@@ -66,6 +69,7 @@ public class UpdateViewVisitor {
         }
     }
 
+    @Override
     public void visit(MarketSpace marketSpace){
         MarketSpaceWidget widget = (MarketSpaceWidget) actionSpaceWidgetHashMap.get(marketSpace.getId());
         if (marketSpace.isOccupied()){
@@ -76,6 +80,7 @@ public class UpdateViewVisitor {
 
     }
 
+    @Override
     public void visit(CouncilSpace councilSpace){
         CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
@@ -84,6 +89,7 @@ public class UpdateViewVisitor {
 
     }
 
+    @Override
     public void visit(ProductionSpace productionSpace){
         ProductionSpaceWidget widget = (ProductionSpaceWidget) actionSpaceWidgetHashMap.get(productionSpace.getId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(productionSpace);
@@ -94,6 +100,7 @@ public class UpdateViewVisitor {
 
     }
 
+    @Override
     public void visit(HarvestingSpace harvestingSpace){
 
         ProductionSpaceWidget widget = (ProductionSpaceWidget) actionSpaceWidgetHashMap.get(harvestingSpace.getId());
@@ -103,8 +110,14 @@ public class UpdateViewVisitor {
 
     }
 
+    @Override
     public void visit(Player player){
 
+
+    }
+
+    @Override
+    public void visit(Tower tower) {
 
     }
 

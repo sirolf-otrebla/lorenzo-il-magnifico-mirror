@@ -14,7 +14,6 @@ public enum ColorEnumeration implements Serializable  {
 	Any("Neutral"),
 	Ghost("Ghost"),
 	NOT_INITIALIZED("Nessuno");
-	
 	private final String color;
 	
 	private ColorEnumeration(String color){

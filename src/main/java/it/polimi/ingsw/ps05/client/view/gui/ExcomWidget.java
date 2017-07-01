@@ -33,4 +33,11 @@ public class ExcomWidget {
         });
     }
 
+    public int getReferenceID() {
+        return referenceID;
+    }
+
+    public void setReferenceID(int referenceID) {
+        this.referenceID = referenceID;
+    }
 }

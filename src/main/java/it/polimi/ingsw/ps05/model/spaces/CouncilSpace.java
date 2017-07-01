@@ -4,7 +4,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.util.*;
 
-import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -96,7 +96,8 @@ public class CouncilSpace extends MultipleOccupantsActionSpace {
 	}
 
 	@Override
-	public void acceptVisitor(UpdateViewVisitor vi) {
+	public void acceptVisitor(ViewVisitorInterface vi) {
 
 	}
+
 }

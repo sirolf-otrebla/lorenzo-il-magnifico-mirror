@@ -23,8 +23,13 @@ public class GUIMain extends Application {
 	private VBox[] towerCardSpacesArray = new VBox[4];
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
+	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
 	private GraphicResources map = new GraphicResources();
-
+	private Integer[] faithPath = new Integer[16];
+	private Integer[] militaryPath = new Integer[6];
+	private Integer[] greenCardsConversion = new Integer[6];
+	private Integer[] blueCardsConversion = new  Integer[6];
+	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
 	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(2);
@@ -283,5 +288,48 @@ public class GUIMain extends Application {
 
 	}
 
+	public CouncilSpaceWidget getCouncilSpaceWidget() {
+		return councilSpaceWidget;
+	}
+
+	public Integer[] getFaithPath() {
+		return faithPath;
+	}
+
+	public void setFaithPath(Integer[] faithPath) {
+		this.faithPath = faithPath;
+	}
+
+	public Integer[] getMilitaryPath() {
+		return militaryPath;
+	}
+
+	public void setMilitaryPath(Integer[] militaryPath) {
+		this.militaryPath = militaryPath;
+	}
+
+	public Integer[] getGreenCardsConversion() {
+		return greenCardsConversion;
+	}
+
+	public void setGreenCardsConversion(Integer[] greenCardsConversion) {
+		this.greenCardsConversion = greenCardsConversion;
+	}
+
+	public Integer[] getBlueCardsConversion() {
+		return blueCardsConversion;
+	}
+
+	public void setBlueCardsConversion(Integer[] blueCardsConversion) {
+		this.blueCardsConversion = blueCardsConversion;
+	}
+
+	public ExcomWidget[] getExcomWidgets() {
+		return excomWidgets;
+	}
+
+	public void setExcomWidgets(ExcomWidget[] excomWidgets) {
+		this.excomWidgets = excomWidgets;
+	}
 }
 
