@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+
 /**
  * Created by miotto on 28/06/17.
  */
@@ -21,7 +23,7 @@ public class FamiliarWidget {
     }
 
     public FamiliarWidget(String path) {
-        Image i = new Image(path, FAMILIAR_MIN_SIZE, FAMILIAR_MIN_SIZE, true, true);
+        Image i = new Image(path, FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
         imageElement = new ImageView();
         imageElement.setImage(i);
 

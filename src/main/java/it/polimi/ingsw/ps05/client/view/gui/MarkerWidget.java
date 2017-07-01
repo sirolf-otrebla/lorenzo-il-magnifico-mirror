@@ -8,6 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+
 /**
  * Created by miotto on 28/06/17.
  */
@@ -24,14 +27,14 @@ public class MarkerWidget {
 
     public MarkerWidget() {
 
-        markerCircle = new Circle(MARKER_RADIUS);
+        markerCircle = new Circle(MARKER_RADIUS * resize);
 
         points = new Text(new String(String.valueOf(INITIAL_POINTS)));
         points.setFont(Font.loadFont("file:source/resources/fonts/im-fell-french-canon.ttf", 10));
         points.setBoundsType(TextBoundsType.VISUAL); // Calculate text bounds basing on visuals
 
         stack = new StackPane();
-        stack.setMinSize(2 * MARKER_RADIUS, 2 * MARKER_RADIUS);
+        stack.setMinSize(2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize);
         stack.getChildren().addAll(markerCircle, points);
 
     }
@@ -39,8 +42,8 @@ public class MarkerWidget {
     public MarkerWidget(String backgroundPath) {
 
         imagePath = backgroundPath;
-        Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS, 2 * MARKER_RADIUS, true, true);
-        markerCircle = new Circle(MARKER_RADIUS);
+        Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize, true, true);
+        markerCircle = new Circle(MARKER_RADIUS * resize);
         markerCircle.setFill(new ImagePattern(markerImage));
 
         points = new Text(new String(String.valueOf(INITIAL_POINTS))); //TODO: controllare come si può fare meglio la trasformazione
@@ -48,14 +51,14 @@ public class MarkerWidget {
         points.setBoundsType(TextBoundsType.VISUAL); // Calculate text bounds basing on visuals
 
         stack = new StackPane();
-        stack.setMinSize(2 * MARKER_RADIUS, 2 * MARKER_RADIUS);
+        stack.setMinSize(2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize);
         stack.getChildren().addAll(markerCircle, points);
 
     }
 
     public void addImage(String imagePath) {
         this.imagePath = imagePath;
-        Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS, 2 * MARKER_RADIUS, true, true);
+        Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize, true, true);
         markerCircle.setFill(new ImagePattern(markerImage));
     }
 

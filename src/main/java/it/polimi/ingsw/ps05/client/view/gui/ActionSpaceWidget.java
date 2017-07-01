@@ -9,6 +9,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 
 public class ActionSpaceWidget {
@@ -27,7 +28,7 @@ public class ActionSpaceWidget {
     }
 
     public ActionSpaceWidget(int minimumDie) {
-        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
+        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
         occupied = false;
         minDie = minimumDie;
     }

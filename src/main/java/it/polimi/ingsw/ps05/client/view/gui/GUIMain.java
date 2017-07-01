@@ -2,23 +2,24 @@ package it.polimi.ingsw.ps05.client.view.gui;
 
 
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.*;
-
-import java.util.ArrayList;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
 public class GUIMain extends Application {
 
 	private Stage stage;
+
+	public static double stageWidth, stageHeight, resize;
+	public static final int ORIGINAL_WIDTH = 1120;
 
 	private GraphicMap map = new GraphicMap();
 
@@ -28,7 +29,7 @@ public class GUIMain extends Application {
 	private FamiliarWidget redFamiliar_neutral = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/neutral.png");
 
 	private TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
-	private final VBox[] towerOccupationCircesArray = new VBox[4];
+	private final VBox[] towerOccupationCirclesArray = new VBox[4];
 	private final VBox[] towerCardSpacesArray = new VBox[4];
 
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget();
@@ -73,72 +74,101 @@ public class GUIMain extends Application {
 
 		int i = 0, j = 0;
 
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		double screenWidth = primaryScreenBounds.getWidth();
+		double screenHeight = primaryScreenBounds.getHeight();
+		double screenRatio = screenWidth / screenHeight;
+
 		stage = primaryStage;
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
 
+		/* Setting window size */
+		if(screenRatio <= 1.75) {
+			stage.setX(primaryScreenBounds.getMinX());
+			stage.setWidth(primaryScreenBounds.getWidth());
+			stage.setHeight(primaryScreenBounds.getWidth() / 1.75);
+			this.stageWidth = primaryScreenBounds.getWidth();
+			this.stageHeight = stageWidth / 1.75;
+		} else {
+			stage.setY(primaryScreenBounds.getMinY());
+			stage.setHeight(primaryScreenBounds.getHeight());
+			stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
+			this.stageHeight = primaryScreenBounds.getHeight();
+			this.stageWidth = stageHeight * 1.75;
+		}
+		resize = this.stageWidth / ORIGINAL_WIDTH;
+
 		final Pane root = new Pane();
 		root.setId("root");
-		root.setMinSize(1120, 640);
 
-		final Pane board = new AnchorPane();
-		board.setId("board");
-		board.setMinSize(1120,640);
-
-
-		root.getChildren().add(board);
+		root.minWidthProperty().bind(stage.widthProperty());
+		root.minHeightProperty().bind(stage.heightProperty());
+		root.prefWidthProperty().bind(stage.widthProperty());
+		root.prefHeightProperty().bind(stage.heightProperty());
+		root.maxWidthProperty().bind(stage.widthProperty());
+		root.maxHeightProperty().bind(stage.heightProperty());
 
         /* Adding playable familiars */
-		insertDraggableFamiliar(redFamiliar_black, board, 740, 140);
-		insertDraggableFamiliar(redFamiliar_white, board, 790, 140);
-		insertDraggableFamiliar(redFamiliar_orange, board, 840, 140);
-		insertDraggableFamiliar(redFamiliar_neutral, board, 890, 140);
+		insertDraggableFamiliar(redFamiliar_black, root, 66.07, 21.87);
+		insertDraggableFamiliar(redFamiliar_white, root, 70.5357, 21.87);
+		insertDraggableFamiliar(redFamiliar_orange, root, 75, 21.87);
+		insertDraggableFamiliar(redFamiliar_neutral, root, 79.4643, 21.87);
 
         /* Adding tower action spaces */
         i = 0;
         j = 0;
 		for (TowerTileWidget[] tower: this.towerTileWidgetList) {
-			this.towerOccupationCircesArray[j] = new VBox(111 - FAMILIAR_MIN_SIZE);
+			this.towerOccupationCirclesArray[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
+			towerOccupationCirclesArray[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
 			for (TowerTileWidget widget : tower) {
-				widget = new TowerTileWidget(2*i +1);
+				widget = new TowerTileWidget(2*i + 1);
 				i++;
-				towerOccupationCircesArray[j].getChildren().add(widget.getOccupationCircle());
+				towerOccupationCirclesArray[j].getChildren().add(widget.getOccupationCircle());
 				towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
 			}
 			j++;
 		}
 
-		/*
-		insertActionSpace(greenTowerSpace7, board, 7, 102, 66);
-		insertActionSpace(greenTowerSpace5, board, 5, 102, 177);
-		insertActionSpace(greenTowerSpace3, board, 3, 102, 287);
-		insertActionSpace(greenTowerSpace1, board, 1, 102, 398);
+		//TODO aggiungere binding
+		towerOccupationCirclesArray[0].setLayoutX(stageWidth * 0.091071); // green tower
+		towerOccupationCirclesArray[1].setLayoutX(stageWidth * 0.2); // blue tower
+		towerOccupationCirclesArray[2].setLayoutX(stageWidth * 0.309821); // yellow tower
+		towerOccupationCirclesArray[3].setLayoutX(stageWidth * 0.41875); // violet tower
 
-		insertActionSpace(blueTowerSpace7, board, 7, 224, 66);
-		insertActionSpace(blueTowerSpace5, board, 5, 224, 177);
-		insertActionSpace(blueTowerSpace3, board, 3, 224, 287);
-		insertActionSpace(blueTowerSpace1, board, 1, 224, 398);
+		/* righe mantenute perché contengono le coordinate dei posti azione
 
-		insertActionSpace(yellowTowerSpace7, board, 7, 347, 66);
-		insertActionSpace(yellowTowerSpace5, board, 5, 347, 177);
-		insertActionSpace(yellowTowerSpace3, board, 3, 347, 287);
-		insertActionSpace(yellowTowerSpace1, board, 1, 347, 398);
+		insertActionSpace(greenTowerSpace7, root, 7, 102, 66);
+		insertActionSpace(greenTowerSpace5, root, 5, 102, 177);
+		insertActionSpace(greenTowerSpace3, root, 3, 102, 287);
+		insertActionSpace(greenTowerSpace1, root, 1, 102, 398);
 
-		insertActionSpace(violetTowerSpace7, board, 7, 469, 66);
-		insertActionSpace(violetTowerSpace5, board, 5, 469, 177);
-		insertActionSpace(violetTowerSpace3, board, 3, 469, 287);
-		insertActionSpace(violetTowerSpace1, board, 1, 469, 398);
+		insertActionSpace(blueTowerSpace7, root, 7, 224, 66);
+		insertActionSpace(blueTowerSpace5, root, 5, 224, 177);
+		insertActionSpace(blueTowerSpace3, root, 3, 224, 287);
+		insertActionSpace(blueTowerSpace1, root, 1, 224, 398);
+
+		insertActionSpace(yellowTowerSpace7, root, 7, 347, 66);
+		insertActionSpace(yellowTowerSpace5, root, 5, 347, 177);
+		insertActionSpace(yellowTowerSpace3, root, 3, 347, 287);
+		insertActionSpace(yellowTowerSpace1, root, 1, 347, 398);
+
+		insertActionSpace(violetTowerSpace7, root, 7, 469, 66);
+		insertActionSpace(violetTowerSpace5, root, 5, 469, 177);
+		insertActionSpace(violetTowerSpace3, root, 3, 469, 287);
+		insertActionSpace(violetTowerSpace1, root, 1, 469, 398);
+
 		*/
 
         /* Adding market action spaces */
-		insertActionSpace(goldMarketSpace, board, 1, 317, 513); // gold
-		insertActionSpace(servantsMarketSpace, board, 1, 371, 513); // servants
-		insertActionSpace(militaryMarketSpace, board, 1, 423, 529); // military + gold
-		insertActionSpace(privilegesMarketSpace, board, 1, 462, 568); // privileges
+		insertActionSpace(goldMarketSpace, root, 1, 28.3036, 80.1562); // gold
+		insertActionSpace(servantsMarketSpace, root, 1, 33.125, 80.1562); // servants
+		insertActionSpace(militaryMarketSpace, root, 1, 37.7679, 82.6562); // military + gold
+		insertActionSpace(privilegesMarketSpace, root, 1, 41.25, 88.75); // privileges
 
         /* Adding harvest and production action spaces */
-		insertActionSpace(productionSpace, board, 1, 31, 528); // production
-		insertActionSpace(harvestingSpace, board, 1, 31, 599); // harvest
+		insertActionSpace(productionSpace, root, 1, 2.7679, 82.5); // production
+		insertActionSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
 
 		/* Adding tower cards */
 		//TODO
@@ -148,9 +178,12 @@ public class GUIMain extends Application {
 		j = 0;
 
         for (MarkerWidget[] track: this.markerWidgetList) {
-			if(i < 2) this.trackBoxesArray[i] = new HBox(20);
-			else this.trackBoxesArray[i] = new VBox(20);
-			board.getChildren().add(this.trackBoxesArray[i]);
+			if(i < 2) {
+				this.trackBoxesArray[i] = new HBox(20);
+			} else {
+				this.trackBoxesArray[i] = new VBox(20);
+			}
+			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
 				playerMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-"
 						+ map.playerColorMap.get(j) + ".png");
@@ -158,6 +191,29 @@ public class GUIMain extends Application {
 				j++;
 			}
 		}
+
+		/****** MODO 1 ******/
+		// Faith markers
+		this.trackBoxesArray[1].setLayoutX((51.7857 / 100) * stageWidth);
+		this.trackBoxesArray[1].setLayoutY((68.4375 / 100) * stageHeight);
+		// Military markers
+		this.trackBoxesArray[2].setLayoutX((47.9464 / 100) * stageWidth);
+		this.trackBoxesArray[2].setLayoutY((15.3125 / 100) * stageHeight);
+		// Victory markers
+		this.trackBoxesArray[3].setLayoutX((60.2679 / 100) * stageWidth);
+		this.trackBoxesArray[3].setLayoutY((15.3125 / 100) * stageHeight);
+
+		/****** MODO 2 (binding) ******/
+		// Faith markers
+		//this.trackBoxesArray[1].layoutXProperty().bind(stage.widthProperty().multiply(51.7857 / 100));
+		//this.trackBoxesArray[1].layoutYProperty().bind(stage.heightProperty().multiply(68.4375 / 100));
+		// Military markers
+		//this.trackBoxesArray[2].layoutXProperty().bind(stage.widthProperty().multiply(47.9464 / 100));
+		//this.trackBoxesArray[2].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
+		// Victory markers
+		//this.trackBoxesArray[3].layoutXProperty().bind(stage.widthProperty().multiply(60.2679 / 100));
+		//this.trackBoxesArray[3].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
+
 
 		/*
 		militaryBox.setLayoutX(537);
@@ -171,29 +227,37 @@ public class GUIMain extends Application {
 		*/
 
 		/* Adding player buttons */
-		final HBox commands = new HBox(50);
+		final HBox commands = new HBox(50 * resize);
 		final Button showCardsButton = new Button("Carte sviluppo");
 		final Button showLeaderButton = new Button("Carte Leader");
 		commands.getChildren().addAll(showCardsButton, showLeaderButton);
-		commands.setLayoutX(770);
-		commands.setLayoutY(60);
-		board.getChildren().add(commands);
 
+		/****** MODO 1 ******/
+		commands.setLayoutX((68.75 / 100) * stageWidth);
+		commands.setLayoutY((9.375 / 100) * stageHeight);
+		/****** MODO 2 (meglio) ******/
+		//commands.layoutXProperty().bind(stage.widthProperty().multiply(68.75 / 100));
+		//commands.layoutYProperty().bind(stage.heightProperty().multiply(9.375 / 100));
 
-		board.maxWidthProperty().bind(stage.widthProperty());
-		board.maxHeightProperty().bind(stage.heightProperty());
+		root.getChildren().add(commands);
 
-		Scene mainScene = new Scene(root, 1120, 640);
+		/*
+		root.maxWidthProperty().bind(stage.widthProperty());
+		root.maxHeightProperty().bind(stage.heightProperty());
+		*/
+
+		Scene mainScene = new Scene(root);
 		mainScene.getStylesheets().addAll(this.getClass().getResource("style-prova.css").toExternalForm());
 
 		stage.setScene(mainScene);
+		stage.sizeToScene();
 		stage.show();
 	}
 
-	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double x, double y) {
+	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double percX, double percY) {
 
-		familiar.getImageElement().setX(x);
-		familiar.getImageElement().setY(y);
+		familiar.getImageElement().setX(percX * stageWidth);
+		familiar.getImageElement().setY(percY * stageHeight);
 
 		familiar.setupGestureSource();
 
@@ -201,11 +265,11 @@ public class GUIMain extends Application {
 
 	}
 
-	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double x, double y) {
+	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double percX, double percY) {
 
 		actionSpace.getOccupationCircle().setRadius(20);
-		actionSpace.getOccupationCircle().setCenterX(x);
-		actionSpace.getOccupationCircle().setCenterY(y);
+		actionSpace.getOccupationCircle().setCenterX(percX * stageWidth);
+		actionSpace.getOccupationCircle().setCenterY(percY * stageHeight);
 		actionSpace.getOccupationCircle().setFill(Color.TRANSPARENT);
 
 		actionSpace.setupGestureTarget();
