@@ -94,7 +94,7 @@ public class Action implements Period {
 		//position.applyNonActivableEffects moves the card (if there is any;
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);
-		this.position.applyEffect();
+		this.position.applyEffect(this.familiar);
 		
 	}
 

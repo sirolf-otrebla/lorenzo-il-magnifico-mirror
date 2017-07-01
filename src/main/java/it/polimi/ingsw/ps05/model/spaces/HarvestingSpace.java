@@ -3,6 +3,9 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
 import it.polimi.ingsw.ps05.model.Player;
@@ -16,11 +19,12 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  * 
  * further comments will be added
  */
-public class HarvestingSpace extends ActionSpaceWithEffect {
+public class HarvestingSpace extends MultipleOccupantsActionSpace {
 
 	/**
 	 * 
 	 */
+	private boolean moreThanZeroOccupants = false;
 	private static final long serialVersionUID = -7499949449184129806L;
 	private ArrayList<Effect> effectList;
 
@@ -30,11 +34,16 @@ public class HarvestingSpace extends ActionSpaceWithEffect {
 	}
 
 	@Override
-	public void applyEffect() {
-		Player player = this.getOccupant().getRelatedPlayer();
+	public void applyEffect(Familiar pl) {
+		Player player = pl.getRelatedPlayer();
 		Iterator<GreenCard> cardListIt = player.getGreenCardList().iterator();
 		while (cardListIt.hasNext())
-			cardListIt.next().applyHarvestableEffects(this.getOccupant());
+			cardListIt.next().applyHarvestableEffects(pl);
+		if (!moreThanZeroOccupants){
+			moreThanZeroOccupants = true;
+			this.setDiceRequirement(new Dice(ColorEnumeration.Any, this.getDiceRequirement().getValue() + 3));
+		}
+		this.getOccupantList().add(pl);
 
 	}
 
@@ -52,5 +61,10 @@ public class HarvestingSpace extends ActionSpaceWithEffect {
 		super();
 		super.setDiceRequirement(diceRequired);
 		this.effectList = effectList;
+	}
+
+	@Override
+	public void acceptVisitor(UpdateViewVisitor vi) {
+
 	}
 }

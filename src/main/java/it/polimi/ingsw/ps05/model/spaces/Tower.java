@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
@@ -83,7 +83,7 @@ public abstract class Tower implements Serializable, Visitable {
 
 
 	@Override
-	public void acceptVisitor(updateViewVisitor vi) {
+	public void acceptVisitor(UpdateViewVisitor vi) {
 
 	}
 	

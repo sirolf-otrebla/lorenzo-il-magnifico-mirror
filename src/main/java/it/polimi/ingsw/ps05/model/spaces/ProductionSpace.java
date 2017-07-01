@@ -3,10 +3,10 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -18,11 +18,13 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  * 
  * further comments will be added
  */
-public class ProductionSpace extends ActionSpaceWithEffect {
+public class ProductionSpace extends MultipleOccupantsActionSpace {
 
 	/**
 	 * 
 	 */
+
+	private boolean moreThanZeroOccupants = false;
 	private static final long serialVersionUID = -5391097080685286028L;
 	public ProductionSpace() {
 		super();
@@ -52,17 +54,20 @@ public class ProductionSpace extends ActionSpaceWithEffect {
     }
 
     @Override
-    public void applyEffect() {
-        Player player = this.getOccupant().getRelatedPlayer();
-        Iterator<YellowCard> cardListIt = player.getYellowCardList().iterator();
+    public void applyEffect(Familiar pl) {
+        Iterator<YellowCard> cardListIt = pl.getRelatedPlayer().getYellowCardList().iterator();
         while (cardListIt.hasNext())
-            cardListIt.next().applyProductionEffects(this.getOccupant());
-
+            cardListIt.next().applyProductionEffects(pl);
+        if (!moreThanZeroOccupants){
+        	moreThanZeroOccupants = true;
+        	this.setDiceRequirement(new Dice(ColorEnumeration.Any, this.getDiceRequirement().getValue() + 3));
+		}
+		this.getOccupantList().add(pl);
 
     }
 
 	@Override
-	public void acceptVisitor(updateViewVisitor vi) {
+	public void acceptVisitor(UpdateViewVisitor vi) {
 
 	}
 }

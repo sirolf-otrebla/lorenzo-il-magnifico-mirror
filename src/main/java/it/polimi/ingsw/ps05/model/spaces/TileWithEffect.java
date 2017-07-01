@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
@@ -93,12 +95,17 @@ public class TileWithEffect extends ActionSpaceWithEffect implements TowerTileIn
 	}
 
 	@Override
-	public void applyEffect() {
-		toBeDecorated.applyEffect();
+	public void applyEffect(Familiar pl) {
+		toBeDecorated.applyEffect(pl);
 	}
 
 	@Override
 	public void removeTowerCard() {
 		toBeDecorated.removeTowerCard();
+	}
+
+	@Override
+	public void acceptVisitor(UpdateViewVisitor vi) {
+
 	}
 }

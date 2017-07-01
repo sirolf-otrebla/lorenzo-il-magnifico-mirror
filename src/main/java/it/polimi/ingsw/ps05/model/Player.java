@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.cards.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.OnePerTurnEffect;
@@ -262,7 +262,7 @@ public class Player implements PlayerRelated, Visitable {
 	}
 
 	@Override
-	public void acceptVisitor(updateViewVisitor vi) {
+	public void acceptVisitor(UpdateViewVisitor vi) {
 
 	}
 }

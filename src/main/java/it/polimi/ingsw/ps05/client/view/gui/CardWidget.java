@@ -7,19 +7,24 @@ import javafx.scene.input.MouseEvent;
 /**
  * Created by miotto on 27/06/17.
  */
+
+
+
 public class CardWidget {
 
     public static final double CARD_MIN_HEIGHT = 100;
     public static final double CARD_MIN_WIDTH = 70;
 
-    private boolean taken;
     private int referenceID;
     private ImageView cardImage;
     private String imagePath;
     private String cardName;
-    private boolean payAlternatives;
+    private boolean morePaymentOptions;
+    private boolean taken;
 
-    public CardWidget() {
+    public CardWidget(Integer referenceID) {
+        this.referenceID = referenceID;
+        //TODO FINIRE COSTRUTTORE E SETTARE PATH
 
     }
 
@@ -34,12 +39,46 @@ public class CardWidget {
         });
     }
 
-    public boolean hasPayAlternatives() {
-        return this.payAlternatives;
+    public void repaint() {
+        if(isTaken()) {
+            this.cardImage.setImage(null);
+        }
+        else {
+            Image i = new Image(imagePath, CARD_MIN_WIDTH, CARD_MIN_HEIGHT, true, true);
+            this.cardImage.setImage(i);
+        }
     }
 
     public String getCardName() {
         return cardName;
+    }
+
+    public void setReferenceID(int referenceID) {
+        this.referenceID = referenceID;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public boolean hasMorePaymentOptions() {
+        return this.morePaymentOptions;
+    }
+
+    public void setMorePaymentOptions(boolean morePaymentOptions) {
+        this.morePaymentOptions = morePaymentOptions;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 
     public ImageView getCardImage() {
@@ -48,5 +87,9 @@ public class CardWidget {
 
     public void setCardImage(ImageView cardImage) {
         this.cardImage = cardImage;
+    }
+
+    public int getReferenceID() {
+        return referenceID;
     }
 }

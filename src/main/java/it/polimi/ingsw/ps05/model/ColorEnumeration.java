@@ -3,16 +3,16 @@ package it.polimi.ingsw.ps05.model;
 import java.io.Serializable;
 
 public enum ColorEnumeration implements Serializable  {
-	Violet("Viola"),
-	Yellow("Giallo"),
-	Blue("Blu"),
-	Green("Verde"),
-	Red("Rosso"),
-	Black("Nero"),
-	White("Bianco"),
-	Orange("Arancione"),
-	Any("Neutro"),
-	Ghost("Fantasma"),
+	Violet("violet"),
+	Yellow("yellow"),
+	Blue("blue"),
+	Green("green"),
+	Red("red"),
+	Black("black"),
+	White("white"),
+	Orange("orange"),
+	Any("neutral"),
+	Ghost("ghost"),
 	NOT_INITIALIZED("Nessuno");
 	
 	private final String color;

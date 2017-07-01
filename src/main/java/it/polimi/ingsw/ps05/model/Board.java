@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
@@ -160,7 +160,7 @@ public class Board implements Serializable, Visitable{
 
 
 	@Override
-	public void acceptVisitor(updateViewVisitor vi) {
+	public void acceptVisitor(UpdateViewVisitor vi) {
 
 		//TODO
 	}

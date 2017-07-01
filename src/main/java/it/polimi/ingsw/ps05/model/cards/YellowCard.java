@@ -50,7 +50,7 @@ public class YellowCard extends TowerCard {
 		this.selectedEffects = selectedEffects;
 	}
 
-	public void applyProductionEffects(Familiar familyMember){
+	public void applyProductionEffects(PlayerRelated familyMember){
 
 		/*1st solution: Player selects what cards he want to use BEFORE
 		 * calling action.run() class. references to cards he want to activate are stored

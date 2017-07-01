@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.client.ctrl.updateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
-public class MarketSpace extends ActionSpaceWithEffect {
+public class MarketSpace extends SingleOccupantActionSpace {
 
 	/**
 	 * 
@@ -25,7 +26,7 @@ public class MarketSpace extends ActionSpaceWithEffect {
 	}
 
 	@Override
-	public void applyEffect() {
+	public void applyEffect(Familiar pl) {
 		//Player player = this.getOccupant().getRelatedPlayer();
 		Iterator<Effect> it = this.getEffects().iterator();
 		while (it.hasNext()){
@@ -58,7 +59,7 @@ public class MarketSpace extends ActionSpaceWithEffect {
 	}
 
 	@Override
-	public void acceptVisitor(updateViewVisitor vi) {
+	public void acceptVisitor(UpdateViewVisitor vi) {
 
 	}
 }

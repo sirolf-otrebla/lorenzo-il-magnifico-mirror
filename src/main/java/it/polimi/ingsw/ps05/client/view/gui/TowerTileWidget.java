@@ -1,9 +1,13 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+
+import java.util.ArrayList;
 
 /**
  * Created by miotto on 27/06/17.
@@ -12,6 +16,9 @@ public class TowerTileWidget extends ActionSpaceWidget {
 
     private CardWidget associatedCard;
     private boolean morePaymentOptions;
+    private boolean isLegal = false;
+    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
+
 
     public TowerTileWidget(int minDie) {
         super(minDie);
@@ -19,23 +26,25 @@ public class TowerTileWidget extends ActionSpaceWidget {
 
     @Override
     public void setupDragDropped() {
-         super.getOccupationCircle().setOnDragDropped((DragEvent e) -> {
+        this.getOccupationCircle().setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;
 
             System.out.println("starting if");
-            if(e.getDragboard().hasImage()) {
-                if(this.associatedCard.hasPayAlternatives()) {
+            if(!isOccupied() && e.getDragboard().hasImage()) {
+                if(this.associatedCard.hasMorePaymentOptions()) {
                     /* Showing selection window if card has payment alternatives */
-                    /* if (PaymentPopup.display(this.getAssociatedCard().getCardName())) {
+                    PaymentPopup paymentPopup = new PaymentPopup();
+                    paymentPopup.setResArrayList(null); //TODO
+                    if (paymentPopup.display(this.getAssociatedCard().getCardName())) {
                         /* Enter 'if' when the player succesfully select the payment, without canceling action */
-                       /* super.isOccupied = true;
+                        this.setOccupied(true);
                         System.out.println("inside if");
                         Image source = e.getDragboard().getImage();
-                        occupationCircle.setOpacity(1);
-                        occupationCircle.setFill(new ImagePattern(source));
+                        this.getOccupationCircle().setOpacity(1);
+                        this.getOccupationCircle().setFill(new ImagePattern(source));
                         success = true;
-                    }  */
+                    }
                 }
             }
 
@@ -56,5 +65,22 @@ public class TowerTileWidget extends ActionSpaceWidget {
 
     public boolean hasMorePaymentOptions() {
         return morePaymentOptions;
+    }
+
+
+    public boolean isLegal() {
+        return isLegal;
+    }
+
+    public void setLegal(boolean legal) {
+        isLegal = legal;
+    }
+
+    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
+        return legalFamilyMemberList;
+    }
+
+    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
+        this.legalFamilyMemberList = legalFamilyMemberList;
     }
 }
