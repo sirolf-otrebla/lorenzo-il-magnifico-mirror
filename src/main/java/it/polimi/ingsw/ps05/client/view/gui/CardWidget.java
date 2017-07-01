@@ -22,6 +22,7 @@ public class CardWidget {
     private String imagePath;
     private String cardName;
     private boolean morePaymentOptions;
+    private boolean taken;
 
     public CardWidget(Integer referenceID) {
         this.referenceID = referenceID;

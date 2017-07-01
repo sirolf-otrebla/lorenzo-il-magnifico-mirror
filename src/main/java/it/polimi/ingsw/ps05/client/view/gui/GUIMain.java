@@ -14,6 +14,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
 
+import java.io.File;
+
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
 public class GUIMain extends Application {
@@ -25,10 +27,6 @@ public class GUIMain extends Application {
 	public static double stageWidth, stageHeight, resize;
 	public static final int ORIGINAL_WIDTH = 1120;
 
-	private GraphicMap map = new GraphicMap();
-	TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
-	private VBox[] towerOccupationCircesArray = new VBox[4];
-	private VBox[] towerCardSpacesArray = new VBox[4];
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
@@ -39,40 +37,21 @@ public class GUIMain extends Application {
 	private Integer[] blueCardsConversion = new  Integer[6];
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
-	private FamiliarWidget redFamiliar_black = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/black.png");
-	private FamiliarWidget redFamiliar_white = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/white.png");
-	private FamiliarWidget redFamiliar_orange = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/orange.png");
-	private FamiliarWidget redFamiliar_neutral = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/neutral.png");
-
-	private TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
+	private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
 	private final VBox[] towerOccupationCirclesArray = new VBox[4];
 	private final VBox[] towerCardSpacesArray = new VBox[4];
 
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
-	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(2);
+	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1);
 	// MultipleSpaceWidget secondaryHarvestingSpace = new MultipleSpaceWidget();
-
-
 
 	// MultipleSpaceWidget councilSpace = new MultipleSpaceWidget();
 
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
 
-	private MarkerWidget redFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
-	private MarkerWidget greenFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
-	private MarkerWidget blueFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
-	private MarkerWidget yellowFaithMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
 
-	private MarkerWidget redVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
-	private MarkerWidget greenVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
-	private MarkerWidget blueVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
-	private MarkerWidget yellowVictoryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
 
-	private MarkerWidget redMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-red.png");
-	private MarkerWidget greenMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-green.png");
-	private MarkerWidget blueMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-blue.png");
-	private MarkerWidget yellowMilitaryMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-yellow.png");
 
 	public static void main(String[] args) {
 		launch(args);
@@ -80,10 +59,8 @@ public class GUIMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		// Parent root = FXMLLoader.load(getClass().getResource("source.fxml"));
-		// primaryStage.setTitle("Hello World");
 
-		int i = 0, j = 0;
+		System.out.println(System.getProperty("user.dir"));
 
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		double screenWidth = primaryScreenBounds.getWidth();
@@ -121,15 +98,26 @@ public class GUIMain extends Application {
 		root.maxHeightProperty().bind(stage.heightProperty());
 
         /* Adding playable familiars */
-		insertDraggableFamiliar(redFamiliar_black, root, 66.07, 21.87);
-		insertDraggableFamiliar(redFamiliar_white, root, 70.5357, 21.87);
-		insertDraggableFamiliar(redFamiliar_orange, root, 75, 21.87);
-		insertDraggableFamiliar(redFamiliar_neutral, root, 79.4643, 21.87);
+        /*
+		for (FamiliarWidget[] playerFamiliars: this.familiarWidgetLists) {
+			int i = 0;
+			int j = 0;
+			for (FamiliarWidget familiar: playerFamiliars) {
+				familiar = new FamiliarWidget("../main/res/img/redpl/" + map.getDiceColor(i) + ".png"); //TODO: da cambiare, è solo per testing
+				i++;
+			}
+			j++;
+		}
+		*/
+		insertDraggableFamiliar(familiarWidgetLists[0][0] = new FamiliarWidget("../res/img/redpl/black.png"), root, 66.07, 21.87);
+		/*
+		insertDraggableFamiliar(familiarWidgetLists[0][1] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/white.png"), root, 70.5357, 21.87);
+		insertDraggableFamiliar(familiarWidgetLists[0][2] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/orange.png"), root, 75, 21.87);
+		insertDraggableFamiliar(familiarWidgetLists[0][3] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/neutral.png"), root, 79.4643, 21.87);
+		*/
 
         /* Adding tower action spaces */
-        i = 0;
-        j = 0;
-		for (TowerTileWidget[] tower: this.towerTileWidgetList) {
+		for (TowerTileWidget[] tower: this.towerTileWidgetLists) {
 			int i = 0;
 			int j = 0;
 			this.towerOccupationCirclesArray[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
@@ -154,36 +142,12 @@ public class GUIMain extends Application {
                 familiarWidgetLists[i][j] = new FamiliarWidget(
                         ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
-		/* righe mantenute perché contengono le coordinate dei posti azione
-
-		insertActionSpace(greenTowerSpace7, root, 7, 102, 66);
-		insertActionSpace(greenTowerSpace5, root, 5, 102, 177);
-		insertActionSpace(greenTowerSpace3, root, 3, 102, 287);
-		insertActionSpace(greenTowerSpace1, root, 1, 102, 398);
-
-		insertActionSpace(blueTowerSpace7, root, 7, 224, 66);
-		insertActionSpace(blueTowerSpace5, root, 5, 224, 177);
-		insertActionSpace(blueTowerSpace3, root, 3, 224, 287);
-		insertActionSpace(blueTowerSpace1, root, 1, 224, 398);
-
-		insertActionSpace(yellowTowerSpace7, root, 7, 347, 66);
-		insertActionSpace(yellowTowerSpace5, root, 5, 347, 177);
-		insertActionSpace(yellowTowerSpace3, root, 3, 347, 287);
-		insertActionSpace(yellowTowerSpace1, root, 1, 347, 398);
-
-		insertActionSpace(violetTowerSpace7, root, 7, 469, 66);
-		insertActionSpace(violetTowerSpace5, root, 5, 469, 177);
-		insertActionSpace(violetTowerSpace3, root, 3, 469, 287);
-		insertActionSpace(violetTowerSpace1, root, 1, 469, 398);
-
-		*/
-
         /* Adding market action spaces */
-		/* insertActionSpace(goldMarketSpace, root, 1, 28.3036, 80.1562); // gold
-		insertActionSpace(servantsMarketSpace, root, 1, 33.125, 80.1562); // servants
-		insertActionSpace(militaryMarketSpace, root, 1, 37.7679, 82.6562); // military + gold
-		insertActionSpace(privilegesMarketSpace, root, 1, 41.25, 88.75); // privileges
-*/
+		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
+		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
+		insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
+		insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
+
         /* Adding harvest and production action spaces */
 		insertActionSpace(productionSpace, root, 1, 2.7679, 82.5); // production
 		insertActionSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
@@ -202,7 +166,7 @@ public class GUIMain extends Application {
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
-				playerMarker = new MarkerWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/marker-"
+				playerMarker = new MarkerWidget("../res/img/marker-"
 						+ map.playerColorMap.get(j) + ".png");
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
@@ -231,17 +195,6 @@ public class GUIMain extends Application {
 		//this.trackBoxesArray[3].layoutXProperty().bind(stage.widthProperty().multiply(60.2679 / 100));
 		//this.trackBoxesArray[3].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
 
-
-		/*
-		militaryBox.setLayoutX(537);
-		militaryBox.setLayoutY(98);
-
-		victoryBox.setLayoutX(675);
-		victoryBox.setLayoutY(98);
-
-		faithBox.setLayoutX(580);
-		faithBox.setLayoutY(438);
-		*/
 
 		/* Adding player buttons */
 		final HBox commands = new HBox(50 * resize);
@@ -282,9 +235,8 @@ public class GUIMain extends Application {
 
 	}
 
-	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double percX, double percY) {
 	public TowerTileWidget[][] getTowerTileWidgetList() {
-		return towerTileWidgetList;
+		return towerTileWidgetLists;
 	}
 
 	public FamiliarWidget[][] getFamiliarWidgetLists() {
@@ -421,5 +373,40 @@ public class GUIMain extends Application {
 	public void setExcomWidgets(ExcomWidget[] excomWidgets) {
 		this.excomWidgets = excomWidgets;
 	}
+
+
+
+
+	
+	/*
+		insertActionSpace(greenTowerSpace7, root, 7, 102, 66);
+		insertActionSpace(greenTowerSpace5, root, 5, 102, 177);
+		insertActionSpace(greenTowerSpace3, root, 3, 102, 287);
+		insertActionSpace(greenTowerSpace1, root, 1, 102, 398);
+
+		insertActionSpace(blueTowerSpace7, root, 7, 224, 66);
+		insertActionSpace(blueTowerSpace5, root, 5, 224, 177);
+		insertActionSpace(blueTowerSpace3, root, 3, 224, 287);
+		insertActionSpace(blueTowerSpace1, root, 1, 224, 398);
+
+		insertActionSpace(yellowTowerSpace7, root, 7, 347, 66);
+		insertActionSpace(yellowTowerSpace5, root, 5, 347, 177);
+		insertActionSpace(yellowTowerSpace3, root, 3, 347, 287);
+		insertActionSpace(yellowTowerSpace1, root, 1, 347, 398);
+
+		insertActionSpace(violetTowerSpace7, root, 7, 469, 66);
+		insertActionSpace(violetTowerSpace5, root, 5, 469, 177);
+		insertActionSpace(violetTowerSpace3, root, 3, 469, 287);
+		insertActionSpace(violetTowerSpace1, root, 1, 469, 398);
+
+		militaryBox.setLayoutX(537);
+		militaryBox.setLayoutY(98);
+
+		victoryBox.setLayoutX(675);
+		victoryBox.setLayoutY(98);
+
+		faithBox.setLayoutX(580);
+		faithBox.setLayoutY(438);
+		*/
 }
 
