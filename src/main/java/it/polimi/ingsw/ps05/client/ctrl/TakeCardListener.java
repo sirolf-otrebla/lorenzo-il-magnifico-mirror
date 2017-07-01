@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
+import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 
@@ -15,7 +16,7 @@ public class TakeCardListener implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        TowerTileWidget tileWidget = (TowerTileWidget) arg;
+        TowerTileViewObject tileWidget = (TowerTileViewObject) arg;
         if (tileWidget.hasMorePaymentOptions()) {
             //TODO FINESTRA SELEZIONE
         }

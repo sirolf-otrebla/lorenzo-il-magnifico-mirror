@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public abstract class ActionSpace implements Serializable, VisitableFromView, ActionSpaceViewObject{
+public abstract class ActionSpace implements Serializable, VisitableFromView{
 
 	/**
 	 * 

@@ -33,11 +33,16 @@ public class Game implements Observer {
     public static final int FAM_DIM = 4;
 
 
-    public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id){
+    public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
+                ArrayList<PlayerClient> clientList){
         this.id = id;
         this.useCompleteRules = useCompleteRules;
         this.useCustomBonusTiles = useCustomBonusTiles;
         this.clientHashMap = new HashMap<Integer, PlayerClient>();
+        for (PlayerClient client: clientList){
+            clientHashMap.put(client.getId(), client);
+            client.setInGame(this);
+        }
         this.excommList = new ArrayList<>();
 
     }

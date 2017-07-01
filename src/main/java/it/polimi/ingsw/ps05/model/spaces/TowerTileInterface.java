@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.io.Serializable;
 
+import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
@@ -17,5 +18,7 @@ public abstract  class  TowerTileInterface extends SingleOccupantActionSpace imp
 	public abstract TowerCard getCard();
 	public abstract Tower getParentTower();
 	public abstract void setDiceRequired(Integer dice);
+	public abstract boolean hasMorePaymentOptions();
+
 	
 }

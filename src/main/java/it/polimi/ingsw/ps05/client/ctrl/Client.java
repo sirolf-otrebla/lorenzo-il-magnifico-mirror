@@ -1,9 +1,15 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
+import it.polimi.ingsw.ps05.client.view.cli.CliActionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
 import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
+import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
@@ -15,6 +21,10 @@ import java.util.HashMap;
  */
 public class Client {
 
+    /* event observers */
+    private MoveFamiliarListener moveFamiliarListener = new MoveFamiliarListener();
+    private TakeCardListener takeCardListener = new TakeCardListener();
+    /* end event observers */
     private static Client client;
     private ServerInterface serverInterface;
     private GameStatus gameStatus;
@@ -59,6 +69,22 @@ public class Client {
     
     public Integer getId(){
     	return id;
+    }
+
+    public void linkToObserver(ActionSpaceViewObject observable){
+        observable.addObserver(moveFamiliarListener);
+    }
+
+    public void linkToObserver(TowerTileViewObject observable){
+        observable.addObserver(this.takeCardListener);
+    }
+
+    public void linkToObserver(HarvestSpaceViewObject observable){
+
+    }
+
+    public void linkToObserver(ProductionSpaceViewObject observable){
+
     }
 
 }

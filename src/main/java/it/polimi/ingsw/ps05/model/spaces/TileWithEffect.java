@@ -26,7 +26,8 @@ public class TileWithEffect extends TowerTileInterface {
 	private Tile toBeDecorated; //?????
 
 	private ArrayList<ActionResult> effectOnPositioning = new ArrayList<ActionResult>();
-	
+	private Boolean hasMorePaymentOptions = false;
+
     public TileWithEffect(){
         this.toBeDecorated = new Tile();
     }
@@ -38,6 +39,7 @@ public class TileWithEffect extends TowerTileInterface {
     
     @Override
     public void setTowerCard(TowerCard card) {
+    	if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.toBeDecorated.setTowerCard(card);
     }
     @Override
@@ -113,4 +115,9 @@ public class TileWithEffect extends TowerTileInterface {
     public String toString(){
     	return "Tower " + toBeDecorated.getParentTower().getColor().toString() + " T. " + toBeDecorated.getDiceRequirement().getValue();
     }
+
+	@Override
+	public boolean hasMorePaymentOptions() {
+		return this.hasMorePaymentOptions;
+	}
 }
