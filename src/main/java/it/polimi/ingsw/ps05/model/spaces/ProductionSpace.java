@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps05.model.spaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -67,7 +67,7 @@ public class ProductionSpace extends MultipleOccupantsActionSpace {
     }
 
 	@Override
-	public void acceptVisitor(UpdateViewVisitor vi) {
+	public void acceptVisitor(ViewVisitorInterface vi) {
 
 	}
 }

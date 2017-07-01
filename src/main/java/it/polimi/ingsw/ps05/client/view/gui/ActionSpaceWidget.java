@@ -117,6 +117,10 @@ public class ActionSpaceWidget {
         this.id = id;
     }
 
+    public int getMinDie() {
+        return minDie;
+    }
+
     public Circle getOccupationCircle() {
         return this.occupationCircle;
     }

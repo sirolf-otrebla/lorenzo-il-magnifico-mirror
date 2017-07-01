@@ -3,10 +3,10 @@ package it.polimi.ingsw.ps05.model;
 import java.io.Serializable;
 
 public enum ColorEnumeration implements Serializable  {
-	Violet("violet"),
 	Yellow("yellow"),
 	Blue("blue"),
 	Green("green"),
+	Violet("violet"),
 	Red("red"),
 	Black("black"),
 	White("white"),

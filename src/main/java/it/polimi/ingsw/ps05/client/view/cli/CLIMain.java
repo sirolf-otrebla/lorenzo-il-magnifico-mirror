@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.client.view.cli;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
+import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -41,7 +42,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
-public class CLIMain implements Runnable{
+public class CLIMain implements LimView, Runnable{
 	int currentRowBoard = 0;
 	int currentColBoard = 0;
 	int currentRowMyStats = 0;

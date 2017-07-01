@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 
-import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
@@ -13,8 +13,11 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 public class MarketSpace extends SingleOccupantActionSpace {
 
 	/**
-	 * 
+	 *
+	 *
 	 */
+
+	private Integer MarketSpaceTypeID;
 	private static final long serialVersionUID = 3303459183874742240L;
 	private ArrayList<Effect> effectList;
 	private int[] selectedEffects = {};
@@ -59,7 +62,15 @@ public class MarketSpace extends SingleOccupantActionSpace {
 	}
 
 	@Override
-	public void acceptVisitor(UpdateViewVisitor vi) {
+	public void acceptVisitor(ViewVisitorInterface vi) {
 
+	}
+
+	public Integer getMarketSpaceTypeID() {
+		return MarketSpaceTypeID;
+	}
+
+	public void setMarketSpaceTypeID(Integer marketSpaceTypeID) {
+		MarketSpaceTypeID = marketSpaceTypeID;
 	}
 }
