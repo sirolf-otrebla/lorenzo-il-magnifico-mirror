@@ -11,7 +11,6 @@ public abstract class SingleOccupantActionSpace extends ActionSpaceWithEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = -6904353010062127223L;
-	private Familiar occupant;
 
     public Familiar getOccupant(){
         return super.getOccupant();
