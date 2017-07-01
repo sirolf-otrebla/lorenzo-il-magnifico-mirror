@@ -4,8 +4,6 @@ import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
-import java.io.Serializable;
-
 import static it.polimi.ingsw.ps05.model.ColorEnumeration.NOT_INITIALIZED;
 
 public class Familiar implements PlayerRelated {
@@ -21,7 +19,7 @@ public class Familiar implements PlayerRelated {
 	private transient Player relatedPlayer = null;
 
 
-	private Integer relatedPlayerID;
+	private ColorEnumeration relatedPlayerColor;
 	
 	public Familiar(){
 		
@@ -93,7 +91,7 @@ public class Familiar implements PlayerRelated {
 		return this.relatedPlayer;
 	}
 
-	public Integer getRelatedPlayerID() {
-		return relatedPlayerID;
+	public ColorEnumeration getRelatedPlayerColor() {
+		return relatedPlayerColor;
 	}
 }

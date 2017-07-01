@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
-import it.polimi.ingsw.ps05.model.PlayerRelated;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
@@ -14,8 +15,7 @@ import java.util.ArrayList;
  * 
  * further comments will be added.
  */
-public class Tile extends ActionSpace implements TowerTileInterface {
-
+public class Tile extends SingleOccupantActionSpace implements TowerTileInterface {
     /**
 	 * 
 	 */
@@ -91,7 +91,7 @@ public class Tile extends ActionSpace implements TowerTileInterface {
     }
 
     @Override
-    public void applyEffect() {
+    public void applyEffect(Familiar pl) {
         this.card.moveToPlayer(this.getOccupant().getRelatedPlayer());
         this.card.applyNonActivableEffects(this.getOccupant());
     }
@@ -101,4 +101,9 @@ public class Tile extends ActionSpace implements TowerTileInterface {
 		// TODO Auto-generated method stub
 		card = null;
 	}
+
+    @Override
+    public void acceptVisitor(UpdateViewVisitor vi) {
+
+    }
 }

@@ -7,12 +7,14 @@ import javafx.scene.input.MouseEvent;
 /**
  * Created by miotto on 27/06/17.
  */
+
+
+
 public class CardWidget {
 
     public static final double CARD_MIN_HEIGHT = 100;
     public static final double CARD_MIN_WIDTH = 70;
 
-    private boolean taken;
     private int referenceID;
     private ImageView cardImage;
     private String imagePath;
@@ -20,7 +22,9 @@ public class CardWidget {
     private boolean morePaymentOptions;
     private boolean taken;
 
-    public CardWidget() {
+    public CardWidget(Integer referenceID) {
+        this.referenceID = referenceID;
+        //TODO FINIRE COSTRUTTORE E SETTARE PATH
 
     }
 
@@ -83,5 +87,9 @@ public class CardWidget {
 
     public void setCardImage(ImageView cardImage) {
         this.cardImage = cardImage;
+    }
+
+    public int getReferenceID() {
+        return referenceID;
     }
 }

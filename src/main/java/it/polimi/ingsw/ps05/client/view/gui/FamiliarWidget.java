@@ -1,9 +1,12 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+
+import java.awt.*;
 
 /**
  * Created by miotto on 28/06/17.
@@ -15,9 +18,13 @@ public class FamiliarWidget {
     private boolean isPlaced;
     private ImageView imageElement;
     private String imagePath;
+    private ColorEnumeration FamiliarColor;
+    private ColorEnumeration PlayerColor;
 
-    public FamiliarWidget() {
+    public FamiliarWidget(ColorEnumeration player, ColorEnumeration Familiar) {
 
+
+        //todo
     }
 
     public FamiliarWidget(String path) {

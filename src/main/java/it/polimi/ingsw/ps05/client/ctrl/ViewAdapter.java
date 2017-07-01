@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
+import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 
 /**
@@ -38,15 +39,16 @@ public class ViewAdapter {
         return  new ViewAdapter(type);
     }
 
-    private void setUpGui(){
+    private void setUpGui(Board board){
         //TODO
     }
 
-    private void setUpCli(){
+    private void setUpCli(Board board){
         //TODO
     }
 
     private void updateView(){
+
 
     }
 

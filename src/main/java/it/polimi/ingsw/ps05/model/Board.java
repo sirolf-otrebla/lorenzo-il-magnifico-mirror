@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
@@ -15,7 +16,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
  * 
  */
 
-public class Board implements Serializable{
+public class Board implements Serializable, Visitable{
 
 
 	/**
@@ -57,7 +58,7 @@ public class Board implements Serializable{
 		this.greenCardsConversion = greenConversion;
 		this.blueCardsConversion = blueConversion;
 	}
-	
+
 	public ArrayList<VictoryResource> getGreenCardsConversion() {
 		return greenCardsConversion;
 	}
@@ -156,4 +157,12 @@ public class Board implements Serializable{
 	public ActionSpace getActionSpace(Integer referenceID){
 		return this.getActSpacesMap().get(referenceID);
 	}
+
+
+	@Override
+	public void acceptVisitor(UpdateViewVisitor vi) {
+
+		//TODO
+	}
+
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -8,39 +9,28 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
-import java.util.ArrayList;
-
-import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
-
 public class GUIMain extends Application {
+
+
 
 	private Stage stage;
 
-	private GraphicMap map = new GraphicMap();
+	TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
+	private VBox[] towerOccupationCircesArray = new VBox[4];
+	private VBox[] towerCardSpacesArray = new VBox[4];
+	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[4][4];
+	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
+	private GraphicResources map = new GraphicResources();
 
-	private FamiliarWidget redFamiliar_black = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/black.png");
-	private FamiliarWidget redFamiliar_white = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/white.png");
-	private FamiliarWidget redFamiliar_orange = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/orange.png");
-	private FamiliarWidget redFamiliar_neutral = new FamiliarWidget("main/java/it.polimi.ingsw.ps05/client/view/gui/img/neutral.png");
 
-	private TowerTileWidget[][] towerTileWidgetList = new TowerTileWidget[4][4];
-	private final VBox[] towerOccupationCircesArray = new VBox[4];
-	private final VBox[] towerCardSpacesArray = new VBox[4];
-
-	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget();
-	// MultipleSpaceWidget secondaryProductionSpace = new MultipleSpaceWidget();
-	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget();
+	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
+	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(2);
 	// MultipleSpaceWidget secondaryHarvestingSpace = new MultipleSpaceWidget();
 
 
-	private MarketSpaceWidget goldMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget servantsMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget militaryMarketSpace = new MarketSpaceWidget();
-	private MarketSpaceWidget privilegesMarketSpace = new MarketSpaceWidget();
 
 	// MultipleSpaceWidget councilSpace = new MultipleSpaceWidget();
 
@@ -71,34 +61,20 @@ public class GUIMain extends Application {
 		// Parent root = FXMLLoader.load(getClass().getResource("source.fxml"));
 		// primaryStage.setTitle("Hello World");
 
-		int i = 0, j = 0;
-
 		stage = primaryStage;
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
-
 		final Pane root = new Pane();
 		root.setId("root");
 		root.setMinSize(1120, 640);
-
 		final Pane board = new AnchorPane();
 		board.setId("board");
 		board.setMinSize(1120,640);
-
-
 		root.getChildren().add(board);
-
-        /* Adding playable familiars */
-		insertDraggableFamiliar(redFamiliar_black, board, 740, 140);
-		insertDraggableFamiliar(redFamiliar_white, board, 790, 140);
-		insertDraggableFamiliar(redFamiliar_orange, board, 840, 140);
-		insertDraggableFamiliar(redFamiliar_neutral, board, 890, 140);
-
-        /* Adding tower action spaces */
-        i = 0;
-        j = 0;
 		for (TowerTileWidget[] tower: this.towerTileWidgetList) {
-			this.towerOccupationCircesArray[j] = new VBox(111 - FAMILIAR_MIN_SIZE);
+			int i = 0;
+			int j = 0;
+			this.towerOccupationCircesArray[j] = new VBox();
 			for (TowerTileWidget widget : tower) {
 				widget = new TowerTileWidget(2*i +1);
 				i++;
@@ -108,6 +84,19 @@ public class GUIMain extends Application {
 			j++;
 		}
 
+		for (int i = 0; i < familiarWidgetLists.length; i++)
+			for (int j = 0; i < familiarWidgetLists[i].length; j++)
+				familiarWidgetLists[i][j] = new FamiliarWidget(
+						ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
+
+
+        /* Adding playable familiars */
+		/*insertDraggableFamiliar(redFamiliar_black, board, 740, 140);
+		insertDraggableFamiliar(redFamiliar_white, board, 790, 140);
+		insertDraggableFamiliar(redFamiliar_orange, board, 840, 140);
+		insertDraggableFamiliar(redFamiliar_neutral, board, 890, 140);
+		*/
+        /* Adding tower action spaces */
 		/*
 		insertActionSpace(greenTowerSpace7, board, 7, 102, 66);
 		insertActionSpace(greenTowerSpace5, board, 5, 102, 177);
@@ -128,14 +117,13 @@ public class GUIMain extends Application {
 		insertActionSpace(violetTowerSpace5, board, 5, 469, 177);
 		insertActionSpace(violetTowerSpace3, board, 3, 469, 287);
 		insertActionSpace(violetTowerSpace1, board, 1, 469, 398);
-		*/
 
         /* Adding market action spaces */
-		insertActionSpace(goldMarketSpace, board, 1, 317, 513); // gold
+		/* insertActionSpace(goldMarketSpace, board, 1, 317, 513); // gold
 		insertActionSpace(servantsMarketSpace, board, 1, 371, 513); // servants
 		insertActionSpace(militaryMarketSpace, board, 1, 423, 529); // military + gold
 		insertActionSpace(privilegesMarketSpace, board, 1, 462, 568); // privileges
-
+*/
         /* Adding harvest and production action spaces */
 		insertActionSpace(productionSpace, board, 1, 31, 528); // production
 		insertActionSpace(harvestingSpace, board, 1, 31, 599); // harvest
@@ -144,10 +132,9 @@ public class GUIMain extends Application {
 		//TODO
 
         /* Adding points markers */
-		i = 0;
-		j = 0;
-
         for (MarkerWidget[] track: this.markerWidgetList) {
+        	int i = 0;
+			int j = 0;
 			if(i < 2) this.trackBoxesArray[i] = new HBox(20);
 			else this.trackBoxesArray[i] = new VBox(20);
 			board.getChildren().add(this.trackBoxesArray[i]);
@@ -199,6 +186,30 @@ public class GUIMain extends Application {
 
 		pane.getChildren().add(familiar.getImageElement());
 
+	}
+
+	public TowerTileWidget[][] getTowerTileWidgetList() {
+		return towerTileWidgetList;
+	}
+
+	public FamiliarWidget[][] getFamiliarWidgetLists() {
+		return familiarWidgetLists;
+	}
+
+	public MarketSpaceWidget[] getMarketSpaceWidgets() {
+		return marketSpaceWidgets;
+	}
+
+	public MarkerWidget[][] getMarkerWidgetList() {
+		return markerWidgetList;
+	}
+
+	public ProductionSpaceWidget getProductionSpace() {
+		return productionSpace;
+	}
+
+	public HarvestingSpaceWidget getHarvestingSpace() {
+		return harvestingSpace;
 	}
 
 	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double x, double y) {
