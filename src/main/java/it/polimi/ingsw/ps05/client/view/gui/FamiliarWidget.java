@@ -12,6 +12,7 @@ public class FamiliarWidget {
 
     public static final double FAMILIAR_MIN_SIZE = 40;
     private int referenceID;
+    private boolean isPlaced;
     private ImageView imageElement;
     private String imagePath;
 
@@ -25,7 +26,6 @@ public class FamiliarWidget {
         imageElement.setImage(i);
 
         setupGestureSource();
-
     }
 
     void setupGestureSource() {

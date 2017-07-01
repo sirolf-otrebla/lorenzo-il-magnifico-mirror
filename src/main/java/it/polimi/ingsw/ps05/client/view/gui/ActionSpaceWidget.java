@@ -13,20 +13,23 @@ import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_S
 
 public class ActionSpaceWidget {
 
-    private int referenceID;
-    private boolean isOccupied;
+    private int referenceId;
+    private boolean occupied;
     private Circle occupationCircle;
-    private ColorEnumeration familyMemberID;
-    private Integer occupantPlayerID;
+    private ColorEnumeration familyMemberId;
+    private ColorEnumeration occupantPlayerId;
     private Integer id;
+    private GraphicMap graphicMap = new GraphicMap();
+    private int minDie;
 
     public ActionSpaceWidget() {
-        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
-        isOccupied = false;
+
     }
 
-    public Circle getOccupationCircle() {
-        return this.occupationCircle;
+    public ActionSpaceWidget(int minimumDie) {
+        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
+        occupied = false;
+        minDie = minimumDie;
     }
 
     public void setupGestureTarget() {
@@ -52,7 +55,7 @@ public class ActionSpaceWidget {
     public void setupDragEntered() {
         occupationCircle.setOnDragEntered((DragEvent e) -> {
 
-            if (e.getGestureSource() != occupationCircle && e.getDragboard().hasImage()) {
+            if (!occupied && e.getGestureSource() != occupationCircle && e.getDragboard().hasImage()) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);
             }
@@ -64,9 +67,11 @@ public class ActionSpaceWidget {
     public void setupDragExited() {
         occupationCircle.setOnDragExited((DragEvent e) -> {
 
-            occupationCircle.setFill(Color.TRANSPARENT);
-            //e.consume();
+            if(!occupied) {
+                occupationCircle.setFill(Color.TRANSPARENT);
+            }
 
+            //e.consume();
         });
     }
 
@@ -76,8 +81,8 @@ public class ActionSpaceWidget {
             boolean success = false;
 
             System.out.println("starting if");
-            if(e.getDragboard().hasImage()) {
-                this.isOccupied = true;
+            if(!occupied && e.getDragboard().hasImage()) {
+                this.occupied = true;
                 System.out.println("inside if");
                 Image source = e.getDragboard().getImage();
                 occupationCircle.setOpacity(1);
@@ -91,12 +96,18 @@ public class ActionSpaceWidget {
         });
     }
 
-    public ColorEnumeration getFamilyMemberID() {
-        return familyMemberID;
+    public void repaint() {
+        if(occupied) {
+            occupationCircle.setOpacity(1);
+            occupationCircle.setFill(new ImagePattern(graphicMap.familiarColorMap.get(occupantPlayerId, familyMemberId)));
+        }
+        else {
+            occupationCircle.setFill(Color.TRANSPARENT);
+        }
     }
 
-    public int getOccupantID() {
-        return occupantPlayerID;
+    public ColorEnumeration getFamilyMemberID() {
+        return familyMemberId;
     }
 
     public int getId() {
@@ -105,5 +116,21 @@ public class ActionSpaceWidget {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Circle getOccupationCircle() {
+        return this.occupationCircle;
+    }
+
+    public void setOccupationCircle(Circle occupationCircle) {
+        this.occupationCircle = occupationCircle;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
     }
 }

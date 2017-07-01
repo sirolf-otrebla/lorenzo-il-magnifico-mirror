@@ -17,7 +17,8 @@ public class CardWidget {
     private ImageView cardImage;
     private String imagePath;
     private String cardName;
-    private boolean payAlternatives;
+    private boolean morePaymentOptions;
+    private boolean taken;
 
     public CardWidget() {
 
@@ -34,11 +35,53 @@ public class CardWidget {
         });
     }
 
-    public boolean hasPayAlternatives() {
-        return this.payAlternatives;
+    public void repaint() {
+        if(isTaken()) {
+            this.cardImage.setImage(null);
+        }
+        else {
+            Image i = new Image(imagePath, CARD_MIN_WIDTH, CARD_MIN_HEIGHT, true, true);
+            this.cardImage.setImage(i);
+        }
     }
 
     public String getCardName() {
         return cardName;
+    }
+
+    public void setReferenceID(int referenceID) {
+        this.referenceID = referenceID;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public boolean hasMorePaymentOptions() {
+        return this.morePaymentOptions;
+    }
+
+    public void setMorePaymentOptions(boolean morePaymentOptions) {
+        this.morePaymentOptions = morePaymentOptions;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
+
+    public ImageView getCardImage() {
+        return cardImage;
+    }
+
+    public void setCardImage(ImageView cardImage) {
+        this.cardImage = cardImage;
     }
 }
