@@ -20,6 +20,4 @@ public interface Card extends Serializable {
 	public EpochEnumeration getEpoch();
 	
 	public String getName(); 
-	
-	public Integer getId();
 }

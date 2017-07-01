@@ -937,11 +937,13 @@ public class CLIMain implements LimView, Runnable{
 				"Dado: " + productionList.get(currentColBoard).getDiceRequirement().getValue());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		if (productionList.get(currentColBoard).isOccupied()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
-					productionList.get(currentColBoard).getOccupant().getRelatedPlayer().getUsername());
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					"Fam " + productionList.get(currentColBoard).getOccupant().getColor().toString());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			for (Familiar f : productionList.get(currentColBoard-productionList.size()).getOccupantList()){
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
+						f.getRelatedPlayer().getUsername());
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+						"Fam " + f.getColor().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			}
 		}
 		if (!productionList.get(currentColBoard).isOccupied() && productionList.get(currentColBoard).getEffects().size() != 0){
 			System.out.println("In");
@@ -1082,11 +1084,13 @@ public class CLIMain implements LimView, Runnable{
 				"Dado: " + harvestList.get(currentColBoard-productionList.size()).getDiceRequirement().getValue());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		if (harvestList.get(currentColBoard-productionList.size()).isOccupied()){
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
-					harvestList.get(currentColBoard-productionList.size()).getOccupant().getRelatedPlayer().getUsername());
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
-					"Fam " + harvestList.get(currentColBoard-productionList.size()).getOccupant().getColor().toString());
-			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			for (Familiar f : harvestList.get(currentColBoard-productionList.size()).getOccupantList()){
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow(), 
+						f.getRelatedPlayer().getUsername());
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+						"Fam " + f.getColor().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			}
 		} 
 		if (!harvestList.get(currentColBoard-productionList.size()).isOccupied() && harvestList.get(currentColBoard-productionList.size()).getEffects().size() != 0) {
 			for (Effect effect : harvestList.get(currentColBoard-productionList.size()).getEffects()){
@@ -1176,6 +1180,4 @@ public class CLIMain implements LimView, Runnable{
 			}
 		}
 	}
-	
-
 }

@@ -91,10 +91,5 @@ public class LeaderCard implements Card {
 		    ((SimpleEffect)effects.get(i)).apply(player);
 	}
 
-	@Override
-	public Integer getId() {
-		return referenceID;
-	}
-
 
 }
