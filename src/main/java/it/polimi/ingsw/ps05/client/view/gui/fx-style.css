@@ -1,14 +1,10 @@
 #root{
-    -fx-background-color: #e2d0ae;
-}
-
-#board{
-    -fx-background-image: url("img/prova6.png");
-    -fx-background-repeat: stretch;
-    -fx-background-size: 1120 640;
-    -fx-background-position: top center;
+    -fx-background-image: url("../../../../../../../../res/img/board.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
 }
 
 #paymentSelection{
-    -fx-background-image: url("img/lightbrownBG.jpg")
+    -fx-background-image: url("../../../../../../../../res/img/lightbrownBG.jpg")
 }

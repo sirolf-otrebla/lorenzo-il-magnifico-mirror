@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+
 /**
  * Created by miotto on 27/06/17.
  */
@@ -29,7 +31,7 @@ public class CardWidget {
     }
 
     public CardWidget(String path) {
-        Image i = new Image(path, CARD_MIN_WIDTH, CARD_MIN_HEIGHT, true, true);
+        Image i = new Image(path, CARD_MIN_WIDTH * resize, CARD_MIN_HEIGHT * resize, true, true);
         cardImage = new ImageView();
         cardImage.setImage(i);
 
@@ -44,7 +46,7 @@ public class CardWidget {
             this.cardImage.setImage(null);
         }
         else {
-            Image i = new Image(imagePath, CARD_MIN_WIDTH, CARD_MIN_HEIGHT, true, true);
+            Image i = new Image(imagePath, CARD_MIN_WIDTH * resize, CARD_MIN_HEIGHT * resize, true, true);
             this.cardImage.setImage(i);
         }
     }

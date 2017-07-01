@@ -9,6 +9,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 
 public class ActionSpaceWidget {
@@ -24,7 +25,7 @@ public class ActionSpaceWidget {
     private int minDie;
 
     public ActionSpaceWidget(int minimumDie) {
-        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2);
+        occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
         isOccupied = false;
         this.minDie = minimumDie;
     }
@@ -50,7 +51,7 @@ public class ActionSpaceWidget {
     }
 
     public void setupDragEntered() {
-            occupationCircle.setOnDragEntered((DragEvent e) -> {
+        occupationCircle.setOnDragEntered((DragEvent e) -> {
 
             if (!occupied && e.getGestureSource() != occupationCircle && e.getDragboard().hasImage()) {
                 occupationCircle.setOpacity(0.4);
@@ -70,7 +71,6 @@ public class ActionSpaceWidget {
 
             //e.consume();
         });
-
     }
 
     public void setupDragDropped() {

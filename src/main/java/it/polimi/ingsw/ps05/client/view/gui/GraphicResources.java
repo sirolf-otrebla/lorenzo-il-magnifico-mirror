@@ -16,10 +16,15 @@ public class GraphicResources {
     public Map<Integer, String> playerColorMap = new HashMap<>();
 
     private HashMap<ColorEnumeration, HashMap<ColorEnumeration, String>> familiarResPath = new HashMap<>();
+
+    private HashMap<Integer, String> diceColorMap = new HashMap<>();
+
+
+
     public GraphicResources() {
         buildFamiliarPathsMap();
+        buildDiceColorMap();
     }
-
 
     private void buildFamiliarPathsMap() {
         int i;
@@ -42,9 +47,23 @@ public class GraphicResources {
 
     }
 
+    private void buildDiceColorMap() {
+        int i;
+        ColorEnumeration[] famColors = new ColorEnumeration[4];
+        for (i = 5; i < 9; i++)
+            famColors[i - 5] = ColorEnumeration.values()[i];
+        i = 0;
+        for (ColorEnumeration f: famColors) {
+            this.diceColorMap.put(i, f.toString());
+        }
+    }
+
     public String getFamiliarPath(ColorEnumeration player, ColorEnumeration familyMember){
         return familiarResPath.get(player).get(familyMember);
 
     }
 
+    public String getDiceColor(int i) {
+        return diceColorMap.get(i);
+    }
 }
