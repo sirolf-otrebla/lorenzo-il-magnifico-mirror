@@ -230,8 +230,9 @@ public class CLIMain implements Runnable{
 			space = council;
 		}
 		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam - 1], space);
-		System.out.println("Fam " + ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getRelatedDice().getValue() + " " +
-				space.toString());
+		System.out.println(space.getDiceRequirement().getValue());
+		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam - 1]).getRelatedDice().getValue());
+		System.out.println(space.toString());
 		System.out.println("Action legal " + action.isLegal());
 	}
 	
@@ -311,19 +312,16 @@ public class CLIMain implements Runnable{
 					inMyStats = true;
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 				} else if (inMyStats){
 					inBoard = false;
 					inMyStats = false;
 					inPlayers = true;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
 				} else if (inPlayers){
 					inBoard = true;
 					inMyStats = false;
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-					terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 				}
 
 				break;
@@ -332,6 +330,13 @@ public class CLIMain implements Runnable{
 				break;
 			}
 			System.out.println(terminal.getCursorPosition() + " " + currentColBoard + " " + currentRowBoard);
+			if (inMyStats){
+				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
+			} else if (inPlayers){
+				terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
+			} else if (inBoard){
+				terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
+			}
 			terminal.flush();
 			keyStroke = terminal.readInput();
 		}

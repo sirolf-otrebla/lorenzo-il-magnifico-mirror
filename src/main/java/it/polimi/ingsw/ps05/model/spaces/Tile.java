@@ -40,16 +40,18 @@ public class Tile extends SingleOccupantActionSpace implements TowerTileInterfac
     	this.parentTower = parentTower;
     	this.card = card;
     	this.diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
+    	super.setDiceRequirement(this.diceRequirement);
     }
     
     @Override
     public void setDiceRequired(Integer diceRequired){
     	diceRequirement = new Dice(ColorEnumeration.Any, diceRequired);
+    	super.setDiceRequirement(diceRequirement);
     }
     
     @Override
     public Dice getDiceRequired(){
-
+    	
         return this.diceRequirement;
     }
     @Override
