@@ -97,6 +97,7 @@ public class GUIMain extends Application {
 		}
 		resize = this.stageWidth / ORIGINAL_WIDTH;
 
+		/* Creating root pane */
 		final Pane root = new Pane();
 		root.setId("root");
 
@@ -106,10 +107,12 @@ public class GUIMain extends Application {
 		root.prefHeightProperty().bind(stage.heightProperty());
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
-		
+
+		/* DA POPOLARE
 		for (int i = 0; i < 4; i++){
 			towerCardSpacesArray[i] = new VBox();
 		}
+		*/
 
         /* Adding playable familiars */
         /*
@@ -163,6 +166,7 @@ public class GUIMain extends Application {
 
         for (int i = 0; i < this.marketSpaceWidgets.length; i++) marketSpaceWidgets[i] =
 				new MarketSpaceWidget(1);
+
         /* Adding market action spaces  (Si adda pure quello che vuoi ma ricordati di inizializzare prima... )*/
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
 		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
@@ -193,6 +197,7 @@ public class GUIMain extends Application {
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
 			}
+			i++;
 		}
 
 		/****** MODO 1 ******/
@@ -240,11 +245,13 @@ public class GUIMain extends Application {
 		*/
 
 		Scene mainScene = new Scene(root);
+
 		File file = new File("structure.fxml");
 		ClassLoader cl = this.getClass().getClassLoader();
 		System.out.println(cl.getResource("./").toString());
-		mainScene.getStylesheets().addAll(cl.getResource("fx-style.css").toExternalForm());
 
+		//mainScene.getStylesheets().addAll(cl.getResource("fx-style.css").toExternalForm());
+		mainScene.getStylesheets().add("./src/main/res/fx-style.css");
 		stage.setScene(mainScene);
 		stage.sizeToScene();
 		stage.show();
@@ -252,8 +259,8 @@ public class GUIMain extends Application {
 
 	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double percX, double percY) {
 
-		familiar.getImageElement().setX(percX * stageWidth);
-		familiar.getImageElement().setY(percY * stageHeight);
+		familiar.getImageElement().setX((percX / 100) * stageWidth);
+		familiar.getImageElement().setY((percY / 100) * stageHeight);
 
 		familiar.setupGestureSource();
 
@@ -285,11 +292,13 @@ public class GUIMain extends Application {
 		return harvestingSpace;
 	}
 
-	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDice, double percX, double percY) {
+	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDie, double percX, double percY) {
+
+		actionSpace.setMinDie(minDie);
 
 		actionSpace.getOccupationCircle().setRadius(20 * resize);
-		actionSpace.getOccupationCircle().setCenterX(percX * stageWidth);
-		actionSpace.getOccupationCircle().setCenterY(percY * stageHeight);
+		actionSpace.getOccupationCircle().setCenterX((percX * 100) * stageWidth);
+		actionSpace.getOccupationCircle().setCenterY((percY * 100) * stageHeight);
 		actionSpace.getOccupationCircle().setFill(Color.TRANSPARENT);
 
 		actionSpace.setupGestureTarget();
@@ -382,6 +391,10 @@ public class GUIMain extends Application {
 
 	public void setGreenCardsConversion(Integer[] greenCardsConversion) {
 		this.greenCardsConversion = greenCardsConversion;
+	}
+
+	public TowerTileWidget[][] getTowerTileWidgetLists() {
+		return towerTileWidgetLists;
 	}
 
 	public Integer[] getBlueCardsConversion() {

@@ -5,6 +5,13 @@
     -fx-background-position: center;
 }
 
+#personalBoard{
+    -fx-background-image: url("./img/personalboard.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
 #paymentSelection{
     -fx-background-image: url("./img/lightbrownBG.jpg")
 }

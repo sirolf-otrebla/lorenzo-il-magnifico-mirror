@@ -762,7 +762,7 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Scomuniche");
 		lastPos = new TerminalPosition(lastPos.getColumn() ,lastPos.getRow() + 1);
 		secondColumn.add(lastPos);
-		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte leader");
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Carte leaders");
 		lastPos = new TerminalPosition(lastPos.getColumn() ,lastPos.getRow() + 1);
 		secondColumn.add(lastPos);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
