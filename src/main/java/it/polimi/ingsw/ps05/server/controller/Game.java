@@ -4,13 +4,12 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.cards.LeaderCard;
+import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class Game implements Observer {
 
@@ -25,17 +24,18 @@ public class Game implements Observer {
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
     private Round state;
-
-
+    private DraftController draftController;
+    private Thread draftControllerThread;
+    private static final int MAX_LEADER_CARDS = 4;
     private boolean useCompleteRules = true;
     private boolean useCustomBonusTiles = false;
-
     public static final int FAM_DIM = 4;
 
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
         this.id = id;
+
         this.useCompleteRules = useCompleteRules;
         this.useCustomBonusTiles = useCustomBonusTiles;
         this.clientHashMap = new HashMap<Integer, PlayerClient>();
@@ -44,21 +44,23 @@ public class Game implements Observer {
             client.setInGame(this);
         }
         this.excommList = new ArrayList<>();
-
     }
 
-    public void start(){
-
-        this.flowCtrl = new GameFlowController(this);
-        this.flowCrlThread = new Thread(flowCtrl);
+    public void start() throws InterruptedException {
         ArrayList<Player> players = new ArrayList<>();
         for (int i = 0; i < clientHashMap.size(); i++) {
             clientHashMap.get(i).BuildPlayer(ColorEnumeration.values()[i]);
             players.add(clientHashMap.get(i).getPlayer());
         }
+        this.flowCtrl = new GameFlowController(this);
+        this.flowCrlThread = new Thread(flowCtrl);
         this.setup = new GameSetup(players, this);
         this.gBoard = this.setup.getBoard();
         tManager = this.setup.getTurnSetup();
+        draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
+        this.draftControllerThread = new Thread(draftController);
+        this.draftControllerThread.start();
+        draftControllerThread.join();
         this.flowCrlThread.start();
     }
 

@@ -198,6 +198,12 @@ public class Player implements PlayerRelated, VisitableFromView {
 		throw new MissingCardException();
 	}
 
+	public void putLeaderCard(LeaderCard leaderCard){
+    	this.leaderCardHashMap.put(leaderCard.getReferenceID(), leaderCard);
+	}
+
+
+
 	public void resetPermanentEffects(){
 		for (PermanentBonus r:
 			 getPermanentBonusList()) {

@@ -91,5 +91,7 @@ public class LeaderCard implements Card {
 		    ((SimpleEffect)effects.get(i)).apply(player);
 	}
 
-
+	public Integer getReferenceID() {
+		return referenceID;
+	}
 }

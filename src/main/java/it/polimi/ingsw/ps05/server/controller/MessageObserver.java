@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.GameMessage;
+import it.polimi.ingsw.ps05.net.message.LeaderDraftMessage;
 import it.polimi.ingsw.ps05.net.message.LobbyMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
@@ -48,6 +49,11 @@ public class MessageObserver implements Observer, NetMessageVisitor {
         if (this.client.isInGame()){
             //TODO
         }
+
+    }
+
+    @Override
+    public void visit(LeaderDraftMessage msg) {
 
     }
 }

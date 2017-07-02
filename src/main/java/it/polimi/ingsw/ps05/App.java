@@ -17,16 +17,120 @@ import it.polimi.ingsw.ps05.client.view.gui.Login;
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+	public static String[] serverAliases = {
+			"server",
+			"Server",
+			"s",
+			"S",
+			"limServer",
+			"LimServer",
+			"Limserver",
+			"limserver"
+	};
+	public static String[] clientAliases = {
+			"client",
+			"Client",
+			"C",
+			"c",
+			"limClient",
+			"Limclient",
+			"limclient",
+			"LimClient"
+	};
+
+
+	public static void main(String[] args) {
+		System.out.println("Which one do you want to start?");
+		System.out.println("LimServer \t LimClient");
+		Scanner scanner = new Scanner(System.in);
+		String in = scanner.nextLine();
+		boolean started = false;
+		for (String s : App.serverAliases) {
+			if (s.equals(in)) {
+				//TODO START SERVER
+				started = true;
+				System.out.println("use complete rules? ");
+				in = scanner.nextLine();
+				boolean useCompleteRules = true;
+				boolean useCustomBonusTiles = false;
+				if (in.equals("y") || in.equals("yes")) {
+					 useCompleteRules = true;
+				}
+				else {
+					useCompleteRules = false;
+				}
+				System.out.println("use custom Bonus Tiles? ");
+				in = scanner.nextLine();
+				if (in.equals("y") || in.equals("yes")) {
+					useCustomBonusTiles = true;
+				}
+				else {
+					useCustomBonusTiles = false;
+				}
+				System.out.println("please insert maximum lobby timeout");
+				in = scanner.nextLine();
+				Server server = Server.getInstance();
+				server.startServer(new Integer(in), useCompleteRules, useCustomBonusTiles);
+			}
+		}
+		if (!started) {
+			for (String s : App.clientAliases) {
+				if (s.equals(in)) {
+
+					//TODO START CLIENT
+				}
+
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    	/*
+		CHE ROBA È QUESTA, PENSATE PRIMA DI FARE LE COSE.
+
     	new Thread() {
 			@Override
 			public void run(){
 				javafx.application.Application.launch(GUIMain.class);
 			}
 		}.start();
+		*/
+
+
     	//LoginController l = new LoginController();
     	/*Scanner keyboard = new Scanner(System.in);
     	
@@ -57,7 +161,6 @@ public class App
     		//istanzia la gui
     		view.instanceGUI();
     	}*/
-    }
-}
+
 
 

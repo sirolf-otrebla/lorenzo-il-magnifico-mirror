@@ -46,6 +46,12 @@ public class CommonJsonParser {
 		this.game = game;
 	}
 
+	public ArrayList<LeaderCard> loadLeaderCards(){
+		//TODO
+
+		return null;
+	}
+
 	//XXX Metodi per caricamento board
 	public Board loadBoard(String path) {
 		File file = new File(path);
