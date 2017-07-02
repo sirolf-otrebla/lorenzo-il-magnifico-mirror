@@ -33,8 +33,9 @@ public class Lobby implements Observer {
 	}
 	
 	public void createGame(boolean useCompleteRules, boolean useCustomBonusTiles, PlayerClient player){
-		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId++);
-		game.addPlayer(player);
+		ArrayList<PlayerClient> pl = new ArrayList<>();
+		pl.add(player);
+		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId++, pl);
 		gameList.put(gameId, game);
 		removePlayerFromLobby(player);
 	}

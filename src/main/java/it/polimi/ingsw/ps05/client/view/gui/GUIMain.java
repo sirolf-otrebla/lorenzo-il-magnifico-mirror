@@ -16,6 +16,8 @@ import javafx.stage.*;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
+import java.io.File;
+
 public class GUIMain extends Application {
 
 
@@ -171,8 +173,8 @@ public class GUIMain extends Application {
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
-				playerMarker = new MarkerWidget(path + "marker-"
-						+ map.playerColorMap.get(j) + ".png");
+				File f = new File(path + "marker-" + map.playerColorMap.get(j) + ".png");
+				playerMarker = new MarkerWidget(f.toURI().toURL().toString());
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
 			}
