@@ -13,5 +13,7 @@ public interface NetMessageVisitor {
 
     void visit(LeaderDraftMessage msg);
 
+    void visit(AuthMessage msg);
+
 
 }

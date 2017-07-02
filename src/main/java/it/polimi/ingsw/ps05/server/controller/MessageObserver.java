@@ -1,10 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.message.GameMessage;
-import it.polimi.ingsw.ps05.net.message.LeaderDraftMessage;
-import it.polimi.ingsw.ps05.net.message.LobbyMessage;
-import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
@@ -55,5 +52,11 @@ public class MessageObserver implements Observer, NetMessageVisitor {
     @Override
     public void visit(LeaderDraftMessage msg) {
 
+    }
+
+    @Override
+    public void visit(AuthMessage msg) {
+        AuthListener listener = new AuthListener(this.client);
+        msg.acceptVisitor(listener);
     }
 }
