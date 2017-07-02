@@ -15,15 +15,18 @@ public class GraphicResources {
 
     public Map<Integer, String> playerColorMap = new HashMap<>(); // che cazzo è sta merda
 
-    private HashMap<ColorEnumeration, HashMap<ColorEnumeration, String>> familiarResPath = new HashMap<>();
+    static HashMap<ColorEnumeration, HashMap<ColorEnumeration, String>> familiarResPath = new HashMap<>();
 
-    private HashMap<Integer, String> diceColorMap = new HashMap<>();
+    static HashMap<Integer, ColorEnumeration> diceColorMap = new HashMap<>();
+
+    static HashMap<Integer, ColorEnumeration> cardColorMap = new HashMap<>();
 
 
 
     public GraphicResources() {
         buildFamiliarPathsMap();
         buildDiceColorMap();
+        buildCardColorMap();
     }
 
     private void buildFamiliarPathsMap() {
@@ -54,8 +57,15 @@ public class GraphicResources {
             famColors[i - 5] = ColorEnumeration.values()[i];
         i = 0;
         for (ColorEnumeration f: famColors) {
-            this.diceColorMap.put(i, f.toString());
+            this.diceColorMap.put(i, f);
         }
+    }
+
+    private void buildCardColorMap() {
+        this.cardColorMap.put(0, ColorEnumeration.Green);
+        this.cardColorMap.put(1, ColorEnumeration.Blue);
+        this.cardColorMap.put(2, ColorEnumeration.Yellow);
+        this.cardColorMap.put(3, ColorEnumeration.Violet);
     }
 
     public String getFamiliarPath(ColorEnumeration player, ColorEnumeration familyMember){
@@ -63,7 +73,11 @@ public class GraphicResources {
 
     }
 
-    public String getDiceColor(int i) {
+    public ColorEnumeration getDiceColor(int i) {
         return diceColorMap.get(i);
+    }
+
+    public ColorEnumeration getCardColor(int i) {
+        return cardColorMap.get(i);
     }
 }
