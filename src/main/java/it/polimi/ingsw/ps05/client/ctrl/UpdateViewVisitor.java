@@ -63,7 +63,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
                     widget.setLegal(true);
                     widget.getLegalFamilyMemberList().add(f.getColor());
                 }
-            if(widget.getAssociatedCard().getReferenceID() != tile.getCard().getReferenceID())
+            if(widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
                 widget.setAssociatedCard(new CardWidget(tile.getCard().getReferenceID()));
             // altro da aggiungere?
         }
