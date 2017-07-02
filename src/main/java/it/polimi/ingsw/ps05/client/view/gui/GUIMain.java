@@ -246,12 +246,11 @@ public class GUIMain extends Application {
 
 		Scene mainScene = new Scene(root);
 
-		File file = new File("structure.fxml");
-		ClassLoader cl = this.getClass().getClassLoader();
-		System.out.println(cl.getResource("./").toString());
+		File file = new File("./src/main/res/structure.fxml");
+		System.out.println(file.exists());
 
-		//mainScene.getStylesheets().addAll(cl.getResource("fx-style.css").toExternalForm());
-		mainScene.getStylesheets().add("./src/main/res/fx-style.css");
+		File f = new File("./src/main/res/fx-style.css");
+		mainScene.getStylesheets().add(f.toURI().toURL().toString());
 		stage.setScene(mainScene);
 		stage.sizeToScene();
 		stage.show();
