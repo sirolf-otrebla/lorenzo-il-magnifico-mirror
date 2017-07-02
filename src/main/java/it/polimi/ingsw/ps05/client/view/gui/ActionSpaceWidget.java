@@ -121,6 +121,10 @@ public class ActionSpaceWidget {
         return minDie;
     }
 
+    public void setMinDie(int minDie) {
+        this.minDie = minDie;
+    }
+
     public Circle getOccupationCircle() {
         return this.occupationCircle;
     }
@@ -152,4 +156,5 @@ public class ActionSpaceWidget {
     public void setOccupantPlayerId(ColorEnumeration occupantPlayerId) {
         this.occupantPlayerId = occupantPlayerId;
     }
+
 }

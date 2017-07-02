@@ -37,8 +37,14 @@ public class Lobby implements Observer {
 	}
 	
 	public void createGame(boolean useCompleteRules, boolean useCustomBonusTiles, PlayerClient player){
+<<<<<<< HEAD
+		ArrayList<PlayerClient> pl = new ArrayList<>();
+		pl.add(player);
+		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId++, pl);
+=======
 		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId +1, );
 		game.addPlayer(player);
+>>>>>>> branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico.git
 		gameList.put(gameId, game);
 		removePlayerFromLobby(player);
 	}

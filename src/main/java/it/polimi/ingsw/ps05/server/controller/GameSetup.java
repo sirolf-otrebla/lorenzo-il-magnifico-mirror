@@ -18,7 +18,7 @@ public class GameSetup {
 	ArrayList<BonusTile> bonusTiles;
 	CommonJsonParser parser;
 	
-	//TODO draft carte leader
+	//TODO draft carte leaders
 	//TODO scelta pezzo aggiuntivo plancia
 	//TODO scelta regole
 	

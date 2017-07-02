@@ -1,8 +1,10 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.cards.Card;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
@@ -17,28 +19,32 @@ public class CardWidget {
     public static final double CARD_MIN_HEIGHT = 100;
     public static final double CARD_MIN_WIDTH = 70;
 
-    private int referenceID;
+    private int referenceId;
     private ImageView cardImage;
     private String imagePath;
     private String cardName;
     private boolean morePaymentOptions;
     private boolean taken;
 
-    public CardWidget(Integer referenceID) {
-        this.referenceID = referenceID;
-        //TODO FINIRE COSTRUTTORE E SETTARE PATH
 
+    public CardWidget(Integer referenceId) {
+        this.referenceId = referenceId;
     }
 
-    public CardWidget(String path) {
+    public CardWidget(Integer referenceId, String path) {
+        this.referenceId = referenceId;
         Image i = new Image(path, CARD_MIN_WIDTH * resize, CARD_MIN_HEIGHT * resize, true, true);
         cardImage = new ImageView();
         cardImage.setImage(i);
 
-        cardImage.setOnMouseClicked((MouseEvent e) -> {
+        cardImage.setOnMouseEntered((MouseEvent e) -> {
             /* Actions to be performed when the card is clicked once */
             //TODO: implementare lo zoom
         });
+    }
+
+    public void addToPersonalBooard() {
+
     }
 
     public void repaint() {
@@ -55,8 +61,8 @@ public class CardWidget {
         return cardName;
     }
 
-    public void setReferenceID(int referenceID) {
-        this.referenceID = referenceID;
+    public void setReferenceId(int referenceId) {
+        this.referenceId = referenceId;
     }
 
     public void setImagePath(String imagePath) {
@@ -91,7 +97,7 @@ public class CardWidget {
         this.cardImage = cardImage;
     }
 
-    public int getReferenceID() {
-        return referenceID;
+    public int getReferenceId() {
+        return referenceId;
     }
 }
