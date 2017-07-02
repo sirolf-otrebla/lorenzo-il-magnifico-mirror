@@ -1,0 +1,10 @@
+#root{
+    -fx-background-image: url("./img/board.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+#paymentSelection{
+    -fx-background-image: url("./img/lightbrownBG.jpg")
+}

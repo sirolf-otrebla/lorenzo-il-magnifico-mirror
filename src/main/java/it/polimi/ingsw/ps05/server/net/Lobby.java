@@ -5,7 +5,11 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 import java.util.*;
 
 public class Lobby implements Observer {
-	private static Lobby instance = null;
+	@Override
+	public void update(Observable o, Object arg) {
+
+	}
+	/*private static Lobby instance = null;
 	private ArrayList<PlayerClient> playerInLobby= new ArrayList<PlayerClient>();
 	private HashMap<Integer, Game> gameList= new HashMap<>();
 
@@ -33,9 +37,14 @@ public class Lobby implements Observer {
 	}
 	
 	public void createGame(boolean useCompleteRules, boolean useCustomBonusTiles, PlayerClient player){
+<<<<<<< HEAD
 		ArrayList<PlayerClient> pl = new ArrayList<>();
 		pl.add(player);
 		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId++, pl);
+=======
+		Game game = new Game(useCompleteRules,useCustomBonusTiles, gameId +1, );
+		game.addPlayer(player);
+>>>>>>> branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico.git
 		gameList.put(gameId, game);
 		removePlayerFromLobby(player);
 	}
@@ -62,5 +71,5 @@ public class Lobby implements Observer {
 	private void EnterGame(Integer GameId, PlayerClient playerClient){
 		this.gameList.get(GameId).addPlayer(playerClient);
 		this.removePlayerFromLobby(playerClient);
-	}
+	}*/
 }

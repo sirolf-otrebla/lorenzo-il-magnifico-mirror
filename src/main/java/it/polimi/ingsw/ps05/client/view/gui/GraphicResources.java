@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class GraphicResources {
 
-    public Map<Integer, String> playerColorMap = new HashMap<>();
+    public Map<Integer, String> playerColorMap = new HashMap<>(); // che cazzo è sta merda
 
     private HashMap<ColorEnumeration, HashMap<ColorEnumeration, String>> familiarResPath = new HashMap<>();
 
