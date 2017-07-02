@@ -28,6 +28,7 @@ public class ActionSpaceWidget {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
         isOccupied = false;
         this.minDie = minimumDie;
+        setupGestureTarget();
     }
 
     public void setupGestureTarget() {

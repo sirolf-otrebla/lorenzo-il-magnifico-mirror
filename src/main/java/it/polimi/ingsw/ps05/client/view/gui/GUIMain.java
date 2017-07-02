@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -18,8 +19,6 @@ import java.io.File;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
-import java.io.File;
-
 public class GUIMain extends Application {
 
 
@@ -31,7 +30,7 @@ public class GUIMain extends Application {
 	private static final String path = "./src/main/res/img/";
 
 	private FamiliarWidget[] thisPlayerFamiliarWidgetList = new FamiliarWidget[4];
-	private ColorEnumeration thisPlayerColor;
+	private ColorEnumeration thisPlayerColor = ColorEnumeration.Red; // TODO solo da esempio
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
@@ -50,7 +49,8 @@ public class GUIMain extends Application {
 	};
 
 	private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
-	private final VBox[] towerOccupationCirclesArray = new VBox[4];
+	private CardOnBoardWidget[][] cardOnBoardWidgetLists = new CardOnBoardWidget[4][4];
+	private final VBox[] towerOccupationCirclesBoxes = new VBox[4];
 	private final VBox[] towerCardSpacesArray = new VBox[4];
 
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
@@ -62,6 +62,7 @@ public class GUIMain extends Application {
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
 
+	private PersonalBoardWindow personalBoardWindow = new PersonalBoardWindow(this);
 
 
 
@@ -71,6 +72,8 @@ public class GUIMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception{
+
+		int i;
 
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		double screenWidth = primaryScreenBounds.getWidth();
@@ -86,16 +89,16 @@ public class GUIMain extends Application {
 			stage.setX(primaryScreenBounds.getMinX());
 			stage.setWidth(primaryScreenBounds.getWidth());
 			stage.setHeight(primaryScreenBounds.getWidth() / 1.75);
-			this.stageWidth = primaryScreenBounds.getWidth();
-			this.stageHeight = stageWidth / 1.75;
+			stageWidth = primaryScreenBounds.getWidth();
+			stageHeight = stageWidth / 1.75;
 		} else {
 			stage.setY(primaryScreenBounds.getMinY());
 			stage.setHeight(primaryScreenBounds.getHeight());
 			stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
-			this.stageHeight = primaryScreenBounds.getHeight();
-			this.stageWidth = stageHeight * 1.75;
+			stageHeight = primaryScreenBounds.getHeight();
+			stageWidth = stageHeight * 1.75;
 		}
-		resize = this.stageWidth / ORIGINAL_WIDTH;
+		resize = stageWidth / ORIGINAL_WIDTH;
 
 		/* Creating root pane */
 		final Pane root = new Pane();
@@ -108,11 +111,6 @@ public class GUIMain extends Application {
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
 
-		/* DA POPOLARE
-		for (int i = 0; i < 4; i++){
-			towerCardSpacesArray[i] = new VBox();
-		}
-		*/
 
         /* Adding playable familiars */
         /*
@@ -126,45 +124,22 @@ public class GUIMain extends Application {
 			j++;
 		}
 		*/
-		familiarWidgetLists[0][0] = new FamiliarWidget(path + "redpl/black.png");
-		insertDraggableFamiliar(familiarWidgetLists[0][0], root, 66.07, 21.87);
-		/*
-		insertDraggableFamiliar(familiarWidgetLists[0][1] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/white.png"), root, 70.5357, 21.87);
-		insertDraggableFamiliar(familiarWidgetLists[0][2] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/orange.png"), root, 75, 21.87);
-		insertDraggableFamiliar(familiarWidgetLists[0][3] = new FamiliarWidget("it.polimi.ingsw.ps05/client/view/gui/img/redpl/neutral.png"), root, 79.4643, 21.87);
-		*/
 
-        /* Adding tower action spaces */
+		thisPlayerFamiliarWidgetList[0] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/black.png");
+		thisPlayerFamiliarWidgetList[1] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/white.png");
+		thisPlayerFamiliarWidgetList[2] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/orange.png");
+		thisPlayerFamiliarWidgetList[3] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/neutral.png");
+		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[0], root, 66.07, 21.87);
+		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[1], root, 70.5357, 21.87);
+		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[2], root, 75, 21.87);
+		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[3], root, 79.4643, 21.87);
 
-		/*for (int i = 0; i < towerTileWidgetLists.length ; i++){
-			for(int j = 0; j < towerTileWidgetLists[i].length; j++){
-				towerTileWidgetLists[i][j] = new TowerTileWidget(2*i + 1);
-			}
-		} */
-		for (int j = 0; j < this.towerTileWidgetLists.length ; j++) {
-			TowerTileWidget[] tower = towerTileWidgetLists[j];
-			this.towerOccupationCirclesArray[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
-			towerOccupationCirclesArray[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
-			for (int i = 0; i < tower.length; i++){
-				tower[i] = new TowerTileWidget(2*i + 1);
-				towerOccupationCirclesArray[j].getChildren().add(tower[i].getOccupationCircle());
-				//XXX eccezione in questa riga, ho popolato towerCardSpacesArray, ma widget non ha nessuna carta
-				//towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
-			}
-		}
-
-		//TODO aggiungere binding
-		towerOccupationCirclesArray[0].setLayoutX(stageWidth * 0.091071); // green tower
-		towerOccupationCirclesArray[1].setLayoutX(stageWidth * 0.2); // blue tower
-		towerOccupationCirclesArray[2].setLayoutX(stageWidth * 0.309821); // yellow tower
-		towerOccupationCirclesArray[3].setLayoutX(stageWidth * 0.41875); // violet tower
-
-        for (int i = 0; i < familiarWidgetLists.length; i++)
+        for (i = 0; i < familiarWidgetLists.length; i++)
             for (int j = 0; j < familiarWidgetLists[i].length; j++)
                 familiarWidgetLists[i][j] = new FamiliarWidget(
                         ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
-        for (int i = 0; i < this.marketSpaceWidgets.length; i++) marketSpaceWidgets[i] =
+        for (i = 0; i < this.marketSpaceWidgets.length; i++) marketSpaceWidgets[i] =
 				new MarketSpaceWidget(1);
 
         /* Adding market action spaces  (Si adda pure quello che vuoi ma ricordati di inizializzare prima... )*/
@@ -177,22 +152,41 @@ public class GUIMain extends Application {
 		insertActionSpace(productionSpace, root, 1, 2.7679, 82.5); // production
 		insertActionSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
 
-		/* Adding tower cards */
-		//TODO
+		/* Adding tower cards and tower action spaces */
+		for(i = 0; i < 4; i++) {
+			// instantiating boxes
+			towerOccupationCirclesBoxes[i] = new VBox(13.0 * resize); // 11.0937 = distanza verticale % tra action space
+			towerOccupationCirclesBoxes[i].setLayoutX((7.3214 / 100 + 10.9 * i) * stageWidth); // 10.9 = distanza orizzantale % tra le colonne di action space
+			towerOccupationCirclesBoxes[i].setLayoutY(7.1875 / 100 * stageHeight);
+			root.getChildren().add(towerOccupationCirclesBoxes[i]);
+
+			towerCardSpacesArray[i] = new VBox(0.06 * resize); //TODO 0.06 valore di prova, controllare distanza
+			towerCardSpacesArray[i].setLayoutX((0.8684 / 100 + 10.9 * i) * stageWidth);
+			towerCardSpacesArray[i].setLayoutY(1.4168 / 100 * stageHeight);
+			root.getChildren().add(towerCardSpacesArray[i]);
+			for(int j = 0; j < 4; j++) {
+				// instantiating widgets
+				towerTileWidgetLists[i][j] = new TowerTileWidget(7 - 2*j);
+				towerOccupationCirclesBoxes[i].getChildren().add(towerTileWidgetLists[i][j].getOccupationCircle());
+
+				cardOnBoardWidgetLists[i][j] = new CardOnBoardWidget(); //TODO capire se popolare subito con le immagini o se si aggiungono dopo
+				// towerCardSpacesArray[i].getChildren().add(cardOnBoardWidgetLists[i][j].getCardImage());
+			}
+		}
+
 
         /* Adding points markers */
-        int j = 0;
+		i = 0;
         for (MarkerWidget[] track: this.markerWidgetList) {
-        	int i = 0;
-
+			int j = 0;
 			if(i < 2) {
-				this.trackBoxesArray[i] = new HBox(20);
+				this.trackBoxesArray[i] = new HBox(12 * resize);
 			} else {
-				this.trackBoxesArray[i] = new VBox(20);
+				this.trackBoxesArray[i] = new VBox(12 * resize);
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
-				String thisPath =path + "marker-" + this.playerColorArray[i].toString() + ".png";
+				String thisPath = path + "marker-" + this.playerColorArray[i].toString() + ".png";
 				playerMarker = new MarkerWidget(thisPath);
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
@@ -201,16 +195,18 @@ public class GUIMain extends Application {
 		}
 
 		/****** MODO 1 ******/
+		// Play order markers
+		this.trackBoxesArray[0].setLayoutX((48.1 / 100) * stageWidth);
+		this.trackBoxesArray[0].setLayoutY((43.5 / 100) * stageHeight);
 		// Faith markers
-		for(int i = 0; i < trackBoxesArray.length; i++) this.trackBoxesArray[i] = new Pane();
-		this.trackBoxesArray[1].setLayoutX((51.7857 / 100) * stageWidth);
-		this.trackBoxesArray[1].setLayoutY((68.4375 / 100) * stageHeight);
+		this.trackBoxesArray[1].setLayoutX((50.1857 / 100) * stageWidth);
+		this.trackBoxesArray[1].setLayoutY((66.0375 / 100) * stageHeight);
 		// Military markers
-		this.trackBoxesArray[2].setLayoutX((47.9464 / 100) * stageWidth);
-		this.trackBoxesArray[2].setLayoutY((15.3125 / 100) * stageHeight);
+		this.trackBoxesArray[2].setLayoutX((46.8064 / 100) * stageWidth);
+		this.trackBoxesArray[2].setLayoutY((14.4125 / 100) * stageHeight);
 		// Victory markers
-		this.trackBoxesArray[3].setLayoutX((60.2679 / 100) * stageWidth);
-		this.trackBoxesArray[3].setLayoutY((15.3125 / 100) * stageHeight);
+		this.trackBoxesArray[3].setLayoutX((59.2079 / 100) * stageWidth);
+		this.trackBoxesArray[3].setLayoutY((14.4125 / 100) * stageHeight);
 
 		/****** MODO 2 (binding) ******/
 		// Faith markers
@@ -226,8 +222,14 @@ public class GUIMain extends Application {
 
 		/* Adding player buttons */
 		final HBox commands = new HBox(50 * resize);
+
 		final Button showCardsButton = new Button("Carte sviluppo");
+		showCardsButton.setDefaultButton(false);
+		showCardsButton.setOnAction((ActionEvent e) -> {
+			this.personalBoardWindow.display(stageHeight);
+		});
 		final Button showLeaderButton = new Button("Carte Leader");
+
 		commands.getChildren().addAll(showCardsButton, showLeaderButton);
 
 		/****** MODO 1 ******/
@@ -254,6 +256,26 @@ public class GUIMain extends Application {
 		stage.setScene(mainScene);
 		stage.sizeToScene();
 		stage.show();
+
+
+
+
+
+		/* Adding tower action spaces */
+
+		/*
+		for (int j = 0; j < this.towerTileWidgetLists.length ; j++) {
+			TowerTileWidget[] tower = towerTileWidgetLists[j];
+			this.towerOccupationCirclesBoxes[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
+			towerOccupationCirclesBoxes[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
+			for (i = 0; i < tower.length; i++){
+				tower[i] = new TowerTileWidget(2*i + 1);
+				towerOccupationCirclesBoxes[j].getChildren().add(tower[i].getOccupationCircle());
+				//XXX eccezione in questa riga, ho popolato towerCardSpacesArray, ma widget non ha nessuna carta
+				//towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
+			}
+		}
+		*/
 	}
 
 	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double percX, double percY) {
@@ -461,6 +483,14 @@ public class GUIMain extends Application {
 
 		faithBox.setLayoutX(580);
 		faithBox.setLayoutY(438);
+		*/
+
+	//TODO aggiungere binding
+		/*
+		towerOccupationCirclesBoxes[0].setLayoutX(stageWidth * 0.091071); // green tower
+		towerOccupationCirclesBoxes[1].setLayoutX(stageWidth * 0.2); // blue tower
+		towerOccupationCirclesBoxes[2].setLayoutX(stageWidth * 0.309821); // yellow tower
+		towerOccupationCirclesBoxes[3].setLayoutX(stageWidth * 0.41875); // violet tower
 		*/
 
 
