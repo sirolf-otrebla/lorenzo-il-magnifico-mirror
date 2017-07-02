@@ -14,6 +14,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.*;
 
 
+import java.io.File;
+
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 
 public class GUIMain extends Application {
@@ -37,6 +39,13 @@ public class GUIMain extends Application {
 	private Integer[] greenCardsConversion = new Integer[6];
 	private Integer[] blueCardsConversion = new  Integer[6];
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
+
+	private ColorEnumeration[] playerColorArray = {
+			ColorEnumeration.Red,
+			ColorEnumeration.Green,
+			ColorEnumeration.Blue,
+			ColorEnumeration.Yellow
+	};
 
 	private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
 	private final VBox[] towerOccupationCirclesArray = new VBox[4];
@@ -121,19 +130,22 @@ public class GUIMain extends Application {
 		*/
 
         /* Adding tower action spaces */
-		for (TowerTileWidget[] tower: this.towerTileWidgetLists) {
-			int i = 0;
-			int j = 0;
+
+		/*for (int i = 0; i < towerTileWidgetLists.length ; i++){
+			for(int j = 0; j < towerTileWidgetLists[i].length; j++){
+				towerTileWidgetLists[i][j] = new TowerTileWidget(2*i + 1);
+			}
+		} */
+		for (int j = 0; j < this.towerTileWidgetLists.length ; j++) {
+			TowerTileWidget[] tower = towerTileWidgetLists[j];
 			this.towerOccupationCirclesArray[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
 			towerOccupationCirclesArray[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
-			for (TowerTileWidget widget : tower) {
-				widget = new TowerTileWidget(2*i + 1);
-				i++;
-				towerOccupationCirclesArray[j].getChildren().add(widget.getOccupationCircle());
+			for (int i = 0; i < tower.length; i++){
+				tower[i] = new TowerTileWidget(2*i + 1);
+				towerOccupationCirclesArray[j].getChildren().add(tower[i].getOccupationCircle());
 				//XXX eccezione in questa riga, ho popolato towerCardSpacesArray, ma widget non ha nessuna carta
-				towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
+				//towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
 			}
-			j++;
 		}
 
 		//TODO aggiungere binding
@@ -143,11 +155,13 @@ public class GUIMain extends Application {
 		towerOccupationCirclesArray[3].setLayoutX(stageWidth * 0.41875); // violet tower
 
         for (int i = 0; i < familiarWidgetLists.length; i++)
-            for (int j = 0; i < familiarWidgetLists[i].length; j++)
+            for (int j = 0; j < familiarWidgetLists[i].length; j++)
                 familiarWidgetLists[i][j] = new FamiliarWidget(
                         ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
-        /* Adding market action spaces */
+        for (int i = 0; i < this.marketSpaceWidgets.length; i++) marketSpaceWidgets[i] =
+				new MarketSpaceWidget(1);
+        /* Adding market action spaces  (Si adda pure quello che vuoi ma ricordati di inizializzare prima... )*/
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
 		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
 		insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
@@ -161,9 +175,10 @@ public class GUIMain extends Application {
 		//TODO
 
         /* Adding points markers */
+        int j = 0;
         for (MarkerWidget[] track: this.markerWidgetList) {
         	int i = 0;
-			int j = 0;
+
 			if(i < 2) {
 				this.trackBoxesArray[i] = new HBox(20);
 			} else {
@@ -171,8 +186,8 @@ public class GUIMain extends Application {
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (MarkerWidget playerMarker: track) {
-				playerMarker = new MarkerWidget(path + "marker-"
-						+ map.playerColorMap.get(j) + ".png");
+				String thisPath =path + "marker-" + this.playerColorArray[i].toString() + ".png";
+				playerMarker = new MarkerWidget(thisPath);
 				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
 				j++;
 			}
@@ -180,6 +195,7 @@ public class GUIMain extends Application {
 
 		/****** MODO 1 ******/
 		// Faith markers
+		for(int i = 0; i < trackBoxesArray.length; i++) this.trackBoxesArray[i] = new Pane();
 		this.trackBoxesArray[1].setLayoutX((51.7857 / 100) * stageWidth);
 		this.trackBoxesArray[1].setLayoutY((68.4375 / 100) * stageHeight);
 		// Military markers
@@ -222,7 +238,10 @@ public class GUIMain extends Application {
 		*/
 
 		Scene mainScene = new Scene(root);
-		mainScene.getStylesheets().addAll(this.getClass().getResource("style-prova.css").toExternalForm());
+		File file = new File("structure.fxml");
+		ClassLoader cl = this.getClass().getClassLoader();
+		System.out.println(cl.getResource("./").toString());
+		mainScene.getStylesheets().addAll(cl.getResource("fx-style.css").toExternalForm());
 
 		stage.setScene(mainScene);
 		stage.sizeToScene();

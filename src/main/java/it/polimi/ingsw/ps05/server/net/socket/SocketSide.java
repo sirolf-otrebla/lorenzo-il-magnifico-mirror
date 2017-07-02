@@ -30,7 +30,7 @@ public class SocketSide implements Runnable {
 				System.out.println("quis");
 				PlayerClient p = new PlayerClient(c, id++);
 				connected.add(p);
-				Lobby.getInstance().addPlayerToLobby(p);
+				/*Lobby.getInstance().addPlayerToLobby(p);*/
 				Thread t = new Thread(p);
 				t.start();
 			} catch (IOException e) {

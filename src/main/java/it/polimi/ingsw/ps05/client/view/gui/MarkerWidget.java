@@ -8,6 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
@@ -39,9 +42,11 @@ public class MarkerWidget {
 
     }
 
-    public MarkerWidget(String backgroundPath) {
+    public MarkerWidget(String backgroundPath) throws MalformedURLException {
 
-        imagePath = backgroundPath;
+        File file = new File(backgroundPath);
+
+        imagePath = file.toURI().toURL().toString();
         Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize, true, true);
         markerCircle = new Circle(MARKER_RADIUS * resize);
         markerCircle.setFill(new ImagePattern(markerImage));

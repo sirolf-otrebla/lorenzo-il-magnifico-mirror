@@ -14,7 +14,8 @@ import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.controller.Game;
-import junit.framework.*;
+ import  junit.framework.*;
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Random;
 /**
  * Created by Alberto on 25/05/2017.
  */
-public class ActionTest extends TestCase{
+public class ActionTest extends TestCase {
 
 	private Action testActl;
 	private Player testPl;
@@ -106,7 +107,7 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		Game game = new Game(true, true, numP);
+		Game game = new Game(true, true, numP, null ); //TODO SISTEMARE
 		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		Board board = gameSetup.getBoard();
@@ -141,7 +142,7 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		Game game = new Game(true, true, numP);
+		Game game = new Game(true, true, numP, null);
 		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		Board board = gameSetup.getBoard();
@@ -173,7 +174,7 @@ public class ActionTest extends TestCase{
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
 
-		Game game = new Game(true, true, numP);
+		Game game = new Game(true, true, numP, null);
 		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
@@ -248,7 +249,7 @@ public class ActionTest extends TestCase{
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		Game game = new Game(true, true, numP);
+		Game game = new Game(true, true, numP, null);
 		game.start();
 		GameSetup gameSetup = new GameSetup(list,game);
 		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
