@@ -1,25 +1,19 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
+import it.polimi.ingsw.ps05.client.net.ClientMessageTaker;
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
-import it.polimi.ingsw.ps05.client.view.cli.CliActionSpaceViewObject;
-import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
-import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
+import it.polimi.ingsw.ps05.client.view.gui.Login;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
-import it.polimi.ingsw.ps05.model.Board;
-import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-
-import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * Created by Alberto on 27/06/2017.
  */
-public class Client {
+public class Client implements Runnable{
 
     /* event observers */
     private MoveFamiliarListener moveFamiliarListener = new MoveFamiliarListener();
@@ -30,10 +24,14 @@ public class Client {
     private GameStatus gameStatus;
     private String username;
     private Integer id;
+    private ClientMessageTaker messageVisitor;
+
     private Client(){
+        messageVisitor = new ClientMessageTaker();
         //TODO ATTIVA LOBBY
         //TODO GESTISCE CONNESSIONE
     	getConnection();
+
     }
 
     private void getConnection(){
@@ -87,4 +85,16 @@ public class Client {
 
     }
 
+    public void launchLoginForm(){
+        Login.main(null);
+    }
+
+    public ClientMessageTaker getMessageTaker() {
+        return messageVisitor;
+    }
+
+    @Override
+    public void run() {
+
+    }
 }

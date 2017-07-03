@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 /**
  * Created by Alberto on 26/06/2017.
  */
-public abstract class Connection {
+public interface Connection {
 
 	public abstract void listen();
 

@@ -134,8 +134,6 @@ public class CLIMain implements LimView, Runnable{
 		for (ActionSpace s : this.board.getActSpacesMap().values()) {
 			s.setOccupied(this.player.getFamilyMember(ColorEnumeration.White));
 			this.player.getFamilyMember(ColorEnumeration.White).setPosition(s);
-			System.out.println("s : " + s.isOccupied() + " " + s.getId() + " " + s.getClass());
-
 		}
 		for (TowerTileInterface t : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
 			((TileWithEffect)t).setOccupied(this.player.getFamilyMember(ColorEnumeration.Black));
@@ -171,14 +169,17 @@ public class CLIMain implements LimView, Runnable{
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
-					System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+
 					try {
 						if (!ratioSet){
 							ratioWidth = PREFERRED_WIDTH / newSize.getColumns();
 							ratioHeight = PREFERRED_HEIGHT / newSize.getRows();
+							if (ratioHeight > 2) ratioHeight = 2;
+							if (ratioWidth > 1) ratioWidth = (float) 1;
 							ratioSet = true;
 						}
-
+						System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+						System.out.println("ratio width: " + ratioWidth + "ratio height: " + ratioHeight);
 						terminal.clearScreen();
 						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
 						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
@@ -357,7 +358,6 @@ public class CLIMain implements LimView, Runnable{
 				System.out.println("Default");
 				break;
 			}
-			System.out.println(terminal.getCursorPosition() + " " + currentColBoard + " " + currentRowBoard);
 			if (inMyStats){
 				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 			} else if (inPlayers){
@@ -677,7 +677,6 @@ public class CLIMain implements LimView, Runnable{
 							(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/32,
 							6*height/16));
 				} catch (IndexOutOfBoundsException e){
-					System.out.println("Eccezione consiglio");
 					list = new ArrayList<TerminalPosition>();
 					list.add(new TerminalPosition((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16 +
 							width/32,
@@ -711,16 +710,12 @@ public class CLIMain implements LimView, Runnable{
 
 	private void checkPositionCorrect(){
 		for (ArrayList<TerminalPosition> column : mapBoard){
-			System.out.println("Righe: " + column.size());
 			for (int i = 0; i < column.size() - 1; i++ ){
 				if (column.get(i).getRow() > column.get(i + 1).getRow()){
 					TerminalPosition infra = column.get(i);
 					column.set(i, column.get(i + 1));
 					column.set(i + 1, infra);
 				}
-			}
-			for (int i = 0; i < column.size(); i++ ){
-				System.out.println(column.get(i));
 			}
 		}
 	}
@@ -1286,7 +1281,6 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Occupanti: ");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		System.out.println("size: " + council.getOccupantList().size());
 		for (Familiar fam : council.getOccupantList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					fam.getRelatedPlayer().getUsername());
