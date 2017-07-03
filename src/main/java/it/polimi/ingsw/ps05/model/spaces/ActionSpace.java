@@ -82,6 +82,14 @@ public abstract class ActionSpace implements Serializable, VisitableFromView{
 	public Dice getDiceRequirement() {
 		return diceRequirement;
 	}
+	
+	public void temporarySetFree(){
+		isOccupied = false;
+	}
+	
+	public void temporarySetOccupied(){
+		isOccupied = true;
+	}
 
 	public void reset(){
 		isOccupied = false;

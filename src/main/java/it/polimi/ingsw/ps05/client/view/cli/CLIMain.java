@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
+import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -1303,10 +1305,10 @@ public class CLIMain implements LimView, Runnable{
 		chose.start();
 	}
 
-	private void choseDraftCard(ArrayList<?> cards, int width){
+	private ArrayList<?> choseDraftCard(ArrayList<?> cards, int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, SelectionTypeEnum.DRAFT);
-		chose.start();
+		return chose.start();
 	}
 
 	private void visualCard(ArrayList<?> cards, int width){
@@ -1317,5 +1319,26 @@ public class CLIMain implements LimView, Runnable{
 
 	public void setActive (boolean active){
 		this.meActive = active;
+	}
+	
+	public Integer getCardForDraft(List<Integer> list) throws IOException{
+		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
+		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
+		for (Integer i : list){
+			cardsToCheck.add(getLeaderWithID(i, allCards));
+		}
+		
+		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
+		
+		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
+	}
+	
+	public LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
+		for (LeaderCard l : cards){
+			if (l.getReferenceID() == id){
+				return l;
+			}
+		}
+		return null;
 	}
 }

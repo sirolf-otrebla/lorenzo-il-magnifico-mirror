@@ -1,0 +1,488 @@
+{
+	"LeaderCard": 
+	[
+		{
+			"CardName": "Francesco Sforza",
+			"ID": 1,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"VioletCard": 5
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"HarvestAction": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Ludovico Ariosto",
+			"ID": 2,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"BlueCard": 5
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"NoOccupiedSpace": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Filippo Brunelleschi",
+			"ID": 3,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"YellowCard": 5
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"NoTowerOccupiedGold": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Federico da Montefeltro",
+			"ID": 4,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"GreenCard": 5
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"FreeAction": 6
+				}
+			}
+		},
+
+		{
+			"CardName": "Girolamo Savonarola",
+			"ID": 5,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"GoldResource": 18
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"FaithResource": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Giovanni dalle Bande Nere",
+			"ID": 6,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"MilitaryResource": 12
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"WoodResource": 1,
+					"GoldResource": 1,
+					"StoneResource": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Sandro Botticelli",
+			"ID": 7,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"WoodResource": 10
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"MilitaryResource": 2,
+					"VictoryResource": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Michelangelo Buonarroti",
+			"ID": 8,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"StoneResource": 10
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"GoldResource": 3
+				}
+			}
+		},
+
+		{
+			"CardName": "Ludovico III Gonzaga",
+			"ID": 9,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"ServantResource": 15
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"PrivilegeBonus": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Leonardo da Vinci",
+			"ID": 10,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"BlueCard": 4,
+					"GreenCard": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"ProductionAction": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Pico della Mirandola",
+			"ID": 11,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"VioletCard": 4,
+					"YellowCard": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"GoldResourceCostBonus": -3
+				}
+			}
+		},
+
+		{
+			"CardName": "Sisto IV",
+			"ID": 12,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"WoodResource": 6,
+					"StoneResource": 6,
+					"ServantResource": 6,
+					"GoldResource": 6
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"FaithResource": 5
+				}
+			}
+		},
+
+		{
+			"CardName": "Lucreazia Borgia",
+			"ID": 13,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"BlueCard": 6
+				},
+
+				"Second": 
+				{
+					"GreenCard": 6
+				},
+
+				"Third": 
+				{
+					"YellowCard": 6
+				},
+
+				"Fourth": 
+				{
+					"VioletCard": 6
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"BonusDice": 
+					{
+						"First": 
+						{
+							"Color": "Black",
+							"ToAdd": true,
+							"Value": 2
+						},
+
+						"Second": 
+						{
+							"Color": "Orange",
+							"ToAdd": true,
+							"Value": 2
+						},
+
+						"Third": 
+						{
+							"Color": "White",
+							"ToAdd": true,
+							"Value": 2
+						}
+					}
+				}
+			}
+		},
+
+		{
+			"CardName": "Sigismondo Malatesta",
+			"ID": 14,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"MilitaryResource": 7,
+					"FaithResource": 3
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"BonusDice": 
+					{
+						"First": 
+						{
+							"Color": "Any",
+							"ToAdd": true,
+							"Value": 3
+						}
+					}
+				}
+			}
+		},
+
+		{
+			"CardName": "Lorenzo de Medici",
+			"ID": 15,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"VictoryResource": 35
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"CopyLeader": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Ludovico il Moro",
+			"ID": 16,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"BlueCard": 2,
+					"GreenCard": 2,
+					"YellowCard": 2,
+					"VioletCard": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"BonusDice": 
+					{
+						"First": 
+						{
+							"Color": "Black",
+							"ToAdd": false,
+							"Value": 5
+						},
+
+						"Second": 
+						{
+							"Color": "White",
+							"ToAdd": false,
+							"Value": 5
+						},
+
+						"Third": 
+						{
+							"Color": "Orange",
+							"ToAdd": false,
+							"Value": 5
+						}
+					}
+				}
+			}
+		},
+
+		{
+			"CardName": "Cesare Borgia",
+			"ID": 17,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"YellowCard": 3,
+					"GoldResource": 12,
+					"FaithResource": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"NoMilitaryPointsForGreen": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Santa Rita",
+			"ID": 18,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"FaithResource": 8
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"DoubleBonus": 0
+				}
+			}
+		},
+
+		{
+			"CardName": "Cosimo de Medici",
+			"ID": 19,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"YellowCard": 4,
+					"BlueCard": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"ServantResource": 3,
+					"VictoryResource": 1
+				}
+			}
+		},
+
+		{
+			"CardName": "Barolomeo Colleoni",
+			"ID": 20,
+			"Requirement": 
+			{
+				"First": 
+				{
+					"GreenCard": 4,
+					"VioletCard": 2
+				}
+			},
+
+			"Effect": 
+			{
+				"OnePerTurnEffect": 
+				{
+					"VictoryResource": 4
+				}
+			}
+		}
+	]
+}
