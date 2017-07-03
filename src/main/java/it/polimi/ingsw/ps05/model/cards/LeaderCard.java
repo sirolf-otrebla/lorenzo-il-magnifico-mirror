@@ -21,8 +21,6 @@ public class LeaderCard implements Card {
 
 	private final Integer referenceID;
 
-	private static int count = 0;
-
 	private Observer privilegeListener;
 
 	private boolean active = false;
