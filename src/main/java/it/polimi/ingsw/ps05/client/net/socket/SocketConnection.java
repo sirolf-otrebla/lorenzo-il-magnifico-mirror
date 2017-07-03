@@ -1,18 +1,21 @@
 package it.polimi.ingsw.ps05.client.net.socket;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.client.net.ClientMessageTaker;
 import it.polimi.ingsw.ps05.client.net.Connection;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.socket.Stream;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Observable;
 
 /**
  * Created by Alberto on 27/06/2017.
  */
-public class SocketConnection extends Connection{
+public class SocketConnection implements Connection {
 
-    public static final int port = 54322;
+    public static final int port = 11717;
 
     private Socket socket;
     private Stream stream;
@@ -20,9 +23,10 @@ public class SocketConnection extends Connection{
 
 
     //todo throwa o gestisce?
-    public SocketConnection(String server) throws IOException {
-        socket = new Socket(server, SocketConnection.port);
+    public SocketConnection(String server, int port) throws IOException {
+        socket = new Socket(server, port);
         this.stream = new Stream(this.socket);
+
     }
 
 
@@ -31,6 +35,14 @@ public class SocketConnection extends Connection{
     		while (true){
     			try {
 					message = stream.takeInData();
+					if (message != null){
+						synchronized (this) {
+							ClientMessageTaker messageTaker =
+									Client.getInstance().getMessageTaker();
+							messageTaker.setInputMessage(message);
+							messageTaker.getSem().release(1);
+						}
+					}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();
 				}
@@ -40,6 +52,7 @@ public class SocketConnection extends Connection{
 	@Override
 	public void send(NetMessage mess) {
 		try {
+			System.out.println("sto per inviare sullo stream");
 			stream.sendData(mess);
 		} catch (IOException e) {
 			e.printStackTrace();

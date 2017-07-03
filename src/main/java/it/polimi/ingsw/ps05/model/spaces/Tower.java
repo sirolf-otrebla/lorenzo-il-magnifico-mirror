@@ -58,6 +58,10 @@ public abstract class Tower implements Serializable, VisitableFromView {
 		return this.towerOccupiedGoldResource;
 	}
 	
+	public void setRentAmount(Integer value){
+		this.towerOccupiedGoldResource = new GoldResource(value);
+	}
+	
 	public HashMap<Integer, TowerTileInterface> getTiles(){
 		return this.tiles;
 	}

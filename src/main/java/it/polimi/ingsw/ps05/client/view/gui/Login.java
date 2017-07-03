@@ -7,18 +7,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -27,7 +22,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Login extends Application implements Observable{
+import java.util.ArrayList;
+
+public class Login extends Application implements Observable {
 	static boolean printed = false;
 
 	static StringProperty serverString = new SimpleStringProperty();
@@ -44,13 +41,15 @@ public class Login extends Application implements Observable{
 	static TextField serverTextField;
 	static TextField portTextField;
 	static Label connesso;
-	static RadioButton rb3,rb1,rb2;
+	static RadioButton rb3, rb1, rb2;
 	static RadioButton rb4;
 	static TextField userTextField;
 	static TextField pwBox;
-	static Button btn,btn1,btn2;
+	static Button btn, btn1, btn2;
+	static ListView<String> userListView;
+	static Label userList;
 
-	public void setConnected(){
+	public void setConnected() {
 		System.out.println("aggiorno");
 		connesso.setText("Connesso");
 		connesso.setTextFill(Color.GREEN);
@@ -67,9 +66,18 @@ public class Login extends Application implements Observable{
 		btn2.setDisable(false);
 	}
 
+	public void setRegistered() {
+		connesso.setText("Registrato!!!!!!!! DIOPORCO");
+		connesso.setTextFill(Color.BLUEVIOLET);
+	}
+
 
 	@Override
 	public void start(Stage primaryStage) {
+		userListView = new ListView<>();
+		userList = new Label("Utenti in attesa");
+		userList.setVisible(false);
+		userListView.setVisible(false);
 		primaryStage.setTitle("Login");
 		grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -102,7 +110,7 @@ public class Login extends Application implements Observable{
 		hbBtn1.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn1.getChildren().add(btn1);
 		grid.add(hbBtn1, 1, 4);
-		
+
 		final ToggleGroup group1 = new ToggleGroup();
 
 		rb3 = new RadioButton("Socket");
@@ -114,13 +122,13 @@ public class Login extends Application implements Observable{
 		rb4.setToggleGroup(group1);
 		grid.add(rb3, 0, 3);
 		grid.add(rb4, 1, 3);
-		
-		group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+
+		group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov,
-					Toggle old_toggle, Toggle new_toggle) {
+								Toggle old_toggle, Toggle new_toggle) {
 				if (group1.getSelectedToggle() != null) {
-					connection.set(((RadioButton)group1.getSelectedToggle()).getText());
-				}                
+					connection.set(((RadioButton) group1.getSelectedToggle()).getText());
+				}
 			}
 		});
 
@@ -144,14 +152,15 @@ public class Login extends Application implements Observable{
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn);
 		grid.add(hbBtn, 1, 12);
-		
+
 		btn2 = new Button("Register");
 		btn2.setDisable(true);
 		HBox hbBtn2 = new HBox(10);
 		hbBtn2.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn2.getChildren().add(btn2);
 		grid.add(hbBtn2, 0, 12);
-
+		grid.add(userList, 0, 13);
+		grid.add(userListView, 1, 13);
 		final ToggleGroup group = new ToggleGroup();
 
 		rb1 = new RadioButton("GUI");
@@ -159,18 +168,19 @@ public class Login extends Application implements Observable{
 		rb1.setSelected(true);
 		UI.set("GUI");
 
+
 		rb2 = new RadioButton("CLI");
 		rb2.setToggleGroup(group);
 		grid.add(rb1, 0, 9);
 		grid.add(rb2, 1, 9);
 		rb1.setDisable(true);
 		rb2.setDisable(true);
-		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov,
-					Toggle old_toggle, Toggle new_toggle) {
+								Toggle old_toggle, Toggle new_toggle) {
 				if (group.getSelectedToggle() != null) {
-					UI.set(((RadioButton)group.getSelectedToggle()).getText());
-				}                
+					UI.set(((RadioButton) group.getSelectedToggle()).getText());
+				}
 			}
 		});
 
@@ -196,10 +206,11 @@ public class Login extends Application implements Observable{
 
 			@Override
 			public void handle(ActionEvent e) {
+				registration.set("Registration");
 				username.set(userTextField.getText());
 				password.set(pwBox.getText());
-				registration.set("Registration");
-				
+
+
 			}
 		});
 
@@ -207,14 +218,13 @@ public class Login extends Application implements Observable{
 		printed = true;
 	}
 
-	public boolean printedCheck(){
+	public boolean printedCheck() {
 		return printed;
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 
 	@Override
 	public void addListener(InvalidationListener listener) {
@@ -227,31 +237,41 @@ public class Login extends Application implements Observable{
 
 	}
 
-	public StringProperty getUsername(){
+	public StringProperty getUsername() {
 		return username;
 	}
-	
-	public StringProperty getPassword(){
+
+	public StringProperty getPassword() {
 		return password;
 	}
-	
-	public StringProperty getServer(){
+
+	public StringProperty getServer() {
 		return serverString;
 	}
-	
-	public StringProperty getPort(){
+
+	public StringProperty getPort() {
 		return portString;
 	}
-	
-	public StringProperty getConnection(){
+
+	public StringProperty getConnection() {
 		return connection;
 	}
-	
-	public StringProperty getRegistration(){
+
+	public StringProperty getRegistration() {
 		return registration;
 	}
-	
-	public StringProperty getUI(){
+
+	public StringProperty getUI() {
 		return UI;
 	}
+
+	public void setLobbyUsernamesList(ObservableList list) {
+		this.userListView.setItems(list);
+	}
+
+	public void setLobbyVisble() {
+		userList.setVisible(true);
+		userListView.setVisible(true);
+	}
+
 }

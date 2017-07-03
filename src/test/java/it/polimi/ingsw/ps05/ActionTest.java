@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05;
 
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
-import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
+import it.polimi.ingsw.ps05.model.exceptions.*;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
@@ -10,9 +10,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.server.controller.GameSetup;
 import it.polimi.ingsw.ps05.server.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.*;
-import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
-import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
-import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.controller.Game;
  import  junit.framework.*;
 import junit.framework.TestCase;
@@ -100,7 +97,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testBoard(){
+	public void testBoard() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(5);
@@ -140,7 +137,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test //il tile non restituisce la carta, o se lo fa è da verificare e da applicare gli effetti
-	public void testActionOnTower(){ //tested just with gold
+	public void testActionOnTower() throws InterruptedException { //tested just with gold
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;
@@ -171,12 +168,14 @@ public class ActionTest extends TestCase {
 				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
 			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
 				e.printStackTrace();
+			} catch (IllegalMethodCallException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
 	@Test
-	public void testActionOnSpace(){
+	public void testActionOnSpace() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;
@@ -257,7 +256,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testFamiliar(){
+	public void testFamiliar() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;

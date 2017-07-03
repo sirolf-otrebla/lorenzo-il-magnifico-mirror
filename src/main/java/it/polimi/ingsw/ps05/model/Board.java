@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -23,7 +24,7 @@ public class Board implements Serializable, VisitableFromView {
 	 * 
 	 */
 	private static final long serialVersionUID = 3802284891664073914L;
-	
+
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
 	public final static int RESOURCE_CONVERSION_RATIO = 5;
@@ -37,11 +38,12 @@ public class Board implements Serializable, VisitableFromView {
 	private ArrayList<ExcommunicationCard> excomCards = null; //array da 3 elementi che contiene i riferimenti alle carte scomunica pescate ad inizio partita
 	private ArrayList<VictoryResource> greenCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
 	private ArrayList<VictoryResource> blueCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
-	
-	
+	private ArrayList<LeaderCard> leaderCardsList = null;
+
 	public Board(ArrayList<Tower> towerList, ArrayList<ActionSpace> actionSpaceArrayList,
 			ArrayList<VictoryResource> faithPath, ArrayList<MilitaryResource> militaryPath,
-			ArrayList<VictoryResource> blueConversion, ArrayList<VictoryResource> greenConversion) {
+			ArrayList<VictoryResource> blueConversion, ArrayList<VictoryResource> greenConversion,
+			ArrayList<LeaderCard> leaderCardList) {
 		super();
 
 		this.towerHashMap = new HashMap<>();
@@ -57,12 +59,13 @@ public class Board implements Serializable, VisitableFromView {
 		this.militaryPath = militaryPath;
 		this.greenCardsConversion = greenConversion;
 		this.blueCardsConversion = blueConversion;
+		this.leaderCardsList = leaderCardList;
 	}
 
 	public ArrayList<VictoryResource> getGreenCardsConversion() {
 		return greenCardsConversion;
 	}
-	
+
 	public ArrayList<VictoryResource> getBlueCardsConversion() {
 		return blueCardsConversion;
 	}
@@ -75,6 +78,10 @@ public class Board implements Serializable, VisitableFromView {
 		return playerOnCouncil;
 	}
 
+	public ArrayList<LeaderCard> getLeaderCardsList(){
+		return leaderCardsList;
+	}
+
 	public ArrayList<VictoryResource> getFaithPath() {
 		return faithPath;
 	}
@@ -84,21 +91,13 @@ public class Board implements Serializable, VisitableFromView {
 	}
 
 	public ArrayList<ExcommunicationCard> getExcomCards() { return excomCards; }
-	
+
 	public void setGreenCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException{
-		if (this.greenCardsConversion == null) {
-			this.greenCardsConversion = conversion;
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+		this.greenCardsConversion = conversion;
 	}
-	
+
 	public void setBlueCardsConversion (ArrayList<VictoryResource> conversion) throws RepeatedAssignmentException {
-		if (this.blueCardsConversion == null) {
-			this.blueCardsConversion = conversion;
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+		this.blueCardsConversion = conversion;
 	}
 
 	public void setTowerList(HashMap<ColorEnumeration, Tower> towerList) throws RepeatedAssignmentException {
@@ -130,20 +129,16 @@ public class Board implements Serializable, VisitableFromView {
 		}
 	}
 
-	public void setMilitaryPath(ArrayList<MilitaryResource> militaryPath) throws RepeatedAssignmentException {
-		if (this.militaryPath == null) {
-			this.militaryPath = militaryPath;
-		} else {
-			throw new RepeatedAssignmentException();
-		}
+	public void setMilitaryPath(ArrayList<MilitaryResource> militaryPath) {
+		this.militaryPath = militaryPath;
 	}
 
 	public void setExcomCards(ArrayList<ExcommunicationCard> excomCards) throws RepeatedAssignmentException {
-			if (this.excomCards == null) {
-				this.excomCards = excomCards;
-			} else {
-				throw new RepeatedAssignmentException();
-			}
+		if (this.excomCards == null) {
+			this.excomCards = excomCards;
+		} else {
+			throw new RepeatedAssignmentException();
+		}
 	}
 
 	public HashMap<Integer, ActionSpace> getActSpacesMap() {

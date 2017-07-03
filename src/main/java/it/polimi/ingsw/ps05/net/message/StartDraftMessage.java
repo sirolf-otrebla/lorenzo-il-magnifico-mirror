@@ -17,7 +17,7 @@ public class StartDraftMessage implements LeaderDraftMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+        vi.visit(this);
     }
 
     public ArrayList<Integer> getLeaderReferenceIdList() {

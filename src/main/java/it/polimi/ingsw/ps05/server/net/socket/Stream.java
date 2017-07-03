@@ -24,6 +24,7 @@ public class Stream {
 	}
 
 	public void sendData(NetMessage obj) throws IOException{
+		System.out.println("serializzo oggetto ed invio");
 		out.writeObject(obj);
 	}
 }

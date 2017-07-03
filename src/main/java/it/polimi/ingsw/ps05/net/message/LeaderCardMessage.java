@@ -49,6 +49,6 @@ public class LeaderCardMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
+        vi.visit(this);
     }
 }

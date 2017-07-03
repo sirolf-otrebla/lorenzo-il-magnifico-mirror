@@ -16,7 +16,7 @@ import java.io.File;
  */
 public class PersonalBoardWindow {
 
-    public static final int ORIGINAL_WIDTH = 3459, ORIGINAL_HEIGHT = 3800, ORIGINAL_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
+    public static final int ORIGINAL_WIDTH = 3600, ORIGINAL_HEIGHT = 3800, ORIGINAL_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
 
     private ColorEnumeration playerColor = ColorEnumeration.Red;
     private HBox personalCardBoxes[] = new HBox[4];
@@ -34,11 +34,10 @@ public class PersonalBoardWindow {
         //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Personal Board");
         stage.setResizable(false);
-        stage.centerOnScreen();
+        //stage.centerOnScreen();
         stage.setMinHeight(250); //TODO impostare la grandezza minima corretta
-
-        PersonalBoardWindow.personalBoardHeight = mainBoardHeight - 50; //TODO trasformare il -50 in percentuale
-        PersonalBoardWindow.personalBoardWidth = (mainBoardHeight - 50) * ORIGINAL_RATIO;
+        PersonalBoardWindow.personalBoardHeight = mainBoardHeight*0.95; //TODO trasformare il -50 in percentuale
+        PersonalBoardWindow.personalBoardWidth = (mainBoardHeight*0.95* ORIGINAL_RATIO);
         stage.setHeight(PersonalBoardWindow.personalBoardHeight);
         stage.setWidth(PersonalBoardWindow.personalBoardWidth);
 
@@ -47,22 +46,24 @@ public class PersonalBoardWindow {
         final Pane pane = new Pane();
         pane.setId("personalBoard");
 
-
+        /*
         pane.minWidthProperty().bind(stage.widthProperty());
         pane.minHeightProperty().bind(stage.heightProperty());
         pane.prefWidthProperty().bind(stage.widthProperty());
         pane.prefHeightProperty().bind(stage.heightProperty());
         pane.maxWidthProperty().bind(stage.widthProperty());
         pane.maxHeightProperty().bind(stage.heightProperty());
-
+        */
 
         for (int i = 0; i < 4; i++) {
-            this.personalCardBoxes[i] = new HBox(2); //TODO controllare che lo spacing sia corretto
-            this.personalCardBoxes[i].setLayoutX((2.4277 / 100) * PersonalBoardWindow.personalBoardWidth);
-            this.personalCardBoxes[i].setLayoutY((1.8684 + 23.0*i) / 100 * PersonalBoardWindow.personalBoardHeight); // 23.0 distanza verticale tra gruppi di carte
+            this.personalCardBoxes[i] = new HBox(20); //TODO controllare che lo spacing sia corretto
+            this.personalCardBoxes[i].setLayoutX((2.4277 / 100) * personalBoardWidth);
+            this.personalCardBoxes[i].setLayoutY((1.8684 + 25.5*i) / 100 * personalBoardHeight); // 23.0 distanza verticale tra gruppi di carte
 
+            /*
             this.personalCardBoxes[i].setPrefHeight((21.0 / 100) * personalBoardHeight);
             this.personalCardBoxes[i].setPrefWidth((90.0 / 100) * personalBoardWidth);
+            */
             /*
             this.personalCardBoxes[i].setMinHeight(personalBoardHeight);
             this.personalCardBoxes[i].setMinWidth(personalBoardWidth);

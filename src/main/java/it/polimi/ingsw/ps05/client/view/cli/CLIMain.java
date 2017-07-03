@@ -4,17 +4,20 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
-import it.polimi.ingsw.ps05.client.view.gui.*;
+import it.polimi.ingsw.ps05.client.view.SelectionTypeEnum;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
+import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
+import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
-import it.polimi.ingsw.ps05.model.spaces.Tile;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
@@ -25,7 +28,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
@@ -36,6 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -44,7 +47,6 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import javafx.scene.layout.VBox;
 
 public class CLIMain implements LimView, Runnable{
 
@@ -82,29 +84,29 @@ public class CLIMain implements LimView, Runnable{
 	boolean meActive = true;
 	int selectedFam = 0;
 	int selectedOpt = 0;
-	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){/**
-		 * 
-		 */
+	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
+
 		private static final long serialVersionUID = 1L;
 
-	{
-		add(ColorEnumeration.Green);
-		add(ColorEnumeration.Blue);
-		add(ColorEnumeration.Yellow);
-		add(ColorEnumeration.Violet);
-		
-	}};
+		{
+			add(ColorEnumeration.Green);
+			add(ColorEnumeration.Blue);
+			add(ColorEnumeration.Yellow);
+			add(ColorEnumeration.Violet);
+
+		}
+	};
 	private ArrayList<ArrayList<Integer>> tileIdForTower = new ArrayList<ArrayList<Integer>>();
-	
+
 	/*
 	 * fare selezione privilegi
 	 * fare draft
 	 * 
 	 */
-	
+
 	//mettere nella wiki che per la CLI la risoluzione minima consigliata è 1280*800
-	
-	
+
+
 
 	public CLIMain(Board board, Player player, ArrayList<Player> playersList){
 		this.board = board;
@@ -119,22 +121,21 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
 		System.out.println(width + ": " + height);
-		//trySys();
+
+
+		trySys();
 	}
 
 	public void trySys(){
 		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
-			player.addBlueCard((BlueCard)tile.getCard());
 			playersList.get(0).addBlueCard((BlueCard)tile.getCard());
 		}
-		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Green).getTiles().values()) {
-			playersList.get(1).addGreenCard((GreenCard)tile.getCard());
+		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
+			player.addYellowCard((YellowCard)tile.getCard());
 		}
 		for (ActionSpace s : this.board.getActSpacesMap().values()) {
 			s.setOccupied(this.player.getFamilyMember(ColorEnumeration.White));
 			this.player.getFamilyMember(ColorEnumeration.White).setPosition(s);
-			System.out.println("s : " + s.isOccupied() + " " + s.getId() + " " + s.getClass());
-			
 		}
 		for (TowerTileInterface t : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
 			((TileWithEffect)t).setOccupied(this.player.getFamilyMember(ColorEnumeration.Black));
@@ -170,14 +171,17 @@ public class CLIMain implements LimView, Runnable{
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
-					System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+
 					try {
 						if (!ratioSet){
 							ratioWidth = PREFERRED_WIDTH / newSize.getColumns();
 							ratioHeight = PREFERRED_HEIGHT / newSize.getRows();
+							if (ratioHeight > 2) ratioHeight = 2;
+							if (ratioWidth > 1) ratioWidth = (float) 1;
 							ratioSet = true;
 						}
-
+						System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+						System.out.println("ratio width: " + ratioWidth + "ratio height: " + ratioHeight);
 						terminal.clearScreen();
 						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
 						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
@@ -188,12 +192,12 @@ public class CLIMain implements LimView, Runnable{
 						} else if (inPlayers){
 							terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
 						}
-						
+
 						terminal.flush();
 					}
 					catch(IOException e) {
 						// Not much we can do here
-						
+
 						try {
 							terminal.clearScreen();
 							drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
@@ -210,12 +214,12 @@ public class CLIMain implements LimView, Runnable{
 							e1.printStackTrace();
 							System.exit(1);
 						}
-						
+
 						throw new RuntimeException(e);
 					}
 				}
 			});
-			
+
 			movePointer(textGraphics);
 
 		}
@@ -223,13 +227,13 @@ public class CLIMain implements LimView, Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void tryAction(){
 		ActionSpace space;
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			space = ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
 			space.setDiceRequirement(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getDiceRequired());
-			
+
 		} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 			//Market
 			space = (ActionSpace)marketList.get(currentColBoard);
@@ -248,9 +252,15 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam ]).getRelatedDice().getValue());
 		System.out.println(space.toString());
 		System.out.println("Action legal " + action.isLegal());
-		
+		try {
+			action.run(selectedOpt);
+		} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
+			e.printStackTrace();
+
+		}
+
 	}
-	
+
 	public void updateBoard(Board board){
 		this.board = board;
 		try {
@@ -262,34 +272,43 @@ public class CLIMain implements LimView, Runnable{
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
+
 	}
-	
-	private void analizeChar(Character c){
+
+	private void analizeChar(Character c, TextGraphics textGraphics) throws IOException{
 		if (c == 'q' || c == 'Q'){
 			selectedFam = 0;
+			drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
+					Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		} else if (c == 'w' || c == 'W') {
 			selectedFam = 1;
+			drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
+					Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		} else if (c == 'e' || c == 'E') {
 			selectedFam = 2;
+			drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
+					Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		} else if (c == 'r' || c == 'R') {
 			selectedFam = 3;
+			drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
+					Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		} else if (c == '1') {
 			selectedOpt = 0;
+			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		} else if (c == '2') {
 			selectedOpt = 1;
+			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 		}
-		
+
 	}
-	
+
 	private void movePointer(TextGraphics textGraphics) throws IOException{
 		KeyStroke keyStroke = terminal.readInput();
 		while(true) {
 			switch(keyStroke.getKeyType()){
 			case Character:
-				analizeChar(keyStroke.getCharacter());
-				drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
-						Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
+				analizeChar(keyStroke.getCharacter(), textGraphics);
+
 				break;
 			case ArrowDown: 
 				moveDown(textGraphics);
@@ -306,20 +325,18 @@ public class CLIMain implements LimView, Runnable{
 			case Enter:
 				if (inPlayers){
 					if (currentRowPlayers == 0) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
+						visualCard(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
 					} else if (currentRowPlayers == 1) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getBlueCardList(), textGraphics.getSize().getColumns());
+						visualCard(playersList.get(currentColPlayers).getBlueCardList(), textGraphics.getSize().getColumns());
 					} else if (currentRowPlayers == 2) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getYellowCardList(), textGraphics.getSize().getColumns());
+						visualCard(playersList.get(currentColPlayers).getYellowCardList(), textGraphics.getSize().getColumns());
 					} else if (currentRowPlayers == 3) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
+						visualCard(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
 					}
 				} else if(meActive && inBoard){
-					tryAction();
+					choseActivableProductionCard(terminal.getTerminalSize().getColumns());
+					//doActionForPlayer();
 				}
-				break;
-			case Escape:
-				//terminal.setCursorPosition(currentCol, currentRow);
 				break;
 			case Tab:
 				if (inBoard){
@@ -338,13 +355,11 @@ public class CLIMain implements LimView, Runnable{
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 				}
-
 				break;
 			default:
 				System.out.println("Default");
 				break;
 			}
-			System.out.println(terminal.getCursorPosition() + " " + currentColBoard + " " + currentRowBoard);
 			if (inMyStats){
 				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 			} else if (inPlayers){
@@ -357,6 +372,38 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 	
+	private void doActionForPlayer() throws IOException {
+		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
+			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
+				//NON OCCUPATO
+				TowerCard c = board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard();
+				CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
+						((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
+						selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
+				a.notifyObservers();
+			} else {
+				//OCCUPATO
+			}
+		} else if(currentColBoard < board.getTowerList().size() &&
+				currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
+			//MARKET
+			CliActionSpaceViewObject a = new CliActionSpaceViewObject(marketList.get(currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
+			a.notifyObservers();
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
+			//PRODUCTION
+			choseActivableProductionCard(terminal.getTerminalSize().getColumns());
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && 
+				currentColBoard >= productionList.size() &&
+				currentColBoard < productionList.size() + harvestList.size() ){
+			//HARVEST
+			choseActivableHarvestCard(terminal.getTerminalSize().getColumns());
+		} else {
+			//CONSIGLIO
+			CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
+					((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
+		}
+	}
+
 	private void moveUp(TextGraphics textGraphics) throws IOException {
 		if (inBoard){
 			try{
@@ -632,7 +679,6 @@ public class CLIMain implements LimView, Runnable{
 							(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/32,
 							6*height/16));
 				} catch (IndexOutOfBoundsException e){
-					System.out.println("Eccezione consiglio");
 					list = new ArrayList<TerminalPosition>();
 					list.add(new TerminalPosition((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16 +
 							width/32,
@@ -660,22 +706,18 @@ public class CLIMain implements LimView, Runnable{
 				,6*height/16+1, "Produzione");
 		textGraphics.putString((int) (Math.ceil((productionList.size()+harvestList.size())/2.0))*width/16+1
 				,6*height/16+1, "Raccolto");
-		
+
 		checkPositionCorrect();
 	}
-	
+
 	private void checkPositionCorrect(){
 		for (ArrayList<TerminalPosition> column : mapBoard){
-			System.out.println("Righe: " + column.size());
 			for (int i = 0; i < column.size() - 1; i++ ){
 				if (column.get(i).getRow() > column.get(i + 1).getRow()){
 					TerminalPosition infra = column.get(i);
 					column.set(i, column.get(i + 1));
 					column.set(i + 1, infra);
 				}
-			}
-			for (int i = 0; i < column.size(); i++ ){
-				System.out.println(column.get(i));
 			}
 		}
 	}
@@ -746,7 +788,7 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		int i = 0;
 		for (Familiar familiar : player.getFamilyList()){
-			
+
 			if (i == selectedFam && !familiar.isUsed()){
 				textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
 			}
@@ -758,7 +800,7 @@ public class CLIMain implements LimView, Runnable{
 			secondColumn.add(lastPos);
 			textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 		}
-		
+
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Scomuniche");
 		lastPos = new TerminalPosition(lastPos.getColumn() ,lastPos.getRow() + 1);
 		secondColumn.add(lastPos);
@@ -798,7 +840,7 @@ public class CLIMain implements LimView, Runnable{
 				ids.add(((ActionSpace)tile).getId());
 			}
 			Comparator<Integer> comp = (Integer x, Integer y) -> {
-			    return x.compareTo(y);
+				return x.compareTo(y);
 			};
 			ids.sort(comp);
 			for (int b = 0; b < tower.getTiles().size(); b++){
@@ -864,8 +906,7 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
-	private void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd, TextGraphics textGraphics){
-		System.out.println("draw square");
+	public static void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd, TextGraphics textGraphics){
 		textGraphics.drawLine(colStart,rowStart,colStart,rowEnd,'|');
 		textGraphics.drawLine(colEnd,rowStart,colEnd,rowEnd,'|');
 		textGraphics.drawLine(colStart,rowStart,colEnd,rowStart,'-');
@@ -904,7 +945,7 @@ public class CLIMain implements LimView, Runnable{
 				} else {
 					infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
 				}
-				
+
 			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 				infoMarket(colForInfo,0,textGraphics);
 			} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
@@ -950,7 +991,7 @@ public class CLIMain implements LimView, Runnable{
 			}
 		}
 	}
-	
+
 	private void infoOccupied(int column, int row, TextGraphics textGraphics, ActionSpace space){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		ArrayList<Familiar> list = new ArrayList<>();
@@ -1078,12 +1119,18 @@ public class CLIMain implements LimView, Runnable{
 				"Costi:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
+			int i = 0;
 			for (ArrayList<Resource> choseOr : card.getRequirements()){
+				if (i == selectedOpt && inBoard){
+					textGraphics.setBackgroundColor(TextColor.ANSI.RED);
+				}
 				for (Resource res : choseOr){
 					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
+				i++;
 			}
 		} catch (Exception e){
 			//requirementList == null, non fare niente cercare di risolvere
@@ -1148,7 +1195,7 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
-		
+
 		for (int i = 0; i < effect.getResourceRequired().size(); i++){
 			for (Resource resource : effect.getResourceRequired().get(i)) {
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, resource.getValue() + " " + resource.toString());
@@ -1236,7 +1283,6 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Occupanti: ");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		System.out.println("size: " + council.getOccupantList().size());
 		for (Familiar fam : council.getOccupantList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					fam.getRelatedPlayer().getUsername());
@@ -1247,40 +1293,52 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
-	private void showCardsInNewTerminal(ArrayList<?> cards, int width){
-		if (cards.size() != 0){
-			
-			try {
-				DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
-				int height = 30;
-				int currentWidth = cards.size()*width/6;
-				defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(currentWidth, height));
-				Terminal cardTerminal = defaultTerminalFactory.createTerminal();
-				
-				cardTerminal.enterPrivateMode();
-				cardTerminal.clearScreen();
-				cardTerminal.setCursorVisible(true);
+	private void choseActivableHarvestCard(int width){
 
-				TextGraphics cardTextGraphics = cardTerminal.newTextGraphics();
-				cardTextGraphics.setForegroundColor(TextColor.ANSI.WHITE);
-				cardTextGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
-				for (int i = 0; i < cards.size(); i++) {
-					drawSquare(
-							(i*currentWidth)/cards.size(),
-							0,
-							((i+1)*currentWidth/cards.size())-1,
-							height-1 ,
-							cardTextGraphics);
-					infoCard((i*currentWidth)/cards.size() + 1, 0, (TowerCard)cards.get(i), cardTextGraphics);
-				}
-				cardTerminal.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getGreenCardList(), width, SelectionTypeEnum.HARVEST);
+		chose.start();
 	}
-	
+
+	private void choseActivableProductionCard(int width){
+
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getYellowCardList(), width, SelectionTypeEnum.PRODUCTION);
+		chose.start();
+	}
+
+	private ArrayList<?> choseDraftCard(ArrayList<?> cards, int width){
+
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, SelectionTypeEnum.DRAFT);
+		return chose.start();
+	}
+
+	private void visualCard(ArrayList<?> cards, int width){
+
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, SelectionTypeEnum.HARVEST);
+		chose.start();
+	}
+
 	public void setActive (boolean active){
 		this.meActive = active;
+	}
+	
+	public Integer getCardForDraft(List<Integer> list) throws IOException{
+		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
+		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
+		for (Integer i : list){
+			cardsToCheck.add(getLeaderWithID(i, allCards));
+		}
+		
+		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
+		
+		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
+	}
+	
+	public LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
+		for (LeaderCard l : cards){
+			if (l.getReferenceID() == id){
+				return l;
+			}
+		}
+		return null;
 	}
 }

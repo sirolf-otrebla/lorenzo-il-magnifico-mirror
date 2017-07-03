@@ -13,15 +13,17 @@ import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.InactivePlayerTask;
 import it.polimi.ingsw.ps05.server.controller.MessageObserver;
+import it.polimi.ingsw.ps05.server.controller.Server;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
 	private int id;
-	private boolean isActive = false;
+	private boolean isActive = true;
 	private boolean inGame = false;
 	private LimConnection connection;
 	private Timer timer;
 	private Observer messageObserver;
 	private Game game = null;
+	private boolean logged = false;
 
 	private static final int  ACT_WAITING_TIME = 120000;
 
@@ -34,8 +36,9 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	    this.connection = netHandler;
 	    this.id = id;
 	    this.messageObserver = MessageObserver.getInstance();
+	    addObserver(messageObserver);
 		this.timer = new Timer();
-
+		netHandler.addObserver(this);
     }
 
 	@Override
@@ -108,5 +111,21 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 		connection.send(message);
 	}
 
+
+	public boolean isLogged() {
+		return logged;
+	}
+
+	public void setLogged(boolean logged) {
+		this.logged = logged;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
 
