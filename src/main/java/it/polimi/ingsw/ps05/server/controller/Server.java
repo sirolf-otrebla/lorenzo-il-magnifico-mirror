@@ -35,6 +35,7 @@ public class Server {
     public void  startServer(int waitingTime, boolean useCompleteRules, boolean useCustomTiles){
         serverLobby = new Lobby(waitingTime, useCompleteRules, useCustomTiles);
         globalClientMap = new HashMap<>();
+        this.serverLobby = new Lobby(waitingTime,useCompleteRules, useCustomTiles);
         userDatabase =  Database.getInstance();
         try {
             listener = new NetworkListener(DEFAULT_PORT);
@@ -57,6 +58,7 @@ public class Server {
 
     public void putNewClient(PlayerClient client){
         this.globalClientMap.put(client.getId(), client);
+        this.serverLobby.addToLobby(client);
     }
 
     public Database getUserDatabase() {

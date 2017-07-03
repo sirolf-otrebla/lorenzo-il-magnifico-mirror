@@ -59,4 +59,9 @@ public class MessageObserver implements Observer, NetMessageVisitor {
         AuthListener listener = new AuthListener(this.client);
         msg.acceptVisitor(listener);
     }
+
+    @Override
+    public void visit(AuthResponseMessage msg) {
+        //todo
+    }
 }

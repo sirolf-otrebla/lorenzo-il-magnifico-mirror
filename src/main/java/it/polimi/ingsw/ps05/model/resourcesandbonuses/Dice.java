@@ -57,15 +57,11 @@ public class Dice implements Resource {
 		int diff = playerFamiliar.getRelatedDice().getValue() - this.getValue();
 		if ( diff > 0) return true;
 		if (Math.abs(diff) <= playerFamiliar.getRelatedPlayer().getResource(ServantResource.id).getValue()){
-			try{
-				playerFamiliar.getRelatedPlayer().getResource(ServantResource.id).remove(new ServantResource(Math.abs(diff)));
-				return true;
-			} catch (NotEnoughResourcesException e){
-				System.out.println("SOMETHING REALLY BAD HAS HAPPENED!! THIS MESSAGE IT'S NOT MEANT TO BE DISPLAYED EVER");
-			} catch (IllegalMethodCallException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				ServantResource playerServants =
+						(ServantResource) playerFamiliar.getRelatedPlayer().getResource(ServantResource.id);
+				if (playerServants.getValue() > Math.abs(diff) ) return true;
+				return  false;
+				//playerServants.remove(new ServantResource(Math.abs(diff)));
 		}
 		return false;
 	}

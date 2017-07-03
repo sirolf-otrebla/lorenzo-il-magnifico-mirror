@@ -15,17 +15,16 @@ public class AuthListener {
     private PlayerClient client;
 
     public AuthListener(PlayerClient client){
-
-
+        this.client = client;
     }
     public void visit(LoginMessage msg){
 
         if( Server.getInstance().getUserDatabase().checkUser(
                 msg.getUsername(), msg.getPassword())){
+            client.setUsername(msg.getUsername());
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
             client.sendMessage(new LoggedMessage(LoggedMessage.STATUS_LOGGED));
-            Server.getInstance().getServerLobby().addToLobby(client);
 
         } else {
             this.client.setLogged(false);
@@ -36,10 +35,11 @@ public class AuthListener {
     public void visit(RegistrationMessage msg){
         if (Server.getInstance().getUserDatabase().registerNewUser(
                 msg.getUsername(), msg.getPassword())){
+            client.setUsername(msg.getUsername());
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
             client.sendMessage(new RegisteredMessage(RegisteredMessage.STATUS_REGISTERED));
-            Server.getInstance().getServerLobby().addToLobby(client);
+            client.setUsername(msg.getUsername());
         }else {
             this.client.setLogged(false);
             client.sendMessage(new RegisteredMessage(RegisteredMessage.STATUS_FAILED_REGIST));

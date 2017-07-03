@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 /**
  * Created by Alberto on 27/06/2017.
  */
-public class Client implements Runnable{
+public class Client {
 
     /* event observers */
     private MoveFamiliarListener moveFamiliarListener = new MoveFamiliarListener();
@@ -25,11 +25,14 @@ public class Client implements Runnable{
     private String username;
     private Integer id;
     private ClientMessageTaker messageVisitor;
+    private LoginController loginController;
 
     private Client(){
         messageVisitor = new ClientMessageTaker();
+        loginController = new LoginController();
         //TODO ATTIVA LOBBY
         //TODO GESTISCE CONNESSIONE
+
     	getConnection();
 
     }
@@ -93,8 +96,7 @@ public class Client implements Runnable{
         return messageVisitor;
     }
 
-    @Override
-    public void run() {
-
+    public LoginController getLoginController() {
+        return loginController;
     }
 }

@@ -3,7 +3,9 @@ package it.polimi.ingsw.ps05.net.message;
 import it.polimi.ingsw.ps05.server.controller.AuthListener;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
-public class RegistrationMessage implements AuthMessage {
+import java.io.Serializable;
+
+public class RegistrationMessage implements AuthMessage, Serializable {
 	
 	private String username;
 	private String password;

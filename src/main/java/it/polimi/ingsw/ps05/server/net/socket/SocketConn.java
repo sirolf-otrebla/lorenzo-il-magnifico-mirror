@@ -17,6 +17,7 @@ public class SocketConn extends LimConnection {
 	private NetMessage message;
 	
 	public SocketConn(Socket socket){
+		System.out.println("viva gesù");
 		this.socket = socket;
 		try {
 			stream = new Stream(this.socket);
@@ -31,7 +32,9 @@ public class SocketConn extends LimConnection {
     		while (true){
     			try {
 					message = stream.takeInData();
-					
+					System.out.println("ho ricevuto qualcosa");
+					setChanged();
+					notifyObservers();
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

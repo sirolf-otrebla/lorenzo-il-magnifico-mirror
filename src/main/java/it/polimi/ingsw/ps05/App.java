@@ -79,9 +79,12 @@ public class App {
 			for (String s : App.clientAliases) {
 				if (s.equals(in)) {
 					Client.getInstance();
+					/*Client.getInstance();
 					CliTest test = new CliTest();
 					test.setUp();
 					test.TestAdicazzo();
+					*/
+
 					// Login.main(null);
 					//TODO START CLIENT
 				}

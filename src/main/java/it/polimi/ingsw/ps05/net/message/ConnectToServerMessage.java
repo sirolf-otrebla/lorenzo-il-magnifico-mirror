@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.net.message;
 
+import it.polimi.ingsw.ps05.client.ctrl.LobbyMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
@@ -8,6 +9,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 public class ConnectToServerMessage implements LobbyMessage {
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
+
+    }
+
+    @Override
+    public void acceptVisitor(LobbyMessageVisitor vi) {
 
     }
 }

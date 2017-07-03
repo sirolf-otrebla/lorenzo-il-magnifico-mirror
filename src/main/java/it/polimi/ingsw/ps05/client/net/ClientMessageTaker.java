@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.client.net;
 
+import it.polimi.ingsw.ps05.client.ctrl.AuthResponseVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.client.ctrl.LobbyMessageVisitor;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
@@ -25,6 +28,10 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
 
     @Override
     public void visit(LobbyMessage msg) {
+        System.out.println("sono nel primo visitor (lobbyMessage");
+        LobbyMessageVisitor visitor = new LobbyMessageVisitor();
+        msg.acceptVisitor(visitor);
+
 
     }
 
@@ -38,6 +45,12 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
 
     }
 
+    public void visit(AuthResponseMessage msg) {
+       AuthResponseVisitor visitor =  new AuthResponseVisitor(Client.getInstance().getLoginController().getSemaphore());
+       System.out.println("sono nel primo visitor");
+       msg.acceptVisitor(visitor);
+    }
+
 
 
     @Override
@@ -46,6 +59,7 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
             try {
                 sem.acquire();
                 if(this.inputMessage == null) continue;
+                System.out.println("ho ricevuto qualcosa di bellissimo dal server");
                 this.inputMessage.acceptVisitor(this);
             } catch (InterruptedException e) {
                 e.printStackTrace();

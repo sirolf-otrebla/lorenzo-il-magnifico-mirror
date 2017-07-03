@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.exceptions.*;
@@ -81,9 +82,15 @@ public class Action implements Period {
 
 
 
-	public void run(int selectedPayment) throws IllegalActionException, NotEnoughResourcesException, DiceTooLowException {
+	public void run(int selectedPayment) throws IllegalActionException, NotEnoughResourcesException, DiceTooLowException, IllegalMethodCallException {
 
 		if (!isLegal) throw new IllegalActionException(IllegalActionException.ACTION_NOT_LEGAL);
+		Integer familiarDieValue = this.familiar.getRelatedDice().getValue();
+		Integer requestedDie = this.familiar.getRelatedDice().getValue();
+		if ( familiarDieValue < requestedDie) {
+			Integer diff = requestedDie - familiarDieValue;
+			this.familiar.getRelatedPlayer().getResource(ServantResource.id).remove(diff.intValue());
+		}
 		int len = this.getSuitableReqAlternatives().size();
 		if ( selectedPayment < 0 || selectedPayment > len )
 			throw new IllegalActionException(IllegalActionException.BAD_PAY_CHOICE);
