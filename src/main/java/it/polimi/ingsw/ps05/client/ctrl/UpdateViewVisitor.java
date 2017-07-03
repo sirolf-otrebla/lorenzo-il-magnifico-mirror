@@ -82,10 +82,11 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
 
     @Override
     public void visit(CouncilSpace councilSpace){
+        /* TODO CouncilSpaceWidget estende MultipleSpaceWidget, non più ActionSpaceWidget
         CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
         widget.setOccupingFamiliarList(widgetList);
-
+        */
 
     }
 

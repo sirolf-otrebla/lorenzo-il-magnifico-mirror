@@ -21,12 +21,22 @@ public class GraphicResources {
 
     static HashMap<Integer, ColorEnumeration> cardColorMap = new HashMap<>();
 
+    static HashMap<Integer, String> leaderPathMap = new HashMap<>();
+
 
 
     public GraphicResources() {
         buildFamiliarPathsMap();
         buildDiceColorMap();
         buildCardColorMap();
+    }
+
+    private void buildLeaderPathMap() {
+        for(int i = 1; i <= 20; i++)
+            if(i < 10)
+                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_0" + i);
+            else
+                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_" + i);
     }
 
     private void buildFamiliarPathsMap() {
@@ -42,8 +52,8 @@ public class GraphicResources {
         for (ColorEnumeration p : plColors){
             HashMap<ColorEnumeration, String> pathMap = new HashMap<>();
             for (ColorEnumeration f : famColors) {
-                pathMap.put(f, "main/java/it.polimi.ingsw.ps05/client/view/gui/img/"
-                        + p.toString() + "pl/" + f.toString() + ".png");
+                pathMap.put(f, "./src/main/res/img/"
+                        + p.toString().toLowerCase() + "pl/" + f.toString() + ".png");
             }
             this.familiarResPath.put(p, pathMap);
         }
@@ -71,6 +81,10 @@ public class GraphicResources {
     public String getFamiliarPath(ColorEnumeration player, ColorEnumeration familyMember){
         return familiarResPath.get(player).get(familyMember);
 
+    }
+
+    public String getLeaderPath(int i) {
+        return leaderPathMap.get(i);
     }
 
     public ColorEnumeration getDiceColor(int i) {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by miotto on 27/06/17.
  */
-public class ProductionSpaceWidget extends ActionSpaceWidget {
+public class ProductionSpaceWidget extends MultipleSpaceWidget {
 
     private boolean morethanZeroOccupants = false;
     private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList; // 1 player, 2 familiare

@@ -8,12 +8,18 @@ import java.util.ArrayList;
 /**
  * Created by miotto on 27/06/17.
  */
-public class CouncilSpaceWidget extends ActionSpaceWidget{
+public class CouncilSpaceWidget extends MultipleSpaceWidget {
+
     private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
 
     public CouncilSpaceWidget(int minimumDie) {
         super(minimumDie);
     }
+
+
+
+
+
 
     public ArrayList<Pair<ColorEnumeration, ColorEnumeration>> getOccupingFamiliarList() {
         return occupingFamiliarList;
@@ -22,4 +28,5 @@ public class CouncilSpaceWidget extends ActionSpaceWidget{
     public void setOccupingFamiliarList(ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList) {
         this.occupingFamiliarList = occupingFamiliarList;
     }
+
 }

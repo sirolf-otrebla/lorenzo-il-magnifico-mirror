@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 public class FamiliarWidget {
 
     public static final double FAMILIAR_MIN_SIZE = 40;
-    private boolean isPlaced;
+    private boolean placed;
     private ImageView imageElement;
     private String imagePath;
     private ColorEnumeration FamiliarColor;
@@ -30,24 +30,27 @@ public class FamiliarWidget {
     }
 
     public FamiliarWidget(String path) {
+
+        /*
     	System.out.println(path);
     	File crDir = new File(path);
     	System.out.println(crDir.exists());
+    	*/
     	//getAllFile(crDir);
-    	try{
-    		
-    		Image i = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+
+        addImage(path);
+        setupGestureSource();
+    }
+
+    public void addImage(String path) {
+        File crDir = new File(path);
+        try{
+            Image i = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
             imageElement = new ImageView();
             imageElement.setImage(i);
-    	} catch (IllegalArgumentException e){
-    		e.printStackTrace();
-    	} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-
-        setupGestureSource();
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
     }
     
     private void getAllFile(File crDir){
@@ -102,6 +105,12 @@ public class FamiliarWidget {
 
     }
 
+    public void repaint() {
+        if(!isPlaced()) {
+
+        }
+    }
+
     public ImageView getImageElement() {
         return this.imageElement;
     }
@@ -114,5 +123,11 @@ public class FamiliarWidget {
         return FamiliarColor;
     }
 
+    public boolean isPlaced() {
+        return placed;
+    }
 
+    public void setPlaced(boolean placed) {
+        this.placed = placed;
+    }
 }

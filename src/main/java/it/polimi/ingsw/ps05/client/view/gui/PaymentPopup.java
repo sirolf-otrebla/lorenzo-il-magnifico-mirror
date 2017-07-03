@@ -16,6 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+
 import java.util.ArrayList;
 
 /**
@@ -38,15 +40,11 @@ public class PaymentPopup {
 
         Label label = new Label("Choose payment method for " + cardName);
 
-        /* Creating buttons for the selection */
-        Button firstAltButton = new Button();
-        Button secondAltButton = new Button();
         ToggleGroup toggleGroup = new ToggleGroup();
 
-        VBox verticalBox = new VBox();
+        VBox selectables = new VBox();
         ArrayList<RadioButton> buttonList = new ArrayList<RadioButton>();
 
-        //TODO: in base a parametri da aggiungere i pulsanti avranno l'immagine della risorsa 'resimage' come sfondo e il valore 'resValue' come testo
 
         for (ArrayList<String> resList : resArrayList) {
             String text = new String();
@@ -54,14 +52,8 @@ public class PaymentPopup {
             RadioButton rb = new RadioButton(text);
             buttonList.add(rb);
             rb.setToggleGroup(toggleGroup);
-            verticalBox.getChildren().add(rb);
+            selectables.getChildren().add(rb);
         }
-
-        //TODO FINIRE
-
-
-        HBox hbox = new HBox(40);
-        hbox.getChildren().addAll(firstAltButton, secondAltButton);
 
         /* Adding cancel button */
         Button cancelButton = new Button("Cancel");
@@ -72,10 +64,10 @@ public class PaymentPopup {
 
         VBox vbox = new VBox(20);
         vbox.setId("paymentSelection");
-        vbox.getChildren().addAll(hbox, cancelButton);
+        vbox.getChildren().addAll(label, selectables, cancelButton);
         vbox.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(vbox, 600, 300);
+        Scene scene = new Scene(vbox, 600 * resize, 300 * resize);
         popup.setScene(scene);
         popup.showAndWait();
 
@@ -94,6 +86,20 @@ public class PaymentPopup {
 
 
 
+
+
+
+
+/* Creating buttons for the selection */
+
+//TODO: in base a parametri da aggiungere i pulsanti avranno l'immagine della risorsa 'resimage' come sfondo e il valore 'resValue' come testo
+/*
+        Button firstAltButton = new Button();
+        Button secondAltButton = new Button();
+
+        HBox hbox = new HBox(40 * resize);
+        hbox.getChildren().addAll(firstAltButton, secondAltButton);
+        */
 
         /*
         firstAltButton.setStyle("-fx-background-image: " + resImage1);

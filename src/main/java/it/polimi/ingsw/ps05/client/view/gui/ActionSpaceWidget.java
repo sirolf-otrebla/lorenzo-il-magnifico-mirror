@@ -15,17 +15,19 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 public class ActionSpaceWidget {
 
     private int referenceId;
+    private Integer id; //TODO capire se tenere due id oppure no
     private boolean occupied;
     private Circle occupationCircle;
     private ColorEnumeration familyMemberId;
     private ColorEnumeration occupantPlayerId;
-    private Integer id;
     private boolean isOccupied;
     private GraphicResources graphicMap = new GraphicResources();
     private int minDie;
+    private boolean isLegal;
 
     public ActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
+        occupationCircle.setFill(Color.TRANSPARENT);
         isOccupied = false;
         this.minDie = minimumDie;
         setupGestureTarget();
@@ -158,4 +160,11 @@ public class ActionSpaceWidget {
         this.occupantPlayerId = occupantPlayerId;
     }
 
+    public boolean isLegal() {
+        return isLegal;
+    }
+
+    public void setLegal(boolean legal) {
+        isLegal = legal;
+    }
 }

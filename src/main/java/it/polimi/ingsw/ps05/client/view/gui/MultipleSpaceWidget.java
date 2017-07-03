@@ -8,6 +8,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 
 /**
@@ -15,14 +16,25 @@ import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_S
  */
 public class MultipleSpaceWidget {
 
-    private int referenceID;
+    private int referenceId;
+    private int minDie;
+    private boolean isLegal;
     private final ScrollPane scrollPane = new ScrollPane();
     private final HBox hbox = new HBox();
 
-    public MultipleSpaceWidget() {
-        hbox.setMinHeight(FAMILIAR_MIN_SIZE);
+
+    public MultipleSpaceWidget(int referenceId, int minDie) {
+        this(minDie);
+        this.referenceId = referenceId;
+    }
+
+    public MultipleSpaceWidget(int minDie) {
+
+        this.minDie = minDie;
+
+        // hbox.setMinHeight(FAMILIAR_MIN_SIZE * resize);
         hbox.setFillHeight(true);
-        scrollPane.setMinSize(2 * FAMILIAR_MIN_SIZE, FAMILIAR_MIN_SIZE);
+        scrollPane.setMinSize(2 * FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize);
         scrollPane.setContent(hbox);
 
         /* disabling scrollbar */
@@ -33,6 +45,11 @@ public class MultipleSpaceWidget {
         scrollPane.setFitToHeight(true);
 
         setupGestureTarget();
+    }
+
+    public void repaint() {
+        /* removing all familiars inside the box */
+        this.hbox.getChildren().clear();
     }
 
     public void setupGestureTarget() {
@@ -84,6 +101,7 @@ public class MultipleSpaceWidget {
 
             System.out.println("starting if");
             if(e.getDragboard().hasImage()) {
+                //TODO comunicare al controller che il familiare è stato posizionato nello spazio multiplo
                 System.out.println("inside if");
                 Image source = e.getDragboard().getImage();
                 ImageView imageElement = new ImageView(source);
@@ -97,4 +115,23 @@ public class MultipleSpaceWidget {
         });
     }
 
+    public int getMinDie() {
+        return minDie;
+    }
+
+    public int getId() {
+        return referenceId;
+    }
+
+    public void setId(int referenceId) {
+        this.referenceId = referenceId;
+    }
+
+    public boolean isLegal() {
+        return isLegal;
+    }
+
+    public void setLegal(boolean legal) {
+        isLegal = legal;
+    }
 }

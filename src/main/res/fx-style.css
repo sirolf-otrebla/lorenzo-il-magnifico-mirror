@@ -12,6 +12,50 @@
     -fx-background-position: center;
 }
 
+#personalLeaders{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
 #paymentSelection{
-    -fx-background-image: url("./img/lightbrownBG.jpg")
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+#excomPopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+#leaderDraftPopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+#resourceLabel{
+     -fx-border-color: cornsilk;
+}
+
+#showCardsButton{
+    -fx-base: #fc9349;
+}
+
+#showLeaderButton{
+    -fx-base: #9b653e
+}
+
+
+.button:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+
+
+.text{
+    -fx-font-smoothing-type: lcd;
 }
