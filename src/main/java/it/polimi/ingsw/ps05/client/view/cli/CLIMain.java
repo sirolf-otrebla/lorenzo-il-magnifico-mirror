@@ -4,7 +4,6 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
-import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -13,8 +12,10 @@ import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
+import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
+import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
-import it.polimi.ingsw.ps05.model.spaces.Tile;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
@@ -25,7 +26,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
@@ -44,7 +44,6 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import javafx.scene.layout.VBox;
 
 public class CLIMain implements LimView, Runnable{
 
@@ -248,6 +247,12 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam ]).getRelatedDice().getValue());
 		System.out.println(space.toString());
 		System.out.println("Action legal " + action.isLegal());
+		try {
+			action.run(selectedOpt);
+		} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
+			e.printStackTrace();
+			
+		}
 		
 	}
 	
@@ -1078,12 +1083,17 @@ public class CLIMain implements LimView, Runnable{
 				"Costi:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
+			int i = 0;
 			for (ArrayList<Resource> choseOr : card.getRequirements()){
+				if (i == selectedOpt){
+					textGraphics.setBackgroundColor(TextColor.ANSI.GREEN);
+				}
 				for (Resource res : choseOr){
 					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 			}
 		} catch (Exception e){
 			//requirementList == null, non fare niente cercare di risolvere

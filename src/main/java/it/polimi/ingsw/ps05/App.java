@@ -21,14 +21,14 @@ public class App
 {
     public static void main( String[] args )
     {
-    	new Thread() {
+    	/*new Thread() {
 			@Override
 			public void run(){
 				javafx.application.Application.launch(GUIMain.class);
 			}
-		}.start();
+		}.start();*/
     	//LoginController l = new LoginController();
-    	/*Scanner keyboard = new Scanner(System.in);
+    	Scanner keyboard = new Scanner(System.in);
     	
     	String string = new String("C");
     	while(!string.equals("C") && !string.equals("G")){
@@ -46,7 +46,7 @@ public class App
     	list.add(p2);
     	list.add(p3);
     	list.add(p4);
-    	Game game = new Game(true,true,0);
+    	Game game = new Game(true,true,0, null);
     	game.start();
     	GameSetup setup = new GameSetup(list, game);
     	View view = new View();
@@ -56,7 +56,7 @@ public class App
     	} else {
     		//istanzia la gui
     		view.instanceGUI();
-    	}*/
+    	}
     }
 }
 
