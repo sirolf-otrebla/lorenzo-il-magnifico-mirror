@@ -5,8 +5,6 @@ import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 
-import java.util.Observable;
-
 /**
  * Created by Alberto on 01/07/2017.
  */
