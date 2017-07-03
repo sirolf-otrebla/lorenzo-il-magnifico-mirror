@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
@@ -77,7 +78,11 @@ public class App {
 		if (!started) {
 			for (String s : App.clientAliases) {
 				if (s.equals(in)) {
-
+					Client.getInstance();
+					CliTest test = new CliTest();
+					test.setUp();
+					test.TestAdicazzo();
+					// Login.main(null);
 					//TODO START CLIENT
 				}
 

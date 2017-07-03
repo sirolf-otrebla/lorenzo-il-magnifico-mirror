@@ -133,7 +133,6 @@ public class CLIMain implements LimView, Runnable{
 		for (ActionSpace s : this.board.getActSpacesMap().values()) {
 			s.setOccupied(this.player.getFamilyMember(ColorEnumeration.White));
 			this.player.getFamilyMember(ColorEnumeration.White).setPosition(s);
-			System.out.println("s : " + s.isOccupied() + " " + s.getId() + " " + s.getClass());
 			
 		}
 		for (TowerTileInterface t : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
@@ -170,14 +169,17 @@ public class CLIMain implements LimView, Runnable{
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
-					System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+
 					try {
 						if (!ratioSet){
 							ratioWidth = PREFERRED_WIDTH / newSize.getColumns();
 							ratioHeight = PREFERRED_HEIGHT / newSize.getRows();
+							if (ratioHeight > 2) ratioHeight = 2;
+							if (ratioWidth > 1) ratioWidth = (float) 1;
 							ratioSet = true;
 						}
-
+						System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+						System.out.println("ratio width: " + ratioWidth + "ratio height: " + ratioHeight);
 						terminal.clearScreen();
 						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	
 						printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
@@ -188,7 +190,7 @@ public class CLIMain implements LimView, Runnable{
 						} else if (inPlayers){
 							terminal.setCursorPosition(mapPlayers.get(currentColPlayers).get(currentRowPlayers));
 						}
-						
+
 						terminal.flush();
 					}
 					catch(IOException e) {
@@ -285,66 +287,65 @@ public class CLIMain implements LimView, Runnable{
 	private void movePointer(TextGraphics textGraphics) throws IOException{
 		KeyStroke keyStroke = terminal.readInput();
 		while(true) {
-			switch(keyStroke.getKeyType()){
-			case Character:
-				analizeChar(keyStroke.getCharacter());
-				drawPlayerInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),
-						Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-				break;
-			case ArrowDown: 
-				moveDown(textGraphics);
-				break;
-			case ArrowLeft:
-				moveLeft(textGraphics);
-				break;
-			case ArrowRight:
-				moveRight(textGraphics);
-				break;
-			case ArrowUp:
-				moveUp(textGraphics);
-				break;
-			case Enter:
-				if (inPlayers){
-					if (currentRowPlayers == 0) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
-					} else if (currentRowPlayers == 1) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getBlueCardList(), textGraphics.getSize().getColumns());
-					} else if (currentRowPlayers == 2) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getYellowCardList(), textGraphics.getSize().getColumns());
-					} else if (currentRowPlayers == 3) {
-						showCardsInNewTerminal(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
+			switch(keyStroke.getKeyType()) {
+				case Character:
+					analizeChar(keyStroke.getCharacter());
+					drawPlayerInfo(Math.round(ratioWidth * terminal.getTerminalSize().getColumns()),
+							Math.round(ratioHeight * terminal.getTerminalSize().getRows()), textGraphics);
+					break;
+				case ArrowDown:
+					moveDown(textGraphics);
+					break;
+				case ArrowLeft:
+					moveLeft(textGraphics);
+					break;
+				case ArrowRight:
+					moveRight(textGraphics);
+					break;
+				case ArrowUp:
+					moveUp(textGraphics);
+					break;
+				case Enter:
+					if (inPlayers) {
+						if (currentRowPlayers == 0) {
+							showCardsInNewTerminal(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
+						} else if (currentRowPlayers == 1) {
+							showCardsInNewTerminal(playersList.get(currentColPlayers).getBlueCardList(), textGraphics.getSize().getColumns());
+						} else if (currentRowPlayers == 2) {
+							showCardsInNewTerminal(playersList.get(currentColPlayers).getYellowCardList(), textGraphics.getSize().getColumns());
+						} else if (currentRowPlayers == 3) {
+							showCardsInNewTerminal(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
+						}
+					} else if (meActive && inBoard) {
+						tryAction();
 					}
-				} else if(meActive && inBoard){
-					tryAction();
-				}
-				break;
-			case Escape:
-				//terminal.setCursorPosition(currentCol, currentRow);
-				break;
-			case Tab:
-				if (inBoard){
-					inBoard = false;
-					inMyStats = true;
-					inPlayers = false;
-					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-				} else if (inMyStats){
-					inBoard = false;
-					inMyStats = false;
-					inPlayers = true;
-					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-				} else if (inPlayers){
-					inBoard = true;
-					inMyStats = false;
-					inPlayers = false;
-					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
-				}
+					break;
+				case Escape:
+					//terminal.setCursorPosition(currentCol, currentRow);
+					break;
+				case Tab:
+					if (inBoard) {
+						inBoard = false;
+						inMyStats = true;
+						inPlayers = false;
+						printInfo(Math.round(ratioWidth * terminal.getTerminalSize().getColumns()), Math.round(ratioHeight * terminal.getTerminalSize().getRows()), textGraphics);
+					} else if (inMyStats) {
+						inBoard = false;
+						inMyStats = false;
+						inPlayers = true;
+						printInfo(Math.round(ratioWidth * terminal.getTerminalSize().getColumns()), Math.round(ratioHeight * terminal.getTerminalSize().getRows()), textGraphics);
+					} else if (inPlayers) {
+						inBoard = true;
+						inMyStats = false;
+						inPlayers = false;
+						printInfo(Math.round(ratioWidth * terminal.getTerminalSize().getColumns()), Math.round(ratioHeight * terminal.getTerminalSize().getRows()), textGraphics);
+					}
 
-				break;
-			default:
-				System.out.println("Default");
-				break;
+					break;
+				default:
+					System.out.println("Default");
+					break;
 			}
-			System.out.println(terminal.getCursorPosition() + " " + currentColBoard + " " + currentRowBoard);
 			if (inMyStats){
 				terminal.setCursorPosition(mapMyStats.get(currentColMyStats).get(currentRowMyStats));
 			} else if (inPlayers){
@@ -632,7 +633,6 @@ public class CLIMain implements LimView, Runnable{
 							(Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/32,
 							6*height/16));
 				} catch (IndexOutOfBoundsException e){
-					System.out.println("Eccezione consiglio");
 					list = new ArrayList<TerminalPosition>();
 					list.add(new TerminalPosition((Math.max(marketList.size(), productionList.size()+harvestList.size())+1)*width/16 +
 							width/32,
@@ -666,16 +666,12 @@ public class CLIMain implements LimView, Runnable{
 	
 	private void checkPositionCorrect(){
 		for (ArrayList<TerminalPosition> column : mapBoard){
-			System.out.println("Righe: " + column.size());
 			for (int i = 0; i < column.size() - 1; i++ ){
 				if (column.get(i).getRow() > column.get(i + 1).getRow()){
 					TerminalPosition infra = column.get(i);
 					column.set(i, column.get(i + 1));
 					column.set(i + 1, infra);
 				}
-			}
-			for (int i = 0; i < column.size(); i++ ){
-				System.out.println(column.get(i));
 			}
 		}
 	}
@@ -865,7 +861,6 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	private void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd, TextGraphics textGraphics){
-		System.out.println("draw square");
 		textGraphics.drawLine(colStart,rowStart,colStart,rowEnd,'|');
 		textGraphics.drawLine(colEnd,rowStart,colEnd,rowEnd,'|');
 		textGraphics.drawLine(colStart,rowStart,colEnd,rowStart,'-');
@@ -1236,7 +1231,6 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Occupanti: ");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		System.out.println("size: " + council.getOccupantList().size());
 		for (Familiar fam : council.getOccupantList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					fam.getRelatedPlayer().getUsername());

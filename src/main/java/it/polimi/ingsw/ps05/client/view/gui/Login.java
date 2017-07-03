@@ -215,7 +215,6 @@ public class Login extends Application implements Observable{
 		launch(args);
 	}
 
-
 	@Override
 	public void addListener(InvalidationListener listener) {
 

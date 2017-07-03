@@ -16,7 +16,9 @@ import java.io.File;
  */
 public class PersonalBoardWindow {
 
-    public static final int ORIGINAL_WIDTH = 3600, ORIGINAL_HEIGHT = 3800, ORIGINAL_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
+    public static final int ORIGINAL_WIDTH = 3459, ORIGINAL_HEIGHT = 3800;
+    public static final Double ORIGINAL_RATIO = ((double) ORIGINAL_WIDTH )/ ORIGINAL_HEIGHT;
+
 
     private ColorEnumeration playerColor = ColorEnumeration.Red;
     private HBox personalCardBoxes[] = new HBox[4];
@@ -35,9 +37,8 @@ public class PersonalBoardWindow {
         stage.setTitle("Personal Board");
         stage.setResizable(false);
         stage.setMinHeight(250); //TODO impostare la grandezza minima corretta
-
-        PersonalBoardWindow.personalBoardHeight = mainBoardHeight - 50; //TODO trasformare il -50 in percentuale
-        PersonalBoardWindow.personalBoardWidth = (mainBoardHeight - 50) * ORIGINAL_RATIO;
+        PersonalBoardWindow.personalBoardHeight = mainBoardHeight*0.95; //TODO trasformare il -50 in percentuale
+        PersonalBoardWindow.personalBoardWidth = (mainBoardHeight*0.95* ORIGINAL_RATIO);
         stage.setHeight(PersonalBoardWindow.personalBoardHeight);
         stage.setWidth(PersonalBoardWindow.personalBoardWidth);
 

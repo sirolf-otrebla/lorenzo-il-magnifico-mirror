@@ -100,7 +100,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testBoard(){
+	public void testBoard() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(5);
@@ -135,7 +135,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test //il tile non restituisce la carta, o se lo fa è da verificare e da applicare gli effetti
-	public void testActionOnTower(){ //tested just with gold
+	public void testActionOnTower() throws InterruptedException { //tested just with gold
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;
@@ -166,7 +166,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testActionOnSpace(){
+	public void testActionOnSpace() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;
@@ -242,7 +242,7 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testFamiliar(){
+	public void testFamiliar() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random randomNum = new Random();
 		int numP = randomNum.nextInt(4) + 1;

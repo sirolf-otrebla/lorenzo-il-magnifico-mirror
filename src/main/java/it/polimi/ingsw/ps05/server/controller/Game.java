@@ -57,10 +57,10 @@ public class Game implements Observer {
         this.setup = new GameSetup(players, this);
         this.gBoard = this.setup.getBoard();
         tManager = this.setup.getTurnSetup();
-        draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
-        this.draftControllerThread = new Thread(draftController);
-        this.draftControllerThread.start();
-        draftControllerThread.join();
+        //draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
+        //this.draftControllerThread = new Thread(draftController);
+        //this.draftControllerThread.start();
+        //draftControllerThread.join();
         this.flowCrlThread.start();
     }
 
