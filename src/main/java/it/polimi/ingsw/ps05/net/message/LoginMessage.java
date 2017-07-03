@@ -1,8 +1,9 @@
 package it.polimi.ingsw.ps05.net.message;
 
+import it.polimi.ingsw.ps05.server.controller.AuthListener;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
-public class LoginMessage implements LobbyMessage {
+public class LoginMessage implements AuthMessage {
 	
 	private String username;
 	private String password;
@@ -13,7 +14,7 @@ public class LoginMessage implements LobbyMessage {
 	}
 
 	@Override
-	public void acceptVisitor(NetMessageVisitor vi) throws Exception {
+	public void acceptVisitor(NetMessageVisitor vi) {
 		vi.visit(this);
 	}
 	
@@ -25,4 +26,8 @@ public class LoginMessage implements LobbyMessage {
 		return password;
 	}
 
+	@Override
+	public void acceptVisitor(AuthListener vi) {
+		vi.visit(this);
+	}
 }

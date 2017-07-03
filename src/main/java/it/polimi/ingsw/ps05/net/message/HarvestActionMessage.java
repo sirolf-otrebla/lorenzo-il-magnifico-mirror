@@ -32,7 +32,7 @@ public class HarvestActionMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
+        vi.visit(this);
     }
 
     // decoratore di ActionMessage

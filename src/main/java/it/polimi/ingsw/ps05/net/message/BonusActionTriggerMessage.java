@@ -14,6 +14,5 @@ public class BonusActionTriggerMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
     }
 }

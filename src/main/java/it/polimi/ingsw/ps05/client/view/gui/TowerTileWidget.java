@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TowerTileWidget extends ActionSpaceWidget {
 
-    private CardWidget associatedCard;
+    private CardOnBoardWidget associatedCard;
     private boolean morePaymentOptions;
     private boolean isLegal = false;
     private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
@@ -54,11 +54,11 @@ public class TowerTileWidget extends ActionSpaceWidget {
         });
     }
 
-    public CardWidget getAssociatedCard() {
+    public CardOnBoardWidget getAssociatedCard() {
         return associatedCard;
     }
 
-    public void setAssociatedCard(CardWidget associatedCard) {
+    public void setAssociatedCard(CardOnBoardWidget associatedCard) {
         this.associatedCard = associatedCard;
     }
 
