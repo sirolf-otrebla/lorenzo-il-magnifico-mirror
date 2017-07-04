@@ -31,9 +31,9 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
             System.out.println("starting if");
             if(!isOccupied() && e.getDragboard().hasImage()) {
                 if(this.associatedCard.hasMorePaymentOptions()) {
-                    /* Showing selection window if card has payment alternatives */
+                    /* Showing payment selection window if associated card has payment alternatives */
                     PaymentPopup paymentPopup = new PaymentPopup();
-                    paymentPopup.setResArrayList(null); //TODO
+                    paymentPopup.setResArrayList(null); //TODO: come si passano le risorse tra cui scegliere al popup?
                     if (paymentPopup.display(this.getAssociatedCard().getCardName())) {
                         /* Enter 'if' when the player succesfully select the payment, without canceling action */
                         this.setOccupied(true);

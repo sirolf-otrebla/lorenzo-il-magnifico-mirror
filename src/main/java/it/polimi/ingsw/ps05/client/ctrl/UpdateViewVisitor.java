@@ -14,20 +14,20 @@ import java.util.HashMap;
  * Created by Alberto on 30/06/2017.
  */
 public class UpdateViewVisitor implements ViewVisitorInterface{
-    private HashMap<Integer, ActionSpaceWidget> actionSpaceWidgetHashMap;
+    private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap;
     private GUIMain guiMain;
     private Client client;
 
     public UpdateViewVisitor(Client client, GUIMain main){
         for (SingleOccupantActionSpaceWidget widget:
              guiMain.getMarketSpaceWidgets()) {
-            actionSpaceWidgetHashMap.put(widget.getId(), widget);
+            actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
         }
-        actionSpaceWidgetHashMap.put(guiMain.getHarvestingSpace().getId(), guiMain.getHarvestingSpace());
-        actionSpaceWidgetHashMap.put(guiMain.getProductionSpace().getId(), guiMain.getProductionSpace());
+        actionSpaceWidgetHashMap.put(guiMain.getHarvestingSpace().getReferenceId(), guiMain.getHarvestingSpace());
+        actionSpaceWidgetHashMap.put(guiMain.getProductionSpace().getReferenceId(), guiMain.getProductionSpace());
         for (TowerTileWidget[] tileWidgetArray: guiMain.getTowerTileWidgetList())
             for (TowerTileWidget tileWidget: tileWidgetArray)
-                actionSpaceWidgetHashMap.put(tileWidget.getId(), tileWidget);
+                actionSpaceWidgetHashMap.put(tileWidget.getReferenceId(), tileWidget);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
         if (tile.isOccupied()){
             widget.setOccupied(true);
             ColorEnumeration playerID = tile.getOccupant().getRelatedPlayerColor();
-            widget.setOccupantPlayerId(playerID);
+            widget.setOccupantPlayerColor(playerID);
             //TODO ESISTE UN METODO MIGLIORE PER CONTROLLARE LA LEGALITÀ DI UNA AZIONE, PER ORA TENIAMO QUESTO
             Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
             for (Familiar f: family )
@@ -74,7 +74,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
         MarketSpaceWidget widget = (MarketSpaceWidget) actionSpaceWidgetHashMap.get(marketSpace.getId());
         if (marketSpace.isOccupied()){
             widget.setOccupied(true);
-            widget.setOccupantPlayerId(marketSpace.getOccupant().getRelatedPlayerColor());
+            widget.setOccupantPlayerColor(marketSpace.getOccupant().getRelatedPlayerColor());
 
         }
 
@@ -83,7 +83,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
     @Override
     public void visit(CouncilSpace councilSpace){
         /* TODO CouncilSpaceWidget estende MultipleSpaceWidget, non più SingleOccupantActionSpaceWidget
-        CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getId());
+        CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getReferenceId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
         widget.setOccupingFamiliarList(widgetList);
         */
