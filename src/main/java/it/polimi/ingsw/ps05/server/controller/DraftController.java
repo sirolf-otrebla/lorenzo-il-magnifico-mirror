@@ -32,7 +32,7 @@ public class DraftController implements Runnable{
     public DraftController(ArrayList<PlayerClient> clients, Game game){
         parser = new CommonJsonParser(clients.size(), game);
         ArrayList<PlayerClient> draftClientArrayList = new ArrayList<>();
-        Collections.copy( draftClientArrayList, clients);
+        for (PlayerClient client : clients) draftClientArrayList.add(client);
         leaderCardReferenceIdMatrix = new HashMap<>();
         Collections.shuffle(draftClientArrayList);
         for (PlayerClient client: draftClientArrayList) {

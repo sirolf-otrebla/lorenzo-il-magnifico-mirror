@@ -80,7 +80,8 @@ public class ViewAdapter {
             this.view = new CLIMain(msg.getStatus().getGameBoard(),
                     msg.getStatus().getThisPlayer(), playerArrayList );
             System.out.println("Sending setup done message");
-            Client.getInstance().sendToServer(new SetupDoneMessage());
+            SetupDoneMessage setupDoneMessage = new SetupDoneMessage();
+            Client.getInstance().sendToServer(setupDoneMessage);
         }
     }
 

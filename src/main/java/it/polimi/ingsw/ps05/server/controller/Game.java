@@ -38,23 +38,33 @@ public class Game implements Observer {
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
-        this.id = id;
-        this.semStart = new Semaphore(0);
-        this.useCompleteRules = useCompleteRules;
-        this.useCustomBonusTiles = useCustomBonusTiles;
-        this.clientHashMap = new HashMap<Integer, PlayerClient>();
-        for (PlayerClient client: clientList){
-            clientHashMap.put(client.getId(), client);
-            client.setInGame(this);
+        synchronized (this) {
+            this.id = id;
+            this.semStart = new Semaphore(0);
+            this.useCompleteRules = useCompleteRules;
+            this.useCustomBonusTiles = useCustomBonusTiles;
+            this.clientHashMap = new HashMap<Integer, PlayerClient>();
+            for (PlayerClient client : clientList) {
+                clientHashMap.put(client.getId(), client);
+                client.setInGame(this);
+            }
         }
         this.excommList = new ArrayList<>();
     }
 
     public void start() throws InterruptedException {
+        ArrayList<PlayerClient> playerClients = new ArrayList<PlayerClient>(clientHashMap.values());
         ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < clientHashMap.size(); i++) {
-            clientHashMap.get(i).BuildPlayer(ColorEnumeration.values()[i]);
-            players.add(clientHashMap.get(i).getPlayer());
+        ColorEnumeration[] colorEnumerationAssignationArray = {
+                ColorEnumeration.Green,
+                ColorEnumeration.Yellow,
+                ColorEnumeration.Blue,
+                ColorEnumeration.Red
+        };
+        Collections.shuffle(playerClients);
+        for (int i = 0; i < playerClients.size(); i++) {
+            playerClients.get(i).BuildPlayer(colorEnumerationAssignationArray[i]);
+            players.add(playerClients.get(i).getPlayer());
         }
         this.flowCtrl = new GameFlowController(this);
         this.flowCrlThread = new Thread(flowCtrl);

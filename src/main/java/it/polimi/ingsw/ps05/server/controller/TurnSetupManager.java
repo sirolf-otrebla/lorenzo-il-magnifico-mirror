@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps05.server.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
 
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -122,21 +119,13 @@ public class TurnSetupManager extends Observable{
 	}
 	
 	private ArrayList<Player> setRandomPlayerOrder(){
-		ArrayList<Player> orderToSet = new ArrayList<Player>();
-		int size = playersConnected.size();
-		for (int i = 0; i < size; i++){
-			orderToSet.add(playersConnected.get(new Random().nextInt(playersConnected.size())));
-			playersConnected.remove(orderToSet.get(i));
-			
+		ArrayList<Player> plList = new ArrayList<>();
+		plList.ensureCapacity(this.playersConnected.size());
+		for( Player pl : playersConnected){
+			plList.add(pl);
 		}
-		for (int i = 0; i < orderToSet.size(); i++){
-			Player player = orderToSet.get(i);
-			player.addResource(new GoldResource(goldAmountStart + i));
-			player.addResource(new WoodResource(woodAmountStart));
-			player.addResource(new StoneResource(stoneAmountStart));
-			player.addResource(new ServantResource(servantsAmountStart));
-		}
-		return orderToSet;
+		Collections.shuffle(plList);
+		return plList;
 	}
 	
 	public Turn getTurn(){

@@ -97,11 +97,11 @@ public class Login extends Application implements Observable {
 
 		Label server = new Label("Server:");
 		grid.add(server, 0, 1);
-		serverTextField = new TextField();
+		serverTextField = new TextField("localhost");
 		grid.add(serverTextField, 1, 1);
 		Label port = new Label("Port:");
 		grid.add(port, 0, 2);
-		portTextField = new TextField();
+		portTextField = new TextField("11717");
 		grid.add(portTextField, 1, 2);
 
 		connesso = new Label("Non connesso");

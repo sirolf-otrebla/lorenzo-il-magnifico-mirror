@@ -59,6 +59,7 @@ public class Client {
 
     }
     public void sendToServer(NetMessage message){
+        this.serverInterface = ServerInterface.getInstance();
     	serverInterface.getConnection().send(message);
     }
 
