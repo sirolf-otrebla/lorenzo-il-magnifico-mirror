@@ -12,20 +12,20 @@ import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_S
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 
-public class ActionSpaceWidget {
+public class SingleOccupantActionSpaceWidget implements ActionSpaceWidget {
 
     private int referenceId;
     private Integer id; //TODO capire se tenere due id oppure no
     private boolean occupied;
     private Circle occupationCircle;
-    private ColorEnumeration familyMemberColor;
-    private ColorEnumeration occupantPlayerColor;
+    private ColorEnumeration familyMemberId;
+    private ColorEnumeration occupantPlayerId;
     private boolean isOccupied;
     private GraphicResources graphicMap = new GraphicResources();
     private int minDie;
     private boolean isLegal;
 
-    public ActionSpaceWidget(int minimumDie) {
+    public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
         occupationCircle.setFill(Color.TRANSPARENT);
         isOccupied = false;
@@ -99,7 +99,7 @@ public class ActionSpaceWidget {
 
     public void repaint() {
         if(occupied) {
-            Image img = new Image(this.graphicMap.getFamiliarPath(this.occupantPlayerColor, this.familyMemberColor));
+            Image img = new Image(this.graphicMap.getFamiliarPath(this.occupantPlayerId, this.familyMemberId));
             occupationCircle.setOpacity(1);
             occupationCircle.setFill(new ImagePattern(img));
         }
@@ -109,10 +109,10 @@ public class ActionSpaceWidget {
     }
 
     public ColorEnumeration getFamilyMemberID() {
-        return familyMemberColor;
+        return familyMemberId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -144,20 +144,20 @@ public class ActionSpaceWidget {
         this.occupied = occupied;
     }
 
-    public ColorEnumeration getFamilyMemberColor() {
-        return familyMemberColor;
+    public ColorEnumeration getFamilyMemberId() {
+        return familyMemberId;
     }
 
-    public void setFamilyMemberColor(ColorEnumeration familyMemberColor) {
-        this.familyMemberColor = familyMemberColor;
+    public void setFamilyMemberId(ColorEnumeration familyMemberId) {
+        this.familyMemberId = familyMemberId;
     }
 
-    public ColorEnumeration getOccupantPlayerColor() {
-        return occupantPlayerColor;
+    public ColorEnumeration getOccupantPlayerId() {
+        return occupantPlayerId;
     }
 
-    public void setOccupantPlayerColor(ColorEnumeration occupantPlayerColor) {
-        this.occupantPlayerColor = occupantPlayerColor;
+    public void setOccupantPlayerId(ColorEnumeration occupantPlayerId) {
+        this.occupantPlayerId = occupantPlayerId;
     }
 
     public boolean isLegal() {

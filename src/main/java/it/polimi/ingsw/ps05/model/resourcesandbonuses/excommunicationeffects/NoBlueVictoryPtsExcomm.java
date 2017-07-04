@@ -14,8 +14,8 @@ public class NoBlueVictoryPtsExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = -2326158148474708705L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

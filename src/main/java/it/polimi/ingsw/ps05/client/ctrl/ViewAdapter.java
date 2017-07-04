@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tile;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.GameStatus;
+import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
+import it.polimi.ingsw.ps05.net.message.SetupDoneMessage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,6 +69,19 @@ public class ViewAdapter {
     private void updateView(){
 
 
+    }
+
+    public void setUpInterface(GameSetupMessage msg){
+        if (this.viewType == this.GUI_TYPE) {
+
+        } else {
+            ArrayList<Player> playerArrayList = new ArrayList<>(msg.getStatus().getPlayerHashMap().values());
+            System.out.println("(setUpInterface) lunghezza playerArrayList: " + playerArrayList.size() );
+            this.view = new CLIMain(msg.getStatus().getGameBoard(),
+                    msg.getStatus().getThisPlayer(), playerArrayList );
+            System.out.println("Sending setup done message");
+            Client.getInstance().sendToServer(new SetupDoneMessage());
+        }
     }
 
 

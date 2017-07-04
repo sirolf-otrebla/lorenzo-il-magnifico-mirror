@@ -15,7 +15,7 @@ public class DoubleBonus extends PermanentBonus {
 	 * 
 	 */
 	private static final long serialVersionUID = -6139830404981455814L;
-	Game game;
+	transient Game game;
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {

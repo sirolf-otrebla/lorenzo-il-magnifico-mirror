@@ -11,7 +11,7 @@ public class NoMilitaryPointsForGreen extends PermanentBonus {
 	 * 
 	 */
 	private static final long serialVersionUID = -2110987672087368361L;
-	Game game;
+	transient Game game;
 	ArrayList<MilitaryResource> path;
 	
 	@Override

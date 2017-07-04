@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.net.GameStatus;
+import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 
 /**
@@ -26,6 +27,7 @@ public class Client {
     private Integer id;
     private ClientMessageTaker messageVisitor;
     private LoginController loginController;
+    private ViewAdapter viewAdapter;
 
     private Client(){
         messageVisitor = new ClientMessageTaker();
@@ -47,6 +49,15 @@ public class Client {
         return client;
     }
 
+    public void startGame(String viewType, GameSetupMessage message){
+        try {
+            ViewAdapter viewAdapter = ViewAdapter.createInstance(viewType);
+            viewAdapter.setUpInterface(message);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void sendToServer(NetMessage message){
     	serverInterface.getConnection().send(message);
     }
@@ -89,7 +100,7 @@ public class Client {
     }
 
     public void launchLoginForm(){
-        Login.main(null);
+        ;
     }
 
     public ClientMessageTaker getMessageTaker() {

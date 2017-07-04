@@ -13,7 +13,7 @@ public class VioletBonus extends PermanentBonus{
 	 */
 	private static final long serialVersionUID = -7329537189894904204L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public VioletBonus(Integer value){
 		this.value = value;

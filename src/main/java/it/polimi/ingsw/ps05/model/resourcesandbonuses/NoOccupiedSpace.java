@@ -15,7 +15,7 @@ public class NoOccupiedSpace extends PermanentBonus {
 	 */
 	private static final long serialVersionUID = -3661417399312197123L;
 	ArrayList<ActionSpace> modified = new ArrayList<>();
-	Game game;
+	transient Game game;
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {

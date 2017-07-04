@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.server.controller;
 
-import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -42,11 +41,15 @@ public class MessageObserver implements Observer, NetMessageVisitor {
         }
     }
 
-    public void visit(LobbyMessage msg){
-        if (this.client.isInGame()){
-            //TODO
-        }
+    @Override
+    public void visit(LobbyMessage msg) {
 
+    }
+
+    public void visit(LobbyResponseMessage msg){
+        System.out.println("LobbyResponseMessage received");
+       LobbyResponseMessageVisitor visitor  = new LobbyResponseMessageVisitor(this.client);
+       msg.acceptVisitor(visitor);
     }
 
     @Override
@@ -57,6 +60,7 @@ public class MessageObserver implements Observer, NetMessageVisitor {
     @Override
     public void visit(AuthMessage msg) {
         AuthListener listener = new AuthListener(this.client);
+        System.out.println("messaggio di auth a MessageObserver");
         msg.acceptVisitor(listener);
     }
 
@@ -64,4 +68,5 @@ public class MessageObserver implements Observer, NetMessageVisitor {
     public void visit(AuthResponseMessage msg) {
         //todo
     }
+
 }

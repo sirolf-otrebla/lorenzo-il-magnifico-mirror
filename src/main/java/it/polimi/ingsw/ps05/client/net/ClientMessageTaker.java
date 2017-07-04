@@ -28,7 +28,7 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
 
     @Override
     public void visit(LobbyMessage msg) {
-        System.out.println("sono nel primo visitor (lobbyMessage");
+        System.out.println("sono nel primo visitor (lobbyMessage)");
         LobbyMessageVisitor visitor = new LobbyMessageVisitor();
         msg.acceptVisitor(visitor);
 
@@ -47,10 +47,14 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
 
     public void visit(AuthResponseMessage msg) {
        AuthResponseVisitor visitor =  new AuthResponseVisitor(Client.getInstance().getLoginController().getSemaphore());
-       System.out.println("sono nel primo visitor");
+       System.out.println("sono nel primo visitor (authResponse)");
        msg.acceptVisitor(visitor);
     }
 
+    @Override
+    public void visit(LobbyResponseMessage msg) {
+        // no
+    }
 
 
     @Override

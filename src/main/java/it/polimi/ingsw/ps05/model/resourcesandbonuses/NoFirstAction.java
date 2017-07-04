@@ -17,7 +17,7 @@ public class NoFirstAction extends PermanentBonus implements ActionResult {
 	 * 
 	 */
 	private static final long serialVersionUID = 282333671940817128L;
-	Game game;
+	transient Game game;
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {

@@ -10,7 +10,7 @@ public class CopyLeader implements ActionResult {
 	 * 
 	 */
 	private static final long serialVersionUID = -1350594508245935462L;
-	Game game;
+	transient Game game;
 	Integer value; //usato per tenere l'id della carta leader copiata
 
 	@Override

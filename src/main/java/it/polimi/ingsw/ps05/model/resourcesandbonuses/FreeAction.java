@@ -13,7 +13,7 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	 */
 	private static final long serialVersionUID = 6755046862889487264L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public FreeAction(Integer value){
 		this.value = value;

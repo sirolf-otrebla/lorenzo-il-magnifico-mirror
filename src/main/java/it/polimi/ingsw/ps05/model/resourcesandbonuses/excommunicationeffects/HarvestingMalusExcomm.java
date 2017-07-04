@@ -14,8 +14,8 @@ public class HarvestingMalusExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = -8922189358831556898L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

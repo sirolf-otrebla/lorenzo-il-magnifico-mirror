@@ -18,7 +18,7 @@ public class Dice implements Resource {
 	ColorEnumeration color;
 	private int value;
 	public static final  String ID = "Dado";
-	private Game game;
+	private  transient Game game;
 	
 	public Dice(ColorEnumeration color) {
 		super();

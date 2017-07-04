@@ -13,7 +13,7 @@ public class HarvestBonus extends PermanentBonus{
 	 */
 	private static final long serialVersionUID = -4353497814018798307L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public HarvestBonus(Integer value){
 		this.value = value;

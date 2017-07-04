@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
-public class Player implements PlayerRelated, VisitableFromView {
+public class Player implements Serializable, PlayerRelated, VisitableFromView {
 
 	/**
 	 * 

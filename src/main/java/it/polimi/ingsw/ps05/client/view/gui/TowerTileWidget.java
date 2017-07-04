@@ -1,18 +1,16 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
-import it.polimi.ingsw.ps05.model.spaces.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 
 /**
  * Created by miotto on 27/06/17.
  */
-public class TowerTileWidget extends ActionSpaceWidget {
+public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
 
     private CardOnBoardWidget associatedCard;
     private boolean morePaymentOptions;

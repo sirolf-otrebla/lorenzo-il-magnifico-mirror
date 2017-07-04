@@ -12,7 +12,7 @@ public class BonusDice extends PermanentBonus {
 	private static final long serialVersionUID = -4761876138993965465L;
 	Integer value;
 	ColorEnumeration color;
-	Game game;
+	transient Game  game;
 	boolean toAdd = true;
 	Integer oldValue;
 	

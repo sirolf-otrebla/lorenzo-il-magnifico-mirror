@@ -22,6 +22,7 @@ public class AuthListener {
         if( Server.getInstance().getUserDatabase().checkUser(
                 msg.getUsername(), msg.getPassword())){
             client.setUsername(msg.getUsername());
+            System.out.println("inserisco nuovo client");
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
             client.sendMessage(new LoggedMessage(LoggedMessage.STATUS_LOGGED));
@@ -36,6 +37,7 @@ public class AuthListener {
         if (Server.getInstance().getUserDatabase().registerNewUser(
                 msg.getUsername(), msg.getPassword())){
             client.setUsername(msg.getUsername());
+            System.out.println("inserisco nuovo client");
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
             client.sendMessage(new RegisteredMessage(RegisteredMessage.STATUS_REGISTERED));

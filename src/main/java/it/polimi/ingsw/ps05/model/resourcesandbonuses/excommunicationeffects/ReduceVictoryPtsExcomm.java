@@ -21,8 +21,8 @@ public class ReduceVictoryPtsExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = 5529477371507190656L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

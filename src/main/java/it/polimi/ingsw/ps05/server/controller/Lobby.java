@@ -28,12 +28,12 @@ public class Lobby implements Runnable {
         this.lobbyLifeTime = lobbyLifeTime;
         sem = new Semaphore(0);
 }
-    public synchronized void addToLobby(PlayerClient client){
+    public void addToLobby(PlayerClient client){
         System.out.println("adding player to lobby");
-        this.connectedClientArrayList.add(client);
         if (connectedClientArrayList.size() == 1){
             this.timer.schedule(new StartGameTimerTask(this), lobbyLifeTime);
         }
+        this.connectedClientArrayList.add(client);
         ArrayList<String> usernamesArrayList = new ArrayList<>();
         for (PlayerClient playerClient: this.connectedClientArrayList) {
             usernamesArrayList.add(playerClient.getUsername());
@@ -43,16 +43,20 @@ public class Lobby implements Runnable {
             if(!client.equals(playerClient))
                 playerClient.sendMessage(new EnteringLobbyMessage(false, usernamesArrayList));
         }
+
+        // fa partire il metodo run di sotto
+        System.out.println("rilascio lock");
         sem.release();
+        System.out.println("Sem queue length: " + sem.availablePermits());
     }
 
     public synchronized void removeHeadFromLobby(){
-        if(this.connectedClientArrayList != null) connectedClientArrayList.remove(connectedClientArrayList.size() -1);
+        if(this.connectedClientArrayList.size() > 0) connectedClientArrayList.remove(connectedClientArrayList.size() -1);
     }
 
     public void removeAllPlayers(){
         removeHeadFromLobby();
-       if (this.connectedClientArrayList != null) removeAllPlayers();
+       if (this.connectedClientArrayList.size() > 0) removeAllPlayers();
     }
 
     public void removePlayerFromLobby(PlayerClient client){
@@ -62,6 +66,7 @@ public class Lobby implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Starting Lobby Thread");
         synchronized (this){
             try {
                 sem.acquire(MAX_PLAYER_NUM);
@@ -70,15 +75,21 @@ public class Lobby implements Runnable {
                 System.out.println("something gone wrong :( ");
                 //TODO gestire sta cazzo di eccezione
             }
-            startGame();
+            System.out.println("Starting game!!!");
         }
+        startGame();
 
     }
 
     public void startGame(){
-        Game game = new Game(this.useCompleteRules, this.useCustomBonusTiles, Server.getInstance().getGamesNumber() +1, connectedClientArrayList);
+        Game game = new Game(this.useCompleteRules, this.useCustomBonusTiles,
+                Server.getInstance().getGamesNumber() +1, connectedClientArrayList);
         removeAllPlayers();
-
+        try {
+            game.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }

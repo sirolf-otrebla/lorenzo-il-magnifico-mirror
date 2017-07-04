@@ -13,7 +13,7 @@ public class YellowBonus extends PermanentBonus{
 	 */
 	private static final long serialVersionUID = -8671801209944697132L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public YellowBonus(Integer value){
 		this.value = value;

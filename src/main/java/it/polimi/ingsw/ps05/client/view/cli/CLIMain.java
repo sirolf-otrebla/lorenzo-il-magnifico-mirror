@@ -6,6 +6,7 @@ import com.googlecode.lanterna.terminal.TerminalResizeListener;
 import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.client.view.SelectionTypeEnum;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
@@ -109,6 +110,7 @@ public class CLIMain implements LimView, Runnable{
 
 
 	public CLIMain(Board board, Player player, ArrayList<Player> playersList){
+		this.setActive(false);
 		this.board = board;
 		this.player = player;
 		this.playersList = playersList;
@@ -127,6 +129,8 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	public void trySys(){
+		System.out.println("(trySis at CLIMain) lunghezza playerArrayList: " + playersList.size() );
+
 		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
 			playersList.get(0).addBlueCard((BlueCard)tile.getCard());
 		}
@@ -257,6 +261,8 @@ public class CLIMain implements LimView, Runnable{
 		} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
 			e.printStackTrace();
 
+		} catch (IllegalMethodCallException e) {
+			e.printStackTrace();
 		}
 
 	}

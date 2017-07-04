@@ -13,7 +13,7 @@ public class GreenBonus extends PermanentBonus{
 	 */
 	private static final long serialVersionUID = -1598014701385821881L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private  Game game;
+	transient private  Game game;
 
 	public GreenBonus(Integer value){
 		this.value = value;
