@@ -15,7 +15,7 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	 */
 	private static final long serialVersionUID = 5972328530854839238L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private  Game game;
+	private transient Game game;
 
 	public AllBonus(Integer value){
 		this.value = value;

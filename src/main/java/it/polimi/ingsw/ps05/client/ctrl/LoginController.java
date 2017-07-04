@@ -28,6 +28,7 @@ public class LoginController {
 	String password = null;
 	String registration = "Login";
 	ServerInterface dioporc;
+	private String viewType;
 	private Semaphore semaphore;
 	private int status = -1;
 
@@ -35,7 +36,6 @@ public class LoginController {
 	public LoginController() {
 		l = new Login();
 		semaphore = new Semaphore(0);
-
 
 		new Thread() {
 			@Override
@@ -128,6 +128,7 @@ public class LoginController {
 		}
 		NetMessage recMess = connToUse.getInputMessage();
 		l.setLobbyVisble();
+		this.viewType = l.getUI().getValue().toLowerCase();
 	}
 	
 	private synchronized void tryRegistration() {
@@ -143,6 +144,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		NetMessage recMess = connToUse.getInputMessage();
+		this.viewType = l.getUI().getValue().toLowerCase();
 	}
 
 	public Semaphore getSemaphore() {
@@ -163,5 +165,13 @@ public class LoginController {
 
 	public void setLobby(){
 		l.setLobbyVisble();
+	}
+
+	public void closeWindow(){
+		l.close();
+	}
+
+	public String getViewType() {
+		return viewType;
 	}
 }

@@ -17,7 +17,7 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	private Integer value;
 
 	public static final String id = "Oro Bonus";
-	private  Game game;
+	transient private  Game game;
 
 	public GoldResourceCostBonus(){
 		

@@ -15,7 +15,7 @@ public class BlueCardMalusExcomm implements ExcommunicationEffect {
 	 */
 	private static final long serialVersionUID = 2066135228669323010L;
 	
-	Game game;
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

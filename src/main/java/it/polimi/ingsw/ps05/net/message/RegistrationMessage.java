@@ -30,6 +30,7 @@ public class RegistrationMessage implements AuthMessage, Serializable {
 
 	@Override
 	public void acceptVisitor(AuthListener vi) {
+		System.out.println("dentro acceptVisitor");
 		vi.visit(this);
 	}
 }

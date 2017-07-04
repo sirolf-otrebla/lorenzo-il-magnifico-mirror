@@ -23,7 +23,7 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	//Ex. value 5 è da Integerendersi come un azione con dado 5 sulla colonna blu
 
-	private Game game;
+	private transient Game game;
 
 	public BlueAction(Integer value){
 		this.value = value;

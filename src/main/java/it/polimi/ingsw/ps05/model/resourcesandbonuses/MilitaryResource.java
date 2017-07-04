@@ -14,7 +14,7 @@ public class MilitaryResource implements Resource, ActionResult {
 	private static final long serialVersionUID = -7968592953342500243L;
 	private Integer amount;
 	public static final String id = "Militare";
-	private  Game game;
+	transient private  Game game;
 
 	public MilitaryResource(Integer amount){
 		this.amount = amount;

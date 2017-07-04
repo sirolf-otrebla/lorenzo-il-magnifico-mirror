@@ -5,11 +5,14 @@ import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
+import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
+import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 public class Game implements Observer {
 
@@ -30,12 +33,13 @@ public class Game implements Observer {
     private boolean useCompleteRules = true;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
+    private Semaphore semStart;
 
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
         this.id = id;
-
+        this.semStart = new Semaphore(0);
         this.useCompleteRules = useCompleteRules;
         this.useCustomBonusTiles = useCustomBonusTiles;
         this.clientHashMap = new HashMap<Integer, PlayerClient>();
@@ -57,6 +61,13 @@ public class Game implements Observer {
         this.setup = new GameSetup(players, this);
         this.gBoard = this.setup.getBoard();
         tManager = this.setup.getTurnSetup();
+        for (PlayerClient client: this.clientHashMap.values()) {
+            GameStatus status = new GameStatus( players,  this.gBoard, client.getPlayer(), GameStatus.NO_PLAYER_ACTIVE);
+            client.sendMessage(new GameSetupMessage(status));
+        }
+        // waiting to start
+         semStart.acquire(clientHashMap.size());
+        // starting
         if (useCompleteRules || useCustomBonusTiles){
         	draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
             this.draftControllerThread = new Thread(draftController);
@@ -133,5 +144,9 @@ public class Game implements Observer {
 
     public PlayerClient getPlayerClient(Integer id){
         return this.clientHashMap.get(id);
+    }
+
+    public Semaphore getSemStart() {
+        return semStart;
     }
 }

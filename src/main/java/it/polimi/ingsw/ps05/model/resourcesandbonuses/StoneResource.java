@@ -15,7 +15,7 @@ public class StoneResource implements Resource, ActionResult {
 	private static final long serialVersionUID = 1244888621400064253L;
 	private Integer amount;
 	public static final String id = "Pietra";
-	private Game game;
+	transient private Game game;
 	
 	public StoneResource(Integer amount){
 		this.amount = amount;

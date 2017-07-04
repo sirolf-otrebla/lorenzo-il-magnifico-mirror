@@ -14,8 +14,8 @@ public class VioletCardMalusExcomm implements ExcommunicationEffect{
 	 * 
 	 */
 	private static final long serialVersionUID = 5526622434349388102L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
     public EffectType getEffectType() {

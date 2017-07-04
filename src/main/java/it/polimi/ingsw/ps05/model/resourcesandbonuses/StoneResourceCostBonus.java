@@ -15,7 +15,7 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 	private static final long serialVersionUID = 375568512526772790L;
 	private Integer value;
 	public static final  String ID = "Pietra Bonus";
-	private Game game;
+	transient private Game game;
 	
 	public StoneResourceCostBonus(){
 		

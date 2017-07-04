@@ -13,7 +13,7 @@ public class GoldResource implements Resource, ActionResult {
 	private static final long serialVersionUID = 5857907131060281475L;
 	private Integer amount;
 	public static final String id = "Oro";
-	private Game game;
+	transient private Game game;
 
 
 	public GoldResource(Integer amount){

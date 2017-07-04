@@ -13,7 +13,7 @@ public class WoodResource implements Resource, ActionResult {
 	private static final long serialVersionUID = -220328697689674078L;
 	private Integer amount;
 	public static final String id = "Legno";
-	private Game game;
+	transient private Game game;
 	
 	public WoodResource(Integer amount){
 		this.amount = amount;

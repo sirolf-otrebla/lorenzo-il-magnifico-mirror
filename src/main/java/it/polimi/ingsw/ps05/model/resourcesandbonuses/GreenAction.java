@@ -20,7 +20,7 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	 */
 	private static final long serialVersionUID = -7255786539292915638L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public GreenAction(Integer value){
 		this.value = value;

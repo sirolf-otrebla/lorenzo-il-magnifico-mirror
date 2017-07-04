@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.client.net.ServerInterface;
-import it.polimi.ingsw.ps05.client.view.gui.ActionSpaceWidget;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
-import it.polimi.ingsw.ps05.model.Action;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 
 import java.util.Observable;

@@ -391,7 +391,7 @@ public class GUIMain extends Application {
 		return harvestingSpace;
 	}
 
-	void insertActionSpace(ActionSpaceWidget actionSpace, Pane pane, int minDie, double percX, double percY) {
+	void insertActionSpace(SingleOccupantActionSpaceWidget actionSpace, Pane pane, int minDie, double percX, double percY) {
 
 		actionSpace.setMinDie(minDie);
 
