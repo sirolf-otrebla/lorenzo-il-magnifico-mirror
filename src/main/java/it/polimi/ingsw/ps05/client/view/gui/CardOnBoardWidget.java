@@ -6,8 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
-import java.awt.*;
-
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 import static it.polimi.ingsw.ps05.client.view.gui.GraphicResources.cardColorMap;
 
@@ -72,8 +70,8 @@ public class CardOnBoardWidget {
 
         for(int i = 0; i < 4; i++) {
             // find the right card box color and return
-            if(this.color == cardColorMap.get(i))
-                return personalBoard.getPersonalCardBoxes()[i];
+            if(this.color == GraphicResources.getCardColor(i))
+                return personalBoard.getCardHboxes()[i];
         }
         return null; //TODO se non viene trovato il colore corrispondente si potrebbe lanciare un'eccezione o chiudere il programma
     }

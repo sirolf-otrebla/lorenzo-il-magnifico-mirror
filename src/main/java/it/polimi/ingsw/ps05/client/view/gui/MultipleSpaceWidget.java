@@ -34,7 +34,7 @@ public class MultipleSpaceWidget {
 
         // hbox.setMinHeight(FAMILIAR_MIN_SIZE * resize);
         hbox.setFillHeight(true);
-        scrollPane.setMinSize(2 * FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize);
+        scrollPane.setPrefSize(2 * FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize);
         scrollPane.setContent(hbox);
 
         /* disabling scrollbar */
@@ -133,5 +133,13 @@ public class MultipleSpaceWidget {
 
     public void setLegal(boolean legal) {
         isLegal = legal;
+    }
+
+    public void setMinDie(int minDie) {
+        this.minDie = minDie;
+    }
+
+    public ScrollPane getScrollPane() {
+        return scrollPane;
     }
 }

@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -23,22 +23,10 @@ public class FamiliarWidget {
     private ColorEnumeration FamiliarColor;
     private ColorEnumeration PlayerColor;
 
-    public FamiliarWidget(ColorEnumeration player, ColorEnumeration Familiar) {
-
-
-        //todo
-    }
-
-    public FamiliarWidget(String path) {
-
-        /*
-    	System.out.println(path);
-    	File crDir = new File(path);
-    	System.out.println(crDir.exists());
-    	*/
-    	//getAllFile(crDir);
-
-        addImage(path);
+    public FamiliarWidget(ColorEnumeration playerColor, ColorEnumeration familiarColor) {
+        // construct image path
+        String imagePath = path + playerColor.toString().toLowerCase() + "pl/" + familiarColor.toString().toLowerCase() + ".png";
+        addImage(imagePath);
         setupGestureSource();
     }
 
@@ -107,7 +95,7 @@ public class FamiliarWidget {
 
     public void repaint() {
         if(!isPlaced()) {
-
+            //TODO
         }
     }
 

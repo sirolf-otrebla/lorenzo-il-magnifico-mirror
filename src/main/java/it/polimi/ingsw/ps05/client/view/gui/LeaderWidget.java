@@ -14,7 +14,7 @@ public class LeaderWidget {
     private int referenceId;
     private String imagePath;
     private ImageView leaderCard;
-    private ImageView backSide;
+    private static ImageView backSide;
     private static boolean played;
     private boolean active;
     private boolean drafted;
@@ -28,15 +28,9 @@ public class LeaderWidget {
 
     public LeaderWidget(int referenceId) {
         this.referenceId = referenceId;
-        //TODO
-        addBackImage();
-    }
-
-    public LeaderWidget(int referenceId, String imagePath) {
-        this.referenceId = referenceId;
+        String imagePath = GraphicResources.getLeaderPath(referenceId);
         addImage(imagePath);
         addBackImage();
-        setupZoomGesture();
     }
 
     public void addImage(String imagePath) {
@@ -49,10 +43,10 @@ public class LeaderWidget {
 
     public void addBackImage() {
         Image i = new Image(backPath);
-        this.backSide = new ImageView(i);
-        this.backSide.setPreserveRatio(true);
-        this.backSide.setSmooth(true);
-        this.backSide.setCache(true);
+        backSide = new ImageView(i);
+        backSide.setPreserveRatio(true);
+        backSide.setSmooth(true);
+        backSide.setCache(true);
     }
 
 

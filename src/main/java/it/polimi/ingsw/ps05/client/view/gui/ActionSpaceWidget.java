@@ -18,8 +18,8 @@ public class ActionSpaceWidget {
     private Integer id; //TODO capire se tenere due id oppure no
     private boolean occupied;
     private Circle occupationCircle;
-    private ColorEnumeration familyMemberId;
-    private ColorEnumeration occupantPlayerId;
+    private ColorEnumeration familyMemberColor;
+    private ColorEnumeration occupantPlayerColor;
     private boolean isOccupied;
     private GraphicResources graphicMap = new GraphicResources();
     private int minDie;
@@ -99,7 +99,7 @@ public class ActionSpaceWidget {
 
     public void repaint() {
         if(occupied) {
-            Image img = new Image(this.graphicMap.getFamiliarPath(this.occupantPlayerId, this.familyMemberId));
+            Image img = new Image(this.graphicMap.getFamiliarPath(this.occupantPlayerColor, this.familyMemberColor));
             occupationCircle.setOpacity(1);
             occupationCircle.setFill(new ImagePattern(img));
         }
@@ -109,7 +109,7 @@ public class ActionSpaceWidget {
     }
 
     public ColorEnumeration getFamilyMemberID() {
-        return familyMemberId;
+        return familyMemberColor;
     }
 
     public int getId() {
@@ -144,20 +144,20 @@ public class ActionSpaceWidget {
         this.occupied = occupied;
     }
 
-    public ColorEnumeration getFamilyMemberId() {
-        return familyMemberId;
+    public ColorEnumeration getFamilyMemberColor() {
+        return familyMemberColor;
     }
 
-    public void setFamilyMemberId(ColorEnumeration familyMemberId) {
-        this.familyMemberId = familyMemberId;
+    public void setFamilyMemberColor(ColorEnumeration familyMemberColor) {
+        this.familyMemberColor = familyMemberColor;
     }
 
-    public ColorEnumeration getOccupantPlayerId() {
-        return occupantPlayerId;
+    public ColorEnumeration getOccupantPlayerColor() {
+        return occupantPlayerColor;
     }
 
-    public void setOccupantPlayerId(ColorEnumeration occupantPlayerId) {
-        this.occupantPlayerId = occupantPlayerId;
+    public void setOccupantPlayerColor(ColorEnumeration occupantPlayerColor) {
+        this.occupantPlayerColor = occupantPlayerColor;
     }
 
     public boolean isLegal() {

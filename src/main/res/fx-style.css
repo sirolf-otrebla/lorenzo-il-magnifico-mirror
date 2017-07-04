@@ -12,6 +12,13 @@
     -fx-background-position: center;
 }
 
+#opponentBoard{
+    -fx-background-image: url("./img/personalboard.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
 #personalLeaders{
     -fx-background-image: url("./img/lightbrownBG.jpg");
     -fx-background-size: auto;
@@ -46,6 +53,10 @@
 
 #showLeaderButton{
     -fx-base: #9b653e
+}
+
+#timerLabel{
+
 }
 
 

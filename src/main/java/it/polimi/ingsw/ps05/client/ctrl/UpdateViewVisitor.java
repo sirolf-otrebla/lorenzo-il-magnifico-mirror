@@ -55,7 +55,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
         if (tile.isOccupied()){
             widget.setOccupied(true);
             ColorEnumeration playerID = tile.getOccupant().getRelatedPlayerColor();
-            widget.setOccupantPlayerId(playerID);
+            widget.setOccupantPlayerColor(playerID);
             //TODO ESISTE UN METODO MIGLIORE PER CONTROLLARE LA LEGALITÀ DI UNA AZIONE, PER ORA TENIAMO QUESTO
             Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
             for (Familiar f: family )
@@ -74,7 +74,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
         MarketSpaceWidget widget = (MarketSpaceWidget) actionSpaceWidgetHashMap.get(marketSpace.getId());
         if (marketSpace.isOccupied()){
             widget.setOccupied(true);
-            widget.setOccupantPlayerId(marketSpace.getOccupant().getRelatedPlayerColor());
+            widget.setOccupantPlayerColor(marketSpace.getOccupant().getRelatedPlayerColor());
 
         }
 
