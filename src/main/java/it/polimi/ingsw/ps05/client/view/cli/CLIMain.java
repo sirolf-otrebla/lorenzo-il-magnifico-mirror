@@ -1333,7 +1333,7 @@ public class CLIMain implements LimView, Runnable{
 		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
 	}
 	
-	public LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
+	private LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
 		for (LeaderCard l : cards){
 			if (l.getReferenceID() == id){
 				return l;
@@ -1341,4 +1341,13 @@ public class CLIMain implements LimView, Runnable{
 		}
 		return null;
 	}
+	
+	private void discardLeaderCard() throws IOException{
+		
+		ArrayList<?> chosenCard = choseDraftCard(player.getLeaderCardList(), terminal.getTerminalSize().getColumns());
+		
+		player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
+	}
+	
+	
 }

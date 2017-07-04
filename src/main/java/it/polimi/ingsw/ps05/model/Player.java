@@ -29,7 +29,7 @@ public class Player implements PlayerRelated, VisitableFromView {
 	ColorEnumeration color;
 	
 	// game information
-	private HashMap<ColorEnumeration, Familiar> familyMap;
+	private HashMap<ColorEnumeration, Familiar> familyMap = new HashMap<>();
 	private BonusTile bonusTile;
 
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
@@ -41,9 +41,9 @@ public class Player implements PlayerRelated, VisitableFromView {
 	private HashMap<Integer, VioletCard> violetCardHashMap = new HashMap<>();
 	private HashMap<Integer, LeaderCard> leaderCardHashMap = new HashMap<>();
 
-	private ArrayList<PermanentBonus> permanentEffectResList;
-	private ArrayList<OnePerTurnEffect> onePerTurnEffectList;
-	private ArrayList<Effect> temporaryEffectList;
+	private ArrayList<PermanentBonus> permanentEffectResList = new ArrayList<>();
+	private ArrayList<OnePerTurnEffect> onePerTurnEffectList = new ArrayList<>();
+	private ArrayList<Effect> temporaryEffectList = new ArrayList<>();
 	
 	//TODO arraylist di scomuniche
 	//TODO fare controllo se prima azione del turno nel controller (una scomunica lo richiede)

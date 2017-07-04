@@ -11,7 +11,6 @@ import it.polimi.ingsw.ps05.server.controller.GameSetup;
 import it.polimi.ingsw.ps05.server.controller.TurnSetupManager;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.server.controller.Game;
- import  junit.framework.*;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -218,139 +217,9 @@ public class ActionTest extends TestCase {
 		*/
 	}
 
-
-	@Test
-	public  void testPlayer(){
-
-		assertEquals(ActionTest.PL_ID_TEST, testPl.getPlayerID());
-		assertEquals(ActionTest.PL_USERNAME_TEST, testPl.getUsername());
-		assertSame(this.testFm, testPl.getFamilyList().toArray()[0]);
-		assertEquals(new Integer(0), (Integer) testPl.getResource("Pietra").getValue());
-		assertEquals(0, (int) testPl.getResource("Oro").getValue());
-		assertEquals(0, (int) testPl.getResource("Fede").getValue());
-		assertEquals(0, (int) testPl.getResource("Legno").getValue());
-		assertEquals(0, (int) testPl.getResource("Vittoria").getValue());
-
-		WoodResource wood = new WoodResource(ActionTest.PL_TEST_WOOD);
-		wood.applyResult(testPl);
-		StoneResource stone = new StoneResource(ActionTest.PL_TEST_STONE);
-		stone.applyResult(testPl);
-		FaithResource faith = new FaithResource(ActionTest.PL_TEST_FAITH);
-		faith.applyResult(testPl);
-		MilitaryResource military = new MilitaryResource(ActionTest.PL_TEST_MILITARY);
-		military.applyResult(testPl);
-		VictoryResource victory = new VictoryResource(ActionTest.PL_TEST_MILITARY);
-		victory.applyResult(testPl);
-		ServantResource servant = new ServantResource(ActionTest.PL_TEST_MILITARY);
-		servant.applyResult(testPl);
-		GoldResource gold = new GoldResource(ActionTest.PL_TEST_MILITARY);
-		gold.applyResult(testPl);
-
-		assertEquals(ActionTest.PL_TEST_WOOD, (int) testPl.getResource("Legno").getValue());
-		assertEquals(ActionTest.PL_TEST_STONE, (int) testPl.getResource("Pietra").getValue());
-		assertEquals(ActionTest.PL_TEST_FAITH, (int) testPl.getResource("Fede").getValue());
-		assertEquals(ActionTest.PL_TEST_MILITARY, (int) testPl.getResource("Militare").getValue());
-		assertEquals(ActionTest.PL_TEST_VICTORY, (int) testPl.getResource("Vittoria").getValue());
-		assertEquals(ActionTest.PL_TEST_SERVANTS, (int) testPl.getResource("Servitori").getValue());
-		assertEquals(ActionTest.PL_TEST_GOLD, (int) testPl.getResource("Oro").getValue());
-	}
-
-	@Test
-	public void testFamiliar() throws InterruptedException {
-		ArrayList<Player> list = new ArrayList<Player>();
-		Random randomNum = new Random();
-		int numP = randomNum.nextInt(4) + 1;
-		for (int i = 0; i < numP; i++){
-			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
-		}
-		Game game = new Game(true, true, numP, null);
-		try {
-			game.start();
-		} catch (InterruptedException exc) {
-			//TODO gestire eccezione
-			exc.printStackTrace();
-		}
-		GameSetup gameSetup = new GameSetup(list,game);
-		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
-		Turn turn = turnSetup.getTurn();
-		assertEquals(numP,turn.getPlayerOrder().size());
-		System.out.println("Dadi " + turn.getDice().size());
-		assertEquals(4, turn.getDice().size());
-		for (Player p : turn.getPlayerOrder()){
-			int white = 0;
-			int black = 0;
-			int orange = 0;
-			int any = 0;
-			for (Familiar f : p.getFamilyList()){
-				if (f.getColor().equals(ColorEnumeration.White)){
-					white++;
-					for (Dice d : turn.getDice()){
-						if (d.getColor().equals(ColorEnumeration.White)){
-							assertEquals(d.getValue(),f.getRelatedDice().getValue());
-						}
-					}
-				} else if (f.getColor().equals(ColorEnumeration.Black)){
-					black++;
-					for (Dice d : turn.getDice()){
-						if (d.getColor().equals(ColorEnumeration.Black)){
-							assertEquals(d.getValue(),f.getRelatedDice().getValue());
-						}
-					}
-				} else if (f.getColor().equals(ColorEnumeration.Orange)){
-					orange++;
-					for (Dice d : turn.getDice()){
-						if (d.getColor().equals(ColorEnumeration.Orange)){
-							assertEquals(d.getValue(),f.getRelatedDice().getValue());
-						}
-					}
-				} else if (f.getColor().equals(ColorEnumeration.Any)){
-					any++;
-				}
-			}
-			assertEquals(1,white);
-			assertEquals(1,black);
-			assertEquals(1,orange);
-			assertEquals(1,any);
-			assertEquals(4,white+orange+black+any);
-		}
-
-		//  ?
-		for (Player p : turn.getPlayerOrder()){
-			for (Player o : turn.getPlayerOrder()){
-				assertEquals(((Familiar) p.getFamilyList().toArray()[0]).getColor(),
-						((Familiar) o.getFamilyList().toArray()[0]).getColor());
-				assertEquals(((Familiar) p.getFamilyList().toArray()[1]).getColor(),
-						((Familiar) o.getFamilyList().toArray()[1]).getColor());
-				assertEquals(((Familiar) p.getFamilyList().toArray()[2]).getColor(),
-						((Familiar) o.getFamilyList().toArray()[2]).getColor());
-				assertEquals(((Familiar) p.getFamilyList().toArray()[3]).getColor(),
-						((Familiar) o.getFamilyList().toArray()[3]).getColor());
-
-				assertEquals(((Familiar) p.getFamilyList().toArray()[1]).getRelatedDice().getValue(),
-						((Familiar) p.getFamilyList().toArray()[1]).getRelatedDice().getValue());
-				assertEquals(((Familiar) p.getFamilyList().toArray()[2]).getRelatedDice().getValue(),
-						((Familiar) p.getFamilyList().toArray()[2]).getRelatedDice().getValue());
-
-			}
-		}
-
-
-
-	}
-
 	@Test
 	public void testEffects(){
 		// 
-	}
-
-	@Test
-	public void testDices(){
-		assertEquals(ActionTest.DICE_REQ_AMT,(int) this.testDiceReq.getValue());
-		assertEquals(ActionTest.PL_COLOR_TEST,this.testDiceReq.getColor());
-		for (int i = 0; i < 1000000; i++){
-			Dice dice = new Dice(ActionTest.PL_COLOR_TEST);
-			assertTrue(1 <= (int)dice.getValue() && (int)dice.getValue() <= 6);
-		}
 	}
 
 	@Test

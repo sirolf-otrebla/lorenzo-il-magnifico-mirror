@@ -37,7 +37,6 @@ public class DraftController implements Runnable{
         for (PlayerClient client: draftClientArrayList) {
             leaderCardReferenceIdMatrix.put(client.getPlayer().getColor(), new ArrayList<>());
         }
-        leaderCardArrayList = parser.loadLeaderCards();
         clientArrayList = draftClientArrayList;
         this.sem = new Semaphore(draftClientArrayList.size());
         for (PlayerClient client: draftClientArrayList) {
