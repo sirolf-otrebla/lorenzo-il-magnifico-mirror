@@ -14,8 +14,8 @@ public class NoMarket extends PermanentBonus implements ActionResult {
 	 * 
 	 */
 	private static final long serialVersionUID = 1229611496109790398L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {

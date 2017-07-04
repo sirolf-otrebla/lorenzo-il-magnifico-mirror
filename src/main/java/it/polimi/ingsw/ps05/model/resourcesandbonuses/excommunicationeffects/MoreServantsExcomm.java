@@ -14,8 +14,8 @@ public class MoreServantsExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = -2072434447683709748L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

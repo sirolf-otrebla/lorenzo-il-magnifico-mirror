@@ -19,7 +19,7 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	 */
 	private static final long serialVersionUID = -4390914866043626710L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public ProductionAction(Integer value){
 		this.value = value;

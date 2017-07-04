@@ -14,7 +14,7 @@ public class ServantResource implements Resource, ActionResult {
 	private static final long serialVersionUID = 2480704551869981268L;
 	private Integer amount;
 	public static final  String id = "Servitori";
-	private Game game;
+	transient private Game game;
 
 	public ServantResource(Integer value){
 		this.amount = value;

@@ -14,7 +14,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	private static final long serialVersionUID = 2496576331602457912L;
 	private Integer value; //con value si Integerende il numero di privilegi conferiti dalla carta
 						//ricordandosi che i privilegi non possono mai essere uguali tra loro
-	private Game game;
+	transient private Game game;
 
 	//soluzione a mio parere molto brutta pensare ad alternativa
 

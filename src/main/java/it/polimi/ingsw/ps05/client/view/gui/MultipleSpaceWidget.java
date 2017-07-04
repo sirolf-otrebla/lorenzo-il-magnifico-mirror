@@ -14,7 +14,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 /**
  * Created by miotto on 27/06/17.
  */
-public class MultipleSpaceWidget {
+public class MultipleSpaceWidget implements ActionSpaceWidget {
 
     private int referenceId;
     private int minDie;
@@ -119,8 +119,13 @@ public class MultipleSpaceWidget {
         return minDie;
     }
 
-    public int getId() {
+    public Integer getId() {
         return referenceId;
+    }
+
+    @Override
+    public void setId(Integer id) {
+
     }
 
     public void setId(int referenceId) {

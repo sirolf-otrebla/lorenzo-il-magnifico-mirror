@@ -19,7 +19,7 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 	 */
 	private static final long serialVersionUID = 2399262282971411797L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public HarvestAction(Integer value){
 		this.value = value;

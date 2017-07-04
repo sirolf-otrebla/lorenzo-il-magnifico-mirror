@@ -5,8 +5,8 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class NoTowerOccupiedGold extends PermanentBonus {
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {

@@ -36,6 +36,8 @@ public class Server {
         serverLobby = new Lobby(waitingTime, useCompleteRules, useCustomTiles);
         globalClientMap = new HashMap<>();
         this.serverLobby = new Lobby(waitingTime,useCompleteRules, useCustomTiles);
+        Thread lobbyThread = new Thread(this.serverLobby);
+        lobbyThread.start();
         userDatabase =  Database.getInstance();
         try {
             listener = new NetworkListener(DEFAULT_PORT);

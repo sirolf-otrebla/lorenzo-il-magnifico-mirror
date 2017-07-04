@@ -13,7 +13,7 @@ public class VictoryResource implements Resource, ActionResult {
 	private static final long serialVersionUID = 371922522218080021L;
 	private Integer amount;
 	public static final String ID = "Vittoria";
-	private Game game;
+	private transient Game game;
 	
 	public VictoryResource(Integer amount){
 		this.amount = amount;

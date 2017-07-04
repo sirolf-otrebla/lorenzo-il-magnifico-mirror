@@ -20,7 +20,7 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	 */
 	private static final long serialVersionUID = 3294703103366213393L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public YellowAction(Integer value){
 		this.value = value;

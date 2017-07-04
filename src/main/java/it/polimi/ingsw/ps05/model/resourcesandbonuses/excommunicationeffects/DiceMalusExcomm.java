@@ -14,8 +14,8 @@ public class DiceMalusExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = 8647656084663944173L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

@@ -17,4 +17,6 @@ public interface NetMessageVisitor {
 
     void visit(AuthResponseMessage msg);
 
+    void visit(LobbyResponseMessage msg);
+
 }

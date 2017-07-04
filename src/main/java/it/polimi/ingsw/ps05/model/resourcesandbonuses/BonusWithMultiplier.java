@@ -15,7 +15,7 @@ public class BonusWithMultiplier extends PermanentBonus {
 	private Float multiplier;
 	private Resource returnResource;
 	private Class<?> cardToCount;
-	private Game game;
+	private transient Game game;
 
 	public BonusWithMultiplier() {
 

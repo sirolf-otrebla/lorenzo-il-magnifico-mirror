@@ -49,6 +49,8 @@ public class Login extends Application implements Observable {
 	static ListView<String> userListView;
 	static Label userList;
 
+	Stage primaryStage;
+
 	public void setConnected() {
 		System.out.println("aggiorno");
 		connesso.setText("Connesso");
@@ -84,6 +86,7 @@ public class Login extends Application implements Observable {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
+		this.primaryStage = primaryStage;
 
 		scene = new Scene(grid, 400, 500);
 		primaryStage.setScene(scene);
@@ -272,6 +275,10 @@ public class Login extends Application implements Observable {
 	public void setLobbyVisble() {
 		userList.setVisible(true);
 		userListView.setVisible(true);
+	}
+
+	public void close(){
+		primaryStage.close();
 	}
 
 }

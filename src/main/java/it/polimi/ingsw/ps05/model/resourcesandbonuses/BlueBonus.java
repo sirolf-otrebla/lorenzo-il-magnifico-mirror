@@ -15,7 +15,7 @@ public class BlueBonus extends Observable implements ActionResult {
 	 */
 	private static final long serialVersionUID = 3795604773294229746L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private  Game game;
+	private transient Game game;
 	
 	public BlueBonus(Integer value){
 		this.value = value;

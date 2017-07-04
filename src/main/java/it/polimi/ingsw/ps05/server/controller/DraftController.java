@@ -27,6 +27,7 @@ public class DraftController implements Runnable{
     private ArrayList<LeaderCard> leaderCardArrayList;
     private ArrayList<PlayerClient> clientArrayList;
     private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap;
+    private HashMap<Integer, LeaderCard> leaderCardHashMap;
 
     public DraftController(ArrayList<PlayerClient> clients, Game game){
         parser = new CommonJsonParser(clients.size(), game);
@@ -37,7 +38,10 @@ public class DraftController implements Runnable{
         for (PlayerClient client: draftClientArrayList) {
             leaderCardReferenceIdMatrix.put(client.getPlayer().getColor(), new ArrayList<>());
         }
-        leaderCardArrayList = parser.loadLeaderCards();
+        leaderCardArrayList = game.getBoard().getLeaderCardsList();
+        for (LeaderCard leader: leaderCardArrayList) {
+            leaderCardHashMap.put(leader.getReferenceID(), leader);
+        }
         clientArrayList = draftClientArrayList;
         this.sem = new Semaphore(draftClientArrayList.size());
         for (PlayerClient client: draftClientArrayList) {

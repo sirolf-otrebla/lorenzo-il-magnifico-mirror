@@ -14,8 +14,8 @@ public class GreenCardMalusExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = 2060928888181607949L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

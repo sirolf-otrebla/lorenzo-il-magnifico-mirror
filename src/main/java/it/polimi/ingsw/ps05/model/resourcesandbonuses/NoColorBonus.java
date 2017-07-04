@@ -11,7 +11,7 @@ public class NoColorBonus extends PermanentBonus {
 	 */
 	private static final long serialVersionUID = -8105323045051472500L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public NoColorBonus(Integer value){
 		this.value = value;

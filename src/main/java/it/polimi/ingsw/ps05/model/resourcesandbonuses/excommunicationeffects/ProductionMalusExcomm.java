@@ -14,8 +14,8 @@ public class ProductionMalusExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = 3451796585263469770L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

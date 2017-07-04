@@ -14,8 +14,8 @@ public class NoActionExcomm implements ExcommunicationEffect {
 	 * 
 	 */
 	private static final long serialVersionUID = 3208417758147281941L;
-	
-	Game game;
+
+	transient Game game;
 
 	@Override
 	public EffectType getEffectType() {

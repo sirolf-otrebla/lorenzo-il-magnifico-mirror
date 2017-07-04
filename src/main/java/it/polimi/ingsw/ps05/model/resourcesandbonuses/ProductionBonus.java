@@ -13,7 +13,7 @@ public class ProductionBonus extends PermanentBonus {
 	 */
 	private static final long serialVersionUID = -239848225304423565L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
-	private Game game;
+	transient private Game game;
 
 	public ProductionBonus(Integer value){
 		this.value = value;
