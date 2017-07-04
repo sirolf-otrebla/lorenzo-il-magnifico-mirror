@@ -17,31 +17,39 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 public class LeaderDraftPopup {
 
     public static final double LEADER_HEIGHT_PERC = 30 / 100;
-    private static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
+
+    static Stage popup;
+    static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
     private static LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
+    private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
+    public static int numberOfLeadersAlreadySelected;
     public static boolean draftCompleted;
 
-    public static LeaderWidget[] display(LeaderWidget[] leadersToDraftArray) {
+    public static void display(Integer[] referenceIdArray) {
 
-        LeaderDraftPopup.leadersToDraftArray = leadersToDraftArray;
+        /* Initialize leaders to be drafted */
+        int i = 0;
+        for(Integer referenceId: referenceIdArray) {
+            leadersToDraftArray[i] = new LeaderWidget(referenceId);
+            i++;
+        }
 
-        Stage popup = new Stage();
+        popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initStyle(StageStyle.UNDECORATED);
 
-
         HBox hbox = new HBox(30 * resize);
-        hbox.setMinWidth(LEADER_HEIGHT_PERC * stageHeight);
+        hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
         hbox.setFillHeight(true);
 
-        // adding LeaderWidgets to hbox
-        for(int i = 0; i < 4; i++) {
-            setupGestureTarget(leadersToDraftArray[i]);
-            hbox.getChildren().add(leadersToDraftArray[i].getLeaderCard());
+        // adding leaders to hbox
+        for(LeaderWidget leader: leadersToDraftArray) {
+            setupGestureTarget(leader);
+            hbox.getChildren().add(leader.getLeaderCard());
         }
 
         Label label = new Label();
-        label.setText("Choose the card you want to keep");
+        label.setText("Choose one card you want to keep");
 
         VBox vbox = new VBox(20 * resize);
         vbox.setId("leaderDraftPopup");
@@ -55,27 +63,53 @@ public class LeaderDraftPopup {
 
         draftCompleted = true;
 
-        return leadersDrafted;
-
     }
 
     private static void setupGestureTarget(LeaderWidget leaderWidget) {
 
         // EVENTO CHE VA PASSATO AL CONTROLLER
+
         leaderWidget.getLeaderCard().setOnMouseClicked((MouseEvent e) -> {
             /* What to do when the leader is selected */
-            //TODO capire come salvare i leader scelti (array, tree...)
-            leaderWidget.getLeaderCard().setOpacity(0.7);
+            storeSelectedLeader(leaderWidget, numberOfLeadersAlreadySelected);
+            leaderWidget.getLeaderCard().setOpacity(0.5);
             leaderWidget.getLeaderCard().setMouseTransparent(true); // disable mouse click
             leaderWidget.setDrafted(true);
-            leaderWidget.setOfPlayerProperty(true);
+            numberOfLeadersAlreadySelected++;
         });
 
     }
 
-    private void repaint() {
-        for(LeaderWidget leader: leadersToDraftArray) {
-            leader.repaintDraft();
+    //// DA CHIAMARE DALL'ESTERNO ////
+    private void repaint(Integer[] newReferenceIdArray) {
+
+        /* Insert new leaders in a new array */
+        int i = 0;
+        for(Integer referenceId: newReferenceIdArray) {
+            newLeadersToDraftArray[i] = new LeaderWidget(referenceId);
+            i++;
         }
+
+        /* Updates the leaders to be drafted */
+        i = 0;
+        for(LeaderWidget leader: leadersToDraftArray) {
+            try {
+                if (!leader.isDrafted()) {
+                    leader = newLeadersToDraftArray[i];
+                    i++;
+                }
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //// DA CHIAMARE DALL'ESTERNO ////
+    private static void endLeaderDraft() {
+        popup.close();
+    }
+
+    private static void storeSelectedLeader(LeaderWidget leaderToStore, int leadersAlreadySelected) {
+        leadersDrafted[leadersAlreadySelected] = leaderToStore;
     }
 }

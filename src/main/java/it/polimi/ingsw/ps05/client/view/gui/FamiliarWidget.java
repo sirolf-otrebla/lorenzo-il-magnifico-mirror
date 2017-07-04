@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -20,25 +20,17 @@ public class FamiliarWidget {
     private boolean placed;
     private ImageView imageElement;
     private String imagePath;
-    private ColorEnumeration FamiliarColor;
-    private ColorEnumeration PlayerColor;
+    private ColorEnumeration familiarColor;
+    private ColorEnumeration playerColor;
 
-    public FamiliarWidget(ColorEnumeration player, ColorEnumeration Familiar) {
+    public FamiliarWidget(ColorEnumeration playerColor, ColorEnumeration familiarColor) {
+        // construct image path
+        this.playerColor = playerColor;
+        this.familiarColor = familiarColor;
 
+        this.imagePath = path + this.playerColor.toString().toLowerCase() + "pl/" + this.familiarColor.toString().toLowerCase() + ".png";
 
-        //todo
-    }
-
-    public FamiliarWidget(String path) {
-
-        /*
-    	System.out.println(path);
-    	File crDir = new File(path);
-    	System.out.println(crDir.exists());
-    	*/
-    	//getAllFile(crDir);
-
-        addImage(path);
+        addImage(this.imagePath);
         setupGestureSource();
     }
 
@@ -107,7 +99,7 @@ public class FamiliarWidget {
 
     public void repaint() {
         if(!isPlaced()) {
-
+            //TODO
         }
     }
 
@@ -120,7 +112,7 @@ public class FamiliarWidget {
     }
 
     public ColorEnumeration getFamiliarColor() {
-        return FamiliarColor;
+        return familiarColor;
     }
 
     public boolean isPlaced() {

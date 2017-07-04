@@ -1,50 +1,67 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
-import javafx.geometry.Rectangle2D;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.File;
+
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 /**
  * Created by miotto on 02/07/17.
  */
 public class PersonalBoardWindow {
 
-    public static final int ORIGINAL_WIDTH = 3600, ORIGINAL_HEIGHT = 3800, ORIGINAL_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
-
-    private ColorEnumeration playerColor = ColorEnumeration.Red;
-    private HBox personalCardBoxes[] = new HBox[4];
+    public static final int ORIGINAL_WIDTH = 3459, ORIGINAL_HEIGHT = 3800, ORIGINAL_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
     public static double personalBoardWidth, personalBoardHeight, personalBoardResize;
-    private GUIMain boardWindow;
 
-    public PersonalBoardWindow(GUIMain board) {
-        this.boardWindow = board;
+    GUIMain board;
+    String username;
+    CardOnPersonalWidget[][] cardAcquiredWidget = new CardOnPersonalWidget[4][4];
+    LeaderWidget[] leaderWidgets;
+    BonusTileWidget bonusTile;
 
+    private HBox[] cardHboxes = new HBox[4];
+
+
+    public PersonalBoardWindow(GUIMain board, String username, CardOnPersonalWidget[][] cardAcquiredWidget,
+                               LeaderWidget[] leaderWidgets, BonusTileWidget bonusTile) {
+        this.board = board;
+        this.username = username;
+        this.cardAcquiredWidget = cardAcquiredWidget;
+        this.leaderWidgets = leaderWidgets;
+        this.bonusTile = bonusTile;
     }
 
-    public void display(double mainBoardHeight) {
+    public void display() {
+
         Stage stage = new Stage();
 
-        //stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Personal Board");
+        stage.setTitle("My Board");
         stage.setResizable(false);
-        //stage.centerOnScreen();
-        stage.setMinHeight(250); //TODO impostare la grandezza minima corretta
-        PersonalBoardWindow.personalBoardHeight = mainBoardHeight*0.95; //TODO trasformare il -50 in percentuale
-        PersonalBoardWindow.personalBoardWidth = (mainBoardHeight*0.95* ORIGINAL_RATIO);
+        stage.centerOnScreen();
+
+        // calculate and set window dimensions
+        PersonalBoardWindow.personalBoardHeight = stageHeight * 0.90;
+        PersonalBoardWindow.personalBoardWidth = (stageWidth * 0.90 * ORIGINAL_RATIO);
         stage.setHeight(PersonalBoardWindow.personalBoardHeight);
         stage.setWidth(PersonalBoardWindow.personalBoardWidth);
-
         personalBoardResize = personalBoardWidth / ORIGINAL_WIDTH;
 
         final Pane pane = new Pane();
         pane.setId("personalBoard");
+
+        /* add button that shows bonus tile */
+        Button showBonusTileButton = new Button("Bonus tile");
+        showBonusTileButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
+        showBonusTileButton.setOnAction((ActionEvent e) -> {
+            //TODO implementare popup
+        });
 
         /*
         pane.minWidthProperty().bind(stage.widthProperty());
@@ -55,26 +72,8 @@ public class PersonalBoardWindow {
         pane.maxHeightProperty().bind(stage.heightProperty());
         */
 
-        for (int i = 0; i < 4; i++) {
-            this.personalCardBoxes[i] = new HBox(20); //TODO controllare che lo spacing sia corretto
-            this.personalCardBoxes[i].setLayoutX((2.4277 / 100) * personalBoardWidth);
-            this.personalCardBoxes[i].setLayoutY((1.8684 + 25.5*i) / 100 * personalBoardHeight); // 23.0 distanza verticale tra gruppi di carte
-
-            /*
-            this.personalCardBoxes[i].setPrefHeight((21.0 / 100) * personalBoardHeight);
-            this.personalCardBoxes[i].setPrefWidth((90.0 / 100) * personalBoardWidth);
-            */
-            /*
-            this.personalCardBoxes[i].setMinHeight(personalBoardHeight);
-            this.personalCardBoxes[i].setMinWidth(personalBoardWidth);
-            this.personalCardBoxes[i].setPrefHeight(personalBoardHeight);
-            this.personalCardBoxes[i].setPrefWidth(personalBoardWidth);
-            this.personalCardBoxes[i].setMaxHeight(personalBoardHeight);
-            this.personalCardBoxes[i].setMaxWidth(personalBoardWidth);
-            */
-
-            this.personalCardBoxes[i].setFillHeight(true);
-        }
+        /* show acquired cards */
+        setCardAcquiredLayout();
 
         Scene personalScene = new Scene(pane);
 
@@ -89,14 +88,36 @@ public class PersonalBoardWindow {
         stage.show();
     }
 
+    void setCardAcquiredLayout() {
 
+        for(int i = 0; i < 4; i++) {
+            // inside the i hbox
+            this.cardHboxes[i] = new HBox(20 * personalBoardResize); //TODO controllare che lo spacing sia corretto
+            this.cardHboxes[i].setLayoutX((2.4277 / 100) * personalBoardWidth);
+            this.cardHboxes[i].setLayoutY((1.8684 + 25.5 * i) / 100 * personalBoardHeight);
+
+            this.cardHboxes[i].setPrefHeight((21.0 / 100) * personalBoardHeight);
+            this.cardHboxes[i].setPrefWidth((90.0 / 100) * personalBoardWidth);
+            for(int j = 0; j < 4; j++) {
+                // inside the j color of cards acquired
+                for(int k = 0; k < 4; k++) {
+                    // inside the k card of j color
+                    if(cardAcquiredWidget[j][k] != null)
+                        cardHboxes[i].getChildren().add(cardAcquiredWidget[j][k].getCardImage());
+                }
+            }
+        }
+
+    }
+
+    /***   Metodo per Sirolfo   ***/
     public void repaint() {
 
-        TowerTileWidget[][] towerActionSpaces = boardWindow.getTowerTileWidgetList();
+        TowerTileWidget[][] towerActionSpaces = board.getTowerTileWidgetList();
 
         for (TowerTileWidget[] tower: towerActionSpaces) {
             for (TowerTileWidget actionSpace: tower) {
-                if(actionSpace.getAssociatedCard().isTaken() && actionSpace.getOccupantPlayerId() == boardWindow.getThisPlayerColor()) {
+                if(actionSpace.getAssociatedCard().isTaken() && actionSpace.getOccupantPlayerColor() == board.getPlayer().getPlayerColor()) {
                     // enter if the card is taken with a familiar of the player
                     actionSpace.getAssociatedCard().addToPersonalBoard(this);
                 }
@@ -105,11 +126,7 @@ public class PersonalBoardWindow {
 
     }
 
-    public ColorEnumeration getPlayerColor() {
-        return playerColor;
-    }
-
-    public HBox[] getPersonalCardBoxes() {
-        return personalCardBoxes;
+    public HBox[] getCardHboxes() {
+        return cardHboxes;
     }
 }

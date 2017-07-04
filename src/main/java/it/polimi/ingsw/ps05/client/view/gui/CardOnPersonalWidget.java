@@ -36,5 +36,15 @@ public class CardOnPersonalWidget {
         });
     }
 
+    public ImageView getCardImage() {
+        return cardImage;
+    }
 
+    public String getCardName() {
+        return cardName;
+    }
+
+    public ColorEnumeration getColor() {
+        return color;
+    }
 }

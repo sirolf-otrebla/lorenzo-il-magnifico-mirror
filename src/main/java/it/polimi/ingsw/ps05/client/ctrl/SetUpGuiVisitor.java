@@ -8,7 +8,6 @@ import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -24,7 +23,7 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
 
     @Override
     public void visit(GameStatus status) {
-        this.gui.setThisPlayerColor(status.getThisPlayer().getColor());
+        this.gui.getPlayer().setPlayerColor(status.getThisPlayer().getColor());
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {
@@ -61,35 +60,35 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
         //TODO CONTROLLARE QUESTA SOLUZIONE
         MarketSpaceWidget[] marketSpaceWidgets = gui.getMarketSpaceWidgets();
         MarketSpaceWidget thisWidget = marketSpaceWidgets[marketSpace.getMarketSpaceTypeID()];
-        thisWidget.setId(marketSpace.getId());
+        thisWidget.setReferenceId(marketSpace.getId());
         thisWidget.setResult(marketSpace.getEffects().toString());
     }
 
     @Override
     public void visit(CouncilSpace councilSpace) {
         Integer id = councilSpace.getId();
-        gui.getCouncilSpaceWidget().setId(id);
+        gui.getCouncilSpaceWidget().setReferenceId(id);
     }
 
     @Override
     public void visit(ProductionSpace productionSpace) {
         Integer id = productionSpace.getId();
-        gui.getProductionSpace().setId(id);
+        gui.getProductionSpace().setReferenceId(id);
 
     }
 
     @Override
     public void visit(HarvestingSpace harvestingSpace) {
         Integer id = harvestingSpace.getId();
-        gui.getHarvestingSpace().setId(id);
+        gui.getHarvestingSpace().setReferenceId(id);
     }
 
     @Override
     public void visit(Player player) {
-        if (this.gui.getThisPlayerColor() == player.getColor()){
+        if (this.gui.getPlayer().getPlayerColor() == player.getColor()){
             int i = 0;
             for (Familiar f: player.getFamilyList()) {
-                this.gui.getThisPlayerFamiliarWidgetList()[i] = new FamiliarWidget(player.getColor(), f.getColor());
+                this.gui.getPlayer().getFamiliarWidgetList()[i] = new FamiliarWidget(player.getColor(), f.getColor());
                 i++;
             }
         }
@@ -127,7 +126,7 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
         for (TowerTileWidget tileWidget :towerTileWidgets){
             for(TowerTileInterface tile : tiles){
                 if(tile.getDiceRequired().getValue() == tileWidget.getMinDie())
-                    tileWidget.setId(tile.getId());
+                    tileWidget.setReferenceId(tile.getId());
             }
         }
     }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,7 +19,7 @@ public class LeaderPopup {
 
     private static final double LEADERCARD_ZOOM = 2;
 
-    public static void display(LeaderWidget[] personalLeaders) {
+    public void display(LeaderWidget[] personalLeaders) {
 
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -56,7 +57,7 @@ public class LeaderPopup {
 
     }
 
-    private static void addPersonalLeaders(LeaderWidget[] personalLeaders, HBox handBox, HBox playedBox) {
+    private void addPersonalLeaders(LeaderWidget[] personalLeaders, HBox handBox, HBox playedBox) {
         handBox.getChildren().clear();
         playedBox.getChildren().clear();
         for(int i = 0; i < 4; i++) {

@@ -21,27 +21,25 @@ import java.io.File;
 public class GUIMain extends Application {
 
 
-
 	private Stage stage;
 
 	public static double stageWidth, stageHeight, resize;
 	public static final int ORIGINAL_WIDTH = 1120;
 	public static final double CARD_RATIO = 294 / 436;
-	private static final String path = "./src/main/res/img/";
+	public static final String path = "./src/main/res/img/";
 
-	private FamiliarWidget[] thisPlayerFamiliarWidgetList = new FamiliarWidget[4];
-	private ColorEnumeration thisPlayerColor = ColorEnumeration.Red; // TODO solo per testing
+	private PlayerWidget player;
+	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
+
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
-	private LeaderWidget[] thisPlayerLeaderWidgetList = new LeaderWidget[4];
-	private HBox thisPlayerResourcesBox;
+	private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
+	private HBox playerResourcesBox;
 	private ResourcesWidget[] resourcesWidgetArray = new ResourcesWidget[4];
 
-
-	private GraphicResources map = new GraphicResources();
 	private Integer[] faithPath = new Integer[16];
 	private Integer[] militaryPath = new Integer[6];
 	private Integer[] greenCardsConversion = new Integer[6];
-	private Integer[] blueCardsConversion = new  Integer[6];
+	private Integer[] blueCardsConversion = new Integer[6];
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
 	private ColorEnumeration[] playerColorArray = {
@@ -60,18 +58,16 @@ public class GUIMain extends Application {
 
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
 	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1);
-	// MultipleSpaceWidget secondaryHarvestingSpace = new MultipleSpaceWidget();
-	// MultipleSpaceWidget councilSpace = new MultipleSpaceWidget();
+	private CouncilSpaceWidget councilSpace = new CouncilSpaceWidget(1);
 
-	private PersonalBoardWindow thisPlayerPersonalBoardWindow = new PersonalBoardWindow(this);
-	private PersonalBoardWindow[] personalBoardWindowArray = new PersonalBoardWindow[3];
+	// private PersonalBoardWindow playerPersonalBoardWindow = new PersonalBoardWindow(this);
+	// private PersonalBoardWindow[] personalBoardWindowArray = new PersonalBoardWindow[3];
 
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
+	private TimerWidget timerWidget = new TimerWidget();
 
-
-
-
+	private GraphicResources graphicMap = new GraphicResources();
 
 
 	public static void main(String[] args) {
@@ -79,21 +75,24 @@ public class GUIMain extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception{
+	public void start(Stage primaryStage) throws Exception {
 
 		int i;
-
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-		double screenWidth = primaryScreenBounds.getWidth();
-		double screenHeight = primaryScreenBounds.getHeight();
-		double screenRatio = screenWidth / screenHeight;
+		int thisPlayerId = 0;
+		int[] opponentIdArray = {1, 2, 3}; //TODO valori di test
 
 		stage = primaryStage;
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
 
-		/* Setting window size */
-		if(screenRatio <= 1.75) {
+		/* Retrieving screen bounds */
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		double screenWidth = primaryScreenBounds.getWidth();
+		double screenHeight = primaryScreenBounds.getHeight();
+		double screenRatio = screenWidth / screenHeight;
+
+		/* Set up window size */
+		if (screenRatio <= 1.75) {
 			stage.setX(primaryScreenBounds.getMinX());
 			stage.setWidth(primaryScreenBounds.getWidth());
 			stage.setHeight(primaryScreenBounds.getWidth() / 1.75);
@@ -108,10 +107,11 @@ public class GUIMain extends Application {
 		}
 		resize = stageWidth / ORIGINAL_WIDTH;
 
-		/* Creating root pane */
+		/* Create root pane */
 		final Pane root = new Pane();
 		root.setId("root");
 
+		/* Bind root pane size with window size */
 		root.minWidthProperty().bind(stage.widthProperty());
 		root.minHeightProperty().bind(stage.heightProperty());
 		root.prefWidthProperty().bind(stage.widthProperty());
@@ -119,137 +119,158 @@ public class GUIMain extends Application {
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
 
-
-        /* Adding playable familiars */
-        /*
-		for (FamiliarWidget[] playerFamiliars: this.familiarWidgetLists) {
-			int i = 0;
-			int j = 0;
-			for (FamiliarWidget familiar: playerFamiliars) {
-				familiar = new FamiliarWidget("../main/res/img/redpl/" + map.getDiceColor(i) + ".png"); //TODO: da cambiare, è solo per testing
-				i++;
-			}
-			j++;
+		/* Instantiate player and opponents widgets */
+		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId)); //TODO colore da settare tramite ID fornito dal model
+		i = 0;
+		for (i = 0; i < 3; i++) {
+			opponentsArray[i] = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
 		}
-		*/
 
-		thisPlayerFamiliarWidgetList[0] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/black.png");
-		thisPlayerFamiliarWidgetList[1] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/white.png");
-		thisPlayerFamiliarWidgetList[2] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/orange.png");
-		thisPlayerFamiliarWidgetList[3] = new FamiliarWidget(path + thisPlayerColor.toString().toLowerCase() + "pl/neutral.png");
-		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[0], root, 66.07, 21.87);
-		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[1], root, 70.5357, 21.87);
-		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[2], root, 75, 21.87);
-		insertDraggableFamiliar(thisPlayerFamiliarWidgetList[3], root, 79.4643, 21.87);
+		for (i = 0; i < 3; i++) {
+			System.out.println(opponentsArray[i].getOpponentColor().toString());
+		}
 
-        for (i = 0; i < familiarWidgetLists.length; i++)
-            for (int j = 0; j < familiarWidgetLists[i].length; j++)
-                familiarWidgetLists[i][j] = new FamiliarWidget(
-                        ColorEnumeration.values()[1+i], ColorEnumeration.values()[j+5]);
 
-        for (i = 0; i < this.marketSpaceWidgets.length; i++) marketSpaceWidgets[i] =
-				new MarketSpaceWidget(1);
-
-        /* Adding market action spaces  (Si adda pure quello che vuoi ma ricordati di inizializzare prima... )*/
+        /* Add market action spaces */
+		// Initialize
+		for (i = 0; i < this.marketSpaceWidgets.length; i++)
+			marketSpaceWidgets[i] =
+					new MarketSpaceWidget(1);
+		// Add to board
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
 		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
 		insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
 		insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
 
-        /* Adding harvest and production action spaces */
-        /*
-		insertActionSpace(productionSpace, root, 1, 2.7679, 82.5); // production
-		insertActionSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
-		*/
+        /* Add harvest and production action spaces */
+		insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
+		insertMultipleSpace(harvestingSpace, root, 1, 0.892, 90.3137); // harvest
 
-		/* Adding tower cards and tower action spaces */
-		for(i = 0; i < 4; i++) {
-			// action spaces
-			towerOccupationCirclesBoxes[i] = new VBox((10.95 / 100) * stageHeight); // 11.0937 = distanza verticale % tra action space
-			towerOccupationCirclesBoxes[i].setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth); // 10.9 = distanza orizzantale % tra le colonne di action space
+		/* Add tower cards and tower action spaces */
+		for (i = 0; i < 4; i++) {
+			// VBoxes of action spaces
+			towerOccupationCirclesBoxes[i] = new VBox((10.95 / 100) * stageHeight);
+			towerOccupationCirclesBoxes[i].setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth);
 			towerOccupationCirclesBoxes[i].setLayoutY((7.1875 / 100) * stageHeight);
 			root.getChildren().add(towerOccupationCirclesBoxes[i]);
 
-			// tower cards
-			towerCardSpacesArray[i] = new VBox((0.06 / 100) * resize); //TODO 0.06 valore di prova, controllare distanza
+			// VBoxes of tower cards
+			towerCardSpacesArray[i] = new VBox((40 / 100) * stageHeight); //TODO spacing di prova, controllare
 			towerCardSpacesArray[i].setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
 			towerCardSpacesArray[i].setLayoutY((1.4168 / 100) * stageHeight);
+			towerCardSpacesArray[i].prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8));
 			root.getChildren().add(towerCardSpacesArray[i]);
-			for(int j = 0; j < 4; j++) {
-				// instantiating widgets
-				towerTileWidgetLists[i][j] = new TowerTileWidget(7 - 2*j);
+			for (int j = 0; j < 4; j++) {
+				// action spaces
+				towerTileWidgetLists[i][j] = new TowerTileWidget(7 - 2 * j);
 				towerOccupationCirclesBoxes[i].getChildren().add(towerTileWidgetLists[i][j].getOccupationCircle());
 
+				// tower cards
 				cardOnBoardWidgetLists[i][j] = new CardOnBoardWidget(); //TODO capire se popolare subito con le immagini o se si aggiungono dopo
 				// towerCardSpacesArray[i].getChildren().add(cardOnBoardWidgetLists[i][j].getCardImage());
 			}
 		}
 
-
-        /* Adding points markers */
+        /* Add points markers */
+        /*
 		i = 0;
-        for (MarkerWidget[] track: this.markerWidgetList) {
+		for (MarkerWidget[] track : this.markerWidgetList) {
 			int j = 0;
-			if(i < 2) {
+			if (i < 2) {
 				this.trackBoxesArray[i] = new HBox(12 * resize);
 			} else {
 				this.trackBoxesArray[i] = new VBox(12 * resize);
 			}
 			root.getChildren().add(this.trackBoxesArray[i]);
-			for (MarkerWidget playerMarker: track) {
-				String thisPath = path + "marker-" + this.playerColorArray[i].toString() + ".png";
-				playerMarker = new MarkerWidget(thisPath);
-				this.trackBoxesArray[i].getChildren().add(playerMarker.getMarkerCircle());
+			for (MarkerWidget marker : track) {
+				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j);
+				String thisPath = path + "marker-" + markerColor.toString().toLowerCase() + ".png";
+				marker = new MarkerWidget(thisPath);
+				if (player.getPlayerColor() == markerColor)
+					player.getPlayerMarkers()[i] = marker;
+				else {
+					for (OpponentWidget opponent : opponentsArray)
+						if (opponent.getOpponentColor() == markerColor)
+							opponent.getOpponentMarkers()[i] = marker;
+				}
+				this.trackBoxesArray[i].getChildren().add(marker.getMarkerCircle());
 				j++;
 			}
 			i++;
 		}
+		*/
 
-		/****** MODO 1 ******/
-		// Play order markers
-		this.trackBoxesArray[0].setLayoutX((48.1 / 100) * stageWidth);
-		this.trackBoxesArray[0].setLayoutY((43.5 / 100) * stageHeight);
-		// Faith markers
-		this.trackBoxesArray[1].setLayoutX((50.1857 / 100) * stageWidth);
-		this.trackBoxesArray[1].setLayoutY((66.0375 / 100) * stageHeight);
-		// Military markers
-		this.trackBoxesArray[2].setLayoutX((46.8064 / 100) * stageWidth);
-		this.trackBoxesArray[2].setLayoutY((14.4125 / 100) * stageHeight);
-		// Victory markers
-		this.trackBoxesArray[3].setLayoutX((59.2079 / 100) * stageWidth);
-		this.trackBoxesArray[3].setLayoutY((14.4125 / 100) * stageHeight);
-
-		/****** MODO 2 (binding) ******/
-		// Faith markers
-		//this.trackBoxesArray[1].layoutXProperty().bind(stage.widthProperty().multiply(51.7857 / 100));
-		//this.trackBoxesArray[1].layoutYProperty().bind(stage.heightProperty().multiply(68.4375 / 100));
-		// Military markers
-		//this.trackBoxesArray[2].layoutXProperty().bind(stage.widthProperty().multiply(47.9464 / 100));
-		//this.trackBoxesArray[2].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
-		// Victory markers
-		//this.trackBoxesArray[3].layoutXProperty().bind(stage.widthProperty().multiply(60.2679 / 100));
-		//this.trackBoxesArray[3].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
-
-		// Initializing personal boards of the other players
-		for (PersonalBoardWindow personalBoard: personalBoardWindowArray) {
-			personalBoard = new PersonalBoardWindow(this);
+		for (i = 0; i < 4; i++) {
+			if(i < 2)
+				this.trackBoxesArray[i] = new HBox(12 * resize);
+			else
+				this.trackBoxesArray[i] = new VBox(12 * resize);
+			root.getChildren().add(this.trackBoxesArray[i]);
+			for (int j = 0; j < 4; j++) {
+				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j);
+				String thisPath = path + "marker-" + markerColor.toString().toLowerCase() + ".png";
+				System.out.println(thisPath);
+				markerWidgetList[i][j] = new MarkerWidget(thisPath);
+				if(player.getPlayerColor() == markerColor)
+					player.getPlayerMarkers()[i] = markerWidgetList[i][j];
+				else {
+					for (int k = 0; k < 3; k++)
+						if(opponentsArray[k].getOpponentColor() == markerColor)
+							opponentsArray[k].getOpponentMarkers()[i] = markerWidgetList[i][j];
+				}
+				this.trackBoxesArray[i].getChildren().add(markerWidgetList[i][j].getMarkerCircle());
+			}
 		}
 
+		/****** MODO 1 ******/
+		// Play-order markers
+		this.trackBoxesArray[0].setLayoutX((47.4857 / 100) * stageWidth);
+		this.trackBoxesArray[0].setLayoutY((43.5 / 100) * stageHeight);
+		this.trackBoxesArray[0].setMaxHeight((3.5 / 100) * stageHeight);
+		// Faith markers
+		this.trackBoxesArray[1].setLayoutX((47.4857 / 100) * stageWidth);
+		this.trackBoxesArray[1].setLayoutY((66.0375 / 100) * stageHeight);
+		// Military markers
+		this.trackBoxesArray[2].setLayoutX((46.7664 / 100) * stageWidth);
+		this.trackBoxesArray[2].setLayoutY((14.4125 / 100) * stageHeight);
+		// Victory markers
+		this.trackBoxesArray[3].setLayoutX((59.1679 / 100) * stageWidth);
+		this.trackBoxesArray[3].setLayoutY((14.4125 / 100) * stageHeight);
 
-		/* Adding player buttons */
+		/* Add playable familiars */
+		this.player.addFamiliarToBoard(root);
+
+        /* Initialize opponents familiars */
+		i = 0;
+
+		for(i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				opponentsArray[i].getFamiliarWidgetList()[j] = new FamiliarWidget(opponentsArray[i].getOpponentColor(), GraphicResources.getFamiliarColor(j));
+			}
+		}
+
+		/*
+		for (OpponentWidget opponent : opponentsArray) {
+			int j = 0;
+			for (FamiliarWidget familiar : opponent.getFamiliarWidgetList()) {
+				familiar = new FamiliarWidget(opponent.getOpponentColor(), GraphicResources.getDiceColor(j));
+				j++;
+			}
+			i++;
+		}
+		*/
+
+		/* Add player buttons */
 		// Personal cards
 		final VBox commands = new VBox(20 * resize);
 		commands.setAlignment(Pos.CENTER);
-
 		final Button showCardsButton = new Button("Carte sviluppo");
 		showCardsButton.setId("showCardsButton");
 		showCardsButton.setMaxWidth(Double.MAX_VALUE);
 		showCardsButton.setOnAction((ActionEvent e) -> {
-			this.thisPlayerPersonalBoardWindow.display(stageHeight);
+			this.player.getPersonalBoard().display();
 		});
-		//showCardsButton.requestFocus();
-
-		final Button showLeaderButton = new Button("Carte Leader");
+		final Button showLeaderButton = new Button("Carte Leader"); // showLeaderButton is not clickable because the draft is not done yet
 		showLeaderButton.setId("showLeaderButton");
 		showLeaderButton.setMaxWidth(Double.MAX_VALUE);
 
@@ -258,9 +279,6 @@ public class GUIMain extends Application {
 		/****** MODO 1 ******/
 		commands.setLayoutX((68.0 / 100) * stageWidth);
 		commands.setLayoutY((6.2 / 100) * stageHeight);
-		/****** MODO 2 (meglio) ******/
-		//commands.layoutXProperty().bind(stage.widthProperty().multiply(68.75 / 100));
-		//commands.layoutYProperty().bind(stage.heightProperty().multiply(9.375 / 100));
 
 		root.getChildren().add(commands);
 
@@ -272,13 +290,12 @@ public class GUIMain extends Application {
 		personalBoardButtonsBox.setLayoutY((6.2 / 100) * stageHeight);
 
 		final Button[] otherPlayersButtons = new Button[3];
-
 		i = 0;
-		// setting up buttons that open other players personal boards
-		for(Button button: otherPlayersButtons) {
+		// set up buttons that open other players personal boards
+		for (Button button : otherPlayersButtons) {
 			button = new Button(); //TODO inserire i nomi dei giocatori
 			button.setMaxWidth(Double.MAX_VALUE);
-			setButtonClickGesture(button, personalBoardWindowArray[i]); // setting buttons actions on click (open relative personal board)
+			setButtonClickGesture(button, opponentsArray[i]); // setting buttons actions on click (open relative personal board)
 			personalBoardButtonsBox.getChildren().add(button);
 			i++;
 		}
@@ -286,31 +303,42 @@ public class GUIMain extends Application {
 		root.getChildren().add(personalBoardButtonsBox);
 
 
-
-		/* Adding player resources */
-		for(i = 0; i < 4; i++) {
+		/* Add player resources */
+		for (i = 0; i < 4; i++) {
 			resourcesWidgetArray[i] = new ResourcesWidget();
 		}
-		thisPlayerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
-		root.getChildren().add(thisPlayerResourcesBox);
+		playerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
+		root.getChildren().add(playerResourcesBox);
 
 
-
-		/* Adding dice */
+		/* Add dice */
 		HBox diceBox = new HBox(20 * resize);
 		diceBox.setLayoutX((25.0 / 100) * stageWidth);
 		diceBox.setLayoutY((94.0 / 100) * stageHeight);
 		diceBox.setPrefHeight((4.8 / 100) * stageHeight);
 
 		DieWidget[] diceWidgetArray = new DieWidget[3];
-		for(DieWidget die: diceWidgetArray) {
-			die = new DieWidget();
-			diceBox.getChildren().add(die.getValueLabel());
+		for (i = 0; i < 3; i++) {
+			diceWidgetArray[i] = new DieWidget(i);
+			diceBox.getChildren().add(diceWidgetArray[i].getValueLabel());
 		}
 
+		/* Add timer */
+		timerWidget.setLayoutX((90.0 / 100) * stageWidth);
+		timerWidget.setLayoutY((95.0 / 100) * stageHeight);
+		timerWidget.setMaxHeight((3.0 / 100) * stageHeight);
+		root.getChildren().add(timerWidget);
 
 
 
+		// TEST CARICAMENTO CARTE
+		int[][] array = {{ 3,  6,  8,  9},
+				         {50, 51, 52, 56},
+				         {25, 27, 28, 30},
+						 {80, 82, 84, 90}};
+		insertCards(array);
+
+		Integer[] leaderIdArray = {2,8,10,15};
 
 		/*
 		root.maxWidthProperty().bind(stage.widthProperty());
@@ -319,79 +347,78 @@ public class GUIMain extends Application {
 
 		Scene mainScene = new Scene(root);
 
-		File file = new File("./src/main/res/structure.fxml");
-		System.out.println(file.exists());
 
 		File f = new File("./src/main/res/fx-style.css");
 		mainScene.getStylesheets().add(f.toURI().toURL().toString());
+
 		stage.setScene(mainScene);
 		stage.sizeToScene();
 		stage.show();
 
+		//startBonusTileDraft();
+		//startLeaderDraft(leaderIdArray);
+
+	}
 
 
 
 
-		/* Adding tower action spaces */
+	/**************************/
+	/**   Metodi per albe    **/
 
-		/*
-		for (int j = 0; j < this.towerTileWidgetLists.length ; j++) {
-			TowerTileWidget[] tower = towerTileWidgetLists[j];
-			this.towerOccupationCirclesBoxes[j] = new VBox(((9.9107 / 100) - FAMILIAR_MIN_SIZE) * stageHeight);
-			towerOccupationCirclesBoxes[j].setLayoutY(stageHeight * 0.103125); //TODO aggiungere binding
-			for (i = 0; i < tower.length; i++){
-				tower[i] = new TowerTileWidget(2*i + 1);
-				towerOccupationCirclesBoxes[j].getChildren().add(tower[i].getOccupationCircle());
-				//XXX eccezione in questa riga, ho popolato towerCardSpacesArray, ma widget non ha nessuna carta
-				//towerCardSpacesArray[j].getChildren().add(widget.getAssociatedCard().getCardImage());
+
+	public void startBonusTileDraft() {
+		// Show bonus tile draft window
+		BonusTileDraftPopup.display();
+	}
+
+	public void endBonusTileDraft() {
+		// Close draft window
+		BonusTileDraftPopup.getPopupStage().close();
+
+		// Update player bonus tile
+		this.player.setBonusTileWidget(BonusTileDraftPopup.getSelectedBonusTile());
+	}
+
+	public void startLeaderDraft(Integer[] referenceIdArray) {
+		// Show leader draft window
+		LeaderDraftPopup.display(referenceIdArray);
+	}
+
+	public void endLeaderDraft() {
+		LeaderDraftPopup.popup.close();
+	}
+
+	public void updateLeadersAfterDraft() {
+		int i = 0;
+		for (LeaderWidget leader : this.player.getLeaderWidgetList()) {
+			leader = LeaderDraftPopup.leadersDrafted[i];
+		}
+	}
+
+	public void insertCards(int[][] referenceIdsArray) {
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				CardOnBoardWidget newCard = new CardOnBoardWidget(referenceIdsArray[i][j]);
+				int module = referenceIdsArray[i][j] % 24;
+				towerCardSpacesArray[i].getChildren().add(newCard.getCardImage());
 			}
 		}
-		*/
 	}
 
-	void insertDraggableFamiliar(FamiliarWidget familiar, Pane pane, double percX, double percY) {
-
-		familiar.getImageElement().setX((percX / 100) * stageWidth);
-		familiar.getImageElement().setY((percY / 100) * stageHeight);
-
-		familiar.setupGestureSource();
-
-		pane.getChildren().add(familiar.getImageElement());
-
-	}
+	/**                        **/
+	/***************************/
 
 
-	void setButtonClickGesture(Button button, PersonalBoardWindow windowToBeOpened) {
+
+
+	void setButtonClickGesture(Button button, OpponentWidget opponentWidget) {
 		button.setOnAction((ActionEvent e) -> {
-			windowToBeOpened.display(stageHeight);
+			opponentWidget.getPersonalBoard().display();
 		});
 	}
 
-	public TowerTileWidget[][] getTowerTileWidgetList() {
-		return towerTileWidgetLists;
-	}
-
-	public FamiliarWidget[][] getFamiliarWidgetLists() {
-		return familiarWidgetLists;
-	}
-
-	public MarketSpaceWidget[] getMarketSpaceWidgets() {
-		return marketSpaceWidgets;
-	}
-
-	public MarkerWidget[][] getMarkerWidgetList() {
-		return markerWidgetList;
-	}
-
-	public ProductionSpaceWidget getProductionSpace() {
-		return productionSpace;
-	}
-
-	public HarvestingSpaceWidget getHarvestingSpace() {
-		return harvestingSpace;
-	}
-
-	void insertActionSpace(SingleOccupantActionSpaceWidget actionSpace, Pane pane, int minDie, double percX, double percY) {
+	private void insertActionSpace(SingleOccupantActionSpaceWidget actionSpace, Pane parent, int minDie, double percX, double percY) {
 
 		actionSpace.setMinDie(minDie);
 
@@ -402,8 +429,18 @@ public class GUIMain extends Application {
 
 		actionSpace.setupGestureTarget();
 
-		pane.getChildren().add(actionSpace.getOccupationCircle());
+		parent.getChildren().add(actionSpace.getOccupationCircle());
 
+	}
+
+	private void insertMultipleSpace(MultipleSpaceWidget multipleSpace, Pane parent, int minDie, double percX, double percY) {
+
+		multipleSpace.setMinDie(minDie);
+
+		multipleSpace.getScrollPane().setLayoutX((percX / 100) * stageWidth);
+		multipleSpace.getScrollPane().setLayoutY((percY / 100) * stageHeight);
+
+		parent.getChildren().add(multipleSpace.getScrollPane());
 	}
 
 	void insertMarker(MarkerWidget marker, Pane box) {
@@ -446,7 +483,7 @@ public class GUIMain extends Application {
 			boolean success = false;
 
 			System.out.println("starting if");
-			if(e.getDragboard().hasImage()) {
+			if (e.getDragboard().hasImage()) {
 				System.out.println("inside if");
 				Image source = e.getDragboard().getImage();
 				target.setOpacity(1);
@@ -460,8 +497,32 @@ public class GUIMain extends Application {
 		});
 	}
 
-	void showAllowedActionSpaces () {
+	void showAllowedActionSpaces() {
 
+	}
+
+	public TowerTileWidget[][] getTowerTileWidgetList() {
+		return towerTileWidgetLists;
+	}
+
+	public FamiliarWidget[][] getFamiliarWidgetLists() {
+		return familiarWidgetLists;
+	}
+
+	public MarketSpaceWidget[] getMarketSpaceWidgets() {
+		return marketSpaceWidgets;
+	}
+
+	public MarkerWidget[][] getMarkerWidgetList() {
+		return markerWidgetList;
+	}
+
+	public ProductionSpaceWidget getProductionSpace() {
+		return productionSpace;
+	}
+
+	public HarvestingSpaceWidget getHarvestingSpace() {
+		return harvestingSpace;
 	}
 
 	public CouncilSpaceWidget getCouncilSpaceWidget() {
@@ -512,21 +573,19 @@ public class GUIMain extends Application {
 		this.excomWidgets = excomWidgets;
 	}
 
-    public ColorEnumeration getThisPlayerColor() {
-        return thisPlayerColor;
-    }
+	public PlayerWidget getPlayer() {
+		return player;
+	}
 
-    public void setThisPlayerColor(ColorEnumeration thisPlayerColor) {
-        this.thisPlayerColor = thisPlayerColor;
-    }
+	public OpponentWidget[] getOpponentsArray() {
+		return opponentsArray;
+	}
+}
 
-    public FamiliarWidget[] getThisPlayerFamiliarWidgetList() {
-        return thisPlayerFamiliarWidgetList;
-    }
 
-    public void setThisPlayerFamiliarWidgetList(FamiliarWidget[] thisPlayerFamiliarWidgetList) {
-        this.thisPlayerFamiliarWidgetList = thisPlayerFamiliarWidgetList;
-    }
+
+
+
 
 
 
@@ -571,6 +630,19 @@ public class GUIMain extends Application {
 		towerOccupationCirclesBoxes[3].setLayoutX(stageWidth * 0.41875); // violet tower
 		*/
 
+/****** MARKERS MODO 2 (binding) ******/
+	// Faith markers
+	//this.trackBoxesArray[1].layoutXProperty().bind(stage.widthProperty().multiply(51.7857 / 100));
+	//this.trackBoxesArray[1].layoutYProperty().bind(stage.heightProperty().multiply(68.4375 / 100));
+	// Military markers
+	//this.trackBoxesArray[2].layoutXProperty().bind(stage.widthProperty().multiply(47.9464 / 100));
+	//this.trackBoxesArray[2].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
+	// Victory markers
+	//this.trackBoxesArray[3].layoutXProperty().bind(stage.widthProperty().multiply(60.2679 / 100));
+	//this.trackBoxesArray[3].layoutYProperty().bind(stage.heightProperty().multiply(15.3125 / 100));
 
-}
+	/****** BUTTONS MODO 2 (meglio) ******/
+	//commands.layoutXProperty().bind(stage.widthProperty().multiply(68.75 / 100));
+	//commands.layoutYProperty().bind(stage.heightProperty().multiply(9.375 / 100));
+
 

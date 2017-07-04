@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 /**
  * Created by miotto on 28/06/17.
  */
@@ -14,7 +17,7 @@ public class LeaderWidget {
     private int referenceId;
     private String imagePath;
     private ImageView leaderCard;
-    private ImageView backSide;
+    private static ImageView backSide;
     private static boolean played;
     private boolean active;
     private boolean drafted;
@@ -28,31 +31,36 @@ public class LeaderWidget {
 
     public LeaderWidget(int referenceId) {
         this.referenceId = referenceId;
-        //TODO
-        addBackImage();
-    }
-
-    public LeaderWidget(int referenceId, String imagePath) {
-        this.referenceId = referenceId;
+        String imagePath = GraphicResources.getLeaderPath(referenceId);
         addImage(imagePath);
         addBackImage();
-        setupZoomGesture();
     }
 
     public void addImage(String imagePath) {
-        Image img = new Image(imagePath);
-        this.leaderCard = new ImageView(img);
-        this.leaderCard.setPreserveRatio(true);
-        this.leaderCard.setSmooth(true);
-        this.leaderCard.setCache(true); // performance boost
+        File crDir = new File(imagePath);
+        try {
+            Image img = new Image(crDir.toURI().toURL().toString());
+            this.leaderCard = new ImageView(img);
+            this.leaderCard.setPreserveRatio(true);
+            this.leaderCard.setSmooth(true);
+            this.setupClickGesture();
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
     }
 
     public void addBackImage() {
-        Image i = new Image(backPath);
-        this.backSide = new ImageView(i);
-        this.backSide.setPreserveRatio(true);
-        this.backSide.setSmooth(true);
-        this.backSide.setCache(true);
+        File crDir = new File(backPath);
+        try {
+            Image i = new Image(crDir.toURI().toURL().toString());
+            backSide = new ImageView(i);
+            backSide.setPreserveRatio(true);
+            backSide.setSmooth(true);
+            backSide.setCache(true);
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
     }
 
 
