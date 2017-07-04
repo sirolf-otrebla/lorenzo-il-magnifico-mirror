@@ -102,7 +102,8 @@ public class PersonalBoardWindow {
                 // inside the j color of cards acquired
                 for(int k = 0; k < 4; k++) {
                     // inside the k card of j color
-                    cardHboxes[i].getChildren().add(cardAcquiredWidget[j][k].getCardImage());
+                    if(cardAcquiredWidget[j][k] != null)
+                        cardHboxes[i].getChildren().add(cardAcquiredWidget[j][k].getCardImage());
                 }
             }
         }

@@ -6,8 +6,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
-import static it.polimi.ingsw.ps05.client.view.gui.GraphicResources.cardColorMap;
 
 /**
  * Created by miotto on 02/07/17.
@@ -31,19 +33,25 @@ public class CardOnBoardWidget {
     }
 
     public CardOnBoardWidget(Integer referenceId) {
-        this.referenceId = referenceId;
-    }
-
-    public CardOnBoardWidget(Integer referenceId, String path) {
-        this.referenceId = referenceId;
-        Image i = new Image(path, CARD_MIN_WIDTH_BOARD * resize, CARD_MIN_HEIGHT_BOARD * resize, true, true);
-        cardImage = new ImageView();
-        cardImage.setImage(i);
+        addCardImage(referenceId);
 
         cardImage.setOnMouseEntered((MouseEvent e) -> {
             /* Actions to be performed when the card is clicked once */
             //TODO: implementare lo zoom
         });
+    }
+
+    public void addCardImage(Integer referenceId) {
+        this.referenceId = referenceId;
+        String path = GraphicResources.getCardPath(referenceId);
+        File crDir = new File(path);
+        try {
+            Image i = new Image(crDir.toURI().toURL().toString(), CARD_MIN_WIDTH_BOARD * resize, CARD_MIN_HEIGHT_BOARD * resize, true, true);
+            cardImage = new ImageView();
+            cardImage.setImage(i);
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
     }
 
     public void repaint() {

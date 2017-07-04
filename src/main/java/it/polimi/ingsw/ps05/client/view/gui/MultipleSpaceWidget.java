@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -14,7 +16,9 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 /**
  * Created by miotto on 27/06/17.
  */
-public class MultipleSpaceWidget implements ActionSpaceWidget {
+public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
+
+    public static final double SCROLLPANE_HEIGHT_RESIZE = 1.2, SCROLLPANE_WIDTH_RESIZE = 8.0;
 
     private int referenceId;
     private int minDie;
@@ -32,9 +36,8 @@ public class MultipleSpaceWidget implements ActionSpaceWidget {
 
         this.minDie = minDie;
 
-        // hbox.setMinHeight(FAMILIAR_MIN_SIZE * resize);
+        hbox.setMinHeight(FAMILIAR_MIN_SIZE * resize);
         hbox.setFillHeight(true);
-        scrollPane.setPrefSize(2 * FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize);
         scrollPane.setContent(hbox);
 
         /* disabling scrollbar */
@@ -43,6 +46,7 @@ public class MultipleSpaceWidget implements ActionSpaceWidget {
 
         scrollPane.setPannable(true);
         scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(false);
 
         setupGestureTarget();
     }
@@ -77,7 +81,7 @@ public class MultipleSpaceWidget implements ActionSpaceWidget {
         scrollPane.setOnDragEntered((DragEvent e) -> {
             if (e.getGestureSource() != scrollPane && e.getDragboard().hasImage()) {
                 scrollPane.setStyle("-fx-border-style: outset");
-                scrollPane.setStyle("-fx-border-width: 3px");
+                scrollPane.setStyle("-fx-border-width: 8px");
                 scrollPane.setStyle("-fx-border-color: palegreen");
             }
 
@@ -115,16 +119,38 @@ public class MultipleSpaceWidget implements ActionSpaceWidget {
         });
     }
 
+    private static <T> long countChildren(TreeItem<T> treeItem) {
+        long count = 0;
+
+        if (treeItem != null) {
+            ObservableList<TreeItem<T>> children = treeItem.getChildren();
+
+            if (children != null) {
+                count += children.size();
+
+                for (TreeItem<T> child : children) {
+                    count += countChildren(child);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private void setLayout() {
+        //TODO allargare lo scroll pane quando si aggiunge un elemento
+    }
+
     public int getMinDie() {
         return minDie;
     }
 
-    public Integer getId() {
+    public Integer getReferenceId() {
         return referenceId;
     }
 
     @Override
-    public void setId(Integer id) {
+    public void setReferenceId(Integer referenceId) {
 
     }
 

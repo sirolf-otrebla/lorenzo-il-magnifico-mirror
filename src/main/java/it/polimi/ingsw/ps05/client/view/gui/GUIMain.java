@@ -119,11 +119,17 @@ public class GUIMain extends Application {
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
 
-		/* Instantiate player widgets */
+		/* Instantiate player and opponents widgets */
 		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId)); //TODO colore da settare tramite ID fornito dal model
 		i = 0;
-		for (OpponentWidget opponent : opponentsArray)
-			opponent = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
+		for (i = 0; i < 3; i++) {
+			opponentsArray[i] = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
+		}
+
+		for (i = 0; i < 3; i++) {
+			System.out.println(opponentsArray[i].getOpponentColor().toString());
+		}
+
 
         /* Add market action spaces */
 		// Initialize
@@ -137,8 +143,8 @@ public class GUIMain extends Application {
 		insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
 
         /* Add harvest and production action spaces */
-		insertMultipleSpace(productionSpace, root, 1, 2.7679, 82.5); // production
-		insertMultipleSpace(harvestingSpace, root, 1, 2.7679, 93.5937); // harvest
+		insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
+		insertMultipleSpace(harvestingSpace, root, 1, 0.892, 90.3137); // harvest
 
 		/* Add tower cards and tower action spaces */
 		for (i = 0; i < 4; i++) {
@@ -149,9 +155,10 @@ public class GUIMain extends Application {
 			root.getChildren().add(towerOccupationCirclesBoxes[i]);
 
 			// VBoxes of tower cards
-			towerCardSpacesArray[i] = new VBox((0.06 / 100) * resize); //TODO spacing di prova, controllare
+			towerCardSpacesArray[i] = new VBox((40 / 100) * stageHeight); //TODO spacing di prova, controllare
 			towerCardSpacesArray[i].setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
 			towerCardSpacesArray[i].setLayoutY((1.4168 / 100) * stageHeight);
+			towerCardSpacesArray[i].prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8));
 			root.getChildren().add(towerCardSpacesArray[i]);
 			for (int j = 0; j < 4; j++) {
 				// action spaces
@@ -165,6 +172,7 @@ public class GUIMain extends Application {
 		}
 
         /* Add points markers */
+        /*
 		i = 0;
 		for (MarkerWidget[] track : this.markerWidgetList) {
 			int j = 0;
@@ -190,19 +198,43 @@ public class GUIMain extends Application {
 			}
 			i++;
 		}
+		*/
+
+		for (i = 0; i < 4; i++) {
+			if(i < 2)
+				this.trackBoxesArray[i] = new HBox(12 * resize);
+			else
+				this.trackBoxesArray[i] = new VBox(12 * resize);
+			root.getChildren().add(this.trackBoxesArray[i]);
+			for (int j = 0; j < 4; j++) {
+				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j);
+				String thisPath = path + "marker-" + markerColor.toString().toLowerCase() + ".png";
+				System.out.println(thisPath);
+				markerWidgetList[i][j] = new MarkerWidget(thisPath);
+				if(player.getPlayerColor() == markerColor)
+					player.getPlayerMarkers()[i] = markerWidgetList[i][j];
+				else {
+					for (int k = 0; k < 3; k++)
+						if(opponentsArray[k].getOpponentColor() == markerColor)
+							opponentsArray[k].getOpponentMarkers()[i] = markerWidgetList[i][j];
+				}
+				this.trackBoxesArray[i].getChildren().add(markerWidgetList[i][j].getMarkerCircle());
+			}
+		}
 
 		/****** MODO 1 ******/
 		// Play-order markers
-		this.trackBoxesArray[0].setLayoutX((48.1 / 100) * stageWidth);
+		this.trackBoxesArray[0].setLayoutX((47.4857 / 100) * stageWidth);
 		this.trackBoxesArray[0].setLayoutY((43.5 / 100) * stageHeight);
+		this.trackBoxesArray[0].setMaxHeight((3.5 / 100) * stageHeight);
 		// Faith markers
 		this.trackBoxesArray[1].setLayoutX((47.4857 / 100) * stageWidth);
 		this.trackBoxesArray[1].setLayoutY((66.0375 / 100) * stageHeight);
 		// Military markers
-		this.trackBoxesArray[2].setLayoutX((46.8064 / 100) * stageWidth);
+		this.trackBoxesArray[2].setLayoutX((46.7664 / 100) * stageWidth);
 		this.trackBoxesArray[2].setLayoutY((14.4125 / 100) * stageHeight);
 		// Victory markers
-		this.trackBoxesArray[3].setLayoutX((59.2079 / 100) * stageWidth);
+		this.trackBoxesArray[3].setLayoutX((59.1679 / 100) * stageWidth);
 		this.trackBoxesArray[3].setLayoutY((14.4125 / 100) * stageHeight);
 
 		/* Add playable familiars */
@@ -210,6 +242,14 @@ public class GUIMain extends Application {
 
         /* Initialize opponents familiars */
 		i = 0;
+
+		for(i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				opponentsArray[i].getFamiliarWidgetList()[j] = new FamiliarWidget(opponentsArray[i].getOpponentColor(), GraphicResources.getFamiliarColor(j));
+			}
+		}
+
+		/*
 		for (OpponentWidget opponent : opponentsArray) {
 			int j = 0;
 			for (FamiliarWidget familiar : opponent.getFamiliarWidgetList()) {
@@ -218,6 +258,7 @@ public class GUIMain extends Application {
 			}
 			i++;
 		}
+		*/
 
 		/* Add player buttons */
 		// Personal cards
@@ -277,14 +318,27 @@ public class GUIMain extends Application {
 		diceBox.setPrefHeight((4.8 / 100) * stageHeight);
 
 		DieWidget[] diceWidgetArray = new DieWidget[3];
-		for (DieWidget die : diceWidgetArray) {
-			die = new DieWidget();
-			diceBox.getChildren().add(die.getValueLabel());
+		for (i = 0; i < 3; i++) {
+			diceWidgetArray[i] = new DieWidget(i);
+			diceBox.getChildren().add(diceWidgetArray[i].getValueLabel());
 		}
 
 		/* Add timer */
 		timerWidget.setLayoutX((90.0 / 100) * stageWidth);
 		timerWidget.setLayoutY((95.0 / 100) * stageHeight);
+		timerWidget.setMaxHeight((3.0 / 100) * stageHeight);
+		root.getChildren().add(timerWidget);
+
+
+
+		// TEST CARICAMENTO CARTE
+		int[][] array = {{ 3,  6,  8,  9},
+				         {50, 51, 52, 56},
+				         {25, 27, 28, 30},
+						 {80, 82, 84, 90}};
+		insertCards(array);
+
+		Integer[] leaderIdArray = {2,8,10,15};
 
 		/*
 		root.maxWidthProperty().bind(stage.widthProperty());
@@ -293,15 +347,16 @@ public class GUIMain extends Application {
 
 		Scene mainScene = new Scene(root);
 
-		File file = new File("./src/main/res/structure.fxml");
-		System.out.println(file.exists());
 
 		File f = new File("./src/main/res/fx-style.css");
 		mainScene.getStylesheets().add(f.toURI().toURL().toString());
+
 		stage.setScene(mainScene);
 		stage.sizeToScene();
 		stage.show();
 
+		//startBonusTileDraft();
+		//startLeaderDraft(leaderIdArray);
 
 	}
 
@@ -309,7 +364,7 @@ public class GUIMain extends Application {
 
 
 	/**************************/
-	/**  Metodi per Sirolfo  **/
+	/**   Metodi per albe    **/
 
 
 	public void startBonusTileDraft() {
@@ -330,10 +385,24 @@ public class GUIMain extends Application {
 		LeaderDraftPopup.display(referenceIdArray);
 	}
 
+	public void endLeaderDraft() {
+		LeaderDraftPopup.popup.close();
+	}
+
 	public void updateLeadersAfterDraft() {
 		int i = 0;
 		for (LeaderWidget leader : this.player.getLeaderWidgetList()) {
 			leader = LeaderDraftPopup.leadersDrafted[i];
+		}
+	}
+
+	public void insertCards(int[][] referenceIdsArray) {
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+				CardOnBoardWidget newCard = new CardOnBoardWidget(referenceIdsArray[i][j]);
+				int module = referenceIdsArray[i][j] % 24;
+				towerCardSpacesArray[i].getChildren().add(newCard.getCardImage());
+			}
 		}
 	}
 
@@ -349,7 +418,7 @@ public class GUIMain extends Application {
 		});
 	}
 
-	private void insertActionSpace(ActionSpaceWidget actionSpace, Pane parent, int minDie, double percX, double percY) {
+	private void insertActionSpace(SingleOccupantActionSpaceWidget actionSpace, Pane parent, int minDie, double percX, double percY) {
 
 		actionSpace.setMinDie(minDie);
 

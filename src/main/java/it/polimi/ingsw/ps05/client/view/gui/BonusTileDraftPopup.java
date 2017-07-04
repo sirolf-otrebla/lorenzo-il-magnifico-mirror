@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -7,6 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.net.MalformedURLException;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -27,20 +31,30 @@ public class BonusTileDraftPopup {
         popupStage.initStyle(StageStyle.UNDECORATED);
 
         // create bonusTile widgets
-        int i = 0;
-        for(BonusTileWidget bonusTile: bonusTileArray) {
-            bonusTile = new BonusTileWidget(i); //TODO controllare se va bene istanziare le bonus tile con questi referenceId (da 0 a 3)
-            hbox.getChildren().add(bonusTile);
+        for(int i = 0; i < 4; i++) {
+            bonusTileArray[i] = new BonusTileWidget(i);
+            hbox.getChildren().add(bonusTileArray[i]);
         }
+
         Label label = new Label("Choose your personal Bonus Tile");
+        label.setId("labelTileDraft");
 
         hbox.setFillHeight(true);
-        hbox.setPrefHeight((50 / 100) * stageHeight);
+        hbox.setPrefHeight((30 / 100) * stageHeight);
 
         VBox vbox = new VBox(20 * resize);
-        vbox.getChildren().addAll(label, vbox);
+        vbox.setId("bonusTileDraft");
+        vbox.getChildren().addAll(label, hbox);
+        vbox.setPadding(new Insets(50 * resize, 50 * resize, 50 * resize, 50 * resize));
 
         Scene scene = new Scene(vbox);
+
+        File f = new File("./src/main/res/fx-style.css");
+        try {
+            scene.getStylesheets().add(f.toURI().toURL().toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 
         popupStage.setScene(scene);
         popupStage.sizeToScene();

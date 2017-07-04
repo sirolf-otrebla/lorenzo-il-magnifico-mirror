@@ -31,9 +31,6 @@ public class OpponentWidget {
 
 
 
-
-
-
     public PersonalBoardWindow getPersonalBoard() {
         return personalBoard;
     }

@@ -27,6 +27,8 @@ public final class GraphicResources {
 
     private static HashMap<Integer, String> bonusTilePathMap = new HashMap<>();
 
+    private static HashMap<Integer, String> developmentCardPathMap = new HashMap<>();
+
 
 
     GraphicResources() {
@@ -37,6 +39,12 @@ public final class GraphicResources {
         buildPlayerColorMap();
         buildFamiliarColorMap();
         buildBonusTilePathMap();
+        buildDevelopmentCardPathMap();
+    }
+
+    private static void buildDevelopmentCardPathMap() {
+        for(int i = 0; i < 96; i++)
+            developmentCardPathMap.put(i, "./src/main/res/img/cards/devcards_f_en_c_" + (i + 1) + ".png");
     }
 
     private static void buildBonusTilePathMap() {
@@ -76,6 +84,11 @@ public final class GraphicResources {
     }
 
     private static void buildDiceColorMap() {
+
+        diceColorMap.put(0, ColorEnumeration.Black);
+        diceColorMap.put(1, ColorEnumeration.White);
+        diceColorMap.put(2, ColorEnumeration.Orange);
+        /*
         int i;
         ColorEnumeration[] famColors = new ColorEnumeration[4];
         for (i = 5; i < 9; i++)
@@ -84,6 +97,7 @@ public final class GraphicResources {
         for (ColorEnumeration f: famColors) {
             diceColorMap.put(i, f);
         }
+        */
     }
 
     private static void buildCardColorMap() {
@@ -134,4 +148,8 @@ public final class GraphicResources {
     }
 
     public static String getBonusTilePath(int i) { return bonusTilePathMap.get(i); }
+
+    public static String getCardPath(int i) {
+        return developmentCardPathMap.get(i);
+    }
 }

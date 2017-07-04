@@ -36,10 +36,8 @@ public class PlayerWidget {
     public void addFamiliarToBoard(Pane board) {
         int i = 0;
         // initialize familiars
-        for(FamiliarWidget familiar: familiarWidgetList) {
-            familiar = new FamiliarWidget(this.playerColor, GraphicResources.getFamiliarColor(i));
-            i++;
-        }
+        for(i = 0; i < 4; i++)
+            familiarWidgetList[i] = new FamiliarWidget(this.playerColor, GraphicResources.getFamiliarColor(i));
         // insert in the board
         insertDraggableFamiliar(familiarWidgetList[0], board, 66.07, 21.87);
         insertDraggableFamiliar(familiarWidgetList[1], board, 70.5357, 21.87);
@@ -96,5 +94,13 @@ public class PlayerWidget {
 
     public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
         this.bonusTileWidget = bonusTileWidget;
+    }
+
+    public void setPlayerColor(ColorEnumeration playerColor) {
+        this.playerColor = playerColor;
+    }
+
+    public FamiliarWidget[] getFamiliarWidgetList() {
+        return familiarWidgetList;
     }
 }

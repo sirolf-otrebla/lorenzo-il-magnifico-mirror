@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 /**
  * Created by miotto on 04/07/17.
  */
@@ -18,14 +21,18 @@ public class BonusTileWidget extends ImageView {
         this.referenceId = referenceId;
         // obtain image path from referenceId
         this.imagePath = GraphicResources.getBonusTilePath(referenceId);
-
         addImage(this.imagePath);
     }
 
     public void addImage(String imagePath) {
-        Image img = new Image(imagePath);
-        this.setImage(img);
-        this.setupClickGesture();
+        File crDir = new File(imagePath);
+        try {
+            Image img = new Image(crDir.toURI().toURL().toString());
+            this.setImage(img);
+            this.setupClickGesture();
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
     }
 
     // click-to-take-bonusTile gesture

@@ -20,13 +20,17 @@ public class FamiliarWidget {
     private boolean placed;
     private ImageView imageElement;
     private String imagePath;
-    private ColorEnumeration FamiliarColor;
-    private ColorEnumeration PlayerColor;
+    private ColorEnumeration familiarColor;
+    private ColorEnumeration playerColor;
 
     public FamiliarWidget(ColorEnumeration playerColor, ColorEnumeration familiarColor) {
         // construct image path
-        String imagePath = path + playerColor.toString().toLowerCase() + "pl/" + familiarColor.toString().toLowerCase() + ".png";
-        addImage(imagePath);
+        this.playerColor = playerColor;
+        this.familiarColor = familiarColor;
+
+        this.imagePath = path + this.playerColor.toString().toLowerCase() + "pl/" + this.familiarColor.toString().toLowerCase() + ".png";
+
+        addImage(this.imagePath);
         setupGestureSource();
     }
 
@@ -108,7 +112,7 @@ public class FamiliarWidget {
     }
 
     public ColorEnumeration getFamiliarColor() {
-        return FamiliarColor;
+        return familiarColor;
     }
 
     public boolean isPlaced() {

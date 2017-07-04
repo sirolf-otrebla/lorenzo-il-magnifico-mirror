@@ -11,12 +11,17 @@ import javafx.scene.image.ImageView;
 public class DieWidget {
 
     private int referenceId; //TODO controllare se i dadi necessitano di ID
-    private int value;
+    private Integer value;
     private Label valueLabel;
     private ColorEnumeration dieColor;
 
-    public DieWidget() {
+    public DieWidget(int referenceId) {
+        this.dieColor = GraphicResources.getDiceColor(referenceId); // va da 0 a 2
+        this.valueLabel = new Label("0"); // test
+    }
 
+    public DieWidget(ColorEnumeration color) {
+        this.dieColor = color;
     }
 
     public DieWidget(ColorEnumeration color, int value) {
@@ -46,11 +51,11 @@ public class DieWidget {
         this.referenceId = referenceId;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

@@ -18,7 +18,7 @@ public class LeaderDraftPopup {
 
     public static final double LEADER_HEIGHT_PERC = 30 / 100;
 
-    private static Stage popup;
+    static Stage popup;
     static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
     private static LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
     private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
@@ -39,7 +39,7 @@ public class LeaderDraftPopup {
         popup.initStyle(StageStyle.UNDECORATED);
 
         HBox hbox = new HBox(30 * resize);
-        hbox.setMinWidth(LEADER_HEIGHT_PERC * stageHeight);
+        hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
         hbox.setFillHeight(true);
 
         // adding leaders to hbox

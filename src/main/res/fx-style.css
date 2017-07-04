@@ -1,5 +1,5 @@
 #root{
-    -fx-background-image: url("./img/board.png");
+    -fx-background-image: url("./img/prova7.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
@@ -43,6 +43,12 @@
     -fx-background-position: center;
 }
 
+#bonusTileDraft{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
 #resourceLabel{
      -fx-border-color: cornsilk;
 }
@@ -59,6 +65,10 @@
 
 }
 
+#labelTileDraft{
+    -fx-font-size: 18;
+}
+
 
 .button:focused {
     -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
@@ -66,7 +76,14 @@
     -fx-background-radius: 5, 4, 3;
 }
 
-
 .text{
     -fx-font-smoothing-type: lcd;
+}
+
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
