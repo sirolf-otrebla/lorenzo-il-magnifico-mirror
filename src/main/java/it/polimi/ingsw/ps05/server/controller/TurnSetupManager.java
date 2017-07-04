@@ -14,7 +14,7 @@ import it.polimi.ingsw.ps05.model.*;
 public class TurnSetupManager extends Observable{
 
 	private Turn turn; //vecchio turno
-	private ArrayList<Turn> turnHistory;
+	private ArrayList<Turn> turnHistory = new ArrayList<>();
 	private  Board board;
 	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
 	
@@ -59,6 +59,9 @@ public class TurnSetupManager extends Observable{
 		}
 		//council, serve spostare anche l'ordine dei giocatori
 		ArrayList<Player> list = board.getPlayerOnCouncil();
+		if (list == null){
+			list = new ArrayList<>();
+		}
 		board.setPlayerOnCouncil(null);
 		updatePlayerOrder(list,next);
 	}
@@ -67,8 +70,7 @@ public class TurnSetupManager extends Observable{
 		for (Player o : currentTurn.getPlayerOrder()){
 			for (Familiar f : o.getFamilyList()){
 				for (Dice d : currentTurn.getDice()){
-					if (f.getColor().equals(d.getColor())){
-						//System.out.println("Setting " + d.getValue()+ " " + d.getColor().toString() + " for familiar color " + f.getColor().toString());
+					if (f.getColor() == d.getColor()){
 						f.setDice(d);
 						break;
 					}

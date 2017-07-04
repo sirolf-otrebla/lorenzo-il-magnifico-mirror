@@ -13,9 +13,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public abstract class TowerCard implements Card {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3659476952391381973L;
 	public Epoch epoch = new Epoch();
 	public ColorEnumeration color;
@@ -24,6 +21,16 @@ public abstract class TowerCard implements Card {
 	public ArrayList<Effect> effects = new ArrayList<Effect>();
 	private Integer referenceID;
 
+	/**
+	 * TowerCard is a card designed to stay in tower
+	 * @param referenceID is the unique ID of the card
+	 * @param epoch is the epoch in which the card will appear in the board
+	 * @param color is the color of the card
+	 * @param cardName is the unique name of the card
+	 * @param requirements are the resource that you must have to take the card (there could be more than 
+	 * one way to pay)
+	 * @param effects are the action that the card allows you to do
+	 */
 	public TowerCard(int referenceID, Epoch epoch, ColorEnumeration color, String cardName,
 					 ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
 		this.epoch = epoch;
@@ -33,7 +40,14 @@ public abstract class TowerCard implements Card {
 		this.effects = effects;
 		this.referenceID = referenceID;
 	}
-	
+	/**
+	 * TowerCard is a card designed to stay in tower
+	 * @param referenceID is the unique ID of the card
+	 * @param epoch is the epoch in which the card will appear in the board
+	 * @param color is the color of the card
+	 * @param cardName is the unique name of the card
+	 * @param effects are the action that the card allows you to do
+	 */
 	public TowerCard(int referenceID, Epoch epoch, ColorEnumeration color, String cardName, ArrayList<Effect> effects) {
 		this.epoch = epoch;
 		this.color = color;
@@ -45,13 +59,19 @@ public abstract class TowerCard implements Card {
 	
 	public TowerCard(){
 	}
-	
+	/**
+	 * The false resource is a resource that non one can have and is used to inhibit someone
+	 * from taking the card (that happens when you have a special effect that allows you to do an action
+	 * only in a section of the board
+	 */
 	public void addFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			or.add(new AlwaysUnFullFilledResource());
 		}
 	}
-	
+	/**
+	 * Remove the resource added before
+	 */
 	public void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			for (Resource r : or){

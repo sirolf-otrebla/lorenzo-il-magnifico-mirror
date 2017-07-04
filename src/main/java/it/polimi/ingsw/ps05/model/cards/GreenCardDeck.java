@@ -19,7 +19,11 @@ public class GreenCardDeck implements Deck {
 	ArrayList<GreenCard> secondEpochCard = new ArrayList<GreenCard>();
 	ArrayList<GreenCard> thirdEpochCard = new ArrayList<GreenCard>();
 	
-	
+	/**
+	 * The deck is a container of card, divided for color and epoch. Each deck contains the cards of the same
+	 * color.
+	 * @param cardList is the list of the card, not divided for epoch of the same color
+	 */
 	public GreenCardDeck(ArrayList<GreenCard> cardList){
 		this.cardList = cardList;
 		for (GreenCard o : this.cardList) {
@@ -33,7 +37,10 @@ public class GreenCardDeck implements Deck {
 		}
 	}
 
-
+	/**
+	 * @param epoch contains the epoch of the requested card.
+	 * @return a card of the selected epoch that will be displayed in the tower.
+	 */
 	@Override
 	public TowerCard getCard(Epoch epoch) {
 		if (epoch.getID().equals(EpochEnumeration.FIRST)){

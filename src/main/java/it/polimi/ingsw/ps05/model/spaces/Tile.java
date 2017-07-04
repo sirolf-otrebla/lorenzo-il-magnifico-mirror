@@ -45,6 +45,16 @@ public class Tile extends TowerTileInterface {
     }
     
     @Override
+    public void setOccupied(Familiar f){
+    	super.setOccupied(f);
+    }
+    
+    @Override
+    public boolean isOccupied(){
+    	return super.isOccupied();
+    }
+    
+    @Override
     public Tower getParentTower(){
         return this.parentTower;
     }
@@ -83,10 +93,6 @@ public class Tile extends TowerTileInterface {
                andAlternative.add(new GoldResource(Tile.TOWER_OCCUPIED_PAYMENT));
        return req;
     }
-  
-    public boolean isOccupied() {
-        return  super.isOccupied();
-    }
 
     @Override
     public void applyEffect(Familiar pl) {
@@ -107,7 +113,7 @@ public class Tile extends TowerTileInterface {
 
     @Override
     public void acceptVisitor(ViewVisitorInterface vi) {
-
+    	//TODO
     }
     
     @Override

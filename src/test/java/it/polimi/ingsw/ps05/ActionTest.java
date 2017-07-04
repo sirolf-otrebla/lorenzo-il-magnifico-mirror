@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.server.controller.GameSetup;
 import it.polimi.ingsw.ps05.server.controller.TurnSetupManager;
+import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import junit.framework.TestCase;
@@ -93,45 +94,6 @@ public class ActionTest extends TestCase {
 		testMarket = new MarketSpace(testDiceReq, testEffectArrayList);
 		this.testActl = new Action(testFm, testMarket);
 
-	}
-
-	@Test
-	public void testBoard() throws InterruptedException {
-		ArrayList<Player> list = new ArrayList<Player>();
-		Random randomNum = new Random();
-		int numP = randomNum.nextInt(5);
-		for (int i = 0; i < numP; i++){
-			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
-		}
-		Game game = new Game(true, true, numP, null ); //TODO SISTEMARE
-		try {
-			game.start();
-		} catch (InterruptedException exc) {
-			//TODO gestire eccezione
-			exc.printStackTrace();
-		}
-		GameSetup gameSetup = new GameSetup(list,game);
-		Board board = gameSetup.getBoard();
-		assertEquals(ActionTest.B_TOWER_NUMBER, board.getTowerList().size());
-		for (int i = 0; i < board.getTowerList().size(); i++){
-			assertEquals(ActionTest.T_TILE_NUMBER,board.getTowerList().get(i).getTiles().size());
-			for (TowerTileInterface t : board.getTowerList().get(i).getTiles().values()){
-				assertNotNull(t.getParentTower());
-			}
-		}
-		if (numP == 2){
-			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR2,board.getActSpacesMap().values().size());
-		} else if (numP == 3){
-			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR3,board.getActSpacesMap().values().size());
-		} else if (numP == 4){
-			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR4,board.getActSpacesMap().values().size());
-		} else if (numP > 4){
-			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR5_MORE,board.getActSpacesMap().values().size());
-		} else if (numP < 2){
-			assertEquals(ActionTest.B_NUM_ACTIONSPACE_FOR1_LESS,board.getActSpacesMap().values().size());
-		}
-		assertEquals(ActionTest.B_FAITH_PATH,board.getFaithPath().size());
-		assertEquals(ActionTest.B_MILITARY_PATH,board.getMilitaryPath().size());
 
 	}
 
@@ -143,7 +105,7 @@ public class ActionTest extends TestCase {
 		for (int i = 0; i < numP; i++){
 			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
 		}
-		Game game = new Game(true, true, numP, null);
+		Game game = new Game(false, false, numP, new ArrayList<PlayerClient>());
 		try {
 			game.start();
 		} catch (InterruptedException exc) {

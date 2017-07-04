@@ -30,7 +30,7 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	ColorEnumeration color;
 	
 	// game information
-	private HashMap<ColorEnumeration, Familiar> familyMap = new HashMap<>();
+	private HashMap<ColorEnumeration, Familiar> familyMap = null;
 	private BonusTile bonusTile;
 
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();

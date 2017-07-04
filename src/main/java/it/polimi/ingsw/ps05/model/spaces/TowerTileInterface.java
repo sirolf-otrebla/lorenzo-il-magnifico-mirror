@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps05.model.spaces;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 
@@ -11,6 +10,10 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
  *  */
 public abstract  class  TowerTileInterface extends SingleOccupantActionSpace implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8336428979750702256L;
 	public abstract void setParentTower(Tower tower);
 	public abstract void setTowerCard(TowerCard card);
 	public abstract void removeTowerCard();
