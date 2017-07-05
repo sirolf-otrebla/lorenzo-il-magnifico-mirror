@@ -1,6 +1,7 @@
 
 package it.polimi.ingsw.ps05.server.net;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -41,8 +42,14 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 
 	@Override
 	public void run() {
-		if (connection != null)
-		    connection.listen();
+		if (connection != null){
+			try {
+				connection.listen();
+			} catch (ClassNotFoundException | IOException e) {
+				System.err.println("Connessione terminata");
+				connection = null;
+			}
+		}
 	}
 
     @Override

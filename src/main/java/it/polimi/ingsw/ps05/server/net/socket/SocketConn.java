@@ -28,17 +28,12 @@ public class SocketConn extends LimConnection {
 	}
 	
     @Override
-    public void listen() {
+    public void listen() throws ClassNotFoundException, IOException {
     		while (true){
-    			try {
 					message = stream.takeInData();
 					System.out.println("ho ricevuto qualcosa");
 					setChanged();
 					notifyObservers();
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
     		}
     }
 
