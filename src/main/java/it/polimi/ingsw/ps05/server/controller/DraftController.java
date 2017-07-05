@@ -67,8 +67,10 @@ public class DraftController implements Runnable{
         try {
             sem.acquire(clientArrayList.size());
             for (int i = 0; i < this.clientArrayList.size(); i++){
-                new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
-                        this.clientArrayList.get(i).getPlayer().getColor()));
+                this.clientArrayList.get(i).sendMessage(
+                        new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
+                        this.clientArrayList.get(i).getPlayer().getColor())));
+
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
