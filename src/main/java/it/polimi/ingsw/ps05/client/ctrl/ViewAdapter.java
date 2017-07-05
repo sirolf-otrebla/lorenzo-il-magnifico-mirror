@@ -61,7 +61,8 @@ public class ViewAdapter {
         } else {
 
             CLIMain cli = (CLIMain) this.view;
-           // cli.
+            cli.updateBoard(status.getGameBoard());
+            cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
         }
     }
 
