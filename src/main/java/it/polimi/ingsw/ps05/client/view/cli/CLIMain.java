@@ -32,6 +32,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
+import it.polimi.ingsw.ps05.model.cards.Card;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -100,8 +101,9 @@ public class CLIMain implements LimView, Runnable{
 	private ArrayList<ArrayList<Integer>> tileIdForTower = new ArrayList<ArrayList<Integer>>();
 
 	/*
-	 * fare selezione privilegi
-	 * fare draft
+	 * TODO fare selezione privilegi
+	 * 
+	 * TODO mettere da qualche parte che sei attivo
 	 * 
 	 */
 
@@ -125,7 +127,7 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println(width + ": " + height);
 
 
-		trySys();
+		//trySys();
 	}
 
 	public void trySys(){
@@ -151,6 +153,7 @@ public class CLIMain implements LimView, Runnable{
 	@Override
 	public void run() {
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
+		defaultTerminalFactory.setTerminalEmulatorTitle("Lorenzo il Magnifico");
 		defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(PREFERRED_WIDTH, PREFERRED_HEIGHT));
 		try {
 			terminal = defaultTerminalFactory.createTerminal();
@@ -340,8 +343,9 @@ public class CLIMain implements LimView, Runnable{
 						visualCard(playersList.get(currentColPlayers).getVioletCardList(), textGraphics.getSize().getColumns());
 					}
 				} else if(meActive && inBoard){
-					choseActivableProductionCard(terminal.getTerminalSize().getColumns());
-					//doActionForPlayer();
+					doActionForPlayer();
+				} else if (inMyStats && currentRowMyStats == 5 && currentColMyStats == 1){
+					selectLeaderCard();
 				}
 				break;
 			case Tab:
@@ -361,6 +365,9 @@ public class CLIMain implements LimView, Runnable{
 					inPlayers = false;
 					printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);
 				}
+				break;
+			case Escape:
+				//passare il turno;
 				break;
 			default:
 				System.out.println("Default");
@@ -382,19 +389,25 @@ public class CLIMain implements LimView, Runnable{
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
 				//NON OCCUPATO
-				TowerCard c = board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard();
-				CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
-						((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
-						selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
-				a.notifyObservers();
-			} else {
-				//OCCUPATO
+				Action ac = new Action(((Familiar)this.player.getFamilyList().toArray()[selectedFam]),
+						board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+				if (ac.isLegal()){
+					TowerCard c = board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard();
+					CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
+							((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
+							selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
+					a.notifyObservers();
+				}
+				
 			}
 		} else if(currentColBoard < board.getTowerList().size() &&
 				currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 			//MARKET
-			CliActionSpaceViewObject a = new CliActionSpaceViewObject(marketList.get(currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
-			a.notifyObservers();
+			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],marketList.get(currentColBoard));
+			if (ac.isLegal()){
+				CliActionSpaceViewObject a = new CliActionSpaceViewObject(marketList.get(currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
+				a.notifyObservers();
+			}
 		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
 			//PRODUCTION
 			choseActivableProductionCard(terminal.getTerminalSize().getColumns());
@@ -407,6 +420,7 @@ public class CLIMain implements LimView, Runnable{
 			//CONSIGLIO
 			CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
 					((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
+			a.notifyObservers();
 		}
 	}
 
@@ -780,7 +794,7 @@ public class CLIMain implements LimView, Runnable{
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			firstColumn.add(lastPos);
 		}
-		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7, "Carte Blu:");
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7 - player.getGreenCardList().size(), "Carte Blu:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+7);
 		for (BlueCard card : player.getBlueCardList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, card.getName());
@@ -824,7 +838,7 @@ public class CLIMain implements LimView, Runnable{
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			secondColumn.add(lastPos);
 		}
-		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7, "Carte Viola:");
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 7 - player.getYellowCardList().size(), "Carte Viola:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+7);
 		for (VioletCard card : player.getVioletCardList()){
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, card.getName());
@@ -1302,13 +1316,25 @@ public class CLIMain implements LimView, Runnable{
 	private void choseActivableHarvestCard(int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getGreenCardList(), width, SelectionTypeEnum.HARVEST);
-		chose.start();
+		ArrayList<Card> a = chose.start();
+		ArrayList<Integer> ids = new ArrayList<>();
+		for (Card c : a){
+			ids.add(((TowerCard)c).getReferenceID());
+		}
+		CliHarvestSpaceViewObject b = new CliHarvestSpaceViewObject(harvestList.get(-productionList.size() + currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
+		b.notifyObservers();
 	}
 
 	private void choseActivableProductionCard(int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getYellowCardList(), width, SelectionTypeEnum.PRODUCTION);
-		chose.start();
+		ArrayList<Card> a = chose.start();
+		ArrayList<Integer> ids = new ArrayList<>();
+		for (Card c : a){
+			ids.add(((TowerCard)c).getReferenceID());
+		}
+		CliProductionSpaceViewObject b = new CliProductionSpaceViewObject(productionList.get(currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
+		b.notifyObservers();
 	}
 
 	private ArrayList<?> choseDraftCard(ArrayList<?> cards, int width){
@@ -1348,11 +1374,27 @@ public class CLIMain implements LimView, Runnable{
 		return null;
 	}
 	
-	private void discardLeaderCard() throws IOException{
+	private void selectLeaderCard() throws IOException{
 		
 		ArrayList<?> chosenCard = choseDraftCard(player.getLeaderCardList(), terminal.getTerminalSize().getColumns());
+		boolean success = true;
+		for (ArrayList<Resource> a : ((LeaderCard)chosenCard.get(0)).getRequirements()){
+			success = true;
+			for (Resource r : a){
+				if (!r.hasEnoughResources(this.player.createGhostFamiliar(0))){
+					success = false;
+					break;
+				}
+			}
+			if (success) break;
+		}
 		
-		player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
+		if (success){
+			//attivare carta leader
+		} else {
+			player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
+		}
+		
 	}
 	
 	
