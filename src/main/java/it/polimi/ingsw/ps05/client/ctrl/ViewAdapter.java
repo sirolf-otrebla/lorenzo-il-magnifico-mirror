@@ -112,10 +112,14 @@ public class ViewAdapter {
             // TODO
 
         } else {
+        	System.out.println("AAAAAAA");
             ArrayList<Integer> discardedIds = new ArrayList<>();
             for(Integer id: draftIDs)
                 discardedIds.add(id);
             CLIMain cliView = (CLIMain) this.view;
+            Thread t = new Thread(cliView);
+            t.setDaemon(true);
+            t.start();
             try {
                 CliThread = new Thread(cliView);
                 CliThread.setDaemon(true);

@@ -39,6 +39,7 @@ public class Server {
         Thread lobbyThread = new Thread(this.serverLobby);
         lobbyThread.start();
         userDatabase =  Database.getInstance();
+        userDatabase.deleteDatabase();
         try {
             listener = new NetworkListener(DEFAULT_PORT);
         } catch (IOException e) {

@@ -74,6 +74,17 @@ public class Database {
 		}
 	}
 	
+	public void deleteDatabase(){
+		try{
+			Statement stmt = c.createStatement();
+			String sql = "DELETE FROM 'data'";
+			stmt.executeUpdate(sql);
+			System.out.println("Cancellato");
+		} catch (Exception e){
+			System.out.println("Fallito canc");
+		}
+	}
+	
 	private void printDatabase(){
 		Statement stmt;
 		try {

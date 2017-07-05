@@ -43,7 +43,7 @@ public class DraftController implements Runnable{
             leaderCardHashMap.put(leader.getReferenceID(), leader);
         }
         clientArrayList = draftClientArrayList;
-        this.sem = new Semaphore(1);
+        this.sem = new Semaphore(draftClientArrayList.size());
         for (PlayerClient client: draftClientArrayList) {
             choosenCardsMap.put(client.getPlayer().getColor(), new ArrayList<>());
         }
@@ -62,16 +62,18 @@ public class DraftController implements Runnable{
         }
     }
 
-    private synchronized void sendInitialDraftMessage(){
-        System.out.println("sending initial draft");
+    private void sendInitialDraftMessage(){
         try {
-            sem.acquire();
-            for (int i = 0; i < this.clientArrayList.size(); i++){
-                this.clientArrayList.get(i).sendMessage(
-                        new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
-                        this.clientArrayList.get(i).getPlayer().getColor())));
-
-            }
+        	System.out.println("Pre sem");
+            sem.acquire(clientArrayList.size());
+            System.out.println("sending initial draft");
+            synchronized (this) {
+            	for (int i = 0; i < this.clientArrayList.size(); i++){
+            		this.clientArrayList.get(i).sendMessage(
+                    new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
+                            this.clientArrayList.get(i).getPlayer().getColor())));
+                }
+			}
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

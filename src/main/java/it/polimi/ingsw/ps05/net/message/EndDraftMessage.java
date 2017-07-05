@@ -10,8 +10,11 @@ import java.util.ArrayList;
  */
 public class EndDraftMessage implements LeaderDraftMessage {
 
-
-    private ArrayList<Integer> playerLeaderCards;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -620774875766220141L;
+	private ArrayList<Integer> playerLeaderCards;
 
     public EndDraftMessage(ArrayList<Integer> playerLeaderCards){
 
@@ -23,8 +26,9 @@ public class EndDraftMessage implements LeaderDraftMessage {
 
     }
 
-    @Override
-    public void acceptVisitor(DraftVisitor vi) {
-
-    }
+	@Override
+	public void acceptVisitor(DraftVisitor vi) {
+		// TODO Auto-generated method stub
+		
+	}
 }
