@@ -9,13 +9,17 @@ import java.util.TimerTask;
  */
 public class InactivePlayerTask extends TimerTask {
 
+    private Game game;
+    private PlayerClient player;
     public InactivePlayerTask(Game game, PlayerClient player){
-        game.getState().nextState();
-        player.setInactive();
+       this.game = game;
+       this.player = player;
     }
 
     @Override
     public void run() {
+        game.getState().nextState();
+        player.setInactive();
 
     }
 }

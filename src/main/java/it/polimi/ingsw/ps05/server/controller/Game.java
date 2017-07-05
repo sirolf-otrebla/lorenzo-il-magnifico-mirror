@@ -134,7 +134,8 @@ public class Game implements Observer {
     }
 
     public void setActivePlayer(Player nextPlayer) {
-        this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
+        if( activePlayer != null)
+            this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
         this.activePlayer = nextPlayer;
         this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
     }

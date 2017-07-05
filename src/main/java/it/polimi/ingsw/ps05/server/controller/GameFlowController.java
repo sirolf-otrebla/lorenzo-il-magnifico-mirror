@@ -54,12 +54,12 @@ public class GameFlowController implements Runnable {
 
 	@Override
 	public void run()  {
-		while(game.end){
+		while(!game.end){
 			try {
 
 				Turn thisTurn = this.game.gettManager().getTurn();
 				PlayerClient plClient =
-                        game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0));
+                        game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0).getPlayerID());
 				plClient.setActive();
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
