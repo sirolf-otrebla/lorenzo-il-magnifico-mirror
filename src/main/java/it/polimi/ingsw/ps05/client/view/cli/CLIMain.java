@@ -86,6 +86,7 @@ public class CLIMain implements LimView, Runnable{
 	boolean meActive = true;
 	int selectedFam = 0;
 	int selectedOpt = 0;
+	Player active = null;
 	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
 
 		private static final long serialVersionUID = 1L;
@@ -112,7 +113,6 @@ public class CLIMain implements LimView, Runnable{
 
 
 	public CLIMain(Board board, Player player, ArrayList<Player> playersList){
-		this.setActive(false);
 		this.board = board;
 		this.player = player;
 		this.playersList = playersList;
@@ -398,7 +398,6 @@ public class CLIMain implements LimView, Runnable{
 							selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
 					a.notifyObservers();
 				}
-				
 			}
 		} else if(currentColBoard < board.getTowerList().size() &&
 				currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
@@ -422,6 +421,7 @@ public class CLIMain implements LimView, Runnable{
 					((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
 			a.notifyObservers();
 		}
+		meActive = false;
 	}
 
 	private void moveUp(TextGraphics textGraphics) throws IOException {
@@ -777,7 +777,11 @@ public class CLIMain implements LimView, Runnable{
 		int chosenColStart = Math.max(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 6 + width/8 , 5*width/8);
 		drawSquare(chosenColStart,0,width - 1, 4*height/16 + 1,textGraphics);
 		TerminalPosition lastPos = new TerminalPosition(chosenColStart + 1, 0);
+		if (active != null && active.getPlayerID() == player.getPlayerID()){
+			textGraphics.setBackgroundColor(TextColor.ANSI.YELLOW);
+		}
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, player.getUsername());
+		textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		ArrayList<TerminalPosition> firstColumn = new ArrayList<TerminalPosition>();
 		for (Resource resource : player.getResourceList()){
@@ -904,7 +908,11 @@ public class CLIMain implements LimView, Runnable{
 			ArrayList<TerminalPosition> list = new ArrayList<>();
 			TerminalPosition lastPos = new TerminalPosition(startCol + 1 + i*dist/3,5*height/16);
 			Player p = playersList.get(i);
+			if (active != null && active.getPlayerID() == p.getPlayerID()){
+				textGraphics.setBackgroundColor(TextColor.ANSI.YELLOW);
+			}
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, p.getUsername());
+			textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 			lastPos = new TerminalPosition(lastPos.getColumn(), lastPos.getRow() + 1);
 			for (Resource r : p.getResourceList()){
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, r.toString() + " " + r.getValue());
@@ -1349,8 +1357,13 @@ public class CLIMain implements LimView, Runnable{
 		chose.start();
 	}
 
-	public void setActive (boolean active){
-		this.meActive = active;
+	public void setActivePlayer (Player active){
+		this.active = active;
+		if (active.getPlayerID() == player.getPlayerID()){
+			meActive = true;
+		} else {
+			meActive = false;
+		}
 	}
 	
 	public Integer getCardForDraft(List<Integer> list) throws IOException{
