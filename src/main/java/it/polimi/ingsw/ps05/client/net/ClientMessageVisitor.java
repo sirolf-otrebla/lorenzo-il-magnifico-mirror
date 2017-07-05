@@ -63,6 +63,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
 
     @Override
     public void visit(DraftMessage msg) {
+    	System.out.println("Draft message visitor");
         DraftVisitor visitor = new DraftVisitor();
         msg.acceptVisitor(visitor);
     }

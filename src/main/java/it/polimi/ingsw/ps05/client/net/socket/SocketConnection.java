@@ -33,15 +33,20 @@ public class SocketConnection implements Connection {
     public void listen() {
     		while (true){
     			try {
+    				System.out.println("ready to take in data");
 					message = stream.takeInData();
+					System.out.println("received something");
 					if (message != null){
 						synchronized (this) {
+							System.out.println("received not null");
 							ClientMessageVisitor messageTaker =
 									Client.getInstance().getMessageTaker();
 							messageTaker.setInputMessage(message);
 							messageTaker.getSem().release(1);
+							System.out.println("sem released");
 						}
 					}
+					System.out.println("after condition");
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();
 				}
@@ -53,6 +58,7 @@ public class SocketConnection implements Connection {
 		try {
 			System.out.println("sto per inviare sullo stream");
 			stream.sendData(mess);
+			System.out.println("Messaggio mandato");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

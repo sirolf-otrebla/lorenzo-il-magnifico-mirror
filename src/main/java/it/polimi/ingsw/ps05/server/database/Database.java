@@ -74,7 +74,7 @@ public class Database {
 		}
 	}
 	
-	private void deleteDatabase(){
+	public void deleteDatabase(){
 		try{
 			Statement stmt = c.createStatement();
 			String sql = "DELETE FROM 'data'";
