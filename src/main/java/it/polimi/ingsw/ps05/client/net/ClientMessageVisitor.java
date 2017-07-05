@@ -23,7 +23,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     @Override
     public void visit(GameUpdateMessage msg) {
         if (Client.getInstance().isInGame()){
-            //todo
+            ViewAdapter.getInstance().updateView(msg.getGameStatus());
         }else {
             ViewAdapter.getInstance().startGameView(msg.getGameStatus());
         }

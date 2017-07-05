@@ -19,6 +19,7 @@ public class ViewAdapter {
     public static final String GUI_TYPE = "gui";
     public static final String CLI_TYPE = "cli";
 
+    private Thread CliThread;
     private String viewType;
 
     private LimView view;
@@ -63,10 +64,21 @@ public class ViewAdapter {
             CLIMain cli = (CLIMain) this.view;
             cli.updateBoard(status.getGameBoard());
             cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
+            if(CliThread != null && CliThread.isDaemon()){
+
+            }
+            else {
+                CliThread = new Thread(cli);
+                CliThread.setDaemon(true);
+                CliThread.start();
+            }
         }
     }
 
-    private void updateView(){
+    public void updateView(GameStatus status){
+        CLIMain cli = (CLIMain) this.view;
+        cli.updateBoard(status.getGameBoard());
+        cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
 
 
     }
