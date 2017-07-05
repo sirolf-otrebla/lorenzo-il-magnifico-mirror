@@ -23,7 +23,7 @@ public class TileWithEffect extends TowerTileInterface {
 	 */
 	private static final long serialVersionUID = 675964833623423175L;
 
-	private Tile toBeDecorated; //?????
+	private Tile toBeDecorated;
 
 	private ArrayList<ActionResult> effectOnPositioning = new ArrayList<ActionResult>();
 	private Boolean hasMorePaymentOptions = false;
@@ -46,6 +46,11 @@ public class TileWithEffect extends TowerTileInterface {
     public void setDiceRequired(Integer diceRequired){
 
         this.toBeDecorated.setDiceRequired(diceRequired);
+    }
+    
+    @Override
+    public boolean isOccupied(){
+    	return super.isOccupied();
     }
     
     public void setTileEffect(ArrayList<ActionResult> effectOnPositioning){
@@ -98,6 +103,9 @@ public class TileWithEffect extends TowerTileInterface {
 
 	@Override
 	public void applyEffect(Familiar pl) {
+		for (ActionResult r : this.getEffectOnPositioning()){
+			r.applyResult(pl);
+		}
 		toBeDecorated.applyEffect(pl);
 	}
 
@@ -108,7 +116,7 @@ public class TileWithEffect extends TowerTileInterface {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-
+		//TODO
 	}
 	
 	@Override

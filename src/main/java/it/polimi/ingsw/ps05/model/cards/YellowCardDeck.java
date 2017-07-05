@@ -19,7 +19,11 @@ ArrayList<YellowCard> cardList;
 	ArrayList<YellowCard> secondEpochCard = new ArrayList<YellowCard>();
 	ArrayList<YellowCard> thirdEpochCard = new ArrayList<YellowCard>();
 	
-	
+	/**
+	 * The deck is a container of card, divided for color and epoch. Each deck contains the cards of the same
+	 * color.
+	 * @param cardList is the list of the card, not divided for epoch of the same color
+	 */
 	public YellowCardDeck(ArrayList<YellowCard> cardList){
 		this.cardList = cardList;
 		for (YellowCard o : this.cardList) {
@@ -33,7 +37,10 @@ ArrayList<YellowCard> cardList;
 		}
 	}
 
-
+	/**
+	 * @param epoch contains the epoch of the requested card.
+	 * @return a card of the selected epoch that will be displayed in the tower.
+	 */
 	@Override
 	public TowerCard getCard(Epoch epoch) {
 		if (epoch.getID().equals(EpochEnumeration.FIRST)){

@@ -11,6 +11,8 @@ import java.util.Observer;
  * Created by Alberto on 26/06/2017.
  */
 public class DiscardLeaderListener implements Observer{
+	
+	//TODO not used
     @Override
     public void update(Observable o, Object arg) {
         LeaderWidget leaderWidget = (LeaderWidget) arg;

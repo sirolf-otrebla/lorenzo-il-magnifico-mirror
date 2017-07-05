@@ -12,10 +12,10 @@ public abstract class SingleOccupantActionSpace extends ActionSpaceWithEffect {
 	 */
 	private static final long serialVersionUID = -6904353010062127223L;
 
+	@Override
     public Familiar getOccupant(){
         return super.getOccupant();
     }
-
 
     public void setOccupant(Familiar firstOccupant) {
     	super.setOccupied(firstOccupant);

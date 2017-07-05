@@ -51,6 +51,7 @@ public class GameSetup {
 				p.setFamiliars(familyList);
 			} catch (RepeatedAssignmentException e) {
 				//TODO
+				System.out.println("familiari già creati");
 			}
 		}
 	}

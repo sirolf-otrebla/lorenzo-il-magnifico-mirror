@@ -93,15 +93,15 @@ public class Client {
     }
 
     public void linkToObserver(HarvestSpaceViewObject observable){
-
+    	//TODO
     }
 
     public void linkToObserver(ProductionSpaceViewObject observable){
-
+    	//TODO
     }
 
     public void launchLoginForm(){
-        ;
+        //TODO
     }
 
     public ClientMessageVisitor getMessageTaker() {
