@@ -48,7 +48,8 @@ public class SocketConnection implements Connection {
 					}
 					System.out.println("after condition");
 				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
+					System.err.println("Connessione persa");
+					System.exit(-1);
 				}
     		}
     }
@@ -60,7 +61,8 @@ public class SocketConnection implements Connection {
 			stream.sendData(mess);
 			System.out.println("Messaggio mandato");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("Messaggio non mandato");
+			System.exit(-1);
 		}
 	}
 

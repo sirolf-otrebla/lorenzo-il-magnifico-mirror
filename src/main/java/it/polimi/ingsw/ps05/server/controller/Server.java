@@ -56,7 +56,6 @@ public class Server {
     public void registerGame(Game game){
         gameList.add(game);
         gamesNumber++;
-
     }
 
     public void putNewClient(PlayerClient client){

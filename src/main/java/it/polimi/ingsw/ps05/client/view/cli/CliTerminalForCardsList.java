@@ -128,7 +128,7 @@ public class CliTerminalForCardsList {
 						selectedCards.remove(cards.get(indiceCarta));
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
 					} else if (numMaxCardSelectable > selectedCards.size()){
-						selectedCards.add((TowerCard)cards.get(indiceCarta));
+						selectedCards.add((Card)cards.get(indiceCarta));
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
 					}
 				}

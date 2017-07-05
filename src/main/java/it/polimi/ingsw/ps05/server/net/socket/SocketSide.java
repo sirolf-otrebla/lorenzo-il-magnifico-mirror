@@ -14,6 +14,7 @@ public class SocketSide implements Runnable {
 	private ServerSocket server;
 	private int id= 0;
 	private ArrayList<PlayerClient> connected = new ArrayList<PlayerClient>();
+	Thread t;
 	
 	public SocketSide(int port) throws IOException{
 			server = new ServerSocket(port);
@@ -33,11 +34,11 @@ public class SocketSide implements Runnable {
 				PlayerClient p = new PlayerClient(c, id++);
 				connected.add(p);
 				/*Lobby.getInstance().addPlayerToLobby(p);*/
-				Thread t = new Thread(p);
+				t = new Thread(p);
 				t.start();
 			} catch (IOException e) {
-	// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Connessione in ingresso interrotta");
+				t.interrupt();
 			}
 		}
 	}

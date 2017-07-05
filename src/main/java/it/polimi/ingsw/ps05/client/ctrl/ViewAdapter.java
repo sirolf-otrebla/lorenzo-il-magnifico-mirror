@@ -125,10 +125,6 @@ public class ViewAdapter {
                 CliThread.setDaemon(true);
                 CliThread.start();
                 Integer cardChoosen = cliView.getCardForDraft(draftIDs);
-                for (int i = 0; i < draftIDs.size(); i++){
-                    if (discardedIds.get(i) == cardChoosen)
-                        discardedIds.remove(i);
-                }
                 LeaderDraftChoiceMessage responseMessage =
                         new LeaderDraftChoiceMessage(cardChoosen);
                 Client.getInstance().sendToServer(responseMessage);
