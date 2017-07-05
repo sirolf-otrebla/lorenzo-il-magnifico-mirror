@@ -45,7 +45,8 @@ public class ViewAdapter {
     }
     public static ViewAdapter createInstance(String type) throws IllegalAccessException{
         if (instance != null) throw new IllegalAccessException();
-        return  new ViewAdapter(type);
+        ViewAdapter.instance = new ViewAdapter(type);
+        return  instance;
     }
 
     private void setUpGui(GameStatus gameStatus){
@@ -120,6 +121,9 @@ public class ViewAdapter {
             t.setDaemon(true);
             t.start();
             try {
+                CliThread = new Thread(cliView);
+                CliThread.setDaemon(true);
+                CliThread.start();
                 Integer cardChoosen = cliView.getCardForDraft(draftIDs);
                 for (int i = 0; i < draftIDs.size(); i++){
                     if (discardedIds.get(i) == cardChoosen)

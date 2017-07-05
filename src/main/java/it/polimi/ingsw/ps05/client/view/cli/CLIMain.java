@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -53,6 +54,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 public class CLIMain implements LimView, Runnable{
 
 
+	private Semaphore internalSemaphore;
 	/* view objects */
 
 	int currentRowBoard = 0;
@@ -87,7 +89,7 @@ public class CLIMain implements LimView, Runnable{
 	int selectedFam = 0;
 	int selectedOpt = 0;
 	Player active = null;
-	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
+		private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
 
 		private static final long serialVersionUID = 1L;
 
@@ -125,6 +127,7 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println(screenSize.getWidth());
 		System.out.println(screenSize.getHeight());
 		System.out.println(width + ": " + height);
+		internalSemaphore = new Semaphore(0);
 
 
 		//trySys();
@@ -175,6 +178,7 @@ public class CLIMain implements LimView, Runnable{
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
 			terminal.flush();
 
+			internalSemaphore.release();
 			terminal.addResizeListener(new TerminalResizeListener() {
 				@Override
 				public void onResized(Terminal terminal, TerminalSize newSize) {
@@ -1367,6 +1371,11 @@ public class CLIMain implements LimView, Runnable{
 	}
 	
 	public Integer getCardForDraft(List<Integer> list) throws IOException{
+		try {
+			internalSemaphore.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
 		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
 		for (Integer i : list){
@@ -1374,7 +1383,7 @@ public class CLIMain implements LimView, Runnable{
 		}
 		
 		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
-		
+		internalSemaphore.release();
 		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
 	}
 	
