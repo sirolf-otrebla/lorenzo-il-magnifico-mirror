@@ -21,7 +21,7 @@ public class Tile extends TowerTileInterface {
 	 * 
 	 */
 	private static final long serialVersionUID = 1979532547287923081L;
-	private transient Tower parentTower;
+	private Tower parentTower;
     private TowerCard card;
 
     private Boolean hasMorePaymentOptions = false;

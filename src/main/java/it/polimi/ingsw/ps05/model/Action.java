@@ -8,6 +8,9 @@ import it.polimi.ingsw.ps05.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/** This class represent an Action during a game round. It is executed on server and modify the game state
+ *
+ */
 public class Action implements Period {
 
 	/**
