@@ -15,9 +15,9 @@ public class AuthResponseVisitor  {
 
     public void visit(LoggedMessage msg){
         LoginController loginController = Client.getInstance().getLoginController();
-        if(loginController.getStatus() == LoginController.STATUS_WAIT_LOGIN)
+        if(loginController.getStatus() == LoginController.STATUS_WAIT_LOGIN) {
             Client.getInstance().getLoginController().getSemaphore().release();
-
+        }
     }
 
     public void visit(RegisteredMessage msg){

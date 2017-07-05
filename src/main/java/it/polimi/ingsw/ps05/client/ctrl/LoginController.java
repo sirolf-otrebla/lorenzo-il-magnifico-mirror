@@ -140,6 +140,7 @@ public class LoginController {
 			semaphore.acquire();
 			l.setRegistered();
 			l.setLobbyVisble();
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

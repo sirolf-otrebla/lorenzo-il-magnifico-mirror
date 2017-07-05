@@ -43,7 +43,7 @@ public class DraftController implements Runnable{
             leaderCardHashMap.put(leader.getReferenceID(), leader);
         }
         clientArrayList = draftClientArrayList;
-        this.sem = new Semaphore(draftClientArrayList.size());
+        this.sem = new Semaphore(1);
         for (PlayerClient client: draftClientArrayList) {
             choosenCardsMap.put(client.getPlayer().getColor(), new ArrayList<>());
         }
@@ -65,7 +65,7 @@ public class DraftController implements Runnable{
     private synchronized void sendInitialDraftMessage(){
         System.out.println("sending initial draft");
         try {
-            sem.acquire(clientArrayList.size());
+            sem.acquire();
             for (int i = 0; i < this.clientArrayList.size(); i++){
                 this.clientArrayList.get(i).sendMessage(
                         new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
