@@ -103,7 +103,16 @@ public class ViewAdapter {
             // TODO
 
         } else {
-            startDraft(draftIDs);
+            CLIMain cliView = (CLIMain) this.view;
+            Integer cardChoosen = null;
+            try {
+                cardChoosen = cliView.getCardForDraft(draftIDs);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            LeaderDraftChoiceMessage responseMessage =
+                    new LeaderDraftChoiceMessage(cardChoosen);
+            Client.getInstance().sendToServer(responseMessage);
         }
     }
 
@@ -113,13 +122,7 @@ public class ViewAdapter {
 
         } else {
         	System.out.println("AAAAAAA");
-            ArrayList<Integer> discardedIds = new ArrayList<>();
-            for(Integer id: draftIDs)
-                discardedIds.add(id);
             CLIMain cliView = (CLIMain) this.view;
-            Thread t = new Thread(cliView);
-            t.setDaemon(true);
-            t.start();
             try {
                 CliThread = new Thread(cliView);
                 CliThread.setDaemon(true);

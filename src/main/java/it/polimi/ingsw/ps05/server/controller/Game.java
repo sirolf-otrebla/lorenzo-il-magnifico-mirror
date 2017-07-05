@@ -82,6 +82,7 @@ public class Game implements Observer {
             this.draftControllerThread.start();
             draftControllerThread.join();
         }
+        System.out.println("Starting game flow");
         this.flowCrlThread.start();
     }
 

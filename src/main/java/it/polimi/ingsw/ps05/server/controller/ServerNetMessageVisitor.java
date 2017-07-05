@@ -66,8 +66,10 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
 
     @Override
     public void visit(DraftResponseNetMessage msg) {
+        System.out.println("(DraftResponseNetMessage primo visitor");
         DraftResponseMessageVisitor visitor =
                 new DraftResponseMessageVisitor(this.client);
+        msg.acceptVIsitor(visitor);
     }
 
 

@@ -27,6 +27,7 @@ public class RoundController {
         for (int i = 0; i < Game.FAM_DIM ; i++){
             Round round = new Round(playerOrder, game);
             round.executeRound();
+            roundList.add(round);
         }
     }
 
