@@ -12,17 +12,9 @@ import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 
-/* See UML for description
- * 
- * 
- */
 
 public class Board implements Serializable, VisitableFromView {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3802284891664073914L;
 
 	public final static int MAX_PLAYERS = 4;
