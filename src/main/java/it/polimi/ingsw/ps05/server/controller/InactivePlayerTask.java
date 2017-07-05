@@ -8,18 +8,20 @@ import java.util.TimerTask;
  * Created by Alberto on 29/06/2017.
  */
 public class InactivePlayerTask extends TimerTask {
+	
+	private Game game;
+	private PlayerClient player;
 
-    private Game game;
-    private PlayerClient player;
     public InactivePlayerTask(Game game, PlayerClient player){
-       this.game = game;
-       this.player = player;
+    	this.game = game;
+        this.player = player;
     }
+    
+    
 
     @Override
     public void run() {
-        game.getState().nextState();
+    	game.getState().nextState();
         player.setInactive();
-
     }
 }

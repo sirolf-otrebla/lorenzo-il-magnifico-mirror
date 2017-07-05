@@ -21,6 +21,7 @@ public class RoundController {
         this.turn = turn;
         this.playerOrder = turn.getPlayerOrder();
         this.roundList = new  ArrayList<Round>();
+        this.game = game;
     }
 
     public void executeTurn() throws InterruptedException{

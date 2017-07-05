@@ -17,7 +17,7 @@ public class Game implements Observer {
     private int id;
     private GameSetup setup;
     private  GameFlowController flowCtrl;
-    public boolean end;
+    public boolean end = false;
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
@@ -81,6 +81,7 @@ public class Game implements Observer {
             this.draftControllerThread = new Thread(draftController);
             this.draftControllerThread.start();
             draftControllerThread.join();
+            System.out.println("post draft");
         }
         System.out.println("Starting game flow");
         this.flowCrlThread.start();
@@ -134,10 +135,11 @@ public class Game implements Observer {
     }
 
     public void setActivePlayer(Player nextPlayer) {
-        if( activePlayer != null)
-            this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
-        this.activePlayer = nextPlayer;
-        this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
+    	if (activePlayer != null)
+    		this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
+            this.activePlayer = nextPlayer;
+            this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
+        
     }
 
     public Board getBoard() {

@@ -26,11 +26,13 @@ public class GameFlowController implements Runnable {
 
 
 	public GameFlowController(Game game){
+		System.out.println("GFLWCTRL start");
         this.game = game;
         this.exTrigger = new ExcommunicationTriggerListener(this);
 		this.endActionListener = new EndActionListener(this);
 		this.bonusActListener = new BonusActionListener(this);
 		this.limitedBonusActListener = new LimitedBonusActListener(this);
+		System.out.println("GFLWCTRL cons end");
 	}
 
 	public synchronized void setGameInput(NetMessage gameInput) {
@@ -54,21 +56,24 @@ public class GameFlowController implements Runnable {
 
 	@Override
 	public void run()  {
+		System.out.println("RUN START");
+		System.out.println("Game end: " + game.end);
 		while(!game.end){
 			try {
-
+				System.out.println("game flow ctrl pre turn  ");
 				Turn thisTurn = this.game.gettManager().getTurn();
 				PlayerClient plClient =
                         game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0).getPlayerID());
+				System.out.println("PlClient : " + plClient);
 				plClient.setActive();
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
 				this.game.gettManager().loadNextTurn();
 
 			} catch (InterruptedException e ){
-
+				e.printStackTrace();
 			} catch (Exception f){
-
+				f.printStackTrace();
 			}
 		}
 		if (game.end){
