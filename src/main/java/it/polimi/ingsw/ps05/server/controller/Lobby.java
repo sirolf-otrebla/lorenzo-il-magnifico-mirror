@@ -77,6 +77,7 @@ public class Lobby implements Runnable {
 			}
 			System.out.println("Starting game!!!");
 		}
+		timer.cancel();
 		startGame();
 
 	}

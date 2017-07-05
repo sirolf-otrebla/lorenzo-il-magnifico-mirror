@@ -83,6 +83,7 @@ public class DraftController implements Runnable{
         assignRandomCards();
         sendInitialDraftMessage();
         for (int index = MAX_LEADER_CARDS-1; index > 0; index--) {
+        	System.out.println("ciclo delle carte leader. manca : " + index);
             try {
                 sem.acquire(this.clientArrayList.size());
                 ColorEnumeration thisPlayerColor = this.clientArrayList.get(0).getPlayer().getColor();
@@ -111,6 +112,8 @@ public class DraftController implements Runnable{
                 e.printStackTrace();
             }
         }
+        System.out.println("fuori da ciclo carte leader");
+        System.out.println("Sto per comunicare le carte scelte a tutti");
         for (PlayerClient client : this.clientArrayList){
             Player player = client.getPlayer();
             ArrayList<Integer> playerCardIds = this.choosenCardsMap.get(player.getColor());
@@ -122,6 +125,7 @@ public class DraftController implements Runnable{
             }
             client.sendMessage(message);
         }
+        System.out.println("post comunicato carte");
 
     }
 

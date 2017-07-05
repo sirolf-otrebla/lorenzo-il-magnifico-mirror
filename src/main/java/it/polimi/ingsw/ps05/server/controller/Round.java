@@ -42,6 +42,7 @@ public class Round {
     }
     private synchronized void waitCommand() throws InterruptedException {
         // send message
+    	System.out.println("WAIT COMMAND");
         game.getGameFlowctrl().sendUpdateMsg();
         this.waitingMessageSemaphore.acquire();
     }

@@ -126,6 +126,7 @@ public class TurnSetupManager extends Observable{
 		for( Player pl : playersConnected){
 			plList.add(pl);
 		}
+		System.out.println("player order size in turn setup manager: " + plList.size());
 		Collections.shuffle(plList);
 		return plList;
 	}
