@@ -634,20 +634,25 @@ public class CLIMain implements LimView, Runnable{
 		while(iterator.hasNext()){
 			ActionSpace actionSpace = iterator.next();
 			if (actionSpace instanceof MarketSpace){
-				ArrayList<TerminalPosition> list = mapBoard.get(marketList.size());
-				list.add(new TerminalPosition((marketList.size()+1)*width/16 - width/32,
-						6*height/16 - height/32));
-				if (actionSpace.isOccupied()){
-					textGraphics.putString((marketList.size()+1)*width/16 - width/32,
-							6*height/16 - height/32, "X", SGR.BOLD);
+				try {
+					ArrayList<TerminalPosition> list = mapBoard.get(marketList.size());
+					list.add(new TerminalPosition((marketList.size()+1)*width/16 - width/32,
+							6*height/16 - height/32));
+					if (actionSpace.isOccupied()){
+						textGraphics.putString((marketList.size()+1)*width/16 - width/32,
+								6*height/16 - height/32, "X", SGR.BOLD);
+					}
+					drawSquare(
+							marketList.size()*width/16,
+							5*height/16,
+							(marketList.size()+1)*width/16,
+							6*height/16,textGraphics
+					);
+					marketList.add((MarketSpace) actionSpace);
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("il market è andato out of bound");
 				}
-				drawSquare(
-						marketList.size()*width/16,
-						5*height/16,
-						(marketList.size()+1)*width/16,
-						6*height/16,textGraphics
-						);
-				marketList.add((MarketSpace) actionSpace);
+
 			} else if (actionSpace instanceof ProductionSpace){
 				ArrayList<TerminalPosition> list = mapBoard.get(productionList.size());
 				list.add(new TerminalPosition((productionList.size()+1)*width/16 - width/32,
@@ -1379,11 +1384,13 @@ public class CLIMain implements LimView, Runnable{
 		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
 		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
 		for (Integer i : list){
+			System.out.println("Player.id " + player.getPlayerID() + " Leader.id " + i);
 			cardsToCheck.add(getLeaderWithID(i, allCards));
 		}
 		
 		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
 		internalSemaphore.release();
+		player.putLeaderCard((LeaderCard)chosenCard.get(0));
 		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
 	}
 	

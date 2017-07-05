@@ -82,12 +82,12 @@ public class DraftController implements Runnable{
     public void run() {
         assignRandomCards();
         sendInitialDraftMessage();
-        for (int index = MAX_LEADER_CARDS; index > 0; index--) {
+        for (int index = MAX_LEADER_CARDS-1; index > 0; index--) {
             try {
                 sem.acquire(this.clientArrayList.size());
+                ColorEnumeration thisPlayerColor = this.clientArrayList.get(0).getPlayer().getColor();
+                ArrayList<Integer> thisPlayerList = this.leaderCardReferenceIdMatrix.get(thisPlayerColor);
                 for (int j = 0; j < this.clientArrayList.size(); j++){
-
-                    ColorEnumeration thisPlayerColor = this.clientArrayList.get(j).getPlayer().getColor();
                     ArrayList<Integer> tempArrayList = new ArrayList<>();
                     ColorEnumeration nextPlayerColor;
                     if (j == this.clientArrayList.size() -1)
@@ -96,8 +96,11 @@ public class DraftController implements Runnable{
                        nextPlayerColor = this.clientArrayList.get(j+1).getPlayer().getColor();
                     for (Integer i: this.leaderCardReferenceIdMatrix.get(nextPlayerColor))
                         tempArrayList.add(i);
+
                     this.leaderCardReferenceIdMatrix.remove(nextPlayerColor);
-                    this.leaderCardReferenceIdMatrix.put(nextPlayerColor, tempArrayList);
+                    this.leaderCardReferenceIdMatrix.put(nextPlayerColor,
+                            thisPlayerList);
+                    thisPlayerList = tempArrayList;
                 }
                 for (PlayerClient client : this.clientArrayList){
                     LeaderDraftUpdateNetMessage message = new LeaderDraftUpdateNetMessage(this.leaderCardReferenceIdMatrix.get(
@@ -126,5 +129,7 @@ public class DraftController implements Runnable{
         this.choosenCardsMap.get(playerColor).add(leaderCardReferenceID);
         this.leaderCardReferenceIdMatrix.get(playerColor).remove(leaderCardReferenceID);
         sem.release();
+        System.out.println("(DraftController) semaforo rilasciato: numero permessi: \t" +
+                 + sem.availablePermits());
     }
 }

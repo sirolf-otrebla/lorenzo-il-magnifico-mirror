@@ -39,6 +39,7 @@ public class GameFlowController implements Runnable {
 	}
 
 	public void sendUpdateMsg(){
+		System.out.println("Sending Update Msg");
 		Board board = this.game.getBoard();
 		Integer activePlayerId = this.game.getActivePlayer().getPlayerID();
 		ArrayList<Player> playerStatusList = new ArrayList<Player>();
@@ -60,7 +61,6 @@ public class GameFlowController implements Runnable {
 				PlayerClient plClient =
                         game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0));
 				plClient.setActive();
-				Player c= thisTurn.getPlayerOrder().get(0);
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
 				this.game.gettManager().loadNextTurn();

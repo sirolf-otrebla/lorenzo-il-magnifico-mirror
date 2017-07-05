@@ -42,14 +42,7 @@ public class Round {
     }
     private synchronized void waitCommand() throws InterruptedException {
         // send message
-        ArrayList<Player> players = playerOrder;
-        for (Player pl: players) {
-            GameStatus status = new GameStatus(players, this.game.getBoard(),
-                    pl, this.game.getActivePlayer().getPlayerID());
-            GameUpdateMessage gameUpdateMessage = new GameUpdateMessage(status);
-            PlayerClient client = this.game.getPlayerClient(pl.getPlayerID());
-            client.sendMessage(gameUpdateMessage);
-        }
+        game.getGameFlowctrl().sendUpdateMsg();
         this.waitingMessageSemaphore.acquire();
     }
 

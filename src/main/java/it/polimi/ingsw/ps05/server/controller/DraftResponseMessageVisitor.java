@@ -13,7 +13,10 @@ public class DraftResponseMessageVisitor {
     public DraftResponseMessageVisitor(PlayerClient client){
         this.client = client;
     }
+
+
     public void visit(LeaderDraftChoiceMessage msg) {
+        System.out.println("(LeaderDraftChoiceMessage) secondo visitor");
         this.client.getGame().getDraftController().DoChoice(
                 client.getPlayer().getColor(), msg.getChoice());
     }
