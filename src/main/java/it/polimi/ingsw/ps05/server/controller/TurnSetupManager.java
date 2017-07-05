@@ -128,6 +128,12 @@ public class TurnSetupManager extends Observable{
 		}
 		System.out.println("player order size in turn setup manager: " + plList.size());
 		Collections.shuffle(plList);
+		for (int i = 0; i < plList.size(); i++){
+			plList.get(i).addResource(new GoldResource(goldAmountStart + i));
+			plList.get(i).addResource(new ServantResource(servantsAmountStart));
+			plList.get(i).addResource(new WoodResource(woodAmountStart));
+			plList.get(i).addResource(new StoneResource(stoneAmountStart));
+		}
 		return plList;
 	}
 	

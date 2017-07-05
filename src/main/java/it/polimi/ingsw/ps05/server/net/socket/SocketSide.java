@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
-
-import it.polimi.ingsw.ps05.server.net.Lobby;
-
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 public class SocketSide implements Runnable {
@@ -33,7 +30,6 @@ public class SocketSide implements Runnable {
 				System.out.println("Nuova connessione");
 				PlayerClient p = new PlayerClient(c, id++);
 				connected.add(p);
-				/*Lobby.getInstance().addPlayerToLobby(p);*/
 				t = new Thread(p);
 				t.start();
 			} catch (IOException e) {
