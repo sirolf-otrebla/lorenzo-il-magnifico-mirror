@@ -12,11 +12,11 @@ import java.util.ArrayList;
 /**
  * Created by Alberto on 12/06/2017.
  */
-public class UpdateMessage implements GameMessage{
+public class GameUpdateMessage implements GameMessage{
 
     private GameStatus gameStatus;
 
-    public UpdateMessage(GameStatus gameStatus){
+    public GameUpdateMessage(GameStatus gameStatus){
         this.gameStatus = gameStatus;
     }
     @Override
@@ -27,5 +27,9 @@ public class UpdateMessage implements GameMessage{
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
 
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 }

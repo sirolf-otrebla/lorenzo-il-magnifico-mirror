@@ -355,8 +355,9 @@ public class GUIMain extends Application {
 		stage.sizeToScene();
 		stage.show();
 
-		//startBonusTileDraft();
-		//startLeaderDraft(leaderIdArray);
+		startBonusTileDraft();
+		//Integer[] e = {1,2,3,4};
+		//startLeaderDraft(e);
 
 	}
 

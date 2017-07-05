@@ -4,9 +4,7 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.net.GameStatus;
-import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -158,5 +156,9 @@ public class Game implements Observer {
 
     public Semaphore getSemStart() {
         return semStart;
+    }
+
+    public DraftController getDraftController() {
+        return draftController;
     }
 }

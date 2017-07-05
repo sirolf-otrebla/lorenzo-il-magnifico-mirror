@@ -4,7 +4,6 @@ package it.polimi.ingsw.ps05.server.net;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
@@ -12,8 +11,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.InactivePlayerTask;
-import it.polimi.ingsw.ps05.server.controller.MessageObserver;
-import it.polimi.ingsw.ps05.server.controller.Server;
+import it.polimi.ingsw.ps05.server.controller.ServerNetMessageVisitor;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
 	private int id;
@@ -35,7 +33,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	public PlayerClient(LimConnection netHandler, int id){
 	    this.connection = netHandler;
 	    this.id = id;
-	    this.messageObserver = MessageObserver.getInstance();
+	    this.messageObserver = ServerNetMessageVisitor.getInstance();
 	    addObserver(messageObserver);
 		this.timer = new Timer();
 		netHandler.addObserver(this);

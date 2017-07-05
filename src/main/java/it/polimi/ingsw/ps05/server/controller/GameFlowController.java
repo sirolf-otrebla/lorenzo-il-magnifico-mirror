@@ -46,7 +46,7 @@ public class GameFlowController implements Runnable {
 			playerStatusList.add(p.getPlayer());
 		for (PlayerClient p : this.game.getPlayerInGame().values()){
 			GameStatus status = new GameStatus(playerStatusList, board, p.getPlayer(), activePlayerId);
-			UpdateMessage updateMessage = new UpdateMessage(status);
+			GameUpdateMessage gameUpdateMessage = new GameUpdateMessage(status);
 		}
 
 	}

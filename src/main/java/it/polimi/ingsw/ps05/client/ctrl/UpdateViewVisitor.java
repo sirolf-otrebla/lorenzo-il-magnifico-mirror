@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
+import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import javafx.util.Pair;
@@ -113,8 +115,42 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
 
     @Override
     public void visit(Player player){
+        if (player.getColor() == this.guiMain.getPlayer().getPlayerColor()){
+
+        }
+        else {
+            for (OpponentWidget widget
+                : this.guiMain.getOpponentsArray()) {
+                if(widget.getOpponentColor().equals(player.getColor())){
+                    // widget.setOpponentMarkers();
+                    widget.getResourceWidget().setGoldValue(
+                            player.getResource(GoldResource.id).getValue());
+                    widget.getResourceWidget().setServantValue(
+                            player.getResource(ServantResource.id).getValue());
+                    widget.getResourceWidget().setStoneValue(
+                            player.getResource(StoneResource.id).getValue());
+                    widget.getResourceWidget().setWoodValue(
+                            player.getResource(WoodResource.id).getValue());
+
+                    Resource[] points = new Resource[3];
+                    points[0] = player.getResource(VictoryResource.ID);
+                    points[1] = player.getResource(MilitaryResource.id);
+                    points[2] = player.getResource(FaithResource.ID);
+
+                    HashMap<String, MarkerWidget> markerWidgetHashMap = new HashMap<>();
+                    for (MarkerWidget markerWidget:
+                            widget.getOpponentMarkers()) {
+                        markerWidgetHashMap.put(markerWidget.getID(), markerWidget);
+                    }
+
+                    for (Resource r: points)
+                        markerWidgetHashMap.get(r.getID()).setIntPoints(r.getValue());
 
 
+
+                }
+            }
+        }
     }
 
     @Override

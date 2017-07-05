@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps05.client.net;
 
-import it.polimi.ingsw.ps05.client.ctrl.AuthResponseVisitor;
-import it.polimi.ingsw.ps05.client.ctrl.Client;
-import it.polimi.ingsw.ps05.client.ctrl.LobbyMessageVisitor;
+import it.polimi.ingsw.ps05.client.ctrl.*;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
@@ -13,16 +11,27 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by Alberto on 03/07/2017.
  */
-public class ClientMessageTaker implements Runnable, NetMessageVisitor {
+public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     private NetMessage inputMessage;
     private Semaphore sem;
 
-    public ClientMessageTaker(){
+    public ClientMessageVisitor(){
         sem = new Semaphore(0);
 
     }
+
+    @Override
+    public void visit(GameUpdateMessage msg) {
+        if (Client.getInstance().isInGame()){
+            //todo
+        }else {
+            ViewAdapter.getInstance().startGameView(msg.getGameStatus());
+        }
+    }
+
     @Override
     public void visit(GameMessage msg) {
+        //todo errore
 
     }
 
@@ -35,10 +44,6 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
 
     }
 
-    @Override
-    public void visit(LeaderDraftMessage msg) {
-
-    }
 
     @Override
     public void visit(AuthMessage msg) {
@@ -54,6 +59,17 @@ public class ClientMessageTaker implements Runnable, NetMessageVisitor {
     @Override
     public void visit(LobbyResponseMessage msg) {
         // no
+    }
+
+    @Override
+    public void visit(DraftMessage msg) {
+        DraftVisitor visitor = new DraftVisitor();
+        msg.acceptVisitor(visitor);
+    }
+
+    @Override
+    public void visit(DraftResponseNetMessage msg) {
+            // no
     }
 
 

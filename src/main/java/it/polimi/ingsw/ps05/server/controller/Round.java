@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.GameMessage;
-import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.net.message.GameUpdateMessage;
+import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by Alberto on 19/06/2017.
@@ -15,6 +18,7 @@ public class Round {
     private Game game;
     private GameMessage inputMessage;
     private GameCommandsVisitor visitor;
+    private Semaphore waitingMessageSemaphore;
 
     /* result listeners */
     private Iterator<Player> plOrdIt;
@@ -22,6 +26,7 @@ public class Round {
     public Round(ArrayList<Player> playerOrder, Game game){
         this.game = game;
         this.playerOrder = playerOrder;
+        waitingMessageSemaphore = new Semaphore(0);
     }
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
@@ -36,7 +41,16 @@ public class Round {
 
     }
     private synchronized void waitCommand() throws InterruptedException {
-        while (this.inputMessage==null) wait();
+        // send message
+        ArrayList<Player> players = playerOrder;
+        for (Player pl: players) {
+            GameStatus status = new GameStatus(players, this.game.getBoard(),
+                    pl, this.game.getActivePlayer().getPlayerID());
+            GameUpdateMessage gameUpdateMessage = new GameUpdateMessage(status);
+            PlayerClient client = this.game.getPlayerClient(pl.getPlayerID());
+            client.sendMessage(gameUpdateMessage);
+        }
+        this.waitingMessageSemaphore.acquire();
     }
 
     private void executeCommand(){
@@ -65,5 +79,6 @@ public class Round {
 
     public void setInputMessage(GameMessage inputMessage) {
         this.inputMessage = inputMessage;
+        waitingMessageSemaphore.release();
     }
 }

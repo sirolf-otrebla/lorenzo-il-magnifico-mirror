@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps05.server.controller;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
-import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
+import it.polimi.ingsw.ps05.net.message.LeaderDraftUpdateNetMessage;
 import it.polimi.ingsw.ps05.net.message.EndDraftMessage;
-import it.polimi.ingsw.ps05.net.message.StartDraftMessage;
+import it.polimi.ingsw.ps05.net.message.StartLeaderDraftMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 
@@ -26,11 +26,11 @@ public class DraftController implements Runnable{
     private HashMap<ColorEnumeration, ArrayList<Integer>> leaderCardReferenceIdMatrix;
     private ArrayList<LeaderCard> leaderCardArrayList;
     private ArrayList<PlayerClient> clientArrayList;
-    private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap;
-    private HashMap<Integer, LeaderCard> leaderCardHashMap;
+    private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap =  new HashMap<>();
+    private HashMap<Integer, LeaderCard> leaderCardHashMap = new HashMap<>();
 
     public DraftController(ArrayList<PlayerClient> clients, Game game){
-        parser = new CommonJsonParser(clients.size(), game);
+        this.leaderCardArrayList = game.getBoard().getLeaderCardsList();
         ArrayList<PlayerClient> draftClientArrayList = new ArrayList<>();
         for (PlayerClient client : clients) draftClientArrayList.add(client);
         leaderCardReferenceIdMatrix = new HashMap<>();
@@ -63,10 +63,11 @@ public class DraftController implements Runnable{
     }
 
     private synchronized void sendInitialDraftMessage(){
+        System.out.println("sending initial draft");
         try {
             sem.acquire(clientArrayList.size());
             for (int i = 0; i < this.clientArrayList.size(); i++){
-                new StartDraftMessage(leaderCardReferenceIdMatrix.get(
+                new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
                         this.clientArrayList.get(i).getPlayer().getColor()));
             }
         } catch (InterruptedException e) {
@@ -89,13 +90,13 @@ public class DraftController implements Runnable{
                         nextPlayerColor = this.clientArrayList.get(0).getPlayer().getColor();
                     else
                        nextPlayerColor = this.clientArrayList.get(j+1).getPlayer().getColor();
-
-                    Collections.copy(tempArrayList, this.leaderCardReferenceIdMatrix.get(nextPlayerColor));
+                    for (Integer i: this.leaderCardReferenceIdMatrix.get(nextPlayerColor))
+                        tempArrayList.add(i);
                     this.leaderCardReferenceIdMatrix.remove(nextPlayerColor);
                     this.leaderCardReferenceIdMatrix.put(nextPlayerColor, tempArrayList);
                 }
                 for (PlayerClient client : this.clientArrayList){
-                    DraftResponseMessage message = new DraftResponseMessage(this.leaderCardReferenceIdMatrix.get(
+                    LeaderDraftUpdateNetMessage message = new LeaderDraftUpdateNetMessage(this.leaderCardReferenceIdMatrix.get(
                             client.getPlayer().getColor()));
                     client.sendMessage(message);
                 }
