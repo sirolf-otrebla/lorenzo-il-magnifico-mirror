@@ -80,4 +80,9 @@ public class WoodResourceCostBonus implements Resource, ActionResult {
 		return "Costo legno";
 	}
 
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
 }

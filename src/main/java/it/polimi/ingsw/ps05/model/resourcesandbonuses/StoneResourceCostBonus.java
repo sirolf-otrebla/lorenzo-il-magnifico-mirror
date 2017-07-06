@@ -79,4 +79,9 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 		return "Costo pietra";
 	}
 
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
 }

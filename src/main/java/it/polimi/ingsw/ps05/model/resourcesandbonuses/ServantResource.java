@@ -86,4 +86,9 @@ public class ServantResource implements Resource, ActionResult {
 	public String toString(){
 		return "Servitori";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 }

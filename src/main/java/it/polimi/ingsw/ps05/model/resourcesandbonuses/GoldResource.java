@@ -86,4 +86,9 @@ public class GoldResource implements Resource, ActionResult {
 	public String toString(){
 		return "Oro";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 }

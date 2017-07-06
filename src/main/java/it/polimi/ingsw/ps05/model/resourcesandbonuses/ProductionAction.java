@@ -79,7 +79,6 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -95,5 +94,11 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	@Override
 	public String toString(){
 		return "Azione produzione";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
+
 	}
 }

@@ -87,4 +87,9 @@ public class MilitaryResource implements Resource, ActionResult {
 		return "Punti militare";
 	}
 
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
 }

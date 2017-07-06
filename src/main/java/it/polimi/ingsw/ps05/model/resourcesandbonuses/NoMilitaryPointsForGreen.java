@@ -45,6 +45,11 @@ public class NoMilitaryPointsForGreen extends PermanentBonus {
 	}
 
 	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
+	@Override
 	public void resetResult(PlayerRelated playerR) {
 		game.getBoard().setMilitaryPath(path);
 		

@@ -167,4 +167,8 @@ public class Game implements Observer {
     public DraftController getDraftController() {
         return draftController;
     }
+
+    public void setgBoard(Board gBoard) {
+        this.gBoard = gBoard;
+    }
 }

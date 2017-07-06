@@ -14,6 +14,9 @@ public class GreenBonus extends PermanentBonus{
 	private static final long serialVersionUID = -1598014701385821881L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	transient private  Game game;
+	private boolean hasListeners = false;
+
+
 
 	public GreenBonus(Integer value){
 		this.value = value;
@@ -46,16 +49,15 @@ public class GreenBonus extends PermanentBonus{
 				}
 			}
 		}
-		setChanged();
-		notify();
-
+		if(hasListeners) {
+			setChanged();
+			notify();
+		}
 	}
 
 	@Override
 	public void setGame(Game game) {
-		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
+		this.game = game;}
 
 	@Override
 	public Game getGame() {
@@ -66,6 +68,13 @@ public class GreenBonus extends PermanentBonus{
 	@Override
 	public String toString(){
 		return "Bonus verde";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
+		hasListeners = true;
+
 	}
 
 	@Override

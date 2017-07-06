@@ -124,4 +124,8 @@ public class Client {
     public void setInGame(boolean inGame) {
         this.inGame = inGame;
     }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
 }

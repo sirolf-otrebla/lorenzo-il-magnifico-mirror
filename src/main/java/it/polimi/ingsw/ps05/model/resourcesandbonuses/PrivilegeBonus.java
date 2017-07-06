@@ -71,6 +71,11 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	public String toString(){
 		return "Privilegio";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 }
 
 
