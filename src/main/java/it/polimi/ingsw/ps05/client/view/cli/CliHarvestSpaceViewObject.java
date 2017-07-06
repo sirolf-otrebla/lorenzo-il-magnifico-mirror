@@ -39,4 +39,10 @@ public class CliHarvestSpaceViewObject extends HarvestSpaceViewObject {
     public Integer getId() {
         return this.space.getId();
     }
+
+    @Override
+    public void notifyToActionHandler() {
+        setChanged();
+        notifyObservers(this);
+    }
 }

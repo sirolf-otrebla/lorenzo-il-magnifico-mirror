@@ -40,4 +40,10 @@ public class CliTileVIewObject extends TowerTileViewObject {
         return tile.getId();
     }
 
+    @Override
+    public void notifyToActionHandler() {
+        setChanged();
+        notifyObservers(this);
+    }
+
 }

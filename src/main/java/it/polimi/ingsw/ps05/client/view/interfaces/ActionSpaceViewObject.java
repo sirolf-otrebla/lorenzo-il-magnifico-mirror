@@ -10,6 +10,7 @@ import java.util.Observable;
 public abstract class ActionSpaceViewObject extends Observable{
     public abstract ColorEnumeration getFamilyMemberID();
     public abstract Integer getId();
+    public abstract void notifyToActionHandler();
 
 
 }

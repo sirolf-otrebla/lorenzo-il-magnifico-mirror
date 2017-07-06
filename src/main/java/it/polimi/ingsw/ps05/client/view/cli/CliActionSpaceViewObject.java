@@ -34,4 +34,10 @@ public class CliActionSpaceViewObject extends ActionSpaceViewObject {
     public void notifyObservers(){
         super.notifyObservers(this);
     }
+
+    @Override
+    public void notifyToActionHandler() {
+        setChanged();
+        notifyObservers(this);
+    }
 }
