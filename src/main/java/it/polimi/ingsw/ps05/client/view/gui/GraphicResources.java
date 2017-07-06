@@ -29,6 +29,8 @@ public final class GraphicResources {
 
     private static HashMap<Integer, String> developmentCardPathMap = new HashMap<>();
 
+    private static HashMap<ColorEnumeration, Integer[]> TowerCardArrayHashMap = new HashMap<>();
+
 
 
     GraphicResources() {
@@ -48,18 +50,18 @@ public final class GraphicResources {
     }
 
     private static void buildBonusTilePathMap() {
-        bonusTilePathMap.put(0, "./src/main/res/img/bonusTiles/bonustile_STANDARD");
+        bonusTilePathMap.put(4, "./src/main/res/img/bonusTiles/bonustile_STANDARD");
         for(int i = 0; i < 4; i++) {
-            bonusTilePathMap.put(i, "./src/main/res/img/bonusTiles/bonustile_" + (i + 1));
+            bonusTilePathMap.put(i, "./src/main/res/img/bonusTiles/bonustile_" + (i + 1) + ".png");
         }
     }
 
     private static void buildLeaderPathMap() {
         for(int i = 1; i <= 20; i++)
             if(i < 10)
-                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_0" + i);
+                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_0" + i + ".jpg");
             else
-                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_" + i);
+                leaderPathMap.put(i, "./src/main/res/img/cards/leaders/leaders_f_c_" + i + ".jpg");
     }
 
     private static void buildFamiliarPathsMap() {

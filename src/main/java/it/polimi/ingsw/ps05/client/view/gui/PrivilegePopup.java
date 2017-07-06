@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,12 +15,12 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 /**
- * Created by miotto on 04/07/17.
+ * Created by miotto on 06/07/17.
  */
-public class BonusTileDraftPopup {
+public class PrivilegePopup {
 
     private static Stage popupStage;
     private static BonusTileWidget[] bonusTileArray = new BonusTileWidget[4];
@@ -36,14 +35,12 @@ public class BonusTileDraftPopup {
 
         HBox hbox = new HBox(50 * resize);
         VBox vbox = new VBox(40 * resize);
-        GridPane gridPane = new GridPane();
 
         // create bonusTile widgets
         for(int i = 0; i < 4; i++) {
             bonusTileArray[i] = new BonusTileWidget(i);
             System.out.println(bonusTileArray[i].getImagePath());
             hbox.getChildren().add(bonusTileArray[i].getImage());
-            //GridPane.setConstraints(bonusTileArray[i].getImage(), i, 0);
         }
 
         Label label = new Label("Choose your personal Bonus Tile");
@@ -82,11 +79,6 @@ public class BonusTileDraftPopup {
             if(bonusTile.isThisPlayerSelected())
                 selectedBonusTile = bonusTile;
 
-    }
-
-    public void updateDraft(int draftedBonusTile) {
-        bonusTileArray[draftedBonusTile].setDrafted(true);
-        repaint();
     }
 
     private void repaint() {

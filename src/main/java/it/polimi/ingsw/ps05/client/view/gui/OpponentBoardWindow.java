@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +19,7 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
     private LeaderPopup leaderPopup = new LeaderPopup();
 
 
-    public OpponentBoardWindow(GUIMain board, String username, CardOnPersonalWidget[][] cardAcquiredWidget,
+    public OpponentBoardWindow(GUIMain board, String username, AcquiredCardWidget[][] cardAcquiredWidget,
                                LeaderWidget[] leaderWidgets, BonusTileWidget bonusTile) {
         super(board, username, cardAcquiredWidget, leaderWidgets, bonusTile);
     }

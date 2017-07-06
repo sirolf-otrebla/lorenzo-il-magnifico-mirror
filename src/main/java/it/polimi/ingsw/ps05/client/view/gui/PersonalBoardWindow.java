@@ -1,12 +1,13 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 
@@ -22,18 +23,21 @@ public class PersonalBoardWindow {
 
     GUIMain board;
     String username;
-    CardOnPersonalWidget[][] cardAcquiredWidget = new CardOnPersonalWidget[4][4];
+    AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
     LeaderWidget[] leaderWidgets;
     BonusTileWidget bonusTile;
 
-    private HBox[] cardHboxes = new HBox[4];
+    private HBox[] cardHboxes;
 
 
-    public PersonalBoardWindow(GUIMain board, String username, CardOnPersonalWidget[][] cardAcquiredWidget,
+    public PersonalBoardWindow(GUIMain board, String username, AcquiredCardWidget[][] cardAcquiredWidget,
                                LeaderWidget[] leaderWidgets, BonusTileWidget bonusTile) {
         this.board = board;
         this.username = username;
         this.cardAcquiredWidget = cardAcquiredWidget;
+        for(int i = 0; i < 4; i++)
+            for(int j = 0; j < 6; j++)
+                this.cardAcquiredWidget[i][j] = new AcquiredCardWidget(); // creating empty card widgets
         this.leaderWidgets = leaderWidgets;
         this.bonusTile = bonusTile;
     }
@@ -42,25 +46,35 @@ public class PersonalBoardWindow {
 
         Stage stage = new Stage();
 
-        stage.setTitle("My Board");
-        stage.setResizable(false);
-        stage.centerOnScreen();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.setTitle("My Board");
+        //stage.setResizable(false);
 
         // calculate and set window dimensions
-        PersonalBoardWindow.personalBoardHeight = stageHeight * 0.90;
-        PersonalBoardWindow.personalBoardWidth = (stageWidth * 0.90 * ORIGINAL_RATIO);
-        stage.setHeight(PersonalBoardWindow.personalBoardHeight);
-        stage.setWidth(PersonalBoardWindow.personalBoardWidth);
+        personalBoardHeight = stageHeight * 0.90;
+        personalBoardWidth = (stageHeight * 0.90) * ORIGINAL_RATIO;
         personalBoardResize = personalBoardWidth / ORIGINAL_WIDTH;
+
+        stage.setHeight(personalBoardHeight);
+        stage.setWidth(personalBoardWidth);
 
         final Pane pane = new Pane();
         pane.setId("personalBoard");
 
-        /* add button that shows bonus tile */
+        /* Add button for bonus tile */
         Button showBonusTileButton = new Button("Bonus tile");
-        showBonusTileButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
+        // showBonusTileButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
         showBonusTileButton.setOnAction((ActionEvent e) -> {
             //TODO implementare popup
+        });
+
+        /* Add Close button */
+        Button closeButton = new Button("Close");
+        closeButton.layoutXProperty().bind(stage.widthProperty().multiply(90 / 100));
+        closeButton.layoutYProperty().bind(stage.heightProperty().multiply(1 / 100));
+        closeButton.setOnAction((ActionEvent e) -> {
+            stage.close();
         });
 
         /*
@@ -73,6 +87,7 @@ public class PersonalBoardWindow {
         */
 
         /* show acquired cards */
+        cardHboxes = new HBox[4];
         setCardAcquiredLayout();
 
         Scene personalScene = new Scene(pane);
@@ -84,25 +99,28 @@ public class PersonalBoardWindow {
             exc.printStackTrace();
         }
 
+        stage.centerOnScreen();
         stage.setScene(personalScene);
-        stage.show();
+        stage.showAndWait();
     }
 
     void setCardAcquiredLayout() {
 
         for(int i = 0; i < 4; i++) {
             // inside the i hbox
-            this.cardHboxes[i] = new HBox(20 * personalBoardResize); //TODO controllare che lo spacing sia corretto
-            this.cardHboxes[i].setLayoutX((2.4277 / 100) * personalBoardWidth);
-            this.cardHboxes[i].setLayoutY((1.8684 + 25.5 * i) / 100 * personalBoardHeight);
+            //cardHboxes[i] = new HBox(20 * personalBoardResize);
+            cardHboxes[i] = new HBox(20); //TODO controllare che lo spacing sia corretto
+            cardHboxes[i].setFillHeight(true);
+            cardHboxes[i].setLayoutX((2.4277 / 100) * personalBoardWidth);
+            cardHboxes[i].setLayoutY((1.8684 + 25.5 * i) / 100 * personalBoardHeight);
 
-            this.cardHboxes[i].setPrefHeight((21.0 / 100) * personalBoardHeight);
-            this.cardHboxes[i].setPrefWidth((90.0 / 100) * personalBoardWidth);
+            cardHboxes[i].setPrefHeight((21.0 / 100) * personalBoardHeight);
+            cardHboxes[i].setPrefWidth((90.0 / 100) * personalBoardWidth);
             for(int j = 0; j < 4; j++) {
                 // inside the j color of cards acquired
                 for(int k = 0; k < 4; k++) {
                     // inside the k card of j color
-                    if(cardAcquiredWidget[j][k] != null)
+                    if(cardAcquiredWidget[j][k].getCardImage().getImage() != null)
                         cardHboxes[i].getChildren().add(cardAcquiredWidget[j][k].getCardImage());
                 }
             }
@@ -111,9 +129,12 @@ public class PersonalBoardWindow {
     }
 
     /***   Metodo per Sirolfo   ***/
+    /* //TODO metodo forse inutile perché le carte acquistate si aggiornano automaticamente al momento dell'acquisto
     public void repaint() {
 
-        TowerTileWidget[][] towerActionSpaces = board.getTowerTileWidgetList();
+        for (int i = 0; i < 4; i++) {
+            TowerTileWidget[] towerActionSpaces = board.getTowerTileWidgetList(towerColorArray[i]);
+            for (int j = 0; j < 4 )
 
         for (TowerTileWidget[] tower: towerActionSpaces) {
             for (TowerTileWidget actionSpace: tower) {
@@ -125,8 +146,9 @@ public class PersonalBoardWindow {
         }
 
     }
+    */
 
-    public HBox[] getCardHboxes() {
-        return cardHboxes;
-    }
+   public HBox[] getCardHboxes() {
+       return cardHboxes;
+   }
 }

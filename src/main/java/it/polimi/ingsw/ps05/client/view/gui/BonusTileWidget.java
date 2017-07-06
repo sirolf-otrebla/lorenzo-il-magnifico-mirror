@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -7,14 +8,19 @@ import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
+
 /**
  * Created by miotto on 04/07/17.
  */
-public class BonusTileWidget extends ImageView {
+public class BonusTileWidget {
+
+    private static double BONUSTILE_HEIGHT_PERC = 0.6;
 
     private int referenceId;
     private boolean drafted;
     private boolean thisPlayerSelected;
+    private ImageView image;
     private String imagePath;
 
     public BonusTileWidget(int referenceId) {
@@ -28,7 +34,9 @@ public class BonusTileWidget extends ImageView {
         File crDir = new File(imagePath);
         try {
             Image img = new Image(crDir.toURI().toURL().toString());
-            this.setImage(img);
+            this.image = new ImageView(img);
+            this.image.setPreserveRatio(true);
+            this.image.setFitHeight(BONUSTILE_HEIGHT_PERC * stageHeight);
             this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -37,17 +45,22 @@ public class BonusTileWidget extends ImageView {
 
     // click-to-take-bonusTile gesture
     private void setupClickGesture() {
-        this.setOnMouseClicked((MouseEvent e) -> {
+
+        this.image.setOnMouseEntered((MouseEvent e) -> {
+            this.image.setCursor(Cursor.HAND);
+        });
+
+        this.image.setOnMouseClicked((MouseEvent e) -> {
             this.setDrafted(true);
             this.setThisPlayerSelected(true);
-            //TODO si potrebbe chiamare il metodo repaint() direttamente da qui, senza aspettare la chiamata del controller
+            this.repaint();
         });
     }
 
     public void repaint() {
         if(isDrafted()) {
-            this.setOpacity(0.5);
-            this.setMouseTransparent(true);
+            this.image.setOpacity(0.3);
+            this.image.setMouseTransparent(true);
         }
     }
 
@@ -82,5 +95,13 @@ public class BonusTileWidget extends ImageView {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
     }
 }

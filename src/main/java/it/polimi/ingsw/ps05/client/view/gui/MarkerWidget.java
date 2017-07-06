@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
@@ -32,12 +34,14 @@ public class MarkerWidget {
 
         markerCircle = new Circle(MARKER_RADIUS * resize);
 
-        points = new Text(new String(String.valueOf(INITIAL_POINTS)));
+        points = new Text(String.valueOf(INITIAL_POINTS));
         points.setFont(Font.loadFont("file:source/resources/fonts/im-fell-french-canon.ttf", 10));
         points.setBoundsType(TextBoundsType.VISUAL); // Calculate text bounds basing on visuals
 
+
         stack = new StackPane();
         stack.setMinSize(2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize);
+        stack.setAlignment(Pos.CENTER);
         stack.getChildren().addAll(markerCircle, points);
 
     }
@@ -51,12 +55,13 @@ public class MarkerWidget {
         markerCircle = new Circle(MARKER_RADIUS * resize);
         markerCircle.setFill(new ImagePattern(markerImage));
 
-        points = new Text(new String(String.valueOf(INITIAL_POINTS))); //TODO: controllare come si può fare meglio la trasformazione
+        points = new Text(String.valueOf(INITIAL_POINTS)); //TODO: controllare come si può fare meglio la trasformazione
         points.setFont(Font.loadFont("file:source/resources/fonts/im-fell-french-canon.ttf", 10));
         points.setBoundsType(TextBoundsType.VISUAL); // Calculate text bounds basing on visuals
 
         stack = new StackPane();
         stack.setMinSize(2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize);
+        stack.setAlignment(Pos.CENTER);
         stack.getChildren().addAll(markerCircle, points);
 
     }
@@ -75,9 +80,12 @@ public class MarkerWidget {
         return referenceID;
     }
 
-    public Circle getMarkerCircle() {
-        return markerCircle;
+    public StackPane getMarker() {
+        return stack;
     }
 
+    public Text getPoints() {
+        return points;
+    }
 }
 

@@ -10,7 +10,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.PersonalBoardWindow.personalB
 /**
  * Created by miotto on 02/07/17.
  */
-public class CardOnPersonalWidget {
+public class AcquiredCardWidget {
 
     public static final double CARD_ORIGINAL_PERC_HEIGHT_PERSONAL = 20.1052, CARD_RATIO = 0.6743;
 
@@ -20,11 +20,15 @@ public class CardOnPersonalWidget {
     private String cardName;
     private ColorEnumeration color;
 
-    public CardOnPersonalWidget(Integer referenceId) {
+    public AcquiredCardWidget() {
+        this.cardImage = new ImageView();
+    }
+
+    public AcquiredCardWidget(Integer referenceId) {
         this.referenceId = referenceId;
     }
 
-    public CardOnPersonalWidget(Integer referenceId, String path) {
+    public AcquiredCardWidget(Integer referenceId, String path) {
         this.referenceId = referenceId;
         Image i = new Image(path, CARD_ORIGINAL_PERC_HEIGHT_PERSONAL * personalBoardResize, CARD_ORIGINAL_PERC_HEIGHT_PERSONAL * CARD_RATIO * personalBoardResize, true, true);
         cardImage = new ImageView();

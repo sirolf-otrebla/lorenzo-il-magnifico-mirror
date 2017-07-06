@@ -64,6 +64,8 @@ public class ResourcesWidget {
 
     }
 
+    public void setResources(){} //TODO
+
     public int getGoldValue() {
         return goldValue;
     }

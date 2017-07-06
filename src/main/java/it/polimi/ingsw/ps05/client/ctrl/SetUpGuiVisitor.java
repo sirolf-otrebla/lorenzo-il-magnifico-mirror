@@ -112,6 +112,9 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
 
     @Override
     public void visit(Tower tower) {
+
+        /* array di ColorEnumeration e relativa HashMap sono diventate inutili, si può accedere alla tore del colore desiderato tramite ColorEnumeration
+
         ColorEnumeration[] colorEnumerations = {
                 ColorEnumeration.Green,
                 ColorEnumeration.Blue,
@@ -121,8 +124,10 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
         HashMap<ColorEnumeration, Integer> colorIndexHashMap = new HashMap<>();
         for (int i = 0; i < colorEnumerations.length ; i++) colorIndexHashMap.put(colorEnumerations[i], i);
 
+        */
+
         Collection<TowerTileInterface> tiles = tower.getTiles().values();
-        TowerTileWidget[] towerTileWidgets =  gui.getTowerTileWidgetList()[colorIndexHashMap.get(tower.getColor())];
+        TowerTileWidget[] towerTileWidgets =  gui.getTowerTileWidgetList(tower.getColor()); // aggiornato
         for (TowerTileWidget tileWidget :towerTileWidgets){
             for(TowerTileInterface tile : tiles){
                 if(tile.getDiceRequired().getValue() == tileWidget.getMinDie())
