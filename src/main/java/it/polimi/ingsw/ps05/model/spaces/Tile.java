@@ -40,7 +40,7 @@ public class Tile extends TowerTileInterface {
     	super();
         if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.parentTower = parentTower;
-    	this.card = card;
+    	this.card = card; 
     	super.setDiceRequirement( new Dice(ColorEnumeration.Any, diceRequired));
     }
     

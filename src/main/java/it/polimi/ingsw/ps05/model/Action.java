@@ -57,7 +57,7 @@ public class Action implements Period {
 		if (this.isLegal) return true;
 		if (this.familiar.isUsed()) return false;
 		if (this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
-
+		
 		// 2- 2b)
 		ArrayList<ArrayList<Resource>> list = this.position.getRequirements();
 		Iterator<ArrayList<Resource>> iterator = list.iterator();
