@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 /*
  * this is a decorator for Tile class, designed to add tile-related effects \
@@ -128,4 +130,9 @@ public class TileWithEffect extends TowerTileInterface {
 	public boolean hasMorePaymentOptions() {
 		return this.hasMorePaymentOptions;
 	}
+	
+	@Override
+    public  ArrayList<ArrayList<Resource>> getRequirements(){
+        return this.toBeDecorated.getRequirements();
+    }
 }

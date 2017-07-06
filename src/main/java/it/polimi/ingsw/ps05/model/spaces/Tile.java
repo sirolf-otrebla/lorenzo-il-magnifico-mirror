@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -40,7 +39,7 @@ public class Tile extends TowerTileInterface {
     	super();
         if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.parentTower = parentTower;
-    	this.card = card;
+    	this.card = card; 
     	super.setDiceRequirement( new Dice(ColorEnumeration.Any, diceRequired));
     }
     
@@ -85,12 +84,11 @@ public class Tile extends TowerTileInterface {
     public  ArrayList<ArrayList<Resource>> getRequirements(){
         // ADDS DICE REQUIREMENT
        ArrayList<ArrayList<Resource>> req = card.getRequirements();
-       if (req.size() == 0) {
-           req.add((new ArrayList<>()));
-           req.get(0).add(this.getDiceRequired());
-
-       }else {
-           for (ArrayList<Resource> andAlternative : req)
+       if (req.size() == 0){
+    	   req.add(new ArrayList<>());
+    	   req.get(0).add(this.getDiceRequired());
+       } else {
+    	   for (ArrayList<Resource> andAlternative: req)
                andAlternative.add(super.getDiceRequirement());
        }
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;

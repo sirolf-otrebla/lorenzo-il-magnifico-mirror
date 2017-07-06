@@ -26,6 +26,7 @@ import it.polimi.ingsw.ps05.model.cards.VioletCard;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
@@ -89,7 +90,7 @@ public class CLIMain implements LimView, Runnable{
 	int selectedFam = 0;
 	int selectedOpt = 0;
 	Player active = null;
-		private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
+	private ArrayList<ColorEnumeration> towerOrder = new ArrayList<ColorEnumeration>(){
 
 		private static final long serialVersionUID = 1L;
 
@@ -389,7 +390,7 @@ public class CLIMain implements LimView, Runnable{
 			keyStroke = terminal.readInput();
 		}
 	}
-	
+
 	private void doActionForPlayer() throws IOException {
 		System.out.println("Do action!!!!!");
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
@@ -657,7 +658,7 @@ public class CLIMain implements LimView, Runnable{
 							5*height/16,
 							(marketList.size()+1)*width/16,
 							6*height/16,textGraphics
-					);
+							);
 					marketList.add((MarketSpace) actionSpace);
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("il market è andato out of bound");
@@ -1178,8 +1179,10 @@ public class CLIMain implements LimView, Runnable{
 					textGraphics.setBackgroundColor(TextColor.ANSI.RED);
 				}
 				for (Resource res : choseOr){
-					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
-					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					if (!res.getID().equals(Dice.ID)){
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					}
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -1396,7 +1399,7 @@ public class CLIMain implements LimView, Runnable{
 			meActive = false;
 		}
 	}
-	
+
 	public Integer getCardForDraft(List<Integer> list) throws IOException{
 		try {
 			internalSemaphore.acquire();
@@ -1409,13 +1412,13 @@ public class CLIMain implements LimView, Runnable{
 			System.out.println("Player.id " + player.getPlayerID() + " Leader.id " + i);
 			cardsToCheck.add(getLeaderWithID(i, allCards));
 		}
-		
+
 		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
 		internalSemaphore.release();
 		player.putLeaderCard((LeaderCard)chosenCard.get(0));
 		return ((LeaderCard)chosenCard.get(0)).getReferenceID();
 	}
-	
+
 	private LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
 		for (LeaderCard l : cards){
 			if (l.getReferenceID() == id){
@@ -1424,9 +1427,9 @@ public class CLIMain implements LimView, Runnable{
 		}
 		return null;
 	}
-	
+
 	private void selectLeaderCard() throws IOException{
-		
+
 		ArrayList<?> chosenCard = choseDraftCard(player.getLeaderCardList(), terminal.getTerminalSize().getColumns());
 		boolean success = true;
 		for (ArrayList<Resource> a : ((LeaderCard)chosenCard.get(0)).getRequirements()){
@@ -1439,17 +1442,17 @@ public class CLIMain implements LimView, Runnable{
 			}
 			if (success) break;
 		}
-		
+
 		if (success){
 			//attivare carta leader
 		} else {
 			player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
 		}
-		
+
 	}
-	
+
 	private boolean checkIsLegal(){
-		
+
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
 				//NON OCCUPATO
@@ -1466,7 +1469,7 @@ public class CLIMain implements LimView, Runnable{
 			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],marketList.get(currentColBoard));
 			System.out.println("Action is legal? " + ac.isLegal());
 			return ac.isLegal();
-			
+
 		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
 			//PRODUCTION
 			System.out.println("Production");
@@ -1490,5 +1493,5 @@ public class CLIMain implements LimView, Runnable{
 		}
 		return false;
 	}
-	
+
 }
