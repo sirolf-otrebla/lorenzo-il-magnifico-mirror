@@ -14,16 +14,16 @@ public class TurnSetupManager extends Observable{
 	private ArrayList<Turn> turnHistory = new ArrayList<>();
 	private  Board board;
 	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
+	private ArrayList<Resource> startResource;
 	
-	private final static int goldAmountStart = 5;
-	private final static int woodAmountStart = 2;
-	private final static int stoneAmountStart = 2;
-	private final static int servantsAmountStart = 3;
-	
-	public TurnSetupManager(ArrayList<Player> playersConnected, Board board){
+	public TurnSetupManager(ArrayList<Player> playersConnected, Board board, ArrayList<Resource> startingResource){
 		this.board = board;
 		this.playersConnected = playersConnected;
+		this.startResource = startingResource;
+		System.out.println("Starting resource: " + startingResource.size());
+		System.out.println("Start resource: " + this.startResource.size());
 		this.turn = setupFirstTurn();
+		
 	}
 	
 	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
@@ -127,12 +127,17 @@ public class TurnSetupManager extends Observable{
 			plList.add(pl);
 		}
 		System.out.println("player order size in turn setup manager: " + plList.size());
+		System.out.println("Start resource: " + startResource.size());
 		Collections.shuffle(plList);
 		for (int i = 0; i < plList.size(); i++){
-			plList.get(i).addResource(new GoldResource(goldAmountStart + i));
-			plList.get(i).addResource(new ServantResource(servantsAmountStart));
-			plList.get(i).addResource(new WoodResource(woodAmountStart));
-			plList.get(i).addResource(new StoneResource(stoneAmountStart));
+			for (Resource r : startResource){
+				System.out.println(r.toString() + " " + r.getValue());
+				plList.get(i).addResource(r);
+				if (r.getID().equals(GoldResource.id)){
+					r.setValue(r.getValue() + 1);
+				}
+				
+			}
 		}
 		return plList;
 	}

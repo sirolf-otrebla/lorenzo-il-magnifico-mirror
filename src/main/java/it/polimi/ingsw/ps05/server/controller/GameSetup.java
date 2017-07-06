@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.model.cards.Deck;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
@@ -36,7 +37,9 @@ public class GameSetup {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		turnSetup = new TurnSetupManager(playerConnected, board);
+		ArrayList<Resource> l = parser.loadStartingResources();
+		System.out.println("resource loaded in gameSetup " + l.size());
+		turnSetup = new TurnSetupManager(playerConnected, board, l);
 		
 	}
 	

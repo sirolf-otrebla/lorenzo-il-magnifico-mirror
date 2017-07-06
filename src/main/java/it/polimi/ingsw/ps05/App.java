@@ -62,6 +62,7 @@ public class App {
 				} else {
 					useCompleteRules = false;
 				}
+				System.out.println("complete rules chosen " + useCompleteRules);
 				System.out.println("use custom Bonus Tiles? ");
 				in = scanner.nextLine();
 				if (in.equals("y") || in.equals("yes")) {
@@ -72,6 +73,8 @@ public class App {
 				System.out.println("please insert maximum lobby timeout");
 				in = scanner.nextLine();
 				Server server = Server.getInstance();
+				System.out.println("complete rules chosen " + useCompleteRules);
+				System.out.println("bonus tiles chosen " + useCustomBonusTiles);
 				server.startServer(new Integer(in), useCompleteRules, useCustomBonusTiles);
 			}
 		}

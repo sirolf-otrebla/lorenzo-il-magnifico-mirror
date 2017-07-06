@@ -395,8 +395,10 @@ public class CLIMain implements LimView, Runnable{
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
 				//NON OCCUPATO
+				System.out.println("in board non occupato");
 				Action ac = new Action(((Familiar)this.player.getFamilyList().toArray()[selectedFam]),
 						board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+				System.out.println("Action is legal? " + ac.isLegal());
 				if (ac.isLegal()){
 					TowerCard c = board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard();
 					CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
@@ -409,26 +411,31 @@ public class CLIMain implements LimView, Runnable{
 		} else if(currentColBoard < board.getTowerList().size() &&
 				currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 			//MARKET
+			System.out.println("Market");
 			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],marketList.get(currentColBoard));
+			System.out.println("Action is legal? " + ac.isLegal());
 			if (ac.isLegal()){
 				CliActionSpaceViewObject a = new CliActionSpaceViewObject(marketList.get(currentColBoard), ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
 				a.notifyObservers();
 			}
 		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
 			//PRODUCTION
+			System.out.println("Production");
 			choseActivableProductionCard(terminal.getTerminalSize().getColumns());
 		} else if (currentRowBoard == board.getTowerList().size() + 1 && 
 				currentColBoard >= productionList.size() &&
 				currentColBoard < productionList.size() + harvestList.size() ){
 			//HARVEST
+			System.out.println("Harvest");
 			choseActivableHarvestCard(terminal.getTerminalSize().getColumns());
 		} else {
 			//CONSIGLIO
+			System.out.println("Consiglio");
 			CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
 					((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
 			a.notifyObservers();
 		}
-		meActive = false;
+		//meActive = false;
 	}
 
 	private void moveUp(TextGraphics textGraphics) throws IOException {

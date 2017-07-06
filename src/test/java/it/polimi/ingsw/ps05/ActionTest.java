@@ -97,44 +97,6 @@ public class ActionTest extends TestCase {
 
 	}
 
-	@Test //il tile non restituisce la carta, o se lo fa è da verificare e da applicare gli effetti
-	public void testActionOnTower() throws InterruptedException { //tested just with gold
-		ArrayList<Player> list = new ArrayList<Player>();
-		Random randomNum = new Random();
-		int numP = randomNum.nextInt(4) + 1;
-		for (int i = 0; i < numP; i++){
-			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
-		}
-		Game game = new Game(false, false, numP, new ArrayList<PlayerClient>());
-		try {
-			game.start();
-		} catch (InterruptedException exc) {
-			//TODO gestire eccezione
-			exc.printStackTrace();
-		}
-		GameSetup gameSetup = new GameSetup(list,game);
-		Board board = gameSetup.getBoard();
-		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
-		Turn turn = turnSetup.getTurn();
-		Integer gold = turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue();
-		Action action = new Action((Familiar) turn.getPlayerOrder().get(0).getFamilyList().toArray()[0],
-				(ActionSpace)board.getTowerList().get(2).getTiles().get(2));
-		System.out.println("islegal: " + action.isLegal());
-		if (action.isLegal()){
-			try {
-				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
-				assertTrue(gold != turn.getPlayerOrder().get(0).getResource(GoldResource.id).getValue());
-				assertTrue(((Familiar)turn.getPlayerOrder().get(0).getFamilyList().toArray()[0]).isUsed());
-				assertTrue(((ActionSpace)board.getTowerList().get(2).getTiles().get(2)).isOccupied());
-				assertTrue(turn.getPlayerOrder().get(0).getBlueCardList().size() != 0);
-			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
-				e.printStackTrace();
-			} catch (IllegalMethodCallException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	@Test
 	public void testActionOnSpace() throws InterruptedException {
 		ArrayList<Player> list = new ArrayList<Player>();
