@@ -16,11 +16,13 @@ public class TakeCardListener implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("arrivato all'observer TakeCardListener");
         TowerTileViewObject tileWidget = (TowerTileViewObject) arg;
         if (tileWidget.hasMorePaymentOptions()) {
             //TODO FINESTRA SELEZIONE
         }
         else {
+            System.out.println("writing message ActionMessage");
             ActionMessage msg = new ActionMessage(tileWidget.getFamilyMemberID(), tileWidget.getId(),
                     0, Client.getInstance().getGameStatus().getThisPlayer());
             Client.getInstance().sendToServer(msg);

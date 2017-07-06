@@ -336,6 +336,7 @@ public class CLIMain implements LimView, Runnable{
 				moveUp(textGraphics);
 				break;
 			case Enter:
+				System.out.println("meActive value: \t" + meActive);
 				if (inPlayers){
 					if (currentRowPlayers == 0) {
 						visualCard(playersList.get(currentColPlayers).getGreenCardList(), textGraphics.getSize().getColumns());
@@ -390,6 +391,7 @@ public class CLIMain implements LimView, Runnable{
 	}
 	
 	private void doActionForPlayer() throws IOException {
+		System.out.println("Do action!!!!!");
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
 			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
 				//NON OCCUPATO
@@ -400,6 +402,7 @@ public class CLIMain implements LimView, Runnable{
 					CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
 							((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
 							selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
+					System.out.println("notify to observers");
 					a.notifyObservers();
 				}
 			}
