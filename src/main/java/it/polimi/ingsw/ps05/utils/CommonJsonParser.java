@@ -725,6 +725,7 @@ public class CommonJsonParser {
 		} catch (IOException | ParseException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Resource loaded: " + list.size());
 		return list;
 	}
 

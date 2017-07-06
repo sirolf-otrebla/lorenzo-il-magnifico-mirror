@@ -121,7 +121,8 @@ public class CliTerminalForCardsList {
 				System.out.println(requirementsSelected.toString());
 				break;
 			case Enter:
-				enterDetected = true;
+				if (selectedCards.size() != 0)
+					enterDetected = true;
 				break;
 			case Character:
 				if (keyStroke.getCharacter() == ' '){
@@ -135,10 +136,12 @@ public class CliTerminalForCardsList {
 				}
 				
 				break;
+			case Escape:
+				enterDetected = true;
+				break;
 
 			default:
 				System.out.println("Default");
-				System.out.println(cardTerminal.getTerminalSize().toString());
 				break;
 			}
 			cardTerminal.setCursorPosition(((indiceCarta+1)*currentWidth/(cards.size()) - currentWidth/(2*cards.size())), stdCursorPositionY);

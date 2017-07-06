@@ -28,7 +28,7 @@ public class Game implements Observer {
     private DraftController draftController;
     private Thread draftControllerThread;
     private static final int MAX_LEADER_CARDS = 4;
-    private boolean useCompleteRules = true;
+    private boolean useCompleteRules = false;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
     private Semaphore semStart;
@@ -68,7 +68,7 @@ public class Game implements Observer {
         this.flowCrlThread = new Thread(flowCtrl);
         this.setup = new GameSetup(players, this);
         this.gBoard = this.setup.getBoard();
-        tManager = this.setup.getTurnSetup();
+        tManager = this.setup.getTurnSetupManager();
         for (PlayerClient client: this.clientHashMap.values()) {
             GameStatus status = new GameStatus( players,  this.gBoard, client.getPlayer(), GameStatus.NO_PLAYER_ACTIVE);
             client.sendMessage(new GameSetupMessage(status));
@@ -76,6 +76,7 @@ public class Game implements Observer {
         // waiting to start
          semStart.acquire(clientHashMap.size());
         // starting
+         System.out.println("Complete rules: " + useCompleteRules + "\tBonus Tile" + useCustomBonusTiles);
         if (useCompleteRules || useCustomBonusTiles){
         	draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
             this.draftControllerThread = new Thread(draftController);

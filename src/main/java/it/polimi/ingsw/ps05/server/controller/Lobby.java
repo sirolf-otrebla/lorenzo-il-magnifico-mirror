@@ -17,7 +17,7 @@ public class Lobby implements Runnable {
 	private ArrayList<PlayerClient> connectedClientArrayList;
 	private Timer timer;
 	private int lobbyLifeTime;
-	private boolean useCompleteRules = true;
+	private boolean useCompleteRules = false;
 	private boolean useCustomBonusTiles = false;
 	public static final int MAX_PLAYER_NUM = 4;
 	private Semaphore sem;
@@ -27,6 +27,8 @@ public class Lobby implements Runnable {
 		this.timer = new Timer();
 		this.lobbyLifeTime = lobbyLifeTime;
 		sem = new Semaphore(0);
+		this.useCompleteRules = useCompleteRules;
+		this.useCustomBonusTiles = useCustomBonusTiles;
 	}
 	public void addToLobby(PlayerClient client){
 		System.out.println("adding player to lobby");
