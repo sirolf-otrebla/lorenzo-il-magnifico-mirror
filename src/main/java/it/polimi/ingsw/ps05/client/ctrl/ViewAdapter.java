@@ -63,8 +63,7 @@ public class ViewAdapter {
         } else {
 
             CLIMain cli = (CLIMain) this.view;
-            cli.updateBoard(status.getGameBoard());
-            cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
+            
             if(CliThread != null && CliThread.isDaemon()){
 
             }
@@ -73,6 +72,8 @@ public class ViewAdapter {
                 CliThread.setDaemon(true);
                 CliThread.start();
             }
+            cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
+            cli.updateBoard(status.getGameBoard());
         }
     }
 
