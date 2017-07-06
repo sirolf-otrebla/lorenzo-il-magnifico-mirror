@@ -30,7 +30,7 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	ColorEnumeration color;
 	
 	// game information
-	private HashMap<ColorEnumeration, Familiar> familyMap = null;
+	private HashMap<ColorEnumeration, Familiar> familyMap = new HashMap<>();
 	private BonusTile bonusTile;
 
 	private ArrayList<Resource> resourceList = new ArrayList<Resource>();
@@ -117,7 +117,7 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
     }
 
     public void setFamiliars(ArrayList<Familiar> familyList) throws RepeatedAssignmentException {
-		if (this.familyMap == null) {
+		if (this.familyMap.size() == 0) {
 			this.familyMap = new HashMap<>();
 			for (Familiar f: familyList)
 				this.familyMap.put(f.getColor(), f);

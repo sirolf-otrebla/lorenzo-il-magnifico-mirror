@@ -103,7 +103,6 @@ public class Action implements Period {
 		manageRequirements(paymentList);
 
 		//position.applyNonActivableEffects moves the card (if there is any;
-		this.position.applyEffect(this.familiar);
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);
 		this.position.applyEffect(this.familiar);

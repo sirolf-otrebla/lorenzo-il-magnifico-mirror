@@ -77,7 +77,10 @@ public class GenericActionTest extends TestCase {
 				}
 			}
 		}
-		
+	}
+	
+	@Test
+	public void testActionOnActionSpace(){
 		
 	}
 

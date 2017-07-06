@@ -36,7 +36,7 @@ public class GameSetup {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		turnSetup = new TurnSetupManager(playerConnected, board);
+		turnSetup = new TurnSetupManager(playerConnected, board, parser.loadStartingResources());
 		
 	}
 	

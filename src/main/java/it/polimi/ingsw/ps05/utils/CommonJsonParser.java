@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import it.polimi.ingsw.ps05.model.cards.*;
@@ -708,6 +709,23 @@ public class CommonJsonParser {
 			}
 		}
 		return bonus;
+	}
+	
+	public ArrayList<Resource> loadStartingResources(){
+		ArrayList<Resource> list = new ArrayList<>();
+		try {
+			File file = new File("./src/main/res/startResource.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			for (int i = 0; i < obj.keySet().size(); i++){
+				Object actionObject = Class.forName(resourcePath + obj.keySet().toArray()[i].toString()).newInstance();
+				Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
+				method.invoke(actionObject, Integer.parseInt(obj.get(obj.keySet().toArray()[i]).toString()));
+				list.add((Resource)actionObject);
+			}
+		} catch (IOException | ParseException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
