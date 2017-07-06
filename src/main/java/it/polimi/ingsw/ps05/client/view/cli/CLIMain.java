@@ -1052,6 +1052,8 @@ public class CLIMain implements LimView, Runnable{
 					"Fam " + f.getColor().toString() + " " + f.getRelatedDice().getValue());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private void infoBonusTile(int column, int row, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
@@ -1125,6 +1127,8 @@ public class CLIMain implements LimView, Runnable{
 				}
 			}
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private void infoProduction(int column, int row, TextGraphics textGraphics){
@@ -1155,6 +1159,8 @@ public class CLIMain implements LimView, Runnable{
 
 			}
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private void infoCard(int column, int row, TowerCard card, TextGraphics textGraphics){
@@ -1209,6 +1215,8 @@ public class CLIMain implements LimView, Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
@@ -1301,6 +1309,8 @@ public class CLIMain implements LimView, Runnable{
 
 			}
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private void infoCouncil(int column, int row, TextGraphics textGraphics){
@@ -1338,6 +1348,8 @@ public class CLIMain implements LimView, Runnable{
 					"fam " + fam.getColor().toString());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, 
+				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
 	private void choseActivableHarvestCard(int width){
@@ -1436,5 +1448,47 @@ public class CLIMain implements LimView, Runnable{
 		
 	}
 	
+	private boolean checkIsLegal(){
+		
+		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
+			if (!((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard))).isOccupied()) {
+				//NON OCCUPATO
+				System.out.println("in board non occupato");
+				Action ac = new Action(((Familiar)this.player.getFamilyList().toArray()[selectedFam]),
+						board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
+				System.out.println("Action is legal? " + ac.isLegal());
+				return ac.isLegal();
+			}
+		} else if(currentColBoard < board.getTowerList().size() &&
+				currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
+			//MARKET
+			System.out.println("Market");
+			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],marketList.get(currentColBoard));
+			System.out.println("Action is legal? " + ac.isLegal());
+			return ac.isLegal();
+			
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
+			//PRODUCTION
+			System.out.println("Production");
+			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],productionList.get(currentColBoard));
+			System.out.println("Action is legal? " + ac.isLegal());
+			return ac.isLegal();
+		} else if (currentRowBoard == board.getTowerList().size() + 1 && 
+				currentColBoard >= productionList.size() &&
+				currentColBoard < productionList.size() + harvestList.size() ){
+			//HARVEST
+			System.out.println("Harvest");
+			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],harvestList.get(currentColBoard-productionList.size()));
+			System.out.println("Action is legal? " + ac.isLegal());
+			return ac.isLegal();
+		} else {
+			//CONSIGLIO
+			System.out.println("Consiglio");
+			Action ac = new Action((Familiar)this.player.getFamilyList().toArray()[selectedFam],council);
+			System.out.println("Action is legal? " + ac.isLegal());
+			return ac.isLegal();
+		}
+		return false;
+	}
 	
 }
