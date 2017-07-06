@@ -24,7 +24,6 @@ public class Action implements Period {
 	public static final int THIRD_OPTION = 2;
 
 
-	private Player player;
 	private Familiar familiar;
 	private ActionSpace position;
 

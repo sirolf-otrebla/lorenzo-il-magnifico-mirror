@@ -404,8 +404,8 @@ public class CLIMain implements LimView, Runnable{
 					CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
 							((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
 							selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
-					System.out.println("notify to observers");
-					a.notifyObservers();
+					System.out.println("notifyToActionHandler to observers");
+					a.notifyToActionHandler();
 				}
 			}
 		} else if(currentColBoard < board.getTowerList().size() &&

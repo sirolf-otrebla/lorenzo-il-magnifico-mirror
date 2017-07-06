@@ -41,4 +41,10 @@ public class CliProductionSpaceViewObject extends ProductionSpaceViewObject {
     public Integer getId() {
         return this.space.getId();
     }
+
+    @Override
+    public void notifyToActionHandler() {
+        setChanged();
+        notifyObservers(this);
+    }
 }
