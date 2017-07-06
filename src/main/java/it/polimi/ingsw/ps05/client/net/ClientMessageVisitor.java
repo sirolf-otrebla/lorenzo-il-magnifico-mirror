@@ -23,6 +23,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     @Override
     public void visit(GameUpdateMessage msg) {
         System.out.println("Primo visitor, GameUpdateMsg");
+        Client.getInstance().setGameStatus(msg.getGameStatus());
         if (Client.getInstance().isInGame()){
             ViewAdapter.getInstance().updateView(msg.getGameStatus());
         }else {

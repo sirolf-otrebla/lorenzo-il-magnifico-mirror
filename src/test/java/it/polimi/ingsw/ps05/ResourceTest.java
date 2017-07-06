@@ -6,18 +6,18 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import it.polimi.ingsw.ps05.server.net.FakeConnection;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
-import it.polimi.ingsw.ps05.model.spaces.Tile;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.GameSetup;
-import it.polimi.ingsw.ps05.server.controller.Server;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.server.net.socket.SocketConn;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
@@ -29,11 +29,18 @@ public class ResourceTest {
 	ArrayList<ActionResult> actionResults = new ArrayList<>();
 	private final Integer ZERO = 0;
 	private final Integer NUM_TO_SUM = 5;
+	private ArrayList<Player> players = new ArrayList<>();
+	private Game game;
+	private Integer firstDice;
+	private Integer id;
+	private TowerTileInterface firstTile;
+	private Board board;
 
 	public ResourceTest(){
 
 	}
 
+	@Before
 	public void setUp(){
 		resourceArrayList.add(new GoldResource(0));
 		resourceArrayList.add(new StoneResource(0));
@@ -54,6 +61,36 @@ public class ResourceTest {
 		actionResults.add(new FreeAction());
 		actionResults.add(new GreenAction());
 		actionResults.add(new GreenBonus());
+
+		// setup per actionResult
+
+
+		ColorEnumeration[] colorEnumeration = {
+				ColorEnumeration.Yellow,
+				ColorEnumeration.Green,
+				ColorEnumeration.Red,
+				ColorEnumeration.Blue
+		};
+		ArrayList<PlayerClient> playerClients = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			playerClients.add(new PlayerClient(new FakeConnection(), i));
+		}
+		game = new Game(false, false, 100, playerClients);
+		for (int i = 0; i < 4; i++) {
+			playerClients.get(i).BuildPlayer(colorEnumeration[i]);
+		}
+		for (PlayerClient client: playerClients) {
+			players.add(client.getPlayer());
+			client.setInGame(game);
+		}
+		GameSetup setup = new GameSetup(players, game);
+		board = setup.getBoard();
+		game.setgBoard(board);
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Green).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		id = firstTile.getId();
+		firstDice = firstTile.getDiceRequired().getValue();
 
 
 	}
@@ -101,7 +138,7 @@ public class ResourceTest {
 		int WaitingTime = 9000;
 		ArrayList<PlayerClient> playerClients = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
-			new PlayerClient(new SocketConn(new Socket()), i);
+			new PlayerClient(new FakeConnection(), i);
 		}
 		Game game = new Game(false, false, 100, playerClients);
 		assertEquals(false, game.isUsingCompleteRules());
@@ -111,39 +148,47 @@ public class ResourceTest {
 	}
 
 	@Test
-	public void buildBoardTest() throws NoSuchMethodException {
+	public void allBonusTest() throws NoSuchMethodException {
 
-		ColorEnumeration[] colorEnumeration = {
-				ColorEnumeration.Yellow,
-				ColorEnumeration.Green,
-				ColorEnumeration.Red,
-				ColorEnumeration.Blue
-		};
-		ArrayList<PlayerClient> playerClients = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			new PlayerClient(new SocketConn(new Socket()), i);
-		}
-		Game game = new Game(false, false, 100, playerClients);
-		for (int i = 0; i < 4; i++) {
-			playerClients.get(i).BuildPlayer(colorEnumeration[i]);
-		}
-		ArrayList<Player> players = new ArrayList<>();
-		for (PlayerClient client: playerClients) {
-			players.add(client.getPlayer());
-			client.setInGame(game);
-		}
-		GameSetup setup = new GameSetup(players, game);
-		Board board = setup.getBoard();
-		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Green).
-				getTiles().values().iterator();
-		TowerTileInterface firstTile = iterator.next();
-		Integer id = firstTile.getId();
-		Integer firstDice = firstTile.getDiceRequired().getValue();
-		ActionResult actionResult = actionResults.get(0); //allbonus
+		AllBonus actionResult = new AllBonus(); //allbonus
+		actionResult.setGame(game);
 		actionResult.setValue(2);
 		actionResult.applyResult(players.get(1));
-		assertEquals((int) firstDice +2, (int) firstTile.getDiceRequired().getValue());
+		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
 
 
 	}
+
+	@Test
+	public void GreenBonusTest() throws NoSuchMethodException{
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Green).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		GreenBonus actionResult = new GreenBonus(); //allbonus
+		actionResult.setGame(game);
+		actionResult.setValue(3);
+		actionResult.applyResult(players.get(1));
+		assertEquals((int) firstDice -3, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+
+	}
+
+	@Test
+	public void BlueBonusTest() throws NoSuchMethodException{
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Blue).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		BlueBonus actionResult = new BlueBonus(); //allbonus
+		actionResult.setGame(game);
+		actionResult.setValue(2);
+		actionResult.applyResult(players.get(1));
+		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+
+	}
+
 }

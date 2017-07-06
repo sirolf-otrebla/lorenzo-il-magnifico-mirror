@@ -53,7 +53,6 @@ public class YellowBonus extends PermanentBonus{
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -64,6 +63,11 @@ public class YellowBonus extends PermanentBonus{
 	@Override
 	public String toString(){
 		return "Bonus giallo";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override

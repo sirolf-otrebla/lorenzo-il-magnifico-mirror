@@ -73,4 +73,9 @@ public class RemoveTileEffect implements ActionResult {
 	public String toString(){
 		return "Rimuovi eff. Tile";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 }

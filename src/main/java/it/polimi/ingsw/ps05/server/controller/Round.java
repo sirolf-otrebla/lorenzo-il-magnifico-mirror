@@ -27,6 +27,7 @@ public class Round {
         this.game = game;
         this.playerOrder = playerOrder;
         waitingMessageSemaphore = new Semaphore(0);
+
     }
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
@@ -49,6 +50,7 @@ public class Round {
 
     private void executeCommand(){
         try {
+            visitor = new GameCommandsVisitor(this.game.getActivePlayer(), this);
             this.inputMessage.acceptVisitor(visitor);
         } catch (Exception e) {
 

@@ -85,8 +85,14 @@ public class Tile extends TowerTileInterface {
     public  ArrayList<ArrayList<Resource>> getRequirements(){
         // ADDS DICE REQUIREMENT
        ArrayList<ArrayList<Resource>> req = card.getRequirements();
-       for (ArrayList<Resource> andAlternative: req)
-           andAlternative.add(super.getDiceRequirement());
+       if (req.size() == 0) {
+           req.add((new ArrayList<>()));
+           req.get(0).add(this.getDiceRequired());
+
+       }else {
+           for (ArrayList<Resource> andAlternative : req)
+               andAlternative.add(super.getDiceRequirement());
+       }
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;
        if (parentTower.isOccupied())
            for (ArrayList<Resource> andAlternative: req)

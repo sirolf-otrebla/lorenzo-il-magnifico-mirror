@@ -83,7 +83,6 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -94,6 +93,11 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 	@Override
 	public String toString(){
 		return "Azione viola";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override

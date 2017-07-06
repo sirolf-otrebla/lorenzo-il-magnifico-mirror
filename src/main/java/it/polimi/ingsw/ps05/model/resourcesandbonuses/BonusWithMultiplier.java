@@ -102,6 +102,10 @@ public class BonusWithMultiplier extends PermanentBonus {
 		return "Bonus moltipl.";
 	}
 
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 
 
 	@Override

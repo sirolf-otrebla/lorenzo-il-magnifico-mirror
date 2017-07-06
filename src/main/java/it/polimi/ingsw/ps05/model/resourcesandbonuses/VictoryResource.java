@@ -85,4 +85,9 @@ public class VictoryResource implements Resource, ActionResult {
 	public String toString(){
 		return "Punit Vittoria";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+
+	}
 }

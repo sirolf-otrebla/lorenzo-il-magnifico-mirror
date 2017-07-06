@@ -31,7 +31,7 @@ public class FaithResource implements Resource, ActionResult {
 	}
 
 	public Integer getValue() {
-		return this.amount;
+		return this.amount.intValue();
 	}
 
 
@@ -88,5 +88,10 @@ public class FaithResource implements Resource, ActionResult {
 	@Override
 	public String toString(){
 		return "Punti Fede";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
 	}
 }

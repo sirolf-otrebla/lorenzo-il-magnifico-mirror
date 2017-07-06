@@ -88,4 +88,9 @@ public class StoneResource implements Resource, ActionResult {
 	public String toString(){
 		return "Pietra";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
 }

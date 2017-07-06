@@ -51,7 +51,6 @@ public class ProductionBonus extends PermanentBonus {
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -63,6 +62,11 @@ public class ProductionBonus extends PermanentBonus {
 	@Override
 	public String toString(){
 		return "Bonus produzione";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
