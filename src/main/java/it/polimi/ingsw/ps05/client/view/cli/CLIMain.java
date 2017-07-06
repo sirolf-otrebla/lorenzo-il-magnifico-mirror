@@ -36,6 +36,8 @@ import it.polimi.ingsw.ps05.model.cards.BlueCard;
 import it.polimi.ingsw.ps05.model.cards.Card;
 
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -120,7 +122,11 @@ public class CLIMain implements LimView, Runnable{
 		this.player = player;
 		this.playersList = playersList;
 		this.playersList.remove(this.player);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		int width1 = gd.getDisplayMode().getWidth();
+		int height1 = gd.getDisplayMode().getHeight();
+		Dimension screenSize = new Dimension(width1, height1);
 		Double width = (200*screenSize.getWidth()/1280);
 		PREFERRED_WIDTH = width.intValue();
 		Double height = (100*screenSize.getHeight()/800);

@@ -80,6 +80,19 @@ public class Database {
 		}
 	}
 	
+	public int getIdForUsername(String username){
+		try {
+			Statement stmt = c.createStatement();
+			String sql = "SELECT ID FROM data WHERE Username = '" + username + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			return rs.getInt("ID");
+			
+		} catch (Exception e){
+			System.out.println("aggiunta fallita");
+			return -1;
+		}
+	}
+	
 	private void printDatabase(){
 		Statement stmt;
 		try {

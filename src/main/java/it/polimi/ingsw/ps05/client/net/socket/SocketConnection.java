@@ -39,6 +39,7 @@ public class SocketConnection implements Connection {
 					if (message != null){
 						synchronized (this) {
 							System.out.println("received not null");
+							System.out.println(message.toString());
 							ClientMessageVisitor messageTaker =
 									Client.getInstance().getMessageTaker();
 							messageTaker.setInputMessage(message);

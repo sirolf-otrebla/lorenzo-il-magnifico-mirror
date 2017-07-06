@@ -92,7 +92,7 @@ public class ViewAdapter {
             ArrayList<Player> playerArrayList = new ArrayList<>(msg.getStatus().getPlayerHashMap().values());
             System.out.println("(setUpInterface) lunghezza playerArrayList: " + playerArrayList.size() );
             this.view = new CLIMain(msg.getStatus().getGameBoard(),
-                    msg.getStatus().getThisPlayer(), playerArrayList );
+                    msg.getStatus().getThisPlayer(), playerArrayList);
             System.out.println("Sending setup done message");
             SetupDoneMessage setupDoneMessage = new SetupDoneMessage();
             Client.getInstance().sendToServer(setupDoneMessage);
