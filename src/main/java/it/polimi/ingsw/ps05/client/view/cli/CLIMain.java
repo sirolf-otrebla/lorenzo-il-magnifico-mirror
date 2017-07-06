@@ -283,6 +283,7 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	public void updateGame(GameStatus status){
+		System.out.println("Start update game in cli");
 		this.board = status.getGameBoard();
 		this.player = status.getThisPlayer();
 		for (Player p : status.getPlayerHashMap().values()){
@@ -302,7 +303,7 @@ public class CLIMain implements LimView, Runnable{
 			e.printStackTrace();
 			System.exit(1);
 		}
-
+		System.out.println("End update game in cli");
 	}
 
 	private void analizeChar(Character c, TextGraphics textGraphics) throws IOException{
