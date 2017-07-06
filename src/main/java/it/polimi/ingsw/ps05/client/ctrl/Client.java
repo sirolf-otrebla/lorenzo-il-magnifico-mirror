@@ -66,10 +66,6 @@ public class Client {
     public GameStatus getGameStatus() {
         return gameStatus;
     }
-    
-    public void setGameStatus(GameStatus gameStatus){
-    	this.gameStatus = gameStatus;
-    }
 
     
     public void setUsername(String username){

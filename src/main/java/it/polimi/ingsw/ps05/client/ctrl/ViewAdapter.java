@@ -73,13 +73,13 @@ public class ViewAdapter {
                 CliThread.start();
             }
             cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
-            cli.updateBoard(status.getGameBoard());
+            cli.updateGame(status);
         }
     }
 
     public void updateView(GameStatus status){
         CLIMain cli = (CLIMain) this.view;
-        cli.updateBoard(status.getGameBoard());
+        cli.updateGame(status);
         cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
 
 

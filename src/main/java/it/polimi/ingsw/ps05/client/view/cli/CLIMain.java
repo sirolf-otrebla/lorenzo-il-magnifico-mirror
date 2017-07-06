@@ -21,6 +21,7 @@ import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
+import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.cards.VioletCard;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
@@ -281,8 +282,17 @@ public class CLIMain implements LimView, Runnable{
 
 	}
 
-	public void updateBoard(Board board){
-		this.board = board;
+	public void updateGame(GameStatus status){
+		this.board = status.getGameBoard();
+		this.player = status.getThisPlayer();
+		for (Player p : status.getPlayerHashMap().values()){
+			for (Player inThis : playersList){
+				if (p.getPlayerID() == inThis.getPlayerID()){
+					inThis = p;
+					break;
+				}
+			}
+		}
 		try {
 			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows(),graphics);
 			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),graphics);
