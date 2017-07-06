@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.server.net;
 
 
 
+import java.io.IOException;
 import java.util.Observable;
 
 import it.polimi.ingsw.ps05.net.message.NetMessage;
@@ -11,7 +12,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
  */
 public abstract class LimConnection extends Observable {
 
-    public abstract void listen();
+    public abstract void listen() throws ClassNotFoundException, IOException;
     
     public abstract void send(NetMessage mess);
     

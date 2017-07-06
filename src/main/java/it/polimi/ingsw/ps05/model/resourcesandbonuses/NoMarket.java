@@ -45,12 +45,16 @@ public class NoMarket extends PermanentBonus implements ActionResult {
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
 	public Game getGame() {
 		return this.game;
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override

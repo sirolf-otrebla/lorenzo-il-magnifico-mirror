@@ -16,6 +16,7 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	private static final long serialVersionUID = 5972328530854839238L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private transient Game game;
+	private boolean hasListeners = false;
 
 	public AllBonus(Integer value){
 		this.value = value;
@@ -49,8 +50,10 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 		for (ActionSpace a : board.getActSpacesMap().values()){
 			a.setDiceRequirement(new Dice(ColorEnumeration.Any, a.getDiceRequirement().getValue() - this.getValue()));
 		}
-		setChanged();
-		notify();
+		if(hasListeners) {
+			setChanged();
+			notify();
+		}
 	}
 	
 	@Override
@@ -69,8 +72,9 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
+
+
 
 	@Override
 	public Game getGame() {
@@ -80,6 +84,12 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	@Override
 	public String toString(){
 		return "Bonus globale";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
+		hasListeners = true;
 	}
 
 }

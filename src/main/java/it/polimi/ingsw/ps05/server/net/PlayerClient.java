@@ -1,10 +1,10 @@
 
 package it.polimi.ingsw.ps05.server.net;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
@@ -12,8 +12,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.InactivePlayerTask;
-import it.polimi.ingsw.ps05.server.controller.MessageObserver;
-import it.polimi.ingsw.ps05.server.controller.Server;
+import it.polimi.ingsw.ps05.server.controller.ServerNetMessageVisitor;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
 	private int id;
@@ -25,7 +24,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 120000;
+	private static final int  ACT_WAITING_TIME = 120000000;
 
 	private Player pl = null;
 	private boolean plExists = false;
@@ -35,7 +34,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	public PlayerClient(LimConnection netHandler, int id){
 	    this.connection = netHandler;
 	    this.id = id;
-	    this.messageObserver = MessageObserver.getInstance();
+	    this.messageObserver = ServerNetMessageVisitor.getInstance();
 	    addObserver(messageObserver);
 		this.timer = new Timer();
 		netHandler.addObserver(this);
@@ -43,8 +42,14 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 
 	@Override
 	public void run() {
-		if (connection != null)
-		    connection.listen();
+		if (connection != null){
+			try {
+				connection.listen();
+			} catch (ClassNotFoundException | IOException e) {
+				System.err.println("Connessione terminata");
+				connection = null;
+			}
+		}
 	}
 
     @Override
@@ -61,6 +66,11 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 			RejectedMessage mess = new RejectedMessage();
 			this.connection.send(mess);
 		}
+    }
+    
+    public void setPlayer(Player pl){
+    	this.pl = pl;
+    	plExists = true;
     }
 
     public void BuildPlayer( ColorEnumeration color){
@@ -95,11 +105,16 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 		this.active = true;
 		InactivePlayerTask task = new InactivePlayerTask(this.game, this);
 		timer.schedule(task, PlayerClient.ACT_WAITING_TIME);
+		
 	}
 
 	public void setInactive(){
 		this.timer.cancel();
 		this.active = false;
+	}
+	
+	public void setIdAfterLogin(int id){
+		this.id = id;
 	}
 	
 	public int getId(){
@@ -108,7 +123,10 @@ public class PlayerClient extends Observable implements Runnable, Observer{
     
 
 	public void sendMessage(NetMessage message){
-		connection.send(message);
+		if (connection != null){
+			connection.send(message);
+		}
+		
 	}
 
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.server.controller;
 
+import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -10,16 +11,16 @@ import java.util.Observer;
 /**
  * Created by Alberto on 29/06/2017.
  */
-public class MessageObserver implements Observer, NetMessageVisitor {
+public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
 
     private PlayerClient client;
-    private static MessageObserver instance = null;
-    private MessageObserver(){
+    private static ServerNetMessageVisitor instance = null;
+    private ServerNetMessageVisitor(){
         //TODO
     }
 
-    public static MessageObserver getInstance(){
-        if (instance ==  null) instance = new MessageObserver();
+    public static ServerNetMessageVisitor getInstance(){
+        if (instance ==  null) instance = new ServerNetMessageVisitor();
         return instance;
     }
     @Override
@@ -33,8 +34,14 @@ public class MessageObserver implements Observer, NetMessageVisitor {
         }
     }
 
+    @Override
+    public void visit(GameUpdateMessage msg) {
+        //todo errore
+    }
+
     public void visit(GameMessage msg){
         if (this.client.isInGame() == false){
+            //TODO
         }
         else {
             this.client.getGame().getState().setInputMessage(msg);
@@ -53,14 +60,23 @@ public class MessageObserver implements Observer, NetMessageVisitor {
     }
 
     @Override
-    public void visit(LeaderDraftMessage msg) {
+    public void visit(DraftMessage msg) {
 
     }
 
     @Override
+    public void visit(DraftResponseNetMessage msg) {
+        System.out.println("(DraftResponseNetMessage primo visitor");
+        DraftResponseMessageVisitor visitor =
+                new DraftResponseMessageVisitor(this.client);
+        msg.acceptVIsitor(visitor);
+    }
+
+
+    @Override
     public void visit(AuthMessage msg) {
         AuthListener listener = new AuthListener(this.client);
-        System.out.println("messaggio di auth a MessageObserver");
+        System.out.println("messaggio di auth a ServerNetMessageVisitor");
         msg.acceptVisitor(listener);
     }
 

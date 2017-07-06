@@ -83,7 +83,6 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -99,5 +98,10 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	@Override
 	public String toString(){
 		return "Azione gialla";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 }

@@ -11,14 +11,9 @@ public class Database {
 			c = DriverManager.getConnection("jdbc:sqlite:data.sqlite");
 			c.setAutoCommit(true);
 			System.out.println("Opened database successfully");
-			//"CREATE TABLE 'data' ('ID' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
-			//'Username' VARCHAR(16) NOT NULL UNIQUE, 
-			//'Password' VARCHAR(20) NOT NULL, 
-			//'DataAdded' TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-			//'GamePlayed' INTEGER NOT NULL DEFAULT 0, 
-			//'GameWon' INTEGER NOT NULL DEFAULT 0, 
-			//'GameTime' DOUBLE NOT NULL DEFAULT 0)";
-
+			//Statement stmt = c.createStatement();
+			//String sql = "CREATE TABLE 'data' ('ID' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 'Username' VARCHAR(16) NOT NULL UNIQUE, 'Password' VARCHAR(20) NOT NULL, 'DataAdded' TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 'GamePlayed' INTEGER NOT NULL DEFAULT 0, 'GameWon' INTEGER NOT NULL DEFAULT 0, 'GameTime' DOUBLE NOT NULL DEFAULT 0)";
+			//stmt.executeUpdate(sql);
 			
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -71,6 +66,30 @@ public class Database {
 			stmt.executeUpdate(sql);
 		} catch (Exception e){
 			System.out.println("aggiunta fallita");
+		}
+	}
+	
+	public void deleteDatabase(){
+		try{
+			Statement stmt = c.createStatement();
+			String sql = "DELETE FROM 'data'";
+			stmt.executeUpdate(sql);
+			System.out.println("Cancellato");
+		} catch (Exception e){
+			System.out.println("Fallito canc");
+		}
+	}
+	
+	public int getIdForUsername(String username){
+		try {
+			Statement stmt = c.createStatement();
+			String sql = "SELECT ID FROM data WHERE Username = '" + username + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			return rs.getInt("ID");
+			
+		} catch (Exception e){
+			System.out.println("aggiunta fallita");
+			return -1;
 		}
 	}
 	

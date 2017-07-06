@@ -18,7 +18,7 @@ public class Familiar implements Serializable, PlayerRelated {
 	private transient ActionSpace position;
 	private Dice relatedDice;
 	private ColorEnumeration color = NOT_INITIALIZED;
-	private transient Player relatedPlayer = null;
+	private Player relatedPlayer = null;
 
 
 	private ColorEnumeration relatedPlayerColor;

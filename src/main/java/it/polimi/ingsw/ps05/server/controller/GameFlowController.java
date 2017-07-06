@@ -26,11 +26,13 @@ public class GameFlowController implements Runnable {
 
 
 	public GameFlowController(Game game){
+		System.out.println("GFLWCTRL start");
         this.game = game;
         this.exTrigger = new ExcommunicationTriggerListener(this);
 		this.endActionListener = new EndActionListener(this);
 		this.bonusActListener = new BonusActionListener(this);
 		this.limitedBonusActListener = new LimitedBonusActListener(this);
+		System.out.println("GFLWCTRL cons end");
 	}
 
 	public synchronized void setGameInput(NetMessage gameInput) {
@@ -39,6 +41,7 @@ public class GameFlowController implements Runnable {
 	}
 
 	public void sendUpdateMsg(){
+		System.out.println("Sending Update Msg");
 		Board board = this.game.getBoard();
 		Integer activePlayerId = this.game.getActivePlayer().getPlayerID();
 		ArrayList<Player> playerStatusList = new ArrayList<Player>();
@@ -46,29 +49,32 @@ public class GameFlowController implements Runnable {
 			playerStatusList.add(p.getPlayer());
 		for (PlayerClient p : this.game.getPlayerInGame().values()){
 			GameStatus status = new GameStatus(playerStatusList, board, p.getPlayer(), activePlayerId);
-			UpdateMessage updateMessage = new UpdateMessage(status);
+			GameUpdateMessage gameUpdateMessage = new GameUpdateMessage(status);
+			p.sendMessage(gameUpdateMessage);
 		}
 
 	}
 
 	@Override
 	public void run()  {
-		while(game.end){
+		System.out.println("RUN START");
+		System.out.println("Game end: " + game.end);
+		while(!game.end){
 			try {
-
+				System.out.println("game flow ctrl pre turn  ");
 				Turn thisTurn = this.game.gettManager().getTurn();
 				PlayerClient plClient =
-                        game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0));
+                        game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0).getPlayerID());
+				System.out.println("PlClient : " + plClient);
 				plClient.setActive();
-				Player c= thisTurn.getPlayerOrder().get(0);
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
 				this.game.gettManager().loadNextTurn();
 
 			} catch (InterruptedException e ){
-
+				e.printStackTrace();
 			} catch (Exception f){
-
+				f.printStackTrace();
 			}
 		}
 		if (game.end){

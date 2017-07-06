@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps05.server.controller;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
-import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
+import it.polimi.ingsw.ps05.net.message.LeaderDraftUpdateNetMessage;
 import it.polimi.ingsw.ps05.net.message.EndDraftMessage;
-import it.polimi.ingsw.ps05.net.message.StartDraftMessage;
+import it.polimi.ingsw.ps05.net.message.StartLeaderDraftMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 
@@ -26,13 +26,13 @@ public class DraftController implements Runnable{
     private HashMap<ColorEnumeration, ArrayList<Integer>> leaderCardReferenceIdMatrix;
     private ArrayList<LeaderCard> leaderCardArrayList;
     private ArrayList<PlayerClient> clientArrayList;
-    private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap;
-    private HashMap<Integer, LeaderCard> leaderCardHashMap;
+    private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap =  new HashMap<>();
+    private HashMap<Integer, LeaderCard> leaderCardHashMap = new HashMap<>();
 
     public DraftController(ArrayList<PlayerClient> clients, Game game){
-        parser = new CommonJsonParser(clients.size(), game);
+        this.leaderCardArrayList = game.getBoard().getLeaderCardsList();
         ArrayList<PlayerClient> draftClientArrayList = new ArrayList<>();
-        Collections.copy( draftClientArrayList, clients);
+        for (PlayerClient client : clients) draftClientArrayList.add(client);
         leaderCardReferenceIdMatrix = new HashMap<>();
         Collections.shuffle(draftClientArrayList);
         for (PlayerClient client: draftClientArrayList) {
@@ -62,13 +62,18 @@ public class DraftController implements Runnable{
         }
     }
 
-    private synchronized void sendInitialDraftMessage(){
+    private void sendInitialDraftMessage(){
         try {
+        	System.out.println("Pre sem");
             sem.acquire(clientArrayList.size());
-            for (int i = 0; i < this.clientArrayList.size(); i++){
-                new StartDraftMessage(leaderCardReferenceIdMatrix.get(
-                        this.clientArrayList.get(i).getPlayer().getColor()));
-            }
+            System.out.println("sending initial draft");
+            synchronized (this) {
+            	for (int i = 0; i < this.clientArrayList.size(); i++){
+            		this.clientArrayList.get(i).sendMessage(
+                    new StartLeaderDraftMessage(leaderCardReferenceIdMatrix.get(
+                            this.clientArrayList.get(i).getPlayer().getColor())));
+                }
+			}
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -77,25 +82,29 @@ public class DraftController implements Runnable{
     public void run() {
         assignRandomCards();
         sendInitialDraftMessage();
-        for (int index = MAX_LEADER_CARDS; index > 0; index--) {
+        for (int index = MAX_LEADER_CARDS-1; index > 0; index--) {
+        	System.out.println("ciclo delle carte leader. manca : " + index);
             try {
                 sem.acquire(this.clientArrayList.size());
+                ColorEnumeration thisPlayerColor = this.clientArrayList.get(0).getPlayer().getColor();
+                ArrayList<Integer> thisPlayerList = this.leaderCardReferenceIdMatrix.get(thisPlayerColor);
                 for (int j = 0; j < this.clientArrayList.size(); j++){
-
-                    ColorEnumeration thisPlayerColor = this.clientArrayList.get(j).getPlayer().getColor();
                     ArrayList<Integer> tempArrayList = new ArrayList<>();
                     ColorEnumeration nextPlayerColor;
                     if (j == this.clientArrayList.size() -1)
                         nextPlayerColor = this.clientArrayList.get(0).getPlayer().getColor();
                     else
                        nextPlayerColor = this.clientArrayList.get(j+1).getPlayer().getColor();
+                    for (Integer i: this.leaderCardReferenceIdMatrix.get(nextPlayerColor))
+                        tempArrayList.add(i);
 
-                    Collections.copy(tempArrayList, this.leaderCardReferenceIdMatrix.get(nextPlayerColor));
                     this.leaderCardReferenceIdMatrix.remove(nextPlayerColor);
-                    this.leaderCardReferenceIdMatrix.put(nextPlayerColor, tempArrayList);
+                    this.leaderCardReferenceIdMatrix.put(nextPlayerColor,
+                            thisPlayerList);
+                    thisPlayerList = tempArrayList;
                 }
                 for (PlayerClient client : this.clientArrayList){
-                    DraftResponseMessage message = new DraftResponseMessage(this.leaderCardReferenceIdMatrix.get(
+                    LeaderDraftUpdateNetMessage message = new LeaderDraftUpdateNetMessage(this.leaderCardReferenceIdMatrix.get(
                             client.getPlayer().getColor()));
                     client.sendMessage(message);
                 }
@@ -103,6 +112,8 @@ public class DraftController implements Runnable{
                 e.printStackTrace();
             }
         }
+        System.out.println("fuori da ciclo carte leader");
+        System.out.println("Sto per comunicare le carte scelte a tutti");
         for (PlayerClient client : this.clientArrayList){
             Player player = client.getPlayer();
             ArrayList<Integer> playerCardIds = this.choosenCardsMap.get(player.getColor());
@@ -114,6 +125,7 @@ public class DraftController implements Runnable{
             }
             client.sendMessage(message);
         }
+        System.out.println("post comunicato carte");
 
     }
 
@@ -121,5 +133,7 @@ public class DraftController implements Runnable{
         this.choosenCardsMap.get(playerColor).add(leaderCardReferenceID);
         this.leaderCardReferenceIdMatrix.get(playerColor).remove(leaderCardReferenceID);
         sem.release();
+        System.out.println("(DraftController) semaforo rilasciato: numero permessi: \t" +
+                 + sem.availablePermits());
     }
 }

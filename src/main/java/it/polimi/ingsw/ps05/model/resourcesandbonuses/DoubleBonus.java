@@ -66,6 +66,11 @@ public class DoubleBonus extends PermanentBonus {
 	}
 
 	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
+	@Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Tower t : game.getBoard().getTowerList().values()) {
 			for (TowerTileInterface tile : t.getTiles().values()){

@@ -38,6 +38,11 @@ public class NoTowerOccupiedGold extends PermanentBonus {
 	}
 
 	@Override
+	public void linkToGfcObservers() {
+		//TODO
+	}
+
+	@Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Tower t : game.getBoard().getTowerList().values()){
 			t.setRentAmount(Tower.TOWER_RENT_AMNT);

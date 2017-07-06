@@ -1,9 +1,6 @@
 package it.polimi.ingsw.ps05.server.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
 
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -14,19 +11,19 @@ import it.polimi.ingsw.ps05.model.*;
 public class TurnSetupManager extends Observable{
 
 	private Turn turn; //vecchio turno
-	private ArrayList<Turn> turnHistory;
+	private ArrayList<Turn> turnHistory = new ArrayList<>();
 	private  Board board;
 	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
+	private ArrayList<Resource> startResource;
 	
-	private final static int goldAmountStart = 5;
-	private final static int woodAmountStart = 2;
-	private final static int stoneAmountStart = 2;
-	private final static int servantsAmountStart = 3;
-	
-	public TurnSetupManager(ArrayList<Player> playersConnected, Board board){
+	public TurnSetupManager(ArrayList<Player> playersConnected, Board board, ArrayList<Resource> startingResource){
 		this.board = board;
 		this.playersConnected = playersConnected;
+		this.startResource = startingResource;
+		System.out.println("Starting resource: " + startingResource.size());
+		System.out.println("Start resource: " + this.startResource.size());
 		this.turn = setupFirstTurn();
+		
 	}
 	
 	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
@@ -59,6 +56,9 @@ public class TurnSetupManager extends Observable{
 		}
 		//council, serve spostare anche l'ordine dei giocatori
 		ArrayList<Player> list = board.getPlayerOnCouncil();
+		if (list == null){
+			list = new ArrayList<>();
+		}
 		board.setPlayerOnCouncil(null);
 		updatePlayerOrder(list,next);
 	}
@@ -67,8 +67,7 @@ public class TurnSetupManager extends Observable{
 		for (Player o : currentTurn.getPlayerOrder()){
 			for (Familiar f : o.getFamilyList()){
 				for (Dice d : currentTurn.getDice()){
-					if (f.getColor().equals(d.getColor())){
-						//System.out.println("Setting " + d.getValue()+ " " + d.getColor().toString() + " for familiar color " + f.getColor().toString());
+					if (f.getColor() == d.getColor()){
 						f.setDice(d);
 						break;
 					}
@@ -122,21 +121,25 @@ public class TurnSetupManager extends Observable{
 	}
 	
 	private ArrayList<Player> setRandomPlayerOrder(){
-		ArrayList<Player> orderToSet = new ArrayList<Player>();
-		int size = playersConnected.size();
-		for (int i = 0; i < size; i++){
-			orderToSet.add(playersConnected.get(new Random().nextInt(playersConnected.size())));
-			playersConnected.remove(orderToSet.get(i));
-			
+		ArrayList<Player> plList = new ArrayList<>();
+		plList.ensureCapacity(this.playersConnected.size());
+		for( Player pl : playersConnected){
+			plList.add(pl);
 		}
-		for (int i = 0; i < orderToSet.size(); i++){
-			Player player = orderToSet.get(i);
-			player.addResource(new GoldResource(goldAmountStart + i));
-			player.addResource(new WoodResource(woodAmountStart));
-			player.addResource(new StoneResource(stoneAmountStart));
-			player.addResource(new ServantResource(servantsAmountStart));
+		System.out.println("player order size in turn setup manager: " + plList.size());
+		System.out.println("Start resource: " + startResource.size());
+		Collections.shuffle(plList);
+		for (int i = 0; i < plList.size(); i++){
+			for (Resource r : startResource){
+				System.out.println(r.toString() + " " + r.getValue());
+				plList.get(i).addResource(r);
+				if (r.getID().equals(GoldResource.id)){
+					r.setValue(r.getValue() + 1);
+				}
+				
+			}
 		}
-		return orderToSet;
+		return plList;
 	}
 	
 	public Turn getTurn(){

@@ -94,4 +94,9 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 	public String toString(){
 		return "Azione raccolto";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
+	}
 }

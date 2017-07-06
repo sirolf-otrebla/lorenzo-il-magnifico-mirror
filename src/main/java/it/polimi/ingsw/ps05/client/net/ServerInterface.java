@@ -8,18 +8,20 @@ import it.polimi.ingsw.ps05.client.ctrl.Client;
 public class ServerInterface implements Runnable{
 
     private Connection connection;
-    public static ServerInterface serverInterface;
+    private static ServerInterface serverInterface;
 
     private ServerInterface() {
     }
 
     public static ServerInterface getInstance(){
-        if (serverInterface == null) return new ServerInterface();
-        else return  serverInterface;
+        if (serverInterface == null) serverInterface = new ServerInterface();
+        return  serverInterface;
     }
 
     public void setConnection(Connection connection) {
+        ;
         this.connection = connection;
+        System.out.println("connessione registrata");
     }
     
     public Connection getConnection(){

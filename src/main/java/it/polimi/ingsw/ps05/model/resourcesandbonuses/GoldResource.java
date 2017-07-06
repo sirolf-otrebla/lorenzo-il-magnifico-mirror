@@ -34,11 +34,16 @@ public class GoldResource implements Resource, ActionResult {
 
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
+		if (this.getValue() - amount < 0) {
+			throw new NotEnoughResourcesException();
+		}
 		setValue(this.getValue() - amount);
 	}
 
 	@Override
-	public void remove(Resource res) {
+	public void remove(Resource res) throws NotEnoughResourcesException, IllegalMethodCallException {
+		if (!res.getID().equals(this.getID())) throw new IllegalMethodCallException();
+		if (this.getValue() - res.getValue() < 0) throw new NotEnoughResourcesException();
 		setValue(this.getValue() - res.getValue());
 	}
 
@@ -80,5 +85,10 @@ public class GoldResource implements Resource, ActionResult {
 	@Override
 	public String toString(){
 		return "Oro";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		//TODO
 	}
 }

@@ -25,7 +25,7 @@ public abstract class ActionSpace implements Serializable, VisitableFromView{
 	 */
 	private static final long serialVersionUID = -3124416903238969687L;
 
-	private boolean isOccupied;
+	private boolean isOccupied = false;
 
 	//todo: sistemare sta porcata dello static
 	// serve per assegnare gli id

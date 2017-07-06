@@ -41,7 +41,9 @@ public class CliTileVIewObject extends TowerTileViewObject {
     }
 
     @Override
-    public void notifyObservers(){
-        super.notifyObservers(this);
+    public void notifyToActionHandler() {
+        setChanged();
+        notifyObservers(this);
     }
+
 }

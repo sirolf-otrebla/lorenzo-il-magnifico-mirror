@@ -4,9 +4,7 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.net.GameStatus;
-import it.polimi.ingsw.ps05.net.message.DraftResponseMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -19,7 +17,7 @@ public class Game implements Observer {
     private int id;
     private GameSetup setup;
     private  GameFlowController flowCtrl;
-    public boolean end;
+    public boolean end = false;
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
@@ -30,7 +28,7 @@ public class Game implements Observer {
     private DraftController draftController;
     private Thread draftControllerThread;
     private static final int MAX_LEADER_CARDS = 4;
-    private boolean useCompleteRules = true;
+    private boolean useCompleteRules = false;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
     private Semaphore semStart;
@@ -38,42 +36,56 @@ public class Game implements Observer {
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
-        this.id = id;
-        this.semStart = new Semaphore(0);
-        this.useCompleteRules = useCompleteRules;
-        this.useCustomBonusTiles = useCustomBonusTiles;
-        this.clientHashMap = new HashMap<Integer, PlayerClient>();
-        for (PlayerClient client: clientList){
-            clientHashMap.put(client.getId(), client);
-            client.setInGame(this);
+        synchronized (this) {
+            this.id = id;
+            this.semStart = new Semaphore(0);
+            this.useCompleteRules = useCompleteRules;
+            this.useCustomBonusTiles = useCustomBonusTiles;
+            this.clientHashMap = new HashMap<Integer, PlayerClient>();
+            for (PlayerClient client : clientList) {
+                clientHashMap.put(client.getId(), client);
+                client.setInGame(this);
+            }
         }
         this.excommList = new ArrayList<>();
     }
 
     public void start() throws InterruptedException {
+        ArrayList<PlayerClient> playerClients = new ArrayList<PlayerClient>(clientHashMap.values());
         ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < clientHashMap.size(); i++) {
-            clientHashMap.get(i).BuildPlayer(ColorEnumeration.values()[i]);
-            players.add(clientHashMap.get(i).getPlayer());
+        ColorEnumeration[] colorEnumerationAssignationArray = {
+                ColorEnumeration.Green,
+                ColorEnumeration.Yellow,
+                ColorEnumeration.Blue,
+                ColorEnumeration.Red
+        };
+        Collections.shuffle(playerClients);
+        for (int i = 0; i < playerClients.size(); i++) {
+            playerClients.get(i).BuildPlayer(colorEnumerationAssignationArray[i]);
+            players.add(playerClients.get(i).getPlayer());
         }
         this.flowCtrl = new GameFlowController(this);
         this.flowCrlThread = new Thread(flowCtrl);
         this.setup = new GameSetup(players, this);
         this.gBoard = this.setup.getBoard();
-        tManager = this.setup.getTurnSetup();
+        tManager = this.setup.getTurnSetupManager();
         for (PlayerClient client: this.clientHashMap.values()) {
             GameStatus status = new GameStatus( players,  this.gBoard, client.getPlayer(), GameStatus.NO_PLAYER_ACTIVE);
             client.sendMessage(new GameSetupMessage(status));
         }
+        Server.getInstance().registerGame(this);
         // waiting to start
          semStart.acquire(clientHashMap.size());
         // starting
+         System.out.println("Complete rules: " + useCompleteRules + "\tBonus Tile" + useCustomBonusTiles);
         if (useCompleteRules || useCustomBonusTiles){
         	draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
             this.draftControllerThread = new Thread(draftController);
             this.draftControllerThread.start();
             draftControllerThread.join();
+            System.out.println("post draft");
         }
+        System.out.println("Starting game flow");
         this.flowCrlThread.start();
     }
 
@@ -125,9 +137,11 @@ public class Game implements Observer {
     }
 
     public void setActivePlayer(Player nextPlayer) {
-        this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
-        this.activePlayer = nextPlayer;
-        this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
+    	if (activePlayer != null)
+    		this.clientHashMap.get(activePlayer.getPlayerID()).setInactive();
+            this.activePlayer = nextPlayer;
+            this.clientHashMap.get(nextPlayer.getPlayerID()).setActive();
+        
     }
 
     public Board getBoard() {
@@ -148,5 +162,13 @@ public class Game implements Observer {
 
     public Semaphore getSemStart() {
         return semStart;
+    }
+
+    public DraftController getDraftController() {
+        return draftController;
+    }
+
+    public void setgBoard(Board gBoard) {
+        this.gBoard = gBoard;
     }
 }

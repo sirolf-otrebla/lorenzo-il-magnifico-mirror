@@ -1,9 +1,8 @@
 package it.polimi.ingsw.ps05.net.message;
 
 import it.polimi.ingsw.ps05.client.ctrl.AuthResponseVisitor;
-import it.polimi.ingsw.ps05.client.net.ClientMessageTaker;
+import it.polimi.ingsw.ps05.client.net.ClientMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
-import sun.nio.ch.Net;
 
 /**
  * Created by Alberto on 02/07/2017.
@@ -31,7 +30,7 @@ public class LoggedMessage implements AuthResponseMessage {
     }
 
     @Override
-    public void acceptVisitor(ClientMessageTaker vi) {
+    public void acceptVisitor(ClientMessageVisitor vi) {
         vi.visit(this);
     }
 }

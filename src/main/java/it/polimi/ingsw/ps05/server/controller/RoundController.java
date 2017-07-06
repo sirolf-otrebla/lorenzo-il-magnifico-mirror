@@ -21,12 +21,14 @@ public class RoundController {
         this.turn = turn;
         this.playerOrder = turn.getPlayerOrder();
         this.roundList = new  ArrayList<Round>();
+        this.game = game;
     }
 
     public void executeTurn() throws InterruptedException{
         for (int i = 0; i < Game.FAM_DIM ; i++){
             Round round = new Round(playerOrder, game);
             round.executeRound();
+            roundList.add(round);
         }
     }
 

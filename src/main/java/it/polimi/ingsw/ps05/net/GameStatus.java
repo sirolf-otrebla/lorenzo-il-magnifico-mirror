@@ -41,4 +41,7 @@ public class GameStatus implements Serializable{
         this.thisPlayer = thisPlayer;
     }
 
+    public Integer getActivePlayerId() {
+        return activePlayerId;
+    }
 }

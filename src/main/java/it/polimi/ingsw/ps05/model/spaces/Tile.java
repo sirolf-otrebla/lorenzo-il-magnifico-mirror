@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -21,7 +20,7 @@ public class Tile extends TowerTileInterface {
 	 * 
 	 */
 	private static final long serialVersionUID = 1979532547287923081L;
-	private transient Tower parentTower;
+	private Tower parentTower;
     private TowerCard card;
 
     private Boolean hasMorePaymentOptions = false;
@@ -40,8 +39,18 @@ public class Tile extends TowerTileInterface {
     	super();
         if (card.requirements.size() > 1) this.hasMorePaymentOptions = true;
     	this.parentTower = parentTower;
-    	this.card = card;
+    	this.card = card; 
     	super.setDiceRequirement( new Dice(ColorEnumeration.Any, diceRequired));
+    }
+    
+    @Override
+    public void setOccupied(Familiar f){
+    	super.setOccupied(f);
+    }
+    
+    @Override
+    public boolean isOccupied(){
+    	return super.isOccupied();
     }
     
     @Override
@@ -75,17 +84,18 @@ public class Tile extends TowerTileInterface {
     public  ArrayList<ArrayList<Resource>> getRequirements(){
         // ADDS DICE REQUIREMENT
        ArrayList<ArrayList<Resource>> req = card.getRequirements();
-       for (ArrayList<Resource> andAlternative: req)
-           andAlternative.add(super.getDiceRequirement());
+       if (req.size() == 0){
+    	   req.add(new ArrayList<>());
+    	   req.get(0).add(this.getDiceRequired());
+       } else {
+    	   for (ArrayList<Resource> andAlternative: req)
+               andAlternative.add(super.getDiceRequirement());
+       }
        // ADD TOWER OCCUPIED GOLD REQUIREMENT;
        if (parentTower.isOccupied())
            for (ArrayList<Resource> andAlternative: req)
                andAlternative.add(new GoldResource(Tile.TOWER_OCCUPIED_PAYMENT));
        return req;
-    }
-  
-    public boolean isOccupied() {
-        return  super.isOccupied();
     }
 
     @Override
@@ -107,7 +117,7 @@ public class Tile extends TowerTileInterface {
 
     @Override
     public void acceptVisitor(ViewVisitorInterface vi) {
-
+    	//TODO
     }
     
     @Override

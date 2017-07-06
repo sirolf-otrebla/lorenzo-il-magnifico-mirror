@@ -16,7 +16,9 @@ public class BlueBonus extends Observable implements ActionResult {
 	private static final long serialVersionUID = 3795604773294229746L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	private transient Game game;
-	
+	private boolean hasListeners = false;
+
+
 	public BlueBonus(Integer value){
 		this.value = value;
 	}
@@ -44,8 +46,10 @@ public class BlueBonus extends Observable implements ActionResult {
 				}
 			}
 		}
-		setChanged();
-		notify();
+		if(hasListeners) {
+			setChanged();
+			notify();
+		}
 	}
 	
 	public void resetResult(PlayerRelated playerR){
@@ -62,7 +66,6 @@ public class BlueBonus extends Observable implements ActionResult {
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -73,5 +76,12 @@ public class BlueBonus extends Observable implements ActionResult {
 	@Override
 	public String toString(){
 		return "Bonus blu";
+	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
+		hasListeners = true;
+
 	}
 }

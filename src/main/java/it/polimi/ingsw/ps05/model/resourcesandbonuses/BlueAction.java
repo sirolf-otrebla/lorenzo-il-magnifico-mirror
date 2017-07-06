@@ -106,5 +106,11 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	public String toString(){
 		return "Azione blu";
 	}
+
+	@Override
+	public void linkToGfcObservers() {
+		addObserver(this.game.getGameFlowctrl().bonusActListener);
+
+	}
 }
 

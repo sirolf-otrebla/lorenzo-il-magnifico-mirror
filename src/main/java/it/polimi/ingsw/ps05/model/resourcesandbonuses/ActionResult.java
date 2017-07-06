@@ -20,5 +20,7 @@ public interface ActionResult extends Serializable {
     @Override
     public String toString();
 
+    public void linkToGfcObservers();
+
 
 }

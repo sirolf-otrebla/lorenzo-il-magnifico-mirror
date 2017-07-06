@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps05.model.cards.Card;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
@@ -120,7 +121,8 @@ public class CliTerminalForCardsList {
 				System.out.println(requirementsSelected.toString());
 				break;
 			case Enter:
-				enterDetected = true;
+				if (selectedCards.size() != 0)
+					enterDetected = true;
 				break;
 			case Character:
 				if (keyStroke.getCharacter() == ' '){
@@ -128,16 +130,18 @@ public class CliTerminalForCardsList {
 						selectedCards.remove(cards.get(indiceCarta));
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
 					} else if (numMaxCardSelectable > selectedCards.size()){
-						selectedCards.add((TowerCard)cards.get(indiceCarta));
+						selectedCards.add((Card)cards.get(indiceCarta));
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
 					}
 				}
 				
 				break;
+			case Escape:
+				enterDetected = true;
+				break;
 
 			default:
 				System.out.println("Default");
-				System.out.println(cardTerminal.getTerminalSize().toString());
 				break;
 			}
 			cardTerminal.setCursorPosition(((indiceCarta+1)*currentWidth/(cards.size()) - currentWidth/(2*cards.size())), stdCursorPositionY);
@@ -176,12 +180,34 @@ public class CliTerminalForCardsList {
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				card.getName());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
+				"Costi:");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		try {
+			for (ArrayList<Resource> choseOr : card.getRequirements()){
+				for (Resource res : choseOr){
+					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
+					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				}
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
+			}
+		} catch (Exception e){
+			//requirementList == null, non fare niente cercare di risolvere
+		}
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
 			for (Effect effect : card.getEffects()){
-				if (effect instanceof ActivableEffect) {
-					textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				if (!(effect instanceof ActivableEffect)) {
+					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					}
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				} else {
 					lastPos = activableEffect(lastPos,(ActivableEffect)effect,textGraphics);
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);

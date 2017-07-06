@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps05.net.message.LoggedMessage;
 import it.polimi.ingsw.ps05.net.message.LoginMessage;
 import it.polimi.ingsw.ps05.net.message.RegisteredMessage;
 import it.polimi.ingsw.ps05.net.message.RegistrationMessage;
+import it.polimi.ingsw.ps05.server.database.Database;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 /**
@@ -23,10 +24,13 @@ public class AuthListener {
                 msg.getUsername(), msg.getPassword())){
             client.setUsername(msg.getUsername());
             System.out.println("inserisco nuovo client");
+            int id = Database.getInstance().getIdForUsername(msg.getUsername());
+            if (id >= 0){
+            	this.client.setIdAfterLogin(id);
+            }
+            client.sendMessage(new LoggedMessage(LoggedMessage.STATUS_LOGGED));
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
-            client.sendMessage(new LoggedMessage(LoggedMessage.STATUS_LOGGED));
-
         } else {
             this.client.setLogged(false);
             client.sendMessage(new LoggedMessage(LoggedMessage.STATUS_FAILED_LOGIN));
@@ -38,6 +42,10 @@ public class AuthListener {
                 msg.getUsername(), msg.getPassword())){
             client.setUsername(msg.getUsername());
             System.out.println("inserisco nuovo client");
+            int id = Database.getInstance().getIdForUsername(msg.getUsername());
+            if (id >= 0){
+            	this.client.setIdAfterLogin(id);
+            }
             Server.getInstance().putNewClient(client);
             this.client.setLogged(true);
             client.sendMessage(new RegisteredMessage(RegisteredMessage.STATUS_REGISTERED));

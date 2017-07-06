@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,9 +27,17 @@ public class MarkerWidget {
     public static final double MARKER_RADIUS = 14;
     public static final int INITIAL_POINTS = 0;
 
-    private int referenceID;
+    public static final String VICTORY = VictoryResource.ID;
+    public static final String MILITARY = MilitaryResource.id;
+    public static final String FAITH = FaithResource.ID;
+    public static final String PLAYER_ORDER = "playerOrder";
+
+
+
+    private String referenceID;
     private StackPane stack;
     private Circle markerCircle;
+    private Integer intPoints;
     private Text points;
     private String imagePath;
 
@@ -72,11 +83,11 @@ public class MarkerWidget {
         markerCircle.setFill(new ImagePattern(markerImage));
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         referenceID = ID;
     }
 
-    public int getID() {
+    public String getID() {
         return referenceID;
     }
 
@@ -84,6 +95,13 @@ public class MarkerWidget {
         return stack;
     }
 
+    public Integer getIntPoints() {
+        return intPoints;
+    }
+
+    public void setIntPoints(Integer intPoints) {
+        this.intPoints = intPoints;
+    }
     public Text getPoints() {
         return points;
     }

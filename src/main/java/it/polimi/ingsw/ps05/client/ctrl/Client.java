@@ -1,8 +1,7 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.client.net.ClientMessageTaker;
+import it.polimi.ingsw.ps05.client.net.ClientMessageVisitor;
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
-import it.polimi.ingsw.ps05.client.view.gui.Login;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
@@ -25,12 +24,13 @@ public class Client {
     private GameStatus gameStatus;
     private String username;
     private Integer id;
-    private ClientMessageTaker messageVisitor;
+    private boolean inGame;
+    private ClientMessageVisitor messageVisitor;
     private LoginController loginController;
     private ViewAdapter viewAdapter;
 
     private Client(){
-        messageVisitor = new ClientMessageTaker();
+        messageVisitor = new ClientMessageVisitor();
         loginController = new LoginController();
         //TODO ATTIVA LOBBY
         //TODO GESTISCE CONNESSIONE
@@ -59,6 +59,7 @@ public class Client {
 
     }
     public void sendToServer(NetMessage message){
+        this.serverInterface = ServerInterface.getInstance();
     	serverInterface.getConnection().send(message);
     }
 
@@ -88,26 +89,39 @@ public class Client {
     }
 
     public void linkToObserver(TowerTileViewObject observable){
+        System.out.println("aggiungo observable");
         observable.addObserver(this.takeCardListener);
     }
 
     public void linkToObserver(HarvestSpaceViewObject observable){
-
+    	//TODO
     }
 
     public void linkToObserver(ProductionSpaceViewObject observable){
-
+    	//TODO
     }
 
     public void launchLoginForm(){
-        ;
+        //TODO
     }
 
-    public ClientMessageTaker getMessageTaker() {
+    public ClientMessageVisitor getMessageTaker() {
         return messageVisitor;
     }
 
     public LoginController getLoginController() {
         return loginController;
+    }
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }

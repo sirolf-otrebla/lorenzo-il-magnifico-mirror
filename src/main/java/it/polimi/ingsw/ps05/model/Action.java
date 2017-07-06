@@ -8,6 +8,9 @@ import it.polimi.ingsw.ps05.model.exceptions.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/** This class represent an Action during a game round. It is executed on server and modify the game state
+ *
+ */
 public class Action implements Period {
 
 	/**
@@ -21,7 +24,6 @@ public class Action implements Period {
 	public static final int THIRD_OPTION = 2;
 
 
-	private Player player;
 	private Familiar familiar;
 	private ActionSpace position;
 
@@ -53,7 +55,7 @@ public class Action implements Period {
 		// 1
 		if (this.isLegal) return true;
 		if (this.familiar.isUsed()) return false;
-		if (this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
+		if (position != null && this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
 
 		// 2- 2b)
 		ArrayList<ArrayList<Resource>> list = this.position.getRequirements();
