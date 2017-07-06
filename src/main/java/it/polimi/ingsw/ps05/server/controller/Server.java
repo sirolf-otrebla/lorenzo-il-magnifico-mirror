@@ -33,7 +33,6 @@ public class Server {
     }
 
     public void  startServer(int waitingTime, boolean useCompleteRules, boolean useCustomTiles){
-        serverLobby = new Lobby(waitingTime, useCompleteRules, useCustomTiles);
         globalClientMap = new HashMap<>();
         this.serverLobby = new Lobby(waitingTime,useCompleteRules, useCustomTiles);
         Thread lobbyThread = new Thread(this.serverLobby);
