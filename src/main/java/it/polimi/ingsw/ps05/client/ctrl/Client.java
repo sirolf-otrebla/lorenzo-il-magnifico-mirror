@@ -89,6 +89,7 @@ public class Client {
     }
 
     public void linkToObserver(TowerTileViewObject observable){
+        System.out.println("aggiungo observable");
         observable.addObserver(this.takeCardListener);
     }
 

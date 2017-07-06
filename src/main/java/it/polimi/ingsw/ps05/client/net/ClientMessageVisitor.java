@@ -22,6 +22,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
 
     @Override
     public void visit(GameUpdateMessage msg) {
+        System.out.println("Primo visitor, GameUpdateMsg");
         if (Client.getInstance().isInGame()){
             ViewAdapter.getInstance().updateView(msg.getGameStatus());
         }else {
@@ -81,6 +82,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
                 sem.acquire();
                 if(this.inputMessage == null) continue;
                 System.out.println("ho ricevuto qualcosa di bellissimo dal server");
+                System.out.println(inputMessage.toString());
                 this.inputMessage.acceptVisitor(this);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class GameUpdateMessage implements GameMessage{
 
+    public static final String MESSAGE = "GameUpdateMessage Here!";
     private GameStatus gameStatus;
 
     public GameUpdateMessage(GameStatus gameStatus){
@@ -21,15 +22,19 @@ public class GameUpdateMessage implements GameMessage{
     }
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+        vi.visit(this);
     }
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
+        // in futuro
     }
 
     public GameStatus getGameStatus() {
         return gameStatus;
+    }
+
+    public String toString(){
+        return MESSAGE;
     }
 }
