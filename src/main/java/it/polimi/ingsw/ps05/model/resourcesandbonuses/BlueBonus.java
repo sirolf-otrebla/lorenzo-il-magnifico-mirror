@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 
 import java.util.Observable;
 
-public class BlueBonus extends Observable implements ActionResult {
+public class BlueBonus extends PermanentBonus implements ActionResult {
 	/**
 	 * 
 	 */
