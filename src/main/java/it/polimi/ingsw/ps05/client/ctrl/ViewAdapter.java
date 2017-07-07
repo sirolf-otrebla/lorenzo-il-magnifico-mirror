@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
@@ -115,6 +116,17 @@ public class ViewAdapter {
                     new LeaderDraftChoiceMessage(cardChoosen);
             Client.getInstance().sendToServer(responseMessage);
         }
+    }
+    
+    public ArrayList<ActionResult> showPrivilegeConversion(ArrayList<ArrayList<ActionResult>> list, int resToChose){
+    	if (this.viewType == this.GUI_TYPE) {
+            // TODO
+
+        } else {
+            CLIMain cliView = (CLIMain) this.view;
+            //TODO
+        }
+    	return null;
     }
 
     public void startDraft(ArrayList<Integer> draftIDs){

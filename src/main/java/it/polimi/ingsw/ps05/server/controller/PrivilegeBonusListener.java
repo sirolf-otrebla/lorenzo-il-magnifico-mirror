@@ -1,9 +1,11 @@
 package it.polimi.ingsw.ps05.server.controller;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewAdapter;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.PrivilegeBonus;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -15,6 +17,8 @@ import java.util.Observer;
 public class PrivilegeBonusListener implements Observer {
 
     private static PrivilegeBonusListener singleton = null;
+    
+    ArrayList<ArrayList<ActionResult>> conversionList = new ArrayList<ArrayList<ActionResult>>();
 
 
     private PrivilegeBonusListener(){
@@ -29,15 +33,16 @@ public class PrivilegeBonusListener implements Observer {
     }
     private ArrayList<ActionResult> notifyToUI(int resToChoose){
         //TODO:
-    	//imposto io un risultato predefinito per la prova
-    	ArrayList<ActionResult> res = new ArrayList<ActionResult>();
-    	res.add(new GoldResource(2));
-    	res.add(new FaithResource(1));
-        return res;
+    	return ViewAdapter.getInstance().showPrivilegeConversion(conversionList, resToChoose);
+        
     }
     public static PrivilegeBonusListener getInstance(){
         if ( singleton == null)
             singleton = new PrivilegeBonusListener();
         return singleton;
+    }
+    
+    public void setConversionResource(ArrayList<ArrayList<ActionResult>> list){
+    	this.conversionList = list;
     }
 }

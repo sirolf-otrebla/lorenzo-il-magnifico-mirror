@@ -45,7 +45,7 @@ public class GUIMain extends Application {
 
 	private HashMap<ColorEnumeration, TowerCardWidget[]> towerCardWidgetLists = new HashMap<>();
 	// private TowerCardWidget[][] towerCardWidgetLists = new TowerCardWidget[4][4];
-	private HashMap<ColorEnumeration, VBox> towerCardBoxesArray = new HashMap<>() ;
+	private HashMap<ColorEnumeration, VBox> towerCardBoxesArray = new HashMap<>();
 	private HashMap<ColorEnumeration, TowerTileWidget[]> towerTileWidgetLists = new HashMap<>();
 	//private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
 	private HashMap<ColorEnumeration, VBox> towerTilesBoxes = new HashMap<>();
@@ -108,7 +108,7 @@ public class GUIMain extends Application {
 		/* Create root pane */
 		final Pane root = new Pane();
 		root.setId("root");
-
+		
 
 
 		/* Add tower cards and tower action spaces */
@@ -120,13 +120,19 @@ public class GUIMain extends Application {
 		TowerTileWidget[] towerTileWidgetArray; // array di spazi azione della stessa torre
 
 
-		for (int i = 0; i < 4; i++) towerCardBoxesArray.put(towerColorArray[i], new VBox());
+		for (int i = 0; i < 4; i++) { 
+			towerCardBoxesArray.put(towerColorArray[i], new VBox());
+		}
+		System.out.println(towerCardBoxesArray.size());
 		for (int i = 0; i < 4; i++) {
 			towerCardBox = towerCardBoxesArray.get(towerColorArray[i]);
 			System.out.println(towerColorArray[i].toString());
+			System.out.println("StageWidth " + stageWidth);
 			towerCardBox.setSpacing((0.06 / 100) * stageHeight); //TODO spacing di prova, controllare
+			System.out.println("x of tower " + (0.8684 + 10.9 * i) / 100 * stageWidth);
 			towerCardBox.setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
 			towerCardBox.setLayoutY((1.4168 / 100) * stageHeight);
+			System.out.println(i + ": x=" + towerCardBox.getLayoutX() + ", y=" + towerCardBox.getLayoutY());
 			// towerBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8)); //TODO controllare se crea problemi
 			root.getChildren().add(towerCardBox);
 		}
@@ -155,6 +161,9 @@ public class GUIMain extends Application {
 			for (int j = 0; j < 4; j++) {
 				towerCardWidgetLists.get(towerColorArray[i])[j] = new TowerCardWidget(); // creating empty cards
 				towerCardBoxesArray.get(towerColorArray[i]).getChildren().add(towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage()); // placing empty cards on towers
+				System.out.println("tower color i: " + towerColorArray[i]);
+				System.out.println("tower card widget for color: " + towerCardWidgetLists.get(towerColorArray[i])[j]);
+				System.out.println("get image: " + towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage());
 			}
 		}
 
@@ -414,6 +423,7 @@ public class GUIMain extends Application {
 
 
 		File f = new File("./src/main/res/fx-style.css");
+		System.out.println("css exist? " + f.exists());
 		mainScene.getStylesheets().add(f.toURI().toURL().toString());
 
 		stage.setScene(mainScene);
