@@ -5,5 +5,5 @@ package it.polimi.ingsw.ps05.server.controller.endactionstrategies;
  */
 public interface EndActionStrategy {
 
-    void execute();
+    void execute(EndActionStrategyContainer container);
 }

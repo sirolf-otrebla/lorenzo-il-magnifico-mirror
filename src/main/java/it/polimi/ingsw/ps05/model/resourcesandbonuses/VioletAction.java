@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.spaces.VioletTower;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.Board;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Iterator;
 import java.util.Observable;
@@ -60,9 +62,9 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 		}
 		Iterator<ActionSpace> iterator = board.getActSpacesMap().values().iterator();
 		while(iterator.hasNext()) iterator.next().addFalseResource();
-		//notifica observer
-		setChanged();
-		notify();
+
+		this.game.getEndActionStrategyContainer().setChosenStrategy(
+				new BonusActionStrategy(ColorEnumeration.Violet, f));
 	}
 	
 	public void resetResult(PlayerRelated playerR){
