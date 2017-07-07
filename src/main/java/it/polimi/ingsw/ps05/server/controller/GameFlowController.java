@@ -9,9 +9,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.*;
-import it.polimi.ingsw.ps05.server.controller.actionlisteners.BonusActionListener;
-import it.polimi.ingsw.ps05.server.controller.actionlisteners.EndActionListener;
-import it.polimi.ingsw.ps05.server.controller.actionlisteners.LimitedBonusActListener;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;
@@ -22,19 +19,12 @@ public class GameFlowController implements Runnable {
 	private NetMessage gameInput = null;
 	private Game game;
 
-	public BonusActionListener bonusActListener;
 	public ExcommunicationTriggerListener exTrigger;
-	public EndActionListener endActionListener;
-	public LimitedBonusActListener limitedBonusActListener;
-
 
 	public GameFlowController(Game game){
 		System.out.println("GFLWCTRL start");
         this.game = game;
         this.exTrigger = new ExcommunicationTriggerListener(this);
-		this.endActionListener = new EndActionListener(this);
-		this.bonusActListener = new BonusActionListener(this);
-		this.limitedBonusActListener = new LimitedBonusActListener(this);
 		System.out.println("GFLWCTRL cons end");
 	}
 
