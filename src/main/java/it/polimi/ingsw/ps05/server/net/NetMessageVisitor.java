@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps05.server.net;
 
 import it.polimi.ingsw.ps05.net.message.*;
-import it.polimi.ingsw.ps05.server.controller.DraftResponseMessageVisitor;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
 
 /**
  * Created by Alberto on 14/06/2017.

@@ -1,7 +1,11 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.net.message.BonusActionTriggerMessage;
-import it.polimi.ingsw.ps05.net.message.GameUpdateMessage;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.net.message.gamemessages.BonusActionTriggerMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ConvertPrivilegeTriggerMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameUpdateMessage;
+
+import java.util.ArrayList;
 
 /**
  * Created by Alberto on 07/07/2017.
@@ -22,9 +26,11 @@ public class GameResponseMessageVisitor {
     }
 
     public void visit(BonusActionTriggerMessage msg){
+        //TODO
+    }
 
-
-
-
+    public void visit(ConvertPrivilegeTriggerMessage msg){
+        ArrayList<Resource> resources = msg.getConversionList();
+        Integer privileges = msg.getPrivilegeNum();
     }
 }

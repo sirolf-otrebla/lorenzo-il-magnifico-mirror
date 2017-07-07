@@ -1,9 +1,8 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.gamemessages;
 
 import it.polimi.ingsw.ps05.client.ctrl.GameResponseMessageVisitor;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
@@ -11,7 +10,7 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class BonusActionTriggerMessage implements GameResponseMessage {
 
-    private  GameUpdateMessage gameUpdateMessage;
+    private GameUpdateMessage gameUpdateMessage;
     private Familiar ghostFamiliar;
 
 

@@ -15,5 +15,7 @@ public class MoveNextPlayerStrategy implements EndActionStrategy {
     @Override
     public void execute(EndActionStrategyContainer container) {
         game.getState().nextState();
+
+        //TODO GAME STATUS
     }
 }

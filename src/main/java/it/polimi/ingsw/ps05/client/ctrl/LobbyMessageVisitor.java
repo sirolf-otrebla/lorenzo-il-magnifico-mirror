@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.net.message.EnteringLobbyMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
-import it.polimi.ingsw.ps05.net.message.RejoinMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.RejoinMessage;
 
 import java.util.ArrayList;
 

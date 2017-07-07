@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameUpdateMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;

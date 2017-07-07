@@ -95,4 +95,8 @@ public class YellowCard extends TowerCard {
 	public String toString(){
 		return "Carta gialla";
 	}
+
+	public ArrayList<ActivableEffect> getActivableEffectList() {
+		return activableEffectList;
+	}
 }

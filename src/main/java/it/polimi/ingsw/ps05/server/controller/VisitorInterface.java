@@ -2,8 +2,7 @@ package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 import it.polimi.ingsw.ps05.net.message.ExitGameMessage;
-import it.polimi.ingsw.ps05.net.message.LeaderCardMessage;
-import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
+import it.polimi.ingsw.ps05.net.message.gamemessages.LeaderCardMessage;
 
 /**
  * Created by Alberto on 19/06/2017.

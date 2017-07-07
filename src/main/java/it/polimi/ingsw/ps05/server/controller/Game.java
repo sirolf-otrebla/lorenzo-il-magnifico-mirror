@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
@@ -24,6 +25,7 @@ public class Game implements Observer {
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
+    private ArrayList<Resource> privilegeConvResAlternatives;
     private Board gBoard;
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
@@ -48,6 +50,7 @@ public class Game implements Observer {
             this.useCompleteRules = useCompleteRules;
             this.useCustomBonusTiles = useCustomBonusTiles;
             this.clientHashMap = new HashMap<Integer, PlayerClient>();
+            this.privilegeConvResAlternatives = new ArrayList<>();
             for (PlayerClient client : clientList) {
                 clientHashMap.put(client.getId(), client);
                 client.setInGame(this);
@@ -181,4 +184,9 @@ public class Game implements Observer {
     public EndActionStrategyContainer getEndActionStrategyContainer() {
         return endActionStrategyContainer;
     }
+
+    public ArrayList<Resource> getPrivilegeConvResAlternatives() {
+        return privilegeConvResAlternatives;
+    }
 }
+

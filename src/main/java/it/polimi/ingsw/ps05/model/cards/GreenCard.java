@@ -3,10 +3,7 @@ package it.polimi.ingsw.ps05.model.cards;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.*;
-import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
-import it.polimi.ingsw.ps05.model.effects.AlternativeEffect;
-import it.polimi.ingsw.ps05.model.effects.Effect;
-import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
+import it.polimi.ingsw.ps05.model.effects.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
 public class GreenCard extends TowerCard {
@@ -26,7 +23,8 @@ public class GreenCard extends TowerCard {
 	private static final int DEFAULT_EFFECT = 0;
 	private int referenceId;
 	private boolean toBeActivated = true;
-	private ArrayList<Effect> activableEffectList = new ArrayList<Effect>();
+	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
+	private ArrayList<Effect> immediateEffects = new ArrayList<>();
 
 	// meant to be selected BEFORE using HARVEST
 	private int[] selectedEffects;
@@ -35,10 +33,14 @@ public class GreenCard extends TowerCard {
 		super(id, epoch, color, cardName, requirements, effects);
 
 		// NOTE: THIS IS ONLY A PROVISIONAL WORKAROUND. NEED TO CHANGE JSON.
-		for (Effect a: effects)
-			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
-		selectedEffects = new int[activableEffectList.size()]; // ODIO GLI ARRAY ISTANZIATI A RUNTIME PERÒ È LA COSA PIU SVEGLIA IN QUESTO MOMENTO;
-
+		for (Effect a: effects) {
+			if (a instanceof ActivableEffect){
+				this.activableEffectList.add((ActivableEffect) a);
+			}
+			else if (a instanceof ImmediateEffect)
+				this.immediateEffects.add((ImmediateEffect) a);
+			selectedEffects = new int[activableEffectList.size()]; // ODIO GLI ARRAY ISTANZIATI A RUNTIME PERÒ È LA COSA PIU SVEGLIA IN QUESTO MOMENTO;
+		}
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class GreenCard extends TowerCard {
 
 	@Override
 	public ArrayList<Effect> getEffects() {
-		return activableEffectList;
+		return  immediateEffects;
 	}
 
 	public void applyHarvestableEffects(PlayerRelated familyMember){
@@ -93,6 +95,7 @@ public class GreenCard extends TowerCard {
 		return "Carta verde"; //CHI È IL GENIO?
 	}
 
-
-
+	public ArrayList<ActivableEffect> getActivableEffectList() {
+		return activableEffectList;
+	}
 }
