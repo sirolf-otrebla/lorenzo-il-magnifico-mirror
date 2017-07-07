@@ -6,6 +6,10 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class NoTowerOccupiedGold extends PermanentBonus {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3630473764879782868L;
 	transient Game game;
 
 	@Override

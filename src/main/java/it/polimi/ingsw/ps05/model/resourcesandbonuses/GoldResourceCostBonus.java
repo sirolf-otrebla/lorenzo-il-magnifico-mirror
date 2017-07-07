@@ -1,13 +1,17 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
+import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
-public class GoldResourceCostBonus extends PermanentBonus implements Resource {
+public class GoldResourceCostBonus extends PermanentBonus implements ActionResult, Resource {
 	
 	/**
 	 * 
@@ -57,7 +61,17 @@ public class GoldResourceCostBonus extends PermanentBonus implements Resource {
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
+		for (Tower t : game.getBoard().getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
+				for (ArrayList<Resource> e : tile.getCard().getRequirements()){
+					for (Resource r : e){
+						if (r.getID().equals(GoldResource.id)){
+							r.setValue(r.getValue() + this.getValue());
+						}
+					}
+				}
+			}
+		}
 		
 	}
 
@@ -82,9 +96,20 @@ public class GoldResourceCostBonus extends PermanentBonus implements Resource {
 		return "Costo oro";
 	}
 
-
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-
+		for (Tower t : game.getBoard().getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
+				for (ArrayList<Resource> e : tile.getCard().getRequirements()){
+					for (Resource r : e){
+						if (r.getID().equals(GoldResource.id)){
+							r.setValue(r.getValue() - this.getValue());
+						}
+					}
+				}
+			}
+		}
 	}
+
+
 }
