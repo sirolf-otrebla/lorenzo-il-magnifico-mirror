@@ -48,7 +48,9 @@ public class Dice implements Resource {
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) throws DiceTooLowException{
 		Dice playerDice = playerFamiliar.getRelatedDice();
-		if((playerDice.value - this.value)<0) throw new DiceTooLowException(playerDice.value - this.value);
+		if((playerDice.value - this.value)<0){
+			playerFamiliar.getRelatedPlayer().addResource(new ServantResource(playerDice.value - this.value));
+		}
 
 	}
 

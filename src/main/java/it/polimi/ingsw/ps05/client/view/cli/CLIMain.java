@@ -31,6 +31,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
@@ -290,12 +291,21 @@ public class CLIMain implements LimView, Runnable{
 		for (Player p : status.getPlayerHashMap().values()){
 			for (Player inThis : playersList){
 				if (p.getPlayerID() == inThis.getPlayerID()){
+					System.out.println(p.getUsername());
+					System.out.println("Blu: " + p.getBlueCardList());
+					System.out.println("Verde: " + p.getGreenCardList());
+					System.out.println("Giallo: " + p.getYellowCardList());
+					System.out.println("Viola: " + p.getVioletCardList());
+					for (Resource r : p.getResourceList()){
+						System.out.println(r.getID() + " " + r.getValue());
+					}
 					inThis = p;
 					break;
 				}
 			}
 		}
 		try {
+			terminal.clearScreen();
 			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows(),graphics);
 			printInfo(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),graphics);
 			terminal.setCursorPosition(mapBoard.get(currentColBoard).get(currentRowBoard));
@@ -1429,6 +1439,7 @@ public class CLIMain implements LimView, Runnable{
 			meActive = true;
 		} else {
 			meActive = false;
+			resetGhostFamiliar();
 		}
 	}
 
@@ -1531,7 +1542,7 @@ public class CLIMain implements LimView, Runnable{
 		meActive = true;
 	}
 	
-	public void resetGhostFamiliar(){
+	private void resetGhostFamiliar(){
 		ghost = null;
 	}
 }

@@ -12,22 +12,29 @@ import java.util.ArrayList;
  */
 public class GameResponseMessageVisitor {
 
-    public void visit(GameUpdateMessage msg){
-        System.out.println("Primo visitor, GameUpdateMsg");
-        Client.getInstance().setGameStatus(msg.getGameStatus());
-        System.out.println("Settato game status? " + Client.getInstance().getGameStatus());
-        System.out.println("C'è player? " +  Client.getInstance().getGameStatus() == null ? "null" :  Client.getInstance().getGameStatus().getThisPlayer());
-        if (Client.getInstance().isInGame()){
-            ViewAdapter.getInstance().updateView(msg.getGameStatus());
-        }else {
-            ViewAdapter.getInstance().startGameView(msg.getGameStatus());
-        }
+	public void visit(GameUpdateMessage msg){
+		System.out.println("Primo visitor, GameUpdateMsg");
+		Client.getInstance().setGameStatus(msg.getGameStatus());
+		System.out.println("Settato game status? " + Client.getInstance().getGameStatus());
+		System.out.println("C'è player? " +  Client.getInstance().getGameStatus() == null ? "null" :  Client.getInstance().getGameStatus().getThisPlayer());
+		System.out.println("Game: " + Client.getInstance().isInGame());
+		if (Client.getInstance().isInGame()){
+			System.out.println("Update");
+			ViewAdapter.getInstance().updateView(msg.getGameStatus());
+		}else {
+			System.out.println("Start");
+			ViewAdapter.getInstance().startGameView(msg.getGameStatus());
+		}
 
-    }
+	}
 
-    public void visit(BonusActionTriggerMessage msg){
-        //TODO
-    }
+
+	public void visit(BonusActionTriggerMessage msg){
+		this.visit(msg.getGameUpdateMessage());
+		if (Client.getInstance().isInGame()){
+			ViewAdapter.getInstance().setGhostFamiliarForAction(msg.getGhostFamiliar());
+		}
+	}
 
     public void visit(ConvertPrivilegeTriggerMessage msg){
         ArrayList<Resource> resources = msg.getConversionList();

@@ -101,8 +101,9 @@ public class Tile extends TowerTileInterface {
 
     @Override
     public void applyEffect(Familiar pl) {
-        this.card.moveToPlayer(this.getOccupant().getRelatedPlayer());
-        this.card.applyNonActivableEffects(this.getOccupant());
+    	System.out.println("Occupant tower: " + this.getOccupant());
+        this.card.moveToPlayer(pl.getRelatedPlayer());
+        this.card.applyNonActivableEffects(pl);
     }
 
 	@Override
