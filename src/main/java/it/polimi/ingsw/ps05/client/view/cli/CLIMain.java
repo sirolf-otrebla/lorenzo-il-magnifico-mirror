@@ -1429,6 +1429,7 @@ public class CLIMain implements LimView, Runnable{
 			meActive = true;
 		} else {
 			meActive = false;
+			resetGhostFamiliar();
 		}
 	}
 
@@ -1531,7 +1532,7 @@ public class CLIMain implements LimView, Runnable{
 		meActive = true;
 	}
 	
-	public void resetGhostFamiliar(){
+	private void resetGhostFamiliar(){
 		ghost = null;
 	}
 }

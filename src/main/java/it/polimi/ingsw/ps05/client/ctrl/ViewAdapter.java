@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.client.ctrl;
 import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -147,6 +148,16 @@ public class ViewAdapter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public void setGhostFamiliarForAction(Familiar f){
+    	if (this.viewType == this.GUI_TYPE) {
+            // TODO
+
+        } else {
+            CLIMain cliView = (CLIMain) this.view;
+            cliView.actionWithGhostFamiliar(f);
         }
     }
 

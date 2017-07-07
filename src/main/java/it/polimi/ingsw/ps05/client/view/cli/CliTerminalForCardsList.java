@@ -184,7 +184,9 @@ public class CliTerminalForCardsList {
 				"Costi:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
+			System.out.println("card requirements: " + card.getRequirements().size());
 			for (ArrayList<Resource> choseOr : card.getRequirements()){
+				System.out.println("or req: " + choseOr.size());
 				for (Resource res : choseOr){
 					textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
 					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -198,8 +200,9 @@ public class CliTerminalForCardsList {
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+			System.out.println("Effetti: " + card.getEffects().size());
 			for (Effect effect : card.getEffects()){
-				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				if (!(effect instanceof ActivableEffect)) {
 					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {

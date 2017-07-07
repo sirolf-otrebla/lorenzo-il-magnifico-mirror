@@ -22,9 +22,9 @@ public class GameResponseMessageVisitor {
     }
 
     public void visit(BonusActionTriggerMessage msg){
-
-
-
-
+    	this.visit(msg.getGameUpdateMessage());
+    	if (Client.getInstance().isInGame()){
+            ViewAdapter.getInstance().setGhostFamiliarForAction(msg.getGhostFamiliar());
+        }
     }
 }
