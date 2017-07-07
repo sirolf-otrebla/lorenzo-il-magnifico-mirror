@@ -72,8 +72,7 @@ public class GreenBonus extends PermanentBonus{
 
 	@Override
 	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-		hasListeners = true;
+
 
 	}
 

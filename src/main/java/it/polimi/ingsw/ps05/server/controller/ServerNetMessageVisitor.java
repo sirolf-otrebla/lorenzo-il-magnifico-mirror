@@ -35,8 +35,8 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
     }
 
     @Override
-    public void visit(GameUpdateMessage msg) {
-        //todo errore
+    public void visit(GameResponseMessage msg) {
+        // NO
     }
 
     public void visit(GameMessage msg){
