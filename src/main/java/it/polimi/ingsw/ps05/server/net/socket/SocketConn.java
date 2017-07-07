@@ -34,6 +34,7 @@ public class SocketConn extends LimConnection {
 					System.out.println("ho ricevuto qualcosa");
 					setChanged();
 					notifyObservers();
+					flushInBuff();
     		}
     }
 

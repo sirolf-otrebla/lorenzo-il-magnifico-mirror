@@ -125,7 +125,7 @@ public class CliTerminalForCardsList {
 					enterDetected = true;
 				break;
 			case Character:
-				if (keyStroke.getCharacter() == ' '){
+				if (keyStroke.getCharacter() == ' ' && type != SelectionTypeEnum.VISUAL){
 					if (selectedCards.contains(cards.get(indiceCarta))){
 						selectedCards.remove(cards.get(indiceCarta));
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
@@ -138,10 +138,16 @@ public class CliTerminalForCardsList {
 				break;
 			case Escape:
 				enterDetected = true;
+				selectedCards = new ArrayList<>();
+				break;
+			
+			case EOF:
+				enterDetected = true;
+				selectedCards = new ArrayList<>();
 				break;
 
 			default:
-				System.out.println("Default");
+				System.out.println("Default " + keyStroke.toString());
 				break;
 			}
 			cardTerminal.setCursorPosition(((indiceCarta+1)*currentWidth/(cards.size()) - currentWidth/(2*cards.size())), stdCursorPositionY);

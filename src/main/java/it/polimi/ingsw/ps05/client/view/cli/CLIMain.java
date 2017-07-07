@@ -286,24 +286,27 @@ public class CLIMain implements LimView, Runnable{
 
 	public void updateGame(GameStatus status){
 		System.out.println("Start update game in cli");
+		this.board = null;
+		this.player = null;
+		this.playersList = new ArrayList<Player>();
+
 		this.board = status.getGameBoard();
 		this.player = status.getThisPlayer();
 		for (Player p : status.getPlayerHashMap().values()){
-			for (Player inThis : playersList){
-				if (p.getPlayerID() == inThis.getPlayerID()){
-					System.out.println(p.getUsername());
-					System.out.println("Blu: " + p.getBlueCardList());
-					System.out.println("Verde: " + p.getGreenCardList());
-					System.out.println("Giallo: " + p.getYellowCardList());
-					System.out.println("Viola: " + p.getVioletCardList());
-					for (Resource r : p.getResourceList()){
-						System.out.println(r.getID() + " " + r.getValue());
-					}
-					inThis = p;
-					break;
-				}
+			this.playersList.add(p);
+		}
+
+		for (Player p : status.getPlayerHashMap().values()){
+			System.out.println("CLI: " + p.getUsername());
+			System.out.println("CLIBlu: " + p.getBlueCardList());
+			System.out.println("CLIVerde: " + p.getGreenCardList());
+			System.out.println("CLIGiallo: " + p.getYellowCardList());
+			System.out.println("CLIViola: " + p.getVioletCardList());
+			for (Resource r : p.getResourceList()){
+				System.out.println("CLI " + r.getID() + " " + r.getValue());
 			}
 		}
+		this.playersList.remove(this.player);
 		try {
 			terminal.clearScreen();
 			drawGraphics(terminal.getTerminalSize().getColumns(),terminal.getTerminalSize().getRows(),graphics);
@@ -432,7 +435,7 @@ public class CLIMain implements LimView, Runnable{
 					TowerCard c = board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard();
 					CliTileVIewObject a = new CliTileVIewObject(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)),
 							ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
-							selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
+									selectedOpt < c.getRequirements().size() ? selectedOpt : 0);
 					System.out.println("notifyToActionHandler to observers");
 					a.notifyToActionHandler();
 				}
@@ -1421,7 +1424,7 @@ public class CLIMain implements LimView, Runnable{
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, SelectionTypeEnum.DRAFT);
 		return chose.start();
 	}
-	
+
 	public ArrayList<ActionResult> getPrivilegeBonusChoice(ArrayList<ArrayList<ActionResult>> list, int choiceToDo){
 		//TODO
 		return null;
@@ -1541,7 +1544,7 @@ public class CLIMain implements LimView, Runnable{
 		ghost = f;
 		meActive = true;
 	}
-	
+
 	private void resetGhostFamiliar(){
 		ghost = null;
 	}
