@@ -76,13 +76,13 @@ public class ViewAdapter {
 				CliThread.start();
 			}
 			for (Player p : status.getPlayerHashMap().values()){
-				System.out.println("In view adapter: " + p.getUsername());
-				System.out.println("Blu: " + p.getBlueCardList());
-				System.out.println("Verde: " + p.getGreenCardList());
-				System.out.println("Giallo: " + p.getYellowCardList());
-				System.out.println("Viola: " + p.getVioletCardList());
+				System.out.println("viewadapterStart: " + p.getUsername());
+				System.out.println("viewadapterStartBlu: " + p.getBlueCardList());
+				System.out.println("viewadapterStartVerde: " + p.getGreenCardList());
+				System.out.println("viewadapterStartGiallo: " + p.getYellowCardList());
+				System.out.println("viewadapterStartViola: " + p.getVioletCardList());
 				for (Resource r : p.getResourceList()){
-					System.out.println(r.getID() + " " + r.getValue());
+					System.out.println("viewadapterStart " + r.getID() + " " + r.getValue());
 				}
 			}
 			cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
@@ -93,13 +93,13 @@ public class ViewAdapter {
 	public void updateView(GameStatus status){
 		CLIMain cli = (CLIMain) this.view;
 		for (Player p : status.getPlayerHashMap().values()){
-			System.out.println("In view adapter: " + p.getUsername());
-			System.out.println("Blu: " + p.getBlueCardList());
-			System.out.println("Verde: " + p.getGreenCardList());
-			System.out.println("Giallo: " + p.getYellowCardList());
-			System.out.println("Viola: " + p.getVioletCardList());
+			System.out.println("viewadapterUpdate: " + p.getUsername());
+			System.out.println("viewadapterUpdateBlu: " + p.getBlueCardList());
+			System.out.println("viewadapterUpdateVerde: " + p.getGreenCardList());
+			System.out.println("viewadapterUpdateGiallo: " + p.getYellowCardList());
+			System.out.println("viewadapterUpdateViola: " + p.getVioletCardList());
 			for (Resource r : p.getResourceList()){
-				System.out.println(r.getID() + " " + r.getValue());
+				System.out.println("viewadapterUpdate " + r.getID() + " " + r.getValue());
 			}
 		}
 		cli.updateGame(status);

@@ -4,7 +4,7 @@ import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.client.net.ClientMessageVisitor;
 import it.polimi.ingsw.ps05.client.net.Connection;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
-import it.polimi.ingsw.ps05.server.net.socket.Stream;
+
 
 import java.io.IOException;
 import java.net.Socket;

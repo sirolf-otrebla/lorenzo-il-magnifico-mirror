@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
+import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.message.gamemessages.BonusActionTriggerMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.ConvertPrivilegeTriggerMessage;
@@ -18,6 +19,17 @@ public class GameResponseMessageVisitor {
 		System.out.println("Settato game status? " + Client.getInstance().getGameStatus());
 		System.out.println("C'è player? " +  Client.getInstance().getGameStatus() == null ? "null" :  Client.getInstance().getGameStatus().getThisPlayer());
 		System.out.println("Game: " + Client.getInstance().isInGame());
+		
+		for (Player p : msg.getGameStatus().getPlayerHashMap().values()){
+			System.out.println("ResponeVisitor: " + p.getUsername());
+			System.out.println("ResponeVisitorBlu: " + p.getBlueCardList());
+			System.out.println("ResponeVisitorVerde: " + p.getGreenCardList());
+			System.out.println("ResponeVisitorGiallo: " + p.getYellowCardList());
+			System.out.println("ResponeVisitorViola: " + p.getVioletCardList());
+			for (Resource r : p.getResourceList()){
+				System.out.println("ResponeVisitor" + r.getID() + " " + r.getValue());
+			}
+		}
 		if (Client.getInstance().isInGame()){
 			System.out.println("Update");
 			ViewAdapter.getInstance().updateView(msg.getGameStatus());
