@@ -2,69 +2,13 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java" line="125" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/UpdateViewVisitor.java" line="145" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/UpdateViewVisitor.java" line="153" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameResponseMessage.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/BonusActionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/BonusActionListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/actionlisteners/BonusActionListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/EndActionListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/actionlisteners/EndActionListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/LimitedBonusActListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/actionlisteners/LimitedBonusActListener.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameUpdatesVisitor.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/Client.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ActionResult.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ActionResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusDice.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusDice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusWithMultiplier.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BonusWithMultiplier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/CopyLeader.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/CopyLeader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/DoubleBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/DoubleBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FreeAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FreeAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResourceCostBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResourceToSub.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/MilitaryResourceToSub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoColorBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoColorBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoFirstAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoFirstAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoMarket.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoMarket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoMilitaryPointsForGreen.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoMilitaryPointsForGreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoOccupiedSpace.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoOccupiedSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoTowerOccupiedGold.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoTowerOccupiedGold.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PermanentBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PermanentBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ServantResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ServantResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResourceCostBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VictoryResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VictoryResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResourceCostBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/WoodResourceCostBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ResourceTest.java" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ResourceTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -165,7 +109,7 @@
                   <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java">
                     <provider selected="true" editor-type-id="text-editor">
                       <state relative-caret-position="1530">
-                        <caret line="43" column="65" lean-forward="true" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
+                        <caret line="43" column="65" lean-forward="false" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
                         <folding />
                       </state>
                     </provider>
@@ -189,7 +133,7 @@
                   <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java">
                     <provider selected="true" editor-type-id="text-editor">
                       <state relative-caret-position="1479">
-                        <caret line="57" column="13" lean-forward="true" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+                        <caret line="57" column="13" lean-forward="false" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
                         <folding />
                       </state>
                     </provider>
@@ -212,18 +156,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="BonusActionTriggerMessage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BonusActionTriggerMessage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+            <state relative-caret-position="510">
+              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
               <folding>
-                <element signature="e#878#879#0" expanded="true" />
-                <element signature="e#908#909#0" expanded="true" />
-                <element signature="e#963#964#0" expanded="true" />
-                <element signature="e#1003#1004#0" expanded="true" />
-                <element signature="e#1045#1046#0" expanded="true" />
-                <element signature="e#1081#1082#0" expanded="true" />
+                <element signature="e#1319#1320#0" expanded="true" />
+                <element signature="e#1349#1350#0" expanded="true" />
+                <element signature="e#1404#1405#0" expanded="true" />
+                <element signature="e#1444#1445#0" expanded="true" />
+                <element signature="e#1486#1487#0" expanded="true" />
+                <element signature="e#1522#1523#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -234,7 +178,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
               <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-              <folding />
+              <folding>
+                <marker date="1499431519732" expanded="false" signature="2401:2412" ph=" { " />
+                <marker date="1499431519732" expanded="false" signature="2423:2429" ph=" }" />
+                <marker date="1499431519732" expanded="false" signature="2470:2481" ph=" { " />
+                <marker date="1499431519732" expanded="false" signature="2501:2507" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -291,27 +240,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DraftVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/DraftVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LobbyMessageVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/LobbyMessageVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="459">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding>
+                <marker date="1499431519650" expanded="true" signature="1723:1724" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameResponseMessageVisitor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameResponseMessageVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1275">
@@ -372,7 +313,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoFirstAction.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/HarvestAction.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" />
@@ -419,10 +359,11 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameMessageVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameUpdateMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameResponseMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameUpdatesVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java" />
       </list>
     </option>
   </component>
@@ -1654,28 +1595,7 @@
       <workItem from="1499259633430" duration="15703000" />
       <workItem from="1499282270934" duration="4891000" />
       <workItem from="1499292900749" duration="20002000" />
-      <workItem from="1499350538780" duration="21562000" />
-    </task>
-    <task id="LOCAL-00015" summary="prova commit">
-      <created>1497885533192</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1497885533192</updated>
-    </task>
-    <task id="LOCAL-00016" summary="riscrittura controller">
-      <created>1497893958603</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1497893958603</updated>
-    </task>
-    <task id="LOCAL-00017" summary="controller modifiche">
-      <created>1497960863881</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1497960863881</updated>
+      <workItem from="1499350538780" duration="21920000" />
     </task>
     <task id="LOCAL-00018" summary="sync">
       <created>1497960912039</created>
@@ -1999,7 +1919,28 @@
       <option name="project" value="LOCAL" />
       <updated>1499359943193</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="messaggio azione bonus">
+      <created>1499431463042</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1499431463042</updated>
+    </task>
+    <task id="LOCAL-00065" summary="messaggio azione bonus">
+      <created>1499431511803</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1499431511803</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite">
+      <created>1499431550603</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1499431550603</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2035,7 +1976,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="404634000" />
+    <option name="totallyTimeSpent" value="404992000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2066,7 +2007,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2545552" sideWeight="0.4859914" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2545552" sideWeight="0.4859914" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38263667" sideWeight="0.46794182" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1403556" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990962" sideWeight="0.49786097" order="7" side_tool="false" content_ui="tabs" />
@@ -2126,7 +2067,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correzione errore server" />
     <MESSAGE value="interface visitor" />
     <MESSAGE value="sync" />
     <MESSAGE value="View visitor" />
@@ -2148,10 +2088,11 @@
     <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java" />
     <MESSAGE value="renato sei contento?" />
     <MESSAGE value="Renato è bagato" />
-    <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
     <MESSAGE value="modifiche" />
     <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/Action.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/Action.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java" />
+    <MESSAGE value="messaggio azione bonus" />
+    <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2164,7 +2105,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java</url>
-          <line>348</line>
+          <line>422</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
@@ -2236,79 +2177,79 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>24</line>
+          <line>25</line>
           <properties />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>23</line>
+          <line>24</line>
           <properties />
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>22</line>
+          <line>23</line>
           <properties />
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>21</line>
+          <line>22</line>
           <properties />
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>25</line>
+          <line>31</line>
           <properties />
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>27</line>
+          <line>33</line>
           <properties />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/AuthListener.java</url>
-          <line>26</line>
+          <line>32</line>
           <properties />
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/LobbyMessageVisitor.java</url>
-          <line>28</line>
+          <line>29</line>
           <properties />
           <option name="timeStamp" value="132" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java</url>
-          <line>88</line>
+          <line>89</line>
           <properties />
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java</url>
-          <line>91</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java</url>
-          <line>95</line>
+          <line>96</line>
           <properties />
           <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java</url>
-          <line>97</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/LobbyMessageVisitor.java</url>
-          <line>27</line>
+          <line>28</line>
           <properties />
           <option name="timeStamp" value="148" />
         </line-breakpoint>
@@ -2662,7 +2603,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java</url>
-          <line>1059</line>
+          <line>1086</line>
           <properties />
           <option name="timeStamp" value="260" />
         </line-breakpoint>
@@ -2757,14 +2698,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/RemoveTileEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4131">
-          <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/StoneResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-21">
@@ -3030,11 +2963,7 @@
         <state relative-caret-position="6222">
           <caret line="152" column="25" lean-forward="false" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="25" />
           <folding>
-            <element signature="e#4092#4093#0" expanded="true" />
-            <element signature="e#4147#4148#0" expanded="true" />
-            <element signature="e#5490#5491#0" expanded="true" />
-            <element signature="e#5524#5525#0" expanded="true" />
-            <marker date="1499376934274" expanded="true" signature="3557:4014" ph="{...}" />
+            <marker date="1499431519724" expanded="true" signature="3606:4063" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -3110,7 +3039,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
-          <caret line="43" column="65" lean-forward="true" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
+          <caret line="43" column="65" lean-forward="false" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -3125,9 +3054,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/LobbyMessageVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="459">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <marker date="1499431519650" expanded="true" signature="1723:1724" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3155,21 +3086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="e#878#879#0" expanded="true" />
-            <element signature="e#908#909#0" expanded="true" />
-            <element signature="e#963#964#0" expanded="true" />
-            <element signature="e#1003#1004#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="e#1081#1082#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameResponseMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -3192,7 +3108,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding />
+          <folding>
+            <marker date="1499431519732" expanded="false" signature="2401:2412" ph=" { " />
+            <marker date="1499431519732" expanded="false" signature="2423:2429" ph=" }" />
+            <marker date="1499431519732" expanded="false" signature="2470:2481" ph=" { " />
+            <marker date="1499431519732" expanded="false" signature="2501:2507" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3202,6 +3123,29 @@
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameUpdatesVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/BonusActionTriggerMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
+            <element signature="e#1404#1405#0" expanded="true" />
+            <element signature="e#1444#1445#0" expanded="true" />
+            <element signature="e#1486#1487#0" expanded="true" />
+            <element signature="e#1522#1523#0" expanded="true" />
           </folding>
         </state>
       </provider>

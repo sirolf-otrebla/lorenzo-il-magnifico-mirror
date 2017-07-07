@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.net.message;
 
 import it.polimi.ingsw.ps05.client.ctrl.GameResponseMessageVisitor;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
@@ -12,9 +13,21 @@ public class BonusActionTriggerMessage implements GameResponseMessage {
 
     private  GameUpdateMessage gameUpdateMessage;
     private Familiar ghostFamiliar;
-    public BonusActionTriggerMessage(GameUpdateMessage gameUpdateMessage, Familiar ghostFamiliar){
+
+
+    private ColorEnumeration actionColor;
+
+    /**
+     *
+     * @param actionColor       if NOT_INIZIALIZED: FREE ACTION, IF ANY: FREE ACTION ONLY ON TOWERS
+     *                          ANITHING ELSE: FREE ACTION UNDER THE TOWER WITH THIS COLOR
+     * @param gameUpdateMessage
+     * @param ghostFamiliar
+     */
+    public BonusActionTriggerMessage(ColorEnumeration actionColor, GameUpdateMessage gameUpdateMessage, Familiar ghostFamiliar){
         this.gameUpdateMessage = gameUpdateMessage;
         this.ghostFamiliar = ghostFamiliar;
+        this.actionColor = actionColor;
     }
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
