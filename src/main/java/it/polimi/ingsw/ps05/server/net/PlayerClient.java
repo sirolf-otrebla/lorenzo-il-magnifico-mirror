@@ -24,7 +24,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 30000;
+	private static final int  ACT_WAITING_TIME = 300000000;
 
 	private Player pl = null;
 	private boolean plExists = false;

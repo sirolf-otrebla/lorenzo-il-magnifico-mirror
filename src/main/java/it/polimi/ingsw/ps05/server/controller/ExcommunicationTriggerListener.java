@@ -18,6 +18,7 @@ public class ExcommunicationTriggerListener implements Observer {
 
     public ExcommunicationTriggerListener( GameFlowController gfc) {
         this.gfc = gfc;
+        this.game = gfc.getGame();
     }
 
     @Override

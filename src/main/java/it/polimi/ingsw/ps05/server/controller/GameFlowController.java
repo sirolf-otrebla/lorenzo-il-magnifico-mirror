@@ -21,7 +21,7 @@ public class GameFlowController implements Runnable {
 	private NetMessage gameInput = null;
 	private Game game;
 
-	public ExcommunicationTriggerListener exTrigger;
+	public ExcommunicationTriggerListener exTrigger = new ExcommunicationTriggerListener(this);
 
 	public GameFlowController(Game game){
 		System.out.println("GFLWCTRL start");
@@ -62,6 +62,7 @@ public class GameFlowController implements Runnable {
 	public void run()  {
 		System.out.println("RUN START");
 		System.out.println("Game end: " + game.end);
+		this.game.gettManager().addObserver(exTrigger);
 		while(!game.end){
 			try {
 				System.out.println("game flow ctrl pre turn  ");
