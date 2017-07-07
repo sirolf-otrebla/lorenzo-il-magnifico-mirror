@@ -22,6 +22,7 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
 
     @Override
     public void visit(GameResponseMessage msg) {
+    	System.out.println("GameResponeMessage!!!");
         GameResponseMessageVisitor visitor = new GameResponseMessageVisitor();
         msg.acceptVisitor(visitor);
 

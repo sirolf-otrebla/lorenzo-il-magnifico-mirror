@@ -92,6 +92,9 @@ public class GameCommandsVisitor implements VisitorInterface {
                        actionSpace =  tower.getTiles().get(actionSpaceID);
                 }
             }
+            System.out.println("familiare: " + this.activePlayer.getFamilyMap().get(mess.getFamiliarID()) + "\n"+
+            "action space: " + actionSpace + "\n"+
+            		"payment: " + mess.getSelectedPayment());
             Action act = thisPl.doAction(
                     this.activePlayer.getFamilyMap().get(mess.getFamiliarID()), actionSpace,
                     mess.getSelectedPayment());

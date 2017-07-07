@@ -32,6 +32,7 @@ public class Round {
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
+        this.game.setActivePlayer(plOrdIt.next());
         do {
             game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();

@@ -183,8 +183,8 @@ public class CliTerminalForCardsList {
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Costi:");
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		System.out.println("card requirements: " + card.getRequirements().size());
 		try {
-			System.out.println("card requirements: " + card.getRequirements().size());
 			for (ArrayList<Resource> choseOr : card.getRequirements()){
 				System.out.println("or req: " + choseOr.size());
 				for (Resource res : choseOr){
@@ -195,6 +195,7 @@ public class CliTerminalForCardsList {
 				textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
 			}
 		} catch (Exception e){
+			System.out.println("no requirements!!");
 			//requirementList == null, non fare niente cercare di risolvere
 		}
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);

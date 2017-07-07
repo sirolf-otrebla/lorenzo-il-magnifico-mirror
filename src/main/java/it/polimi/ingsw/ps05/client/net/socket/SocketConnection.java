@@ -43,6 +43,7 @@ public class SocketConnection implements Connection {
 							ClientMessageVisitor messageTaker =
 									Client.getInstance().getMessageTaker();
 							messageTaker.setInputMessage(message);
+							flushInBuff();
 							messageTaker.getSem().release(1);
 							System.out.println("sem released");
 						}

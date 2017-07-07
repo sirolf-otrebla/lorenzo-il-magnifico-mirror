@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.net.message;
 
 
+import it.polimi.ingsw.ps05.client.ctrl.GameResponseMessageVisitor;
 import it.polimi.ingsw.ps05.model.Action;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Alberto on 12/06/2017.
  */
-public class GameUpdateMessage implements GameMessage{
+public class GameUpdateMessage implements GameResponseMessage{
 
     public static final String MESSAGE = "GameUpdateMessage Here!";
     private GameStatus gameStatus;
@@ -25,11 +26,6 @@ public class GameUpdateMessage implements GameMessage{
         vi.visit(this);
     }
 
-    @Override
-    public void acceptVisitor(GameCommandsVisitor vi) {
-        // in futuro
-    }
-
     public GameStatus getGameStatus() {
         return gameStatus;
     }
@@ -37,4 +33,9 @@ public class GameUpdateMessage implements GameMessage{
     public String toString(){
         return MESSAGE;
     }
+	@Override
+	public void acceptVisitor(GameResponseMessageVisitor vi) {
+		vi.visit(this);
+		
+	}
 }
