@@ -11,7 +11,7 @@ public class BoardWindow {
     private GUIMain boardWindow;
     private BonusTileWidget bonusTile;
     private LeaderWidget[] leaderWidgets;
-    private CardOnPersonalWidget[][] cardAcquiredWidget;
+    private AcquiredCardWidget[][] cardAcquiredWidget;
 
 
 }

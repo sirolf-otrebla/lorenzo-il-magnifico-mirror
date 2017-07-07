@@ -77,8 +77,9 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
         while(true){
             try {
                 sem.acquire();
+                System.out.println("Ricevuto dal server, null?");
                 if(this.inputMessage == null) continue;
-                System.out.println("ho ricevuto qualcosa di bellissimo dal server");
+                System.out.println("messaggio ricevuto non null");
                 System.out.println(inputMessage.toString());
                 this.inputMessage.acceptVisitor(this);
             } catch (InterruptedException e) {

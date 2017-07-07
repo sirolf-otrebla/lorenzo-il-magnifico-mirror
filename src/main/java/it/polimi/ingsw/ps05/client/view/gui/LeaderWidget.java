@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -7,10 +8,14 @@ import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
+
 /**
  * Created by miotto on 28/06/17.
  */
 public class LeaderWidget {
+
+    public static final double LEADER_HEIGHT_PERC = 0.4;
 
     private static final String backPath = "./src/main/res/img/cards/leaders/leaders_BACK.jpg";
 
@@ -31,7 +36,10 @@ public class LeaderWidget {
 
     public LeaderWidget(int referenceId) {
         this.referenceId = referenceId;
+        System.out.println(referenceId);
         String imagePath = GraphicResources.getLeaderPath(referenceId);
+        this.imagePath = imagePath;
+        System.out.println(imagePath);
         addImage(imagePath);
         addBackImage();
     }
@@ -41,9 +49,10 @@ public class LeaderWidget {
         try {
             Image img = new Image(crDir.toURI().toURL().toString());
             this.leaderCard = new ImageView(img);
+            this.leaderCard.setFitHeight(LEADER_HEIGHT_PERC * stageHeight);
             this.leaderCard.setPreserveRatio(true);
             this.leaderCard.setSmooth(true);
-            this.setupClickGesture();
+            // this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
@@ -74,7 +83,21 @@ public class LeaderWidget {
     }
 
     private void setupClickGesture() {
-        if(this.isOfPlayerProperty() && !this.isActive())
+
+        if(!isDraftFinished()) {
+            this.leaderCard.setOnMouseEntered((MouseEvent e) -> {
+                this.leaderCard.setCursor(Cursor.HAND);
+            });
+
+            this.leaderCard.setOnMouseClicked((MouseEvent e) -> {
+                //TODO notificare il controller
+                this.leaderCard.setOpacity(0.3);
+                this.leaderCard.setMouseTransparent(true);
+            });
+        }
+
+
+        if(isOfPlayerProperty() && !isActive())
             this.leaderCard.setOnMouseClicked((MouseEvent e) -> {
                 played = LeaderActivationPopup.display(); //TODO evento da collegare col controller (il metodo ritorna la scelta del giocatore)
             });

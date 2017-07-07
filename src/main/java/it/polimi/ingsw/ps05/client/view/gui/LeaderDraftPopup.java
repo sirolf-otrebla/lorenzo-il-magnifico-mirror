@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -9,6 +12,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 /**
@@ -16,33 +22,31 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class LeaderDraftPopup {
 
-    public static final double LEADER_HEIGHT_PERC = 30 / 100;
-
-    static Stage popup;
+    private static Stage popup;
     static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
     private static LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
     private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
     public static int numberOfLeadersAlreadySelected;
     public static boolean draftCompleted;
+    public static HBox hboxReference;
 
     public static void display(Integer[] referenceIdArray) {
 
         /* Initialize leaders to be drafted */
-        int i = 0;
-        for(Integer referenceId: referenceIdArray) {
-            leadersToDraftArray[i] = new LeaderWidget(referenceId);
-            i++;
-        }
+
+        for(int i = 0; i < 4; i++)
+            leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
 
         popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initStyle(StageStyle.UNDECORATED);
 
         HBox hbox = new HBox(30 * resize);
-        hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
-        hbox.setFillHeight(true);
+        hboxReference = hbox;
+        //hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
+        //hbox.setFillHeight(true);
 
-        // adding leaders to hbox
+        // adding initial leaders to hbox
         for(LeaderWidget leader: leadersToDraftArray) {
             setupGestureTarget(leader);
             hbox.getChildren().add(leader.getLeaderCard());
@@ -50,12 +54,23 @@ public class LeaderDraftPopup {
 
         Label label = new Label();
         label.setText("Choose one card you want to keep");
+        label.setId("leaderDraftLabel");
 
-        VBox vbox = new VBox(20 * resize);
+        VBox vbox = new VBox(40 * resize);
         vbox.setId("leaderDraftPopup");
+        vbox.setPadding(new Insets(50 * resize, 50 * resize, 50 * resize, 50 * resize));
+        vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(label, hbox);
 
         Scene scene = new Scene(vbox);
+
+        // add stylesheets
+        File f = new File("./src/main/res/fx-style.css");
+        try {
+            scene.getStylesheets().add(f.toURI().toURL().toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 
         popup.setScene(scene);
         popup.setAlwaysOnTop(true);
@@ -69,47 +84,69 @@ public class LeaderDraftPopup {
 
         // EVENTO CHE VA PASSATO AL CONTROLLER
 
-        leaderWidget.getLeaderCard().setOnMouseClicked((MouseEvent e) -> {
-            /* What to do when the leader is selected */
-            storeSelectedLeader(leaderWidget, numberOfLeadersAlreadySelected);
-            leaderWidget.getLeaderCard().setOpacity(0.5);
-            leaderWidget.getLeaderCard().setMouseTransparent(true); // disable mouse click
-            leaderWidget.setDrafted(true);
-            numberOfLeadersAlreadySelected++;
-        });
+        if(!leaderWidget.isDrafted()) {
+            leaderWidget.getLeaderCard().setOnMouseEntered((MouseEvent e) -> {
+                /* What to do when the mouse is over the leader card */
+                leaderWidget.getLeaderCard().setCursor(Cursor.HAND);
+            });
+
+            leaderWidget.getLeaderCard().setOnMouseClicked((MouseEvent e) -> {
+                /* What to do when the leader is selected */
+                storeSelectedLeader(leaderWidget, numberOfLeadersAlreadySelected);
+                leaderWidget.getLeaderCard().setOpacity(0.2);
+                leaderWidget.getLeaderCard().setMouseTransparent(true); // disable mouse click
+                leaderWidget.setDrafted(true);
+                numberOfLeadersAlreadySelected++;
+            });
+        } else {
+            leaderWidget.getLeaderCard().setMouseTransparent(true);
+        }
 
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    private void repaint(Integer[] newReferenceIdArray) {
+    public void updateLeadersToDraft(Integer[] newReferenceIdArray) {
 
         /* Insert new leaders in a new array */
-        int i = 0;
-        for(Integer referenceId: newReferenceIdArray) {
-            newLeadersToDraftArray[i] = new LeaderWidget(referenceId);
-            i++;
-        }
+        int leadersRemained = 4 - numberOfLeadersAlreadySelected; //leaders left to choose
+        for (int i = 0; i < leadersRemained; i++)
+            newLeadersToDraftArray[i] = new LeaderWidget(newReferenceIdArray[i]);
 
-        /* Updates the leaders to be drafted */
-        i = 0;
-        for(LeaderWidget leader: leadersToDraftArray) {
-            try {
-                if (!leader.isDrafted()) {
-                    leader = newLeadersToDraftArray[i];
-                    i++;
-                }
-            } catch (IndexOutOfBoundsException e) {
-                e.printStackTrace();
+        /* Insert the new leaders in the leadersToDraft array */
+        for (int i = 0; i < 4; i++) {
+            int j = 0;
+            if (!leadersToDraftArray[i].isDrafted()) {
+                leadersToDraftArray[i] = newLeadersToDraftArray[j];
+                j++;
             }
         }
+
+        repaint();
+
+    }
+
+    private void repaint() {
+
+        hboxReference.getChildren().clear();
+
+        for(LeaderWidget leader: leadersToDraftArray) {
+            setupGestureTarget(leader);
+            hboxReference.getChildren().add(leader.getLeaderCard());
+        }
+
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    private static void endLeaderDraft() {
+    public static void endLeaderDraft() {
         popup.close();
     }
 
-    private static void storeSelectedLeader(LeaderWidget leaderToStore, int leadersAlreadySelected) {
-        leadersDrafted[leadersAlreadySelected] = leaderToStore;
+    /* Updates the leader drafted array */
+    private static void storeSelectedLeader(LeaderWidget leaderToStore, int numberOfLeadersAlreadySelected) {
+        leadersDrafted[numberOfLeadersAlreadySelected] = leaderToStore;
+    }
+
+    public static Stage getPopup() {
+        return popup;
     }
 }

@@ -67,6 +67,11 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 			this.connection.send(mess);
 		}
     }
+    
+    public void setPlayer(Player pl){
+    	this.pl = pl;
+    	plExists = true;
+    }
 
     public void BuildPlayer( ColorEnumeration color){
 		if(this.pl == null){
@@ -108,13 +113,20 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 		this.active = false;
 	}
 	
+	public void setIdAfterLogin(int id){
+		this.id = id;
+	}
+	
 	public int getId(){
 		return id;
 	}
     
 
 	public void sendMessage(NetMessage message){
-		connection.send(message);
+		if (connection != null){
+			connection.send(message);
+		}
+		
 	}
 
 

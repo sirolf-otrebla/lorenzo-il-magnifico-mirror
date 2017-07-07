@@ -76,6 +76,7 @@ public class Game implements Observer {
             GameStatus status = new GameStatus( players,  this.gBoard, client.getPlayer(), GameStatus.NO_PLAYER_ACTIVE);
             client.sendMessage(new GameSetupMessage(status));
         }
+        Server.getInstance().registerGame(this);
         // waiting to start
          semStart.acquire(clientHashMap.size());
         // starting

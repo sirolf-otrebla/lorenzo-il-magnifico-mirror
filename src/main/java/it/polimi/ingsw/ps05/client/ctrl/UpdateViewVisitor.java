@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import javafx.util.Pair;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +28,16 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
         }
         actionSpaceWidgetHashMap.put(guiMain.getHarvestingSpace().getReferenceId(), guiMain.getHarvestingSpace());
         actionSpaceWidgetHashMap.put(guiMain.getProductionSpace().getReferenceId(), guiMain.getProductionSpace());
+
+        for (ColorEnumeration color: playerColorArray)
+            for (TowerTileWidget tileWidget: guiMain.getTowerTileWidgetList(color))
+                actionSpaceWidgetHashMap.put(tileWidget.getReferenceId(), tileWidget);
+
+        /* CICLO AGGIORNATO dopo cambiamenti di memorizzazione delle TowerTileWidgetList (utilizzo di hashmap)
         for (TowerTileWidget[] tileWidgetArray: guiMain.getTowerTileWidgetList())
             for (TowerTileWidget tileWidget: tileWidgetArray)
                 actionSpaceWidgetHashMap.put(tileWidget.getReferenceId(), tileWidget);
+        */
     }
 
     @Override
@@ -66,7 +74,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
                     widget.getLegalFamilyMemberList().add(f.getColor());
                 }
             if(widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
-                widget.setAssociatedCard(new CardOnBoardWidget(tile.getCard().getReferenceID()));
+                widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
             // altro da aggiungere?
         }
     }

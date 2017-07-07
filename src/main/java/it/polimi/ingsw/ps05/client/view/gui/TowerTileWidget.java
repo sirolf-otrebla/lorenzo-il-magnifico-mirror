@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
 
-    private CardOnBoardWidget associatedCard;
+    private TowerCardWidget associatedCard;
     private boolean morePaymentOptions;
     private boolean isLegal = false;
     private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
@@ -52,11 +52,11 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
         });
     }
 
-    public CardOnBoardWidget getAssociatedCard() {
+    public TowerCardWidget getAssociatedCard() {
         return associatedCard;
     }
 
-    public void setAssociatedCard(CardOnBoardWidget associatedCard) {
+    public void setAssociatedCard(TowerCardWidget associatedCard) {
         this.associatedCard = associatedCard;
     }
 

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -9,7 +8,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static it.polimi.ingsw.ps05.client.view.gui.CardOnBoardWidget.CARD_MIN_HEIGHT_BOARD;
+import java.io.File;
+import java.net.MalformedURLException;
+
+import static it.polimi.ingsw.ps05.client.view.gui.TowerCardWidget.CARD_MIN_HEIGHT_BOARD;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 /**
@@ -51,6 +53,12 @@ public class LeaderPopup {
         vbox.getChildren().addAll(label1, hbox1, label2, hbox2);
 
         Scene scene = new Scene(vbox);
+        File f = new File("./src/main/res/fx-style.css");
+        try {
+            scene.getStylesheets().add(f.toURI().toURL().toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 
         popup.setScene(scene);
         popup.show();

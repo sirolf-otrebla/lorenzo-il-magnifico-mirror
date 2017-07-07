@@ -273,8 +273,10 @@ public class Login extends Application implements Observable {
 	}
 
 	public void setLobbyVisble() {
-		userList.setVisible(true);
-		userListView.setVisible(true);
+		if (userListView.getItems().size() != 0){
+			userList.setVisible(true);
+			userListView.setVisible(true);
+		}
 	}
 
 	public void close(){

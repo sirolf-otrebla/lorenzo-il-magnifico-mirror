@@ -49,6 +49,11 @@
     -fx-background-position: center;
 }
 
+@font-face {
+    -fx-font-family: "NightShade";
+    src: url("./fonts/JimNightshade-Regular.ttf");
+}
+
 #resourceLabel{
      -fx-border-color: cornsilk;
 }
@@ -62,11 +67,22 @@
 }
 
 #timerLabel{
-
+    -fx-font-family: "NightShade";
 }
 
 #labelTileDraft{
     -fx-font-size: 18;
+}
+
+#leaderDraftLabel{
+    -fx-font-size: 18;
+}
+
+.diewidget.label .text{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 38;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
 }
 
 

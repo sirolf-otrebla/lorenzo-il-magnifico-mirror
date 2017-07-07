@@ -120,6 +120,7 @@ public class LoginController {
 	private synchronized void tryLogin() {
 		LoginMessage mess = new LoginMessage(username, password);
 		this.status = LoginController.STATUS_WAIT_LOGIN;
+		this.viewType = l.getUI().getValue().toLowerCase();
 		connToUse.send(mess);
 		try {
 			semaphore.acquire();
@@ -128,12 +129,13 @@ public class LoginController {
 		}
 		NetMessage recMess = connToUse.getInputMessage();
 		l.setLobbyVisble();
-		this.viewType = l.getUI().getValue().toLowerCase();
+		
 	}
 	
 	private synchronized void tryRegistration() {
 		RegistrationMessage mess = new RegistrationMessage(username, password);
 		this.status = LoginController.STATUS_WAIT_REG;
+		this.viewType = l.getUI().getValue().toLowerCase();
 		System.out.println("sto per inviare");
 		connToUse.send(mess);
 		try {
@@ -145,7 +147,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		NetMessage recMess = connToUse.getInputMessage();
-		this.viewType = l.getUI().getValue().toLowerCase();
+		
 	}
 
 	public Semaphore getSemaphore() {

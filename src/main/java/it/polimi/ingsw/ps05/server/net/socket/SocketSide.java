@@ -28,7 +28,7 @@ public class SocketSide implements Runnable {
 				System.out.println("Ciao");
 				SocketConn c = new SocketConn(server.accept());
 				System.out.println("Nuova connessione");
-				PlayerClient p = new PlayerClient(c, id++);
+				PlayerClient p = new PlayerClient(c, --id);
 				connected.add(p);
 				t = new Thread(p);
 				t.start();

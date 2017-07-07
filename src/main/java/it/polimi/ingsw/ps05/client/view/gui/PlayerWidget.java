@@ -1,7 +1,11 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
+import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -19,8 +23,19 @@ public class PlayerWidget {
     private FamiliarWidget[] familiarWidgetList = new FamiliarWidget[4];
     private LeaderWidget[] leaderWidgetList = new LeaderWidget[4];
     private BonusTileWidget bonusTileWidget;
-    private CardOnPersonalWidget[][] cardAcquiredWidget = new CardOnPersonalWidget[4][6];
+    private AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
     private MarkerWidget[] playerMarkers = new MarkerWidget[4];
+    private static HashMap<ColorEnumeration, Integer[]> AcquiredCardArrayHashMap = new HashMap<>();
+    private ColorEnumeration[] personalBoardColorArray = {
+            ColorEnumeration.Yellow,
+            ColorEnumeration.Green,
+            ColorEnumeration.Blue,
+            ColorEnumeration.Violet
+    };
+
+    final VBox commands = new VBox(20 * resize);
+    final Button showCardsButton = new Button("Carte sviluppo");
+    final Button showLeaderButton = new Button("Carte Leader"); // showLeaderButton is not clickable because the draft is not done yet
 
     private final PersonalBoardWindow personalBoard = new PersonalBoardWindow(board, playerUsername,
             cardAcquiredWidget, leaderWidgetList, bonusTileWidget);
@@ -102,5 +117,9 @@ public class PlayerWidget {
 
     public FamiliarWidget[] getFamiliarWidgetList() {
         return familiarWidgetList;
+    }
+
+    public ResourcesWidget getResourceWidget() {
+        return resourceWidget;
     }
 }
