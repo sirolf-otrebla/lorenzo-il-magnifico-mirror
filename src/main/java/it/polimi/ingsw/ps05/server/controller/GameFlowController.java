@@ -26,6 +26,7 @@ public class GameFlowController implements Runnable {
 		System.out.println("GFLWCTRL start");
         this.game = game;
         this.exTrigger = new ExcommunicationTriggerListener(this);
+        this.game.gettManager().addObserver(exTrigger);
 		System.out.println("GFLWCTRL cons end");
 	}
 

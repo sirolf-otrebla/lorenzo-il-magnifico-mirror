@@ -109,7 +109,6 @@ public class Game implements Observer {
 
     public void addPlayer(PlayerClient player){
         clientHashMap.put(player.getId(), player);
-        player.addObserver(this);
     }
 
     public void removePlayer(PlayerClient player){
