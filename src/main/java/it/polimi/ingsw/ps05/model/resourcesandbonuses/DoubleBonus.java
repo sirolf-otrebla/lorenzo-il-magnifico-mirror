@@ -81,15 +81,6 @@ public class DoubleBonus extends PermanentBonus {
 		return game;
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 	/** resets the board as it was before calling applyResult()
 	 *

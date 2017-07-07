@@ -59,15 +59,7 @@ public class NoOccupiedSpace extends PermanentBonus {
 		return game;
 	}
 
-	@Override
-	public void linkToActionListeners() {
 
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
     @Override
 	public void resetResult(PlayerRelated playerR) {

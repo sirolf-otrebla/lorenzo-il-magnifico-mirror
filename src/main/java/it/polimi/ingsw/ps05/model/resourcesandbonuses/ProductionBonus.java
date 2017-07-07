@@ -64,15 +64,6 @@ public class ProductionBonus extends PermanentBonus {
 		return "Bonus produzione";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
     @Override
 	public void resetResult(PlayerRelated playerR) {

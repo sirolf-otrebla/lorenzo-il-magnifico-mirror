@@ -87,13 +87,4 @@ public class GoldResource implements Resource, ActionResult {
 		return "Oro";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

@@ -64,16 +64,6 @@ public class NoColorBonus extends PermanentBonus {
 		return "Bonus neutro";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
-
     @Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Familiar f : playerR.getRelatedPlayer().getFamilyList()){

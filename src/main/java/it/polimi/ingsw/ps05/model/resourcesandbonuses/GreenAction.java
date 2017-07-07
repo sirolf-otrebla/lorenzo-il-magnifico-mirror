@@ -89,15 +89,6 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		return "Azione verde";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 
     public void resetResult(PlayerRelated playerR) {

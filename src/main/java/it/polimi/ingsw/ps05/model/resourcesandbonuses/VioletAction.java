@@ -97,15 +97,7 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 		return "Azione viola";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
     @Override
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
