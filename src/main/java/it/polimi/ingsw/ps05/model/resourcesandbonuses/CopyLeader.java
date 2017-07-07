@@ -45,14 +45,5 @@ public class CopyLeader implements ActionResult {
 		return game;
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 }

@@ -74,13 +74,5 @@ public class RemoveTileEffect implements ActionResult {
 		return "Rimuovi eff. Tile";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

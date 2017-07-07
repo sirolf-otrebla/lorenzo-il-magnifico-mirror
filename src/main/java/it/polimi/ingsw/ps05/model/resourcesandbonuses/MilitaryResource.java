@@ -87,14 +87,6 @@ public class MilitaryResource implements Resource, ActionResult {
 		return "Punti militare";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 }

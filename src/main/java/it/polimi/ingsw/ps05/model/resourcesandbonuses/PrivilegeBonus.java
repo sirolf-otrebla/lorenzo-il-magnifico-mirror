@@ -72,15 +72,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		return "Privilegio";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }
 
 

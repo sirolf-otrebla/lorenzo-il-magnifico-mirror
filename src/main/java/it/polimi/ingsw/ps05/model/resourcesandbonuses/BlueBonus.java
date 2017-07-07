@@ -78,13 +78,5 @@ public class BlueBonus extends Observable implements ActionResult {
 		return "Bonus blu";
 	}
 
-	@Override
-	public void linkToActionListeners() {;
 
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

@@ -89,7 +89,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -108,15 +107,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 		return "Azione blu";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }
 

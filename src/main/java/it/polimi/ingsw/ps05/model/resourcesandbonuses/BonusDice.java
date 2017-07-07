@@ -69,16 +69,6 @@ public class BonusDice extends PermanentBonus {
 		return game;
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
-
     @Override
 	public void resetResult(PlayerRelated playerR) {
 		if (toAdd){

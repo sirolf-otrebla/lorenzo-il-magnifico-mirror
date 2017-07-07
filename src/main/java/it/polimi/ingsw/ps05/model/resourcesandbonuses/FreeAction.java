@@ -69,15 +69,5 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 		return "Azione libera";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		this.addObserver(game.getGameFlowctrl().bonusActListener);
-
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 }

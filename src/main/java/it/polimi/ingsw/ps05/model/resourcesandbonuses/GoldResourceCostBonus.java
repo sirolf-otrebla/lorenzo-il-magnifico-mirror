@@ -82,14 +82,5 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 		return "Costo oro";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 }

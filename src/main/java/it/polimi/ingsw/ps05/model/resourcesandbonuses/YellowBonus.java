@@ -63,17 +63,6 @@ public class YellowBonus extends PermanentBonus{
 		return "Bonus giallo";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-		setChanged();
-		notify();
-    }
-
     @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();

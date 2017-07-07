@@ -70,17 +70,6 @@ public class GreenBonus extends PermanentBonus{
 		return "Bonus verde";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-
-
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
-
     @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();

@@ -89,13 +89,5 @@ public class StoneResource implements Resource, ActionResult {
 		return "Pietra";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

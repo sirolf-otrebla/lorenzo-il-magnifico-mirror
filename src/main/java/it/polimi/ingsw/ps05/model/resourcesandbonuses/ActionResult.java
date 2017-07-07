@@ -20,9 +20,6 @@ void applyResult(PlayerRelated playerR);
     @Override
     public  String toString();
 
-    public void linkToActionListeners();
-
-    public void notifyToActionListeners();
 
 
 }

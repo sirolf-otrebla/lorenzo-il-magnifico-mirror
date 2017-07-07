@@ -104,13 +104,5 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 		return "Azione gialla";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
 
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

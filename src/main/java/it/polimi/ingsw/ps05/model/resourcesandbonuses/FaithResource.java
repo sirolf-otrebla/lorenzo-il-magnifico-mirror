@@ -90,13 +90,4 @@ public class FaithResource implements Resource, ActionResult {
 		return "Punti Fede";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

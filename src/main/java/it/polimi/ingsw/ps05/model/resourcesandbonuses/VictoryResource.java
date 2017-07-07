@@ -86,13 +86,5 @@ public class VictoryResource implements Resource, ActionResult {
 		return "Punit Vittoria";
 	}
 
-	@Override
-	public void linkToActionListeners() {
 
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 }

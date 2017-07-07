@@ -102,16 +102,6 @@ public class BonusWithMultiplier extends PermanentBonus {
 		return "Bonus moltipl.";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
-
 
     @Override
 	public void resetResult(PlayerRelated playerR) {

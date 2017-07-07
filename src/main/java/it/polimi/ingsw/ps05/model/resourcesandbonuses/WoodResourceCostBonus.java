@@ -80,14 +80,5 @@ public class WoodResourceCostBonus implements Resource, ActionResult {
 		return "Costo legno";
 	}
 
-	@Override
-	public void linkToActionListeners() {
-		//TODO
-	}
-
-    @Override
-    public void notifyToActionListeners() {
-
-    }
 
 }
