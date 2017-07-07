@@ -32,13 +32,12 @@ public class Round {
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
-        game.setActivePlayer(plOrdIt.next());
-        while (plOrdIt.hasNext()) {
+        do {
             game.getActivePlayer().evaluatePermanentEffects();
             this.waitCommand();
             this.executeCommand();
 
-        }
+        } while (plOrdIt.hasNext());
 
     }
     private synchronized void waitCommand() throws InterruptedException {

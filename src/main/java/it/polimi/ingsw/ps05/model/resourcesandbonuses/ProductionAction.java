@@ -97,8 +97,13 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().bonusActListener);
 
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

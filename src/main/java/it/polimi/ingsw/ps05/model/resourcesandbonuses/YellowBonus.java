@@ -46,8 +46,6 @@ public class YellowBonus extends PermanentBonus{
 				}
 			}
 		}
-		setChanged();
-		notify();
 	}
 
 	@Override
@@ -66,11 +64,17 @@ public class YellowBonus extends PermanentBonus{
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
-	@Override
+    @Override
+    public void notifyToActionListeners() {
+		setChanged();
+		notify();
+    }
+
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){

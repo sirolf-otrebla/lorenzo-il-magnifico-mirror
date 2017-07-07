@@ -101,7 +101,12 @@ public class YellowAction extends Observable implements ActionResult, BonusActio
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

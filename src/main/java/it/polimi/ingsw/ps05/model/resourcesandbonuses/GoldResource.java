@@ -88,7 +88,12 @@ public class GoldResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

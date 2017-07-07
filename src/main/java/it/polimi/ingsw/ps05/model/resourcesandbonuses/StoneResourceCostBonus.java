@@ -80,8 +80,13 @@ public class StoneResourceCostBonus implements ActionResult, Resource {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 
 }

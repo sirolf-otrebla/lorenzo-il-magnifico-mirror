@@ -87,9 +87,14 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 		hasListeners = true;
+	}
+
+	@Override
+	public void notifyToActionListeners() {
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;

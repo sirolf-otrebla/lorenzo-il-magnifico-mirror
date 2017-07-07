@@ -7,6 +7,8 @@ import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategy;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategyContainer;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.*;
@@ -31,6 +33,7 @@ public class Game implements Observer {
     private boolean useCompleteRules = false;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
+    private EndActionStrategyContainer endActionStrategyContainer;
     private Semaphore semStart;
 
 

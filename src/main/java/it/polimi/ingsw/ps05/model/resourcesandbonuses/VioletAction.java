@@ -96,11 +96,16 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
-	@Override
+    @Override
+    public void notifyToActionListeners() {
+
+    }
+
+    @Override
 	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
 		visitor.visit(this, pl );
 	}

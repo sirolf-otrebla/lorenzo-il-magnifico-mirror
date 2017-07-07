@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
+/** this is a leader card effect, used by "Santa Rita" leader card. it duplicates
+ * the resources obtained through Tower cards
+ */
 public class DoubleBonus extends PermanentBonus {
 
 	/**
@@ -17,6 +20,12 @@ public class DoubleBonus extends PermanentBonus {
 	private static final long serialVersionUID = -6139830404981455814L;
 	transient Game game;
 
+	/** this effect duplicates each resource that can be obtained through tower cards
+	 *
+	 * @param playerR this is the PlayerRelated object that represents the active player.
+	 *                it is not used in this implementation, but it's mandatory for
+	 *             interface compatibility reasons.
+	 */
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		for (Tower t : game.getBoard().getTowerList().values()) {
@@ -25,12 +34,14 @@ public class DoubleBonus extends PermanentBonus {
 				for (Effect e : card.getEffects()){
 					if (e instanceof ImmediateEffect){
 						for (ActionResult r : ((ImmediateEffect) e).getResultList()){
-							if (((Resource)r).getID().equals(GoldResource.id) || ((Resource)r).getID().equals(StoneResource.id) ||
-									((Resource)r).getID().equals(WoodResource.id) || ((Resource)r).getID().equals(ServantResource.id)){
-								try {
-									r.setValue(2*r.getValue());
-								} catch (NoSuchMethodException e1) {
-									//eccezzione che non verrà mai lanciata
+							if (r instanceof Resource) {
+								if (((Resource) r).getID().equals(GoldResource.id) || ((Resource) r).getID().equals(StoneResource.id) ||
+										((Resource) r).getID().equals(WoodResource.id) || ((Resource) r).getID().equals(ServantResource.id)) {
+									try {
+										r.setValue(2 * r.getValue());
+									} catch (NoSuchMethodException e1) {
+										//eccezione che non verrà mai lanciata
+									}
 								}
 							}
 						}
@@ -43,6 +54,11 @@ public class DoubleBonus extends PermanentBonus {
 		
 	}
 
+	/** this method is not usable at this time. it exists for interface compatibility reasons.
+	 *
+	 * @param amount
+	 * @throws NoSuchMethodException if you launch this method, this exception is thrown.
+	 */
 	@Override
 	public void setValue(Integer amount) throws NoSuchMethodException {
 		throw new NoSuchMethodException();
@@ -66,10 +82,21 @@ public class DoubleBonus extends PermanentBonus {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
 
+    @Override
+    public void notifyToActionListeners() {
+
+    }
+
+	/** resets the board as it was before calling applyResult()
+	 *
+	 * @param playerR this is the PlayerRelated object that represents the active player.
+	 *                it is not used in this implementation, but it's mandatory for
+	 *             interface compatibility reasons.
+	 */
 	@Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Tower t : game.getBoard().getTowerList().values()) {

@@ -75,7 +75,12 @@ public class HarvestBonus extends PermanentBonus{
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

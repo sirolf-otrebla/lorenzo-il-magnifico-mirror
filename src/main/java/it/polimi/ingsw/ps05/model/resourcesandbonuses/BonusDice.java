@@ -70,11 +70,16 @@ public class BonusDice extends PermanentBonus {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
 
-	@Override
+    @Override
+    public void notifyToActionListeners() {
+
+    }
+
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		if (toAdd){
 		playerR.getRelatedPlayer().getFamilyMember(color).setDice(

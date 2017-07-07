@@ -67,9 +67,14 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		this.addObserver(game.getGameFlowctrl().bonusActListener);
 
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 
 }

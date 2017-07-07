@@ -87,7 +87,12 @@ public class VictoryResource implements Resource, ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

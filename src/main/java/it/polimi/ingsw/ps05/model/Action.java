@@ -88,7 +88,7 @@ public class Action implements Period {
 
 		if (!isLegal) throw new IllegalActionException(IllegalActionException.ACTION_NOT_LEGAL);
 		Integer familiarDieValue = this.familiar.getRelatedDice().getValue();
-		Integer requestedDie = this.familiar.getRelatedDice().getValue();
+		Integer requestedDie = this.position.getDiceRequirement().getValue();
 		if ( familiarDieValue < requestedDie) {
 			Integer diff = requestedDie - familiarDieValue;
 			this.familiar.getRelatedPlayer().getResource(ServantResource.id).remove(diff.intValue());

@@ -8,7 +8,8 @@ import it.polimi.ingsw.ps05.server.controller.DraftResponseMessageVisitor;
  */
 public interface NetMessageVisitor {
 
-    void visit(GameUpdateMessage msg );
+    void visit(GameResponseMessage msg);
+
     void visit(GameMessage msg);
 
     void visit(LobbyMessage msg);

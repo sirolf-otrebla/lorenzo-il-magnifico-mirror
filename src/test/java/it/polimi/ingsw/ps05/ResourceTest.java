@@ -4,8 +4,14 @@ import static org.junit.Assert.*;
 
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 
+import it.polimi.ingsw.ps05.model.cards.TowerCard;
+import it.polimi.ingsw.ps05.model.effects.Effect;
+import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
+import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.server.net.FakeConnection;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
@@ -49,7 +55,6 @@ public class ResourceTest {
 		resourceArrayList.add(new MilitaryResource(0));
 		resourceArrayList.add(new FaithResource(0));
 		resourceArrayList.add(new VictoryResource(0));
-		resourceArrayList.add(new AlwaysUnFullFilledResource());
 
 		actionResults.add(new AllBonus());
 		actionResults.add(new BlueAction());
@@ -175,6 +180,35 @@ public class ResourceTest {
 		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
 
 	}
+	@Test
+	public void YellowBonusTest() throws NoSuchMethodException{
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Yellow).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		YellowBonus actionResult = new YellowBonus(); //allbonus
+		actionResult.setGame(game);
+		actionResult.setValue(2);
+		actionResult.applyResult(players.get(1));
+		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+
+	}
+
+	@Test
+	public void VioletBonusTest() throws NoSuchMethodException{
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Violet).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		VioletBonus actionResult = new VioletBonus(); //allbonus
+		actionResult.setGame(game);
+		actionResult.setValue(2);
+		actionResult.applyResult(players.get(1));
+		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+
+	}
 
 	@Test
 	public void BlueBonusTest() throws NoSuchMethodException{
@@ -190,5 +224,73 @@ public class ResourceTest {
 		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
 
 	}
+
+	@Test
+	public void DoubleBonusTest() throws NoSuchMethodException{
+		for (int i = 0; i < 50; i++) {
+			ArrayList<TowerTileInterface> blueTower = new ArrayList<>(
+					board.getTowerList().get(ColorEnumeration.Blue).
+					getTiles().values());
+			Collections.shuffle(blueTower);
+			ArrayList<TowerTileInterface> greenTower = new ArrayList<>(
+					board.getTowerList().get(ColorEnumeration.Green).
+							getTiles().values());
+			Collections.shuffle(greenTower);
+			ArrayList<TowerTileInterface> yellowTower = new ArrayList<>(
+					board.getTowerList().get(ColorEnumeration.Yellow).
+							getTiles().values());
+			Collections.shuffle(yellowTower);
+			ArrayList<TowerTileInterface> violetTower = new ArrayList<>(
+					board.getTowerList().get(ColorEnumeration.Violet).
+							getTiles().values());
+			Collections.shuffle(violetTower);
+			TowerTileInterface tile0 = blueTower.get((new Random()).nextInt(blueTower.size()));
+			TowerTileInterface tile1 = greenTower.get((new Random()).nextInt(greenTower.size()));
+			TowerTileInterface tile2 = yellowTower.get((new Random()).nextInt(yellowTower.size()));
+			TowerTileInterface tile3 = violetTower.get((new Random()).nextInt(violetTower.size()));
+			TowerCard card0 = tile0.getCard();
+			TowerCard card1 = tile1.getCard();
+			TowerCard card2 = tile2.getCard();
+			TowerCard card3 = tile3.getCard();
+			ArrayList<Resource> card0ResourceResultsBefore = new ArrayList<>();
+			for (int j = 0; j < card0.getEffects().size() ; j++) {
+				if (card0.getEffects().get(j) instanceof ImmediateEffect){
+					ImmediateEffect effect = (ImmediateEffect) card0.getEffects().get(j);
+					for (int k = 0; k < effect.getResultList().size() ; k++) {
+						if(effect.getResultList().get(k) instanceof GoldResource ||
+								effect.getResultList().get(k) instanceof WoodResource ||
+								effect.getResultList().get(k) instanceof ServantResource ||
+								effect.getResultList().get(k) instanceof StoneResource ){
+							card0ResourceResultsBefore.add((Resource) effect.getResultList().get(k));
+						}
+					}
+				}
+			}
+
+			DoubleBonus actionResult = new DoubleBonus(); //allbonus
+			actionResult.setGame(game);
+			actionResult.applyResult(players.get(1));
+			ArrayList<Resource> card0ResourceResultsAfter = new ArrayList<>();
+			for (int j = 0; j < card0.getEffects().size() ; j++) {
+				if (card0.getEffects().get(j) instanceof ImmediateEffect){
+					ImmediateEffect effect = (ImmediateEffect) card0.getEffects().get(j);
+					for (int k = 0; k < effect.getResultList().size() ; k++) {
+						if(effect.getResultList().get(k) instanceof GoldResource ||
+								effect.getResultList().get(k) instanceof WoodResource ||
+								effect.getResultList().get(k) instanceof ServantResource ||
+								effect.getResultList().get(k) instanceof StoneResource ){
+							card0ResourceResultsAfter.add((Resource) effect.getResultList().get(k));
+						}
+					}
+				}
+			}
+			for (int j = 0; j < card0ResourceResultsBefore.size(); j++) {
+				assertEquals( card0ResourceResultsBefore.get(j).getValue()*2,
+						(int) card0ResourceResultsAfter.get(j).getValue());
+			}
+		}
+	}
+
+
 
 }

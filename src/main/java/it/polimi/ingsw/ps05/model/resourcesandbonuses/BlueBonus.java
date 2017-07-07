@@ -79,9 +79,14 @@ public class BlueBonus extends Observable implements ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 		hasListeners = true;
 
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

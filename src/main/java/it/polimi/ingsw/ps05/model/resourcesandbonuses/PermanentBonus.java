@@ -15,4 +15,9 @@ public abstract class PermanentBonus extends Observable implements ActionResult 
 	private static final long serialVersionUID = -2643486938713305364L;
 
 	public abstract  void resetResult(PlayerRelated playerR);
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

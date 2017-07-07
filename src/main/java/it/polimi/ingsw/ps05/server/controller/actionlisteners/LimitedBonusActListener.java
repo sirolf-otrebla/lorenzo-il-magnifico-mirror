@@ -1,5 +1,6 @@
-package it.polimi.ingsw.ps05.server.controller;
+package it.polimi.ingsw.ps05.server.controller.actionlisteners;
 
+import it.polimi.ingsw.ps05.server.controller.GameFlowController;
 import javafx.beans.Observable;
 
 import java.util.Observer;

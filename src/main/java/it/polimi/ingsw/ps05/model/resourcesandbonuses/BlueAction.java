@@ -108,9 +108,14 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().bonusActListener);
 
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }
 

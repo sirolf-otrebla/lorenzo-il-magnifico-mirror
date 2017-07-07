@@ -103,12 +103,17 @@ public class BonusWithMultiplier extends PermanentBonus {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
 
+    @Override
+    public void notifyToActionListeners() {
 
-	@Override
+    }
+
+
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		//todo
 	}

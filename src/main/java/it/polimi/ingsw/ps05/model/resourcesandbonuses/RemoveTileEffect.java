@@ -75,7 +75,12 @@ public class RemoveTileEffect implements ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }

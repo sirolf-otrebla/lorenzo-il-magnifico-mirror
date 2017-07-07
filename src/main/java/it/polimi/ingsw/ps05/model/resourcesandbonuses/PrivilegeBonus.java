@@ -73,9 +73,14 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		//TODO
 	}
+
+    @Override
+    public void notifyToActionListeners() {
+
+    }
 }
 
 

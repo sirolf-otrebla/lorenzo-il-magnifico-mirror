@@ -89,12 +89,17 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
+    @Override
+    public void notifyToActionListeners() {
 
-	public void resetResult(PlayerRelated playerR) {
+    }
+
+
+    public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){

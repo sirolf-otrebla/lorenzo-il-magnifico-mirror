@@ -65,11 +65,16 @@ public class NoColorBonus extends PermanentBonus {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
+	public void linkToActionListeners() {
 		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
-	@Override
+    @Override
+    public void notifyToActionListeners() {
+
+    }
+
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Familiar f : playerR.getRelatedPlayer().getFamilyList()){
 			if (f.getColor().equals(ColorEnumeration.Any)) {
