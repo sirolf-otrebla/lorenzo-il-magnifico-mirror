@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
-public class GoldResourceCostBonus implements ActionResult, Resource {
+public class GoldResourceCostBonus extends PermanentBonus implements Resource {
 	
 	/**
 	 * 
@@ -83,4 +83,8 @@ public class GoldResourceCostBonus implements ActionResult, Resource {
 	}
 
 
+	@Override
+	public void resetResult(PlayerRelated playerR) {
+
+	}
 }
