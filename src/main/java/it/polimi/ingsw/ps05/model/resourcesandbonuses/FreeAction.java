@@ -1,9 +1,11 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Observable;
 
@@ -42,7 +44,8 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 		Familiar f = playerR.getRelatedPlayer().createGhostFamiliar(this.value);
 		//modifica la board aggiungendo risorsa sempre falsa
 		//niente da modificare, azione free
-		//notifica observer
+		this.game.getEndActionStrategyContainer().setChosenStrategy(
+				new BonusActionStrategy(ColorEnumeration.Any, f));
 
 	}
 

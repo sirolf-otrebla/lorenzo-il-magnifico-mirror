@@ -33,9 +33,11 @@ public class Round {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
         do {
+            game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();
             this.waitCommand();
             this.executeCommand();
+            game.getEndActionStrategyContainer().executeStrategy();
 
         } while (plOrdIt.hasNext());
 

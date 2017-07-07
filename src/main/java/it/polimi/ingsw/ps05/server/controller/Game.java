@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategy;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategyContainer;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.MoveNextPlayerStrategy;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.*;
@@ -40,6 +41,8 @@ public class Game implements Observer {
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
         synchronized (this) {
+            this.endActionStrategyContainer =
+                    new EndActionStrategyContainer(new MoveNextPlayerStrategy(this), this);
             this.id = id;
             this.semStart = new Semaphore(0);
             this.useCompleteRules = useCompleteRules;
@@ -173,5 +176,9 @@ public class Game implements Observer {
 
     public void setgBoard(Board gBoard) {
         this.gBoard = gBoard;
+    }
+
+    public EndActionStrategyContainer getEndActionStrategyContainer() {
+        return endActionStrategyContainer;
     }
 }
