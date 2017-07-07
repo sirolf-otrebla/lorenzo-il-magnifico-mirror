@@ -22,6 +22,7 @@ public class GameResponseMessageVisitor {
 			System.out.println("Update");
 			ViewAdapter.getInstance().updateView(msg.getGameStatus());
 		}else {
+			Client.getInstance().setInGame(true);
 			System.out.println("Start");
 			ViewAdapter.getInstance().startGameView(msg.getGameStatus());
 		}

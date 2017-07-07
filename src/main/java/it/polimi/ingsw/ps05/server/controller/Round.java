@@ -33,17 +33,16 @@ public class Round {
         do {
             game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();
+            game.getGameFlowctrl().sendUpdateMsg();
             this.waitCommand();
             this.executeCommand();
             game.getEndActionStrategyContainer().executeStrategy();
-
         } while (plOrdIt.hasNext());
 
     }
     private synchronized void waitCommand() throws InterruptedException {
         // send message
     	System.out.println("WAIT COMMAND");
-        game.getGameFlowctrl().sendUpdateMsg();
         this.waitingMessageSemaphore.acquire();
     }
 

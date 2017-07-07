@@ -286,8 +286,12 @@ public class CLIMain implements LimView, Runnable{
 
 	public void updateGame(GameStatus status){
 		System.out.println("Start update game in cli");
+		this.board = null;
+		this.player = null;
+		this.playersList = null;
 		this.board = status.getGameBoard();
 		this.player = status.getThisPlayer();
+		this.playersList = new ArrayList<>(status.getPlayerHashMap().values());
 		for (Player p : status.getPlayerHashMap().values()){
 			for (Player inThis : playersList){
 				if (p.getPlayerID() == inThis.getPlayerID()){
