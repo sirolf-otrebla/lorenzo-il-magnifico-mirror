@@ -46,6 +46,36 @@ public class CommonJsonParser {
 		this.playerConnected = playerConnected;
 		this.game = game;
 	}
+	
+	public ArrayList<ArrayList<Resource>> loadPrivilegeConversion(){
+		
+		
+		try {
+			File file = new File("./src/main/res/privilegeConverter.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			JSONArray array = (JSONArray)obj.get("Privilege");
+			ArrayList<ArrayList<Resource>> finalList = new ArrayList<>();
+			
+			for (Object o : array){
+				ArrayList<Resource> interList = new ArrayList<>();
+				JSONObject a = (JSONObject)o;
+				for (int i = 0; i < a.keySet().size(); i++){
+					Object actionObject = Class.forName(resourcePath + a.keySet().toArray()[i].toString()).newInstance();
+					Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
+					method.invoke(actionObject, Integer.parseInt(obj.get(obj.keySet().toArray()[i]).toString()));
+					interList.add((Resource)actionObject);
+				}
+				finalList.add(interList);
+				
+			}
+		} catch (IOException | ParseException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
 
 	private ArrayList<LeaderCard> loadLeaderCards() throws FileNotFoundException, IOException, ParseException, NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		File file = new File("./src/main/res/leader.json");
