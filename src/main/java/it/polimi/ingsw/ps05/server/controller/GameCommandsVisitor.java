@@ -7,12 +7,11 @@ import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.ProductionAction;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
-import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.net.message.gamemessages.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

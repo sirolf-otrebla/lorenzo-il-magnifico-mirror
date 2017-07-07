@@ -1,8 +1,7 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.gui.LeaderWidget;
-import it.polimi.ingsw.ps05.net.message.DiscardLeaderMessage;
-import it.polimi.ingsw.ps05.net.message.LeaderCardMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.DiscardLeaderMessage;
 
 import java.util.Observable;
 import java.util.Observer;

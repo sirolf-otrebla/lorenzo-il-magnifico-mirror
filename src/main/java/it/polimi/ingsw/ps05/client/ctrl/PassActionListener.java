@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.net.message.ActionMessage;
-import it.polimi.ingsw.ps05.net.message.PassActionMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.PassActionMessage;
 
 import java.util.Observable;
 import java.util.Observer;

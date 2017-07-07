@@ -3,23 +3,22 @@ package it.polimi.ingsw.ps05;
 import static org.junit.Assert.*;
 
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
+import it.polimi.ingsw.ps05.model.cards.GreenCard;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
+import it.polimi.ingsw.ps05.model.cards.YellowCard;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
-import it.polimi.ingsw.ps05.model.spaces.BlueTower;
+import it.polimi.ingsw.ps05.model.spaces.*;
+import it.polimi.ingsw.ps05.net.GameStatus;
+import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
+import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.server.net.FakeConnection;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
-import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
-import it.polimi.ingsw.ps05.server.controller.Game;
-import it.polimi.ingsw.ps05.server.controller.GameSetup;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.server.net.socket.SocketConn;
 import org.junit.Assert;
@@ -292,5 +291,168 @@ public class ResourceTest {
 	}
 
 
+	@Test
+	public void testProduction() throws NotEnoughResourcesException, IllegalMethodCallException {
+
+		Player testPl = this.game.getPlayerClient(0).getPlayer();
+		Collection<TowerTileInterface> yellow =
+				board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values();
+		YellowCard card1  = (YellowCard) new ArrayList<TowerTileInterface>(yellow).get(0).getCard();
+		YellowCard card2  = (YellowCard) new ArrayList<TowerTileInterface>(yellow).get(0).getCard();
+		testPl.addYellowCard(card1);
+		testPl.addYellowCard(card2);
+		card1.setToBeActivated(true);
+		card2.setToBeActivated(true);
+		ProductionSpace productionSpace = new ProductionSpace();
+		productionSpace.applyEffect(testPl.getFamilyMember(ColorEnumeration.Black));
+		ArrayList<ActionResult> res1 = card1.getActivableEffectList().
+				get(0).getResultList().get(0);
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res1.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res1.get(0)).getID()).getValue();
+				testPl.addResource(((Resource) res1.get(i)));
+			}
+
+		}
+		ArrayList<ActionResult> res2 = card2.getActivableEffectList().
+				get(0).getResultList().get(0);
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res2.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res2.get(0)).getID()).getValue();
+				testPl.addResource(((Resource) res2.get(i)));
+			}
+
+		}
+		ArrayList<Resource> plRes = testPl.getResourceList();
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res1.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res1.get(i)).getID()).getValue();
+				testPl.getResource(((Resource) res1.get(i)).getID()).remove((Resource) res1.get(i));
+			}
+
+		}
+		for (int i = 0; i < res2.size() ; i++) {
+			if (res2.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res2.get(i)).getID()).getValue();
+				testPl.getResource(((Resource) res2.get(i)).getID()).remove((Resource) res2.get(i));
+			}
+
+		}
+		productionSpace.applyEffect(testPl.getFamilyMember(ColorEnumeration.Black));
+		System.out.println(card1.getActivableEffectList().size());
+		for (Resource r: plRes) {
+			assertEquals(testPl.getResource(r.getID()).getValue(), r.getValue());
+		}
+
+
+	}
+	@Test
+	public void testHarvest() throws NotEnoughResourcesException, IllegalMethodCallException {
+
+		Player testPl = this.game.getPlayerClient(0).getPlayer();
+		Collection<TowerTileInterface> green =
+				board.getTowerList().get(ColorEnumeration.Green).getTiles().values();
+		GreenCard card1  = (GreenCard) new ArrayList<TowerTileInterface>(green).get(0).getCard();
+		GreenCard card2  = (GreenCard) new ArrayList<TowerTileInterface>(green).get(0).getCard();
+		testPl.addGreenCard(card1);
+		testPl.addGreenCard(card2);
+		card1.setToBeActivated(true);
+		card2.setToBeActivated(true);
+		HarvestingSpace har = new HarvestingSpace();
+		har.applyEffect(testPl.getFamilyMember(ColorEnumeration.Black));
+		ArrayList<ActionResult> res1 = card1.getActivableEffectList().
+				get(0).getResultList().get(0);
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res1.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res1.get(0)).getID()).getValue();
+				testPl.addResource(((Resource) res1.get(i)));
+			}
+
+		}
+		ArrayList<ActionResult> res2 = card2.getActivableEffectList().
+				get(0).getResultList().get(0);
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res2.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res2.get(0)).getID()).getValue();
+				testPl.addResource(((Resource) res2.get(i)));
+			}
+
+		}
+		ArrayList<Resource> plRes = testPl.getResourceList();
+		for (int i = 0; i < res1.size() ; i++) {
+			if (res1.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res1.get(i)).getID()).getValue();
+				testPl.getResource(((Resource) res1.get(i)).getID()).remove((Resource) res1.get(i));
+			}
+
+		}
+		for (int i = 0; i < res2.size() ; i++) {
+			if (res2.get(i) instanceof Resource){
+				Integer value =
+						testPl.getResource(((Resource) res2.get(i)).getID()).getValue();
+				testPl.getResource(((Resource) res2.get(i)).getID()).remove((Resource) res2.get(i));
+			}
+
+		}
+		har.applyEffect(testPl.getFamilyMember(ColorEnumeration.Black));
+		System.out.println(card1.getActivableEffectList().size());
+		for (Resource r: plRes) {
+			assertEquals(testPl.getResource(r.getID()).getValue(), r.getValue());
+		}
+
+
+	}
+
+	@Test
+	public void testCouncil() throws InterruptedException {
+		CouncilSpace councilSpace = null;
+		for ( ActionSpace space : this.game.getBoard().getActSpacesMap().values()){
+			if (space instanceof CouncilSpace)
+				councilSpace = (CouncilSpace ) space;
+		}
+		Collections.shuffle(players);
+		for ( Player p : players) {
+			councilSpace.setOccupied(p.getFamilyMember(ColorEnumeration.Black));
+		}
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(players.get(i).getPlayerID(), councilSpace.getOccupantList().get(i).getRelatedPlayer().getPlayerID());
+		}
+	}
+
+	@Test
+	public  void testGameSetup(){
+		ColorEnumeration[] colorEnumeration = {
+				ColorEnumeration.Yellow,
+				ColorEnumeration.Green,
+				ColorEnumeration.Red,
+				ColorEnumeration.Blue
+		};
+		ArrayList<PlayerClient> playerClients = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			playerClients.add(new PlayerClient(new FakeConnection(), i));
+		}
+		game = new Game(false, false, 100, playerClients);
+		for (int i = 0; i < 4; i++) {
+			playerClients.get(i).BuildPlayer(colorEnumeration[i]);
+		}
+		for (PlayerClient client: playerClients) {
+			players.add(client.getPlayer());
+			client.setInGame(game);
+		}
+		GameSetup setup = new GameSetup(players, game);
+		board = setup.getBoard();
+		game.setgBoard(board);
+
+	}
+
 
 }
+
+
