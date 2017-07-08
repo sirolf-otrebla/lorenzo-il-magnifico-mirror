@@ -61,7 +61,6 @@ public class GameCommandsVisitor implements VisitorInterface {
                 card.discard(this.activePlayer);
             else{
                 card.applyNonActivableEffects(activePlayer, lCardMsg.getEffectChoice());
-                this.activePlayer.resetPermanentEffects();
 
             }
         } catch (MissingCardException e){

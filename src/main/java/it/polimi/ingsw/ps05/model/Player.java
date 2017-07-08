@@ -205,11 +205,9 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 
 
 
-	public void resetPermanentEffects(){
-		for (PermanentBonus r:
-			 getPermanentBonusList()) {
-
-			r.resetResult(this);
+	public void resetPermanentEffects(Integer activeEffectBound){
+		for (int i = 0; i < activeEffectBound ; i++) {
+			getPermanentEffectResList().get(i).resetResult(this);
 		}
 	}
 

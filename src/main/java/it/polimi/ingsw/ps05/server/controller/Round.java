@@ -36,9 +36,11 @@ public class Round {
         do {
             game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();
+            Integer effectListSize = game.getActivePlayer().getPermanentEffectResList().size();
             game.getGameFlowctrl().sendUpdateMsg();
             this.waitCommand();
             this.executeCommand();
+            game.getActivePlayer().resetPermanentEffects(effectListSize);
             game.getEndActionStrategyContainer().executeStrategy();
         } while (playerCounter < playerOrder.size());
 
