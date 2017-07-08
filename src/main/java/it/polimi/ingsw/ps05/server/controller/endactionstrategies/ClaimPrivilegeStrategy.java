@@ -18,12 +18,11 @@ public class ClaimPrivilegeStrategy implements EndActionStrategy {
 
     @Override
     public void execute(EndActionStrategyContainer container) {
-        ArrayList<Resource> resAlternatives =
+        ArrayList<ArrayList<Resource>> resAlternatives =
                 container.getGame().getPrivilegeConvResAlternatives();
         ConvertPrivilegeTriggerMessage privilegeTriggerMessage =
                 new ConvertPrivilegeTriggerMessage(container.getGame().getPrivilegeConvResAlternatives(), privilegeNumber);
         Integer playerID = container.getGame().getActivePlayer().getPlayerID();
         container.getGame().getPlayerClient(playerID).sendMessage(privilegeTriggerMessage);
-
     }
 }

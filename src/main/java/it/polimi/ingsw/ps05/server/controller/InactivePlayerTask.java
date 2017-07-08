@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.server.controller;
 
+import it.polimi.ingsw.ps05.net.message.gamemessages.PassActionMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.TimerTask;
@@ -21,6 +22,7 @@ public class InactivePlayerTask extends TimerTask {
 
     @Override
     public void run() {
-    	game.getEndActionStrategyContainer().executeDefaultStrategy();
+        System.out.println("fine azione, ci hai messo troppo tempo baby");
+        game.getState().setInputMessage(new PassActionMessage());
     }
 }

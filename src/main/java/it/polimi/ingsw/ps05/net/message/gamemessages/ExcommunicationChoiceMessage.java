@@ -1,22 +1,19 @@
 package it.polimi.ingsw.ps05.net.message.gamemessages;
 
-import it.polimi.ingsw.ps05.client.ctrl.GameResponseMessageVisitor;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
- * Created by Alberto on 07/07/2017.
+ * Created by Alberto on 08/07/2017.
  */
-public class  ExcommunicationTriggerMessage implements GameResponseMessage {
-
-    public static final int CHOICE = 1;
-    public static final int EXCOMMUNICATED = 0;
-
+public class ExcommunicationChoiceMessage implements GameMessage {
+    private  boolean acceptExcommunication;
     private ExcommunicationCard excommunicationCard;
-    private int state;
+    private Integer playerID;
 
-    public ExcommunicationTriggerMessage(int state, ExcommunicationCard excommunicationCard) {
-        this.state = state;
+    public ExcommunicationChoiceMessage(boolean acceptExcommunication, ExcommunicationCard excommunicationCard) {
+        this.acceptExcommunication = acceptExcommunication;
         this.excommunicationCard = excommunicationCard;
     }
 
@@ -26,12 +23,12 @@ public class  ExcommunicationTriggerMessage implements GameResponseMessage {
     }
 
     @Override
-    public void acceptVisitor(GameResponseMessageVisitor vi) {
+    public void acceptVisitor(GameCommandsVisitor vi) {
         vi.visit(this);
     }
 
-    public int getState() {
-        return state;
+    public boolean isAcceptExcommunication() {
+        return acceptExcommunication;
     }
 
     public ExcommunicationCard getExcommunicationCard() {

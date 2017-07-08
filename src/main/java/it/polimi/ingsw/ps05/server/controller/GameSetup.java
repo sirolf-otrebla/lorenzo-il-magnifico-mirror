@@ -30,12 +30,14 @@ public class GameSetup {
 		createFamiliarForPlayers();
 		loadBoard();
 		loadBonusTiles(game.isUsingCustomBonusTiles());
-		ArrayList<ExcommunicationCard> excomm = loadExcommEffect();
-		try {
-			board.setExcomCards(excomm);
-		} catch (RepeatedAssignmentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (game.isUsingCompleteRules()){
+			ArrayList<ExcommunicationCard> excomm = loadExcommEffect();
+			try {
+				board.setExcomCards(excomm);
+			} catch (RepeatedAssignmentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		ArrayList<Resource> l = parser.loadStartingResources();
 		System.out.println("resource loaded in gameSetup " + l.size());

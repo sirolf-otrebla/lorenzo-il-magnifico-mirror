@@ -42,8 +42,9 @@ public class NoColorBonus extends PermanentBonus {
 				f.setDice(new Dice(ColorEnumeration.Any, f.getRelatedDice().getValue() + this.value));
 			}
 		}
-		setChanged();
-		notify();
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 	
 	

@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 public class ConvertPrivilegeTriggerMessage implements GameResponseMessage {
 
-    private ArrayList<Resource> conversionList;
+    private ArrayList<ArrayList<Resource>> conversionList;
     private Integer privilegeNum;
-    public ConvertPrivilegeTriggerMessage(ArrayList<Resource> conversionList, Integer privilegeNum){
+    public ConvertPrivilegeTriggerMessage(ArrayList<ArrayList<Resource>> conversionList, Integer privilegeNum){
         this.conversionList = conversionList;
         this.privilegeNum = privilegeNum;
     }
@@ -24,10 +24,10 @@ public class ConvertPrivilegeTriggerMessage implements GameResponseMessage {
 
     @Override
     public void acceptVisitor(GameResponseMessageVisitor vi) {
-
+        vi.visit(this);
     }
 
-    public ArrayList<Resource> getConversionList() {
+    public ArrayList<ArrayList<Resource>> getConversionList() {
         return conversionList;
     }
 

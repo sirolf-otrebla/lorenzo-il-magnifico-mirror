@@ -57,6 +57,9 @@ public class RemoveTileEffect extends PermanentBonus implements ActionResult {
 			}
 		}
 		//notifica observer
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

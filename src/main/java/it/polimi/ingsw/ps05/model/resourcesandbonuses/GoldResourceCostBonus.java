@@ -72,7 +72,9 @@ public class GoldResourceCostBonus extends PermanentBonus implements ActionResul
 				}
 			}
 		}
-		
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

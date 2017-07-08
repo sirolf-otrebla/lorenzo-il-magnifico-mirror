@@ -46,7 +46,9 @@ public class BonusDice extends PermanentBonus {
 			playerR.getRelatedPlayer().getFamilyMember(color).setDice(
 					new Dice(color,value));
 		}
-			
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

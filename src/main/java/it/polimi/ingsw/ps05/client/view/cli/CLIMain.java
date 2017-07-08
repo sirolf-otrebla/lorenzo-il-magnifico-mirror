@@ -4,7 +4,6 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
-import it.polimi.ingsw.ps05.client.view.SelectionTypeEnum;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
@@ -31,16 +30,13 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.cards.BlueCard;
-import it.polimi.ingsw.ps05.model.cards.Card;
 
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -109,17 +105,19 @@ public class CLIMain implements LimView, Runnable{
 	};
 	private ArrayList<ArrayList<Integer>> tileIdForTower = new ArrayList<ArrayList<Integer>>();
 
-	/*
-	 * TODO fare selezione privilegi
-	 * 
-	 * TODO mettere da qualche parte che sei attivo
-	 * 
-	 */
+	//TODO Aggiungeere turno corrente sopra lista giocatori
 
 	//mettere nella wiki che per la CLI la risoluzione minima consigliata è 1280*800
 
 
-
+	/**
+	 * This is the constructor of the CLI. This method just setup the object the CLI works with.
+	 * @param board is the place where everything happen. The CLI will show all the information about the board.
+	 * @param player is who you are, the CLI needs to know this to provide you more info about your resources and cards.
+	 * @param playersList is the list of the other player in game. the CLI needs this to provide you general info about other players resources ecc.
+	 * 
+	 * @author lucafala
+	 */
 	public CLIMain(Board board, Player player, ArrayList<Player> playersList){
 		this.board = board;
 		this.player = player;
@@ -138,31 +136,12 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println(screenSize.getHeight());
 		System.out.println(width + ": " + height);
 		internalSemaphore = new Semaphore(0);
-
-
-		//trySys();
 	}
-
-	public void trySys(){
-		System.out.println("(trySis at CLIMain) lunghezza playerArrayList: " + playersList.size() );
-
-		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Blue).getTiles().values()) {
-			playersList.get(0).addBlueCard((BlueCard)tile.getCard());
-		}
-		for (TowerTileInterface tile : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
-			player.addYellowCard((YellowCard)tile.getCard());
-		}
-		for (ActionSpace s : this.board.getActSpacesMap().values()) {
-			s.setOccupied(this.player.getFamilyMember(ColorEnumeration.White));
-			this.player.getFamilyMember(ColorEnumeration.White).setPosition(s);
-		}
-		for (TowerTileInterface t : this.board.getTowerList().get(ColorEnumeration.Yellow).getTiles().values()) {
-			((TileWithEffect)t).setOccupied(this.player.getFamilyMember(ColorEnumeration.Black));
-			this.player.getFamilyMember(ColorEnumeration.Black).setPosition((ActionSpace)t);
-			break;
-		}
-	}
-
+	
+	
+	/**
+	 *This is the method that shows the CLI on the screen. Is highly reccomended to run it on a different thread because he will block the execution to wait some user's input. 
+	 */
 	@Override
 	public void run() {
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
@@ -249,41 +228,10 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
-	public void tryAction(){
-		ActionSpace space;
-		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
-			space = ((ActionSpace)board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)));
-			space.setDiceRequirement(board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getDiceRequired());
-
-		} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
-			//Market
-			space = (ActionSpace)marketList.get(currentColBoard);
-		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
-			//production
-			space = (ActionSpace)productionList.get(currentColBoard);
-		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard >= productionList.size() && currentColBoard < productionList.size() + harvestList.size() ){
-			//Harvest
-			space = (ActionSpace)harvestList.get(currentColBoard - productionList.size());
-		} else {
-			//Council
-			space = council;
-		}
-		Action action = new Action((Familiar)player.getFamilyList().toArray()[selectedFam], space);
-		System.out.println(space.getDiceRequirement().getValue());
-		System.out.println("Fam " +  ((Familiar)player.getFamilyList().toArray()[selectedFam]).getColor().toString() + " " + ((Familiar)player.getFamilyList().toArray()[selectedFam ]).getRelatedDice().getValue());
-		System.out.println(space.toString());
-		System.out.println("Action legal " + action.isLegal());
-		try {
-			action.run(selectedOpt);
-		} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
-			e.printStackTrace();
-
-		} catch (IllegalMethodCallException e) {
-			e.printStackTrace();
-		}
-
-	}
-
+	/**
+	 * Once the CLI is instantiated and shown if you want to update its content you have to call this method.
+	 * @param status is the actual game status that the CLI will show
+	 */
 	public void updateGame(GameStatus status){
 		System.out.println("Start update game in cli");
 		this.board = null;
@@ -320,6 +268,12 @@ public class CLIMain implements LimView, Runnable{
 		System.out.println("End update game in cli");
 	}
 
+	/**
+	 * This method is used to select the familiar to use and the payment option
+	 * @param c is the character read from the keyboard
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void analizeChar(Character c, TextGraphics textGraphics) throws IOException{
 		if ((c == 'q' || c == 'Q') && ghost == null){
 			selectedFam = 0;
@@ -347,13 +301,17 @@ public class CLIMain implements LimView, Runnable{
 
 	}
 
+	/**
+	 * This is the method that manage the user's input. Based on what it reads it does action.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void movePointer(TextGraphics textGraphics) throws IOException{
 		KeyStroke keyStroke = terminal.readInput();
 		while(true) {
 			switch(keyStroke.getKeyType()){
 			case Character:
 				analizeChar(keyStroke.getCharacter(), textGraphics);
-
 				break;
 			case ArrowDown: 
 				moveDown(textGraphics);
@@ -406,6 +364,9 @@ public class CLIMain implements LimView, Runnable{
 			case Escape:
 				//passare il turno;
 				break;
+			case EOF:
+				System.exit(0);
+				break;
 			default:
 				System.out.println("Default");
 				break;
@@ -422,6 +383,11 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method tries to do action for player if the conditions are satisfied (resources, dice, free space)
+	 * @throws IOException if there are problems accessing the terminal
+	 * @see Action
+	 */
 	private void doActionForPlayer() throws IOException {
 		System.out.println("Do action!!!!!");
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
@@ -469,7 +435,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 		//meActive = false;
 	}
-
+	
+	/**
+	 * This method moves the cursor one position up.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void moveUp(TextGraphics textGraphics) throws IOException {
 		if (inBoard){
 			try{
@@ -507,6 +478,11 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method moves the cursor one position right.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void moveRight(TextGraphics textGraphics) throws IOException {
 		if (inBoard){
 			try {
@@ -570,6 +546,11 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method moves the cursor one position down.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void moveDown(TextGraphics textGraphics) throws IOException{
 		if (inBoard){
 			try{
@@ -607,6 +588,11 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method moves the cursor one position left.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @throws IOException if there are problems accessing the terminal
+	 */
 	private void moveLeft(TextGraphics textGraphics) throws IOException {
 		if (inBoard){
 			try{
@@ -653,6 +639,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This is the general method that gives the input for drawing all the graphics.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void drawGraphics(int width, int height, TextGraphics textGraphics){
 		mapBoard = new ArrayList<ArrayList<TerminalPosition>>();
 		offSet = new ArrayList<ArrayList<Integer>>();
@@ -781,6 +773,9 @@ public class CLIMain implements LimView, Runnable{
 		checkPositionCorrect();
 	}
 
+	/**
+	 * Working with hashmap may happens that some lists are different from the expectation. This method corrects the position errors in the CLI
+	 */
 	private void checkPositionCorrect(){
 		for (ArrayList<TerminalPosition> column : mapBoard){
 			for (int i = 0; i < column.size() - 1; i++ ){
@@ -793,6 +788,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method draws the excommunication box and prints inside the info about the current excommunication
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void drawExcomunication(int width, int height, TextGraphics textGraphics){
 		int x = (Math.max(marketList.size(), productionList.size()+harvestList.size())+3)*width/16 - width/32;
 		drawSquare(
@@ -803,10 +804,17 @@ public class CLIMain implements LimView, Runnable{
 				textGraphics
 				);
 		//TODO
-		//textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
-		//textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
-		//		board.getExcomCards().get(0).getFaithRequested().getValue());
-		String toWrite = "";//board.getExcomCards().get(0).getExcommEffect().toString();
+		String toWrite;
+		if (board.getExcomCards() != null){
+			textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
+			textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
+					board.getExcomCards().get(0).getFaithRequested().getValue());
+			toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
+		} else {
+			toWrite = "Regole semplici selezionate. No scomuniche per questa partita";
+		}
+		
+		
 
 		int size = (Math.max(marketList.size(), productionList.size()+harvestList.size())+4)*width/16 + width/32 - x;
 		int i = 0;
@@ -824,6 +832,13 @@ public class CLIMain implements LimView, Runnable{
 
 	}
 
+	
+	/**
+	 * This method draws the player box and prints inside the info about his resources and cards.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void drawPlayerInfo(int width, int height, TextGraphics textGraphics){
 		int chosenColStart = Math.max(3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 6 + width/8 , 5*width/8);
 		drawSquare(chosenColStart,0,width - 1, 4*height/16 + 1,textGraphics);
@@ -912,6 +927,12 @@ public class CLIMain implements LimView, Runnable{
 		mapMyStats.add(secondColumn);
 	}
 
+	/**
+	 * This method draws the board box and all the info about spaces
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void drawBoard(int width, int height, TextGraphics textGraphics){
 		for (int a = 0; a < board.getTowerList().size(); a++){
 			Tower tower = board.getTowerList().get(towerOrder.get(a));
@@ -953,6 +974,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method draws opponents box and their info
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void drawPlayerStats(int width, int height, TextGraphics textGraphics){
 		drawSquare(
 				(Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1,
@@ -994,6 +1021,14 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * Generic method that draws a square given the starting and ending coordinates (highleft and bottomright)
+	 * @param colStart high left x
+	 * @param rowStart high left y
+	 * @param colEnd bottom right x
+	 * @param rowEnd bottom right y
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	public static void drawSquare(int colStart,int rowStart, int colEnd, int rowEnd, TextGraphics textGraphics){
 		textGraphics.drawLine(colStart,rowStart,colStart,rowEnd,'|');
 		textGraphics.drawLine(colEnd,rowStart,colEnd,rowEnd,'|');
@@ -1153,12 +1188,14 @@ public class CLIMain implements LimView, Runnable{
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					"Dado: " + marketList.get(currentColBoard).getDiceRequirement().getValue());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-
 			for (Effect effect : marketList.get(currentColBoard).getEffects()){
+				System.out.println("EFFETTO MERCATO ------ " + effect.getEffectType().toString());
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 						effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				System.out.println("SIZE-------" + ((SimpleEffect)effect).getResultList().size());
 				for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+					System.out.println("BONUS---------" + result.toString());
 					try {
 						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
 						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -1208,6 +1245,7 @@ public class CLIMain implements LimView, Runnable{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				card.getName());
+		System.out.println("---------" + card.getName());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Costi:");
@@ -1234,11 +1272,16 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+			System.out.println("--------Effetti carta: " + card.effects.size());
 			for (Effect effect : card.getEffects()){
-				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				System.out.println("-------Sono nel ciclo " + effect.getClass());
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				System.out.println(lastPos + "---------Effetto: " + effect.getEffectType().toString());
 				if (!(effect instanceof ActivableEffect)) {
+					System.out.println("---------risorse per effetto: " + ((SimpleEffect)effect).getResultList().size());
 					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+						System.out.println(lastPos + "--------" + result.toString() + " " + result.getValue());
 						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
 						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 					}
@@ -1430,7 +1473,7 @@ public class CLIMain implements LimView, Runnable{
 		return chose.start();
 	}
 
-	public ArrayList<Integer> getPrivilegeBonusChoice(ArrayList<ArrayList<ActionResult>> list, int choiceToDo){
+	public ArrayList<Integer> getPrivilegeBonusChoice(ArrayList<ArrayList<Resource>> list, int choiceToDo){
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		try {
 			CliTerminalForCardsList chose = new CliTerminalForCardsList(list, terminal.getTerminalSize().getColumns(), 1, choiceToDo);
@@ -1460,6 +1503,7 @@ public class CLIMain implements LimView, Runnable{
 			meActive = false;
 			resetGhostFamiliar();
 		}
+		updateGame(new GameStatus(playersList, board, this.player, active.getPlayerID()));
 	}
 
 	public Integer getCardForLeaderDraft(List<Integer> list) throws IOException{
@@ -1558,6 +1602,7 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	public void actionWithGhostFamiliar(Familiar f){
+		System.out.println("Setted ghost familiar");
 		ghost = f;
 		meActive = true;
 	}
