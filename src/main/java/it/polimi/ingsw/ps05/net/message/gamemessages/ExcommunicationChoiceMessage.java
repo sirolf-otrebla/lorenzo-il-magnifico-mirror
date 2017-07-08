@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 public class ExcommunicationChoiceMessage implements GameMessage {
     private  boolean acceptExcommunication;
     private ExcommunicationCard excommunicationCard;
+    private Integer playerID;
 
     public ExcommunicationChoiceMessage(boolean acceptExcommunication, ExcommunicationCard excommunicationCard) {
         this.acceptExcommunication = acceptExcommunication;
@@ -18,12 +19,12 @@ public class ExcommunicationChoiceMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+        vi.visit(this);
     }
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
+        vi.visit(this);
     }
 
     public boolean isAcceptExcommunication() {
