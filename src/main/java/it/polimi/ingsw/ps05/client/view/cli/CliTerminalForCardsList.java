@@ -13,6 +13,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import it.polimi.ingsw.ps05.client.view.SelectionTypeEnum;
+import it.polimi.ingsw.ps05.model.BonusTile;
 import it.polimi.ingsw.ps05.model.cards.Card;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
@@ -28,35 +29,33 @@ public class CliTerminalForCardsList {
 	int width;
 	boolean enterDetected = false;
 	Terminal cardTerminal;
-	ArrayList<Card> selectedCards = new ArrayList<>();
+	ArrayList<Object> selected = new ArrayList<>();
 	int indiceCarta = 0;
 	int stdCursorPositionY = 15;
 	int currentWidth;
 	int numMaxCardSelectable = 0;
-	SelectionTypeEnum type;
+	int numMinCardSelectable = 0;
 	ArrayList<Integer> requirementsAvailable = new ArrayList<>();
 	ArrayList<Integer> requirementsSelected = new ArrayList<>();
 
-	public CliTerminalForCardsList(ArrayList<?> cards, int width, SelectionTypeEnum type){
+	public CliTerminalForCardsList(ArrayList<?> cards, int width, int maxCardSelectable, int minCardSelectable){
 		this.cards = cards;
 		this.width = width;
-		this.type = type;
-		for (Object c : cards){
-			for (Effect e : ((Card)c).getEffects()){
-				if (e instanceof ActivableEffect){
-					requirementsAvailable.add(((ActivableEffect)e).getResourceRequired().size());
-					requirementsSelected.add(0);
+		if (this.cards.get(0) instanceof Card){
+			for (Object c : cards){
+				for (Effect e : ((Card)c).getEffects()){
+					if (e instanceof ActivableEffect){
+						requirementsAvailable.add(((ActivableEffect)e).getResourceRequired().size());
+						requirementsSelected.add(0);
+					}
 				}
 			}
 		}
-		if (type == SelectionTypeEnum.DRAFT){
-			numMaxCardSelectable = 1;
-		} else if(type != SelectionTypeEnum.VISUAL) {
-			numMaxCardSelectable = cards.size();
-		}
+		this.numMinCardSelectable = minCardSelectable;
+		this.numMaxCardSelectable = maxCardSelectable;
 	}
 
-	public ArrayList<Card> start(){
+	public ArrayList<?> start(){
 		try {
 			System.out.println("Sstarted");
 			DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
@@ -79,12 +78,13 @@ public class CliTerminalForCardsList {
 						((i+1)*currentWidth/cards.size())-1,
 						height-1 ,
 						cardTextGraphics);
-				infoCard((i*currentWidth)/cards.size() + 1, 0, (Card)cards.get(i), cardTextGraphics);
+				printInfo(i,cardTextGraphics);
+				
 			}
 			System.out.println(requirementsAvailable.toString());
 			System.out.println(requirementsSelected.toString());
 			cardTerminal.flush();
-			if (type != SelectionTypeEnum.VISUAL){
+			if (numMaxCardSelectable != 0){
 				cardTerminal.setCursorVisible(true);
 				cardTerminal.setCursorPosition(((indiceCarta+1)*currentWidth/(cards.size()) - currentWidth/(2*cards.size())), stdCursorPositionY);
 				movePointer(cardTextGraphics);
@@ -94,7 +94,7 @@ public class CliTerminalForCardsList {
 			e.printStackTrace();
 		}
 
-		return selectedCards;
+		return selected;
 	}
 
 	private void movePointer(TextGraphics textGraphics) throws IOException{
@@ -110,40 +110,39 @@ public class CliTerminalForCardsList {
 				break;
 			case ArrowUp:
 				choseUp();
-				infoCard((indiceCarta*currentWidth)/cards.size() + 1, 0, (Card)cards.get(indiceCarta), textGraphics);
+				printInfo(indiceCarta,textGraphics);
 				System.out.println(requirementsAvailable.toString());
 				System.out.println(requirementsSelected.toString());
 				break;
 			case ArrowDown:
 				choseDown();
-				infoCard((indiceCarta*currentWidth)/cards.size() + 1, 0, (Card)cards.get(indiceCarta), textGraphics);
+				printInfo(indiceCarta,textGraphics);
 				System.out.println(requirementsAvailable.toString());
 				System.out.println(requirementsSelected.toString());
 				break;
 			case Enter:
-				if (selectedCards.size() != 0)
+				if (selected.size() >= numMinCardSelectable && selected.size()<= numMaxCardSelectable)
 					enterDetected = true;
 				break;
 			case Character:
-				if (keyStroke.getCharacter() == ' ' && type != SelectionTypeEnum.VISUAL){
-					if (selectedCards.contains(cards.get(indiceCarta))){
-						selectedCards.remove(cards.get(indiceCarta));
+				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable != 0){
+					if (selected.contains(cards.get(indiceCarta))){
+						selected.remove(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
-					} else if (numMaxCardSelectable > selectedCards.size()){
-						selectedCards.add((Card)cards.get(indiceCarta));
+					} else if (numMaxCardSelectable > selected.size()){
+						selected.add(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
 					}
 				}
-				
 				break;
 			case Escape:
 				enterDetected = true;
-				selectedCards = new ArrayList<>();
+				selected = new ArrayList<>();
 				break;
 			
 			case EOF:
 				enterDetected = true;
-				selectedCards = new ArrayList<>();
+				selected = new ArrayList<>();
 				break;
 
 			default:
@@ -152,6 +151,21 @@ public class CliTerminalForCardsList {
 			}
 			cardTerminal.setCursorPosition(((indiceCarta+1)*currentWidth/(cards.size()) - currentWidth/(2*cards.size())), stdCursorPositionY);
 			cardTerminal.flush();
+		}
+	}
+	
+	private void printInfo(int i,TextGraphics textGraphics){
+		if (cards.get(0) instanceof Card){
+			infoCard((i*currentWidth)/cards.size() + 1, 0, (Card)cards.get(i), textGraphics);
+		} else if (cards.get(0) instanceof BonusTile){
+			try {
+				infoBonusTile((i*currentWidth)/cards.size() + 1, 0, textGraphics, (BonusTile)cards.get(i));
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			infoPrivilege((i*currentWidth)/cards.size() + 1, 0, cards.get(i), textGraphics);
 		}
 	}
 
@@ -178,6 +192,14 @@ public class CliTerminalForCardsList {
 	private void choseDown() {
 		if (requirementsSelected.get(indiceCarta) < requirementsAvailable.get(indiceCarta) - 1){
 			requirementsSelected.set(indiceCarta, requirementsSelected.get(indiceCarta) + 1);
+		}
+	}
+	
+	private void infoPrivilege(int column, int row, Object list, TextGraphics textGraphics){
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		for (Resource res : (ArrayList<Resource>)list){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, res.toString() + " " + res.getValue());
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
 	}
 
@@ -232,6 +254,17 @@ public class CliTerminalForCardsList {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void infoBonusTile(int column, int row, TextGraphics textGraphics, BonusTile tile) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
+		TerminalPosition lastPos = new TerminalPosition(column,row);
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		for (Effect effect : tile.getEffectList()){
+			lastPos = activableEffect(lastPos, (ActivableEffect)effect,textGraphics);
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		}
+
 	}
 
 	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
