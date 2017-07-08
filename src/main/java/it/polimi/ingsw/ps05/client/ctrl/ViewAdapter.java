@@ -181,5 +181,16 @@ public class ViewAdapter {
 		}
 	}
 
+	public void printMessage(String message){
+		if (this.viewType == this.GUI_TYPE) {
+			// TODO
+
+		} else {
+			CLIMain cliView = (CLIMain) this.view;
+			cliView.createTerminalWithMessage(message);
+		}
+
+	}
+
 
 }

@@ -1,12 +1,10 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.View;
+import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
-import it.polimi.ingsw.ps05.net.message.gamemessages.BonusActionTriggerMessage;
-import it.polimi.ingsw.ps05.net.message.gamemessages.ConvertPrivilegeTriggerMessage;
-import it.polimi.ingsw.ps05.net.message.gamemessages.GameUpdateMessage;
-import it.polimi.ingsw.ps05.net.message.gamemessages.PrivilegeConversionMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.*;
 
 import java.util.ArrayList;
 
@@ -58,4 +56,18 @@ public class GameResponseMessageVisitor {
 		PrivilegeConversionMessage responseMsg = new PrivilegeConversionMessage(integers);
 		Client.getInstance().sendToServer(responseMsg);
     }
+
+    public void visit(BonusProductionTriggerMessage msg){
+    	visit(msg.getGameUpdateMessage());
+		ViewAdapter.getInstance().printMessage(msg.getDescription());
+	}
+
+	public void visit(BonusHarvestTriggerMessage msg){
+		visit(msg.getGameUpdateMessage());
+		ViewAdapter.getInstance().printMessage(msg.getDescription());
+	}
+
+	public void visit(ExcommunicationTriggerMessage msg){
+
+	}
 }
