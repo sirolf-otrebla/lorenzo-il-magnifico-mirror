@@ -1034,7 +1034,12 @@ public class CLIMain implements LimView, Runnable{
 		textGraphics.drawLine(colStart,rowStart,colEnd,rowStart,'-');
 		textGraphics.drawLine(colStart,rowEnd,colEnd,rowEnd,'-');
 	}
-
+	
+	/**
+	 * This method is used to calculate the highest length in a set of string.
+	 * @param list is the array containing the length of some string
+	 * @return the highest lenght in the array
+	 */
 	private Integer getMaxOffset(ArrayList<Integer> list){
 		Integer max = 0;
 		for (Integer i : list){
@@ -1044,7 +1049,13 @@ public class CLIMain implements LimView, Runnable{
 		}
 		return max;
 	}
-
+	
+	/**
+	 * This is the main method that print info about the position selected. He recognizes where you are and automatically call the right method to show you everything you need.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void printInfo(int width, int height, TextGraphics textGraphics){
 		int colForInfo = 3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3;
 		String space = new String(new char[width/8 + 3]).replace('\0', ' ');
@@ -1114,6 +1125,13 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method is used to print info about a space occupied.
+	* @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @param space we want to know info about its occupant.
+	 */
 	private void infoOccupied(int column, int row, TextGraphics textGraphics, ActionSpace space){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		ArrayList<Familiar> list = new ArrayList<>();
@@ -1131,6 +1149,12 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method print info about the selected bonus tile.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoBonusTile(int column, int row, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");
@@ -1142,7 +1166,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 
 	}
-
+	/**
+	 * This method print info about the selected familiar (its dice value and if it is used or not) 
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoFamiliar(int column, int row, TextGraphics textGraphics){
 		Familiar familiar = (Familiar) player.getFamilyList().toArray()[currentRowMyStats];
 		TerminalPosition lastPos = new TerminalPosition(column,row);
@@ -1154,6 +1183,12 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 	}
 
+	/**
+	 * This method prints info about the conversion path of faith and military points.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoResource(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, player.getResourceList().get(currentRowMyStats).toString() + " " +
@@ -1176,6 +1211,12 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method prints info about the selected market space.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoMarket(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
@@ -1208,6 +1249,12 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method prints info about the selected production space
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoProduction(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
@@ -1240,6 +1287,13 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method print info about a selected card.
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param card is the TowerCard about you want to print the ifno
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoCard(int column, int row, TowerCard card, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
@@ -1304,6 +1358,13 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method is called by infoCard and is used to print activable effect.
+	 * @param lastPos is the last position where the terminal printed a string.
+	 * @param effect is the activable effect that contains all the information that we are going to print.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @return the last position where he printed something
+	 */
 	private TerminalPosition activableEffect(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getActivableEffectType().toString());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
@@ -1319,6 +1380,13 @@ public class CLIMain implements LimView, Runnable{
 		return lastPos;
 	}
 
+	/**
+	 * This method is used to print info about activable effect that doesn't have requirement to activate them (dice excluded)
+	 * @param lastPos is the last position where the terminal printed a string.
+	 * @param effect is the activable effect that contains all the information that we are going to print.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @return the last position where he printed something
+	 */
 	private TerminalPosition activableWithOutResourceRequired(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		for (ArrayList<ActionResult> choseOrRes : effect.getResultList()){
 			for (ActionResult result : choseOrRes){
@@ -1334,6 +1402,13 @@ public class CLIMain implements LimView, Runnable{
 		return lastPos;
 	}
 
+	/**
+	 * This method is used to print info about activable effect that have requirements to activate them (dice excluded)
+	 * @param lastPos is the last position where the terminal printed a string.
+	 * @param effect is the activable effect that contains all the information that we are going to print.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @return the last position where he printed something
+	 */
 	private TerminalPosition activableWithResourceRequired(TerminalPosition lastPos, ActivableEffect effect, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 
 		for (int i = 0; i < effect.getResourceRequired().size(); i++){
@@ -1356,6 +1431,13 @@ public class CLIMain implements LimView, Runnable{
 		return lastPos;
 	}
 
+	/**
+	 * This method is used to print info about a particular bonus that contains multiplier
+	 * @param lastPos is the last position where the terminal printed a string.
+	 * @param result is the bonus (with multiplier) about we are going to print info.
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 * @return the last position where he printed something
+	 */
 	private TerminalPosition bonusWithMultiplier(TerminalPosition lastPos, BonusWithMultiplier result, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException{
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() , result.getMultiplier()+"x"+
 				result.getCardToCount().newInstance().toString());
@@ -1366,6 +1448,12 @@ public class CLIMain implements LimView, Runnable{
 		return lastPos;
 	}
 
+	/**
+	 * This method prints info about the selected harvest space
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoHarvest(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
@@ -1398,6 +1486,12 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method prints info about the council space
+	 * @param width is the terminal width in which we will draw
+	 * @param height is the terminal height in which we will draw
+	 * @param textGraphics is the graphic object where the CLI is going to write
+	 */
 	private void infoCouncil(int column, int row, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
@@ -1437,6 +1531,10 @@ public class CLIMain implements LimView, Runnable{
 				"Legal? " + (checkIsLegal() ? "Si" : "No"));
 	}
 
+	/**
+	 * This method create a context where you have to chose between your cards that contains an harvest effect and decide which you want to activate.
+	 * @param width is the terminal width in which we will draw
+	 */
 	private void choseActivableHarvestCard(int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getGreenCardList(), width, this.player.getGreenCardList().size(), 0);
@@ -1459,6 +1557,10 @@ public class CLIMain implements LimView, Runnable{
 		
 	}
 
+	/**
+	 * This method create a context where you have to chose between your cards that contains a production effect and decide which you want to activate.
+	 * @param width is the terminal width in which we will draw
+	 */
 	private void choseActivableProductionCard(int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getYellowCardList(), width, this.player.getYellowCardList().size(), 0);
@@ -1485,12 +1587,24 @@ public class CLIMain implements LimView, Runnable{
 		}
 	}
 
+	/**
+	 * This method create a context where you have to choose at least one object (it can be a card or a bonus tile).
+	 * @param cards is the array that contains the objects among you have to choose
+	 * @param width is the terminal width in which we will draw
+	 * @return an array of id about the selected items
+	 */
 	private ArrayList<?> choseDraftCard(ArrayList<?> cards, int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, 1, 1);
 		return chose.start();
 	}
 
+	/**
+	 * This method create a context where you have to choose the conversion method of your privilege bonus.
+	 * @param list contains the possible choice among you can choose to convert the bonus.
+	 * @param choiceToDo is the number of the possible choice that you have to do
+	 * @return an array containing the number of the index/es selected
+	 */
 	public ArrayList<Integer> getPrivilegeBonusChoice(ArrayList<ArrayList<Resource>> list, int choiceToDo){
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		try {
@@ -1506,12 +1620,21 @@ public class CLIMain implements LimView, Runnable{
 		return result;
 	}
 
+	/**
+	 * This method create a context where you can see the passed resources. Here you can just see but not select
+	 * @param cards contains the objects that will be displayed in the new context
+	 * @param width is the terminal width in which we will draw
+	 */
 	private void visualCard(ArrayList<?> cards, int width){
 
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(cards, width, 0, 0);
 		chose.start();
 	}
 
+	/**
+	 * This method set the player that is going to do an action
+	 * @param active is the current player
+	 */
 	public void setActivePlayer (Player active){
 		this.active = active;
 		if (active.getPlayerID() == player.getPlayerID()){
@@ -1524,6 +1647,11 @@ public class CLIMain implements LimView, Runnable{
 		updateGame(new GameStatus(playersList, board, this.player, active.getPlayerID()));
 	}
 
+	/**
+	 * this method prepare the draft of the leader cards
+	 * @param list of the leader card among you have to chose
+	 * @return the id of the selected card
+	 */
 	public Integer getCardForLeaderDraft(List<Integer> list) throws IOException{
 		try {
 			internalSemaphore.acquire();
@@ -1544,6 +1672,12 @@ public class CLIMain implements LimView, Runnable{
 		return c;
 	}
 
+	/**
+	 * This method returns a leader card from a given array
+	 * @param id is the id of the desired leader card
+	 * @param cards is the array containing all the leader card
+	 * @return the desired leader card
+	 */
 	private LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
 		for (LeaderCard l : cards){
 			if (l.getReferenceID() == id){
@@ -1553,11 +1687,21 @@ public class CLIMain implements LimView, Runnable{
 		return null;
 	}
 
+	/**
+	 * this method create a context where you can see yours leader cards
+	 * @param list is the array of leader card
+	 * @param width is the terminal width in which we will draw
+	 * @return
+	 */
 	private ArrayList<?> showLeaderCard(ArrayList<?> list, int width){
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(list, width, 0, list.size());
 		return chose.start();
 	}
 	
+	/**
+	 * this method discard or activate a selected leader card (the card will be selected in a new context)
+	 * @throws IOException
+	 */
 	private void selectLeaderCard() throws IOException{
 
 		ArrayList<?> chosenCard = choseDraftCard(player.getLeaderCardList(), terminal.getTerminalSize().getColumns());
@@ -1581,6 +1725,10 @@ public class CLIMain implements LimView, Runnable{
 
 	}
 
+	/**
+	 * this method check if an action with a selected familiar and a selected space is legal
+	 * @return
+	 */
 	private boolean checkIsLegal(){
 
 		if (currentColBoard < board.getTowerList().size() && currentRowBoard < board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()){
@@ -1624,16 +1772,27 @@ public class CLIMain implements LimView, Runnable{
 		return false;
 	}
 
+	/**
+	 * This method set a familiar for a bonus action and set active the player
+	 * @param f the familiar to be used
+	 */
 	public void actionWithGhostFamiliar(Familiar f){
 		System.out.println("Setted ghost familiar");
 		ghost = f;
 		meActive = true;
 	}
 
+	/**
+	 * this method reset the familiar used for the bonus action
+	 */
 	private void resetGhostFamiliar(){
 		ghost = null;
 	}
 	
+	/**
+	 * this method create a context where you can display some message
+	 * @param s is the message that will be displayed
+	 */
 	public void createTerminalWithMessage(String s){
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
 		defaultTerminalFactory.setTerminalEmulatorTitle("Attenzione");
