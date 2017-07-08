@@ -59,10 +59,13 @@ public class CommonJsonParser {
 			for (Object o : array){
 				ArrayList<Resource> interList = new ArrayList<>();
 				JSONObject a = (JSONObject)o;
+				System.out.println("oggetto " + a);
 				for (int i = 0; i < a.keySet().size(); i++){
 					Object actionObject = Class.forName(resourcePath + a.keySet().toArray()[i].toString()).newInstance();
 					Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
-					method.invoke(actionObject, Integer.parseInt(obj.get(obj.keySet().toArray()[i]).toString()));
+					System.out.println(a.keySet().toArray()[i]);
+					System.out.println(a.get(a.keySet().toArray()[i]));
+					method.invoke(actionObject, Integer.parseInt(a.get(a.keySet().toArray()[i]).toString()));
 					interList.add((Resource)actionObject);
 				}
 				finalList.add(interList);
