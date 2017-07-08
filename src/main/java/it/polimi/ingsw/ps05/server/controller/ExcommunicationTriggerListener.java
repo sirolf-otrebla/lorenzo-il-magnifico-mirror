@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationTriggerMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 
@@ -25,10 +26,17 @@ public class ExcommunicationTriggerListener implements Observer {
     public void update(Observable o, Object arg) {
         Epoch epoch = (Epoch) arg;
         ExcommunicationCard ex = epoch.getExcomunicationCard();
-        for (PlayerClient pl: this.game.getPlayerInGame().values()){
+        for (PlayerClient pl: this.game.getPlayerInGame().values()) {
             FaithResource faith = (FaithResource) pl.getPlayer().getResource(FaithResource.ID);
-            if (ex.getFaithRequested().getValue() < faith.getValue());
-              ex.applyEffect(pl.getPlayer());
+            ExcommunicationTriggerMessage message;
+            if (ex.getFaithRequested().getValue() > faith.getValue()) {
+                ex.applyEffect(pl.getPlayer());
+                 message = new ExcommunicationTriggerMessage(ExcommunicationTriggerMessage.EXCOMMUNICATED, ex);
+            } else {
+                 message = new ExcommunicationTriggerMessage(ExcommunicationTriggerMessage.CHOICE, ex);
+            }
+            pl.sendMessage(message);
+
         }
 
     }
