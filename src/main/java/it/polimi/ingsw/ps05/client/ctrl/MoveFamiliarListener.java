@@ -17,9 +17,11 @@ public class MoveFamiliarListener implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
+        System.out.println("sending message to server");
         ActionSpaceViewObject spaceWidget = (ActionSpaceViewObject) arg;
         ActionMessage msg =
-                new ActionMessage( spaceWidget.getFamilyMemberID(), spaceWidget.getId(), 0, null); //todo
+                new ActionMessage( spaceWidget.getFamilyMemberID(), spaceWidget.getId(), 0,
+                        Client.getInstance().getGameStatus().getThisPlayer()); //todo
         Client.getInstance().sendToServer(msg);
 
     }

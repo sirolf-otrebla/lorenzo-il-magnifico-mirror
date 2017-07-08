@@ -24,7 +24,6 @@ public class Lobby implements Runnable {
 
 	public Lobby(int lobbyLifeTime, boolean useCompleteRules, boolean useCustomBonusTiles){
 		connectedClientArrayList = new ArrayList<>();
-		this.timer = new Timer();
 		this.lobbyLifeTime = lobbyLifeTime;
 		sem = new Semaphore(0);
 		this.useCompleteRules = useCompleteRules;
@@ -33,6 +32,7 @@ public class Lobby implements Runnable {
 	public void addToLobby(PlayerClient client){
 		System.out.println("adding player to lobby");
 		if (connectedClientArrayList.size() == 1){
+			this.timer = new Timer();
 			this.timer.schedule(new StartGameTimerTask(this), lobbyLifeTime);
 		}
 		this.connectedClientArrayList.add(client);
@@ -50,6 +50,7 @@ public class Lobby implements Runnable {
 		System.out.println("rilascio lock");
 		sem.release();
 		System.out.println("Sem queue length: " + sem.availablePermits());
+
 	}
 
 	public synchronized void removeHeadFromLobby(){
@@ -68,31 +69,29 @@ public class Lobby implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("Starting Lobby Thread");
-		synchronized (this){
-			try {
-				sem.acquire(MAX_PLAYER_NUM);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				System.out.println("something gone wrong :( ");
-				//TODO gestire sta cazzo di eccezione
+		while(true) {
+			System.out.println("Starting Lobby Thread");
+			synchronized (this) {
+				try {
+					sem.acquire(MAX_PLAYER_NUM);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					System.out.println("something gone wrong :( ");
+					//TODO gestire sta cazzo di eccezione
+				}
+				System.out.println("Starting game!!!");
 			}
-			System.out.println("Starting game!!!");
+			timer.cancel();
+			startGame();
 		}
-		timer.cancel();
-		startGame();
 
 	}
 
 	public void startGame(){
-		Game game = new Game(this.useCompleteRules, this.useCustomBonusTiles,
-				Server.getInstance().getGamesNumber() +1, connectedClientArrayList);
+
+		Thread t = new Thread(new GameThread(this.useCompleteRules, this.useCustomBonusTiles, connectedClientArrayList));
+		t.start();
 		removeAllPlayers();
-		try {
-			game.start();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 
 	}
