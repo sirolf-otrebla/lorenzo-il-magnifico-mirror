@@ -25,7 +25,7 @@ public class Game implements Observer {
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
-    private ArrayList<Resource> privilegeConvResAlternatives;
+    private ArrayList<ArrayList<Resource>> privilegeConvResAlternatives;
     private Board gBoard;
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
@@ -50,7 +50,7 @@ public class Game implements Observer {
             this.useCompleteRules = useCompleteRules;
             this.useCustomBonusTiles = useCustomBonusTiles;
             this.clientHashMap = new HashMap<Integer, PlayerClient>();
-            this.privilegeConvResAlternatives = new ArrayList<>();
+            this.privilegeConvResAlternatives = new ArrayList<ArrayList<Resource>>();
             for (PlayerClient client : clientList) {
                 clientHashMap.put(client.getId(), client);
                 client.setInGame(this);
@@ -183,8 +183,12 @@ public class Game implements Observer {
     public EndActionStrategyContainer getEndActionStrategyContainer() {
         return endActionStrategyContainer;
     }
+    
+    public void setPrivilegeConvResAlternatives(ArrayList<ArrayList<Resource>> list){
+    	this.privilegeConvResAlternatives = list;
+    }
 
-    public ArrayList<Resource> getPrivilegeConvResAlternatives() {
+    public ArrayList<ArrayList<Resource>> getPrivilegeConvResAlternatives() {
         return privilegeConvResAlternatives;
     }
 }
