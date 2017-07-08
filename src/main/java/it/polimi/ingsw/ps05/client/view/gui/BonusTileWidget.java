@@ -23,6 +23,9 @@ public class BonusTileWidget {
     private ImageView image;
     private String imagePath;
 
+    public BonusTileWidget() {
+
+    }
     public BonusTileWidget(int referenceId) {
         this.referenceId = referenceId;
         // obtain image path from referenceId

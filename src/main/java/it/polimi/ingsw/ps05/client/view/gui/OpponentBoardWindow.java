@@ -16,14 +16,20 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class OpponentBoardWindow extends PersonalBoardWindow{
 
+    private String username;
+    private LeaderWidget[] leaderWidgets = new LeaderWidget[4];
     private LeaderPopup leaderPopup = new LeaderPopup();
 
 
-    public OpponentBoardWindow(GUIMain board, String username, AcquiredCardWidget[][] cardAcquiredWidget,
-                               LeaderWidget[] leaderWidgets, BonusTileWidget bonusTile) {
-        super(board, username, cardAcquiredWidget, leaderWidgets, bonusTile);
+
+    public OpponentBoardWindow(GUIMain board, String username, LeaderWidget[] leaderWidgets) {
+        //super(board, username, cardAcquiredWidget, leaderWidgets, bonusTile);
+        super(board);
+        this.username = username;
+        this.leaderWidgets = leaderWidgets;
     }
 
+    @Override
     public void display() {
 
         Stage stage = new Stage();
@@ -53,25 +59,30 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         /* add button for leaders */
         Button showLeaderButton = new Button("Leader Played");
         showLeaderButton.setOnAction((ActionEvent e) -> {
-            leaderPopup.display(leaderWidgets);
+            leaderPopup.display();
         });
 
-        /* set buttons position on window */
-        HBox hbox = new HBox(100 * resize);
-        hbox.setLayoutX((72.0 / 100) * personalBoardWidth);
-        hbox.setLayoutY((1.0 / 100) * personalBoardHeight);
+        /* add close button */
+        Button closeButton = new Button("Close");
+        closeButton.layoutXProperty().bind(stage.widthProperty().multiply(90 / 100));
+        closeButton.layoutYProperty().bind(stage.heightProperty().multiply(1 / 100));
+        closeButton.setOnAction((ActionEvent e) -> {
+            stage.close();
+        });
+        pane.getChildren().add(closeButton);
 
-        /*
-        pane.minWidthProperty().bind(stage.widthProperty());
-        pane.minHeightProperty().bind(stage.heightProperty());
-        pane.prefWidthProperty().bind(stage.widthProperty());
-        pane.prefHeightProperty().bind(stage.heightProperty());
-        pane.maxWidthProperty().bind(stage.widthProperty());
-        pane.maxHeightProperty().bind(stage.heightProperty());
-        */
+        /* set buttons position on window */
+        HBox hbox = new HBox(50 * resize);
+        hbox.setLayoutX((55.0 / 100) * personalBoardWidth);
+        hbox.setLayoutY((1.0 / 100) * personalBoardHeight);
+        hbox.getChildren().addAll(showLeaderButton, showBonusTileButton);
+        pane.getChildren().add(hbox);
 
         /* show acquired cards */
-        setCardAcquiredLayout();
+        showCardAcquiredLayout();
+        for(int i = 0; i < 4; i++) {
+            pane.getChildren().add(cardHboxes[i]);
+        }
 
         Scene personalScene = new Scene(pane);
 
@@ -86,5 +97,8 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         stage.show();
     }
 
+    public LeaderWidget[] getLeaderWidgets() {
+        return leaderWidgets;
+    }
 }
 

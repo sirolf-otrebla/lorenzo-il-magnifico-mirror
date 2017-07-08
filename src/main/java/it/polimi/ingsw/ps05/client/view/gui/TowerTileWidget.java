@@ -14,7 +14,6 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
 
     private TowerCardWidget associatedCard;
     private boolean morePaymentOptions;
-    private boolean isLegal = false;
     private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
 
@@ -34,15 +33,24 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
                     /* Showing payment selection window if associated card has payment alternatives */
                     PaymentPopup paymentPopup = new PaymentPopup();
                     paymentPopup.setResArrayList(null); //TODO: come si passano le risorse tra cui scegliere al popup?
-                    if (paymentPopup.display(this.getAssociatedCard().getCardName())) {
+                    success = false;
+                    // AZIONE ANNULLATA
+                    if (paymentPopup.display(this.getAssociatedCard().getCardName()) != -1) {
                         /* Enter 'if' when the player succesfully select the payment, without canceling action */
+                        // set space occupied
                         this.setOccupied(true);
-                        System.out.println("inside if");
+                        // insert familiar image
                         Image source = e.getDragboard().getImage();
                         this.getOccupationCircle().setOpacity(1);
                         this.getOccupationCircle().setFill(new ImagePattern(source));
+                        // add card to the player collection
+                        // this.associatedCard.addToPersonalBoard(); // TODO: ricevere il colore del giocatore tramite serializzazione
+                        // AZIONE COMPLETATA
                         success = true;
                     }
+                } else {
+                    /* Adding card to personal collection */
+
                 }
             }
 
@@ -60,18 +68,8 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
         this.associatedCard = associatedCard;
     }
 
-
     public boolean hasMorePaymentOptions() {
         return morePaymentOptions;
-    }
-
-
-    public boolean isLegal() {
-        return isLegal;
-    }
-
-    public void setLegal(boolean legal) {
-        isLegal = legal;
     }
 
     public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {

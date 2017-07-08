@@ -2,14 +2,12 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.Board;
-import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 /**
  * Created by Alberto on 01/07/2017.
@@ -37,7 +35,7 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
         for (Tower t:  board.getTowerList().values()) t.acceptVisitor(this);
         for (ActionSpace actionSpace : board.getActSpacesMap().values()) actionSpace.acceptVisitor(this);
         for (int i = 0; i < gui.getExcomWidgets().length; i++)
-            gui.getExcomWidgets()[i].setReferenceID(board.getExcomCards().get(i).getReferenceID());
+            gui.getExcomWidgets()[i].setReferenceId(board.getExcomCards().get(i).getReferenceID());
         for (int i = 0; i < gui.getFaithPath().length; i++)
             gui.getFaithPath()[i] = (board.getFaithPath().get(i).getValue());
         for (int i = 0; i < gui.getMilitaryPath().length; i++)

@@ -18,13 +18,12 @@ public class OpponentWidget {
     private ResourcesWidget resourceWidget = new ResourcesWidget();
     private FamiliarWidget[] familiarWidgetList = new FamiliarWidget[4];
     private LeaderWidget[] leaderWidgetList = new LeaderWidget[4];
-    private BonusTileWidget bonusTileWidget;
     private AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
     private MarkerWidget[] opponentMarkers = new MarkerWidget[4];
     private static HashMap<ColorEnumeration, Integer[]> AquiredCardArrayHashMap = new HashMap<>();
 
-    private final PersonalBoardWindow personalBoard = new PersonalBoardWindow(board, opponentUsername,
-            cardAcquiredWidget, leaderWidgetList, bonusTileWidget);
+    private final OpponentBoardWindow opponentBoard = new OpponentBoardWindow(board, opponentUsername,
+            leaderWidgetList);
     private final LeaderPopup leaderPopup = new LeaderPopup();
 
     final Button personalBoardButton = new Button();
@@ -38,8 +37,8 @@ public class OpponentWidget {
     }
 
 
-    public PersonalBoardWindow getPersonalBoard() {
-        return personalBoard;
+    public OpponentBoardWindow getPersonalBoard() {
+        return opponentBoard;
     }
 
     public ColorEnumeration getOpponentColor() {

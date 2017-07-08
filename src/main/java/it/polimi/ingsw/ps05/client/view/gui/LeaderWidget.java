@@ -13,7 +13,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
 /**
  * Created by miotto on 28/06/17.
  */
-public class LeaderWidget {
+public class LeaderWidget extends ImageView{
 
     public static final double LEADER_HEIGHT_PERC = 0.4;
 
@@ -24,6 +24,7 @@ public class LeaderWidget {
     private ImageView leaderCard;
     private static ImageView backSide;
     private static boolean played;
+    private boolean activable;
     private boolean active;
     private boolean drafted;
     private boolean discarded;
@@ -48,10 +49,9 @@ public class LeaderWidget {
         File crDir = new File(imagePath);
         try {
             Image img = new Image(crDir.toURI().toURL().toString());
-            this.leaderCard = new ImageView(img);
-            this.leaderCard.setFitHeight(LEADER_HEIGHT_PERC * stageHeight);
-            this.leaderCard.setPreserveRatio(true);
-            this.leaderCard.setSmooth(true);
+            this.setFitHeight(LEADER_HEIGHT_PERC * stageHeight);
+            this.setPreserveRatio(true);
+            this.setSmooth(true);
             // this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -85,20 +85,20 @@ public class LeaderWidget {
     private void setupClickGesture() {
 
         if(!isDraftFinished()) {
-            this.leaderCard.setOnMouseEntered((MouseEvent e) -> {
-                this.leaderCard.setCursor(Cursor.HAND);
+            this.setOnMouseEntered((MouseEvent e) -> {
+                this.setCursor(Cursor.HAND);
             });
 
-            this.leaderCard.setOnMouseClicked((MouseEvent e) -> {
+            this.setOnMouseClicked((MouseEvent e) -> {
                 //TODO notificare il controller
-                this.leaderCard.setOpacity(0.3);
-                this.leaderCard.setMouseTransparent(true);
+                this.setOpacity(0.3);
+                this.setMouseTransparent(true);
             });
         }
 
 
         if(isOfPlayerProperty() && !isActive())
-            this.leaderCard.setOnMouseClicked((MouseEvent e) -> {
+            this.setOnMouseClicked((MouseEvent e) -> {
                 played = LeaderActivationPopup.display(); //TODO evento da collegare col controller (il metodo ritorna la scelta del giocatore)
             });
     }
@@ -108,27 +108,27 @@ public class LeaderWidget {
         if(isOfPlayerProperty()) {
             if (isDiscarded()) {
                 addImage(null);
-                this.leaderCard.setMouseTransparent(true);
+                this.setMouseTransparent(true);
             } else if (!isPlayed() || isActive() || (isPlayed() && isActive())) {
                 addImage(this.imagePath);
-                this.leaderCard.setMouseTransparent(false);
+                this.setMouseTransparent(false);
             } else if (isPlayed() && !isActive()) {
                 //TODO non visible, si deve vedere il retro
-                this.leaderCard.setMouseTransparent(false);
+                this.setMouseTransparent(false);
             }
         } else {
             if (isDiscarded()) {
                 addImage(null);
-                this.leaderCard.setMouseTransparent(true);
+                this.setMouseTransparent(true);
             } else if (isPlayed() && isActive()) {
                 addImage(this.imagePath);
-                this.leaderCard.setMouseTransparent(false);
+                this.setMouseTransparent(false);
             } else if (isPlayed() && !isActive()) {
                 //TODO non visible, si deve vedere il retro
-                this.leaderCard.setMouseTransparent(true);
+                this.setMouseTransparent(true);
             } else if (!isPlayed()) {
                 //TODO non visibile, si deve vedere il retro
-                this.leaderCard.setMouseTransparent(true);
+                this.setMouseTransparent(true);
             }
         }
     }
@@ -147,10 +147,6 @@ public class LeaderWidget {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
-    }
-
-    public ImageView getLeaderCard() {
-        return leaderCard;
     }
 
     public boolean isPlayed() {
@@ -203,5 +199,13 @@ public class LeaderWidget {
 
     public void setDraftFinished(boolean draftFinished) {
         this.draftFinished = draftFinished;
+    }
+
+    public boolean isActivable() {
+        return activable;
+    }
+
+    public void setActivable(boolean activable) {
+        this.activable = activable;
     }
 }

@@ -8,6 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.util.HashMap;
+
+import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
@@ -22,6 +25,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private boolean isOccupied;
     private int minDie;
     private boolean isLegal;
+    private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
@@ -43,7 +47,10 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
         occupationCircle.setOnDragOver((DragEvent e) -> {
             /* source is dragged over the occupationCircle */
 
-            if (e.getGestureSource() != occupationCircle && e.getDragboard().hasImage()) {
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+
+            if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
                 e.acceptTransferModes(TransferMode.MOVE);
             }
 
@@ -54,9 +61,15 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     public void setupDragEntered() {
         occupationCircle.setOnDragEntered((DragEvent e) -> {
 
-            if (!occupied && e.getGestureSource() != occupationCircle && e.getDragboard().hasImage()) {
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+
+            if (!occupied && isLegal) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);
+            } else if (!occupied && !isLegal){
+                occupationCircle.setOpacity(0.4);
+                occupationCircle.setFill(Color.FIREBRICK);
             }
 
             //e.consume();
@@ -80,12 +93,13 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
             boolean success = false;
 
             System.out.println("starting if");
-            if (!occupied && e.getDragboard().hasImage()) {
-                this.occupied = true;
-                System.out.println("inside if");
-                Image source = e.getDragboard().getImage();
+            if (e.getDragboard().hasContent(FAMILIAR_DATA)) {
+                FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+                Image img = new Image(sourceData.getFamiliarImagePath());
+                System.out.println("inside action space drag dropped");
                 occupationCircle.setOpacity(1);
-                occupationCircle.setFill(new ImagePattern(source));
+                occupationCircle.setFill(new ImagePattern(img));
+                this.occupied = true;
                 success = true;
             }
 
@@ -163,5 +177,9 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
 
     public void setLegal(boolean legal) {
         isLegal = legal;
+    }
+
+    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
+        return legalActionMap;
     }
 }
