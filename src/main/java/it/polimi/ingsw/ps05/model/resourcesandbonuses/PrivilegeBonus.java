@@ -27,6 +27,10 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		this.addObserver(PrivilegeBonusListener.getInstance());
 		this.value = value;
 	}
+	
+	public PrivilegeBonus(){
+		this.addObserver(PrivilegeBonusListener.getInstance());
+	}
 
 	public void setValue(Integer value){
 		this.value = value;
