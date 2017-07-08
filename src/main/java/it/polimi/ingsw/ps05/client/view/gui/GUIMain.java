@@ -57,6 +57,7 @@ public class GUIMain extends Application {
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1, player);
 	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1, player);
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1, player);
+	private HashMap<Integer, ActionSpaceWidgetInterface> actionSpacesMap = new HashMap<>();
 
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
