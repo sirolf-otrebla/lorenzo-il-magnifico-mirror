@@ -13,9 +13,7 @@ import javafx.scene.layout.HBox;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
-import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageWidth;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 
 /**

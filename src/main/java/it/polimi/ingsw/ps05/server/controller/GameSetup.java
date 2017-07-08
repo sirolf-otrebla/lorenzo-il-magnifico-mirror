@@ -60,7 +60,7 @@ public class GameSetup {
 	}
 	
 	private ArrayList<ExcommunicationCard> loadExcommEffect(){
-		return parser.loadExcommunicationCard("./src/main/res/excommunications.json");
+		return parser.loadExcommunicationCard("./src/main/res/excom.json");
 	}
 	
 	private void loadBoard(){

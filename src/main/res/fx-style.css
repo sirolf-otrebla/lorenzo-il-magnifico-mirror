@@ -67,6 +67,17 @@
     -fx-background-position: center;
 }
 
+#endGamePopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+
+
+
+
+
 @font-face {
     -fx-font-family: "NightShade";
     src: url("./fonts/JimNightshade-Regular.ttf");

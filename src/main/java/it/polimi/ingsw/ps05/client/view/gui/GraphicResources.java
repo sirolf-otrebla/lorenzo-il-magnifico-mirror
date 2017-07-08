@@ -33,6 +33,10 @@ public final class GraphicResources {
 
     private static HashMap<Integer, String> excomPathMap = new HashMap<>();
 
+    private static HashMap<ColorEnumeration, String> markerPathMap = new HashMap<>();
+
+    private static HashMap<String, Integer> resourcesMap = new HashMap<>();
+
 
 
     GraphicResources() {
@@ -45,6 +49,22 @@ public final class GraphicResources {
         buildBonusTilePathMap();
         buildDevelopmentCardPathMap();
         buildExcomPathMap();
+        buildMarkerPathMap();
+        buildResourcesMap();
+    }
+
+    private static void buildResourcesMap() {
+        resourcesMap.put("Oro", 0);
+        resourcesMap.put("Legno", 1);
+        resourcesMap.put("Pietra", 2);
+        resourcesMap.put("Servitori", 3);
+    }
+
+    private static void buildMarkerPathMap() {
+        markerPathMap.put(ColorEnumeration.Red, "./src/main/res/img/marker-red.png");
+        markerPathMap.put(ColorEnumeration.Green, "./src/main/res/img/marker-green.png");
+        markerPathMap.put(ColorEnumeration.Blue, "./src/main/res/img/marker-blue.png");
+        markerPathMap.put(ColorEnumeration.Yellow, "./src/main/res/img/marker-yellow.png");
     }
 
     private static void buildExcomPathMap() {
@@ -121,8 +141,8 @@ public final class GraphicResources {
 
     private static void buildPlayerColorMap() {
         playerColorMap.put(0, ColorEnumeration.Red);
-        playerColorMap.put(1, ColorEnumeration.Blue);
-        playerColorMap.put(2, ColorEnumeration.Green);
+        playerColorMap.put(1, ColorEnumeration.Green);
+        playerColorMap.put(2, ColorEnumeration.Blue);
         playerColorMap.put(3, ColorEnumeration.Yellow);
     }
 
@@ -166,4 +186,12 @@ public final class GraphicResources {
     }
 
     public static String getExcomPath(int i) { return excomPathMap.get(i); }
+
+    public static Integer getResource(String id) {
+        return resourcesMap.get(id);
+    }
+
+    public static String getMarkerPath(ColorEnumeration playerColor) {
+        return markerPathMap.get(playerColor);
+    }
 }

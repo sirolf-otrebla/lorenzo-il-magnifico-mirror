@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
  */
 public class FamiliarWidget extends ImageView{
 
-    public static final double FAMILIAR_MIN_SIZE = 40;
     private boolean placed;
     ColorEnumeration playerColor;
     ColorEnumeration familiarColor;

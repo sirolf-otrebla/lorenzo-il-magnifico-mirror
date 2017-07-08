@@ -12,7 +12,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class ResourcesWidget {
 
-    private int goldValue, woodValue, stoneValue, servantValue;
+    private int[] resources;
     private Label goldLabel, woodLabel, stoneLabel, servantLabel;
     private HBox hbox;
 
@@ -20,10 +20,10 @@ public class ResourcesWidget {
 
         Stage stage = new Stage();
 
-        this.goldLabel = new Label(String.valueOf(goldValue));
-        this.woodLabel = new Label(String.valueOf(woodValue));
-        this.stoneLabel = new Label(String.valueOf(stoneValue));
-        this.servantLabel = new Label(String.valueOf(servantValue));
+        this.goldLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        this.woodLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        this.stoneLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        this.servantLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
 
         this.goldLabel.setId("goldLabel");
         this.woodLabel.setId("woodLabel");
@@ -44,10 +44,10 @@ public class ResourcesWidget {
     }
 
     public HBox setupPersonalResource() {
-        this.goldLabel = new Label(String.valueOf(goldValue));
-        this.woodLabel = new Label(String.valueOf(woodValue));
-        this.stoneLabel = new Label(String.valueOf(stoneValue));
-        this.servantLabel = new Label(String.valueOf(servantValue));
+        this.goldLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        this.woodLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        this.stoneLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        this.servantLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
 
         this.hbox = new HBox(20 * resize);
         this.hbox.setLayoutX((68.0 / 100) * stageWidth);
@@ -62,44 +62,16 @@ public class ResourcesWidget {
 
     public void repaint() {
 
-        goldLabel.setText(String.valueOf(goldValue));
-        woodLabel.setText(String.valueOf(woodValue));
-        stoneLabel.setText(String.valueOf(stoneValue));
-        servantLabel.setText(String.valueOf(servantValue));
+        goldLabel.setText(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
 
     }
 
-    public void setResources(){} //TODO
-
-    public int getGoldValue() {
-        return goldValue;
+    public void setResource(String stringId, int newValue){
+        int i = resources[GraphicResources.getResource(stringId)];
+        resources[i] = newValue;
     }
 
-    public void setGoldValue(int goldValue) {
-        this.goldValue = goldValue;
-    }
-
-    public int getWoodValue() {
-        return woodValue;
-    }
-
-    public void setWoodValue(int woodValue) {
-        this.woodValue = woodValue;
-    }
-
-    public int getStoneValue() {
-        return stoneValue;
-    }
-
-    public void setStoneValue(int stoneValue) {
-        this.stoneValue = stoneValue;
-    }
-
-    public int getServantValue() {
-        return servantValue;
-    }
-
-    public void setServantValue(int servantValue) {
-        this.servantValue = servantValue;
-    }
 }
