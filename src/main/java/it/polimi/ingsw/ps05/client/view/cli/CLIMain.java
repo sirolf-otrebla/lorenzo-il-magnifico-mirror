@@ -804,10 +804,17 @@ public class CLIMain implements LimView, Runnable{
 				textGraphics
 				);
 		//TODO
-		textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
-		textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
-				board.getExcomCards().get(0).getFaithRequested().getValue());
-		String toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
+		String toWrite;
+		if (board.getExcomCards() != null){
+			textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
+			textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
+					board.getExcomCards().get(0).getFaithRequested().getValue());
+			toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
+		} else {
+			toWrite = "Regole semplici selezionate. No scomuniche per questa partita";
+		}
+		
+		
 
 		int size = (Math.max(marketList.size(), productionList.size()+harvestList.size())+4)*width/16 + width/32 - x;
 		int i = 0;
@@ -1236,6 +1243,7 @@ public class CLIMain implements LimView, Runnable{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				card.getName());
+		System.out.println("---------" + card.getName());
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 				"Costi:");
@@ -1262,11 +1270,16 @@ public class CLIMain implements LimView, Runnable{
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+			System.out.println("--------Effetti carta: " + card.effects.size());
 			for (Effect effect : card.getEffects()){
-				textGraphics.putCSIStyledString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
+				System.out.println("-------Sono nel ciclo " + effect.getClass());
+				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+				System.out.println(lastPos + "---------Effetto: " + effect.getEffectType().toString());
 				if (!(effect instanceof ActivableEffect)) {
+					System.out.println("---------risorse per effetto: " + ((SimpleEffect)effect).getResultList().size());
 					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+						System.out.println(lastPos + "--------" + result.toString() + " " + result.getValue());
 						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
 						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 					}
@@ -1488,6 +1501,7 @@ public class CLIMain implements LimView, Runnable{
 			meActive = false;
 			resetGhostFamiliar();
 		}
+		updateGame(new GameStatus(playersList, board, this.player, active.getPlayerID()));
 	}
 
 	public Integer getCardForLeaderDraft(List<Integer> list) throws IOException{

@@ -83,4 +83,9 @@ public class ActivableEffect implements AlternativeEffect {
 	public void setState(int state) {
 		this.state = state;
 	}
+	
+	@Override
+	public String toString(){
+		return getEffectType().toString();
+	}
 }
