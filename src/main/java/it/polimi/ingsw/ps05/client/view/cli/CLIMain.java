@@ -804,10 +804,10 @@ public class CLIMain implements LimView, Runnable{
 				textGraphics
 				);
 		//TODO
-		//textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
-		//textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
-		//		board.getExcomCards().get(0).getFaithRequested().getValue());
-		String toWrite = "";//board.getExcomCards().get(0).getExcommEffect().toString();
+		textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
+		textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
+				board.getExcomCards().get(0).getFaithRequested().getValue());
+		String toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
 
 		int size = (Math.max(marketList.size(), productionList.size()+harvestList.size())+4)*width/16 + width/32 - x;
 		int i = 0;
@@ -1586,6 +1586,7 @@ public class CLIMain implements LimView, Runnable{
 	}
 
 	public void actionWithGhostFamiliar(Familiar f){
+		System.out.println("Setted ghost familiar");
 		ghost = f;
 		meActive = true;
 	}
