@@ -40,6 +40,8 @@ public class GUIMain extends Application {
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
 
+	private HashMap<ColorEnumeration, String> usernamesHashMap;
+
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
 	private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
 	private HBox playerResourcesBox;
@@ -57,7 +59,6 @@ public class GUIMain extends Application {
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1, player);
 	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1, player);
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1, player);
-	private HashMap<Integer, ActionSpaceWidgetInterface> actionSpacesMap = new HashMap<>();
 
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
@@ -105,7 +106,14 @@ public class GUIMain extends Application {
 		this.player.setPlayerColor(thisPlayerColor);
 		this.OPPONENTS_NUMBER = opponentNumber;
 		this.MOVE_TIMER = timeout;
+		this.usernamesHashMap = usernamesHashMap;
+		int i = 0;
+		for(ColorEnumeration color: usernamesHashMap.keySet()) {
+			opponentsArray[i] = new OpponentWidget(this, color);
+			opponentsArray[i].setOpponentUsername(usernamesHashMap.get(color));
+		}
 	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -473,7 +481,7 @@ public class GUIMain extends Application {
 		//doPrivilegeConversion(testPrivilegeConversion);
 		insertExcomCards(testExcomCards);
 		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
-		showEndGameResult(testFinalResults);
+		//showEndGameResult(testFinalResults);
 
 
 	}
