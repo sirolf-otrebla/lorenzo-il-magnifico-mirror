@@ -4,7 +4,6 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
@@ -17,7 +16,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
-import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
 /**
  * Created by miotto on 28/06/17.
@@ -29,7 +27,7 @@ public class MarkerWidget {
 
     public static final String VICTORY = VictoryResource.ID;
     public static final String MILITARY = MilitaryResource.id;
-    public static final String FAITH = FaithResource.ID;
+    public static final String FAITH = FaithResource.id;
     public static final String PLAYER_ORDER = "playerOrder";
 
 

@@ -4,7 +4,6 @@ package it.polimi.ingsw.ps05.client.view.gui;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
@@ -17,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.*;
+import javafx.util.Pair;
 
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class GUIMain extends Application {
 
 	public static double stageWidth, stageHeight, resize;
 	public static final int ORIGINAL_WIDTH = 1120;
-	public static final double CARD_RATIO = 294 / 436;
+	public static final double FAMILIAR_MIN_SIZE = 40, CARD_RATIO = 294 / 436;
 	public static final String path = "./src/main/res/img/";
 	public int PLAYER_NUMBER, OPPONENTS_NUMBER;
 	private Integer MOVE_TIMER;
@@ -39,6 +39,8 @@ public class GUIMain extends Application {
 
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
+
+	private HashMap<ColorEnumeration, String> usernamesHashMap;
 
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
 	private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
@@ -48,16 +50,17 @@ public class GUIMain extends Application {
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
 	private HashMap<ColorEnumeration, TowerCardWidget[]> towerCardWidgetLists = new HashMap<>();
-	// private TowerCardWidget[][] towerCardWidgetLists = new TowerCardWidget[4][4];
 	private HashMap<ColorEnumeration, VBox> towerCardBoxesArray = new HashMap<>() ;
 	private HashMap<ColorEnumeration, TowerTileWidget[]> towerTileWidgetLists = new HashMap<>();
-	//private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
 	private HashMap<ColorEnumeration, VBox> towerTilesBoxes = new HashMap<>();
-	//private final VBox[] towerTilesBoxes = new VBox[4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
+	private SingleProductionSpaceWidget singleProductionSpace = new SingleProductionSpaceWidget(1, player);
+	private SingleHarvestingSpaceWidget singleHarvestingSpace = new SingleHarvestingSpaceWidget(1, player);
 	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1, player);
 	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1, player);
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1, player);
+
+	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
 	private DieWidget[] diceWidgetArray = new DieWidget[3];
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
@@ -99,19 +102,21 @@ public class GUIMain extends Application {
 		launch(args);
 	}
 
-	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout){
+	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout, HashMap<ColorEnumeration, String> usernamesHashMap){
 		this.player.setPlayerColor(thisPlayerColor);
 		this.OPPONENTS_NUMBER = opponentNumber;
 		this.MOVE_TIMER = timeout;
+		this.usernamesHashMap = usernamesHashMap;
+		int i = 0;
+		for(ColorEnumeration color: usernamesHashMap.keySet()) {
+			opponentsArray[i] = new OpponentWidget(this, color);
+			opponentsArray[i].setOpponentUsername(usernamesHashMap.get(color));
+		}
 	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-
-		//TODO settare da fuori
-		PLAYER_NUMBER = 4;
-		OPPONENTS_NUMBER = 3;
-		MOVE_TIMER = 120;
 		//opponentNames = {"Pippo", "Pluto", "Paperino"};
 		int thisPlayerId = 0;
 		int[] opponentIdArray = {1, 2, 3};
@@ -193,6 +198,7 @@ public class GUIMain extends Application {
 			//towerTileWidgetArray = towerTileWidgetLists.get(towerColorArray[i]);
 			for (int j = 0; j < 4; j++) {
 				towerTileWidgetLists.get(towerColorArray[i])[j] = new TowerTileWidget(7 - 2 * j);
+				actionSpaces.add(towerTileWidgetLists.get(towerColorArray[i])[j]);
 				towerTilesBoxes.get(towerColorArray[i]).getChildren().add(towerTileWidgetLists.get(towerColorArray[i])[j].getOccupationCircle());
 			}
 		}
@@ -221,27 +227,45 @@ public class GUIMain extends Application {
 		}
 
 
+		/* Add player resources */
+
+		resourcesWidgetArray[0] = new ResourcesWidget();
+		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
+		root.getChildren().add(playerResourcesBox);
+
+
         /* Add market action spaces */
 		// Initialize
 		for (i = 0; i < this.marketSpaceWidgets.length; i++)
-			marketSpaceWidgets[i] =
-					new MarketSpaceWidget(1);
+			marketSpaceWidgets[i] = new MarketSpaceWidget(1);
 		// Add to board
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
+		actionSpaces.add(marketSpaceWidgets[0]);
 		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
+		actionSpaces.add(marketSpaceWidgets[1]);
 		if(PLAYER_NUMBER >= 4) {
 			insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
+			actionSpaces.add(marketSpaceWidgets[2]);
 			insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
+			actionSpaces.add(marketSpaceWidgets[3]);
 		}
 
         /* Add harvest and production action spaces */
         if(PLAYER_NUMBER >= 3) {
 			insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
+			actionSpaces.add(productionSpace);
 			insertMultipleSpace(harvestingSpace, root, 1, 0.892, 90.3137); // harvest
+			actionSpaces.add(harvestingSpace);
+		} else {
+        	insertActionSpace(singleProductionSpace, root, 1, 0.9, 79.3); // single production
+			actionSpaces.add(singleProductionSpace);
+			insertActionSpace(singleHarvestingSpace, root, 1, 0.9, 90.4); // single harvest
+			actionSpaces.add(singleHarvestingSpace);
 		}
 
 		/* Add council space */
 		insertMultipleSpace(councilSpaceWidget, root, 1, 51.5, 53.7); // council
+		actionSpaces.add(councilSpaceWidget);
 
 
 		/* Add points markers */
@@ -337,13 +361,6 @@ public class GUIMain extends Application {
 		root.getChildren().add(personalBoardButtonsBox);
 
 
-		/* Add player resources */
-
-		resourcesWidgetArray[0] = new ResourcesWidget();
-		playerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
-		root.getChildren().add(playerResourcesBox);
-
-
 		/* Add excommunication widgets */
 		for(i = 0; i < 3; i++) {
 			excomWidgetArray[i] = new ExcomWidget();
@@ -423,6 +440,23 @@ public class GUIMain extends Application {
 
 		Integer[] testExcomCards = {3, 12, 20};
 
+		Pair<ColorEnumeration, Integer> test1 = new Pair<>(ColorEnumeration.Red, 67);
+		Pair<ColorEnumeration, Integer> test2 = new Pair<>(ColorEnumeration.Green, 30);
+		Pair<ColorEnumeration, Integer> test3 = new Pair<>(ColorEnumeration.Blue, 87);
+		Pair<ColorEnumeration, Integer> test4 = new Pair<>(ColorEnumeration.Yellow, 8);
+
+		ArrayList<Pair<ColorEnumeration, Integer>> testFinalResults = new ArrayList<>();
+		testFinalResults.add(test1);
+		testFinalResults.add(test2);
+		testFinalResults.add(test3);
+		testFinalResults.add(test4);
+
+
+
+
+
+
+
 		/*
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
@@ -447,6 +481,7 @@ public class GUIMain extends Application {
 		//doPrivilegeConversion(testPrivilegeConversion);
 		insertExcomCards(testExcomCards);
 		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
+		//showEndGameResult(testFinalResults);
 
 
 	}
@@ -534,24 +569,47 @@ public class GUIMain extends Application {
 		}*/
 	}
 
-	public void updatePlayerResources(ColorEnumeration color, Integer[] newResources) {
+	public void updatePlayerResources(HashMap<String, Integer> thisPlayerResources, HashMap<ColorEnumeration, HashMap<String, Integer>> otherPlayerResources) {
 
 		//TODO decidere come passare le risorse
 
-		player.getResourceWidget().setGoldValue(newResources[0]);
-		player.getResourceWidget().setWoodValue(newResources[1]);
-		player.getResourceWidget().setStoneValue(newResources[2]);
-		player.getResourceWidget().setServantValue(newResources[3]);
+		for(String newResource: thisPlayerResources.keySet()) {
+			for(int i = 0; i < 4; i++) {
+				player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
+			}
+		}
 
 		player.getResourceWidget().repaint();
-		/*
-		else
-			for(int i = 0; i < OPPONENTS_NUMBER; i++) {
-				if (opponentsArray[i].getOpponentColor() == color) {
 
+
+		for(ColorEnumeration opponentColor: otherPlayerResources.keySet()) {
+			for(OpponentWidget opponent: opponentsArray) {
+				if(opponent.getOpponentColor() == opponentColor) {
+					for (String id : otherPlayerResources.get(opponentColor).keySet()) {
+						opponent.getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
+					}
 				}
 			}
-		*/
+		}
+	}
+
+
+
+	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, int actionSpaceId) {
+
+		// get the familiar image
+
+		String path = GraphicResources.getFamiliarPath(playerColor, familiarColor);
+		File crDir = new File(path);
+		try{
+			Image familiarPlayedImage = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+			ImageView familiarPlayed = new ImageView(familiarPlayedImage);
+		} catch (MalformedURLException e){
+			e.printStackTrace();
+		}
+
+		// add to the board
+
 	}
 
 	public void updatePlayerPoints(ColorEnumeration color, Integer[] newPoints) {
@@ -600,6 +658,10 @@ public class GUIMain extends Application {
 
 	public void updateInfoLabel(String info) {
 		this.infoLabel.setText(info);
+	}
+
+	public void showEndGameResult(ArrayList<Pair<ColorEnumeration, Integer>> endGameResults) {
+		EndGamePopup.display(endGameResults);
 	}
 
 

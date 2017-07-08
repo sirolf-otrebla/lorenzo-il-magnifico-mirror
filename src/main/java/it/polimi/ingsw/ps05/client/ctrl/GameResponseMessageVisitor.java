@@ -40,10 +40,11 @@ public class GameResponseMessageVisitor {
 	}
 
     public void visit(ConvertPrivilegeTriggerMessage msg){
+		System.out.println(" dentro visitor conversione privilegio");
 		ArrayList<ArrayList<Resource>> resources = msg.getConversionList();
         Integer privileges = msg.getPrivilegeNum();
 		ArrayList<Integer> integers = ViewAdapter.getInstance().showPrivilegeConversion(resources, privileges);
-		PrivilegeConversionMessage responseMsg = new PrivilegeConversionMessage(integers);
+		PrivilegeConversionMessage responseMsg = new PrivilegeConversionMessage(integers, Client.getInstance().getGameStatus().getActivePlayerId());
 		Client.getInstance().sendToServer(responseMsg);
     }
 

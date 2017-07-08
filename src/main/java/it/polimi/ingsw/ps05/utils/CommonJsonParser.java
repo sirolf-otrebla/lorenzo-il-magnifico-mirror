@@ -48,14 +48,14 @@ public class CommonJsonParser {
 	}
 	
 	public ArrayList<ArrayList<Resource>> loadPrivilegeConversion(){
-		
-		
+
+		ArrayList<ArrayList<Resource>> finalList = new ArrayList<>();
+
 		try {
 			File file = new File("./src/main/res/privilegeConverter.json");
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 			JSONArray array = (JSONArray)obj.get("Privilege");
-			ArrayList<ArrayList<Resource>> finalList = new ArrayList<>();
-			
+
 			for (Object o : array){
 				ArrayList<Resource> interList = new ArrayList<>();
 				JSONObject a = (JSONObject)o;
@@ -76,8 +76,8 @@ public class CommonJsonParser {
 			e.printStackTrace();
 		}
 		
-		
-		return null;
+
+		return finalList;
 	}
 
 	private ArrayList<LeaderCard> loadLeaderCards() throws FileNotFoundException, IOException, ParseException, NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
@@ -93,7 +93,7 @@ public class CommonJsonParser {
 	}
 
 	private LeaderCard loadSingleLeaderCard (JSONObject obj) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
-		LeaderCard card = new LeaderCard(Integer.parseInt(obj.get("ID").toString()));
+		LeaderCard card = new LeaderCard(Integer.parseInt(obj.get("id").toString()));
 		card.setCardName(getCardName(obj));
 		card.setEffects(getEffects((JSONObject)obj.get("Effect")));
 		return card;
@@ -253,7 +253,7 @@ public class CommonJsonParser {
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
-				if (!json.keySet().toArray()[i].equals("numPlayer") && !json.keySet().toArray()[i].equals("ID")){
+				if (!json.keySet().toArray()[i].equals("numPlayer") && !json.keySet().toArray()[i].equals("id")){
 					list.add(createAllExceptActivable(json, i));
 				}
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
@@ -270,12 +270,12 @@ public class CommonJsonParser {
 			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			MarketSpace space = new MarketSpace(effectList);
-			space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
+			space.setMarketSpaceTypeID(Integer.parseInt(json.get("id").toString()));
 			return space;
 		}
 
 		MarketSpace space = new MarketSpace(diceRequired, effectList);
-		space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
+		space.setMarketSpaceTypeID(Integer.parseInt(json.get("id").toString()));
 		return new MarketSpace(diceRequired, effectList);
 	}
 
@@ -592,7 +592,7 @@ public class CommonJsonParser {
 	}
 
 	private Integer getCardId(JSONObject json) {
-		return new Integer(Integer.parseInt(json.get("ID").toString()));
+		return new Integer(Integer.parseInt(json.get("id").toString()));
 	}
 
 	private Epoch getCardEpoch(JSONObject json){

@@ -45,6 +45,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
     }
 	@Override
 	public void applyResult(PlayerRelated playerR){
+		System.out.println("applyresult del privilegio");
 		this.game.getEndActionStrategyContainer().setChosenStrategy(new ClaimPrivilegeStrategy(this.value));
 	}
 

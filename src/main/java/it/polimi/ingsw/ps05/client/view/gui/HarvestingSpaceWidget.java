@@ -35,7 +35,7 @@ public class HarvestingSpaceWidget extends MultipleSpaceWidget {
                 ImageView imageElement = new ImageView(source);
                 hbox.getChildren().add(imageElement);
                 // display popup
-                selectedActivations = getPlayer().displayHarvestingPopup(getPlayer().getPersonalBoard().getProductionCards());
+                selectedActivations = getPlayer().displayHarvestingPopup(getPlayer().getPersonalBoard().getHarvestingCards());
                 //TODO comunicare al controller le scelte dell'utente
                 success = true;
             }

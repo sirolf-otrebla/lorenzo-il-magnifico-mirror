@@ -19,7 +19,7 @@ public interface ViewVisitorInterface {
 
     public void visit(Board board);
 
-    public void visit(Tile tile);
+    public void visit(TowerTileInterface tile);
 
     public void visit(MarketSpace marketSpace);
 

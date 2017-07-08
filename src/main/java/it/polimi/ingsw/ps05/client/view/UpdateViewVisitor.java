@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.client.view;
 
-import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.client.view.gui.*;
@@ -62,20 +61,20 @@ public class UpdateViewVisitor implements ViewVisitorInterface {
     }
 
     @Override
-    public void visit(Tile tile){
+    public void visit(TowerTileInterface tile) {
         TowerTileWidget widget = (TowerTileWidget) actionSpaceWidgetHashMap.get(tile.getId());
-        if (tile.isOccupied()){
+        if (tile.isOccupied()) {
             widget.setOccupied(true);
             ColorEnumeration playerID = tile.getOccupant().getRelatedPlayerColor();
             widget.setOccupantPlayerColor(playerID);
             //TODO ESISTE UN METODO MIGLIORE PER CONTROLLARE LA LEGALITÀ DI UNA AZIONE, PER ORA TENIAMO QUESTO
             Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
-            for (Familiar f: family )
+            for (Familiar f : family)
                 if ((new Action(f, tile).isLegal())) {
                     widget.setLegal(true);
                     widget.getLegalFamilyMemberList().add(f.getColor());
                 }
-            if(widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
+            if (widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
                 widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
             // altro da aggiungere?
         }
@@ -133,6 +132,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface {
                 : this.guiMain.getOpponentsArray()) {
                 if(widget.getOpponentColor().equals(player.getColor())){
                     // widget.setOpponentMarkers();
+                    /*
                     widget.getResourceWidget().setGoldValue(
                             player.getResource(GoldResource.id).getValue());
                     widget.getResourceWidget().setServantValue(
@@ -141,11 +141,12 @@ public class UpdateViewVisitor implements ViewVisitorInterface {
                             player.getResource(StoneResource.id).getValue());
                     widget.getResourceWidget().setWoodValue(
                             player.getResource(WoodResource.id).getValue());
+                            */
 
                     Resource[] points = new Resource[3];
                     points[0] = player.getResource(VictoryResource.ID);
                     points[1] = player.getResource(MilitaryResource.id);
-                    points[2] = player.getResource(FaithResource.ID);
+                    points[2] = player.getResource(FaithResource.id);
 
                     HashMap<String, MarkerWidget> markerWidgetHashMap = new HashMap<>();
                     for (MarkerWidget markerWidget:

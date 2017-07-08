@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.PrivilegeConversionMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 import java.util.concurrent.Semaphore;
@@ -76,6 +77,11 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     @Override
     public void visit(ExcommunicationChoiceMessage msg) {
         // NO
+    }
+
+    @Override
+    public void visit(PrivilegeConversionMessage msg) {
+        // no
     }
 
 

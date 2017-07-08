@@ -6,6 +6,8 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 
@@ -26,18 +28,45 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
         this.gui = gui;
     }
 
+
+
     @Override
     public void visit(GameStatus status) {
+        Board board = status.getGameBoard();
+        board.acceptVisitor(this);
+
         this.gui.getPlayer().setPlayerColor(status.getThisPlayer().getColor());
         Player activePlayer = status.getPlayerHashMap().get(status.getActivePlayerId());
         status.getPlayerHashMap().remove(status.getActivePlayerId());
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
-        this.gui.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120); // settare timeout
+        HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
+        for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());
+        this.gui.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120, usernamesHashMap); // settare timeout
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {
             p.acceptVisitor(this);
         }
+        status.getPlayerHashMap().put(status.getActivePlayerId(), activePlayer);
+
+        Integer[] excommCardsIdArray = new Integer[3];
+        for (ExcommunicationCard card : board.getExcomCards()) {
+            excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
+        }
+        this.gui.insertExcomCards(excommCardsIdArray);
+
+
+
+
+
+
+
+
+
+
+
+
+
         HashMap<ColorEnumeration, int[]> cardIdHashMap = new HashMap<>();
 
         for (ColorEnumeration c: this.gui.getTowerColorArray()) {
@@ -53,6 +82,50 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
         this.gui.insertCards(cardIdHashMap.get(ColorEnumeration.Green), cardIdHashMap.get(ColorEnumeration.Blue),
                 cardIdHashMap.get(ColorEnumeration.Yellow), cardIdHashMap.get(ColorEnumeration.Violet));
 
+        // update dei punti fede, militare, vittoria
+        for (Player p : status.getPlayerHashMap().values()) {
+            Integer[] pointsVector = new Integer[3];
+            pointsVector[0] = p.getResource(FaithResource.id).getValue();
+            pointsVector[1] = p.getResource(MilitaryResource.id).getValue();
+            pointsVector[2] = p.getResource(VictoryResource.ID).getValue();
+            this.gui.updatePlayerPoints(p.getColor(), pointsVector);
+        }
+        // fine update dei punti militari.
+
+        // inserisco risorse nei giocatori
+        HashMap<String, Integer> playerResourcesHashMap = new HashMap<>();
+        for(Resource r : status.getThisPlayer().getResourceList()){
+            if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                    r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
+                playerResourcesHashMap.put(r.getID(), r.getValue());
+            }
+        }
+
+        HashMap<ColorEnumeration, HashMap<String, Integer>> opponentsResourcesHashMap = new HashMap<>();
+        status.getPlayerHashMap().remove(status.getThisPlayer().getPlayerID());
+        for (Integer i : status.getPlayerHashMap().keySet()){
+            HashMap<String, Integer> opponentResourcesHashMap = new HashMap<>();
+            for(Resource r : status.getPlayerHashMap().get(i).getResourceList()){
+                if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                        r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
+                    opponentResourcesHashMap.put(r.getID(), r.getValue());
+                }
+            }
+            opponentsResourcesHashMap.put(status.getPlayerHashMap().get(i).getColor(), opponentResourcesHashMap);
+        }
+
+        this.gui.updatePlayerResources(playerResourcesHashMap, opponentsResourcesHashMap);
+
+        // fine setup risorse
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -60,21 +133,10 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
     public void visit(Board board) {
         for (Tower t:  board.getTowerList().values()) t.acceptVisitor(this);
         for (ActionSpace actionSpace : board.getActSpacesMap().values()) actionSpace.acceptVisitor(this);
-        for (int i = 0; i < gui.getExcomWidgets().length; i++)
-            gui.getExcomWidgets()[i].setReferenceId(board.getExcomCards().get(i).getReferenceID());
-        for (int i = 0; i < gui.getFaithPath().length; i++)
-            gui.getFaithPath()[i] = (board.getFaithPath().get(i).getValue());
-        for (int i = 0; i < gui.getMilitaryPath().length; i++)
-            gui.getMilitaryPath()[i] = (board.getMilitaryPath().get(i).getValue());
-        for (int i = 0; i < gui.getGreenCardsConversion().length; i++)
-            gui.getGreenCardsConversion()[i] = (board.getGreenCardsConversion().get(i).getValue());
-        for (int i = 0; i < gui.getBlueCardsConversion().length; i++)
-            gui.getBlueCardsConversion()[i] = (board.getBlueCardsConversion().get(i).getValue());
-
     }
 
     @Override
-    public void visit(Tile tile) {
+    public void visit(TowerTileInterface towerTileInterface) {
             // DO  NOTHING
     }
 
@@ -136,20 +198,6 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
 
     @Override
     public void visit(Tower tower) {
-
-        /* array di ColorEnumeration e relativa HashMap sono diventate inutili, si può accedere alla tore del colore desiderato tramite ColorEnumeration
-
-        ColorEnumeration[] colorEnumerations = {
-                ColorEnumeration.Green,
-                ColorEnumeration.Blue,
-                ColorEnumeration.Yellow,
-                ColorEnumeration.Violet
-        };
-        HashMap<ColorEnumeration, Integer> colorIndexHashMap = new HashMap<>();
-        for (int i = 0; i < colorEnumerations.length ; i++) colorIndexHashMap.put(colorEnumerations[i], i);
-
-        */
-
         Collection<TowerTileInterface> tiles = tower.getTiles().values();
         TowerTileWidget[] towerTileWidgets =  gui.getTowerTileWidgetList(tower.getColor()); // aggiornato
         for (TowerTileWidget tileWidget :towerTileWidgets){

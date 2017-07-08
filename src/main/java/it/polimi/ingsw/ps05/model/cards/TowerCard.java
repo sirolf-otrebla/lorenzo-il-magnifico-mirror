@@ -27,8 +27,12 @@ public abstract class TowerCard implements Card {
 	 * @param epoch is the epoch in which the card will appear in the board
 	 * @param color is the color of the card
 	 * @param cardName is the unique name of the card
-	 * @param requirements are the resource that you must have to take the card (there could be more than 
-	 * one way to pay)
+	 * @param requirements these are the card's requirements, first List represent an OR plane, the inner list represent
+	 *                      an AND plane: then this parameter can be seen as a SOP logic formula: for example, if the requirements
+	 *                      are: (Resource1 + Resource2) OR (Resource3 + Resource4), they can be represented in this list as a 2-sized
+	 *                      list which is composed by two other list, the firs containing Resource1 and Resource2, and the
+	 *                      second one containing Resource3 and Resource4
+	 *                      @see Resource
 	 * @param effects are the action that the card allows you to do
 	 */
 	public TowerCard(int referenceID, Epoch epoch, ColorEnumeration color, String cardName,
@@ -103,6 +107,11 @@ public abstract class TowerCard implements Card {
 		return this.epoch.getID();
 	}
 
+	/** this method applies the card's effects to a player using {@link PlayerRelated} interface, which is now implemented by
+	 *  both {@link it.polimi.ingsw.ps05.model.Player} and FamilyMember Classes.
+	 *
+	 * @param player	this is the player that will gain the card's effects
+	 */
 	public void applyNonActivableEffects(PlayerRelated player) {
 		//ciclare negli effetti, prendere quelli immediati ed attivarli, prendere quelli di fine partita
 		//e non farci niente, verranno conteggiati alla fine
@@ -122,6 +131,15 @@ public abstract class TowerCard implements Card {
 		return referenceID;
 	}
 
+	/** this method moves the card from is Tower Tile to the player using {@link PlayerRelated} interface, which is now implemented by
+	 *  both {@link it.polimi.ingsw.ps05.model.Player} and FamilyMember Classes. It is implemented by its subclasses
+	 * 	@see BlueCard
+	 * 	@see YellowCard
+	 * 	@see GreenCard
+	 * 	@see VioletCard
+	 *
+	 * @param player	this is the player  where the card will be moved
+	 */
 	public abstract void moveToPlayer(PlayerRelated player);
 
 	public void setReferenceID(Integer referenceID) {
