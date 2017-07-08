@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.server.controller;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
@@ -82,7 +81,7 @@ public class GameFlowController implements Runnable {
 		int tot = pl.getResource(VictoryResource.ID).getValue();
 		tot = tot + game.getBoard().getBlueCardsConversion().get(pl.getBlueCardList().size()).getValue();
 		tot = tot + game.getBoard().getGreenCardsConversion().get(pl.getGreenCardList().size()).getValue();
-		tot = tot + game.getBoard().getFaithPath().get(pl.getResource(FaithResource.ID).getValue()).getValue();
+		tot = tot + game.getBoard().getFaithPath().get(pl.getResource(FaithResource.id).getValue()).getValue();
 		// TODO bisogna controllare chi ha più punti militari tra tutti
 		int ris = pl.getResource(GoldResource.id).getValue();
 		ris = ris + pl.getResource(ServantResource.id).getValue();

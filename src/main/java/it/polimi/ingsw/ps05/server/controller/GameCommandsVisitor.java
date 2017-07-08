@@ -124,6 +124,7 @@ public class GameCommandsVisitor implements VisitorInterface {
                 activePlayer.addResource(r);
             }
         }
+        System.out.println("strategy Ended");
         game.getEndActionStrategyContainer().strategyEnded();
     }
 

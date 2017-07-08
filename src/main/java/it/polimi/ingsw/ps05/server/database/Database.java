@@ -12,7 +12,7 @@ public class Database {
 			c.setAutoCommit(true);
 			System.out.println("Opened database successfully");
 			//Statement stmt = c.createStatement();
-			//String sql = "CREATE TABLE 'data' ('ID' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 'Username' VARCHAR(16) NOT NULL UNIQUE, 'Password' VARCHAR(20) NOT NULL, 'DataAdded' TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 'GamePlayed' INTEGER NOT NULL DEFAULT 0, 'GameWon' INTEGER NOT NULL DEFAULT 0, 'GameTime' DOUBLE NOT NULL DEFAULT 0)";
+			//String sql = "CREATE TABLE 'data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 'Username' VARCHAR(16) NOT NULL UNIQUE, 'Password' VARCHAR(20) NOT NULL, 'DataAdded' TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 'GamePlayed' INTEGER NOT NULL DEFAULT 0, 'GameWon' INTEGER NOT NULL DEFAULT 0, 'GameTime' DOUBLE NOT NULL DEFAULT 0)";
 			//stmt.executeUpdate(sql);
 			
 		} catch ( Exception e ) {
@@ -85,7 +85,7 @@ public class Database {
 			Statement stmt = c.createStatement();
 			String sql = "SELECT ID FROM data WHERE Username = '" + username + "'";
 			ResultSet rs = stmt.executeQuery(sql);
-			return rs.getInt("ID");
+			return rs.getInt("id");
 			
 		} catch (Exception e){
 			System.out.println("aggiunta fallita");
@@ -100,7 +100,7 @@ public class Database {
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM data;");
 
 			while ( rs.next() ) {
-				System.out.println( "ID = " + rs.getInt("ID") );
+				System.out.println( "id = " + rs.getInt("id") );
 				System.out.println( "USR = " + rs.getString("Username") );
 				System.out.println( "PSW = " + rs.getString("Password") );
 				System.out.println( "GamePlayed = " + rs.getInt("GamePlayed") );

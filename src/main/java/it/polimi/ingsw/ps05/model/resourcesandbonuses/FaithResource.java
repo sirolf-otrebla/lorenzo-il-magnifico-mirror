@@ -14,7 +14,7 @@ public class FaithResource implements Resource, ActionResult {
 	 */
 	private static final long serialVersionUID = -6402482453007722862L;
 	private Integer amount;
-	public static final String ID = "Fede";
+	public static final String id = "Fede";
 	transient private Game game;
 
 	public FaithResource(Integer amount) {
@@ -72,7 +72,7 @@ public class FaithResource implements Resource, ActionResult {
 
 	@Override
 	public String getID() {
-		return ID;
+		return id;
 	}
 
 	@Override

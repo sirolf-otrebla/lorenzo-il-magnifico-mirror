@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps05.client.view;
 
-import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.client.view.gui.*;
@@ -147,7 +146,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface {
                     Resource[] points = new Resource[3];
                     points[0] = player.getResource(VictoryResource.ID);
                     points[1] = player.getResource(MilitaryResource.id);
-                    points[2] = player.getResource(FaithResource.ID);
+                    points[2] = player.getResource(FaithResource.id);
 
                     HashMap<String, MarkerWidget> markerWidgetHashMap = new HashMap<>();
                     for (MarkerWidget markerWidget:

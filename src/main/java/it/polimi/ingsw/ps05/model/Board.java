@@ -12,7 +12,9 @@ import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 
-
+/** this class represents the board where the game has place.
+ *
+ */
 public class Board implements Serializable, VisitableFromView {
 
 	private static final long serialVersionUID = 3802284891664073914L;
@@ -194,7 +196,7 @@ public class Board implements Serializable, VisitableFromView {
 
 	/**
 	 * This method is used to get the hashmap of the action space
-	 * @return the hashmap of actionspaces istantiated in the board. the key for each actionspace is its ID
+	 * @return the hashmap of actionspaces istantiated in the board. the key for each actionspace is its id
 	 */
 	public ActionSpace getActionSpace(Integer referenceID){
 		return this.getActSpacesMap().get(referenceID);

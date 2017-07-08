@@ -34,7 +34,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	public PlayerClient(LimConnection netHandler, int id){
 	    this.connection = netHandler;
 	    this.id = id;
-	    this.messageObserver = ServerNetMessageVisitor.getInstance();
+	    this.messageObserver = new ServerNetMessageVisitor();
 	    addObserver(messageObserver);
 		netHandler.addObserver(this);
     }

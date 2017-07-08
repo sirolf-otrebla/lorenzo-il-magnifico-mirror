@@ -1,13 +1,17 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.message.*;
 import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.PrivilegeConversionMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
+import javafx.concurrent.Task;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,20 +21,16 @@ import java.util.Observer;
 public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
 
     private PlayerClient client;
-    private static ServerNetMessageVisitor instance = null;
-    private ServerNetMessageVisitor(){
-        //TODO
-    }
 
-    public static ServerNetMessageVisitor getInstance(){
-        if (instance ==  null) instance = new ServerNetMessageVisitor();
-        return instance;
-    }
+
     @Override
     public void update(Observable o, Object arg) {
         this.client = (PlayerClient) o;
         NetMessage msg = (NetMessage) arg;
         try {
+            System.out.println("-------------------------");
+            System.out.println(msg);
+            System.out.println("_________________________");
             msg.acceptVisitor(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,6 +81,21 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
             Player p = client.getPlayer();
             msg.getExcommunicationCard().applyEffect(p);
         }
+    }
+
+    @Override
+    public void visit(PrivilegeConversionMessage msg) {
+        Player activePlayer = this.client.getGame().getPlayerClient(msg.getPlayerID()).getPlayer();
+        ArrayList<Integer> choices = msg.getChoices();
+        Game game = this.client.getGame();
+        ArrayList<ArrayList<Resource>> alternatives = game.getPrivilegeConvResAlternatives();
+        for (Integer i : choices) {
+            for (Resource r: alternatives.get(i)) {
+                activePlayer.addResource(r);
+            }
+        }
+        System.out.println("strategy Ended");
+        game.getEndActionStrategyContainer().strategyEnded();
     }
 
 

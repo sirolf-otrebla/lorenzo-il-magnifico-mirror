@@ -100,7 +100,7 @@ public class GUIMain extends Application {
 		launch(args);
 	}
 
-	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout){
+	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout, HashMap<ColorEnumeration, String> usernamesHashMap){
 		this.player.setPlayerColor(thisPlayerColor);
 		this.OPPONENTS_NUMBER = opponentNumber;
 		this.MOVE_TIMER = timeout;
@@ -108,11 +108,6 @@ public class GUIMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-
-		//TODO settare da fuori
-		PLAYER_NUMBER = 4;
-		OPPONENTS_NUMBER = 3;
-		MOVE_TIMER = 120;
 		//opponentNames = {"Pippo", "Pluto", "Paperino"};
 		int thisPlayerId = 0;
 		int[] opponentIdArray = {1, 2, 3};
@@ -565,28 +560,28 @@ public class GUIMain extends Application {
 		}*/
 	}
 
-	public void updatePlayerResources(ArrayList<Pair<String, Integer>> thisPlayerResources, ArrayList<Pair<ColorEnumeration,ArrayList<Pair<String, Integer>>>> otherPlayerResources) {
+	public void updatePlayerResources(HashMap<String, Integer> thisPlayerResources, HashMap<ColorEnumeration, HashMap<String, Integer>> otherPlayerResources) {
 
 		//TODO decidere come passare le risorse
 
-		for(Pair<String, Integer> newResource: thisPlayerResources) {
+		for(String newResource: thisPlayerResources.keySet()) {
 			for(int i = 0; i < 4; i++) {
-				player.getResourceWidget().setResource(newResource.getKey(), newResource.getValue());
+				player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
 			}
 		}
 
 		player.getResourceWidget().repaint();
 
 
-		for(Pair<ColorEnumeration, ArrayList<Pair<String, Integer>>> opponentRes: otherPlayerResources) {
-			for(Pair<String, Integer> newResource: opponentRes.getValue()) {
-				for(OpponentWidget opponent: opponentsArray) {
-					if(opponent.getOpponentColor() == opponentRes.getKey())
-						opponent.getResourceWidget().setResource(newResource.getKey(), newResource.getValue());
+		for(ColorEnumeration opponentColor: otherPlayerResources.keySet()) {
+			for(OpponentWidget opponent: opponentsArray) {
+				if(opponent.getOpponentColor() == opponentColor) {
+					for (String id : otherPlayerResources.get(opponentColor).keySet()) {
+						opponent.getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
+					}
 				}
 			}
 		}
-
 	}
 
 

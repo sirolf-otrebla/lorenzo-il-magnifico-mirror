@@ -36,6 +36,7 @@ public class EndActionStrategyContainer {
             strategy.execute(this);
             try {
                 semaphore.acquire();
+                System.out.println("Strategy Semaphore released");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
