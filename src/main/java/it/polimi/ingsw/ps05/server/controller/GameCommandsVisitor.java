@@ -128,10 +128,6 @@ public class GameCommandsVisitor implements VisitorInterface {
         game.getEndActionStrategyContainer().strategyEnded();
     }
 
-    public void visit(ExcommunicationChoiceMessage message){
-
-
-    }
 
     private void validatePlayer(Player expected) throws  Exception{
         ArrayList<Resource> resList = expected.getResourceList();

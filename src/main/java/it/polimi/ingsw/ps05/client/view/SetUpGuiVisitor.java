@@ -1,20 +1,27 @@
-package it.polimi.ingsw.ps05.client.ctrl;
+package it.polimi.ingsw.ps05.client.view;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Alberto on 01/07/2017.
  */
-public class SetUpGuiVisitor implements  ViewVisitorInterface {
+public class SetUpGuiVisitor implements ViewVisitorInterface {
+
+    private
 
     GUIMain gui;
+
     public SetUpGuiVisitor(GUIMain gui){
         this.gui = gui;
     }
@@ -22,11 +29,30 @@ public class SetUpGuiVisitor implements  ViewVisitorInterface {
     @Override
     public void visit(GameStatus status) {
         this.gui.getPlayer().setPlayerColor(status.getThisPlayer().getColor());
+        Player activePlayer = status.getPlayerHashMap().get(status.getActivePlayerId());
+        status.getPlayerHashMap().remove(status.getActivePlayerId());
+        ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
+        this.gui.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120); // settare timeout
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {
             p.acceptVisitor(this);
         }
+        HashMap<ColorEnumeration, int[]> cardIdHashMap = new HashMap<>();
+
+        for (ColorEnumeration c: this.gui.getTowerColorArray()) {
+            Tower tower = status.getGameBoard().getTowerList().get(c);
+            TowerTileInterface[] towerTileInterfaces = (TowerTileInterface[]) tower.getTiles().values().toArray();
+            int[] cards = new int[towerTileInterfaces.length];
+            for (TowerTileInterface t: towerTileInterfaces) {
+                Integer dice = t.getDiceRequired().getValue();
+                cards[(dice -1)/2] = t.getCard().getReferenceID();
+            }
+            cardIdHashMap.put(c, cards);
+        }
+        this.gui.insertCards(cardIdHashMap.get(ColorEnumeration.Green), cardIdHashMap.get(ColorEnumeration.Blue),
+                cardIdHashMap.get(ColorEnumeration.Yellow), cardIdHashMap.get(ColorEnumeration.Violet));
+
 
     }
 

@@ -17,6 +17,8 @@ public class Round {
     private GameCommandsVisitor visitor;
     private Semaphore waitingMessageSemaphore;
 
+    private int playerCounter;
+
     /* result listeners */
     private Iterator<Player> plOrdIt;
 
@@ -29,7 +31,8 @@ public class Round {
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
-        this.game.setActivePlayer(plOrdIt.next());
+        playerCounter = 0;
+        this.game.setActivePlayer(playerOrder.get(playerCounter));
         do {
             game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();
@@ -37,7 +40,7 @@ public class Round {
             this.waitCommand();
             this.executeCommand();
             game.getEndActionStrategyContainer().executeStrategy();
-        } while (plOrdIt.hasNext());
+        } while (playerCounter < playerOrder.size());
 
     }
     private synchronized void waitCommand() throws InterruptedException {
@@ -65,8 +68,10 @@ public class Round {
     public void nextState() {
         Integer playerID = this.game.getActivePlayer().getPlayerID();
         this.game.getPlayerClient(playerID).setInactive();
-        if (this.plOrdIt.hasNext())
-            game.setActivePlayer(this.plOrdIt.next());
+        if (playerCounter < playerOrder.size()) {
+            playerCounter++;
+            game.setActivePlayer(this.playerOrder.get(playerCounter));
+        }
         else {
             //TODO (MANCA QUALCOSA?)
             System.out.println("round finished");

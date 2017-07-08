@@ -46,10 +46,6 @@ public class BlueBonus extends PermanentBonus implements ActionResult {
 				}
 			}
 		}
-		if(hasListeners) {
-			setChanged();
-			notify();
-		}
 	}
 	
 	public void resetResult(PlayerRelated playerR){
