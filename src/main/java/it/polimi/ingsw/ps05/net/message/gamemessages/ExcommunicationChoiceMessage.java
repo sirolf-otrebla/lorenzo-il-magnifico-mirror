@@ -1,18 +1,21 @@
 package it.polimi.ingsw.ps05.net.message.gamemessages;
 
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
+import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
  * Created by Alberto on 08/07/2017.
  */
-public class ExcommunicationChoiceMessage implements GameMessage {
-    /**
+
+
+public class ExcommunicationChoiceMessage implements NetMessage {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6065386365425467855L;
-	private  boolean acceptExcommunication;
+    private  boolean acceptExcommunication;
     private ExcommunicationCard excommunicationCard;
     private Integer playerID;
 
@@ -23,11 +26,6 @@ public class ExcommunicationChoiceMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-        vi.visit(this);
-    }
-
-    @Override
-    public void acceptVisitor(GameCommandsVisitor vi) {
         vi.visit(this);
     }
 

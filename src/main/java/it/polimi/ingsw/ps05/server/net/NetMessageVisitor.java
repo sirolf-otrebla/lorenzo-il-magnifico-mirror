@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.server.net;
 
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
 
@@ -24,6 +25,9 @@ public interface NetMessageVisitor {
     void visit(DraftMessage msg);
 
     void visit(DraftResponseNetMessage msg);
+
+    void visit(ExcommunicationChoiceMessage msg);
+
 
 
 

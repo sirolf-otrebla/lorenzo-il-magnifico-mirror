@@ -84,7 +84,13 @@ public class Tile extends TowerTileInterface {
     @Override
     public  ArrayList<ArrayList<Resource>> getRequirements(){
         // ADDS DICE REQUIREMENT
-       ArrayList<ArrayList<Resource>> req = card.getRequirements();
+       ArrayList<ArrayList<Resource>> cardReq = card.getRequirements();
+       ArrayList<ArrayList<Resource>> req = new ArrayList<>();
+        for (ArrayList<Resource> a : cardReq) {
+            ArrayList<Resource> nuovo = new ArrayList<>();
+            for (Resource r: a) nuovo.add(r);
+            req.add(nuovo);
+        }
        if (req.size() == 0){
     	   req.add(new ArrayList<>());
     	   req.get(0).add(this.getDiceRequired());
@@ -104,6 +110,7 @@ public class Tile extends TowerTileInterface {
     	System.out.println("Occupant tower: " + this.getOccupant());
         this.card.moveToPlayer(pl.getRelatedPlayer());
         this.card.applyNonActivableEffects(pl);
+        this.getParentTower().setOccupied(true);
     }
 
 	@Override

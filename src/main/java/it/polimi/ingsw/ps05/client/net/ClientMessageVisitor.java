@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.client.net;
 
 import it.polimi.ingsw.ps05.client.ctrl.*;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
@@ -70,6 +71,11 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     @Override
     public void visit(DraftResponseNetMessage msg) {
             // no
+    }
+
+    @Override
+    public void visit(ExcommunicationChoiceMessage msg) {
+        // NO
     }
 
 

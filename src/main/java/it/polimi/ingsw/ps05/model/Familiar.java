@@ -15,9 +15,10 @@ public class Familiar implements Serializable, PlayerRelated {
 	 * 
 	 */
 	private static final long serialVersionUID = 8175413398375108149L;
-	private transient ActionSpace position;
+	private ActionSpace position;
 	private Dice relatedDice;
 	private ColorEnumeration color = NOT_INITIALIZED;
+	private boolean used =false;
 	private Player relatedPlayer = null;
 
 
@@ -47,12 +48,12 @@ public class Familiar implements Serializable, PlayerRelated {
 	}
 
 	public boolean isUsed(){
-		if (null == position) return false;
-		return true;
+		return used;
 	}
 
 	public void setPosition(ActionSpace position) {
 		this.position = position;
+		used = true;
 	}
 
 	public void setDice(Dice dice){

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps05.server.controller;
 
+import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
@@ -71,6 +73,14 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
         DraftResponseMessageVisitor visitor =
                 new DraftResponseMessageVisitor(this.client);
         msg.acceptVIsitor(visitor);
+    }
+
+    @Override
+    public void visit(ExcommunicationChoiceMessage msg) {
+        if (msg.isAcceptExcommunication()){
+            Player p = client.getPlayer();
+            msg.getExcommunicationCard().applyEffect(p);
+        }
     }
 
 

@@ -90,7 +90,9 @@ public abstract class Tower implements Serializable, VisitableFromView {
 	public void acceptVisitor(ViewVisitorInterface vi) {
 
 	}
-	
-	
 
+
+	public void setOccupied(boolean occupied) {
+		this.occupied = occupied;
+	}
 }
