@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -16,40 +17,21 @@ public class ResourcesWidget {
     private Label goldLabel, woodLabel, stoneLabel, servantLabel;
     private HBox hbox;
 
-    public void display() {
-
-        Stage stage = new Stage();
-
-        this.goldLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Oro")]));
-        this.woodLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Legno")]));
-        this.stoneLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
-        this.servantLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
-
-        this.goldLabel.setId("goldLabel");
-        this.woodLabel.setId("woodLabel");
-        this.stoneLabel.setId("stoneLabel");
-        this.servantLabel.setId("servantLabel");
-
-        this.hbox = new HBox(60 * resize);
-        this.hbox.setId("resourceLabel");
-        this.hbox.setLayoutX((68.0 / 100) * stageWidth);
-        hbox.setLayoutY((32.08 / 100) * stageHeight);
-        hbox.setFillHeight(true);
-        hbox.setPrefHeight((4.8 / 100) * stageHeight);
-
-        hbox.getChildren().addAll(goldLabel, woodLabel, stoneLabel, servantLabel);
-
-        //TODO hbox da inserire nella personalBoard degli avversari tramite PopOver
-
+    public ResourcesWidget() {
+        this.goldLabel = new Label();
+        this.woodLabel = new Label();
+        this.stoneLabel = new Label();
+        this.servantLabel = new Label();
+        this.hbox = new HBox();
     }
 
-    public HBox setupPersonalResource() {
-        this.goldLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Oro")]));
-        this.woodLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Legno")]));
-        this.stoneLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
-        this.servantLabel = new Label(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
+    public HBox setupThisPlayerResource() {
+        this.goldLabel.setText(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        this.woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        this.stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        this.servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
 
-        this.hbox = new HBox(20 * resize);
+        this.hbox.setSpacing(20 * resize);
         this.hbox.setLayoutX((68.0 / 100) * stageWidth);
         this.hbox.setLayoutY((32.08 / 100) * stageHeight);
         this.hbox.setFillHeight(true);
@@ -58,6 +40,35 @@ public class ResourcesWidget {
         this.hbox.getChildren().addAll(goldLabel, woodLabel, stoneLabel, servantLabel);
 
         return hbox;
+    }
+
+    public void display() {
+
+        Stage stage = new Stage();
+
+        this.goldLabel.setText(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        this.woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        this.stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        this.servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
+
+        this.goldLabel.setId("goldLabel");
+        this.woodLabel.setId("woodLabel");
+        this.stoneLabel.setId("stoneLabel");
+        this.servantLabel.setId("servantLabel");
+
+        hbox.setSpacing(60 * resize);
+        hbox.setId("resourcePopup");
+        hbox.setLayoutX((68.0 / 100) * stageWidth);
+        hbox.setLayoutY((32.08 / 100) * stageHeight);
+        hbox.setFillHeight(true);
+        hbox.setPrefHeight((4.8 / 100) * stageHeight);
+
+        hbox.getChildren().addAll(goldLabel, woodLabel, stoneLabel, servantLabel);
+
+        Scene scene = new Scene(hbox);
+
+        //TODO hbox da inserire nella personalBoard degli avversari tramite PopOver
+
     }
 
     public void repaint() {

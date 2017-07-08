@@ -4,7 +4,6 @@ package it.polimi.ingsw.ps05.client.view.gui;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
@@ -219,6 +218,13 @@ public class GUIMain extends Application {
 		}
 
 
+		/* Add player resources */
+
+		resourcesWidgetArray[0] = new ResourcesWidget();
+		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
+		root.getChildren().add(playerResourcesBox);
+
+
         /* Add market action spaces */
 		// Initialize
 		for (i = 0; i < this.marketSpaceWidgets.length; i++)
@@ -344,13 +350,6 @@ public class GUIMain extends Application {
 			personalBoardButtonsBox.getChildren().add(opponentsArray[i].personalBoardButton);
 		}
 		root.getChildren().add(personalBoardButtonsBox);
-
-
-		/* Add player resources */
-
-		resourcesWidgetArray[0] = new ResourcesWidget();
-		playerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
-		root.getChildren().add(playerResourcesBox);
 
 
 		/* Add excommunication widgets */

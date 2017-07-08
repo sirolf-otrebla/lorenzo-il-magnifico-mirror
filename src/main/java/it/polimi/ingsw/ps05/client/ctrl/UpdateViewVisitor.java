@@ -131,6 +131,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
                 : this.guiMain.getOpponentsArray()) {
                 if(widget.getOpponentColor().equals(player.getColor())){
                     // widget.setOpponentMarkers();
+                    /*
                     widget.getResourceWidget().setGoldValue(
                             player.getResource(GoldResource.id).getValue());
                     widget.getResourceWidget().setServantValue(
@@ -139,6 +140,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface{
                             player.getResource(StoneResource.id).getValue());
                     widget.getResourceWidget().setWoodValue(
                             player.getResource(WoodResource.id).getValue());
+                            */
 
                     Resource[] points = new Resource[3];
                     points[0] = player.getResource(VictoryResource.ID);

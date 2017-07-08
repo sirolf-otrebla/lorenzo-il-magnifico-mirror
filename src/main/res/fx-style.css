@@ -67,6 +67,11 @@
     -fx-background-position: center;
 }
 
+#resourcePopup{
+    -fx-background-image: url("./img/resources.png");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
 #endGamePopup{
     -fx-background-image: url("./img/lightbrownBG.jpg");
     -fx-background-size: auto;

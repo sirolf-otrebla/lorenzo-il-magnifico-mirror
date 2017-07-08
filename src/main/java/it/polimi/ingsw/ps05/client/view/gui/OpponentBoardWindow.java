@@ -19,14 +19,16 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
     private String username;
     private LeaderWidget[] leaderWidgets = new LeaderWidget[4];
     private LeaderPopup leaderPopup = new LeaderPopup();
+    private ResourcesWidget resourceWidget = new ResourcesWidget();
 
 
 
-    public OpponentBoardWindow(GUIMain board, String username, LeaderWidget[] leaderWidgets) {
+    public OpponentBoardWindow(GUIMain board, String username, LeaderWidget[] leaderWidgets, ResourcesWidget resourcesWidget) {
         //super(board, username, cardAcquiredWidget, leaderWidgets, bonusTile);
         super(board);
         this.username = username;
         this.leaderWidgets = leaderWidgets;
+
     }
 
     @Override
@@ -100,5 +102,14 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
     public LeaderWidget[] getLeaderWidgets() {
         return leaderWidgets;
     }
+
+    public ResourcesWidget getResourceWidget() {
+        return resourceWidget;
+    }
+
+    public void setResourceWidget(ResourcesWidget resourceWidget) {
+        this.resourceWidget = resourceWidget;
+    }
+
 }
 
