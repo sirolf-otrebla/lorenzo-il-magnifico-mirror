@@ -26,7 +26,9 @@ public class EndActionStrategyContainer {
     }
 
     public void setChosenStrategy(EndActionStrategy strategy){
+        this.chosenStrategies.remove(defaultStrategy);
         this.chosenStrategies.add(strategy);
+        this.chosenStrategies.add(defaultStrategy);
     }
 
     public void executeStrategy(){
@@ -45,7 +47,7 @@ public class EndActionStrategyContainer {
         defaultStrategy.execute(this);
     }
 
-    public void StrategyEnded(){
+    public void strategyEnded(){
         semaphore.release();
     }
 

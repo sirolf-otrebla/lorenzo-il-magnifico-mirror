@@ -1,12 +1,12 @@
 #root{
-    -fx-background-image: url("./img/prova7.png");
+    -fx-background-image: url("./img/prova8.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
 }
 
 #personalBoard{
-    -fx-background-image: url("./img/personalboard.jpg");
+    -fx-background-image: url("./img/personalboard-low.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
@@ -49,6 +49,24 @@
     -fx-background-position: center;
 }
 
+#productionPopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+#harvestingPopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
+#privilegePopup{
+    -fx-background-image: url("./img/lightbrownBG.jpg");
+    -fx-background-size: auto;
+    -fx-background-position: center;
+}
+
 @font-face {
     -fx-font-family: "NightShade";
     src: url("./fonts/JimNightshade-Regular.ttf");
@@ -76,6 +94,34 @@
 
 #leaderDraftLabel{
     -fx-font-size: 18;
+}
+
+#goldLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#stoneLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#woodLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#servantLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
 }
 
 .diewidget.label .text{

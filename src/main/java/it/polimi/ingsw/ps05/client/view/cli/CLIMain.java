@@ -1458,7 +1458,7 @@ public class CLIMain implements LimView, Runnable{
 		return chose.start();
 	}
 
-	public ArrayList<Integer> getPrivilegeBonusChoice(ArrayList<ArrayList<ActionResult>> list, int choiceToDo){
+	public ArrayList<Integer> getPrivilegeBonusChoice(ArrayList<ArrayList<Resource>> list, int choiceToDo){
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		try {
 			CliTerminalForCardsList chose = new CliTerminalForCardsList(list, terminal.getTerminalSize().getColumns(), 1, choiceToDo);

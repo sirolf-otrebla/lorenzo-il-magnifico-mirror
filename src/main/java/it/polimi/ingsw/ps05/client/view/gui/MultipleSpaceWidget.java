@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
@@ -9,8 +10,12 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 
+import java.util.HashMap;
+
+import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarWidget.FAMILIAR_MIN_SIZE;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageWidth;
 
 
 /**
@@ -23,22 +28,28 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
     private int referenceId;
     private int minDie;
     private boolean isLegal;
-    private final ScrollPane scrollPane = new ScrollPane();
-    private final HBox hbox = new HBox();
+    final ScrollPane scrollPane = new ScrollPane();
+    final HBox hbox = new HBox();
+    private PlayerWidget player;
+    private HashMap <ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
 
 
-    public MultipleSpaceWidget(int referenceId, int minDie) {
-        this(minDie);
+    public MultipleSpaceWidget(int referenceId, int minDie, PlayerWidget player) {
+        this.minDie = minDie;
         this.referenceId = referenceId;
+        this.player = player;
     }
 
-    public MultipleSpaceWidget(int minDie) {
+    public MultipleSpaceWidget(int minDie, PlayerWidget player) {
 
         this.minDie = minDie;
+        this.player = player;
 
         hbox.setMinHeight(FAMILIAR_MIN_SIZE * resize);
         hbox.setFillHeight(true);
         scrollPane.setContent(hbox);
+        scrollPane.setMinWidth((12 / 100) * stageWidth);
+        scrollPane.setMaxWidth((12 / 100) * stageWidth);
 
         /* disabling scrollbar */
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -69,7 +80,10 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
             /* source is dragged over the scrollbar */
 
-            if (e.getGestureSource() != scrollPane && e.getDragboard().hasImage()) {
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+
+            if (e.getGestureSource() != scrollPane && isLegal) {
                 e.acceptTransferModes(TransferMode.MOVE);
             }
 
@@ -79,7 +93,11 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public void setupDragEntered() {
         scrollPane.setOnDragEntered((DragEvent e) -> {
-            if (e.getGestureSource() != scrollPane && e.getDragboard().hasImage()) {
+
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+
+            if (e.getGestureSource() != scrollPane && isLegal) {
                 scrollPane.setStyle("-fx-border-style: outset");
                 scrollPane.setStyle("-fx-border-width: 8px");
                 scrollPane.setStyle("-fx-border-color: palegreen");
@@ -172,5 +190,13 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public ScrollPane getScrollPane() {
         return scrollPane;
+    }
+
+    public PlayerWidget getPlayer() {
+        return player;
+    }
+
+    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
+        return legalActionMap;
     }
 }

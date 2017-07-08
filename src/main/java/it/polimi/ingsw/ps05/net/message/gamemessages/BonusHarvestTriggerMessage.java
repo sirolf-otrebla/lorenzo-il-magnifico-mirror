@@ -7,6 +7,14 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  * Created by Alberto on 07/07/2017.
  */
 public class BonusHarvestTriggerMessage implements GameResponseMessage {
+
+    private GameUpdateMessage gameUpdateMessage;
+    private String description = "hai una azione raccolta bonus";
+
+    public BonusHarvestTriggerMessage(GameUpdateMessage gameUpdateMessage) {
+        this.gameUpdateMessage = gameUpdateMessage;
+    }
+
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
          vi.visit(this);
@@ -14,5 +22,14 @@ public class BonusHarvestTriggerMessage implements GameResponseMessage {
 
     @Override
     public void acceptVisitor(GameResponseMessageVisitor vi) {
+        vi.visit(this);
+    }
+
+    public GameUpdateMessage getGameUpdateMessage() {
+        return gameUpdateMessage;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

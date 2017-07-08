@@ -49,7 +49,7 @@ public class LeaderDraftPopup {
         // adding initial leaders to hbox
         for(LeaderWidget leader: leadersToDraftArray) {
             setupGestureTarget(leader);
-            hbox.getChildren().add(leader.getLeaderCard());
+            hbox.getChildren().add(leader);
         }
 
         Label label = new Label();
@@ -85,21 +85,21 @@ public class LeaderDraftPopup {
         // EVENTO CHE VA PASSATO AL CONTROLLER
 
         if(!leaderWidget.isDrafted()) {
-            leaderWidget.getLeaderCard().setOnMouseEntered((MouseEvent e) -> {
+            leaderWidget.setOnMouseEntered((MouseEvent e) -> {
                 /* What to do when the mouse is over the leader card */
-                leaderWidget.getLeaderCard().setCursor(Cursor.HAND);
+                leaderWidget.setCursor(Cursor.HAND);
             });
 
-            leaderWidget.getLeaderCard().setOnMouseClicked((MouseEvent e) -> {
+            leaderWidget.setOnMouseClicked((MouseEvent e) -> {
                 /* What to do when the leader is selected */
                 storeSelectedLeader(leaderWidget, numberOfLeadersAlreadySelected);
-                leaderWidget.getLeaderCard().setOpacity(0.2);
-                leaderWidget.getLeaderCard().setMouseTransparent(true); // disable mouse click
+                leaderWidget.setOpacity(0.2);
+                leaderWidget.setMouseTransparent(true); // disable mouse click
                 leaderWidget.setDrafted(true);
                 numberOfLeadersAlreadySelected++;
             });
         } else {
-            leaderWidget.getLeaderCard().setMouseTransparent(true);
+            leaderWidget.setMouseTransparent(true);
         }
 
     }
@@ -131,7 +131,7 @@ public class LeaderDraftPopup {
 
         for(LeaderWidget leader: leadersToDraftArray) {
             setupGestureTarget(leader);
-            hboxReference.getChildren().add(leader.getLeaderCard());
+            hboxReference.getChildren().add(leader);
         }
 
     }

@@ -1,9 +1,13 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -14,50 +18,114 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageWidth;
 
 /**
  * Created by miotto on 06/07/17.
  */
 public class PrivilegePopup {
 
+    public static final double PRIVILEGE_WIDTH_PERC = (22.0 / 100);
+    private static final String path = "./src/main/res/img/privileges-table.png";
     private static Stage popupStage;
-    private static BonusTileWidget[] bonusTileArray = new BonusTileWidget[4];
+    static int alreadySelected;
+    static ArrayList<Integer> answers = new ArrayList<>();
 
-    private static BonusTileWidget selectedBonusTile;
+    public static ArrayList<Integer> display(final int conversionsToDo) {
 
-    public static void display() {
+        alreadySelected = 0;
 
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initStyle(StageStyle.UNDECORATED);
 
-        HBox hbox = new HBox(50 * resize);
-        VBox vbox = new VBox(40 * resize);
+        final VBox privilegeConversionsButtonBox = new VBox(10 * resize);
+        VBox vbox = new VBox(20 * resize);
 
-        // create bonusTile widgets
-        for(int i = 0; i < 4; i++) {
-            bonusTileArray[i] = new BonusTileWidget(i);
-            System.out.println(bonusTileArray[i].getImagePath());
-            hbox.getChildren().add(bonusTileArray[i].getImage());
+        final ImageView conversionImage = new ImageView();
+        File crDir = new File("./src/main/res/img/privilege-conversion.png");
+        try {
+            Image img = new Image(crDir.toURI().toURL().toString());
+            conversionImage.setImage(img);
+            conversionImage.setPreserveRatio(true);
+            conversionImage.setFitWidth(PRIVILEGE_WIDTH_PERC * stageWidth);
+        } catch (MalformedURLException e){
+            e.printStackTrace();
         }
 
-        Label label = new Label("Choose your personal Bonus Tile");
-        label.setId("labelTileDraft");
+        final Label introLabel = new Label("Convert your privilege");
+        introLabel.setId("privilegeLabel");
+
+
+        final Label conversionsLeftLabel = new Label("Conversions left: " + (conversionsToDo - alreadySelected));
+        conversionsLeftLabel.setId("privilegeConversionsLabel");
 
         //hbox.setFillHeight(true);
         //hbox.setPrefHeight((30 / 100) * stageHeight);
 
+        /* Setting up buttons for the conversions */ //TODO provare se i toggle button vanno bene per la scelta delle conversioni
+        final ToggleGroup group = new ToggleGroup();
 
-        ImageView prova = bonusTileArray[0].getImage();
+        final RadioButton woodStoneButton = new RadioButton("1 Wood & 1 Stone"); //TODO da rendere flessibile (prendere dal model le informazioni delle risorse)
+        final RadioButton servantsButton = new RadioButton("2 Servants");
+        final RadioButton goldButton = new RadioButton("2 Gold");
+        final RadioButton militaryButton = new RadioButton("2 Military Points");
+        final RadioButton faithButton = new RadioButton("1 Faith Point");
+
+        woodStoneButton.setUserData(0);
+        servantsButton.setUserData(1);
+        goldButton.setUserData(2);
+        militaryButton.setUserData(3);
+        faithButton.setUserData(4);
+
+        woodStoneButton.setToggleGroup(group);
+        servantsButton.setToggleGroup(group);
+        goldButton.setToggleGroup(group);
+        militaryButton.setToggleGroup(group);
+        faithButton.setToggleGroup(group);
+
+        privilegeConversionsButtonBox.getChildren().addAll(woodStoneButton, servantsButton, goldButton, militaryButton, faithButton);
 
 
-        vbox.setId("bonusTileDraft");
-        vbox.getChildren().addAll(label, hbox);
+        // Listening to button click
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+
+                if (group.getSelectedToggle() != null) {
+
+                    if(conversionsToDo > alreadySelected + 1) {
+                        // enter if ther is more than one conversion left
+                        int selection = (int)group.getSelectedToggle().getUserData();
+                        answers.add(selection);
+                        alreadySelected++;
+                        //System.out.println(answers[alreadySelected]);
+                    } else if(conversionsToDo == alreadySelected + 1) {
+                        // enter if it's the last conversion requested
+                        int selection = (int)group.getSelectedToggle().getUserData();
+                        answers.add(selection);
+                        alreadySelected++;
+                        //System.out.println(answers[alreadySelected]);
+                        popupStage.close(); // close the window
+                    }
+                }
+            }
+        });
+
+        /*
+        Button confirmButton = new Button("OK");
+        confirmButton.setOnAction((ActionEvent e) -> {
+            popup.close();
+        });
+        */
+
+        vbox.setId("privilegePopup");
+        vbox.getChildren().addAll(introLabel, conversionImage, privilegeConversionsButtonBox, conversionsLeftLabel);
         vbox.setPadding(new Insets(50 * resize, 50 * resize, 50 * resize, 50 * resize));
         vbox.setAlignment(Pos.CENTER);
-
 
         Scene scene = new Scene(vbox);
 
@@ -74,27 +142,8 @@ public class PrivilegePopup {
         //popupStage.sizeToScene();
         popupStage.showAndWait();
 
-        // after the draft is completed, the selected bonus tile widget is returned to the caller
-        for(BonusTileWidget bonusTile: bonusTileArray)
-            if(bonusTile.isThisPlayerSelected())
-                selectedBonusTile = bonusTile;
-
-    }
-
-    private void repaint() {
-
-        for(BonusTileWidget bonusTile: bonusTileArray) {
-            if(!bonusTile.isDrafted()) {
-                // make already drafted tiles half-transparent
-                bonusTile.getImage().setOpacity(0.3);
-                // disable click for already drafted bonus tiles
-                bonusTile.getImage().setMouseTransparent(true);
-            }
-        }
-    }
-
-    public static BonusTileWidget getSelectedBonusTile() {
-        return selectedBonusTile;
+        // after the selection is completed, the conversions are returned to the caller
+        return answers;
     }
 
     public static Stage getPopupStage() {

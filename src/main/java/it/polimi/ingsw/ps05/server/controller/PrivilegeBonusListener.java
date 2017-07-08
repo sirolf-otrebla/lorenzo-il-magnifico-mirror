@@ -18,7 +18,7 @@ public class PrivilegeBonusListener implements Observer {
 
     private static PrivilegeBonusListener singleton = null;
     
-    ArrayList<ArrayList<ActionResult>> conversionList = new ArrayList<ArrayList<ActionResult>>();
+    ArrayList<ArrayList<Resource>> conversionList = new ArrayList<ArrayList<Resource>>();
 
 
     private PrivilegeBonusListener(){
@@ -42,7 +42,7 @@ public class PrivilegeBonusListener implements Observer {
         return singleton;
     }
     
-    public void setConversionResource(ArrayList<ArrayList<ActionResult>> list){
+    public void setConversionResource(ArrayList<ArrayList<Resource>> list){
     	this.conversionList = list;
     }
 }

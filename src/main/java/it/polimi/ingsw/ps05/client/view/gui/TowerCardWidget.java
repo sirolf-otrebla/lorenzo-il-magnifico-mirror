@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import javafx.animation.PauseTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -72,7 +74,7 @@ public class TowerCardWidget {
 
     private void setZoomGesture() {
         cardImage.setOnMouseEntered((MouseEvent e) -> {
-            /* Actions to be performed when the card is clicked once */
+            /* Actions to be performed when the card is pointed */
             //TODO: implementare lo zoom
             File crDir = new File(imagePath);
             try {
@@ -84,6 +86,17 @@ public class TowerCardWidget {
         });
 
         //TODO volendo si può togliere la carta zoomata quando il mouse esce dalla carta
+        /*
+        cardImage.setOnMouseExited((MouseEvent e) -> {
+            /* Actions to be performed when the card is left */
+        /*
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                zoomReference.setImage(null);
+            });
+            pause.play();
+        });
+        */
     }
 
     // riceve la plancia del giocatore e inserisce la carta acquistata nell'apposito spazio

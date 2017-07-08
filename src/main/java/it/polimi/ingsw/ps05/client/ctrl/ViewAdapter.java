@@ -139,7 +139,7 @@ public class ViewAdapter {
 		}
 	}
 
-	public ArrayList<Integer> showPrivilegeConversion(ArrayList<ArrayList<ActionResult>> list, int resToChose){
+	public ArrayList<Integer> showPrivilegeConversion(ArrayList<ArrayList<Resource>> list, int resToChose){
 		if (this.viewType == this.GUI_TYPE) {
 			// TODO
 
@@ -179,6 +179,17 @@ public class ViewAdapter {
 			CLIMain cliView = (CLIMain) this.view;
 			cliView.actionWithGhostFamiliar(f);
 		}
+	}
+
+	public void printMessage(String message){
+		if (this.viewType == this.GUI_TYPE) {
+			// TODO
+
+		} else {
+			CLIMain cliView = (CLIMain) this.view;
+			cliView.createTerminalWithMessage(message);
+		}
+
 	}
 
 

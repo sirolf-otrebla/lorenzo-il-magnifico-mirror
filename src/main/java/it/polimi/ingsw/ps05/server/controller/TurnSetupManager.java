@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
@@ -15,6 +16,7 @@ public class TurnSetupManager extends Observable{
 	private  Board board;
 	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
 	private ArrayList<Resource> startResource;
+	private Semaphore excommSemaphore = new Semaphore(0);
 	
 	public TurnSetupManager(ArrayList<Player> playersConnected, Board board, ArrayList<Resource> startingResource){
 		this.board = board;
@@ -101,6 +103,11 @@ public class TurnSetupManager extends Observable{
 		if (!next.getEpoch().getID().equals(turn.getEpoch().getID())){
 			this.setChanged();
 			notifyObservers(turn.getEpoch());
+			try {
+				excommSemaphore.acquire(this.playersConnected.size());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		updateFamiliar(next);
 		next.setNext(new Turn());

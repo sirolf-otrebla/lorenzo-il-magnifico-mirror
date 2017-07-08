@@ -31,6 +31,8 @@ public final class GraphicResources {
 
     private static HashMap<ColorEnumeration, Integer[]> TowerCardArrayHashMap = new HashMap<>();
 
+    private static HashMap<Integer, String> excomPathMap = new HashMap<>();
+
 
 
     GraphicResources() {
@@ -42,6 +44,14 @@ public final class GraphicResources {
         buildFamiliarColorMap();
         buildBonusTilePathMap();
         buildDevelopmentCardPathMap();
+        buildExcomPathMap();
+    }
+
+    private static void buildExcomPathMap() {
+        for(int i = 0; i < 21; i++) {
+            int epoch = (i / 7) + 1;
+            excomPathMap.put(i, "./src/main/res/img/excom/excomm_" + epoch + "_" + ((i % 7) + 1) + ".png");
+        }
     }
 
     private static void buildDevelopmentCardPathMap() {
@@ -154,4 +164,6 @@ public final class GraphicResources {
     public static String getCardPath(int i) {
         return developmentCardPathMap.get(i);
     }
+
+    public static String getExcomPath(int i) { return excomPathMap.get(i); }
 }

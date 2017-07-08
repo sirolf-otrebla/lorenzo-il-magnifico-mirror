@@ -6,40 +6,43 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
+import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
-import java.awt.*;
+
 import java.io.File;
 import java.net.MalformedURLException;
 
 /**
  * Created by miotto on 28/06/17.
  */
-public class FamiliarWidget {
+public class FamiliarWidget extends ImageView{
 
     public static final double FAMILIAR_MIN_SIZE = 40;
     private boolean placed;
-    private ImageView imageElement;
+    ColorEnumeration playerColor;
+    ColorEnumeration familiarColor;
     private String imagePath;
-    private ColorEnumeration familiarColor;
-    private ColorEnumeration playerColor;
+    private FamiliarData familiarData;
+    private Image img;
 
     public FamiliarWidget(ColorEnumeration playerColor, ColorEnumeration familiarColor) {
         // construct image path
+        this.familiarData = new FamiliarData(playerColor, familiarColor);
         this.playerColor = playerColor;
         this.familiarColor = familiarColor;
 
         this.imagePath = path + this.playerColor.toString().toLowerCase() + "pl/" + this.familiarColor.toString().toLowerCase() + ".png";
 
         addImage(this.imagePath);
+
         setupGestureSource();
     }
 
     public void addImage(String path) {
         File crDir = new File(path);
         try{
-            Image i = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
-            imageElement = new ImageView();
-            imageElement.setImage(i);
+            this.img = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+            this.setImage(img);
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
@@ -59,37 +62,38 @@ public class FamiliarWidget {
 
     void setupGestureSource() {
 
-        imageElement.setOnDragDetected((MouseEvent e) -> {
+        this.setOnDragDetected((MouseEvent e) -> {
 
-            imageElement.setCursor(Cursor.CLOSED_HAND);
+            this.setCursor(Cursor.CLOSED_HAND);
 
             /* drag was detected, start a drag-and-drop gesture */
             /* allow MOVE transfer mode */
-            Dragboard db = imageElement.startDragAndDrop(TransferMode.MOVE);
+            Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
 
-            /* Put the image on the dragboard */
+            /* Put the data in the dragboard */
             ClipboardContent content = new ClipboardContent();
-            Image imageElementImage = imageElement.getImage();
-            content.putImage(imageElementImage);
+            FamiliarData data = new FamiliarData(this.playerColor, this.familiarColor, this.getImagePath());
+            content.put(FAMILIAR_DATA, data);
             db.setContent(content);
 
-            /* Check which targets are allowed */
-            //TODO: per controllare quali posti azione sono utilizzabili bisogna passare oltre all'immagine del familiare
-            //TODO: anche il valore del dado (volendo anche le risorse così si controlla oltre al dado anche il costo delle carta
-            showAllowedActionSpaces();
+            /*
+            Image imageElementImage = this.getImage();
+            content.putImage(imageElementImage);
+            db.setContent(content);
+            */
 
             //e.consume();
 
         });
 
-        imageElement.setOnMouseEntered((MouseEvent e) -> {
-            imageElement.setCursor(Cursor.HAND);
+        this.setOnMouseEntered((MouseEvent e) -> {
+            this.setCursor(Cursor.HAND);
         });
 
-        imageElement.setOnDragDone((DragEvent e) -> {
+        this.setOnDragDone((DragEvent e) -> {
             /* Actions to be performed after the drag is completed */
             if (e.getTransferMode() == TransferMode.MOVE) {
-                imageElement.setImage(null);
+                this.setImage(null);
             }
 
             //e.consume();
@@ -104,11 +108,7 @@ public class FamiliarWidget {
     }
 
     public ImageView getImageElement() {
-        return this.imageElement;
-    }
-
-    private void showAllowedActionSpaces() {
-        //TODO: capire come mostrare gli spazi azione abilitati in base al valore del familiare e ai servitori del giocatore
+        return this;
     }
 
     public ColorEnumeration getFamiliarColor() {
@@ -121,5 +121,9 @@ public class FamiliarWidget {
 
     public void setPlaced(boolean placed) {
         this.placed = placed;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

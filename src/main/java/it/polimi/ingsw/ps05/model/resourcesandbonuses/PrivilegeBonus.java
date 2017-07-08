@@ -6,6 +6,7 @@ import java.util.Observable;
 import it.polimi.ingsw.ps05.server.controller.PrivilegeBonusListener;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.controller.Game;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.ClaimPrivilegeStrategy;
 
 public class PrivilegeBonus extends Observable implements ActionResult {
 	/**
@@ -25,17 +26,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	public PrivilegeBonus( Integer value){
 		this.addObserver(PrivilegeBonusListener.getInstance());
 		this.value = value;
-		this.setChanged();
-		this.notifyObservers();
-		//TODO: BASTA COSI?
 	}
-	
-	public PrivilegeBonus(){
-		this.addObserver(PrivilegeBonusListener.getInstance());
-		this.notifyObservers();
-		//TODO: BASTA COSI?
-	}
-
 
 	public void setValue(Integer value){
 		this.value = value;
@@ -50,13 +41,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
     }
 	@Override
 	public void applyResult(PlayerRelated playerR){
-		this.setChanged();
-		this.notifyObservers();
-	    for (int i = 0; i < this.value; i++){
-	    	for (ActionResult r : (this.exchangeList.get(resChoosen.get(i)))){
-	    		r.applyResult(playerR);
-	    	}
-	    }
+		this.game.getEndActionStrategyContainer().setChosenStrategy(new ClaimPrivilegeStrategy(this.value));
 	}
 
 	@Override
