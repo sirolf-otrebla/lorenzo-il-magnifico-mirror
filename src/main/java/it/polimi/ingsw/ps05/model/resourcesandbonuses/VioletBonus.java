@@ -46,8 +46,6 @@ public class VioletBonus extends PermanentBonus{
 				}
 			}
 		}
-		setChanged();
-		notify();
 	}
 
 	@Override
@@ -66,12 +64,7 @@ public class VioletBonus extends PermanentBonus{
 		return "Bonus viola";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
-
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){

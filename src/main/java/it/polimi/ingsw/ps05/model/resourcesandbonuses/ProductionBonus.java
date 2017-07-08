@@ -64,12 +64,8 @@ public class ProductionBonus extends PermanentBonus {
 		return "Bonus produzione";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
 
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.game.getBoard();
 		for (ActionSpace a : board.getActSpacesMap().values()){

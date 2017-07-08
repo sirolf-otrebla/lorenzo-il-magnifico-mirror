@@ -19,7 +19,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	//soluzione a mio parere molto brutta pensare ad alternativa
 
 	private ArrayList<ArrayList<ActionResult>> exchangeList;
-	private ArrayList<ActionResult> resChoosen;
+	private ArrayList<Integer> resChoosen;
 	//TODO: IMPLEMENTARE CONTROLLI LUNGHEZZA RISPETTO A QUANTO PASSATO DA FUORI
 
 	public PrivilegeBonus( Integer value){
@@ -45,15 +45,18 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		return this.value;
 	}
 
-	public void setConvertedResources(ArrayList<ActionResult> res){
+	public void setConvertedResources(ArrayList<Integer> res){
         this.resChoosen = res;
     }
 	@Override
 	public void applyResult(PlayerRelated playerR){
 		this.setChanged();
 		this.notifyObservers();
-	    for (int i = 0; i < this.value; i++)
-            this.resChoosen.get(i).applyResult(playerR);
+	    for (int i = 0; i < this.value; i++){
+	    	for (ActionResult r : (this.exchangeList.get(resChoosen.get(i)))){
+	    		r.applyResult(playerR);
+	    	}
+	    }
 	}
 
 	@Override
@@ -72,10 +75,7 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 		return "Privilegio";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
+
 }
 
 

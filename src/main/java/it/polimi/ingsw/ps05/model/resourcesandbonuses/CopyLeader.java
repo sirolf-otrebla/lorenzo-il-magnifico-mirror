@@ -45,9 +45,5 @@ public class CopyLeader implements ActionResult {
 		return game;
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
 
 }

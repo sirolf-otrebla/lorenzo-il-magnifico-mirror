@@ -2,10 +2,10 @@ package it.polimi.ingsw.ps05.client.net;
 
 import it.polimi.ingsw.ps05.client.ctrl.*;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
-import java.util.Observable;
-import java.util.Observer;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -21,16 +21,11 @@ public class ClientMessageVisitor implements Runnable, NetMessageVisitor {
     }
 
     @Override
-    public void visit(GameUpdateMessage msg) {
-        System.out.println("Primo visitor, GameUpdateMsg");
-        Client.getInstance().setGameStatus(msg.getGameStatus());
-        System.out.println("Settato game status? " + Client.getInstance().getGameStatus());
-        System.out.println("C'è player? " +  Client.getInstance().getGameStatus() == null ? "null" :  Client.getInstance().getGameStatus().getThisPlayer());
-        if (Client.getInstance().isInGame()){
-            ViewAdapter.getInstance().updateView(msg.getGameStatus());
-        }else {
-            ViewAdapter.getInstance().startGameView(msg.getGameStatus());
-        }
+    public void visit(GameResponseMessage msg) {
+    	System.out.println("GameResponeMessage!!!");
+        GameResponseMessageVisitor visitor = new GameResponseMessageVisitor();
+        msg.acceptVisitor(visitor);
+
     }
 
     @Override

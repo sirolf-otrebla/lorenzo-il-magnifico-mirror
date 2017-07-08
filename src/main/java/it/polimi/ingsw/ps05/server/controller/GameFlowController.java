@@ -3,12 +3,14 @@ package it.polimi.ingsw.ps05.server.controller;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameUpdateMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;
@@ -19,19 +21,12 @@ public class GameFlowController implements Runnable {
 	private NetMessage gameInput = null;
 	private Game game;
 
-	public BonusActionListener bonusActListener;
-	public ExcommunicationTriggerListener exTrigger;
-	public EndActionListener endActionListener;
-	public LimitedBonusActListener limitedBonusActListener;
-
+	public ExcommunicationTriggerListener exTrigger = new ExcommunicationTriggerListener(this);
 
 	public GameFlowController(Game game){
 		System.out.println("GFLWCTRL start");
         this.game = game;
         this.exTrigger = new ExcommunicationTriggerListener(this);
-		this.endActionListener = new EndActionListener(this);
-		this.bonusActListener = new BonusActionListener(this);
-		this.limitedBonusActListener = new LimitedBonusActListener(this);
 		System.out.println("GFLWCTRL cons end");
 	}
 
@@ -50,6 +45,14 @@ public class GameFlowController implements Runnable {
 		for (PlayerClient p : this.game.getPlayerInGame().values()){
 			GameStatus status = new GameStatus(playerStatusList, board, p.getPlayer(), activePlayerId);
 			GameUpdateMessage gameUpdateMessage = new GameUpdateMessage(status);
+			System.out.println(p.getUsername());
+			System.out.println("Blu: " + p.getPlayer().getBlueCardList());
+			System.out.println("Verde: " + p.getPlayer().getGreenCardList());
+			System.out.println("Giallo: " + p.getPlayer().getYellowCardList());
+			System.out.println("Viola: " + p.getPlayer().getVioletCardList());
+			for (Resource r : p.getPlayer().getResourceList()){
+				System.out.println(r.getID() + " " + r.getValue());
+			}
 			p.sendMessage(gameUpdateMessage);
 		}
 
@@ -59,6 +62,7 @@ public class GameFlowController implements Runnable {
 	public void run()  {
 		System.out.println("RUN START");
 		System.out.println("Game end: " + game.end);
+		this.game.gettManager().addObserver(exTrigger);
 		while(!game.end){
 			try {
 				System.out.println("game flow ctrl pre turn  ");
@@ -95,6 +99,8 @@ public class GameFlowController implements Runnable {
 		tot = (int) (tot + Math.floor(ris/5));
 		return tot;
 	}
+
+
 
 	public Game getGame() {
 		return game;

@@ -87,8 +87,5 @@ public class MilitaryResourceToSub implements Resource, ActionResult {
 		return "Militare da sub";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
+
 }

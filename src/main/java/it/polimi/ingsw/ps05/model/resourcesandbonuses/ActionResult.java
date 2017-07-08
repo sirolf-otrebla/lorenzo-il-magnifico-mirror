@@ -7,20 +7,19 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 
 public interface ActionResult extends Serializable {
 
-    public void applyResult(PlayerRelated playerR);
+void applyResult(PlayerRelated playerR);
 
-    public void setValue(Integer amount) throws NoSuchMethodException;
+    public  void setValue(Integer amount) throws NoSuchMethodException;
 
-    public Integer getValue() throws NoSuchMethodException;
+    public  Integer getValue() throws NoSuchMethodException;
 
-    public void setGame(Game game);
+    public  void setGame(Game game);
 
-    public Game getGame();
+    public  Game getGame();
 
     @Override
-    public String toString();
+    public  String toString();
 
-    public void linkToGfcObservers();
 
 
 }

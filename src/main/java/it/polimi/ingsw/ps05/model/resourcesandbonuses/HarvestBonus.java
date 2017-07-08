@@ -74,8 +74,4 @@ public class HarvestBonus extends PermanentBonus{
 		return "Bonus raccolto";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
 }

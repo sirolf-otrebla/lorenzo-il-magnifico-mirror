@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
 import it.polimi.ingsw.ps05.model.exceptions.*;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
+import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.server.controller.GameSetup;
@@ -95,6 +96,7 @@ public class ActionTest extends TestCase {
 		this.testActl = new Action(testFm, testMarket);
 
 
+
 	}
 
 	@Test
@@ -155,6 +157,20 @@ public class ActionTest extends TestCase {
 	public void testMarket(){
 
 		assertNotNull(this.testMarket.getRequirements());
+	}
+
+	@Test
+	public void testHarvest(){
+
+		ProductionSpace productionSpace = new ProductionSpace();
+		productionSpace.applyEffect(this.testPl.getFamilyMember(ColorEnumeration.Black));
+
+
+	}
+
+	@Test
+	public void testProduction(){
+
 	}
 
 }

@@ -86,10 +86,5 @@ public class AllBonus extends PermanentBonus implements ActionResult {
 		return "Bonus globale";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-		hasListeners = true;
-	}
 
 }

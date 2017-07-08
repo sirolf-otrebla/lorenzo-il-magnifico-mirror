@@ -6,6 +6,10 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 
 public class NoTowerOccupiedGold extends PermanentBonus {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3630473764879782868L;
 	transient Game game;
 
 	@Override
@@ -37,12 +41,8 @@ public class NoTowerOccupiedGold extends PermanentBonus {
 		return game;
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
 
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		for (Tower t : game.getBoard().getTowerList().values()){
 			t.setRentAmount(Tower.TOWER_RENT_AMNT);

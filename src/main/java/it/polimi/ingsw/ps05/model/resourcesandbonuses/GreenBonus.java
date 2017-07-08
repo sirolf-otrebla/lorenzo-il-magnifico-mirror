@@ -70,14 +70,7 @@ public class GreenBonus extends PermanentBonus{
 		return "Bonus verde";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-		hasListeners = true;
-
-	}
-
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){

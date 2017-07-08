@@ -38,6 +38,11 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 		return value;
 	}
 
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public Integer getAmount(){
 		return this.value;
 	}
@@ -74,11 +79,6 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 		}
 	}
 
-	@Override
-	public void setGame(Game game) {
-		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
 
 	@Override
 	public Game getGame() {
@@ -95,8 +95,4 @@ public class HarvestAction extends Observable implements ActionResult, BonusActi
 		return "Azione raccolto";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
 }

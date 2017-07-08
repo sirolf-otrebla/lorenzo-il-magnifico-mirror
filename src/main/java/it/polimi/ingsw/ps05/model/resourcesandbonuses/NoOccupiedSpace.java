@@ -59,12 +59,9 @@ public class NoOccupiedSpace extends PermanentBonus {
 		return game;
 	}
 
-	@Override
-	public void linkToGfcObservers() {
 
-	}
 
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		for (ActionSpace a : modified){
 			a.temporarySetOccupied();

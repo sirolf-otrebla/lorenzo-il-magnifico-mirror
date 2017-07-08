@@ -88,8 +88,5 @@ public class WoodResource implements Resource, ActionResult {
 		return new String("Legno" + this.getValue().toString());
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
+
 }

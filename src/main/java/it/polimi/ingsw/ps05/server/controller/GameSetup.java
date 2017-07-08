@@ -40,7 +40,7 @@ public class GameSetup {
 		ArrayList<Resource> l = parser.loadStartingResources();
 		System.out.println("resource loaded in gameSetup " + l.size());
 		turnSetup = new TurnSetupManager(playerConnected, board, l);
-		
+		game.setPrivilegeConvResAlternatives(parser.loadPrivilegeConversion());
 	}
 	
 	private void createFamiliarForPlayers(){

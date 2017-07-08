@@ -74,7 +74,7 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	    		thisAction.run(selectedOption);
 	    	}
 		} catch (Exception e /* create more catch branch */ ){
-
+			e.printStackTrace();
 		}
 	    return thisAction;
     }

@@ -1,9 +1,8 @@
 package it.polimi.ingsw.ps05.net.message;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
-import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
-import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;

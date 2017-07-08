@@ -60,7 +60,8 @@ public class MarkerWidget {
     public MarkerWidget(String backgroundPath) throws MalformedURLException {
 
         File file = new File(backgroundPath);
-
+        
+        System.out.println("marker image exist? " + file.exists());
         imagePath = file.toURI().toURL().toString();
         Image markerImage = new Image(imagePath, 2 * MARKER_RADIUS * resize, 2 * MARKER_RADIUS * resize, true, true);
         markerCircle = new Circle(MARKER_RADIUS * resize);

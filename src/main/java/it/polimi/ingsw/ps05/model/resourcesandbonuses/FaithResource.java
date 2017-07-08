@@ -90,8 +90,4 @@ public class FaithResource implements Resource, ActionResult {
 		return "Punti Fede";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		//TODO
-	}
 }

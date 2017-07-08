@@ -51,7 +51,6 @@ public class NoFirstAction extends PermanentBonus implements ActionResult {
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
 	}
 
 	@Override
@@ -59,12 +58,9 @@ public class NoFirstAction extends PermanentBonus implements ActionResult {
 		return this.game;
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
 
-	@Override
+
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){

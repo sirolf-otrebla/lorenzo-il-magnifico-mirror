@@ -1,10 +1,8 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
-import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
-import it.polimi.ingsw.ps05.net.message.HarvestActionMessage;
-import it.polimi.ingsw.ps05.net.message.ProductionActionMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.HarvestActionMessage;
 
 import java.util.Observable;
 import java.util.Observer;

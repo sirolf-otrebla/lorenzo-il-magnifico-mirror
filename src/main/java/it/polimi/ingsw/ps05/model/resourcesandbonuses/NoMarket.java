@@ -52,12 +52,8 @@ public class NoMarket extends PermanentBonus implements ActionResult {
 		return this.game;
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-	}
 
-	@Override
+    @Override
 	public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		Iterator<ActionSpace> it = board.getActSpacesMap().values().iterator();

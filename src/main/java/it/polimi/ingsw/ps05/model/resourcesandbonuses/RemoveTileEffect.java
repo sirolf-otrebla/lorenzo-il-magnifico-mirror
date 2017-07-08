@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
-public class RemoveTileEffect implements ActionResult {
+public class RemoveTileEffect extends PermanentBonus implements ActionResult {
 	/**
 	 * 
 	 */
@@ -75,7 +75,10 @@ public class RemoveTileEffect implements ActionResult {
 	}
 
 	@Override
-	public void linkToGfcObservers() {
-		//TODO
+	public void resetResult(PlayerRelated playerR) {
+		// TODO Auto-generated method stub
+		
 	}
+
+
 }

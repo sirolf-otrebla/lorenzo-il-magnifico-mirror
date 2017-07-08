@@ -4,9 +4,13 @@ import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategy;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategyContainer;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.MoveNextPlayerStrategy;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.*;
@@ -21,6 +25,7 @@ public class Game implements Observer {
     private Thread flowCrlThread;
     private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
+    private ArrayList<ArrayList<Resource>> privilegeConvResAlternatives;
     private Board gBoard;
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
@@ -31,17 +36,21 @@ public class Game implements Observer {
     private boolean useCompleteRules = false;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
+    private EndActionStrategyContainer endActionStrategyContainer;
     private Semaphore semStart;
 
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
                 ArrayList<PlayerClient> clientList){
         synchronized (this) {
+            this.endActionStrategyContainer =
+                    new EndActionStrategyContainer(new MoveNextPlayerStrategy(this), this);
             this.id = id;
             this.semStart = new Semaphore(0);
             this.useCompleteRules = useCompleteRules;
             this.useCustomBonusTiles = useCustomBonusTiles;
             this.clientHashMap = new HashMap<Integer, PlayerClient>();
+            this.privilegeConvResAlternatives = new ArrayList<ArrayList<Resource>>();
             for (PlayerClient client : clientList) {
                 clientHashMap.put(client.getId(), client);
                 client.setInGame(this);
@@ -100,7 +109,6 @@ public class Game implements Observer {
 
     public void addPlayer(PlayerClient player){
         clientHashMap.put(player.getId(), player);
-        player.addObserver(this);
     }
 
     public void removePlayer(PlayerClient player){
@@ -171,4 +179,17 @@ public class Game implements Observer {
     public void setgBoard(Board gBoard) {
         this.gBoard = gBoard;
     }
+
+    public EndActionStrategyContainer getEndActionStrategyContainer() {
+        return endActionStrategyContainer;
+    }
+    
+    public void setPrivilegeConvResAlternatives(ArrayList<ArrayList<Resource>> list){
+    	this.privilegeConvResAlternatives = list;
+    }
+
+    public ArrayList<ArrayList<Resource>> getPrivilegeConvResAlternatives() {
+        return privilegeConvResAlternatives;
+    }
 }
+

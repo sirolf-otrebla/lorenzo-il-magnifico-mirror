@@ -21,7 +21,6 @@ public class InactivePlayerTask extends TimerTask {
 
     @Override
     public void run() {
-    	game.getState().nextState();
-        player.setInactive();
+    	game.getEndActionStrategyContainer().executeDefaultStrategy();
     }
 }

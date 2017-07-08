@@ -5,7 +5,7 @@ package it.polimi.ingsw.ps05.model.exceptions;
  */
 
 public class NotEnoughResourcesException extends Exception {
-
+ 
 	/**
 	 * 
 	 */

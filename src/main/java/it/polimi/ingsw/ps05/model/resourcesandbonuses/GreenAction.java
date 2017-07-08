@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.Familiar;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Iterator;
 import java.util.Observable;
@@ -62,9 +64,8 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		while(it.hasNext()){
 			it.next().addFalseResource();
 		}
-		//notifica observer
-		setChanged();
-		notify();
+		this.game.getEndActionStrategyContainer().setChosenStrategy(
+				new BonusActionStrategy(ColorEnumeration.Green, f));
 	}
 
 	@Override
@@ -88,13 +89,9 @@ public class GreenAction extends Observable implements ActionResult, BonusAction
 		return "Azione verde";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
-	}
 
 
-	public void resetResult(PlayerRelated playerR) {
+    public void resetResult(PlayerRelated playerR) {
 		Board board = this.getGame().getBoard();
 		for (Tower t : board.getTowerList().values()){
 			if (!(t instanceof GreenTower)){

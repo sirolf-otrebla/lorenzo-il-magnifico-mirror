@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.gamemessages;
 
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;

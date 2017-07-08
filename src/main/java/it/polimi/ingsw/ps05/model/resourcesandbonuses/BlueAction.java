@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
 import it.polimi.ingsw.ps05.model.spaces.BlueTower;
 import it.polimi.ingsw.ps05.model.Board;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
+import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Iterator;
 import java.util.Observable;
@@ -65,9 +67,8 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 		while(it.hasNext()){
 			it.next().addFalseResource();
 		}
-		//notifica observer
-		setChanged();
-		notify();
+		this.game.getEndActionStrategyContainer().setChosenStrategy(
+				new BonusActionStrategy(ColorEnumeration.Blue, f));
 	}
 
 	public void resetResult(PlayerRelated playerR){
@@ -88,7 +89,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 	}
 
 	@Override
@@ -107,10 +107,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 		return "Azione blu";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().bonusActListener);
 
-	}
 }
 

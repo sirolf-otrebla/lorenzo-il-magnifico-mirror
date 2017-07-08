@@ -1,6 +1,8 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.gamemessages;
 
 import it.polimi.ingsw.ps05.client.ctrl.LobbyMessageVisitor;
+import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
+import it.polimi.ingsw.ps05.net.message.LobbyMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 public class RejoinMessage implements LobbyMessage {

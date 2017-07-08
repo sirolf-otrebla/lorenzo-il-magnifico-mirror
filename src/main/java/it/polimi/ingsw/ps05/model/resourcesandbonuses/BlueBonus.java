@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 
 import java.util.Observable;
 
-public class BlueBonus extends Observable implements ActionResult {
+public class BlueBonus extends PermanentBonus implements ActionResult {
 	/**
 	 * 
 	 */
@@ -78,10 +78,5 @@ public class BlueBonus extends Observable implements ActionResult {
 		return "Bonus blu";
 	}
 
-	@Override
-	public void linkToGfcObservers() {
-		addObserver(this.game.getGameFlowctrl().limitedBonusActListener);
-		hasListeners = true;
 
-	}
 }

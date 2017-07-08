@@ -1,0 +1,20 @@
+{
+  "Privilege": [
+    {
+      "StoneResource": 1,
+      "WoodResource": 1
+    },
+    {
+      "ServantResource": 2
+    },
+    {
+      "GoldResource": 2
+    },
+    {
+      "MilitaryResource": 2
+    },
+    {
+      "FaithResource": 1
+    }
+  ]
+}

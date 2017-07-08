@@ -1,10 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Player;
-import it.polimi.ingsw.ps05.net.GameStatus;
-import it.polimi.ingsw.ps05.net.message.GameMessage;
-import it.polimi.ingsw.ps05.net.message.GameUpdateMessage;
-import it.polimi.ingsw.ps05.server.net.PlayerClient;
+import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,13 +29,15 @@ public class Round {
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
-        game.setActivePlayer(plOrdIt.next());
-        while (plOrdIt.hasNext()) {
+        this.game.setActivePlayer(plOrdIt.next());
+        do {
+            game.getEndActionStrategyContainer().resetStrategy();
             game.getActivePlayer().evaluatePermanentEffects();
             this.waitCommand();
             this.executeCommand();
+            game.getEndActionStrategyContainer().executeStrategy();
 
-        }
+        } while (plOrdIt.hasNext());
 
     }
     private synchronized void waitCommand() throws InterruptedException {
@@ -65,6 +64,8 @@ public class Round {
 
 
     public void nextState() {
+        Integer playerID = this.game.getActivePlayer().getPlayerID();
+        this.game.getPlayerClient(playerID).setInactive();
         if (this.plOrdIt.hasNext())
             game.setActivePlayer(this.plOrdIt.next());
         else {
