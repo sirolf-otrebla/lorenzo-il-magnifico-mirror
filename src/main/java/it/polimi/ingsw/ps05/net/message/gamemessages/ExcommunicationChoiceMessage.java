@@ -8,7 +8,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  * Created by Alberto on 08/07/2017.
  */
 public class ExcommunicationChoiceMessage implements GameMessage {
-    private  boolean acceptExcommunication;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6065386365425467855L;
+	private  boolean acceptExcommunication;
     private ExcommunicationCard excommunicationCard;
     private Integer playerID;
 
@@ -33,5 +37,9 @@ public class ExcommunicationChoiceMessage implements GameMessage {
 
     public ExcommunicationCard getExcommunicationCard() {
         return excommunicationCard;
+    }
+    
+    public Integer getPlayerID(){
+    	return playerID;
     }
 }

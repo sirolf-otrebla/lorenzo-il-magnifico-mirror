@@ -7,7 +7,12 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  * Created by Alberto on 29/06/2017.
  */
 public class ConnectToServerMessage implements LobbyMessage {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -311143099125814840L;
+
+	@Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
 
     }

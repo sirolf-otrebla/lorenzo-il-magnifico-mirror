@@ -11,7 +11,11 @@ import java.util.ArrayList;
  */
 public class ConvertPrivilegeTriggerMessage implements GameResponseMessage {
 
-    private ArrayList<ArrayList<Resource>> conversionList;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5859573765322219979L;
+	private ArrayList<ArrayList<Resource>> conversionList;
     private Integer privilegeNum;
     public ConvertPrivilegeTriggerMessage(ArrayList<ArrayList<Resource>> conversionList, Integer privilegeNum){
         this.conversionList = conversionList;

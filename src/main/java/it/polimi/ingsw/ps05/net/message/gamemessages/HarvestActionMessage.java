@@ -10,7 +10,11 @@ import java.util.ArrayList;
  * Created by Alberto on 29/06/2017.
  */
 public class HarvestActionMessage implements GameMessage {
-    private ActionMessage actionMessage;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5734101287044624912L;
+	private ActionMessage actionMessage;
     private ArrayList<Integer> activeCardsIds;
 
     public HarvestActionMessage(ActionMessage msg, ArrayList<Integer> activeCardsIds){

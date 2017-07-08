@@ -11,7 +11,11 @@ import java.util.ArrayList;
  */
 public class ProductionActionMessage implements GameMessage {
 
-    private ActionMessage actionMessage;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3152205493702020645L;
+	private ActionMessage actionMessage;
     private ArrayList<Integer> activeCardsIds;
 
     public ProductionActionMessage(ActionMessage msg, ArrayList<Integer> activeCardsIds){

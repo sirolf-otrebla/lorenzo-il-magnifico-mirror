@@ -9,7 +9,12 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class DiscardLeaderMessage implements GameMessage {
 
-    private Integer leaderCardReferenceID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3178536392505445475L;
+
+	private Integer leaderCardReferenceID;
 
     private Player playerStatus;
 

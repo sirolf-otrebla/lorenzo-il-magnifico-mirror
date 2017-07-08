@@ -8,7 +8,12 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 public class LobbyStatusMessage implements NetMessage {
 
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8088527459793980560L;
+
+	@Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
 
     }

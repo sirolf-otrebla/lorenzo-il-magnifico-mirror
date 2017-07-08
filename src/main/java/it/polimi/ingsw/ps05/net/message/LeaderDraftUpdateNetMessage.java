@@ -10,7 +10,11 @@ import java.util.ArrayList;
  */
 public class LeaderDraftUpdateNetMessage implements DraftMessage {
 
-    private ArrayList<Integer> leaderCardArrayList;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5542905862673889558L;
+	private ArrayList<Integer> leaderCardArrayList;
     public LeaderDraftUpdateNetMessage(ArrayList<Integer> leaderCardsReferenceIds){
         leaderCardArrayList = leaderCardsReferenceIds;
     }

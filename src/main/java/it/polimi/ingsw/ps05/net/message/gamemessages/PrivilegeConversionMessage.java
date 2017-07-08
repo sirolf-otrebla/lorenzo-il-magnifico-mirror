@@ -10,7 +10,11 @@ import java.util.ArrayList;
  */
 public class PrivilegeConversionMessage implements GameMessage {
 
-    private ArrayList<Integer> choices;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6560428085612827867L;
+	private ArrayList<Integer> choices;
 
     public PrivilegeConversionMessage(ArrayList<Integer> choices) {
         this.choices = choices;

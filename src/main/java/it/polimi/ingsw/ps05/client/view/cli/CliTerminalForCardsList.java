@@ -125,11 +125,11 @@ public class CliTerminalForCardsList {
 					enterDetected = true;
 				break;
 			case Character:
-				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable != 0){
+				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable > 0){
 					if (selected.contains(cards.get(indiceCarta))){
 						selected.remove(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
-					} else if (numMaxCardSelectable > selected.size()){
+					} else if (selected.size() < numMaxCardSelectable){
 						selected.add(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
 					}

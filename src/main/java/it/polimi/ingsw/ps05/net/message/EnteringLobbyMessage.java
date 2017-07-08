@@ -9,7 +9,12 @@ import java.util.ArrayList;
  * Created by Alberto on 03/07/2017.
  */
 public class EnteringLobbyMessage implements LobbyMessage {
-    private boolean youOrOthers;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6751354096571951579L;
+
+	private boolean youOrOthers;
 
     private ArrayList<String> PlayerUsernamesList;
 
