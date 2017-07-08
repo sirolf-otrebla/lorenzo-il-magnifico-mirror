@@ -96,6 +96,34 @@
     -fx-font-size: 18;
 }
 
+#goldLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#stoneLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#woodLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
+#servantLabel{
+    -fx-font-family: "NightShade";
+    -fx-font-size: 30;
+    -fx-stroke: antiquewhite;
+    -fx-stroke-width: 2px;
+}
+
 .diewidget.label .text{
     -fx-font-family: "NightShade";
     -fx-font-size: 38;

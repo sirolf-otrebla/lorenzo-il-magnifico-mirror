@@ -109,7 +109,7 @@ public class GUIMain extends Application {
 		MOVE_TIMER = 120;
 		//opponentNames = {"Pippo", "Pluto", "Paperino"};
 		int thisPlayerId = 0;
-		int[] opponentIdArray = {1, 2, 3}; //TODO valori di test
+		int[] opponentIdArray = {1, 2, 3};
 
 
 
@@ -333,9 +333,8 @@ public class GUIMain extends Application {
 
 
 		/* Add player resources */
-		for (i = 0; i < 4; i++) {
-			resourcesWidgetArray[i] = new ResourcesWidget();
-		}
+
+		resourcesWidgetArray[0] = new ResourcesWidget();
 		playerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
 		root.getChildren().add(playerResourcesBox);
 
@@ -531,12 +530,16 @@ public class GUIMain extends Application {
 	}
 
 	public void updatePlayerResources(ColorEnumeration color, Integer[] newResources) {
+
 		//TODO decidere come passare le risorse
+
+		player.getResourceWidget().setGoldValue(newResources[0]);
+		player.getResourceWidget().setWoodValue(newResources[1]);
+		player.getResourceWidget().setStoneValue(newResources[2]);
+		player.getResourceWidget().setServantValue(newResources[3]);
+
+		player.getResourceWidget().repaint();
 		/*
-		if(player.getPlayerColor() == color)
-			for(int i = 0; i < 4; i++) {
-				player.getResourceWidget().
-			}
 		else
 			for(int i = 0; i < OPPONENTS_NUMBER; i++) {
 				if (opponentsArray[i].getOpponentColor() == color) {
