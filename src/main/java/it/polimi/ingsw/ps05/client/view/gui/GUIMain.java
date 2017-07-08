@@ -100,6 +100,11 @@ public class GUIMain extends Application {
 		launch(args);
 	}
 
+	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout){
+		this.player.setPlayerColor(thisPlayerColor);
+		this.OPPONENTS_NUMBER = opponentNumber;
+		this.MOVE_TIMER = timeout;
+	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 

@@ -1,10 +1,6 @@
 package it.polimi.ingsw.ps05.model.spaces;
 
-import it.polimi.ingsw.ps05.client.ctrl.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.PlayerRelated;
-import it.polimi.ingsw.ps05.model.effects.Effect;
-import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 
 import java.util.ArrayList;
 

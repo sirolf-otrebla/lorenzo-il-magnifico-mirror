@@ -414,7 +414,7 @@ public class CLIMain implements LimView, Runnable{
 			System.out.println("Action is legal? " + ac.isLegal());
 			if (ac.isLegal()){
 				CliActionSpaceViewObject a = new CliActionSpaceViewObject(marketList.get(currentColBoard), ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
-				a.notifyObservers();
+				a.notifyToActionHandler();
 			}
 		} else if (currentRowBoard == board.getTowerList().size() + 1 && currentColBoard < productionList.size()){
 			//PRODUCTION
@@ -431,7 +431,7 @@ public class CLIMain implements LimView, Runnable{
 			System.out.println("Consiglio");
 			CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
 					ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
-			a.notifyObservers();
+			a.notifyToActionHandler();
 		}
 		//meActive = false;
 	}
@@ -1448,7 +1448,7 @@ public class CLIMain implements LimView, Runnable{
 		}
 		if (a.size() != 0){
 			CliHarvestSpaceViewObject b = new CliHarvestSpaceViewObject(harvestList.get(-productionList.size() + currentColBoard),ghost != null ? ghost.getColor(): ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
-			b.notifyObservers();
+			b.notifyToActionHandler();
 		}
 		
 	}
@@ -1463,7 +1463,7 @@ public class CLIMain implements LimView, Runnable{
 		}
 		if (a.size() != 0){
 		CliProductionSpaceViewObject b = new CliProductionSpaceViewObject(productionList.get(currentColBoard), ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
-		b.notifyObservers();
+		b.notifyToActionHandler();
 		}
 	}
 

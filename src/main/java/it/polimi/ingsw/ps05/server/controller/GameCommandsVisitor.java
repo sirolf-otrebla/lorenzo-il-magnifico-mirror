@@ -61,7 +61,6 @@ public class GameCommandsVisitor implements VisitorInterface {
                 card.discard(this.activePlayer);
             else{
                 card.applyNonActivableEffects(activePlayer, lCardMsg.getEffectChoice());
-                this.activePlayer.resetPermanentEffects();
 
             }
         } catch (MissingCardException e){
@@ -128,10 +127,6 @@ public class GameCommandsVisitor implements VisitorInterface {
         game.getEndActionStrategyContainer().strategyEnded();
     }
 
-    public void visit(ExcommunicationChoiceMessage message){
-
-
-    }
 
     private void validatePlayer(Player expected) throws  Exception{
         ArrayList<Resource> resList = expected.getResourceList();

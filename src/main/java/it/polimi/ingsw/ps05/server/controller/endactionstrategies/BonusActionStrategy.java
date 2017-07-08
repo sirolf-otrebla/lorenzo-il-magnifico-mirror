@@ -42,7 +42,7 @@ public class BonusActionStrategy implements EndActionStrategy {
             GameUpdateMessage bonusActionUpdateMessage = new GameUpdateMessage(status);
             BonusActionTriggerMessage msg = new BonusActionTriggerMessage
                     (this.actionColor,bonusActionUpdateMessage, this.ghostFamiliar);
-            cl.sendMessage(bonusActionUpdateMessage);
+            cl.sendMessage(msg);
 
         }
     }

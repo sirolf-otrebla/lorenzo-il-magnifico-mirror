@@ -1,6 +1,8 @@
-package it.polimi.ingsw.ps05.client.ctrl;
+package it.polimi.ingsw.ps05.client.view;
 
 import com.sun.org.apache.regexp.internal.RE;
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 /**
  * Created by Alberto on 30/06/2017.
  */
-public class UpdateViewVisitor implements ViewVisitorInterface{
+public class UpdateViewVisitor implements ViewVisitorInterface {
     private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap;
     private GUIMain guiMain;
     private Client client;
