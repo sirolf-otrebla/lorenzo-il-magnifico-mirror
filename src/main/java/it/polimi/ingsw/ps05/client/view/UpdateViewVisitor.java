@@ -61,20 +61,20 @@ public class UpdateViewVisitor implements ViewVisitorInterface {
     }
 
     @Override
-    public void visit(Tile tile){
+    public void visit(TowerTileInterface tile) {
         TowerTileWidget widget = (TowerTileWidget) actionSpaceWidgetHashMap.get(tile.getId());
-        if (tile.isOccupied()){
+        if (tile.isOccupied()) {
             widget.setOccupied(true);
             ColorEnumeration playerID = tile.getOccupant().getRelatedPlayerColor();
             widget.setOccupantPlayerColor(playerID);
             //TODO ESISTE UN METODO MIGLIORE PER CONTROLLARE LA LEGALITÀ DI UNA AZIONE, PER ORA TENIAMO QUESTO
             Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
-            for (Familiar f: family )
+            for (Familiar f : family)
                 if ((new Action(f, tile).isLegal())) {
                     widget.setLegal(true);
                     widget.getLegalFamilyMemberList().add(f.getColor());
                 }
-            if(widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
+            if (widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
                 widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
             // altro da aggiungere?
         }
