@@ -139,7 +139,7 @@ public class ViewAdapter {
 		}
 	}
 
-	public ArrayList<Integer> showPrivilegeConversion(ArrayList<ArrayList<ActionResult>> list, int resToChose){
+	public ArrayList<Integer> showPrivilegeConversion(ArrayList<ArrayList<Resource>> list, int resToChose){
 		if (this.viewType == this.GUI_TYPE) {
 			// TODO
 

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
+import it.polimi.ingsw.ps05.client.view.View;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.message.gamemessages.BonusActionTriggerMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.ConvertPrivilegeTriggerMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameUpdateMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.PrivilegeConversionMessage;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,10 @@ public class GameResponseMessageVisitor {
 	}
 
     public void visit(ConvertPrivilegeTriggerMessage msg){
-        ArrayList<Resource> resources = msg.getConversionList();
+		ArrayList<ArrayList<Resource>> resources = msg.getConversionList();
         Integer privileges = msg.getPrivilegeNum();
+		ArrayList<Integer> integers = ViewAdapter.getInstance().showPrivilegeConversion(resources, privileges);
+		PrivilegeConversionMessage responseMsg = new PrivilegeConversionMessage(integers);
+		Client.getInstance().sendToServer(responseMsg);
     }
 }

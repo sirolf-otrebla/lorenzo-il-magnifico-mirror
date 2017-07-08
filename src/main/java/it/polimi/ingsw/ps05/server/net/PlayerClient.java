@@ -24,7 +24,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 30000;
+	private static final int  ACT_WAITING_TIME = 30000000;
 
 	private Player pl = null;
 	private boolean plExists = false;
@@ -36,7 +36,6 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	    this.id = id;
 	    this.messageObserver = ServerNetMessageVisitor.getInstance();
 	    addObserver(messageObserver);
-		this.timer = new Timer();
 		netHandler.addObserver(this);
     }
 
@@ -103,6 +102,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 
 	public void setActive() {
 		this.active = true;
+		this.timer = new Timer();
 		InactivePlayerTask task = new InactivePlayerTask(this.game, this);
 		timer.schedule(task, PlayerClient.ACT_WAITING_TIME);
 		

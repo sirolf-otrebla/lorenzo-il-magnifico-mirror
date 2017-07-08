@@ -51,7 +51,7 @@ public class GameCommandsVisitor implements VisitorInterface {
     }
 
     public void visit(PassActionMessage msg){
-        //TODO
+        //DO NOTHING ?
     }
     public void visit(LeaderCardMessage lCardMsg){
         try {
@@ -113,6 +113,19 @@ public class GameCommandsVisitor implements VisitorInterface {
     public void visit(ExitGameMessage mess){
         //TODO:
         // gestione permanenza partita
+    }
+
+
+    public void visit(PrivilegeConversionMessage msg){
+        ArrayList<Integer> choices = msg.getChoices();
+        Game game = this.round.getGame();
+        ArrayList<ArrayList<Resource>> alternatives = game.getPrivilegeConvResAlternatives();
+        for (Integer i : choices) {
+            for (Resource r: alternatives.get(i)) {
+                activePlayer.addResource(r);
+            }
+        }
+        game.getEndActionStrategyContainer().strategyEnded();
     }
 
     private void validatePlayer(Player expected) throws  Exception{

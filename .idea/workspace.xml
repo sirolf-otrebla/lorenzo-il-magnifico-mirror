@@ -6,13 +6,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.sqlite" afterPath="$PROJECT_DIR$/data.sqlite" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PrivilegeConversionListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PrivilegeConversionListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/MoveNextPlayerStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/MoveNextPlayerStrategy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,24 +110,6 @@
     </PATH>
   </component>
   <component name="DockManager">
-    <window id="4">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="ClientMessageVisitor.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="572">
-                    <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
     <window id="2">
       <content type="file-editors">
         <state>
@@ -150,31 +139,97 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+      <file leaf-file-name="CLIMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-84">
+              <caret line="1432" column="82" lean-forward="false" selection-start-line="1432" selection-start-column="82" selection-end-line="1432" selection-end-column="82" />
+              <folding>
+                <element signature="e#3555#3568#0" expanded="true" />
+                <element signature="e#3638#3655#0" expanded="true" />
+                <element signature="e#3722#3739#0" expanded="true" />
+                <element signature="e#4363#4383#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ClientMessageVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1554">
-              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="244">
+              <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stream.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java">
+      <file leaf-file-name="GameResponseMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/GameResponseMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+            <state relative-caret-position="147">
+              <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameResponseMessageVisitor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameResponseMessageVisitor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+            <state relative-caret-position="1092">
+              <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConvertPrivilegeTriggerMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+              <folding>
+                <element signature="e#889#890#0" expanded="true" />
+                <element signature="e#919#920#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrivilegeConversionMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="496">
+              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#429#430#0" expanded="true" />
+                <element signature="e#467#468#0" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+                <element signature="e#543#544#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
+                <element signature="e#760#761#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameCommandsVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="622">
+              <caret line="127" column="61" lean-forward="false" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EndActionStrategyContainer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="49" column="17" lean-forward="false" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -183,83 +238,12 @@
       <file leaf-file-name="ViewAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1575">
-              <caret line="88" column="23" lean-forward="false" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="23" />
+            <state relative-caret-position="221">
+              <caret line="141" column="29" lean-forward="false" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CLIMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="293" column="79" lean-forward="false" selection-start-line="293" selection-start-column="79" selection-end-line="293" selection-end-column="79" />
-              <folding>
-                <element signature="e#3555#3568#0" expanded="true" />
-                <element signature="e#3638#3655#0" expanded="true" />
-                <element signature="e#3722#3739#0" expanded="true" />
-                <element signature="e#4363#4383#0" expanded="true" />
-                <element signature="e#38407#38425#0" expanded="true" />
-                <element signature="e#39753#39771#0" expanded="true" />
-                <element signature="e#42883#42901#0" expanded="true" />
-                <element signature="e#42946#42955#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Round.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="35" column="41" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerClient.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2478">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoundController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectOutputStream.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/ObjectOutputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="495" column="16" lean-forward="false" selection-start-line="495" selection-start-column="16" selection-end-line="495" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameFlowController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#4004#4005#0" expanded="false" />
-                <element signature="e#4022#4023#0" expanded="false" />
+                <marker date="1499516352043" expanded="true" signature="3357:3510" ph="{...}" />
+                <marker date="1499516352043" expanded="true" signature="4161:4344" ph="{...}" />
+                <marker date="1499516352043" expanded="true" signature="5219:5454" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -277,7 +261,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>wait</find>
       <find>eccezione con</find>
       <find>infoCoun</find>
       <find>drawsq</find>
@@ -296,6 +279,8 @@
       <find>res1</find>
       <find>obse</find>
       <find>observ</find>
+      <find>round</find>
+      <find>wait</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -317,11 +302,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/YellowBonus.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionAction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/NoMarket.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/VioletAction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueAction.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/ProductionBonus.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/AllBonus.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/BonusProductionStrategy.java" />
@@ -346,14 +326,9 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/GreenCard.java" />
         <option value="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/ps05/ResourceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BonusTile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/socket/SocketConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameUpdateMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/GameUpdateMessage.java" />
@@ -364,10 +339,20 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/SocketConn.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Server.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PrivilegeConversionListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
       </list>
     </option>
   </component>
@@ -823,7 +808,75 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resourcesandbonuses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lorenzo-il-magnifico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ps05" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1655,13 +1708,6 @@
       <workItem from="1499450881795" duration="7826000" />
       <workItem from="1499469020938" duration="369000" />
     </task>
-    <task id="LOCAL-00025" summary="modifiche client">
-      <created>1498589224108</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1498589224108</updated>
-    </task>
     <task id="LOCAL-00026" summary="sync">
       <created>1498648713376</created>
       <option name="number" value="00026" />
@@ -1998,7 +2044,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499459996494</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite">
+      <created>1499514889624</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1499514889624</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2034,7 +2087,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="435281000" />
+    <option name="totallyTimeSpent" value="441750000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2051,15 +2104,15 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290879" sideWeight="0.49893048" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2931404" sideWeight="0.4849138" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29283488" sideWeight="0.47654584" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34297964" sideWeight="0.5320582" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25337487" sideWeight="0.5181237" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="730" y="448" width="444" height="168" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26272067" sideWeight="0.46794182" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2545552" sideWeight="0.4859914" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26168224" sideWeight="0.45309168" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25337487" sideWeight="0.48187634" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990962" sideWeight="0.49786097" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2070,16 +2123,40 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14586666" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46998927" sideWeight="0.49245688" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46936655" sideWeight="0.48400852" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18074866" sideWeight="0.5021861" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34297964" sideWeight="0.5320582" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22272727" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14586666" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46998927" sideWeight="0.49245688" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290879" sideWeight="0.49893048" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2931404" sideWeight="0.4849138" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="730" y="448" width="444" height="168" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1403556" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26272067" sideWeight="0.46794182" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2545552" sideWeight="0.4859914" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990962" sideWeight="0.49786097" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17963752" sideWeight="0.49781388" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32743838" sideWeight="0.49568966" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18074866" sideWeight="0.5021861" order="7" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2146,21 +2223,15 @@
     <MESSAGE value="modifiche" />
     <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/Action.java&#10;#&#9;src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java" />
     <MESSAGE value="messaggio azione bonus" />
-    <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
     <MESSAGE value="DC" />
     <MESSAGE value="strategie implementate" />
     <MESSAGE value="modifiche timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifiche timer" />
+    <MESSAGE value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'Experimental' of https://github.com/lucafala/lorenzo-il-magnifico into Experimental&#10;&#10;# Conflicts:&#10;#&#9;data.sqlite" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java</url>
-          <line>54</line>
-          <properties />
-          <option name="timeStamp" value="337" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java</url>
           <line>80</line>
@@ -2174,16 +2245,16 @@
           <option name="timeStamp" value="340" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java</url>
-          <line>38</line>
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java</url>
+          <line>30</line>
           <properties />
-          <option name="timeStamp" value="341" />
+          <option name="timeStamp" value="343" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="342" />
+      <option name="time" value="344" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -2200,6 +2271,7 @@
         <watch expression="players" />
         <watch expression="playerClients.get(0)" />
         <watch expression="viewType" />
+        <watch expression="this" />
       </configuration>
     </watches-manager>
   </component>
@@ -2208,96 +2280,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/ColorEnumeration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Epoch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-644">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/BonusTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3162">
-          <caret line="75" column="74" lean-forward="false" selection-start-line="75" selection-start-column="74" selection-end-line="75" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/BonusActionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/BonusProductionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/TurnSetupManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4896">
-          <caret line="102" column="25" lean-forward="false" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
-          <folding>
-            <element signature="e#2615#2621#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Observable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="75" column="30" lean-forward="true" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ServerInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameUpdateMessage.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/concurrent/Semaphore.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2350,52 +2332,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="13" column="43" lean-forward="false" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/MoveNextPlayerStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <element signature="e#542#543#0" expanded="false" />
-            <element signature="e#574#575#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="e#5439#5440#0" expanded="true" />
-            <element signature="e#5474#5475#0" expanded="true" />
-            <element signature="e#5857#5858#0" expanded="true" />
-            <element signature="e#5885#5886#0" expanded="true" />
-            <element signature="e#6373#6374#0" expanded="true" />
-            <element signature="e#6422#6423#0" expanded="true" />
-            <marker date="1499451827847" expanded="true" signature="4027:4484" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Action.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2459,28 +2400,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/socket/SocketConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding>
-            <element signature="e#2026#2027#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2498,9 +2421,6 @@
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#1087#1088#0" expanded="false" />
-            <element signature="e#1108#1109#0" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1180#1181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2509,7 +2429,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1211">
           <caret line="137" column="16" lean-forward="false" selection-start-line="137" selection-start-column="16" selection-end-line="137" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2559,73 +2478,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4004#4005#0" expanded="false" />
-            <element signature="e#4022#4023#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="88" column="23" lean-forward="false" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1554">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="293" column="79" lean-forward="false" selection-start-line="293" selection-start-column="79" selection-end-line="293" selection-end-column="79" />
-          <folding>
-            <element signature="e#3555#3568#0" expanded="true" />
-            <element signature="e#3638#3655#0" expanded="true" />
-            <element signature="e#3722#3739#0" expanded="true" />
-            <element signature="e#4363#4383#0" expanded="true" />
-            <element signature="e#38407#38425#0" expanded="true" />
-            <element signature="e#39753#39771#0" expanded="true" />
-            <element signature="e#42883#42901#0" expanded="true" />
-            <element signature="e#42946#42955#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/socket/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="483">
+          <caret line="32" column="16" lean-forward="false" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -2638,18 +2494,246 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding>
+            <element signature="e#4376#4377#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/InactivePlayerTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/MoveNextPlayerStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#302#303#0" expanded="false" />
+            <element signature="e#334#335#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#5469#5470#0" expanded="true" />
+            <element signature="e#5504#5505#0" expanded="true" />
+            <element signature="e#5887#5888#0" expanded="true" />
+            <element signature="e#5915#5916#0" expanded="true" />
+            <element signature="e#6044#6045#0" expanded="true" />
+            <element signature="e#6093#6094#0" expanded="true" />
+            <element signature="e#6403#6404#0" expanded="true" />
+            <element signature="e#6452#6453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="747" column="0" lean-forward="false" selection-start-line="747" selection-start-column="0" selection-end-line="747" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/Round.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="35" column="41" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+        <state relative-caret-position="278">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2478">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/RoundController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ServerInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/socket/SocketConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/socket/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/HarvestActionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/ClaimPrivilegeStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="25" column="91" lean-forward="false" selection-start-line="25" selection-start-column="91" selection-end-line="25" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="1432" column="82" lean-forward="false" selection-start-line="1432" selection-start-column="82" selection-end-line="1432" selection-end-column="82" />
+          <folding>
+            <element signature="e#3555#3568#0" expanded="true" />
+            <element signature="e#3638#3655#0" expanded="true" />
+            <element signature="e#3722#3739#0" expanded="true" />
+            <element signature="e#4363#4383#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="127" column="61" lean-forward="false" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="49" column="17" lean-forward="false" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/GameResponseMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="141" column="29" lean-forward="false" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="29" />
+          <folding>
+            <marker date="1499516352043" expanded="true" signature="3357:3510" ph="{...}" />
+            <marker date="1499516352043" expanded="true" signature="4161:4344" ph="{...}" />
+            <marker date="1499516352043" expanded="true" signature="5219:5454" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#543#544#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="e#760#761#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/PrivilegeConversionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ConvertPrivilegeTriggerMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="e#889#890#0" expanded="true" />
+            <element signature="e#919#920#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1092">
+          <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="1" />
           <folding />
         </state>
       </provider>
