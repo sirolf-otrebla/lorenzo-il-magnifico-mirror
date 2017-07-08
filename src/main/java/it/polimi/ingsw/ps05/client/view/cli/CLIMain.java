@@ -831,7 +831,6 @@ public class CLIMain implements LimView, Runnable{
 
 
 	}
-
 	
 	/**
 	 * This method draws the player box and prints inside the info about his resources and cards.
@@ -1443,11 +1442,18 @@ public class CLIMain implements LimView, Runnable{
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getGreenCardList(), width, this.player.getGreenCardList().size(), 0);
 		ArrayList<?> a = chose.start();
 		ArrayList<Integer> ids = new ArrayList<>();
-		for (Object c : a){
-			ids.add((Integer)c);
-		}
+		ArrayList<Integer> option = new ArrayList<>();
 		if (a.size() != 0){
-			CliHarvestSpaceViewObject b = new CliHarvestSpaceViewObject(harvestList.get(-productionList.size() + currentColBoard),ghost != null ? ghost.getColor(): ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
+			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
+			for (Integer c : temp1.get(0)){
+				ids.add(c);
+			}
+			for (Integer c : temp1.get(1)){
+				option.add(c);
+			}
+			CliHarvestSpaceViewObject b = new CliHarvestSpaceViewObject(harvestList.get(-productionList.size() + currentColBoard),
+					ghost != null ? ghost.getColor(): ((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), 
+							ids, option);
 			b.notifyToActionHandler();
 		}
 		
@@ -1458,12 +1464,24 @@ public class CLIMain implements LimView, Runnable{
 		CliTerminalForCardsList chose = new CliTerminalForCardsList(this.player.getYellowCardList(), width, this.player.getYellowCardList().size(), 0);
 		ArrayList<?> a = chose.start();
 		ArrayList<Integer> ids = new ArrayList<>();
-		for (Object c : a){
-			ids.add((Integer)c);
-		}
+		ArrayList<Integer> option = new ArrayList<>();
 		if (a.size() != 0){
-		CliProductionSpaceViewObject b = new CliProductionSpaceViewObject(productionList.get(currentColBoard), ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(), ids);
-		b.notifyToActionHandler();
+			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
+			for (Integer c : temp1.get(0)){
+				ids.add(c);
+			}
+			for (Integer c : temp1.get(1)){
+				option.add(c);
+			}
+			
+			CliProductionSpaceViewObject b = new CliProductionSpaceViewObject(productionList.get(currentColBoard),
+					ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(),
+							ids,option);
+			b.notifyToActionHandler();
+		}
+		
+		if (a.size() != 0){
+		
 		}
 	}
 
@@ -1535,6 +1553,11 @@ public class CLIMain implements LimView, Runnable{
 		return null;
 	}
 
+	private ArrayList<?> showLeaderCard(ArrayList<?> list, int width){
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(list, width, 0, list.size());
+		return chose.start();
+	}
+	
 	private void selectLeaderCard() throws IOException{
 
 		ArrayList<?> chosenCard = choseDraftCard(player.getLeaderCardList(), terminal.getTerminalSize().getColumns());
@@ -1553,7 +1576,7 @@ public class CLIMain implements LimView, Runnable{
 		if (success){
 			//attivare carta leader
 		} else {
-			player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
+			//player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
 		}
 
 	}

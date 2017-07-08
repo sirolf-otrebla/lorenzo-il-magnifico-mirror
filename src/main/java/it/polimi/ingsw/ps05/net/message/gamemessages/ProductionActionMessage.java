@@ -17,10 +17,12 @@ public class ProductionActionMessage implements GameMessage {
 	private static final long serialVersionUID = 3152205493702020645L;
 	private ActionMessage actionMessage;
     private ArrayList<Integer> activeCardsIds;
+    private ArrayList<Integer> activateEffectForCard;
 
-    public ProductionActionMessage(ActionMessage msg, ArrayList<Integer> activeCardsIds){
+    public ProductionActionMessage(ActionMessage msg, ArrayList<Integer> activeCardsIds, ArrayList<Integer> activateEffectForCard){
         this.actionMessage = msg;
         this.activeCardsIds = activeCardsIds;
+        this.activateEffectForCard = activateEffectForCard;
     }
 
     @Override
@@ -34,6 +36,10 @@ public class ProductionActionMessage implements GameMessage {
 
     public ArrayList<Integer> getActiveCardsIds() {
         return activeCardsIds;
+    }
+    
+    public ArrayList<Integer> optionForCard(){
+    	return this.activateEffectForCard;
     }
 
     @Override

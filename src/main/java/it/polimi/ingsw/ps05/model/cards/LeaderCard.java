@@ -85,6 +85,7 @@ public class LeaderCard implements Card {
 
 	@Override
 	public void applyNonActivableEffects(PlayerRelated player) {
+		active = true;
 		for (int i = 0; i < effects.size(); i++)
 		    ((SimpleEffect)effects.get(i)).apply(player);
 	}

@@ -40,8 +40,12 @@ public class GameCommandsVisitor implements VisitorInterface {
 
     public void visit(ProductionActionMessage msg){
         HashMap<Integer, YellowCard> map = this.activePlayer.getYellowCardHashMap();
-        for (Integer i : msg.getActiveCardsIds())
-            map.get(i).setToBeActivated(true);
+        for (int i = 0; i < msg.getActiveCardsIds().size(); i++){
+        	map.get(msg.getActiveCardsIds().get(i)).setToBeActivated(true);
+        	map.get(msg.getActiveCardsIds().get(i)).setSelectedEffects(msg.optionForCard().get(i));
+        	
+        }
+        
         msg.getActionMessage().acceptVisitor(this);
     }
 
@@ -60,6 +64,7 @@ public class GameCommandsVisitor implements VisitorInterface {
             if (lCardMsg.getMsgType() == LeaderCardMessage.TYPE_DISCARD)
                 card.discard(this.activePlayer);
             else{
+    
                 card.applyNonActivableEffects(activePlayer, lCardMsg.getEffectChoice());
 
             }

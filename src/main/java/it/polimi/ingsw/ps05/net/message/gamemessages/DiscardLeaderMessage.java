@@ -33,11 +33,11 @@ public class DiscardLeaderMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+    	//TODO
     }
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
-
+    	//TODO
     }
 }

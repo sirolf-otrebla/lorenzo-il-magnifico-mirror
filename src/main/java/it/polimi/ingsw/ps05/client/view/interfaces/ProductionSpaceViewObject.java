@@ -8,6 +8,6 @@ import java.util.Observable;
  */
 public abstract class ProductionSpaceViewObject extends ActionSpaceViewObject {
 
-
+	public abstract ArrayList<Integer> optionForCards();
     public abstract ArrayList<Integer> getActiveCardsId();
 }

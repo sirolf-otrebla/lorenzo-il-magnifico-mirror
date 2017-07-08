@@ -25,7 +25,6 @@ public class GreenCard extends TowerCard {
 	private boolean toBeActivated = true;
 	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
 	private ArrayList<Effect> immediateEffects = new ArrayList<>();
-	private ArrayList<Effect> allEffect;
 
 	// meant to be selected BEFORE using HARVEST
 	private int[] selectedEffects;

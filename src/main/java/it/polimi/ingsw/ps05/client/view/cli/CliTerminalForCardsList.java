@@ -93,7 +93,18 @@ public class CliTerminalForCardsList {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		if (requirementsAvailable.size() != 0){
+			ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
+			ArrayList<Integer> temp = new ArrayList<>();
+			for (Object o : selected){
+				temp.add((Integer)o);
+			}
+			toReturn.add(temp);
+			toReturn.add(requirementsSelected);
+			return toReturn;
+		}
+		
 		return selected;
 	}
 

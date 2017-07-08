@@ -17,12 +17,14 @@ public class CliProductionSpaceViewObject extends ProductionSpaceViewObject {
     private ArrayList<Integer> activeCardIds;
     private ProductionSpace space;
     private ColorEnumeration familyMemberID;
+    private ArrayList<Integer> activationOptionForCard;
 
     public CliProductionSpaceViewObject(ProductionSpace space, ColorEnumeration familyMemberID,
-                                     ArrayList<Integer> activeCardIds){
+                                     ArrayList<Integer> activeCardIds, ArrayList<Integer> activationOptionForCard){
         this.space = space;
         this.activeCardIds = activeCardIds;
         this.familyMemberID = familyMemberID;
+        this.activationOptionForCard = activationOptionForCard;
         Client.getInstance().linkToObserver(this);
 
     }
@@ -47,4 +49,9 @@ public class CliProductionSpaceViewObject extends ProductionSpaceViewObject {
         setChanged();
         notifyObservers(this);
     }
+
+	@Override
+	public ArrayList<Integer> optionForCards() {
+		return this.activationOptionForCard;
+	}
 }
