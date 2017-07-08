@@ -129,7 +129,7 @@ public class ViewAdapter {
 			CLIMain cliView = (CLIMain) this.view;
 			Integer cardChoosen = null;
 			try {
-				cardChoosen = cliView.getCardForDraft(draftIDs);
+				cardChoosen = cliView.getCardForLeaderDraft(draftIDs);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -139,13 +139,13 @@ public class ViewAdapter {
 		}
 	}
 
-	public ArrayList<ActionResult> showPrivilegeConversion(ArrayList<ArrayList<ActionResult>> list, int resToChose){
+	public ArrayList<Integer> showPrivilegeConversion(ArrayList<ArrayList<ActionResult>> list, int resToChose){
 		if (this.viewType == this.GUI_TYPE) {
 			// TODO
 
 		} else {
 			CLIMain cliView = (CLIMain) this.view;
-			//TODO
+			return cliView.getPrivilegeBonusChoice(list, resToChose);
 		}
 		return null;
 	}
@@ -161,7 +161,7 @@ public class ViewAdapter {
 				CliThread = new Thread(cliView);
 				CliThread.setDaemon(true);
 				CliThread.start();
-				Integer cardChoosen = cliView.getCardForDraft(draftIDs);
+				Integer cardChoosen = cliView.getCardForLeaderDraft(draftIDs);
 				LeaderDraftChoiceMessage responseMessage =
 						new LeaderDraftChoiceMessage(cardChoosen);
 				Client.getInstance().sendToServer(responseMessage);

@@ -4,10 +4,12 @@ package it.polimi.ingsw.ps05.client.view.gui;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -18,6 +20,8 @@ import javafx.stage.*;
 
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GUIMain extends Application {
@@ -29,9 +33,9 @@ public class GUIMain extends Application {
 	public static final int ORIGINAL_WIDTH = 1120;
 	public static final double CARD_RATIO = 294 / 436;
 	public static final String path = "./src/main/res/img/";
-	public static int OPPONENTS_NUMBER;
-	private static Integer MOVE_TIMER;
-	private static String[] opponentNames;
+	public int PLAYER_NUMBER, OPPONENTS_NUMBER;
+	private Integer MOVE_TIMER;
+	private String[] opponentNames;
 
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
@@ -45,22 +49,24 @@ public class GUIMain extends Application {
 
 	private HashMap<ColorEnumeration, TowerCardWidget[]> towerCardWidgetLists = new HashMap<>();
 	// private TowerCardWidget[][] towerCardWidgetLists = new TowerCardWidget[4][4];
-	private HashMap<ColorEnumeration, VBox> towerCardBoxesArray = new HashMap<>();
+	private HashMap<ColorEnumeration, VBox> towerCardBoxesArray = new HashMap<>() ;
 	private HashMap<ColorEnumeration, TowerTileWidget[]> towerTileWidgetLists = new HashMap<>();
 	//private TowerTileWidget[][] towerTileWidgetLists = new TowerTileWidget[4][4];
 	private HashMap<ColorEnumeration, VBox> towerTilesBoxes = new HashMap<>();
 	//private final VBox[] towerTilesBoxes = new VBox[4];
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
-	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1);
-	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1);
-	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1);
+	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1, player);
+	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1, player);
+	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1, player);
 
 	private DieWidget[] diceWidgetArray = new DieWidget[3];
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
+	private ExcomWidget[] excomWidgetArray = new ExcomWidget[3];
 	private TimerWidget timerWidget = new TimerWidget();
 	private ImageView zoomedCard = new ImageView();
 	static ImageView zoomReference;
+	private Label infoLabel;
 
 	private GraphicResources graphicMap = new GraphicResources();
 
@@ -97,10 +103,15 @@ public class GUIMain extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 
+		//TODO settare da fuori
+		PLAYER_NUMBER = 4;
+		OPPONENTS_NUMBER = 3;
+		MOVE_TIMER = 120;
+		//opponentNames = {"Pippo", "Pluto", "Paperino"};
+		int thisPlayerId = 0;
+		int[] opponentIdArray = {1, 2, 3};
 
-		OPPONENTS_NUMBER = 3; //TODO settare da file
-		MOVE_TIMER = 120; //TODO settare da file
-		opponentNames = new String[OPPONENTS_NUMBER];
+
 
 
 		zoomReference = zoomedCard;
@@ -108,99 +119,6 @@ public class GUIMain extends Application {
 		/* Create root pane */
 		final Pane root = new Pane();
 		root.setId("root");
-		
-
-
-		/* Add tower cards and tower action spaces */
-
-		VBox towerCardBox; // box verticale contenente le carte
-		TowerCardWidget[] towerCardWidgetArray; // array di carte dello stesso colore
-
-		VBox towerActionBox; // box verticale contenente gli spazi azione della stessa torre
-		TowerTileWidget[] towerTileWidgetArray; // array di spazi azione della stessa torre
-
-
-		for (int i = 0; i < 4; i++) { 
-			towerCardBoxesArray.put(towerColorArray[i], new VBox());
-		}
-		System.out.println(towerCardBoxesArray.size());
-		for (int i = 0; i < 4; i++) {
-			towerCardBox = towerCardBoxesArray.get(towerColorArray[i]);
-			System.out.println(towerColorArray[i].toString());
-			System.out.println("StageWidth " + stageWidth);
-			towerCardBox.setSpacing((0.06 / 100) * stageHeight); //TODO spacing di prova, controllare
-			System.out.println("x of tower " + (0.8684 + 10.9 * i) / 100 * stageWidth);
-			towerCardBox.setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
-			towerCardBox.setLayoutY((1.4168 / 100) * stageHeight);
-			System.out.println(i + ": x=" + towerCardBox.getLayoutX() + ", y=" + towerCardBox.getLayoutY());
-			// towerBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8)); //TODO controllare se crea problemi
-			root.getChildren().add(towerCardBox);
-		}
-
-		for (int i = 0; i < 4; i++) towerTilesBoxes.put(towerColorArray[i], new VBox());
-		for (int i = 0; i < 4; i++) {
-			towerActionBox = towerTilesBoxes.get(towerColorArray[i]);
-			towerActionBox.setSpacing((10.95 / 100) * stageHeight);
-			towerActionBox.setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth);
-			towerActionBox.setLayoutY((7.1875 / 100) * stageHeight);
-			root.getChildren().add(towerActionBox);
-		}
-
-		for (int i = 0; i < 4; i++) towerTileWidgetLists.put(towerColorArray[i], new TowerTileWidget[4]);
-		for (int i = 0; i < 4; i++) {
-			//towerTileWidgetArray = towerTileWidgetLists.get(towerColorArray[i]);
-			for (int j = 0; j < 4; j++) {
-				towerTileWidgetLists.get(towerColorArray[i])[j] = new TowerTileWidget(7 - 2 * j);
-				towerTilesBoxes.get(towerColorArray[i]).getChildren().add(towerTileWidgetLists.get(towerColorArray[i])[j].getOccupationCircle());
-			}
-		}
-
-		for (int i = 0; i < 4; i++) towerCardWidgetLists.put(towerColorArray[i], new TowerCardWidget[4]);
-		for (int i = 0; i < 4; i++) {
-			//towerCardWidgetArray = towerCardWidgetLists.get(towerColorArray[i]);
-			for (int j = 0; j < 4; j++) {
-				towerCardWidgetLists.get(towerColorArray[i])[j] = new TowerCardWidget(); // creating empty cards
-				towerCardBoxesArray.get(towerColorArray[i]).getChildren().add(towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage()); // placing empty cards on towers
-				System.out.println("tower color i: " + towerColorArray[i]);
-				System.out.println("tower card widget for color: " + towerCardWidgetLists.get(towerColorArray[i])[j]);
-				System.out.println("get image: " + towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage());
-			}
-		}
-
-		/* Add tower cards and tower action spaces */
-		/*
-
-		for (i = 0; i < 4; i++) {
-			// VBoxes of action spaces
-			towerTilesBoxes[i] = new VBox((10.95 / 100) * stageHeight);
-			towerTilesBoxes[i].setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth);
-			towerTilesBoxes[i].setLayoutY((7.1875 / 100) * stageHeight);
-			root.getChildren().add(towerTilesBoxes[i]);
-
-			// VBoxes of tower cards
-			towerCardBoxesArray[i] = new VBox((40 / 100) * stageHeight); //TODO spacing di prova, controllare
-			towerCardBoxesArray[i].setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
-			towerCardBoxesArray[i].setLayoutY((1.4168 / 100) * stageHeight);
-			towerCardBoxesArray[i].prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8));
-			root.getChildren().add(towerCardBoxesArray[i]);
-			for (int j = 0; j < 4; j++) {
-				// action spaces
-				towerTileWidgetLists[i][j] = new TowerTileWidget(7 - 2 * j);
-				towerTilesBoxes[i].getChildren().add(towerTileWidgetLists[i][j].getOccupationCircle());
-
-				// tower cards
-				towerCardWidgetLists[i][j] = new TowerCardWidget(); // creating empty cards
-				towerCardBoxesArray[i].getChildren().add(towerCardWidgetLists[i][j].getCardImage()); // placing empty cards on towers
-			}
-		}
-
-		*/
-
-
-
-		int i;
-		int thisPlayerId = 0;
-		int[] opponentIdArray = {1, 2, 3}; //TODO valori di test
 
 		stage = primaryStage;
 		stage.setTitle("Lorenzo il Magnifico");
@@ -236,14 +154,64 @@ public class GUIMain extends Application {
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
 
+		/* Add tower cards and tower action spaces */
+
+		VBox towerCardBox; // box verticale contenente le carte
+		TowerCardWidget[] towerCardWidgetArray; // array di carte dello stesso colore
+
+		VBox towerActionBox; // box verticale contenente gli spazi azione della stessa torre
+		TowerTileWidget[] towerTileWidgetArray; // array di spazi azione della stessa torre
+
+
+		for (int i = 0; i < 4; i++) towerCardBoxesArray.put(towerColorArray[i], new VBox());
+		for (int i = 0; i < 4; i++) {
+			towerCardBox = towerCardBoxesArray.get(towerColorArray[i]);
+			System.out.println(towerColorArray[i].toString());
+			towerCardBox.setSpacing((1.8 / 100) * stageHeight); //TODO spacing di prova, controllare
+			towerCardBox.setLayoutX((0.8684 + 10.95 * i) / 100 * stageWidth);
+			towerCardBox.setLayoutY((2.7468 / 100) * stageHeight);
+			// towerBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8)); //TODO controllare se crea problemi
+			root.getChildren().add(towerCardBox);
+		}
+
+		for (int i = 0; i < 4; i++) towerTilesBoxes.put(towerColorArray[i], new VBox());
+		for (int i = 0; i < 4; i++) {
+			towerActionBox = towerTilesBoxes.get(towerColorArray[i]);
+			towerActionBox.setSpacing((10.95 / 100) * stageHeight);
+			towerActionBox.setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth);
+			towerActionBox.setLayoutY((7.1875 / 100) * stageHeight);
+			root.getChildren().add(towerActionBox);
+		}
+
+		for (int i = 0; i < 4; i++) towerTileWidgetLists.put(towerColorArray[i], new TowerTileWidget[4]);
+		for (int i = 0; i < 4; i++) {
+			//towerTileWidgetArray = towerTileWidgetLists.get(towerColorArray[i]);
+			for (int j = 0; j < 4; j++) {
+				towerTileWidgetLists.get(towerColorArray[i])[j] = new TowerTileWidget(7 - 2 * j);
+				towerTilesBoxes.get(towerColorArray[i]).getChildren().add(towerTileWidgetLists.get(towerColorArray[i])[j].getOccupationCircle());
+			}
+		}
+
+		for (int i = 0; i < 4; i++) towerCardWidgetLists.put(towerColorArray[i], new TowerCardWidget[4]);
+		for (int i = 0; i < 4; i++) {
+			//towerCardWidgetArray = towerCardWidgetLists.get(towerColorArray[i]);
+			for (int j = 0; j < 4; j++) {
+				towerCardWidgetLists.get(towerColorArray[i])[j] = new TowerCardWidget(); // creating empty cards
+				towerCardBoxesArray.get(towerColorArray[i]).getChildren().add(towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage()); // placing empty cards on towers
+			}
+		}
+
+
 		/* Instantiate player and opponents widgets */
-		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId)); //TODO colore da settare tramite ID fornito dal model
-		i = 0;
-		for (i = 0; i < 3; i++) {
+
+		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId));
+
+		int i = 0;
+		for (i = 0; i < OPPONENTS_NUMBER; i++) {
 			opponentsArray[i] = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
 		}
 
-		for (i = 0; i < 3; i++) {
+		for (i = 0; i < OPPONENTS_NUMBER; i++) {
 			System.out.println(opponentsArray[i].getOpponentColor().toString());
 		}
 
@@ -256,12 +224,16 @@ public class GUIMain extends Application {
 		// Add to board
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
 		insertActionSpace(marketSpaceWidgets[1], root, 1, 33.125, 80.1562); // servants
-		insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
-		insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
+		if(PLAYER_NUMBER >= 4) {
+			insertActionSpace(marketSpaceWidgets[2], root, 1, 37.7679, 82.6562); // military + gold
+			insertActionSpace(marketSpaceWidgets[3], root, 1, 41.25, 88.75); // privileges
+		}
 
         /* Add harvest and production action spaces */
-		insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
-		insertMultipleSpace(harvestingSpace, root, 1, 0.892, 90.3137); // harvest
+        if(PLAYER_NUMBER >= 3) {
+			insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
+			insertMultipleSpace(harvestingSpace, root, 1, 0.892, 90.3137); // harvest
+		}
 
 		/* Add council space */
 		insertMultipleSpace(councilSpaceWidget, root, 1, 51.5, 53.7); // council
@@ -269,14 +241,15 @@ public class GUIMain extends Application {
 
 		/* Add points markers */
 		for (i = 0; i < 4; i++) {
-			if(i < 2)
-				this.trackBoxesArray[i] = new HBox(12 * resize);
-			else
+			if(i < 1)
 				this.trackBoxesArray[i] = new VBox(12 * resize);
+			else
+				this.trackBoxesArray[i] = new HBox(12 * resize);
 			root.getChildren().add(this.trackBoxesArray[i]);
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < PLAYER_NUMBER; j++) {
 				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j); // ottiene il colore del segnalino
-				String thisPath = path + "marker-" + markerColor.toString().toLowerCase() + ".png";
+				String thisPath = path + "markers/marker-" + markerColor.toString().toLowerCase() + ".png";
+				System.out.println(thisPath);
 				markerWidgetList[i][j] = new MarkerWidget(thisPath);
 				if(player.getPlayerColor() == markerColor)
 					player.getPlayerMarkers()[i] = markerWidgetList[i][j];
@@ -291,18 +264,18 @@ public class GUIMain extends Application {
 
 		/****** MODO 1 ******/
 		// Play-order markers
-		this.trackBoxesArray[0].setLayoutX((47.4857 / 100) * stageWidth);
-		this.trackBoxesArray[0].setLayoutY((43.5 / 100) * stageHeight);
-		this.trackBoxesArray[0].setMaxHeight((3.5 / 100) * stageHeight);
+		this.trackBoxesArray[0].setLayoutX((96.0 / 100) * stageWidth);
+		this.trackBoxesArray[0].setLayoutY((63.0 / 100) * stageHeight);
+		//this.trackBoxesArray[0].setMaxHeight((0.2 / 100) * stageHeight);
 		// Faith markers
-		this.trackBoxesArray[1].setLayoutX((47.4857 / 100) * stageWidth);
-		this.trackBoxesArray[1].setLayoutY((66.0375 / 100) * stageHeight);
+		this.trackBoxesArray[1].setLayoutX((50.0857 / 100) * stageWidth);
+		this.trackBoxesArray[1].setLayoutY((66.3375 / 100) * stageHeight);
 		// Military markers
-		this.trackBoxesArray[2].setLayoutX((46.7664 / 100) * stageWidth);
-		this.trackBoxesArray[2].setLayoutY((14.4125 / 100) * stageHeight);
+		this.trackBoxesArray[2].setLayoutX((74.7664 / 100) * stageWidth);
+		this.trackBoxesArray[2].setLayoutY((65.0 / 100) * stageHeight);
 		// Victory markers
-		this.trackBoxesArray[3].setLayoutX((59.1679 / 100) * stageWidth);
-		this.trackBoxesArray[3].setLayoutY((14.4125 / 100) * stageHeight);
+		this.trackBoxesArray[3].setLayoutX((74.7664 / 100) * stageWidth);
+		this.trackBoxesArray[3].setLayoutY((77.0 / 100) * stageHeight);
 
 
 		/* Add playable familiars */
@@ -311,25 +284,15 @@ public class GUIMain extends Application {
         /* Initialize opponents familiars */
 		i = 0;
 
-		for(i = 0; i < 3; i++) {
+		for(i = 0; i < OPPONENTS_NUMBER; i++) {
 			for (int j = 0; j < 4; j++) {
 				opponentsArray[i].getFamiliarWidgetList()[j] = new FamiliarWidget(opponentsArray[i].getOpponentColor(), GraphicResources.getFamiliarColor(j));
 			}
 		}
 
-		/*
-		for (OpponentWidget opponent : opponentsArray) {
-			int j = 0;
-			for (FamiliarWidget familiar : opponent.getFamiliarWidgetList()) {
-				familiar = new FamiliarWidget(opponent.getOpponentColor(), GraphicResources.getDiceColor(j));
-				j++;
-			}
-			i++;
-		}
-		*/
-
 
 		/* Add player buttons */
+
 		// Personal cards
 		//final VBox commands = new VBox(20 * resize);
 		player.commands.setAlignment(Pos.CENTER);
@@ -342,6 +305,9 @@ public class GUIMain extends Application {
 		//final Button showLeaderButton = new Button("Carte Leader"); // showLeaderButton is not clickable because the draft is not done yet
 		player.showLeaderButton.setId("showLeaderButton");
 		player.showLeaderButton.setMaxWidth(Double.MAX_VALUE);
+		player.showLeaderButton.setOnAction((ActionEvent e) -> {
+			player.getLeaderPopup().display();
+		});
 
 		player.commands.getChildren().addAll(player.showCardsButton, player.showLeaderButton);
 
@@ -367,11 +333,21 @@ public class GUIMain extends Application {
 
 
 		/* Add player resources */
-		for (i = 0; i < 4; i++) {
-			resourcesWidgetArray[i] = new ResourcesWidget();
-		}
+
+		resourcesWidgetArray[0] = new ResourcesWidget();
 		playerResourcesBox = resourcesWidgetArray[0].setupPersonalResource();
 		root.getChildren().add(playerResourcesBox);
+
+
+		/* Add excommunication widgets */
+		for(i = 0; i < 3; i++) {
+			excomWidgetArray[i] = new ExcomWidget();
+			excomWidgetArray[i].setLayoutX(((50.2 + 4.4 * i) / 100) * stageWidth);
+			root.getChildren().add(excomWidgetArray[i]);
+		}
+		excomWidgetArray[0].setLayoutY((84.4 / 100) * stageHeight);
+		excomWidgetArray[1].setLayoutY((85.9 / 100) * stageHeight);
+		excomWidgetArray[2].setLayoutY((84.4 / 100) * stageHeight);
 
 
 		/* Add dice */
@@ -396,11 +372,35 @@ public class GUIMain extends Application {
 
 
 		/* Add card zoom */
-		zoomedCard.setX((74.0 / 100) * stageWidth);
-		zoomedCard.setY((54.0 / 100) * stageHeight);
-		zoomedCard.setFitHeight((43.0 / 100) * stageHeight);
+		zoomedCard.setX((46.5 / 100) * stageWidth);
+		zoomedCard.setY((4.9 / 100) * stageHeight);
+		zoomedCard.setFitHeight((40.0 / 100) * stageHeight);
 		zoomedCard.setPreserveRatio(true);
 		root.getChildren().add(zoomedCard);
+
+
+		/* Text info for the player */
+		infoLabel = new Label();
+		infoLabel.setId("infolabel");
+		infoLabel.setLayoutX((72.0 / 100) * stageWidth);
+		infoLabel.setLayoutY((95.0 / 100) * stageHeight);
+		root.getChildren().add(infoLabel);
+
+
+		/* Event filter */
+		root.addEventFilter(MouseEvent.DRAG_DETECTED, mouseEvent -> {
+
+			System.out.println("mouse drag detected! " + mouseEvent.getSource());
+
+
+		});
+
+
+
+
+
+
+
 
 
 		// TEST CARICAMENTO CARTE
@@ -414,6 +414,10 @@ public class GUIMain extends Application {
 
 		Integer[] testDiceValues = {3, 5, 6};
 
+		int testPrivilegeConversion = 2;
+
+		Integer[] testExcomCards = {3, 12, 20};
+
 		/*
 		root.maxWidthProperty().bind(stage.widthProperty());
 		root.maxHeightProperty().bind(stage.heightProperty());
@@ -423,7 +427,6 @@ public class GUIMain extends Application {
 
 
 		File f = new File("./src/main/res/fx-style.css");
-		System.out.println("css exist? " + f.exists());
 		mainScene.getStylesheets().add(f.toURI().toURL().toString());
 
 		stage.setScene(mainScene);
@@ -431,10 +434,15 @@ public class GUIMain extends Application {
 		stage.show();
 
 		//startBonusTileDraft();
-		//startLeaderDraft(leaderIdArray);
-		setDiceValues(testDiceValues);
-		timerWidget.setupTimer();
-		timerWidget.startTimer();
+		//startLeaderDraft(testLeaderIdArray);
+		//endLeaderDraft();
+		//setDiceValues(testDiceValues);
+		//timerWidget.setupTimer();
+		//timerWidget.startTimer();
+		//doPrivilegeConversion(testPrivilegeConversion);
+		insertExcomCards(testExcomCards);
+		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
+
 
 	}
 
@@ -455,7 +463,7 @@ public class GUIMain extends Application {
 		BonusTileDraftPopup.getPopupStage().close();
 
 		// Update player bonus tile
-		this.player.setBonusTileWidget(BonusTileDraftPopup.getSelectedBonusTile());
+		this.player.getPersonalBoard().setBonusTileWidget(BonusTileDraftPopup.getSelectedBonusTile());
 	}
 
 	public void startLeaderDraft(Integer[] referenceIdArray) {
@@ -469,9 +477,29 @@ public class GUIMain extends Application {
 	}
 
 	private void updateLeadersAfterDraft() {
-		int i = 0;
-		for(i = 0; i < 4; i++) {
+		for(int i = 0; i < 4; i++) {
 			this.player.getLeaderWidgetList()[i] = LeaderDraftPopup.leadersDrafted[i];
+		}
+	}
+
+	public void updatePlayerLeaderAfterDraft(ColorEnumeration playerColor, int[] leadersDraftedIdArray) {
+		for(int i = 0; i < OPPONENTS_NUMBER; i++) {
+			if(opponentsArray[i].getOpponentColor() == playerColor) {
+				for(int j = 0; j < 4; j++)
+					opponentsArray[i].getPersonalBoard().getLeaderWidgets()[j] = new LeaderWidget(leadersDraftedIdArray[j]);
+			}
+		}
+	}
+
+	// aggiorna i leader attivabili dal giocatore
+	public void updateActivableLeaders(Integer[] activableLeaderIdArray) {
+		for(Integer activableLeaderId: activableLeaderIdArray) {
+			for(LeaderWidget playerLeader: this.player.getLeaderWidgetList()) {
+				if(playerLeader.getReferenceID() == activableLeaderId)
+					playerLeader.setActivable(true);
+				else
+					playerLeader.setActivable(false);
+			}
 		}
 	}
 
@@ -479,15 +507,19 @@ public class GUIMain extends Application {
 
 		for(int i = 0; i < 4; i++) {
 			towerCardWidgetLists.get(ColorEnumeration.Green)[i].addCardImage(greenCardIdArray[i]);
+			towerTileWidgetLists.get(ColorEnumeration.Green)[i].setAssociatedCard(towerCardWidgetLists.get(ColorEnumeration.Green)[i]);
 		}
 		for(int i = 0; i < 4; i++) {
 			towerCardWidgetLists.get(ColorEnumeration.Blue)[i].addCardImage(blueCardIdArray[i]);
+			towerTileWidgetLists.get(ColorEnumeration.Blue)[i].setAssociatedCard(towerCardWidgetLists.get(ColorEnumeration.Blue)[i]);
 		}
 		for(int i = 0; i < 4; i++) {
 			towerCardWidgetLists.get(ColorEnumeration.Yellow)[i].addCardImage(yellowCardIdArray[i]);
+			towerTileWidgetLists.get(ColorEnumeration.Yellow)[i].setAssociatedCard(towerCardWidgetLists.get(ColorEnumeration.Yellow)[i]);
 		}
 		for(int i = 0; i < 4; i++) {
 			towerCardWidgetLists.get(ColorEnumeration.Violet)[i].addCardImage(violetCardIdArray[i]);
+			towerTileWidgetLists.get(ColorEnumeration.Violet)[i].setAssociatedCard(towerCardWidgetLists.get(ColorEnumeration.Violet)[i]);
 		}
 
 		/*
@@ -498,12 +530,16 @@ public class GUIMain extends Application {
 	}
 
 	public void updatePlayerResources(ColorEnumeration color, Integer[] newResources) {
+
 		//TODO decidere come passare le risorse
+
+		player.getResourceWidget().setGoldValue(newResources[0]);
+		player.getResourceWidget().setWoodValue(newResources[1]);
+		player.getResourceWidget().setStoneValue(newResources[2]);
+		player.getResourceWidget().setServantValue(newResources[3]);
+
+		player.getResourceWidget().repaint();
 		/*
-		if(player.getPlayerColor() == color)
-			for(int i = 0; i < 4; i++) {
-				player.getResourceWidget().
-			}
 		else
 			for(int i = 0; i < OPPONENTS_NUMBER; i++) {
 				if (opponentsArray[i].getOpponentColor() == color) {
@@ -528,6 +564,14 @@ public class GUIMain extends Application {
 			}
 	}
 
+	public void setPlayerActive() {
+		this.getPlayer().setActive(true);
+	}
+
+	public void setPlayerInactive() {
+		this.getPlayer().setActive(false);
+	}
+
 	public void setDiceValues(Integer[] newValues) {
 		for (int i = 0; i < 3; i++) {
 			this.diceWidgetArray[i].setValue(newValues[i]);
@@ -535,6 +579,23 @@ public class GUIMain extends Application {
 		}
 	}
 
+	public ArrayList<Integer> doPrivilegeConversion(int privilegesToConvert) {
+		return PrivilegePopup.display(privilegesToConvert);
+	}
+
+	public void insertExcomCards(Integer[] excomIdArray) { //TODO non mostra le scomuniche
+		for(int i = 0; i < 3; i++) {
+			try {
+				excomWidgetArray[i].addExcom(excomIdArray[i]);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void updateInfoLabel(String info) {
+		this.infoLabel.setText(info);
+	}
 
 
 	/**                       **/
@@ -737,6 +798,38 @@ public class GUIMain extends Application {
 
 
 
+
+
+
+
+/* Add tower cards and tower action spaces */
+		/*
+
+		for (i = 0; i < 4; i++) {
+			// VBoxes of action spaces
+			towerTilesBoxes[i] = new VBox((10.95 / 100) * stageHeight);
+			towerTilesBoxes[i].setLayoutX(((7.3214 + 10.95 * i) / 100) * stageWidth);
+			towerTilesBoxes[i].setLayoutY((7.1875 / 100) * stageHeight);
+			root.getChildren().add(towerTilesBoxes[i]);
+
+			// VBoxes of tower cards
+			towerCardBoxesArray[i] = new VBox((40 / 100) * stageHeight); //TODO spacing di prova, controllare
+			towerCardBoxesArray[i].setLayoutX((0.8684 + 10.9 * i) / 100 * stageWidth);
+			towerCardBoxesArray[i].setLayoutY((1.4168 / 100) * stageHeight);
+			towerCardBoxesArray[i].prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.8));
+			root.getChildren().add(towerCardBoxesArray[i]);
+			for (int j = 0; j < 4; j++) {
+				// action spaces
+				towerTileWidgetLists[i][j] = new TowerTileWidget(7 - 2 * j);
+				towerTilesBoxes[i].getChildren().add(towerTileWidgetLists[i][j].getOccupationCircle());
+
+				// tower cards
+				towerCardWidgetLists[i][j] = new TowerCardWidget(); // creating empty cards
+				towerCardBoxesArray[i].getChildren().add(towerCardWidgetLists[i][j].getCardImage()); // placing empty cards on towers
+			}
+		}
+
+		*/
 
 
 

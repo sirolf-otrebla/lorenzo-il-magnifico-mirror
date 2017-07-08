@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Player;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -12,12 +13,9 @@ public class CouncilSpaceWidget extends MultipleSpaceWidget {
 
     private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
 
-    public CouncilSpaceWidget(int minimumDie) {
-        super(minimumDie);
+    public CouncilSpaceWidget(int minimumDie, PlayerWidget player) {
+        super(minimumDie, player);
     }
-
-
-
 
 
 

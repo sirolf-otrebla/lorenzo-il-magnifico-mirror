@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
@@ -22,8 +23,7 @@ public class PlayerWidget {
     private ResourcesWidget resourceWidget = new ResourcesWidget();
     private FamiliarWidget[] familiarWidgetList = new FamiliarWidget[4];
     private LeaderWidget[] leaderWidgetList = new LeaderWidget[4];
-    private BonusTileWidget bonusTileWidget;
-    private AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
+
     private MarkerWidget[] playerMarkers = new MarkerWidget[4];
     private static HashMap<ColorEnumeration, Integer[]> AcquiredCardArrayHashMap = new HashMap<>();
     private ColorEnumeration[] personalBoardColorArray = {
@@ -37,9 +37,11 @@ public class PlayerWidget {
     final Button showCardsButton = new Button("Carte sviluppo");
     final Button showLeaderButton = new Button("Carte Leader"); // showLeaderButton is not clickable because the draft is not done yet
 
-    private final PersonalBoardWindow personalBoard = new PersonalBoardWindow(board, playerUsername,
-            cardAcquiredWidget, leaderWidgetList, bonusTileWidget);
+    private final PersonalBoardWindow personalBoard = new PersonalBoardWindow(board);
     private final LeaderPopup leaderPopup = new LeaderPopup();
+    private final ProductionPopup productionPopup = new ProductionPopup();
+    private final HarvestingPopup harvestingPopup = new HarvestingPopup();
+
 
 
 
@@ -103,14 +105,6 @@ public class PlayerWidget {
         return leaderWidgetList;
     }
 
-    public BonusTileWidget getBonusTileWidget() {
-        return bonusTileWidget;
-    }
-
-    public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
-        this.bonusTileWidget = bonusTileWidget;
-    }
-
     public void setPlayerColor(ColorEnumeration playerColor) {
         this.playerColor = playerColor;
     }
@@ -121,5 +115,15 @@ public class PlayerWidget {
 
     public ResourcesWidget getResourceWidget() {
         return resourceWidget;
+    }
+
+    // ritorna gli edifici scelti da attivare, incluse le scelte multiple
+    public ArrayList<PairObject> displayProductionPopup(AcquiredCardWidget[] yellowCards) {
+        return this.productionPopup.display(yellowCards);
+    }
+
+    // ritorna i territori scelti da attivare
+    public ArrayList<Integer> displayHarvestingPopup(AcquiredCardWidget[] greenCards) {
+        return this.harvestingPopup.display(greenCards);
     }
 }

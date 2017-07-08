@@ -20,6 +20,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 public class ExcomPopup {
 
 
+    static boolean answerSelected = false;
     static boolean answer = true;
 
     // il metodo display ritorna 'answer' quando il popup viene chiuso
@@ -68,7 +69,9 @@ public class ExcomPopup {
 
         Button closeButton = new Button("Confirm");
         closeButton.setOnAction((ActionEvent e) -> {
-            popup.close();
+            if(answerSelected)
+                popup.close();
+            else {}
         });
 
         VBox vbox = new VBox(30 * resize);

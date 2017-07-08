@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -13,11 +16,35 @@ public class ProductionSpaceWidget extends MultipleSpaceWidget {
     private boolean morethanZeroOccupants = false;
     private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList; // 1 player, 2 familiare
     private boolean isLegal;
+    ArrayList<PairObject> selectedActivations; //TODO le carte verdi scelte da attivare vengono salvate qui
 
-    public ProductionSpaceWidget(int minimumDie) {
-        super(minimumDie);
+    public ProductionSpaceWidget(int minimumDie, PlayerWidget player) {
+        super(minimumDie, player);
     }
 
+    @Override
+    public void setupDragDropped() {
+        scrollPane.setOnDragDropped((DragEvent e) -> {
+            /* What to do when the source is dropped */
+            boolean success = false;
+
+            System.out.println("starting if");
+            if(e.getDragboard().hasImage()) {
+                System.out.println("inside if");
+                Image source = e.getDragboard().getImage();
+                ImageView imageElement = new ImageView(source);
+                hbox.getChildren().add(imageElement);
+                // display popup
+                selectedActivations = getPlayer().displayProductionPopup(getPlayer().getPersonalBoard().getProductionCards());
+                //TODO comunicare al controller le scelte dell'utente
+                success = true;
+            }
+
+            e.setDropCompleted(success);
+
+            //e.consume();
+        });
+    }
 
 
     public boolean isMorethanZeroOccupants() {

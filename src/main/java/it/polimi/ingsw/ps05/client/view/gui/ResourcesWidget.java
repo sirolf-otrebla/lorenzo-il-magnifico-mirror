@@ -25,7 +25,12 @@ public class ResourcesWidget {
         this.stoneLabel = new Label(String.valueOf(stoneValue));
         this.servantLabel = new Label(String.valueOf(servantValue));
 
-        this.hbox = new HBox(20 * resize);
+        this.goldLabel.setId("goldLabel");
+        this.woodLabel.setId("woodLabel");
+        this.stoneLabel.setId("stoneLabel");
+        this.servantLabel.setId("servantLabel");
+
+        this.hbox = new HBox(60 * resize);
         this.hbox.setId("resourceLabel");
         this.hbox.setLayoutX((68.0 / 100) * stageWidth);
         hbox.setLayoutY((32.08 / 100) * stageHeight);
