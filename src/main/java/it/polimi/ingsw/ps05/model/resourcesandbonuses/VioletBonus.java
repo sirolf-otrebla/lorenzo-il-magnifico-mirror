@@ -46,6 +46,9 @@ public class VioletBonus extends PermanentBonus{
 				}
 			}
 		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

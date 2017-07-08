@@ -68,6 +68,9 @@ public class StoneResourceCostBonus extends PermanentBonus implements ActionResu
 				}
 			}
 		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

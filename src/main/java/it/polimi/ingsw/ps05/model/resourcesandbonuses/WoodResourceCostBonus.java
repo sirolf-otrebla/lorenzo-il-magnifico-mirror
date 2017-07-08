@@ -58,7 +58,9 @@ public class WoodResourceCostBonus extends PermanentBonus implements Resource, A
 				}
 			}
 		}
-		
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

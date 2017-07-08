@@ -17,6 +17,9 @@ public class NoTowerOccupiedGold extends PermanentBonus {
 		for (Tower t : game.getBoard().getTowerList().values()){
 			t.setRentAmount(0);
 		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 
 	@Override

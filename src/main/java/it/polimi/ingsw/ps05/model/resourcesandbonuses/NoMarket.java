@@ -26,9 +26,9 @@ public class NoMarket extends PermanentBonus implements ActionResult {
 				it.next().addFalseResource();
 			}
 		}
-		//notifica observer
-		setChanged();
-		notify();
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 
 	}
 

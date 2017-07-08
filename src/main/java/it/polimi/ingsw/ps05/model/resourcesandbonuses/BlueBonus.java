@@ -46,6 +46,9 @@ public class BlueBonus extends PermanentBonus implements ActionResult {
 				}
 			}
 		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 	}
 	
 	public void resetResult(PlayerRelated playerR){

@@ -32,9 +32,9 @@ public class NoFirstAction extends PermanentBonus implements ActionResult {
 		while(it.hasNext()){
 			it.next().addFalseResource();
 		}
-		//notifica observer
-		setChanged();
-		notify();
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
 		
 	}
 
