@@ -27,13 +27,12 @@ public class ActivateLeaderMessage implements GameMessage {
 
 	@Override
 	public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-		// TODO Auto-generated method stub
-
+        vi.visit(this);
 	}
 
 	@Override
 	public void acceptVisitor(GameCommandsVisitor vi) {
-		// TODO Auto-generated method stub
+        vi.visit(this);
 	}
 
 }

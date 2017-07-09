@@ -56,5 +56,9 @@ public class EndActionStrategyContainer {
         return game;
     }
 
+    public void removeDefaultFromStrategies(){
+        this.chosenStrategies.remove(defaultStrategy);
+    }
+
 
 }

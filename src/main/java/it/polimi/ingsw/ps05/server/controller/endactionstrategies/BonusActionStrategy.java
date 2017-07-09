@@ -35,8 +35,14 @@ public class BonusActionStrategy implements EndActionStrategy {
         this.game = container.getGame();
         for (PlayerClient client: game.getPlayerInGame().values())
             playerArrayList.add(client.getPlayer());
-
-        for (PlayerClient cl: game.getPlayerInGame().values()) {
+        GameStatus status = new GameStatus(playerArrayList, game.getBoard(), this.game.getActivePlayer(),
+                 game.getActivePlayer().getPlayerID());
+        this.container.removeDefaultFromStrategies();
+        GameUpdateMessage bonusActionUpdateMessage = new GameUpdateMessage(status);
+        BonusActionTriggerMessage msg = new BonusActionTriggerMessage
+                (this.actionColor,bonusActionUpdateMessage, this.ghostFamiliar);
+        this.game.getPlayerClient(this.game.getActivePlayer().getPlayerID()).sendMessage(msg);
+        /*  for (PlayerClient cl: game.getPlayerInGame().values()) {
             GameStatus status = new GameStatus(playerArrayList, game.getBoard(),
                     cl.getPlayer(), game.getActivePlayer().getPlayerID());
             GameUpdateMessage bonusActionUpdateMessage = new GameUpdateMessage(status);
@@ -44,6 +50,9 @@ public class BonusActionStrategy implements EndActionStrategy {
                     (this.actionColor,bonusActionUpdateMessage, this.ghostFamiliar);
             cl.sendMessage(msg);
 
+           */
+
+        this.container.strategyEnded();
         }
+
     }
-}

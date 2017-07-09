@@ -219,7 +219,12 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	}
 	
 	public Familiar createGhostFamiliar(Integer diceRequired) {
-		return new Familiar(new Dice(ColorEnumeration.Ghost,diceRequired),ColorEnumeration.Ghost,this);
+		this.familyMap.put(ColorEnumeration.Ghost, new Familiar(new Dice(ColorEnumeration.Ghost, diceRequired), ColorEnumeration.Ghost, this));
+		return familyMap.get(ColorEnumeration.Ghost);
+	}
+
+	public void  removeGhostFamiliar(){
+		if (familyMap.get(ColorEnumeration.Ghost) != null) familyMap.remove(ColorEnumeration.Ghost);
 	}
 
 	public ArrayList<PermanentBonus> getPermanentEffectResList() {

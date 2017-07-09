@@ -55,8 +55,12 @@ public class GreenCard extends TowerCard {
 		 * this solution requires some kind of card related effect which
 		 */
 
-		// DICE CONTROL IS INSIDE EFFECT
+		// DICE CONTROL IS INSIDE EFFEC
+		// soluzione provvisoria per settare gli effetti, ad oggi le carte verdi non posseggono alternative
 		if(this.getToBeActivated()){
+			for (int i = 0; i < selectedEffects.length; i++) {
+				selectedEffects[i] = 0;
+			}
 			// apply selected alternative for each effect which hase state = STATE_READY ( check ActivableEffect for details)
 			for(int i = 0; activableEffectList.size() > i; i++)
 				((AlternativeEffect)activableEffectList.get(i)).apply(familyMember, selectedEffects[i]);

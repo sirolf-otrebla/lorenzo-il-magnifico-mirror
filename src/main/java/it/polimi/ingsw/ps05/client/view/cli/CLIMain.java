@@ -1134,8 +1134,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method is used to print info about a space occupied.
-	* @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	* @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 * @param space we want to know info about its occupant.
 	 */
@@ -1158,8 +1158,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method print info about the selected bonus tile.
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoBonusTile(int column, int row, TextGraphics textGraphics) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
@@ -1175,8 +1175,8 @@ public class CLIMain implements LimView, Runnable{
 	}
 	/**
 	 * This method print info about the selected familiar (its dice value and if it is used or not) 
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoFamiliar(int column, int row, TextGraphics textGraphics){
@@ -1192,8 +1192,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method prints info about the conversion path of faith and military points.
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoResource(int column, int row, TextGraphics textGraphics){
@@ -1220,8 +1220,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method prints info about the selected market space.
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoMarket(int column, int row, TextGraphics textGraphics){
@@ -1259,8 +1259,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method prints info about the selected production space
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoProduction(int column, int row, TextGraphics textGraphics){
@@ -1297,8 +1297,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method print info about a selected card.
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param card is the TowerCard about you want to print the ifno
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
@@ -1458,8 +1458,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method prints info about the selected harvest space
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoHarvest(int column, int row, TextGraphics textGraphics){
@@ -1496,8 +1496,8 @@ public class CLIMain implements LimView, Runnable{
 
 	/**
 	 * This method prints info about the council space
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoCouncil(int column, int row, TextGraphics textGraphics){
@@ -1552,7 +1552,7 @@ public class CLIMain implements LimView, Runnable{
 		if (a.size() != 0){
 			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
 			for (Integer c : temp1.get(0)){
-				ids.add(c);
+				ids.add(this.player.getGreenCardList().get(c).getReferenceID());
 			}
 			for (Integer c : temp1.get(1)){
 				option.add(c);
@@ -1564,7 +1564,6 @@ public class CLIMain implements LimView, Runnable{
 		}
 		
 	}
-
 	/**
 	 * This method create a context where you have to chose between your cards that contains a production effect and decide which you want to activate.
 	 * @param width is the terminal width in which we will draw
@@ -1578,7 +1577,7 @@ public class CLIMain implements LimView, Runnable{
 		if (a.size() != 0){
 			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
 			for (Integer c : temp1.get(0)){
-				ids.add(c);
+				ids.add(this.player.getYellowCardList().get(c).getReferenceID());
 			}
 			for (Integer c : temp1.get(1)){
 				option.add(c);
