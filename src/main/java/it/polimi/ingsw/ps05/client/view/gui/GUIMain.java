@@ -595,7 +595,7 @@ public class GUIMain extends Application {
 
 
 
-	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, int actionSpaceId) {
+	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, ActionSpaceWidgetInterface actionSpaceWidgetInterface) {
 
 		// get the familiar image
 

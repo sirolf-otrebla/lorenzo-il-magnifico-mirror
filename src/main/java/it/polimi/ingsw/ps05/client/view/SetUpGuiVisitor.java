@@ -56,40 +56,8 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
         this.gui.insertExcomCards(excommCardsIdArray);
 
 
-
-
-
-
-
-
-
-
-
-
-
-        HashMap<ColorEnumeration, int[]> cardIdHashMap = new HashMap<>();
-
-        for (ColorEnumeration c: this.gui.getTowerColorArray()) {
-            Tower tower = status.getGameBoard().getTowerList().get(c);
-            TowerTileInterface[] towerTileInterfaces = (TowerTileInterface[]) tower.getTiles().values().toArray();
-            int[] cards = new int[towerTileInterfaces.length];
-            for (TowerTileInterface t: towerTileInterfaces) {
-                Integer dice = t.getDiceRequired().getValue();
-                cards[(dice -1)/2] = t.getCard().getReferenceID();
-            }
-            cardIdHashMap.put(c, cards);
-        }
-        this.gui.insertCards(cardIdHashMap.get(ColorEnumeration.Green), cardIdHashMap.get(ColorEnumeration.Blue),
-                cardIdHashMap.get(ColorEnumeration.Yellow), cardIdHashMap.get(ColorEnumeration.Violet));
-
         // update dei punti fede, militare, vittoria
-        for (Player p : status.getPlayerHashMap().values()) {
-            Integer[] pointsVector = new Integer[3];
-            pointsVector[0] = p.getResource(FaithResource.id).getValue();
-            pointsVector[1] = p.getResource(MilitaryResource.id).getValue();
-            pointsVector[2] = p.getResource(VictoryResource.ID).getValue();
-            this.gui.updatePlayerPoints(p.getColor(), pointsVector);
-        }
+
         // fine update dei punti militari.
 
         // inserisco risorse nei giocatori
