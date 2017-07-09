@@ -34,10 +34,6 @@ public class FreeAction extends Observable implements ActionResult, BonusAction 
 		return value;
 	}
 
-	public Integer getAmount(){
-		return this.value;
-	}
-
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		//crea familiare ghost in player

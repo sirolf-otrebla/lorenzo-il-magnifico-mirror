@@ -65,10 +65,12 @@ public class ActivableEffect implements AlternativeEffect {
     public void apply(PlayerRelated familyMember, int choosenAlternative) {
 
 		if (state == ActivableEffect.STATE_READY){
-			boolean go = false;
-			for (Resource r : getResourceRequired().get(choosenAlternative)){
-				go = r.hasEnoughResources(((Familiar)familyMember));
-				if (!go) break;
+			boolean go = true;
+			if (getResourceRequired().size() != 0){
+				for (Resource r : getResourceRequired().get(choosenAlternative)){
+					go = r.hasEnoughResources(((Familiar)familyMember));
+					if (!go) break;
+				}
 			}
 			if (go){
 				for (ActionResult r : getResultList().get(choosenAlternative)){
