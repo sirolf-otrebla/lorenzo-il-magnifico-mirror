@@ -29,7 +29,7 @@ public abstract class TowerCard implements Card {
 	 * @param cardName is the unique name of the card
 	 * @param requirements are the resource that you must have to take the card (there could be more than 
 	 * one way to pay)
-	 * @param effects are the action that the card allows you to do
+	 * @param effects are the actions that the card allows you to do
 	 */
 	public TowerCard(int referenceID, Epoch epoch, ColorEnumeration color, String cardName,
 					 ArrayList<ArrayList<Resource>> requirements, ArrayList<Effect> effects) {
@@ -60,7 +60,7 @@ public abstract class TowerCard implements Card {
 	public TowerCard(){
 	}
 	/**
-	 * The false resource is a resource that non one can have and is used to inhibit someone
+	 * The false resource is a resource that no one can have and is used to inhibit someone
 	 * from taking the card (that happens when you have a special effect that allows you to do an action
 	 * only in a section of the board
 	 */
@@ -70,7 +70,7 @@ public abstract class TowerCard implements Card {
 		}
 	}
 	/**
-	 * Remove the resource added before
+	 * Removes the false resource described before
 	 */
 	public void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){

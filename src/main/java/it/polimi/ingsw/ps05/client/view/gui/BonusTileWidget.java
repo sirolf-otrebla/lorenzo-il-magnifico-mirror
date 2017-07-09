@@ -13,20 +13,22 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
 /**
  * Created by miotto on 04/07/17.
  */
-public class BonusTileWidget {
+public class BonusTileWidget extends ImageView {
 
     private static double BONUSTILE_HEIGHT_PERC = 0.6;
 
     private int referenceId;
     private boolean drafted;
+    private boolean draftFinished;
     private boolean thisPlayerSelected;
-    private ImageView image;
     private String imagePath;
 
     public BonusTileWidget() {
 
     }
     public BonusTileWidget(int referenceId) {
+        this.setDrafted(false);
+        this.setDraftFinished(false);
         this.referenceId = referenceId;
         // obtain image path from referenceId
         this.imagePath = GraphicResources.getBonusTilePath(referenceId);
@@ -37,9 +39,9 @@ public class BonusTileWidget {
         File crDir = new File(imagePath);
         try {
             Image img = new Image(crDir.toURI().toURL().toString());
-            this.image = new ImageView(img);
-            this.image.setPreserveRatio(true);
-            this.image.setFitHeight(BONUSTILE_HEIGHT_PERC * stageHeight);
+            this.setImage(img);
+            this.setPreserveRatio(true);
+            this.setFitHeight(BONUSTILE_HEIGHT_PERC * stageHeight);
             this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -49,21 +51,28 @@ public class BonusTileWidget {
     // click-to-take-bonusTile gesture
     private void setupClickGesture() {
 
-        this.image.setOnMouseEntered((MouseEvent e) -> {
-            this.image.setCursor(Cursor.HAND);
-        });
+        if(!isDraftFinished()) {
+            this.setOnMouseEntered((MouseEvent e) -> {
+                this.setCursor(Cursor.HAND);
+            });
 
-        this.image.setOnMouseClicked((MouseEvent e) -> {
-            this.setDrafted(true);
-            this.setThisPlayerSelected(true);
-            this.repaint();
-        });
+            this.setOnMouseClicked((MouseEvent e) -> {
+                this.setDrafted(true);
+                this.setThisPlayerSelected(true);
+                this.repaint();
+            });
+        }
     }
 
     public void repaint() {
-        if(isDrafted()) {
-            this.image.setOpacity(0.3);
-            this.image.setMouseTransparent(true);
+        if(!isDraftFinished()) {
+            if (isDrafted()) {
+                this.setOpacity(0.3);
+                this.setMouseTransparent(true);
+            }
+        } else {
+            this.setOpacity(1);
+            this.setMouseTransparent(true);
         }
     }
 
@@ -100,11 +109,11 @@ public class BonusTileWidget {
         this.imagePath = imagePath;
     }
 
-    public ImageView getImage() {
-        return image;
+    public boolean isDraftFinished() {
+        return draftFinished;
     }
 
-    public void setImage(ImageView image) {
-        this.image = image;
+    public void setDraftFinished(boolean draftFinished) {
+        this.draftFinished = draftFinished;
     }
 }

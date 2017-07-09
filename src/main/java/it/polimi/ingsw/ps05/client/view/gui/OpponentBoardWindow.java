@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,9 +20,9 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
     private String username;
     private LeaderWidget[] leaderWidgets = new LeaderWidget[4];
     private LeaderPopup leaderPopup = new LeaderPopup();
+    private ResourcesWidget resourceWidget = new ResourcesWidget();
 
     public OpponentBoardWindow(GUIMain board, String username, LeaderWidget[] leaderWidgets) {
-        //super(board, username, cardAcquiredWidget, leaderWidgets, bonusTile);
         super(board);
         this.username = username;
         this.leaderWidgets = leaderWidgets;
@@ -35,13 +36,6 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         stage.setResizable(false);
         stage.centerOnScreen();
 
-        // calculate and set window dimensions
-        PersonalBoardWindow.personalBoardHeight = stageHeight * 0.90;
-        PersonalBoardWindow.personalBoardWidth = (stageWidth * 0.90 * ORIGINAL_RATIO);
-        stage.setHeight(PersonalBoardWindow.personalBoardHeight);
-        stage.setWidth(PersonalBoardWindow.personalBoardWidth);
-        personalBoardResize = personalBoardWidth / ORIGINAL_WIDTH;
-
         final Pane pane = new Pane();
         pane.setId("opponentBoard");
 
@@ -50,7 +44,7 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         showBonusTileButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
         showBonusTileButton.setOnAction((ActionEvent e) -> {
             //TODO aggiungere popup
-            ; // bonus tile scelta
+            displayBonusTile();
         });
 
         /* add button for leaders */
@@ -59,27 +53,28 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
             leaderPopup.display();
         });
 
+        /* button for resources */
+        /* add button that shows bonus tile */
+        Button showResources = new Button("Resources");
+        showResources.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
+        showResources.setOnAction((ActionEvent e) -> {
+            this.resourceWidget.display();
+        });
+
         /* add close button */
         Button closeButton = new Button("Close");
-        closeButton.layoutXProperty().bind(stage.widthProperty().multiply(90 / 100));
-        closeButton.layoutYProperty().bind(stage.heightProperty().multiply(1 / 100));
+        showBonusTileButton.setLayoutX((85.0 / 100) * personalBoardWidth);
+        showBonusTileButton.setLayoutY((1.0 / 100) * personalBoardHeight);
         closeButton.setOnAction((ActionEvent e) -> {
             stage.close();
         });
-        pane.getChildren().add(closeButton);
 
         /* set buttons position on window */
         HBox hbox = new HBox(50 * resize);
         hbox.setLayoutX((55.0 / 100) * personalBoardWidth);
         hbox.setLayoutY((1.0 / 100) * personalBoardHeight);
-        hbox.getChildren().addAll(showLeaderButton, showBonusTileButton);
-        pane.getChildren().add(hbox);
-
-        /* show acquired cards */
-        showCardAcquiredLayout();
-        for(int i = 0; i < 4; i++) {
-            pane.getChildren().add(cardHboxes[i]);
-        }
+        hbox.getChildren().addAll(showResources, showLeaderButton, showBonusTileButton);
+        pane.getChildren().addAll(hbox, closeButton);
 
         Scene personalScene = new Scene(pane);
 
@@ -98,5 +93,8 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         return leaderWidgets;
     }
 
+    public ResourcesWidget getResourceWidget() {
+        return resourceWidget;
+    }
 }
 

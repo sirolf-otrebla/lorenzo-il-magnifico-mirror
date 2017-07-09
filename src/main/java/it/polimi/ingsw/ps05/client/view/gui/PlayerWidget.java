@@ -50,7 +50,7 @@ public class PlayerWidget {
         this.playerColor = playerColor;
     }
 
-    public void addFamiliarToBoard(Pane board) {
+    public void addFamiliarsToBoard(Pane board) {
         int i = 0;
         // initialize familiars
         for(i = 0; i < 4; i++)

@@ -16,7 +16,6 @@ public class OpponentWidget {
     private ColorEnumeration opponentColor;
     private String opponentUsername;
     private FamiliarWidget[] familiarWidgetList = new FamiliarWidget[4];
-    private ResourcesWidget resourceWidget = new ResourcesWidget();
 
     private LeaderWidget[] leaderWidgetList = new LeaderWidget[4];
     private AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
@@ -64,10 +63,6 @@ public class OpponentWidget {
 
     public void setOpponentMarkers(MarkerWidget[] opponentMarkers) {
         this.opponentMarkers = opponentMarkers;
-    }
-
-    public ResourcesWidget getResourceWidget() {
-        return resourceWidget;
     }
 
     public String getOpponentUsername() {

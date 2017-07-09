@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
@@ -16,7 +17,7 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 /**
  * Created by miotto on 02/07/17.
  */
-public class TowerCardWidget {
+public class TowerCardWidget extends ImageView{
 
     public static final double CARD_MIN_HEIGHT_BOARD = 100;
     public static final double CARD_MIN_WIDTH_BOARD = 70;
@@ -24,7 +25,6 @@ public class TowerCardWidget {
 
 
     private int referenceId;
-    private ImageView cardImage;
     private String imagePath;
     private String cardName;
     private boolean morePaymentOptions;
@@ -32,17 +32,15 @@ public class TowerCardWidget {
     private ColorEnumeration color;
 
     public TowerCardWidget() {
-        this.cardImage = new ImageView();
         setZoomGesture();
     }
 
     public TowerCardWidget(Integer referenceId) {
 
         this.color = GraphicResources.getCardColor(referenceId % CARD_COLOR_DECK);
-        this.cardImage = new ImageView(); // create empty ImageView
         addCardImage(referenceId); // add image file to ImageView
 
-        cardImage.setOnMouseEntered((MouseEvent e) -> {
+        this.setOnMouseEntered((MouseEvent e) -> {
             /* Actions to be performed when the card is clicked once */
             //TODO: implementare lo zoom
 
@@ -56,7 +54,7 @@ public class TowerCardWidget {
         File crDir = new File(path);
         try {
             Image img = new Image(crDir.toURI().toURL().toString(), CARD_MIN_WIDTH_BOARD * resize, CARD_MIN_HEIGHT_BOARD * resize, true, true);
-            cardImage.setImage(img);
+            this.setImage(img);
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
@@ -64,16 +62,16 @@ public class TowerCardWidget {
 
     public void repaint() {
         if(isTaken()) {
-            this.cardImage.setImage(null);
+            this.setImage(null);
         }
         else { //TODO: forse questo else è inutile, da verificare
             Image i = new Image(imagePath, CARD_MIN_WIDTH_BOARD * resize, CARD_MIN_HEIGHT_BOARD * resize, true, true);
-            this.cardImage.setImage(i);
+            this.setImage(i);
         }
     }
 
     private void setZoomGesture() {
-        cardImage.setOnMouseEntered((MouseEvent e) -> {
+        this.setOnMouseEntered((MouseEvent e) -> {
             /* Actions to be performed when the card is pointed */
             //TODO: implementare lo zoom
             File crDir = new File(imagePath);
@@ -102,23 +100,12 @@ public class TowerCardWidget {
     // riceve la plancia del giocatore e inserisce la carta acquistata nell'apposito spazio
     public void addToPersonalBoard(PersonalBoardWindow personalBoard) {
 
-        HBox destinationBox = getCorrespondingBox(personalBoard);
-        AcquiredCardWidget acquiredCard = new AcquiredCardWidget(this.referenceId, this.getImagePath());
-        destinationBox.getChildren().add(this.cardImage);
+        AcquiredCardWidget acquiredCard = new AcquiredCardWidget(this.referenceId, this.getImagePath(), this.color);
+
+        personalBoard.getCardHboxesMap().get(color).getChildren().add(acquiredCard);
+
 
     }
-
-
-    private HBox getCorrespondingBox(PersonalBoardWindow personalBoard) {
-
-        for(int i = 0; i < 4; i++) {
-            // find the right card box color and return
-            if(this.color == GraphicResources.getCardColor(i))
-                return personalBoard.getCardHboxes()[i];
-        }
-        return null; //TODO se non viene trovato il colore corrispondente si potrebbe lanciare un'eccezione o chiudere il programma
-    }
-
 
 
 
@@ -154,14 +141,6 @@ public class TowerCardWidget {
 
     public void setTaken(boolean taken) {
         this.taken = taken;
-    }
-
-    public ImageView getCardImage() {
-        return cardImage;
-    }
-
-    public void setCardImage(ImageView cardImage) {
-        this.cardImage = cardImage;
     }
 
     public int getReferenceId() {

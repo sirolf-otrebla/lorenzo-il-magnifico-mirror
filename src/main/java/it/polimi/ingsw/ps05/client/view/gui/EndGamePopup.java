@@ -22,6 +22,7 @@ import org.omg.CORBA.CODESET_INCOMPATIBLE;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.stageHeight;
@@ -35,7 +36,7 @@ public class EndGamePopup {
 
     private static Stage popupStage;
 
-    public static void display(ArrayList<Pair<ColorEnumeration, Integer>> finalPointsList) {
+    public static void display(HashMap<ColorEnumeration, Integer> finalPointsMap) {
 
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -52,7 +53,7 @@ public class EndGamePopup {
 
         int i = 0;
         // create final victory points
-        for(Pair<ColorEnumeration, Integer> playerFinalPoints: finalPointsList) {
+        for(ColorEnumeration playerColor: finalPointsMap.keySet()) {
 
             // show final victory points
             File crDir = new File("./src/main/res/img/victory-icn.png");
@@ -65,7 +66,7 @@ public class EndGamePopup {
             } catch (MalformedURLException e){
                 e.printStackTrace();
             }
-            Label playerVictoryPointsLabel = new Label(playerFinalPoints.getValue().toString());
+            Label playerVictoryPointsLabel = new Label(finalPointsMap.get(playerColor).toString());
 
             StackPane stackPane = new StackPane();
             stackPane.getChildren().addAll(victoryIcon, playerVictoryPointsLabel);
@@ -73,7 +74,7 @@ public class EndGamePopup {
 
             gridPane.add(stackPane, i, 0);
 
-            String markerPath = GraphicResources.getMarkerPath(playerFinalPoints.getKey());
+            String markerPath = GraphicResources.getMarkerPath(playerColor);
             File markerFile = new File(markerPath);
 
             // show markers
