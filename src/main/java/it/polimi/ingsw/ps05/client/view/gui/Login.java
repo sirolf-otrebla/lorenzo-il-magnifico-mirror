@@ -69,7 +69,14 @@ public class Login extends Application implements Observable {
 	}
 
 	public void setRegistered() {
-		connesso.setText("Registrato!!!!!!!! DIOPORCO");
+		System.out.println("Sto per mostrare la registrazione");
+		connesso.setText("Registrato e loggato");
+		connesso.setTextFill(Color.BLUEVIOLET);
+	}
+	
+	public void setLogged(){
+		System.out.println("Sto per mostrare la registrazione");
+		connesso.setText("Loggato");
 		connesso.setTextFill(Color.BLUEVIOLET);
 	}
 

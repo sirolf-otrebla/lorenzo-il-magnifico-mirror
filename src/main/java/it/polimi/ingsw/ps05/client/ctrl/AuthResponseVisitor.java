@@ -10,22 +10,19 @@ import java.util.concurrent.Semaphore;
  */
 public class AuthResponseVisitor  {
 
-    public AuthResponseVisitor(Semaphore semaphore){
-    }
+	public AuthResponseVisitor(Semaphore semaphore){
 
-    public void visit(LoggedMessage msg){
-        LoginController loginController = Client.getInstance().getLoginController();
-        if(loginController.getStatus() == LoginController.STATUS_WAIT_LOGIN) {
-            Client.getInstance().getLoginController().getSemaphore().release();
-        }
-    }
+	}
 
-    public void visit(RegisteredMessage msg){
-        LoginController loginController = Client.getInstance().getLoginController();
-        if(loginController.getStatus() == LoginController.STATUS_WAIT_REG) {
-            Client.getInstance().getLoginController().getSemaphore().release();
+	public void visit(LoggedMessage msg){
+		System.out.println("Logged message visited");
+		Client.getInstance().getLoginController().getSemaphore().release();
+	}
 
-        }
+	public void visit(RegisteredMessage msg){
+		System.out.println("Registered message visited");
+		Client.getInstance().getLoginController().getSemaphore().release();
 
-    }
+
+	}
 }
