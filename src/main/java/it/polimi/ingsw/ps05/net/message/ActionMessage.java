@@ -43,6 +43,7 @@ public class ActionMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
+    	System.out.println("going to be visited by game command");
         vi.visit(this);
     }
 

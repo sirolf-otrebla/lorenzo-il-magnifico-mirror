@@ -27,6 +27,7 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
     public void update(Observable o, Object arg) {
         this.client = (PlayerClient) o;
         NetMessage msg = (NetMessage) arg;
+        System.out.println("lo ha mandato " + client.getUsername());
         try {
             System.out.println("-------------------------");
             System.out.println(msg);

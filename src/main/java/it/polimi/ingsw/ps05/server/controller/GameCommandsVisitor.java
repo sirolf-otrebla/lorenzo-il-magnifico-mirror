@@ -75,6 +75,7 @@ public class GameCommandsVisitor implements VisitorInterface {
 
     @Override
     public void visit(ActionMessage mess) {
+    	System.out.println("visiting action message in game commands");
         try {
             Player pl = mess.getPlayerBefore();
             validatePlayer(pl);
