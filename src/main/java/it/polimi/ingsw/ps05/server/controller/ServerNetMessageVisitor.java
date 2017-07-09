@@ -45,7 +45,7 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
 
     public void visit(GameMessage msg){
         if (this.client.isInGame() == false){
-            //TODO
+            System.out.println("client is not in game");
         }
         else {
             this.client.getGame().getState().setInputMessage(msg);

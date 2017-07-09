@@ -7,7 +7,11 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
-
+/**
+ * {@inheritDoc}
+ *
+ * this Action Result represent a die bonus on ALL types of action space.
+ */
 public class AllBonus extends PermanentBonus implements ActionResult {
 
 	/**
