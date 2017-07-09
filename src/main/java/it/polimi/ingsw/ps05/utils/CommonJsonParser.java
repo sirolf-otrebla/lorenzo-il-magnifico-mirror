@@ -93,7 +93,7 @@ public class CommonJsonParser {
 	}
 
 	private LeaderCard loadSingleLeaderCard (JSONObject obj) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
-		LeaderCard card = new LeaderCard(Integer.parseInt(obj.get("id").toString()));
+		LeaderCard card = new LeaderCard(Integer.parseInt(obj.get("ID").toString()));
 		card.setCardName(getCardName(obj));
 		card.setEffects(getEffects((JSONObject)obj.get("Effect")));
 		return card;
@@ -253,7 +253,7 @@ public class CommonJsonParser {
 		ArrayList<ActionResult> list = new ArrayList<ActionResult>();
 		for (int i = 0; i < json.keySet().toArray().length; i++){
 			try {
-				if (!json.keySet().toArray()[i].equals("numPlayer") && !json.keySet().toArray()[i].equals("id")){
+				if (!json.keySet().toArray()[i].equals("numPlayer") && !json.keySet().toArray()[i].equals("ID")){
 					list.add(createAllExceptActivable(json, i));
 				}
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
@@ -270,12 +270,12 @@ public class CommonJsonParser {
 			diceRequired = new Dice(ColorEnumeration.Any,Integer.parseInt(json.get("diceRequired").toString()));
 		} catch (NullPointerException e){
 			MarketSpace space = new MarketSpace(effectList);
-			space.setMarketSpaceTypeID(Integer.parseInt(json.get("id").toString()));
+			space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
 			return space;
 		}
 
 		MarketSpace space = new MarketSpace(diceRequired, effectList);
-		space.setMarketSpaceTypeID(Integer.parseInt(json.get("id").toString()));
+		space.setMarketSpaceTypeID(Integer.parseInt(json.get("ID").toString()));
 		return new MarketSpace(diceRequired, effectList);
 	}
 
@@ -574,25 +574,25 @@ public class CommonJsonParser {
 	}
 
 	private BlueCard loadBlueCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
-		return new BlueCard(getCardId(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+		return new BlueCard(getCardID(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
 	}
 
 	private YellowCard loadYellowCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
-		return new YellowCard(getCardId(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+		return new YellowCard(getCardID(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
 	}
 
 	private GreenCard loadGreenCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
 		ArrayList<ArrayList<Resource>> req = getRequirements((JSONObject)json.get("Requirement"));
 
-		return new GreenCard(getCardId(json),getCardEpoch(json), getCardColor(json), getCardName(json), req == null ? new ArrayList<ArrayList<Resource>>():req, getEffects((JSONObject)json.get("Effect")));
+		return new GreenCard(getCardID(json),getCardEpoch(json), getCardColor(json), getCardName(json), req == null ? new ArrayList<ArrayList<Resource>>():req, getEffects((JSONObject)json.get("Effect")));
 	}
 
 	private VioletCard loadVioletCard(JSONObject json) throws NumberFormatException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException, ClassNotFoundException{
-		return new VioletCard(getCardId(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
+		return new VioletCard(getCardID(json),getCardEpoch(json), getCardColor(json), getCardName(json), getRequirements((JSONObject)json.get("Requirement")), getEffects((JSONObject)json.get("Effect")));
 	}
 
-	private Integer getCardId(JSONObject json) {
-		return new Integer(Integer.parseInt(json.get("id").toString()));
+	private Integer getCardID(JSONObject json) {
+		return new Integer(Integer.parseInt(json.get("ID").toString()));
 	}
 
 	private Epoch getCardEpoch(JSONObject json){
