@@ -9,7 +9,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class  ExcommunicationTriggerMessage implements GameResponseMessage {
 
-    public static final int CHOICE = 1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9112577305094910932L;
+	public static final int CHOICE = 1;
     public static final int EXCOMMUNICATED = 0;
 
     private ExcommunicationCard excommunicationCard;

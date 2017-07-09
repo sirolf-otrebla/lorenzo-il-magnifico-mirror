@@ -3,7 +3,10 @@ package it.polimi.ingsw.ps05.client.ctrl;
 import it.polimi.ingsw.ps05.client.net.ClientMessageVisitor;
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.ActivateLeaderViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.DiscardLeaderViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.PassActionViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -18,6 +21,10 @@ public class Client {
     /* event observers */
     private MoveFamiliarListener moveFamiliarListener = new MoveFamiliarListener();
     private TakeCardListener takeCardListener = new TakeCardListener();
+    private DiscardLeaderListener discardLeaderListener = new DiscardLeaderListener();
+    private ActivateLeaderListener activateLeaderListener = new ActivateLeaderListener();
+    private HarvestActionListener harvestActionListener = new HarvestActionListener();
+    private PassActionListener passActionListener = new PassActionListener();
     /* end event observers */
     private static Client client;
     private ServerInterface serverInterface;
@@ -27,7 +34,6 @@ public class Client {
     private boolean inGame;
     private ClientMessageVisitor messageVisitor;
     private LoginController loginController;
-    private ViewAdapter viewAdapter;
 
     private Client(){
         messageVisitor = new ClientMessageVisitor();
@@ -83,18 +89,29 @@ public class Client {
     public Integer getId(){
     	return id;
     }
+    
+    public void linkToObserver(PassActionViewObject observable){
+    	observable.addObserver(this.passActionListener);
+    }
+    
+    public void linkToObserver(ActivateLeaderViewObject observable){
+    	observable.addObserver(this.activateLeaderListener);
+    }
+    
+    public void linkToObserver(DiscardLeaderViewObject observable){
+    	observable.addObserver(this.discardLeaderListener);
+    }
 
     public void linkToObserver(ActionSpaceViewObject observable){
-        observable.addObserver(moveFamiliarListener);
+        observable.addObserver(this.moveFamiliarListener);
     }
 
     public void linkToObserver(TowerTileViewObject observable){
-        System.out.println("aggiungo observable");
         observable.addObserver(this.takeCardListener);
     }
 
     public void linkToObserver(HarvestSpaceViewObject observable){
-    	//TODO
+    	observable.addObserver(this.harvestActionListener);
     }
 
     public void linkToObserver(ProductionSpaceViewObject observable){

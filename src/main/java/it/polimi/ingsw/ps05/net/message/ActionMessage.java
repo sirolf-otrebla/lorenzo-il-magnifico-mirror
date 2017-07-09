@@ -5,10 +5,12 @@ import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
-import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 public class ActionMessage implements GameMessage {
-    private PlayerClient playerClient;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2583147710479097672L;
     private int actionSpaceID;
     private ColorEnumeration familiarID;
     private Player playerBefore;
@@ -41,6 +43,7 @@ public class ActionMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(GameCommandsVisitor vi) {
+    	System.out.println("going to be visited by game command");
         vi.visit(this);
     }
 

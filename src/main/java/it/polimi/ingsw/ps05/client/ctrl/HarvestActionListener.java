@@ -17,7 +17,7 @@ public class HarvestActionListener implements Observer {
         HarvestSpaceViewObject spaceViewObject = (HarvestSpaceViewObject) arg;
         ActionMessage actionMessage = new ActionMessage(spaceViewObject.getFamilyMemberID(),spaceViewObject.getId(),
                 0, Client.getInstance().getGameStatus().getThisPlayer());
-        HarvestActionMessage harvestActionMessage = new HarvestActionMessage(actionMessage, spaceViewObject.getActiveCardsId());
-
+        HarvestActionMessage harvestActionMessage = new HarvestActionMessage(actionMessage, spaceViewObject.getActiveCardsId(), spaceViewObject.optionForCards());
+        Client.getInstance().sendToServer(harvestActionMessage);
     }
 }

@@ -22,7 +22,7 @@ public class YellowCard extends TowerCard {
 	private boolean toBeActivated = true;
 
 	private ArrayList<ActivableEffect> activableEffectList = new ArrayList<ActivableEffect>();
-	private int[] selectedEffects;
+	private int selectedEffects;
 
 
 	
@@ -30,7 +30,7 @@ public class YellowCard extends TowerCard {
 		super(id, epoch, color, cardName, effects);
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
-		selectedEffects = new int[activableEffectList.size()];
+		selectedEffects = 0;
 	}
 
 	public YellowCard(int id, Epoch epoch, ColorEnumeration color, String cardName,  ArrayList<ArrayList<Resource>> requirements,
@@ -39,14 +39,14 @@ public class YellowCard extends TowerCard {
 
 		for (Effect a: effects)
 			if (a instanceof ActivableEffect) this.activableEffectList.add((ActivableEffect) a);
-		selectedEffects = new int[activableEffectList.size()];
+		selectedEffects = 0;
 	}
 	
-	public int[] getSelectedEffects() {
+	public int getSelectedEffects() {
 		return selectedEffects;
 	}
 
-	public void setSelectedEffects(int[] selectedEffects) {
+	public void setSelectedEffects(int selectedEffects) {
 		this.selectedEffects = selectedEffects;
 	}
 
@@ -62,7 +62,7 @@ public class YellowCard extends TowerCard {
 		if(this.getToBeActivated()){
 			// apply selected alternative for each effect which hase state = STATE_READY ( check ActivableEffect for details)
 			for(int i = 0; activableEffectList.size() > i; i++)
-				activableEffectList.get(i).apply(familyMember, selectedEffects[i]);
+				activableEffectList.get(i).apply(familyMember, selectedEffects);
 		}
 
 

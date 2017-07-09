@@ -8,7 +8,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class LeaderDraftChoiceMessage implements DraftResponseNetMessage {
 
-    private Integer choice;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3208852752070619956L;
+	private Integer choice;
 
     public LeaderDraftChoiceMessage(Integer choice){
         this.choice = choice;

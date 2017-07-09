@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.net.message.gamemessages;
 
 import it.polimi.ingsw.ps05.client.ctrl.GameResponseMessageVisitor;
 import it.polimi.ingsw.ps05.net.GameStatus;
-import it.polimi.ingsw.ps05.server.controller.GameCommandsVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
@@ -11,7 +10,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class GameUpdateMessage implements GameResponseMessage {
 
-    public static final String MESSAGE = "GameUpdateMessage Here!";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2522798785425901624L;
+	public static final String MESSAGE = "GameUpdateMessage Here!";
     private GameStatus gameStatus;
 
     public GameUpdateMessage(GameStatus gameStatus){

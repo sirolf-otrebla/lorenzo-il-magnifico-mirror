@@ -18,7 +18,7 @@ public class EndDraftMessage implements LeaderDraftMessage {
 
     public EndDraftMessage(ArrayList<Integer> playerLeaderCards){
 
-        this.playerLeaderCards = playerLeaderCards;
+        this.setPlayerLeaderCards(playerLeaderCards);
     }
 
     @Override
@@ -30,5 +30,13 @@ public class EndDraftMessage implements LeaderDraftMessage {
 	public void acceptVisitor(DraftVisitor vi) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<Integer> getPlayerLeaderCards() {
+		return playerLeaderCards;
+	}
+
+	public void setPlayerLeaderCards(ArrayList<Integer> playerLeaderCards) {
+		this.playerLeaderCards = playerLeaderCards;
 	}
 }

@@ -7,29 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eaee0cec-b4a3-4574-a522-8c89e942af57" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.sqlite" afterPath="$PROJECT_DIR$/data.sqlite" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/GameResponseMessageVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewVisitorInterface.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewVisitorInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/net/ClientMessageVisitor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/cli/CLIMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/MarkerWidget.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/MarkerWidget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/PrivilegeBonus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/PrivilegeConversionMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameCommandsVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ServerNetMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ServerNetMessageVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/EndActionStrategyContainer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/database/Database.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/database/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/NetMessageVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/net/PlayerClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/utils/CommonJsonParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -132,8 +114,18 @@
       <file leaf-file-name="SetUpGuiVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="30" />
+            <state relative-caret-position="-945">
+              <caret line="111" column="17" lean-forward="true" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UpdateViewVisitor.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1349">
+              <caret line="80" column="5" lean-forward="false" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -163,70 +155,137 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/TowerTileInterface.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
-              <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
+              <caret line="10" column="68" lean-forward="false" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MarketSpace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/MarketSpace.java">
+      <file leaf-file-name="GUIMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="37" />
+            <state relative-caret-position="431">
+              <caret line="104" column="155" lean-forward="false" selection-start-line="104" selection-start-column="155" selection-end-line="104" selection-end-column="155" />
               <folding>
-                <element signature="e#1528#1529#0" expanded="true" />
-                <element signature="e#1559#1560#0" expanded="true" />
+                <marker date="1499556972683" expanded="true" signature="17607:17648" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="17684:17712" ph="/**...*/" />
+                <marker date="1499556972683" expanded="true" signature="17750:17821" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="17856:18059" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="18119:18199" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="18231:18303" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="18345:18462" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="18565:18826" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="18945:19233" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="19357:20576" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="20733:21391" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="21511:21960" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="22039:22503" ph="{...}" />
+                <marker date="1499556972683" expanded="false" signature="22535:22540" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="22573:22576" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="22610:22615" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="22649:22652" ph=" }" />
+                <marker date="1499556972683" expanded="true" signature="22702:22831" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="22907:22965" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="23021:23221" ph="{...}" />
+                <marker date="1499556972683" expanded="false" signature="23264:23269" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="23298:23301" ph=" }" />
+                <marker date="1499556972683" expanded="true" signature="23393:23437" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="23472:23501" ph="/**...*/" />
+                <marker date="1499556972683" expanded="true" signature="23580:23680" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="23622:23675" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="23812:24230" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="24354:24600" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="24652:24703" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="24745:25784" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="24788:24989" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="25036:25204" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="25250:25313" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="25360:25779" ph="{...}" />
+                <marker date="1499556972683" expanded="true" signature="25903:25954" ph="{...}" />
+                <marker date="1499556972683" expanded="false" signature="26007:26012" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26039:26042" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26095:26100" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26126:26129" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26177:26182" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26206:26209" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26261:26266" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26289:26292" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26344:26349" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26372:26375" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26427:26432" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26458:26461" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26495:26500" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26517:26520" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26568:26573" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26600:26603" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26640:26645" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26665:26668" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26722:26727" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26760:26763" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="26808:26813" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="26841:26844" ph=" }" />
+                <marker date="1499556972683" expanded="true" signature="26915:26971" ph="{...}" />
+                <marker date="1499556972683" expanded="false" signature="27015:27020" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27047:27050" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="27118:27123" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27170:27173" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="27214:27219" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27239:27242" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="27300:27305" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27338:27341" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="27375:27380" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27443:27448" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27470:27473" ph=" }" />
+                <marker date="1499556972683" expanded="false" signature="27523:27528" ph=" { " />
+                <marker date="1499556972683" expanded="false" signature="27551:27554" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionSpace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/ActionSpace.java">
+      <file leaf-file-name="ActionMessage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+            <state relative-caret-position="462">
+              <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+              <folding>
+                <element signature="e#1033#1034#0" expanded="true" />
+                <element signature="e#1068#1069#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlueCard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="588">
+              <caret line="35" column="41" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="35" selection-end-column="41" />
+              <folding>
+                <element signature="e#3894#3895#0" expanded="true" />
+                <element signature="e#3939#3940#0" expanded="true" />
+                <element signature="e#3979#3980#0" expanded="true" />
+                <element signature="e#4004#4005#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Card.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/Card.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="board.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/board.json">
+      <file leaf-file-name="TowerCard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="169" column="20" lean-forward="false" selection-start-line="169" selection-start-column="20" selection-end-line="169" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Board.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="14" column="61" lean-forward="false" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FaithResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/FaithResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUIMain.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="102" column="155" lean-forward="false" selection-start-line="102" selection-start-column="139" selection-end-line="102" selection-end-column="155" />
+            <state relative-caret-position="525">
+              <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -244,7 +303,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>drawsq</find>
       <find>System</find>
       <find>setconn</find>
       <find>leader</find>
@@ -274,6 +332,7 @@
       <find>point</find>
       <find>ge</find>
       <find>marke</find>
+      <find>set</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -295,8 +354,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/GameUpdateMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/GameUpdateMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/GameFlowController.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResourceCostBonus.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/MoveNextPlayerStrategy.java" />
@@ -314,7 +371,6 @@
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ExcommunicationTriggerMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/ExcommunicationTriggerListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/gamemessages/ExcommunicationChoiceMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/server/controller/endactionstrategies/BonusActionStrategy.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tower.java" />
@@ -344,8 +400,11 @@
         <option value="$PROJECT_DIR$/target/classes/board.json" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/ctrl/ViewVisitorInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/TowerTileInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java" />
       </list>
     </option>
   </component>
@@ -1879,13 +1938,6 @@
       <workItem from="1499450881795" duration="7826000" />
       <workItem from="1499469020938" duration="369000" />
     </task>
-    <task id="LOCAL-00034" summary="correzione errore server">
-      <created>1498830307025</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1498830307025</updated>
-    </task>
     <task id="LOCAL-00035" summary="interface visitor">
       <created>1498836954839</created>
       <option name="number" value="00035" />
@@ -2222,7 +2274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499545028842</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="inizio setup gui">
+      <created>1499552982023</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1499552982023</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2258,7 +2317,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="471846000" />
+    <option name="totallyTimeSpent" value="474744000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2359,7 +2418,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1403556" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990962" sideWeight="0.49786097" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17963752" sideWeight="0.49781388" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32743838" sideWeight="0.49568966" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271028" sideWeight="0.49568966" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18074866" sideWeight="0.5021861" order="7" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -2407,7 +2466,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Completato DraftController Carte Leader" />
     <MESSAGE value="AuthListener Completato" />
     <MESSAGE value="NOI NON VOGLIAMO CLANDESTINI" />
     <MESSAGE value="Completato Login e Lobby pre partita" />
@@ -2432,7 +2490,8 @@
     <MESSAGE value="bugfixes" />
     <MESSAGE value="sistemati spazi azione mercato" />
     <MESSAGE value="sistemati privilegi" />
-    <option name="LAST_COMMIT_MESSAGE" value="sistemati privilegi" />
+    <MESSAGE value="inizio setup gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio setup gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2491,45 +2550,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="86" column="71" lean-forward="false" selection-start-line="86" selection-start-column="71" selection-end-line="86" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GoldResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/GreenBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="47" column="76" lean-forward="false" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/resourcesandbonuses/BlueBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="47" column="9" lean-forward="false" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-          <folding>
-            <marker date="1499526803745" expanded="false" signature="1786:1791" ph=" { " />
-            <marker date="1499526803745" expanded="false" signature="1808:1811" ph=" }" />
-            <marker date="1499526803745" expanded="false" signature="1846:1851" ph=" { " />
-            <marker date="1499526803745" expanded="false" signature="1863:1866" ph=" }" />
-            <marker date="1499526803745" expanded="false" signature="1905:1909" ph=" { " />
-            <marker date="1499526803745" expanded="false" signature="1928:1931" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/Familiar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -2579,17 +2599,6 @@
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-          <folding>
-            <element signature="e#1033#1034#0" expanded="false" />
-            <element signature="e#1068#1069#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2872,8 +2881,8 @@
         <state relative-caret-position="315">
           <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="37" />
           <folding>
-            <element signature="e#1528#1529#0" expanded="true" />
-            <element signature="e#1559#1560#0" expanded="true" />
+            <element signature="e#1528#1529#0" expanded="false" />
+            <element signature="e#1559#1560#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2897,7 +2906,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/spaces/TowerTileInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
-          <caret line="10" column="68" lean-forward="true" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
+          <caret line="10" column="68" lean-forward="false" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -2910,18 +2919,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/net/message/ActionMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="30" />
+        <state relative-caret-position="462">
+          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+          <folding>
+            <element signature="e#1033#1034#0" expanded="true" />
+            <element signature="e#1068#1069#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/BlueCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="35" column="41" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="35" selection-end-column="41" />
+          <folding>
+            <element signature="e#3894#3895#0" expanded="true" />
+            <element signature="e#3939#3940#0" expanded="true" />
+            <element signature="e#3979#3980#0" expanded="true" />
+            <element signature="e#4004#4005#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/gui/GUIMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="102" column="155" lean-forward="false" selection-start-line="102" selection-start-column="139" selection-end-line="102" selection-end-column="155" />
+        <state relative-caret-position="431">
+          <caret line="104" column="155" lean-forward="false" selection-start-line="104" selection-start-column="155" selection-end-line="104" selection-end-column="155" />
+          <folding>
+            <marker date="1499556972683" expanded="true" signature="17607:17648" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="17684:17712" ph="/**...*/" />
+            <marker date="1499556972683" expanded="true" signature="17750:17821" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="17856:18059" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="18119:18199" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="18231:18303" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="18345:18462" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="18565:18826" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="18945:19233" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="19357:20576" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="20733:21391" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="21511:21960" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="22039:22503" ph="{...}" />
+            <marker date="1499556972683" expanded="false" signature="22535:22540" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="22573:22576" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="22610:22615" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="22649:22652" ph=" }" />
+            <marker date="1499556972683" expanded="true" signature="22702:22831" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="22907:22965" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="23021:23221" ph="{...}" />
+            <marker date="1499556972683" expanded="false" signature="23264:23269" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="23298:23301" ph=" }" />
+            <marker date="1499556972683" expanded="true" signature="23393:23437" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="23472:23501" ph="/**...*/" />
+            <marker date="1499556972683" expanded="true" signature="23580:23680" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="23622:23675" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="23812:24230" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="24354:24600" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="24652:24703" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="24745:25784" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="24788:24989" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="25036:25204" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="25250:25313" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="25360:25779" ph="{...}" />
+            <marker date="1499556972683" expanded="true" signature="25903:25954" ph="{...}" />
+            <marker date="1499556972683" expanded="false" signature="26007:26012" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26039:26042" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26095:26100" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26126:26129" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26177:26182" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26206:26209" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26261:26266" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26289:26292" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26344:26349" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26372:26375" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26427:26432" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26458:26461" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26495:26500" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26517:26520" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26568:26573" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26600:26603" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26640:26645" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26665:26668" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26722:26727" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26760:26763" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="26808:26813" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="26841:26844" ph=" }" />
+            <marker date="1499556972683" expanded="true" signature="26915:26971" ph="{...}" />
+            <marker date="1499556972683" expanded="false" signature="27015:27020" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27047:27050" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="27118:27123" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27170:27173" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="27214:27219" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27239:27242" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="27300:27305" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27338:27341" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="27375:27380" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27443:27448" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27470:27473" ph=" }" />
+            <marker date="1499556972683" expanded="false" signature="27523:27528" ph=" { " />
+            <marker date="1499556972683" expanded="false" signature="27551:27554" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/model/cards/TowerCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/SetUpGuiVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-945">
+          <caret line="111" column="17" lean-forward="true" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/ps05/client/view/UpdateViewVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1349">
+          <caret line="80" column="5" lean-forward="false" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
           <folding />
         </state>
       </provider>

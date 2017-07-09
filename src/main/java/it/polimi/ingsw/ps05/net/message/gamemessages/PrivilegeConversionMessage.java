@@ -11,8 +11,12 @@ import java.util.ArrayList;
  */
 public class PrivilegeConversionMessage implements NetMessage {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6560428085612827867L;
+	private ArrayList<Integer> choices;
     private Integer playerID;
-    private ArrayList<Integer> choices;
 
     public PrivilegeConversionMessage(ArrayList<Integer> choices, Integer playerID) {
         this.choices = choices;

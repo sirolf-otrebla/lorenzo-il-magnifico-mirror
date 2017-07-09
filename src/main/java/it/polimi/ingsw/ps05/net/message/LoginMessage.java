@@ -5,6 +5,10 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 public class LoginMessage implements AuthMessage {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7270402833077537316L;
 	private String username;
 	private String password;
 	

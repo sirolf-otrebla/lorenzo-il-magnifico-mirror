@@ -32,6 +32,7 @@ public class SocketConn extends LimConnection {
     		while (true){
 					message = stream.takeInData();
 					System.out.println("ho ricevuto qualcosa");
+					System.out.println(message.toString());
 					setChanged();
 					notifyObservers();
 					flushInBuff();
