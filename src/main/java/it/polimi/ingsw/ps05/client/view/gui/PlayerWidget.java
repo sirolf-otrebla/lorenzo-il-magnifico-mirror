@@ -118,12 +118,12 @@ public class PlayerWidget {
     }
 
     // ritorna gli edifici scelti da attivare, incluse le scelte multiple
-    public ArrayList<PairObject> displayProductionPopup(AcquiredCardWidget[] yellowCards) {
+    public ArrayList<PairObject> displayProductionPopup(ArrayList<AcquiredCardWidget> yellowCards) {
         return this.productionPopup.display(yellowCards);
     }
 
     // ritorna i territori scelti da attivare
-    public ArrayList<Integer> displayHarvestingPopup(AcquiredCardWidget[] greenCards) {
+    public ArrayList<Integer> displayHarvestingPopup(ArrayList<AcquiredCardWidget> greenCards) {
         return this.harvestingPopup.display(greenCards);
     }
 }

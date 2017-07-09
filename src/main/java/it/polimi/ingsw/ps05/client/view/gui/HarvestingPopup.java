@@ -29,10 +29,10 @@ public class HarvestingPopup {
     static final int CARD_HEIGHT = 220;
 
     private HBox cardsToActivateBox;
-    private AcquiredCardWidget[] cardsToActivate;
-    private ArrayList<Integer> selected;
+    private ArrayList<AcquiredCardWidget> cardsToActivate;
+    private ArrayList<Integer> selected; //TODO passare l'array al controller
 
-    public ArrayList<Integer> display(AcquiredCardWidget[] cardsToActivate) {
+    public ArrayList<Integer> display(ArrayList<AcquiredCardWidget> cardsToActivate) {
 
         this.cardsToActivate = cardsToActivate;
 
@@ -98,7 +98,7 @@ public class HarvestingPopup {
         return cardsToActivateBox;
     }
 
-    public AcquiredCardWidget[] getCardsToActivate() {
+    public ArrayList<AcquiredCardWidget> getCardsToActivate() {
         return cardsToActivate;
     }
 }
