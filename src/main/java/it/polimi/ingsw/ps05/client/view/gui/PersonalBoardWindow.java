@@ -167,6 +167,8 @@ public class PersonalBoardWindow {
     public AcquiredCardWidget[] getHarvestingCards () {
         return this.cardAcquiredWidget[1];
     }
+
+
 }
 
 

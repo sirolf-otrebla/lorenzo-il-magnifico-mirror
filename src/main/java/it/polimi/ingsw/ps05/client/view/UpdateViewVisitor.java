@@ -22,7 +22,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
     private GUIMain gui;
     private Client client;
 
-    public UpdateViewVisitor(Client client, GUIMain main){
+    public UpdateViewVisitor(GUIMain main){
         for (SingleOccupantActionSpaceWidget widget:
              gui.getMarketSpaceWidgets()) {
             actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
@@ -156,9 +156,11 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                     this.gui.getPlayer().getResourceWidget().repaint();
                 }
             }
+
         } else {
             for (OpponentWidget opponentWidget : this.gui.getOpponentsArray()) {
                 if (opponentWidget.getOpponentColor() == player.getColor()) {
+
                     for (Resource r : player.getResourceList()) {
                         if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
                                 r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
@@ -167,10 +169,14 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
                         }
                     }
+
+                    OpponentBoardWindow boardWindow = opponentWidget.getPersonalBoard();
+
                 }
-
-
             }
+        }
+
+
         /*if (player.getColor() == this.gui.getPlayer().getPlayerColor()){
 
         }
@@ -210,8 +216,6 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             }
         }
         */
-
-        }
     }
 
     @Override
