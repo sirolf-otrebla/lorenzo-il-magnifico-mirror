@@ -16,6 +16,9 @@ import it.polimi.ingsw.ps05.server.controller.Game;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -98,6 +101,31 @@ public class ActionTest extends TestCase {
 
 
 	}
+	
+	@Test
+	public void getterSetterTest() throws InterruptedException{
+		
+		Game game;
+		ArrayList<Player> pList = new ArrayList<>();
+		ArrayList<PlayerClient> pcList = new ArrayList<>();
+		pList.add(new Player(0, "luca", ColorEnumeration.Blue));
+		pList.add(new Player(1, "alberto", ColorEnumeration.Green));
+		pList.add(new Player(2, "andrea", ColorEnumeration.Violet));
+		pList.add(new Player(3, "franco", ColorEnumeration.Yellow));
+				
+		game = new Game(false, false, 5, pcList);
+		game.start();
+		Familiar f = ((PlayerClient)game.getPlayerInGame().values().toArray()[0]).getPlayer().getFamilyMember(ColorEnumeration.Black);
+		ActionSpace s = (ActionSpace)game.getBoard().getActSpacesMap().values().toArray()[0];
+		Action action = new Action(f, s);
+		assertEquals(f, action.getFamiliar());
+		assertEquals(s, action.getPosition());
+		if (action.isLegal()){
+			assertTrue(action.getSuitableReqAlternatives().size() > 0);
+		} else {
+			assertTrue(action.getSuitableReqAlternatives().size() == 0);
+		}
+	}
 
 	@Test
 	public void testActionOnSpace() throws InterruptedException {
@@ -141,6 +169,7 @@ public class ActionTest extends TestCase {
 			}
 		}
 		*/
+
 	}
 
 	@Test

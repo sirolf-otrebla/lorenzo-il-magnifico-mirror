@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps05.server.controller.*;
 import it.polimi.ingsw.ps05.server.net.FakeConnection;
 import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
@@ -147,7 +148,7 @@ public class ResourceTest {
 		Game game = new Game(false, false, 100, playerClients);
 		assertEquals(false, game.isUsingCompleteRules());
 		for (PlayerClient client: playerClients) {
-			assertEquals(true, client.isInGame());
+			assertTrue(client.isInGame());
 		}
 	}
 
@@ -161,10 +162,374 @@ public class ResourceTest {
 		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
 		actionResult.resetResult(players.get(1));
 		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
-
-
 	}
 
+	
+	@Test
+	public void alwaysUnFullFilledResourceTest(){
+		AlwaysUnFullFilledResource res = new AlwaysUnFullFilledResource();
+		try {
+			res.remove(5);
+			fail();
+		} catch (Exception e){
+			assertEquals(IllegalMethodCallException.class, e.getClass());
+		}
+		try {
+			res.remove(new GoldResource(5));
+			fail();
+		} catch (Exception e){
+			assertEquals(IllegalMethodCallException.class, e.getClass());
+		}
+		try {
+			res.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e){
+			assertEquals(NotEnoughResourcesException.class, e.getClass());
+		}
+		assertTrue(!res.hasEnoughResources(new Familiar()));
+		assertNull(res.getValue());
+		assertEquals(AlwaysUnFullFilledResource.id, res.getID());
+	}
+	
+	@Test
+	public void blueActionTest() throws NoSuchMethodException{
+		BlueAction a = new BlueAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		BlueAction b = new BlueAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	@Test
+	public void BlueBonusTest() throws NoSuchMethodException{
+		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Blue).
+				getTiles().values().iterator();
+		firstTile = iterator.next();
+		BlueBonus actionResult = new BlueBonus(); //allbonus
+		Dice dice = firstTile.getDiceRequired();
+		actionResult.setGame(game);
+		actionResult.setValue(2);
+		actionResult.applyResult(players.get(1));
+		assertEquals((int) dice.getValue() -2, (int) firstTile.getDiceRequired().getValue());
+		actionResult.resetResult(players.get(1));
+		assertEquals((int) dice.getValue(), (int) firstTile.getDiceRequired().getValue());
+	}
+	
+	@Test
+	public void HarvestBonusTest() throws NoSuchMethodException{
+		for (ActionSpace s : board.getActSpacesMap().values()){
+			if (s instanceof HarvestingSpace){
+				HarvestBonus actionResult = new HarvestBonus(); //allbonus
+				Dice dice = s.getDiceRequirement();
+				actionResult.setGame(game);
+				actionResult.setValue(2);
+				actionResult.applyResult(players.get(1));
+				assertEquals((int) dice.getValue() -2, (int) s.getDiceRequirement().getValue());
+				actionResult.resetResult(players.get(1));
+				assertEquals((int) dice.getValue(), (int) s.getDiceRequirement().getValue());
+			}
+		}
+	}
+	
+	@Test
+	public void ProductionBonusTest() throws NoSuchMethodException{
+		for (ActionSpace s : board.getActSpacesMap().values()){
+			if (s instanceof ProductionSpace){
+				ProductionBonus actionResult = new ProductionBonus(); //allbonus
+				Dice dice = s.getDiceRequirement();
+				actionResult.setGame(game);
+				actionResult.setValue(2);
+				actionResult.applyResult(players.get(1));
+				assertEquals((int) dice.getValue() -2, (int) s.getDiceRequirement().getValue());
+				actionResult.resetResult(players.get(1));
+				assertEquals((int) dice.getValue(), (int) s.getDiceRequirement().getValue());
+			}
+		}
+	}
+	
+	@Test
+	public void bonusDiceTest() throws NoSuchMethodException{
+		BonusDice d = new BonusDice(1, ColorEnumeration.Black, true);
+		assertEquals(1,(int)d.getValue());
+		assertNull(d.getGame());
+		assertEquals(ColorEnumeration.Black, d.getColor());
+		assertTrue(d.isToAdd());
+		d.setValue(5);
+		assertEquals(5, (int)d.getValue());
+		d.setGame(game);
+		assertEquals(game,d.getGame());
+	}
+	
+	@Test
+	public void bonusWithMultiplierTest(){
+		BonusWithMultiplier b = new BonusWithMultiplier();
+		assertNull(b.getCardToCount());
+		assertNull(b.getGame());
+		assertNull(b.getMultiplier());
+		assertNull(b.getReturnResource());
+		Float f = new Float(0.5F);
+		VictoryResource r = new VictoryResource(5);
+		b.setReturnResource(r);
+		b.setMultiplier(f);
+		b.setCardToCount(YellowCard.class);
+		assertEquals(YellowCard.class, b.getCardToCount());
+		assertEquals(f,b.getMultiplier());
+		assertEquals(r, b.getReturnResource());
+		try {
+			b.getValue();
+			fail();
+		} catch (Exception e) {
+			assertEquals(NoSuchMethodException.class, e.getClass());
+		}
+		
+		BonusWithMultiplier b1 = new BonusWithMultiplier(f,
+				r, 
+				YellowCard.class);
+		assertEquals(f,b1.getMultiplier());
+		assertEquals(r, b1.getReturnResource());
+		assertEquals(YellowCard.class, b1.getCardToCount());
+		b1.setGame(game);
+		assertEquals(game,b1.getGame());
+		try{
+			b1.setValue(5);
+			fail();
+		} catch (Exception e){
+			assertEquals(NoSuchMethodException.class, e.getClass());
+		}
+	}
+	
+	@Test
+	public void CopyLeaderTest() throws NoSuchMethodException{
+		CopyLeader l = new CopyLeader();
+		assertNull(l.getGame());
+		l.setGame(game);
+		assertEquals(game,l.getGame());
+		assertNull(l.getValue());
+		l.setValue(5);
+		assertEquals(5, (int)l.getValue());
+		
+	}
+	
+	@Test
+	public void DiceTest(){
+		Dice d = new Dice(ColorEnumeration.Black);
+		assertTrue(d.getValue() >= 1 && d.getValue() <= 6);
+		assertEquals(ColorEnumeration.Black, d.getColor());
+		d.setValue(5);
+		assertEquals(5,(int)d.getValue());
+		try {
+			d.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			d.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		Dice d1 = new Dice(ColorEnumeration.Black,5);
+		assertEquals(ColorEnumeration.Black, d1.getColor());
+		assertEquals(5,(int)d1.getValue());
+	}
+	
+	@Test
+	public void FreeActionTest() throws NoSuchMethodException{
+		FreeAction a = new FreeAction();
+		assertNull(a.getValue());
+		assertNull(a.getGame());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		a.setValue(2);
+		assertEquals(2,(int)a.getValue());
+		
+		FreeAction a1 = new FreeAction(1);
+		assertEquals(1, (int)a1.getValue());
+		assertNull(a1.getGame());
+		a1.setGame(game);
+		assertEquals(game,a1.getGame());
+		a1.setValue(2);
+		assertEquals(2,(int)a1.getValue());
+	}
+	
+	@Test
+	public void GoldBonusTest(){
+		GoldResourceCostBonus r = new GoldResourceCostBonus();
+		assertTrue(!r.hasEnoughResources(new Familiar()));
+		assertNull(r.getValue());
+		assertNull(r.getGame());
+		r.setGame(game);
+		assertEquals(game,r.getGame());
+		r.setValue(1);
+		assertEquals(1,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+		
+	}
+	
+	@Test
+	public void StoneBonusTest(){
+		StoneResourceCostBonus r = new StoneResourceCostBonus();
+		assertTrue(!r.hasEnoughResources(new Familiar()));
+		assertNull(r.getValue());
+		assertNull(r.getGame());
+		r.setGame(game);
+		assertEquals(game,r.getGame());
+		r.setValue(1);
+		assertEquals(1,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+		
+	}
+	
+	@Test
+	public void WoodBonusTest(){
+		WoodResourceCostBonus r = new WoodResourceCostBonus();
+		assertTrue(!r.hasEnoughResources(new Familiar()));
+		assertNull(r.getValue());
+		assertNull(r.getGame());
+		r.setGame(game);
+		assertEquals(game,r.getGame());
+		r.setValue(1);
+		assertEquals(1,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+		
+	}
+	
+	@Test
+	public void greenActionTest() throws NoSuchMethodException{
+		GreenAction a = new GreenAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		GreenAction b = new GreenAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	@Test
+	public void yellowActionTest() throws NoSuchMethodException{
+		YellowAction a = new YellowAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		YellowAction b = new YellowAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	@Test
+	public void violetActionTest() throws NoSuchMethodException{
+		VioletAction a = new VioletAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		VioletAction b = new VioletAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	@Test
+	public void harvestActionTest() throws NoSuchMethodException{
+		HarvestAction a = new HarvestAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		HarvestAction b = new HarvestAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	@Test
+	public void productionActionTest() throws NoSuchMethodException{
+		ProductionAction a = new ProductionAction();
+		assertNull(a.getGame());
+		assertNull(a.getValue());
+		a.setValue(1);
+		assertEquals(1, (int) a.getValue());
+		a.setGame(game);
+		assertEquals(game,a.getGame());
+		
+		ProductionAction b = new ProductionAction(3);
+		assertEquals(3, (int) b.getValue());
+	}
+	
+	
 	@Test
 	public void GreenBonusTest() throws NoSuchMethodException{
 		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Green).
@@ -185,12 +550,13 @@ public class ResourceTest {
 				getTiles().values().iterator();
 		firstTile = iterator.next();
 		YellowBonus actionResult = new YellowBonus(); //allbonus
+		Dice dice = firstTile.getDiceRequired();
 		actionResult.setGame(game);
 		actionResult.setValue(2);
 		actionResult.applyResult(players.get(1));
-		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		assertEquals((int) dice.getValue() -2, (int) firstTile.getDiceRequired().getValue());
 		actionResult.resetResult(players.get(1));
-		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+		assertEquals((int) dice.getValue(), (int) firstTile.getDiceRequired().getValue());
 
 	}
 
@@ -199,28 +565,14 @@ public class ResourceTest {
 		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Violet).
 				getTiles().values().iterator();
 		firstTile = iterator.next();
+		Dice dice = firstTile.getDiceRequired();
 		VioletBonus actionResult = new VioletBonus(); //allbonus
 		actionResult.setGame(game);
 		actionResult.setValue(2);
 		actionResult.applyResult(players.get(1));
-		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
+		assertEquals((int) dice.getValue() -2, (int) firstTile.getDiceRequired().getValue());
 		actionResult.resetResult(players.get(1));
-		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
-
-	}
-
-	@Test
-	public void BlueBonusTest() throws NoSuchMethodException{
-		Iterator<TowerTileInterface> iterator = board.getTowerList().get(ColorEnumeration.Blue).
-				getTiles().values().iterator();
-		firstTile = iterator.next();
-		BlueBonus actionResult = new BlueBonus(); //allbonus
-		actionResult.setGame(game);
-		actionResult.setValue(2);
-		actionResult.applyResult(players.get(1));
-		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
-		actionResult.resetResult(players.get(1));
-		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+		assertEquals((int) dice.getValue(), (int) firstTile.getDiceRequired().getValue());
 
 	}
 

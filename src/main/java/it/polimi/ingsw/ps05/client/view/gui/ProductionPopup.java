@@ -29,10 +29,10 @@ public class ProductionPopup {
     static final int CARD_HEIGHT = 220;
 
     private HBox cardsToActivateBox;
-    private AcquiredCardWidget[] cardsToActivate;
+    private ArrayList<AcquiredCardWidget> cardsToActivate;
     private ArrayList<PairObject> selected = new ArrayList<>();
 
-    public ArrayList<PairObject> display(AcquiredCardWidget[] cardsToActivate) {
+    public ArrayList<PairObject> display(ArrayList<AcquiredCardWidget> cardsToActivate) {
 
         this.cardsToActivate = cardsToActivate;
 
@@ -107,7 +107,7 @@ public class ProductionPopup {
         return cardsToActivateBox;
     }
 
-    public AcquiredCardWidget[] getCardsToActivate() {
+    public ArrayList<AcquiredCardWidget> getCardsToActivate() {
         return cardsToActivate;
     }
 }

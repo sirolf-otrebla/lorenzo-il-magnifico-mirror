@@ -8,23 +8,17 @@ import javafx.scene.text.Font;
 /**
  * Created by miotto on 03/07/17.
  */
-public class DieWidget {
+public class DieWidget extends Label{
 
-    private int referenceId; //TODO controllare se i dadi necessitano di ID
-    private Integer value;
-    private Label label;
     private ColorEnumeration dieColor;
+    private Integer value;
 
-    public DieWidget(int referenceId) {
-        this.dieColor = GraphicResources.getDiceColor(referenceId); // va da 0 a 2
-        this.label = new Label("");
-    }
 
     public DieWidget(ColorEnumeration color) {
         this.dieColor = color;
-        this.label = new Label(""); // empty label
+        this.setText(""); // empty label
         //this.label.setFont(Font.loadFont("file:./src/main/res/fonts/JimNightshade-Regular.ttf", 38));
-        this.label.getStyleClass().add("diewidget");
+        this.getStyleClass().add("diewidget");
     }
 
     /*
@@ -43,20 +37,11 @@ public class DieWidget {
     */
 
     public void repaint() {
-        this.label.setText(String.valueOf(value));
+        this.setText(String.valueOf(value));
     }
 
 
 
-
-
-    public int getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(int referenceId) {
-        this.referenceId = referenceId;
-    }
 
     public Integer getValue() {
         return value;
@@ -64,14 +49,6 @@ public class DieWidget {
 
     public void setValue(Integer value) {
         this.value = value;
-    }
-
-    public Label getLabel() {
-        return label;
-    }
-
-    public void setLabel(Label label) {
-        this.label = label;
     }
 
     public ColorEnumeration getDieColor() {

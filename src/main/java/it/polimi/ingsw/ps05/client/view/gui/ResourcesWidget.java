@@ -1,9 +1,16 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.net.MalformedURLException;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -62,13 +69,27 @@ public class ResourcesWidget {
         hbox.setLayoutY((32.08 / 100) * stageHeight);
         hbox.setFillHeight(true);
         hbox.setPrefHeight((4.8 / 100) * stageHeight);
-
         hbox.getChildren().addAll(goldLabel, woodLabel, stoneLabel, servantLabel);
 
-        Scene scene = new Scene(hbox);
+        ImageView resourcesBackground = new ImageView();
+        File resFile = new File("./src/main/res/img/resources.png");
+        try {
+            Image img = new Image(resFile.toURI().toURL().toString());
+            resourcesBackground.setImage(img);
+            resourcesBackground.setPreserveRatio(true);
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 
-        //TODO hbox da inserire nella personalBoard degli avversari tramite PopOver
+        StackPane stackPane = new StackPane();
+        stackPane.setAlignment(Pos.CENTER);
+        stackPane.getChildren().addAll(resourcesBackground, hbox);
 
+        Scene scene = new Scene(stackPane);
+
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void repaint() {

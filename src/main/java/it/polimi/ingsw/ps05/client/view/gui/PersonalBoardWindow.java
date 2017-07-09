@@ -1,15 +1,19 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -22,28 +26,20 @@ public class PersonalBoardWindow {
     public static double personalBoardWidth, personalBoardHeight, personalBoardResize, ORIGINAL_RATIO = (ORIGINAL_WIDTH / ORIGINAL_HEIGHT);
 
     GUIMain board;
-    private AcquiredCardWidget[][] cardAcquiredWidget = new AcquiredCardWidget[4][6];
+    private HashMap<ColorEnumeration, ArrayList<AcquiredCardWidget>> cardAcquiredColorMap = new HashMap<>();
     private BonusTileWidget bonusTile;
 
-    HBox[] cardHboxes;
+    public static final ColorEnumeration[] acquiredCardColorArray = {
+            ColorEnumeration.Yellow,
+            ColorEnumeration.Green,
+            ColorEnumeration.Violet,
+            ColorEnumeration.Blue
+    };
+
+    HashMap<ColorEnumeration, HBox> cardHboxesMap;
 
 
     public PersonalBoardWindow(GUIMain board) {
-        this.board = board;
-        for(int i = 0; i < 4; i++)
-            for(int j = 0; j < 6; j++)
-                this.cardAcquiredWidget[i][j] = new AcquiredCardWidget(); // creating empty card widgets
-        this.bonusTile = new BonusTileWidget(); // creating empty bonus tile
-    }
-
-    public void display() {
-
-        Stage stage = new Stage();
-
-        stage.initModality(Modality.APPLICATION_MODAL);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("My Board");
-        stage.setResizable(false);
 
         // calculate and set window dimensions
         personalBoardHeight = stageHeight * 0.90;
@@ -55,6 +51,38 @@ public class PersonalBoardWindow {
         System.out.println("stagewidth" + stageWidth);
         System.out.println("stageheight" + stageHeight);
 
+        this.board = board;
+
+        // popolo la hashmap delle HBox contenenti le carte
+        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+            cardHboxesMap.put(cardColor, new HBox(10));
+        }
+
+        // popolo la hashmap deglle liste di carte
+        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+            cardAcquiredColorMap.put(cardColor, new ArrayList<AcquiredCardWidget>());
+        }
+
+        // configuro layout delle HBox
+        int i = 0;
+        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+            cardHboxesMap.get(cardColor).setLayoutX((2.4277 / 100) * personalBoardWidth);
+            cardHboxesMap.get(cardColor).setLayoutY((1.8684 + 25.5 * i) / 100 * personalBoardHeight);
+            cardHboxesMap.get(cardColor).setPrefHeight((21.0 / 100) * personalBoardHeight);
+            cardHboxesMap.get(cardColor).setPrefWidth((90.0 / 100) * personalBoardWidth);
+            cardHboxesMap.get(cardColor).setFillHeight(true);
+        }
+    }
+
+    public void display() {
+
+        Stage stage = new Stage();
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("My Board");
+        stage.setResizable(false);
+
         stage.setHeight(personalBoardHeight);
         stage.setWidth(personalBoardWidth);
 
@@ -65,26 +93,25 @@ public class PersonalBoardWindow {
         Button showBonusTileButton = new Button("Bonus tile");
         // showBonusTileButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
         showBonusTileButton.setOnAction((ActionEvent e) -> {
-            //TODO implementare popup
+            displayBonusTile();
         });
         showBonusTileButton.setLayoutX((55.0 / 100) * personalBoardWidth);
         showBonusTileButton.setLayoutY((1.0 / 100) * personalBoardHeight);
 
         /* Add Close button */
         Button closeButton = new Button("Close");
-        closeButton.layoutXProperty().bind(stage.widthProperty().multiply(90 / 100));
-        closeButton.layoutYProperty().bind(stage.heightProperty().multiply(1 / 100));
+        showBonusTileButton.setLayoutX((85.0 / 100) * personalBoardWidth);
+        showBonusTileButton.setLayoutY((1.0 / 100) * personalBoardHeight);
         closeButton.setOnAction((ActionEvent e) -> {
             stage.close();
         });
 
-        /* show acquired cards */
-        cardHboxes = new HBox[4];
-        showCardAcquiredLayout();
         pane.getChildren().addAll(showBonusTileButton, closeButton);
-        for(int i = 0; i < 4; i++) {
-            pane.getChildren().add(cardHboxes[i]);
-        }
+
+        /* show acquired cards */
+        for(ColorEnumeration cardColor: acquiredCardColorArray)
+            pane.getChildren().add(cardHboxesMap.get(cardColor));
+
 
         Scene personalScene = new Scene(pane);
 
@@ -100,6 +127,53 @@ public class PersonalBoardWindow {
         stage.showAndWait();
     }
 
+
+    void displayBonusTile() {
+        Stage stage = new Stage();
+
+        VBox vbox = new VBox();
+        vbox.getChildren().add(getBonusTileWidget());
+
+        Scene scene = new Scene(vbox);
+
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    public BonusTileWidget getBonusTileWidget() {
+        return bonusTile;
+   }
+
+   public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
+        this.bonusTile = bonusTileWidget;
+    }
+
+    public HashMap<ColorEnumeration, HBox> getCardHboxesMap() {
+        return cardHboxesMap;
+    }
+
+    public ArrayList<AcquiredCardWidget> getProductionCards () {
+       return this.cardAcquiredColorMap.get(ColorEnumeration.Yellow);
+    }
+
+    public ArrayList<AcquiredCardWidget> getHarvestingCards () {
+        return this.cardAcquiredColorMap.get(ColorEnumeration.Green);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ /*
     void showCardAcquiredLayout() {
 
         for(int i = 0; i < 4; i++) {
@@ -123,8 +197,9 @@ public class PersonalBoardWindow {
         }
 
     }
+    */
 
-    /***   Metodo per Sirolfo   ***/
+/***   Metodo per Sirolfo   ***/
     /* //TODO metodo forse inutile perché le carte acquistate si aggiornano automaticamente al momento dell'acquisto
     public void repaint() {
 
@@ -143,32 +218,3 @@ public class PersonalBoardWindow {
 
     }
     */
-
-   public HBox[] getCardHboxes() {
-       return cardHboxes;
-   }
-
-   public BonusTileWidget getBonusTileWidget() {
-        return bonusTile;
-   }
-
-   public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
-        this.bonusTile = bonusTileWidget;
-    }
-
-    public AcquiredCardWidget[][] getCardAcquiredWidget() {
-        return cardAcquiredWidget;
-    }
-
-    public AcquiredCardWidget[] getProductionCards () {
-       return this.cardAcquiredWidget[0];
-    }
-
-    public AcquiredCardWidget[] getHarvestingCards () {
-        return this.cardAcquiredWidget[1];
-    }
-
-
-}
-
-

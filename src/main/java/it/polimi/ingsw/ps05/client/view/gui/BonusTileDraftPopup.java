@@ -42,7 +42,7 @@ public class BonusTileDraftPopup {
         for(int i = 0; i < 4; i++) {
             bonusTileArray[i] = new BonusTileWidget(i);
             System.out.println(bonusTileArray[i].getImagePath());
-            hbox.getChildren().add(bonusTileArray[i].getImage());
+            hbox.getChildren().add(bonusTileArray[i]);
             //GridPane.setConstraints(bonusTileArray[i].getImage(), i, 0);
         }
 
@@ -51,9 +51,6 @@ public class BonusTileDraftPopup {
 
         //hbox.setFillHeight(true);
         //hbox.setPrefHeight((30 / 100) * stageHeight);
-
-
-        ImageView prova = bonusTileArray[0].getImage();
 
 
         vbox.setId("bonusTileDraft");
@@ -94,9 +91,9 @@ public class BonusTileDraftPopup {
         for(BonusTileWidget bonusTile: bonusTileArray) {
             if(!bonusTile.isDrafted()) {
                 // make already drafted tiles half-transparent
-                bonusTile.getImage().setOpacity(0.3);
+                bonusTile.setOpacity(0.3);
                 // disable click for already drafted bonus tiles
-                bonusTile.getImage().setMouseTransparent(true);
+                bonusTile.setMouseTransparent(true);
             }
         }
     }

@@ -27,12 +27,18 @@ public class AcquiredCardWidget extends ImageView{
 
     }
 
+    public AcquiredCardWidget(ColorEnumeration color) {
+        this.color = color;
+    }
+
     public AcquiredCardWidget(Integer referenceId) {
         this.referenceId = referenceId;
     }
 
-    public AcquiredCardWidget(Integer referenceId, String path) {
+    public AcquiredCardWidget(Integer referenceId, String path, ColorEnumeration color) {
         this.referenceId = referenceId;
+        this.color = color;
+
         Image i = new Image(path, CARD_ORIGINAL_PERC_HEIGHT_PERSONAL * personalBoardResize, CARD_ORIGINAL_PERC_HEIGHT_PERSONAL * CARD_RATIO * personalBoardResize, true, true);
         this.setImage(i);
 
