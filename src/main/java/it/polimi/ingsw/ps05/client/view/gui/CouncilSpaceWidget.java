@@ -11,20 +11,12 @@ import java.util.ArrayList;
  */
 public class CouncilSpaceWidget extends MultipleSpaceWidget {
 
-    private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
+
 
     public CouncilSpaceWidget(int minimumDie, PlayerWidget player) {
         super(minimumDie, player);
     }
 
 
-
-    public ArrayList<Pair<ColorEnumeration, ColorEnumeration>> getOccupingFamiliarList() {
-        return occupingFamiliarList;
-    }
-
-    public void setOccupingFamiliarList(ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList) {
-        this.occupingFamiliarList = occupingFamiliarList;
-    }
 
 }
