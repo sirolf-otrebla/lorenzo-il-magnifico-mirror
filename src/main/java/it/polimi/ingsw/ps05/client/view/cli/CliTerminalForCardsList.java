@@ -175,6 +175,8 @@ public class CliTerminalForCardsList {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (cards.get(0) instanceof String){
+			
 		} else {
 			infoPrivilege((i*currentWidth)/cards.size() + 1, 0, cards.get(i), textGraphics);
 		}

@@ -1,25 +1,36 @@
 package it.polimi.ingsw.ps05.server.net.rmi;
 
-import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
-import it.polimi.ingsw.ps05.model.Familiar;
-import it.polimi.ingsw.ps05.model.cards.LeaderCard;
+import it.polimi.ingsw.ps05.net.message.NetMessage;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Created by Alberto on 16/06/2017.
  */
-public class MessageBuilder implements RemoteMessaqeInterface {
-    @Override
-    public void discardLeader(LeaderCard leaderCard) {
-
+public class MessageBuilder extends UnicastRemoteObject implements RemoteMessaqeInterface {
+	
+	private static MessageBuilder instance = null;
+	
+    private MessageBuilder() throws RemoteException {
+		super();
+	}
+    
+    public static MessageBuilder getInstance() throws RemoteException{
+    	if (instance == null){
+    		instance = new MessageBuilder();
+    	}
+    	return instance;
     }
 
-    @Override
-    public void activateLeader(LeaderCard leaderCard) {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6482868064446750712L;
 
-    }
-
-    @Override
-    public void executeAction(Familiar familiar, ActionSpace actionSpace) {
-
-    }
+	@Override
+	public NetMessage sendMessage(NetMessage message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

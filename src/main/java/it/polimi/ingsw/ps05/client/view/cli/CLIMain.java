@@ -431,9 +431,13 @@ public class CLIMain implements LimView, Runnable{
 		} else {
 			//CONSIGLIO
 			System.out.println("Consiglio");
-			CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
-					ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
-			a.notifyToActionHandler();
+			Action action = new Action(ghost != null ? ghost:(Familiar)this.player.getFamilyList().toArray()[selectedFam],council);
+			if (action.isLegal()){
+				CliActionSpaceViewObject a = new CliActionSpaceViewObject(council,
+						ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor());
+				a.notifyToActionHandler();
+			}
+			
 		}
 		//meActive = false;
 	}
@@ -1731,12 +1735,15 @@ public class CLIMain implements LimView, Runnable{
 			if (success) break;
 		}
 
-		if (success){
+		if (success || ((LeaderCard)chosenCard.get(0)).isActive()){
 			//attivare carta leader
+			CliActivateLeaderViewObject obj = new CliActivateLeaderViewObject((LeaderCard)chosenCard.get(0));
+			obj.notifyToObservers();
 		} else {
 			//player.getLeaderCardList().remove(((LeaderCard)chosenCard.get(0)));
+			CliDiscardLeaderViewObject obj = new CliDiscardLeaderViewObject((LeaderCard)chosenCard.get(0));
+			obj.notifyToObservers();
 		}
-
 	}
 
 	/**
@@ -1801,6 +1808,19 @@ public class CLIMain implements LimView, Runnable{
 	 */
 	private void resetGhostFamiliar(){
 		ghost = null;
+	}
+	
+	public boolean askForExcomm() throws IOException{
+		//domanda: VOGLIO ESSERE SCOMUNICATO?
+		ArrayList<String> list = new ArrayList<>();
+		list.add("Non voglio essere scomunicato");
+		list.add("Voglio essere scomunicato");
+		CliTerminalForCardsList chose = new CliTerminalForCardsList(list, terminal.getTerminalSize().getColumns(), 1, 1);
+		ArrayList<Integer> a = (ArrayList<Integer>)chose.start();
+		if (a.size() == 0) return false;
+		
+		return a.get(0) == 0 ? false : true;
+		
 	}
 	
 	/**
