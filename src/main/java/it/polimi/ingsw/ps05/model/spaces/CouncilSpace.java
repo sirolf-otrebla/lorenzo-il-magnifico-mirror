@@ -49,6 +49,11 @@ public class CouncilSpace extends MultipleOccupantsActionSpace {
 	public void setOccupied(Familiar occupant) {
 		super.setOccupied(occupant);;
 	}
+	
+	@Override
+	public boolean isOccupied(){
+		return false;
+	}
 
 	@Override
 	public ArrayList<Effect> getEffects() {

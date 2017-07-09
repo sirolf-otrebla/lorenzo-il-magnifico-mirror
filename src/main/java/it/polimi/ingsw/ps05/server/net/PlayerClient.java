@@ -24,7 +24,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 30000000;
+	private static final int  ACT_WAITING_TIME = 120000;
 
 	private Player pl = null;
 	private boolean plExists = false;
@@ -62,6 +62,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 			notifyObservers(mess);
 
 		}else{
+			System.out.println("Messaggio rifiutato");
 			RejectedMessage mess = new RejectedMessage();
 			this.connection.send(mess);
 		}
@@ -110,6 +111,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 
 	public void setInactive(){
 		this.timer.cancel();
+		this.timer = new Timer();
 		this.active = false;
 	}
 	

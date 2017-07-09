@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActivateLeaderViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.DiscardLeaderViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.HarvestSpaceViewObject;
+import it.polimi.ingsw.ps05.client.view.interfaces.PassActionViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ProductionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -23,6 +24,7 @@ public class Client {
     private DiscardLeaderListener discardLeaderListener = new DiscardLeaderListener();
     private ActivateLeaderListener activateLeaderListener = new ActivateLeaderListener();
     private HarvestActionListener harvestActionListener = new HarvestActionListener();
+    private PassActionListener passActionListener = new PassActionListener();
     /* end event observers */
     private static Client client;
     private ServerInterface serverInterface;
@@ -86,6 +88,10 @@ public class Client {
     
     public Integer getId(){
     	return id;
+    }
+    
+    public void linkToObserver(PassActionViewObject observable){
+    	observable.addObserver(this.passActionListener);
     }
     
     public void linkToObserver(ActivateLeaderViewObject observable){

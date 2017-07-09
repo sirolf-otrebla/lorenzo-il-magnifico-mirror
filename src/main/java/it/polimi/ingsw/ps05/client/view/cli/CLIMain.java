@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
+import it.polimi.ingsw.ps05.client.view.interfaces.PassActionViewObject;
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
@@ -362,7 +363,8 @@ public class CLIMain implements LimView, Runnable{
 				}
 				break;
 			case Escape:
-				//passare il turno;
+				CliPassActionViewObject obj = new CliPassActionViewObject();
+				obj.notifyToObservers();
 				break;
 			case EOF:
 				System.exit(0);
@@ -1233,6 +1235,7 @@ public class CLIMain implements LimView, Runnable{
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					"Dado: " + marketList.get(currentColBoard).getDiceRequirement().getValue());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			System.out.println("MARKET REQUIREMENTS: " + marketList.get(currentColBoard).getRequirements().size());
 			for (Effect effect : marketList.get(currentColBoard).getEffects()){
 				System.out.println("EFFETTO MERCATO ------ " + effect.getEffectType().toString());
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
