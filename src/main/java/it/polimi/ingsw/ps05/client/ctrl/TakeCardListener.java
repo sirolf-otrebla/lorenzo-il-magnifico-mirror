@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
-import it.polimi.ingsw.ps05.client.view.gui.TowerTileWidget;
 import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
-import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.net.message.ActionMessage;
 
 import java.util.Observable;
@@ -19,7 +17,10 @@ public class TakeCardListener implements Observer{
         System.out.println("arrivato all'observer TakeCardListener");
         TowerTileViewObject tileWidget = (TowerTileViewObject) arg;
         if (tileWidget.hasMorePaymentOptions()) {
-            //TODO FINESTRA SELEZIONE
+        	System.out.println("writing message ActionMessage");
+            ActionMessage msg = new ActionMessage(tileWidget.getFamilyMemberID(), tileWidget.getId(),
+                    tileWidget.getSelectedPayment(), Client.getInstance().getGameStatus().getThisPlayer());
+            Client.getInstance().sendToServer(msg);
         }
         else {
             System.out.println("writing message ActionMessage");

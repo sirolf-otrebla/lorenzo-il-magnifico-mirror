@@ -1233,6 +1233,7 @@ public class CLIMain implements LimView, Runnable{
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 
 					"Dado: " + marketList.get(currentColBoard).getDiceRequirement().getValue());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			System.out.println("MARKET REQUIREMENTS: " + marketList.get(currentColBoard).getRequirements().size());
 			for (Effect effect : marketList.get(currentColBoard).getEffects()){
 				System.out.println("EFFETTO MERCATO ------ " + effect.getEffectType().toString());
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, 

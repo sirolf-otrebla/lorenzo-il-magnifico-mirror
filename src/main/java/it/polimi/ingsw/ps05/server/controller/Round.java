@@ -70,8 +70,8 @@ public class Round {
     public void nextState() {
         Integer playerID = this.game.getActivePlayer().getPlayerID();
         this.game.getPlayerClient(playerID).setInactive();
+        playerCounter++;
         if (playerCounter < playerOrder.size()) {
-            playerCounter++;
             game.setActivePlayer(this.playerOrder.get(playerCounter));
         }
         else {
