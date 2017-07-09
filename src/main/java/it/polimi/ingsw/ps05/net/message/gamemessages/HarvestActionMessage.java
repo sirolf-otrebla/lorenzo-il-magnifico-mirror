@@ -25,7 +25,7 @@ public class HarvestActionMessage implements GameMessage {
     }
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+        vi.visit(this);
     }
     
     public ArrayList<Integer> getEffectToActivateForCards(){

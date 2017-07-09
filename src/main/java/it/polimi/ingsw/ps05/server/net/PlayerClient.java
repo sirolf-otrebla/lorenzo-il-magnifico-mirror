@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RejectedMessage;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.InactivePlayerTask;
+import it.polimi.ingsw.ps05.server.controller.Server;
 import it.polimi.ingsw.ps05.server.controller.ServerNetMessageVisitor;
 
 public class PlayerClient extends Observable implements Runnable, Observer{
@@ -24,7 +25,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 120000;
+	private static final int  ACT_WAITING_TIME = 12000000;
 
 	private Player pl = null;
 	private boolean plExists = false;
@@ -47,6 +48,9 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 			} catch (ClassNotFoundException | IOException e) {
 				System.err.println("Connessione terminata");
 				connection = null;
+				if (!inGame){
+					Server.getInstance().removeFromLobby(this);
+				}
 			}
 		}
 	}

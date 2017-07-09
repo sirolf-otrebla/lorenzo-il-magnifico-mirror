@@ -8,13 +8,12 @@ import it.polimi.ingsw.ps05.client.net.Connection;
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
 import it.polimi.ingsw.ps05.client.net.socket.SocketConnection;
 import it.polimi.ingsw.ps05.client.view.gui.Login;
+import it.polimi.ingsw.ps05.net.message.EnteringLobbyMessage;
 import it.polimi.ingsw.ps05.net.message.LoginMessage;
 import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.net.message.RegistrationMessage;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 
 public class LoginController {
 	public static final int STATUS_WAIT_LOGIN = 0;
@@ -121,14 +120,19 @@ public class LoginController {
 		LoginMessage mess = new LoginMessage(username, password);
 		this.status = LoginController.STATUS_WAIT_LOGIN;
 		this.viewType = l.getUI().getValue().toLowerCase();
+		System.out.println("Sto per mandare login");
 		connToUse.send(mess);
+		System.out.println("login mandato");
 		try {
+			System.out.println("Aspetto di acquisire semaforo");
 			semaphore.acquire();
+			System.out.println("Semaforo rilasciato");
+			l.setLogged();
+			l.setLobbyVisble();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		NetMessage recMess = connToUse.getInputMessage();
-		l.setLobbyVisble();
+		
 		
 	}
 	
@@ -146,7 +150,6 @@ public class LoginController {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		NetMessage recMess = connToUse.getInputMessage();
 		
 	}
 

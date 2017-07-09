@@ -84,6 +84,12 @@ public class Server {
             this.serverLobby.addToLobby(client);
     	}
     }
+    
+    public void removeFromLobby(PlayerClient client){
+    	System.out.println("Disconnetto client");
+    	this.globalClientMap.remove(client);
+    	this.serverLobby.removePlayerFromLobby(client);
+    }
 
     public Database getUserDatabase() {
         return userDatabase;
