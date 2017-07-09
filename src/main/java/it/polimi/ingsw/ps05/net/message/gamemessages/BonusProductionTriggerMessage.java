@@ -9,7 +9,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 public class BonusProductionTriggerMessage implements GameResponseMessage {
 
 
-    private GameUpdateMessage gameUpdateMessage;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4337640992718446994L;
+	private GameUpdateMessage gameUpdateMessage;
     private String description = "hai una azione produzione bonus";
 
     public BonusProductionTriggerMessage(GameUpdateMessage gameUpdateMessage) {

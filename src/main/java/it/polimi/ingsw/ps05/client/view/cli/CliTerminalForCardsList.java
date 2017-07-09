@@ -93,7 +93,18 @@ public class CliTerminalForCardsList {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		if (requirementsAvailable.size() != 0){
+			ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
+			ArrayList<Integer> temp = new ArrayList<>();
+			for (Object o : selected){
+				temp.add((Integer)o);
+			}
+			toReturn.add(temp);
+			toReturn.add(requirementsSelected);
+			return toReturn;
+		}
+		
 		return selected;
 	}
 
@@ -125,11 +136,11 @@ public class CliTerminalForCardsList {
 					enterDetected = true;
 				break;
 			case Character:
-				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable != 0){
+				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable > 0){
 					if (selected.contains(cards.get(indiceCarta))){
 						selected.remove(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
-					} else if (numMaxCardSelectable > selected.size()){
+					} else if (selected.size() < numMaxCardSelectable){
 						selected.add(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
 					}

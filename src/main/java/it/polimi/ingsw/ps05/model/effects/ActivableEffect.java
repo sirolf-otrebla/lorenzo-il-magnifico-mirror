@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.model.effects;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
@@ -64,6 +65,17 @@ public class ActivableEffect implements AlternativeEffect {
     public void apply(PlayerRelated familyMember, int choosenAlternative) {
 
 		if (state == ActivableEffect.STATE_READY){
+			boolean go = false;
+			for (Resource r : getResourceRequired().get(choosenAlternative)){
+				go = r.hasEnoughResources(((Familiar)familyMember));
+				if (!go) break;
+			}
+			if (go){
+				for (ActionResult r : getResultList().get(choosenAlternative)){
+					r.applyResult(familyMember);
+				}
+			}
+			
 			// algorithm:
 
             // 1) check dice

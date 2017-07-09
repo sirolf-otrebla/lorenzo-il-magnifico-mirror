@@ -10,7 +10,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class LeaderCardMessage implements GameMessage {
 
-    public static final int TYPE_DISCARD = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6289721597274255922L;
+	public static final int TYPE_DISCARD = 0;
     public static final int TYPE_ACTIVATE = 1;
 
     private int[] effectChoice;

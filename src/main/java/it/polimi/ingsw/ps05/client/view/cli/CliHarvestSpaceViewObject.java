@@ -16,13 +16,19 @@ public class CliHarvestSpaceViewObject extends HarvestSpaceViewObject {
     private ArrayList<Integer> activeCardIds;
     private HarvestingSpace space;
     private ColorEnumeration familyMemberID;
+    private ArrayList<Integer> optionForCards;
 
     public CliHarvestSpaceViewObject(HarvestingSpace space, ColorEnumeration familyMemberID,
-                                     ArrayList<Integer> activeCardIds){
+                                     ArrayList<Integer> activeCardIds, ArrayList<Integer> optionForCards){
         this.space = space;
         this.activeCardIds = activeCardIds;
         this.familyMemberID = familyMemberID;
         Client.getInstance().linkToObserver(this);
+    }
+    
+    @Override
+    public ArrayList<Integer> optionForCards(){
+    	return this.optionForCards;
     }
 
     @Override

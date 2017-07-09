@@ -9,7 +9,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class RegisteredMessage implements AuthResponseMessage {
 
-    public static final int STATUS_REGISTERED = 0x01;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7653459638509932286L;
+	public static final int STATUS_REGISTERED = 0x01;
     public static final int STATUS_FAILED_REGIST= 0;
 
 
@@ -17,7 +21,7 @@ public class RegisteredMessage implements AuthResponseMessage {
 
 
     public RegisteredMessage(int status) {
-        this.status = status;
+        this.setStatus(status);
     }
 
 
@@ -35,4 +39,14 @@ public class RegisteredMessage implements AuthResponseMessage {
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
         vi.visit(this);
     }
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 }

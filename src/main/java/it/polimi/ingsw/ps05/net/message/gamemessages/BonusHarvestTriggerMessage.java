@@ -8,7 +8,11 @@ import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
  */
 public class BonusHarvestTriggerMessage implements GameResponseMessage {
 
-    private GameUpdateMessage gameUpdateMessage;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8950322044301100500L;
+	private GameUpdateMessage gameUpdateMessage;
     private String description = "hai una azione raccolta bonus";
 
     public BonusHarvestTriggerMessage(GameUpdateMessage gameUpdateMessage) {
