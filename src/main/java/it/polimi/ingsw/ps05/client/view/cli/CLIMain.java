@@ -1550,8 +1550,11 @@ public class CLIMain implements LimView, Runnable{
 		ArrayList<Integer> ids = new ArrayList<>();
 		ArrayList<Integer> option = new ArrayList<>();
 		if (a.size() != 0){
+			System.out.println("---------A.SIZE = " + a.size());
 			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
+			System.out.println("CARTE SELEZIONATE " + temp1.size());
 			for (Integer c : temp1.get(0)){
+				System.out.println("ID CARTA SELEZIONATA PER HARVEST " +c);
 				ids.add(c);
 			}
 			for (Integer c : temp1.get(1)){
@@ -1576,9 +1579,12 @@ public class CLIMain implements LimView, Runnable{
 		ArrayList<Integer> ids = new ArrayList<>();
 		ArrayList<Integer> option = new ArrayList<>();
 		if (a.size() != 0){
+			System.out.println("---------A.SIZE = " + a.size());
 			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
+			System.out.println("CARTE SELEZIONATE " + temp1.size());
 			for (Integer c : temp1.get(0)){
-				ids.add(c);
+				
+				ids.add(this.player.getYellowCardList().get(c).getReferenceID());
 			}
 			for (Integer c : temp1.get(1)){
 				option.add(c);

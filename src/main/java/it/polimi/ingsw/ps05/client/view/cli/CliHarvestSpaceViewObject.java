@@ -23,6 +23,7 @@ public class CliHarvestSpaceViewObject extends HarvestSpaceViewObject {
         this.space = space;
         this.activeCardIds = activeCardIds;
         this.familyMemberID = familyMemberID;
+        this.optionForCards = optionForCards;
         Client.getInstance().linkToObserver(this);
     }
     

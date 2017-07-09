@@ -37,25 +37,24 @@ public class GoldResourceCostBonus extends PermanentBonus implements ActionResul
 
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-		// TODO Auto-generated method stub
+		throw new IllegalMethodCallException();
 
 	}
 
 	@Override
 	public void remove(Resource res) throws NotEnoughResourcesException, IllegalMethodCallException {
-		// TODO Auto-generated method stub
+		throw new IllegalMethodCallException();
 
 	}
 
 	@Override
 	public void removeFromPlayer(Familiar playerFamiliar) throws NotEnoughResourcesException, DiceTooLowException {
-		// TODO Auto-generated method stub
+		throw new NotEnoughResourcesException();
 		
 	}
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

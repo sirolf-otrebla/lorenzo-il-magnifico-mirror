@@ -30,17 +30,20 @@ public class Familiar implements Serializable, PlayerRelated {
 	
 	public Familiar (Player player){
 		this.relatedPlayer = player;
+		this.relatedPlayerColor = this.relatedPlayer.getColor();
 	}
 	
 	public Familiar (Player player, ColorEnumeration color){
 		this.relatedPlayer = player;
 		this.color = color;
+		this.relatedPlayerColor = this.relatedPlayer.getColor();
 	}
 	
 	public Familiar(Dice dice, ColorEnumeration color, Player player){
 		this.relatedPlayer = player;
 		this.relatedDice = dice;
 		this.color = color;
+		this.relatedPlayerColor = this.relatedPlayer.getColor();
 	}
 
 	public ActionSpace getPosition() {
@@ -72,6 +75,7 @@ public class Familiar implements Serializable, PlayerRelated {
 	public void setPlayer(Player player) throws RepeatedAssignmentException {
 		if (this.relatedPlayer == null) {
 			this.relatedPlayer = player;
+			this.relatedPlayerColor = this.relatedPlayer.getColor();
 		} else {
 			throw new RepeatedAssignmentException();
 		}

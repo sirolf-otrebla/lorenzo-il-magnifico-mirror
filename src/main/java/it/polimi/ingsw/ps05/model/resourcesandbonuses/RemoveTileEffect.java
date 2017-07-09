@@ -18,6 +18,7 @@ public class RemoveTileEffect extends PermanentBonus implements ActionResult {
 	private static final long serialVersionUID = -1299547449525139414L;
 	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
 	transient private Game game;
+	private ArrayList<ArrayList<ActionResult>> list = new ArrayList<>();
 
 	public RemoveTileEffect(Integer value){
 		this.value = value;
@@ -47,13 +48,9 @@ public class RemoveTileEffect extends PermanentBonus implements ActionResult {
 		for (Tower t : board.getTowerList().values()){
 			for (TowerTileInterface tile : t.getTiles().values()){
 				if (tile instanceof TileWithEffect){
+					list.add(((TileWithEffect)tile).getEffectOnPositioning());
 					((TileWithEffect)tile).setEffectOnPositioning(new ArrayList<ActionResult>());
 				}
-			}
-		}
-		for (ActionSpace a : board.getActSpacesMap().values()){
-			if (!(a instanceof HarvestingSpace)){
-				a.addFalseResource();
 			}
 		}
 		//notifica observer
@@ -79,7 +76,16 @@ public class RemoveTileEffect extends PermanentBonus implements ActionResult {
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		// TODO Auto-generated method stub
+		Board board = this.getGame().getBoard();
+		int i = 0;
+		for (Tower t : board.getTowerList().values()){
+			for (TowerTileInterface tile : t.getTiles().values()){
+				if (tile instanceof TileWithEffect){
+					((TileWithEffect)tile).setEffectOnPositioning(list.get(i));
+					i++;
+				}
+			}
+		}
 		
 	}
 

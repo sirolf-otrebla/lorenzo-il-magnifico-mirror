@@ -18,7 +18,6 @@ public class Dice implements Resource {
 	ColorEnumeration color;
 	private int value;
 	public static final  String ID = "Dado";
-	private  transient Game game;
 	
 	public Dice(ColorEnumeration color) {
 		super();
@@ -37,12 +36,12 @@ public class Dice implements Resource {
 
 	@Override
 	public void remove(int amount) throws NotEnoughResourcesException, IllegalMethodCallException {
-
+		throw new IllegalMethodCallException();
 	}
 
 	@Override
 	public void remove(Resource res) throws NotEnoughResourcesException, IllegalMethodCallException {
-
+		throw new IllegalMethodCallException();
 	}
 
 	@Override
