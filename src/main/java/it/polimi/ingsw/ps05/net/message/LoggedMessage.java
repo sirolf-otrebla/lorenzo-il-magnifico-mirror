@@ -25,7 +25,7 @@ public class LoggedMessage implements AuthResponseMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+    	vi.visit(this);
     }
 
     @Override

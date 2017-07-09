@@ -42,7 +42,7 @@ public class Lobby implements Runnable {
 		}
 		client.sendMessage(new EnteringLobbyMessage(true, usernamesArrayList));
 		for (PlayerClient playerClient: this.connectedClientArrayList) {
-			if(!client.equals(playerClient))
+			//if(!client.equals(playerClient))
 				playerClient.sendMessage(new EnteringLobbyMessage(false, usernamesArrayList));
 		}
 
@@ -65,6 +65,17 @@ public class Lobby implements Runnable {
 	public void removePlayerFromLobby(PlayerClient client){
 		this.connectedClientArrayList.remove(client);
 		if (connectedClientArrayList.size() <= 1 ) timer.cancel();
+		try {
+			sem.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<String> usernamesArrayList = new ArrayList<>();
+		for (PlayerClient playerClient: this.connectedClientArrayList) 
+			usernamesArrayList.add(playerClient.getUsername());
+		for (PlayerClient playerClient: this.connectedClientArrayList) 
+				playerClient.sendMessage(new EnteringLobbyMessage(false, usernamesArrayList));
 	}
 
 	@Override

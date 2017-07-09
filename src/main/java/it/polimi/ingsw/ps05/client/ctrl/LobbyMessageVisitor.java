@@ -19,7 +19,6 @@ public class LobbyMessageVisitor {
 	public void visit(EnteringLobbyMessage lobbyMessage){
 		if (lobbyMessage.isYouOrOthers()) ;
 		System.out.println("sono nel secondo visitor ( messaggio EnteringLobbyMessage)");
-		ArrayList<String> usernames = lobbyMessage.getPlayerUsernamesList();
 		Client.getInstance().getLoginController().setLobby();
 		Client.getInstance().getLoginController().setLobbyUsernames(lobbyMessage.getPlayerUsernamesList());
 	}
@@ -36,8 +35,9 @@ public class LobbyMessageVisitor {
 		Client.getInstance().startGame(viewType, gameSetupMessage);
 
 	}
-
+	
 	public void visit(RejoinMessage rejoinMessage){
+		Client.getInstance().getLoginController().getSemaphore().release();
 		this.visit(rejoinMessage.gameSetupMessage());
 		System.out.println("Primo visitor, GameUpdateMsg");
 		Client.getInstance().setGameStatus(rejoinMessage.gameUpdateMessage().getGameStatus());
