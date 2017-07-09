@@ -64,7 +64,7 @@ public abstract class TowerCard implements Card {
 	public TowerCard(){
 	}
 	/**
-	 * The false resource is a resource that non one can have and is used to inhibit someone
+	 * The false resource is a resource that no one can have and is used to inhibit someone
 	 * from taking the card (that happens when you have a special effect that allows you to do an action
 	 * only in a section of the board
 	 */
@@ -74,7 +74,7 @@ public abstract class TowerCard implements Card {
 		}
 	}
 	/**
-	 * Remove the resource added before
+	 * Removes the false resource described before
 	 */
 	public void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){

@@ -40,6 +40,7 @@ public class GUIMain extends Application {
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
 
+    private HashMap<ColorEnumeration, OpponentWidget> opponentsHashMap = new HashMap<>();
 	private HashMap<ColorEnumeration, String> usernamesHashMap;
 
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
@@ -63,6 +64,7 @@ public class GUIMain extends Application {
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
 	private DieWidget[] diceWidgetArray = new DieWidget[3];
+	private HashMap<ColorEnumeration, DieWidget> diceHashMap = new HashMap<>();
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
 	private ExcomWidget[] excomWidgetArray = new ExcomWidget[3];
@@ -92,8 +94,11 @@ public class GUIMain extends Application {
 			ColorEnumeration.Violet
 	};
 
-	// private PersonalBoardWindow playerPersonalBoardWindow = new PersonalBoardWindow(this);
-	// private PersonalBoardWindow[] personalBoardWindowArray = new PersonalBoardWindow[3];
+    public static final ColorEnumeration[] diceColorArray = {
+            ColorEnumeration.Black,
+            ColorEnumeration.White,
+            ColorEnumeration.Orange
+    };
 
 
 
@@ -103,15 +108,28 @@ public class GUIMain extends Application {
 	}
 
 	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout, HashMap<ColorEnumeration, String> usernamesHashMap){
-		this.player.setPlayerColor(thisPlayerColor);
+
+	    // creo il giocatore
+        player = new PlayerWidget(this, thisPlayerColor);
+	    this.player.setPlayerColor(thisPlayerColor);
+
+	    // setto variabili globali
 		this.OPPONENTS_NUMBER = opponentNumber;
 		this.MOVE_TIMER = timeout;
+
+
 		this.usernamesHashMap = usernamesHashMap;
 		int i = 0;
-		for(ColorEnumeration color: usernamesHashMap.keySet()) {
-			opponentsArray[i] = new OpponentWidget(this, color);
-			opponentsArray[i].setOpponentUsername(usernamesHashMap.get(color));
-		}
+
+        // popolo la hashmap degli avversari
+        for (ColorEnumeration color: usernamesHashMap.keySet())
+            opponentsHashMap.put(color, new OpponentWidget(this, color));
+
+        // aggiungo il nome
+        for (ColorEnumeration color: usernamesHashMap.keySet()) {
+            opponentsHashMap.get(color).setOpponentUsername(usernamesHashMap.get(color));
+        }
+
 	}
 
 	@Override
@@ -208,7 +226,7 @@ public class GUIMain extends Application {
 			//towerCardWidgetArray = towerCardWidgetLists.get(towerColorArray[i]);
 			for (int j = 0; j < 4; j++) {
 				towerCardWidgetLists.get(towerColorArray[i])[j] = new TowerCardWidget(); // creating empty cards
-				towerCardBoxesArray.get(towerColorArray[i]).getChildren().add(towerCardWidgetLists.get(towerColorArray[i])[j].getCardImage()); // placing empty cards on towers
+				towerCardBoxesArray.get(towerColorArray[i]).getChildren().add(towerCardWidgetLists.get(towerColorArray[i])[j]); // placing empty cards on towers
 			}
 		}
 
@@ -308,44 +326,36 @@ public class GUIMain extends Application {
 
 
 		/* Add playable familiars */
-		this.player.addFamiliarToBoard(root);
+		this.player.addFamiliarsToBoard(root);
 
         /* Initialize opponents familiars */
-		i = 0;
-
-		for(i = 0; i < OPPONENTS_NUMBER; i++) {
-			for (int j = 0; j < 4; j++) {
-				opponentsArray[i].getFamiliarWidgetList()[j] = new FamiliarWidget(opponentsArray[i].getOpponentColor(), GraphicResources.getFamiliarColor(j));
-			}
-		}
+		for(ColorEnumeration color: opponentsHashMap.keySet()) {
+		    for(i = 0; i < 4; i++) {
+		        opponentsHashMap.get(color).getFamiliarWidgetList()[i] = new FamiliarWidget(color, GraphicResources.getFamiliarColor(i));
+            }
+        }
 
 
 		/* Add player buttons */
 
 		// Personal cards
-		//final VBox commands = new VBox(20 * resize);
+
 		player.commands.setAlignment(Pos.CENTER);
-		//final Button showCardsButton = new Button("Carte sviluppo");
 		player.showCardsButton.setId("showCardsButton");
 		player.showCardsButton.setMaxWidth(Double.MAX_VALUE);
 		player.showCardsButton.setOnAction((ActionEvent e) -> {
 			player.getPersonalBoard().display();
 		});
-		//final Button showLeaderButton = new Button("Carte Leader"); // showLeaderButton is not clickable because the draft is not done yet
 		player.showLeaderButton.setId("showLeaderButton");
 		player.showLeaderButton.setMaxWidth(Double.MAX_VALUE);
 		player.showLeaderButton.setOnAction((ActionEvent e) -> {
 			player.getLeaderPopup().display();
 		});
-
+        /****** MODO 1 ******/
+        player.commands.setLayoutX((68.0 / 100) * stageWidth);
+        player.commands.setLayoutY((6.2 / 100) * stageHeight);
 		player.commands.getChildren().addAll(player.showCardsButton, player.showLeaderButton);
-
-		/****** MODO 1 ******/
-		player.commands.setLayoutX((68.0 / 100) * stageWidth);
-		player.commands.setLayoutY((6.2 / 100) * stageHeight);
-
 		root.getChildren().add(player.commands);
-
 
 		// Other players boards
 		final VBox personalBoardButtonsBox = new VBox(20 * resize);
@@ -354,10 +364,10 @@ public class GUIMain extends Application {
 		personalBoardButtonsBox.setLayoutY((6.2 / 100) * stageHeight);
 
 		// set up buttons that open other players personal boards
-		for(i = 0; i < OPPONENTS_NUMBER; i++) {
-			setButtonClickGesture(opponentsArray[i].personalBoardButton, opponentsArray[i]);
-			personalBoardButtonsBox.getChildren().add(opponentsArray[i].personalBoardButton);
-		}
+        for(ColorEnumeration opponentColor: opponentsHashMap.keySet()) {
+            setButtonClickGesture(opponentsHashMap.get(opponentColor).personalBoardButton, opponentsHashMap.get(opponentColor));
+            personalBoardButtonsBox.getChildren().add(opponentsHashMap.get(opponentColor).personalBoardButton);
+        }
 		root.getChildren().add(personalBoardButtonsBox);
 
 
@@ -378,10 +388,12 @@ public class GUIMain extends Application {
 		diceBox.setLayoutY((91.0 / 100) * stageHeight);
 		diceBox.setPrefHeight((4.8 / 100) * stageHeight);
 
-		diceWidgetArray = new DieWidget[3]; // creating dice widgets
-		for (i = 0; i < 3; i++) {
-			diceWidgetArray[i] = new DieWidget(GraphicResources.getDiceColor(i));
-			diceBox.getChildren().add(diceWidgetArray[i].getLabel());
+		// poplo la hashmap
+		for(ColorEnumeration dieColor: diceColorArray)
+		    diceHashMap.put(dieColor, new DieWidget(dieColor));
+
+		for (ColorEnumeration dieColor: diceHashMap.keySet()) {
+			diceBox.getChildren().add(diceHashMap.get(dieColor));
 		}
 		root.getChildren().add(diceBox);
 
@@ -413,7 +425,6 @@ public class GUIMain extends Application {
 		root.addEventFilter(MouseEvent.DRAG_DETECTED, mouseEvent -> {
 
 			System.out.println("mouse drag detected! " + mouseEvent.getSource());
-
 
 		});
 
@@ -498,6 +509,10 @@ public class GUIMain extends Application {
 		BonusTileDraftPopup.display();
 	}
 
+	public void updateBonusTileDraft(ColorEnumeration playerColor, Integer bonusTileId) {
+        opponentsHashMap.get(playerColor).getPersonalBoard().setBonusTileWidget(new BonusTileWidget(bonusTileId));
+    }
+
 	public void endBonusTileDraft() {
 		// Close draft window
 		BonusTileDraftPopup.getPopupStage().close();
@@ -511,24 +526,21 @@ public class GUIMain extends Application {
 		LeaderDraftPopup.display(referenceIdArray);
 	}
 
-	public void endLeaderDraft() {
-		updateLeadersAfterDraft();
+	public void endLeaderDraft(HashMap<ColorEnumeration, Integer[]> leadersDraftedIdArray) {
+		updateLeadersAfterDraft(leadersDraftedIdArray);
 		LeaderDraftPopup.getPopup().close();
 	}
 
-	private void updateLeadersAfterDraft() {
+	private void updateLeadersAfterDraft(HashMap<ColorEnumeration, Integer[]> leadersDraftedIdArray) {
 		for(int i = 0; i < 4; i++) {
 			this.player.getLeaderWidgetList()[i] = LeaderDraftPopup.leadersDrafted[i];
 		}
-	}
 
-	public void updatePlayerLeaderAfterDraft(ColorEnumeration playerColor, int[] leadersDraftedIdArray) {
-		for(int i = 0; i < OPPONENTS_NUMBER; i++) {
-			if(opponentsArray[i].getOpponentColor() == playerColor) {
-				for(int j = 0; j < 4; j++)
-					opponentsArray[i].getPersonalBoard().getLeaderWidgets()[j] = new LeaderWidget(leadersDraftedIdArray[j]);
-			}
-		}
+		for(ColorEnumeration opponentColor: leadersDraftedIdArray.keySet())
+		    for(int i = 0; i < 4; i++)
+		        opponentsHashMap.get(opponentColor).getPersonalBoard().getLeaderWidgets()[i] =
+                        new LeaderWidget(leadersDraftedIdArray.get(opponentColor)[i]);
+
 	}
 
 	// aggiorna i leader attivabili dal giocatore
@@ -586,7 +598,7 @@ public class GUIMain extends Application {
 			for(OpponentWidget opponent: opponentsArray) {
 				if(opponent.getOpponentColor() == opponentColor) {
 					for (String id : otherPlayerResources.get(opponentColor).keySet()) {
-						opponent.getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
+						opponent.getPersonalBoard().getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
 					}
 				}
 			}
@@ -660,7 +672,7 @@ public class GUIMain extends Application {
 		this.infoLabel.setText(info);
 	}
 
-	public void showEndGameResult(ArrayList<Pair<ColorEnumeration, Integer>> endGameResults) {
+	public void showEndGameResult(HashMap<ColorEnumeration, Integer> endGameResults) {
 		EndGamePopup.display(endGameResults);
 	}
 
