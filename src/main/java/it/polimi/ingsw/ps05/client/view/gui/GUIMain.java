@@ -477,7 +477,6 @@ public class GUIMain extends Application implements LimView {
 	}
 
 	public void showInterface(){
-		stage.show();
 		Platform.runLater(new Runnable() {
 			private Stage stage;
 			@Override
