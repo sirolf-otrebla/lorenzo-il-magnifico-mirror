@@ -93,4 +93,12 @@ public class LeaderCard implements Card {
 	public Integer getReferenceID() {
 		return referenceID;
 	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }
