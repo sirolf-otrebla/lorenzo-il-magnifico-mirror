@@ -22,27 +22,27 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class LeaderDraftPopup {
 
-    private static Stage popup;
-    static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
-    private static LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
-    private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
-    public static int numberOfLeadersAlreadySelected;
-    public static boolean draftCompleted;
-    public static HBox hboxReference;
+    private Stage popup;
+    LeaderWidget[] leadersDrafted = new LeaderWidget[4];
+    private LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
+    private LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
+    public int numberOfLeadersAlreadySelected;
+    public boolean draftCompleted;
+    private HBox hbox;
 
-    public static void display(Integer[] referenceIdArray) {
+    public void display(Integer[] referenceIdArray) {
 
         /* Initialize leaders to be drafted */
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++) {
             leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
+        }
 
         popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initStyle(StageStyle.UNDECORATED);
 
-        HBox hbox = new HBox(30 * resize);
-        hboxReference = hbox;
+        hbox = new HBox(30 * resize);
         //hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
         //hbox.setFillHeight(true);
 
@@ -80,7 +80,7 @@ public class LeaderDraftPopup {
 
     }
 
-    private static void setupGestureTarget(LeaderWidget leaderWidget) {
+    private void setupGestureTarget(LeaderWidget leaderWidget) {
 
         // EVENTO CHE VA PASSATO AL CONTROLLER
 
@@ -127,26 +127,26 @@ public class LeaderDraftPopup {
 
     private void repaint() {
 
-        hboxReference.getChildren().clear();
+        hbox.getChildren().clear();
 
         for(LeaderWidget leader: leadersToDraftArray) {
             setupGestureTarget(leader);
-            hboxReference.getChildren().add(leader);
+            hbox.getChildren().add(leader);
         }
 
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    public static void endLeaderDraft() {
+    public void endLeaderDraft() {
         popup.close();
     }
 
     /* Updates the leader drafted array */
-    private static void storeSelectedLeader(LeaderWidget leaderToStore, int numberOfLeadersAlreadySelected) {
+    private void storeSelectedLeader(LeaderWidget leaderToStore, int numberOfLeadersAlreadySelected) {
         leadersDrafted[numberOfLeadersAlreadySelected] = leaderToStore;
     }
 
-    public static Stage getPopup() {
+    public Stage getPopup() {
         return popup;
     }
 }
