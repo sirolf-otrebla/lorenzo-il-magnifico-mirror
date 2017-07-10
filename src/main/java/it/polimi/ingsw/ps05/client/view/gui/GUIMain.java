@@ -36,7 +36,6 @@ public class GUIMain extends Application {
 	public int PLAYER_NUMBER, OPPONENTS_NUMBER;
 	private Integer MOVE_TIMER;
 	private String[] opponentNames;
-	private LeaderDraftPopup leaderDraftPopup = new LeaderDraftPopup();
 
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
@@ -524,17 +523,17 @@ public class GUIMain extends Application {
 
 	public void startLeaderDraft(Integer[] referenceIdArray) {
 		// Show leader draft window
-		leaderDraftPopup.display(referenceIdArray);
+		LeaderDraftPopup.display(referenceIdArray);
 	}
 
 	public void endLeaderDraft(HashMap<ColorEnumeration, Integer[]> leadersDraftedIdArray) {
 		updateLeadersAfterDraft(leadersDraftedIdArray);
-		leaderDraftPopup.getPopup().close();
+		LeaderDraftPopup.getPopup().close();
 	}
 
 	private void updateLeadersAfterDraft(HashMap<ColorEnumeration, Integer[]> leadersDraftedIdArray) {
 		for(int i = 0; i < 4; i++) {
-			this.player.getLeaderWidgetList()[i] = leaderDraftPopup.leadersDrafted[i];
+			this.player.getLeaderWidgetList()[i] = LeaderDraftPopup.leadersDrafted[i];
 		}
 
 		for(ColorEnumeration opponentColor: leadersDraftedIdArray.keySet())

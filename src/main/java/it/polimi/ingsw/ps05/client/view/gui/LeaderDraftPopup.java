@@ -22,15 +22,15 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class LeaderDraftPopup {
 
-    private Stage popup;
-    LeaderWidget[] leadersDrafted = new LeaderWidget[4];
-    private LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
-    private LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
-    public int numberOfLeadersAlreadySelected;
-    public boolean draftCompleted;
-    private HBox hbox;
+    private static Stage popup;
+    static LeaderWidget[] leadersDrafted = new LeaderWidget[4];
+    private static LeaderWidget[] leadersToDraftArray = new LeaderWidget[4];
+    private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
+    public static int numberOfLeadersAlreadySelected;
+    public static boolean draftCompleted;
+    private static HBox hboxReference;
 
-    public void display(Integer[] referenceIdArray) {
+    public static void display(Integer[] referenceIdArray) {
 
         /* Initialize leaders to be drafted */
 
@@ -42,7 +42,8 @@ public class LeaderDraftPopup {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initStyle(StageStyle.UNDECORATED);
 
-        hbox = new HBox(30 * resize);
+        HBox hbox = new HBox(30 * resize);
+        hboxReference = hbox;
         //hbox.setPrefWidth(LEADER_HEIGHT_PERC * stageHeight);
         //hbox.setFillHeight(true);
 
@@ -80,7 +81,7 @@ public class LeaderDraftPopup {
 
     }
 
-    private void setupGestureTarget(LeaderWidget leaderWidget) {
+    private static void setupGestureTarget(LeaderWidget leaderWidget) {
 
         // EVENTO CHE VA PASSATO AL CONTROLLER
 
@@ -105,7 +106,7 @@ public class LeaderDraftPopup {
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    public void updateLeadersToDraft(Integer[] newReferenceIdArray) {
+    public static void updateLeadersToDraft(Integer[] newReferenceIdArray) {
 
         /* Insert new leaders in a new array */
         int leadersRemained = 4 - numberOfLeadersAlreadySelected; //leaders left to choose
@@ -125,28 +126,28 @@ public class LeaderDraftPopup {
 
     }
 
-    private void repaint() {
+    private static void repaint() {
 
-        hbox.getChildren().clear();
+        hboxReference.getChildren().clear();
 
         for(LeaderWidget leader: leadersToDraftArray) {
             setupGestureTarget(leader);
-            hbox.getChildren().add(leader);
+            hboxReference.getChildren().add(leader);
         }
 
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    public void endLeaderDraft() {
+    public static void endLeaderDraft() {
         popup.close();
     }
 
     /* Updates the leader drafted array */
-    private void storeSelectedLeader(LeaderWidget leaderToStore, int numberOfLeadersAlreadySelected) {
+    private static void storeSelectedLeader(LeaderWidget leaderToStore, int numberOfLeadersAlreadySelected) {
         leadersDrafted[numberOfLeadersAlreadySelected] = leaderToStore;
     }
 
-    public Stage getPopup() {
+    public static Stage getPopup() {
         return popup;
     }
 }
