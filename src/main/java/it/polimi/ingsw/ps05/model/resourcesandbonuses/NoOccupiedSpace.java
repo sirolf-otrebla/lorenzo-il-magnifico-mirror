@@ -70,5 +70,10 @@ public class NoOccupiedSpace extends PermanentBonus {
 		}
 		modified = new ArrayList<>();
 	}
+    
+    @Override
+    public String toString(){
+    	return "Non consideri occupati gli spazi";
+    }
 
 }

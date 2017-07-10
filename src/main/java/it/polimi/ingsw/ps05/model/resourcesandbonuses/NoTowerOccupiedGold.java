@@ -51,5 +51,10 @@ public class NoTowerOccupiedGold extends PermanentBonus {
 			t.setRentAmount(Tower.TOWER_RENT_AMNT);
 		}
 	}
+    
+    @Override
+    public String toString(){
+    	return "Non paghi l'oro per una torre occupata";
+    }
 
 }

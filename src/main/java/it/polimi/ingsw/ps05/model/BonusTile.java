@@ -16,6 +16,7 @@ public class BonusTile implements Serializable{
 	private Player relatedPlayer;
 	private ArrayList<Effect> effectList = new ArrayList<Effect>();
 	private BonusTileType type;
+	private Integer referenceID;
 	
 	public BonusTile() {
 		
@@ -77,6 +78,14 @@ public class BonusTile implements Serializable{
 	 */
 	public void setType(BonusTileType type) {
 		this.type = type;
+	}
+	
+	public void setReferenceID(Integer referenceID){
+		this.referenceID = referenceID;
+	}
+	
+	public Integer getReferenceID(){
+		return this.referenceID;
 	}
 	
 	

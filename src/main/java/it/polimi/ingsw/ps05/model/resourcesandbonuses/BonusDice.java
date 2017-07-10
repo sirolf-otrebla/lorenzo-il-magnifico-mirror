@@ -82,5 +82,10 @@ public class BonusDice extends PermanentBonus {
 		}
 		
 	}
+    
+    @Override
+    public String toString(){
+    	return "Dado " + color + (toAdd ? " +" : "");
+    }
 
 }
