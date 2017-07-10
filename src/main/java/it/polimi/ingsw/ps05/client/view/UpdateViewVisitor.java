@@ -20,11 +20,16 @@ import java.util.HashMap;
  * Created by Alberto on 30/06/2017.
  */
 public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
-    private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap;
+    private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap = new HashMap<>();
     private GUIMain gui;
     private Client client;
+    private GameStatus status;
 
-    public UpdateViewVisitor(GUIMain main){
+
+    public UpdateViewVisitor(GUIMain main, GameStatus status){
+        this.status = status;
+        this.gui = main;
+        this.client = Client.getInstance();
         for (SingleOccupantActionSpaceWidget widget:
              gui.getMarketSpaceWidgets()) {
             actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
@@ -276,9 +281,10 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             }
     }
 
+
     @Override
     public void run() {
-
+        visit(status);
     }
 }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /** this class represents the personal Bonus Tile which is used during Harvest OR Production Actions
  *
  */
-public class BonusTile implements Serializable{
+public class BonusTile implements Serializable, Draftable{
 	/**
 	 * 
 	 */
@@ -16,7 +16,13 @@ public class BonusTile implements Serializable{
 	private Player relatedPlayer;
 	private ArrayList<Effect> effectList = new ArrayList<Effect>();
 	private BonusTileType type;
-	
+	private Integer referenceID;
+
+
+	public void setReferenceID(Integer referenceID) {
+		this.referenceID = referenceID;
+	}
+
 	public BonusTile() {
 		
 	}
@@ -78,6 +84,10 @@ public class BonusTile implements Serializable{
 	public void setType(BonusTileType type) {
 		this.type = type;
 	}
-	
-	
+
+
+	@Override
+	public Integer getReferenceID() {
+		return referenceID;
+	}
 }

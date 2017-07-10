@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
 import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.BonusTile;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.Player;
@@ -22,8 +23,7 @@ public class Game implements Observer {
     private GameSetup setup;
     private  GameFlowController flowCtrl;
     public boolean end = false;
-    private Thread flowCrlThread;
-    private TurnSetupManager tManager;
+    private Thread flowCrlThread;private TurnSetupManager tManager;
     private HashMap<Integer,PlayerClient> clientHashMap;
     private ArrayList<ArrayList<Resource>> privilegeConvResAlternatives;
     private Board gBoard;
@@ -93,6 +93,8 @@ public class Game implements Observer {
             this.draftControllerThread.start();
             draftControllerThread.join();
             System.out.println("post draft");
+
+
         }
         System.out.println("Starting game flow");
         this.flowCrlThread.start();

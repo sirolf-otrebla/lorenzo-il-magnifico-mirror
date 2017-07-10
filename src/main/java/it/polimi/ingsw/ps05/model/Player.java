@@ -203,6 +203,12 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
     	this.leaderCardHashMap.put(leaderCard.getReferenceID(), leaderCard);
 	}
 
+	public void putBonusTile(BonusTile tile){
+		setBonusTile(tile);
+	}
+
+
+
 
 
 	public void resetPermanentEffects(Integer activeEffectBound){

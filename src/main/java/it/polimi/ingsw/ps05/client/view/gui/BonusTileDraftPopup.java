@@ -13,8 +13,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -22,7 +24,6 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  * Created by miotto on 04/07/17.
  */
 public class BonusTileDraftPopup {
-
     private static Stage popupStage;
     private static BonusTileWidget[] bonusTileArray = new BonusTileWidget[4];
 

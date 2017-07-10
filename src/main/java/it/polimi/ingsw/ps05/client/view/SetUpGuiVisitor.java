@@ -19,11 +19,12 @@ import java.util.HashMap;
 /**
  * Created by Alberto on 01/07/2017.
  */
-public class SetUpGuiVisitor extends Task implements ViewVisitorInterface {
+public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
 
     private GameStatus initStatus;
     private GUIMain gui;
     private UpdateViewVisitor updateViewVisitor;
+
 
     public SetUpGuiVisitor(GameStatus initStatus) {
         this.initStatus = initStatus;
@@ -49,10 +50,10 @@ public class SetUpGuiVisitor extends Task implements ViewVisitorInterface {
         status.getPlayerHashMap().put(status.getActivePlayerId(), activePlayer);
 
         Integer[] excommCardsIdArray = new Integer[3];
-        for (ExcommunicationCard card : board.getExcomCards()) {
-            excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
-        }
-        this.gui.insertExcomCards(excommCardsIdArray);
+        //for (ExcommunicationCard card : board.getExcomCards()) {
+        //    excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
+       // }
+        //this.gui.insertExcomCards(excommCardsIdArray);
 
     }
 
@@ -139,14 +140,15 @@ public class SetUpGuiVisitor extends Task implements ViewVisitorInterface {
         this.initStatus = initStatus;
     }
 
+    public void setGui(GUIMain gui) {
+        this.gui = gui;
+    }
+
     @Override
-    protected Object call() throws Exception {
-        this.gui = new GUIMain();
+    public void run() {
         synchronized (gui) {
             visit(initStatus);
-            gui.showInterface();
         }
-        return gui;
     }
 }
 

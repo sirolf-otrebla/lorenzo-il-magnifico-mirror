@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -29,6 +32,7 @@ public class LeaderDraftPopup {
     public static int numberOfLeadersAlreadySelected;
     public static boolean draftCompleted;
     public static HBox hboxReference;
+    public static Integer cardChoosen;
 
     public static void display(Integer[] referenceIdArray) {
 
@@ -97,6 +101,22 @@ public class LeaderDraftPopup {
                 leaderWidget.setMouseTransparent(true); // disable mouse click
                 leaderWidget.setDrafted(true);
                 numberOfLeadersAlreadySelected++;
+                LeaderDraftPopup.cardChoosen = leaderWidget.getReferenceID();
+                Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        LeaderDraftChoiceMessage responseMessage =
+                                new LeaderDraftChoiceMessage(cardChoosen);
+                        Client.getInstance().sendToServer(responseMessage);
+
+                    }
+                });
+
+                for (LeaderWidget leaderWidget1 : leadersToDraftArray) {
+                    leaderWidget1.setMouseTransparent(true);
+                }
+
             });
         } else {
             leaderWidget.setMouseTransparent(true);
@@ -105,7 +125,7 @@ public class LeaderDraftPopup {
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    public void updateLeadersToDraft(Integer[] newReferenceIdArray) {
+    public static void updateLeadersToDraft(Integer[] newReferenceIdArray) {
 
         /* Insert new leaders in a new array */
         int leadersRemained = 4 - numberOfLeadersAlreadySelected; //leaders left to choose
@@ -117,6 +137,7 @@ public class LeaderDraftPopup {
             int j = 0;
             if (!leadersToDraftArray[i].isDrafted()) {
                 leadersToDraftArray[i] = newLeadersToDraftArray[j];
+                leadersToDraftArray[i].setMouseTransparent(false);
                 j++;
             }
         }
@@ -125,7 +146,7 @@ public class LeaderDraftPopup {
 
     }
 
-    private void repaint() {
+    private static  void repaint() {
 
         hboxReference.getChildren().clear();
 

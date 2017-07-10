@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -289,5 +290,6 @@ public class Login extends Application implements Observable {
 	public void close(){
 		primaryStage.close();
 	}
+
 
 }
