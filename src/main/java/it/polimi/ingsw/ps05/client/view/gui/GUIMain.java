@@ -102,6 +102,9 @@ public class GUIMain extends Application implements LimView {
             ColorEnumeration.Orange
     };
 
+	private double screenWidth, screenHeight, screenRatio, screenMinX, screenMinY;
+	private boolean wider;
+
 
 
 
@@ -114,8 +117,34 @@ public class GUIMain extends Application implements LimView {
 		System.out.println("DENTRO setInitValues GUI");
 		this.usernamesHashMap = usernamesHashMap;
 
+		/* Retrieving screen bounds */
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		screenWidth = primaryScreenBounds.getWidth();
+		screenHeight = primaryScreenBounds.getHeight();
+		screenRatio = screenWidth / screenHeight;
+		screenMinX = primaryScreenBounds.getMinX();
+		screenMinY = primaryScreenBounds.getMinY();
+
+		if (screenRatio <= 1.75) {
+			screenMinX = primaryScreenBounds.getMinX();
+			screenWidth = primaryScreenBounds.getWidth();
+			screenHeight = screenWidth / 1.75;
+			stageWidth = screenWidth;
+			stageHeight = screenHeight;
+			wider = false;
+		} else {
+			screenMinY = primaryScreenBounds.getMinY();
+			screenHeight = primaryScreenBounds.getHeight();
+			screenWidth = screenHeight * 1.75;
+			stageHeight = screenHeight;
+			stageWidth = screenHeight * 1.75;
+			wider = true;
+		}
+		resize = stageWidth / ORIGINAL_WIDTH;
+
 		// setto variabili globali
 		this.OPPONENTS_NUMBER = opponentNumber;
+		this.PLAYER_NUMBER = opponentNumber + 1;
 		this.MOVE_TIMER = timeout;
 
 	    // creo il giocatore
@@ -146,27 +175,16 @@ public class GUIMain extends Application implements LimView {
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
 
-		/* Retrieving screen bounds */
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-		double screenWidth = primaryScreenBounds.getWidth();
-		double screenHeight = primaryScreenBounds.getHeight();
-		double screenRatio = screenWidth / screenHeight;
-
 		/* Set up window size */
-		if (screenRatio <= 1.75) {
-			stage.setX(primaryScreenBounds.getMinX());
-			stage.setWidth(primaryScreenBounds.getWidth());
-			stage.setHeight(primaryScreenBounds.getWidth() / 1.75);
-			stageWidth = primaryScreenBounds.getWidth();
-			stageHeight = stageWidth / 1.75;
+		if (wider == false) {
+			stage.setX(screenMinX);
+			stage.setWidth(stageWidth);
+			stage.setHeight(stageHeight);
 		} else {
-			stage.setY(primaryScreenBounds.getMinY());
-			stage.setHeight(primaryScreenBounds.getHeight());
-			stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
-			stageHeight = primaryScreenBounds.getHeight();
-			stageWidth = stageHeight * 1.75;
+			stage.setY(screenMinY);
+			stage.setHeight(stageHeight);
+			stage.setWidth(stageWidth);
 		}
-		resize = stageWidth / ORIGINAL_WIDTH;
 		System.out.println("stageWidth: " + stageWidth);
 		System.out.println("stageHeight: " + stageHeight);
 		System.out.println("resize: " + resize);
@@ -265,7 +283,7 @@ public class GUIMain extends Application implements LimView {
 			System.out.println(color + " " + opponentsHashMap.get(color).getOpponentUsername());
 		}
 
-
+		System.out.println("PRIMA DEI MARKER");
 
 		/* Add points markers */
 		for (int i = 0; i < 4; i++) {
@@ -294,6 +312,8 @@ public class GUIMain extends Application implements LimView {
 			}
 
 		}
+
+		System.out.println("DOPO I MARKER");
 
 		/****** MODO 1 ******/
 		// Play-order markers
@@ -1013,4 +1033,16 @@ public class GUIMain extends Application implements LimView {
 	//commands.layoutXProperty().bind(stage.widthProperty().multiply(68.75 / 100));
 	//commands.layoutYProperty().bind(stage.heightProperty().multiply(9.375 / 100));
 
+/*
+		stage.setX(screenMinX);
+		stage.setWidth(screenWidth);
+		stage.setHeight(screenWidth / 1.75);
+		stageWidth = screenWidth;
+		stageHeight = screenWidth / 1.75;
 
+		stage.setY(primaryScreenBounds.getMinY());
+		stage.setHeight(primaryScreenBounds.getHeight());
+		stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
+		stageHeight = primaryScreenBounds.getHeight();
+		stageWidth = stageHeight * 1.75;
+		*/
