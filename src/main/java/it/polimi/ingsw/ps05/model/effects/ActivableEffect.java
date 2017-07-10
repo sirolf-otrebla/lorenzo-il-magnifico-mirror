@@ -66,9 +66,10 @@ public class ActivableEffect implements AlternativeEffect {
 
 		if (state == ActivableEffect.STATE_READY){
 			boolean go = true;
-			if (getResourceRequired().size() != 0){
-				for (Resource r : getResourceRequired().get(choosenAlternative)){
-					go = r.hasEnoughResources(((Familiar)familyMember));
+			if(resourcesRequired.size() > 0) {
+				go = false;
+				for (Resource r : getResourceRequired().get(choosenAlternative)) {
+					go = r.hasEnoughResources(((Familiar) familyMember));
 					if (!go) break;
 				}
 			}

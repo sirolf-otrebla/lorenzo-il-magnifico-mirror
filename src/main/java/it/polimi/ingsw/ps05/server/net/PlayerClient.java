@@ -24,7 +24,6 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Observer messageObserver;
 	private Game game = null;
 	private boolean logged = false;
-	
 
 	private Player pl = null;
 	private boolean plExists = false;

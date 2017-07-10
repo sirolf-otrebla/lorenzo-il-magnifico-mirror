@@ -27,7 +27,7 @@ public class ProductionActionMessage implements GameMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-
+        vi.visit(this);
     }
 
     public ActionMessage getActionMessage() {

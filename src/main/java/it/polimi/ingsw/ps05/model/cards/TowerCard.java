@@ -86,17 +86,39 @@ public abstract class TowerCard implements Card {
 		}
 	}
 
+	/** this method returns this card's requirements
+	 *
+	 * @return returns an {@code ArrayList<ArrayList<Resource>>} which represent the card's requirements.
+	 * 			first List represent an OR plane, the inner list represent
+	 *          an AND plane: then this parameter can be seen as a SOP logic formula: for example, if the requirements
+	 *          are: (Resource1 + Resource2) OR (Resource3 + Resource4), they can be represented in this list as a 2-sized
+	 *          list which is composed by two other list, the firs containing Resource1 and Resource2, and the
+	 *          second one containing Resource3 and Resource4
+	 *          @see Resource
+	 */
 	@Override
 	public ArrayList<ArrayList<Resource>> getRequirements() {
 		return this.requirements;
 	}
 
+	/** this method returns this card's effects
+	 *
+	 * @return returns an Arraylist of {@link Effect},  which can be Activable, Immediate, Permanent or other types of
+	 * Effect
+	 * @see ImmediateEffect
+	 * @see it.polimi.ingsw.ps05.model.effects.ActivableEffect
+	 * @see PermanentEffect
+	 */
 	@Override
 	public ArrayList<Effect>getEffects() {
 
 		return this.effects;
 	}
 
+	/** returns the card's name as in the table version of the game
+	 *
+	 * @return a String containing the card's name
+	 */
 	@Override
 	public String getName() {
 		return this.cardName;
