@@ -70,12 +70,10 @@ public class App {
 				} else {
 					useCustomBonusTiles = false;
 				}
-				System.out.println("please insert maximum lobby timeout");
-				in = scanner.nextLine();
 				Server server = Server.getInstance();
 				System.out.println("complete rules chosen " + useCompleteRules);
 				System.out.println("bonus tiles chosen " + useCustomBonusTiles);
-				server.startServer(new Integer(in), useCompleteRules, useCustomBonusTiles);
+				server.startServer( useCompleteRules, useCustomBonusTiles);
 			}
 		}
 		if (!started) {

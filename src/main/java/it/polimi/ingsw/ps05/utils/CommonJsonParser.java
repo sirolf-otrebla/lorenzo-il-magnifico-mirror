@@ -47,6 +47,31 @@ public class CommonJsonParser {
 		this.game = game;
 	}
 	
+	public int loadActionWaitingTimer(){
+		try {
+			File file = new File("./src/main/res/timer.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			Object time = obj.get("ActionWaitingTimer");
+			return Integer.parseInt(time.toString());
+		} catch (IOException | ParseException | SecurityException | IllegalArgumentException e) {
+			e.printStackTrace();
+			return 120;
+		}
+		
+	}
+	
+	public static int loadLobbyWaitingTimer(){
+		try {
+			File file = new File("./src/main/res/timer.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			Object time = obj.get("LobbyWaitingTimer");
+			return Integer.parseInt(time.toString());
+		} catch (IOException | ParseException | SecurityException | IllegalArgumentException e) {
+			e.printStackTrace();
+			return 120;
+		}
+	}
+	
 	public ArrayList<ArrayList<Resource>> loadPrivilegeConversion(){
 
 		ArrayList<ArrayList<Resource>> finalList = new ArrayList<>();
