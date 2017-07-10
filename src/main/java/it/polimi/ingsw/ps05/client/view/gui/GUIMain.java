@@ -125,14 +125,8 @@ public class GUIMain extends Application implements LimView {
         // creo gli avversari
         for (ColorEnumeration color: usernamesHashMap.keySet()) {
 			System.out.println("creando gli avversari: " + color);
-			opponentsHashMap.put(color, new OpponentWidget(this, color));
+			opponentsHashMap.put(color, new OpponentWidget(this, color, usernamesHashMap.get(color)));
 		}
-
-        // aggiungo il nome
-        for (ColorEnumeration color: usernamesHashMap.keySet()) {
-			System.out.println("aggiungendo i nomi: " + usernamesHashMap.get(color));
-            opponentsHashMap.get(color).setOpponentUsername(usernamesHashMap.get(color));
-        }
 
 	}
 
@@ -599,8 +593,6 @@ public class GUIMain extends Application implements LimView {
 		}
 	}
 
-
-
 	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, ActionSpaceWidgetInterface actionSpaceWidgetInterface) {
 
 		// get the familiar image
@@ -641,10 +633,10 @@ public class GUIMain extends Application implements LimView {
 		this.getPlayer().setActive(false);
 	}
 
-	public void setDiceValues(Integer[] newValues) {
-		for (int i = 0; i < 3; i++) {
-			this.diceWidgetArray[i].setValue(newValues[i]);
-			this.diceWidgetArray[i].repaint();
+	public void setDiceValues(HashMap<ColorEnumeration, Integer> newDiceValues) {
+		for (ColorEnumeration diceColor: diceColorArray) {
+			diceHashMap.get(diceColor).setValue(newDiceValues.get(diceColor));
+			diceHashMap.get(diceColor).repaint();
 		}
 	}
 
