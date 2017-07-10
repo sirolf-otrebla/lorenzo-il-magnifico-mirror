@@ -42,13 +42,14 @@ public class BonusTileWidget extends ImageView {
             this.setImage(img);
             this.setPreserveRatio(true);
             this.setFitHeight(BONUSTILE_HEIGHT_PERC * stageHeight);
-            this.setupClickGesture();
+            //this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
     }
 
     // click-to-take-bonusTile gesture
+    /*
     private void setupClickGesture() {
 
         if(!isDraftFinished()) {
@@ -75,6 +76,7 @@ public class BonusTileWidget extends ImageView {
             this.setMouseTransparent(true);
         }
     }
+    */
 
 
     public boolean isThisPlayerSelected() {

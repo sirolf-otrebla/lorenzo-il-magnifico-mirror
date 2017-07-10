@@ -484,7 +484,7 @@ public class GUIMain extends Application {
 		stage.show();
 
 		//startBonusTileDraft();
-		//startLeaderDraft(testLeaderIdArray);
+		startLeaderDraft(testLeaderIdArray);
 		//endLeaderDraft();
 		//setDiceValues(testDiceValues);
 		//timerWidget.setupTimer();

@@ -28,14 +28,15 @@ public class LeaderDraftPopup {
     private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
     public static int numberOfLeadersAlreadySelected;
     public static boolean draftCompleted;
-    public static HBox hboxReference;
+    private static HBox hboxReference;
 
     public static void display(Integer[] referenceIdArray) {
 
         /* Initialize leaders to be drafted */
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++) {
             leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
+        }
 
         popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -105,7 +106,7 @@ public class LeaderDraftPopup {
     }
 
     //// DA CHIAMARE DALL'ESTERNO ////
-    public void updateLeadersToDraft(Integer[] newReferenceIdArray) {
+    public static void updateLeadersToDraft(Integer[] newReferenceIdArray) {
 
         /* Insert new leaders in a new array */
         int leadersRemained = 4 - numberOfLeadersAlreadySelected; //leaders left to choose
@@ -125,7 +126,7 @@ public class LeaderDraftPopup {
 
     }
 
-    private void repaint() {
+    private static void repaint() {
 
         hboxReference.getChildren().clear();
 
