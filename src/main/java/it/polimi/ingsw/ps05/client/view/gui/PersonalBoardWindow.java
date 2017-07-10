@@ -57,18 +57,18 @@ public class PersonalBoardWindow {
         this.board = board;
 
         // popolo la hashmap delle HBox contenenti le carte
-        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+        for (ColorEnumeration cardColor: acquiredCardColorArray) {
             cardHboxesMap.put(cardColor, new HBox(10));
         }
 
         // popolo la hashmap deglle liste di carte
-        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+        for (ColorEnumeration cardColor: acquiredCardColorArray) {
             cardAcquiredColorMap.put(cardColor, new ArrayList<AcquiredCardWidget>());
         }
 
         // configuro layout delle HBox
         int i = 0;
-        for(ColorEnumeration cardColor: acquiredCardColorArray) {
+        for (ColorEnumeration cardColor: acquiredCardColorArray) {
             cardHboxesMap.get(cardColor).setLayoutX((2.4277 / 100) * personalBoardWidth);
             cardHboxesMap.get(cardColor).setLayoutY((1.8684 + 25.5 * i) / 100 * personalBoardHeight);
             cardHboxesMap.get(cardColor).setPrefHeight((21.0 / 100) * personalBoardHeight);
@@ -112,7 +112,7 @@ public class PersonalBoardWindow {
         pane.getChildren().addAll(showBonusTileButton, closeButton);
 
         /* show acquired cards */
-        for(ColorEnumeration cardColor: acquiredCardColorArray)
+        for (ColorEnumeration cardColor: acquiredCardColorArray)
             pane.getChildren().add(cardHboxesMap.get(cardColor));
 
 
@@ -148,7 +148,7 @@ public class PersonalBoardWindow {
         return bonusTile;
    }
 
-   public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
+    public void setBonusTileWidget(BonusTileWidget bonusTileWidget) {
         this.bonusTile = bonusTileWidget;
     }
 
