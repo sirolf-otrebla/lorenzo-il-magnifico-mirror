@@ -147,6 +147,8 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
     public void run() {
         synchronized (gui) {
             visit(initStatus);
+            UpdateViewVisitor updateVisitor = new UpdateViewVisitor(gui, initStatus);
+            updateVisitor.visit(initStatus);
         }
     }
 }

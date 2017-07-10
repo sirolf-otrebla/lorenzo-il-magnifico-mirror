@@ -70,7 +70,12 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
         for (ColorEnumeration c: this.gui.getTowerColorArray()) {
             Tower tower = board.getTowerList().get(c);
-            TowerTileInterface[] towerTileInterfaces = (TowerTileInterface[]) tower.getTiles().values().toArray();
+            TowerTileInterface[] towerTileInterfaces = new TowerTileInterface[tower.getTiles().values().size()];
+            int i = 0;
+            for ( TowerTileInterface towertile:  tower.getTiles().values()) {
+                towerTileInterfaces[i] = towertile;
+                i++;
+            }
             int[] cards = new int[towerTileInterfaces.length];
             for (TowerTileInterface t: towerTileInterfaces) {
                 Integer dice = t.getDiceRequired().getValue();

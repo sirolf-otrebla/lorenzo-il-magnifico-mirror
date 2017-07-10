@@ -18,8 +18,7 @@ public class GuiStarter implements Runnable {
 
     private GUIMain guiMain = new GUIMain();
 
-    public GuiStarter(GameSetupMessage gameSetup) {
-        GameStatus status = gameSetup.getStatus();
+    public GuiStarter(GameStatus status) {
         Player activePlayer = status.getPlayerHashMap().get(status.getActivePlayerId());
         status.getPlayerHashMap().remove(status.getActivePlayerId());
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
