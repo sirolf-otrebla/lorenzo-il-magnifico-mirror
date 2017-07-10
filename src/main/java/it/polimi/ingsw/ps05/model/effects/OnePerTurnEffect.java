@@ -17,6 +17,7 @@ public class OnePerTurnEffect extends ImmediateEffect {
 	
 	private ArrayList<ActionResult> effectList = new ArrayList<>();
 	
+	@Override
 	public void setEffectList(ArrayList<ActionResult> actResList){
 	    this.effectList = actResList;
     }
@@ -33,13 +34,19 @@ public class OnePerTurnEffect extends ImmediateEffect {
         this.used = false;
     }
     
-    public ArrayList<ActionResult> getEffectList(){
-    	return effectList;
+    @Override
+    public ArrayList<ActionResult> getResultList(){
+    	return this.effectList;
     }
     
     @Override
     public void apply(PlayerRelated familyMember){
         super.apply(familyMember);
         this.setUsed();
+    }
+    
+    @Override
+    public String toString(){
+    	return "Attivabile una volta a turno";
     }
 }

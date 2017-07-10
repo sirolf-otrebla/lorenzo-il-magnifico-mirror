@@ -41,7 +41,9 @@ public class CliTerminalForCardsList {
 	public CliTerminalForCardsList(ArrayList<?> cards, int width, int maxCardSelectable, int minCardSelectable){
 		this.cards = cards;
 		this.width = width;
+		System.out.println(this.cards.get(0).getClass());
 		if (this.cards.get(0) instanceof Card){
+			System.out.println("Ho delle carte");
 			for (Object c : cards){
 				for (Effect e : ((Card)c).getEffects()){
 					if (e instanceof ActivableEffect){
@@ -242,11 +244,14 @@ public class CliTerminalForCardsList {
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		try {
 			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 			System.out.println("Effetti: " + card.getEffects().size());
 			for (Effect effect : card.getEffects()){
 				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 				if (!(effect instanceof ActivableEffect)) {
+					System.out.println("non effetto attivabile");
+					System.out.println("effetti disponibili: " + ((SimpleEffect)effect).getResultList().size());
 					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
 						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
 						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);

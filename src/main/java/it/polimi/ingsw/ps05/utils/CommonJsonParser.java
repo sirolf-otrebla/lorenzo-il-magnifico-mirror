@@ -11,20 +11,33 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import it.polimi.ingsw.ps05.model.Board;
+import it.polimi.ingsw.ps05.model.BonusTile;
+import it.polimi.ingsw.ps05.model.BonusTileType;
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.model.Epoch;
+import it.polimi.ingsw.ps05.model.EpochEnumeration;
 import it.polimi.ingsw.ps05.model.cards.*;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffect;
 import it.polimi.ingsw.ps05.model.effects.ActivableEffectType;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.ImmediateEffect;
+import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.spaces.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusDice;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusWithMultiplier;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.ExcommunicationEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects.ReduceVictoryPtsExcomm;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
-import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.exceptions.CouncilDiceAlreadySet;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.server.controller.Game;
@@ -46,7 +59,7 @@ public class CommonJsonParser {
 		this.playerConnected = playerConnected;
 		this.game = game;
 	}
-	
+
 	public int loadActionWaitingTimer(){
 		try {
 			File file = new File("./src/main/res/timer.json");
@@ -57,9 +70,9 @@ public class CommonJsonParser {
 			e.printStackTrace();
 			return 120;
 		}
-		
+
 	}
-	
+
 	public static int loadLobbyWaitingTimer(){
 		try {
 			File file = new File("./src/main/res/timer.json");
@@ -71,7 +84,7 @@ public class CommonJsonParser {
 			return 120;
 		}
 	}
-	
+
 	public ArrayList<ArrayList<Resource>> loadPrivilegeConversion(){
 
 		ArrayList<ArrayList<Resource>> finalList = new ArrayList<>();
@@ -94,18 +107,19 @@ public class CommonJsonParser {
 					interList.add((Resource)actionObject);
 				}
 				finalList.add(interList);
-				
+
 			}
 		} catch (IOException | ParseException | InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 
 		return finalList;
 	}
 
 	private ArrayList<LeaderCard> loadLeaderCards() throws FileNotFoundException, IOException, ParseException, NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		System.out.println("Inizio caricamento leader");
 		File file = new File("./src/main/res/leader.json");
 		JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 		JSONArray array = (JSONArray)obj.get("LeaderCard");
@@ -113,15 +127,81 @@ public class CommonJsonParser {
 		for (int i = 0; i < array.size(); i++){
 			cards.add(loadSingleLeaderCard((JSONObject)array.get(i)));
 		}
-
+		System.out.println("Finito caricamento leader");
 		return cards;
 	}
 
 	private LeaderCard loadSingleLeaderCard (JSONObject obj) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		LeaderCard card = new LeaderCard(Integer.parseInt(obj.get("ID").toString()));
 		card.setCardName(getCardName(obj));
-		card.setEffects(getEffects((JSONObject)obj.get("Effect")));
+		card.setRequirements(getRequirements((JSONObject)obj.get("Requirement")));
+		card.setEffects(loadEffectForLeader((JSONObject)obj.get("Effect")));
+		System.out.println("effetti settati nella carta leader: " + card.getEffects().size());
+		System.out.println("azioni nell'effetto settato: " + ((SimpleEffect)card.getEffects().get(0)).getResultList().size());
 		return card;
+	}
+
+	private ArrayList<Effect> loadEffectForLeader(JSONObject json){
+		ArrayList<Effect> list = new ArrayList<Effect>(); //lista con le liste tra cui scegliere/attivare e basta
+		for (int i = 0; i < json.keySet().toArray().length; i++) { 
+			JSONObject effectList = (JSONObject) json.get(json.keySet().toArray()[i]);//entro in immediate o ecc...
+			ArrayList<ActionResult> resList = new ArrayList<ActionResult>(); //lista dei singoli componenti
+			Object object = null;
+			try {
+				object = Class.forName(effectPath + json.keySet().toArray()[i].toString()).newInstance();
+				System.out.println("instanciated " + json.keySet().toArray()[i].toString());
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				System.err.println("not found " + json.keySet().toArray()[i].toString());
+			} //creo immediate o activable o permanent o endgame
+			Method setList = null;
+			try {
+				setList = object.getClass().getDeclaredMethod("setEffectList", resList.getClass());
+			} catch (NoSuchMethodException | SecurityException e) {
+				System.err.println("non trovato metodo setEffectList");
+			} //non si può mettere ArrayList<ActionResult>.Class quindi uso una variabile uguale e prendo la sua classe
+			for (int j = 0; j < effectList.keySet().toArray().length; j++){ //ciclo le risorse/azioni aggiugnendole ad un arraylist
+				if (!effectList.keySet().toArray()[j].toString().equals("BonusDice")){
+					Object actionObject = null;
+					try {
+						actionObject = Class.forName(resourcePath + effectList.keySet().toArray()[j].toString()).newInstance();
+					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+						System.err.println("non trovata la classe " + effectList.keySet().toArray()[j].toString());
+					}
+					resList.add((ActionResult)actionObject); 
+					Method method = null;
+					try {
+						method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
+					} catch (NoSuchMethodException | SecurityException e) {
+						System.err.println("metodo setValue non trovato");
+					}
+					try {
+						method.invoke(actionObject, Integer.parseInt((effectList.get(effectList.keySet().toArray()[j].toString()).toString())));
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						System.err.println("invocazione fallita di setValue, lanciata eccezzione");
+					}
+					
+					System.out.println("action result creato è null? " + (actionObject==null));
+					resList.set(j, (ActionResult)actionObject);
+				} else {
+
+					JSONObject array = (JSONObject)effectList.get(effectList.keySet().toArray()[j]);
+					for (int k = 0; k < array.keySet().toArray().length; k++){
+						JSONObject obj = (JSONObject)array.get(array.keySet().toArray()[k]);
+						BonusDice dice = new BonusDice(Integer.parseInt(obj.get("Value").toString()),
+								ColorEnumeration.valueOf(obj.get("Color").toString()), (boolean)obj.get("ToAdd"));
+						resList.add((ActionResult)dice);
+					}
+
+				}
+			}
+			try {
+				setList.invoke(object, resList);//setto nell'oggetto effetto (qualunque sia) la lista di azioni appena ricavata
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				System.err.println("Errore nel settare la lista di effetti");
+			}
+			list.add((Effect) object); //aggiungo l'effetto alla lista da ritornare
+		}
+		return list;
 	}
 
 	//XXX Metodi per caricamento board
@@ -402,7 +482,9 @@ public class CommonJsonParser {
 				JSONArray array =  (JSONArray)obj.get("Default");
 				for (int i = 0; i < playerConnected; i++){
 					try {
-						list.add(loadSingleBonusTile(array, type));
+						BonusTile t = loadSingleBonusTile(array, type);
+						t.setReferenceID(i);
+						list.add(t);
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| NoSuchMethodException | SecurityException | IllegalArgumentException
 							| InvocationTargetException e) {
@@ -413,7 +495,9 @@ public class CommonJsonParser {
 				JSONArray array =  (JSONArray)obj.get("Custom");
 				for (int i = 0; i < array.size(); i++){
 					try {
-						list.add(loadSingleBonusTile((JSONArray)array.get(i), type));
+						BonusTile t = loadSingleBonusTile((JSONArray)array.get(i), type);
+						t.setReferenceID(i);
+						list.add(t);
 					} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 							| NoSuchMethodException | SecurityException | IllegalArgumentException
 							| InvocationTargetException e) {
@@ -663,12 +747,14 @@ public class CommonJsonParser {
 							!effectList.keySet().toArray()[j].toString().equals("Multiplier") &
 							!effectList.keySet().toArray()[j].toString().equals("ResourceToCount") &
 							!effectList.keySet().toArray()[j].toString().equals("BonusDice")){
-						resList.add(createAllExceptActivable(effectList, j)); 
+						ActionResult r = createAllExceptActivable(effectList, j);
+						System.out.println("action result creato è null? " + (r==null));
+						resList.add(r); 
 					} else if (!effectList.keySet().toArray()[j].toString().equals("BonusDice")){
 						resList.add(createBonusWithMultiplier(effectList));
 						break;
 					} else {
-						
+
 						JSONObject array = (JSONObject)effectList.get(effectList.keySet().toArray()[j]);
 						for (int k = 0; k < array.keySet().toArray().length; k++){
 							JSONObject obj = (JSONObject)array.get(array.keySet().toArray()[k]);
@@ -676,7 +762,7 @@ public class CommonJsonParser {
 									ColorEnumeration.valueOf(obj.get("Color").toString()), (boolean)obj.get("ToAdd"));
 							resList.add((ActionResult)dice);
 						}
-						
+
 					}
 				}
 				setList.invoke(object, resList);//setto nell'oggetto effetto (qualunque sia) la lista di azioni appena ricavata
@@ -725,29 +811,29 @@ public class CommonJsonParser {
 
 	private ActionResult createAllExceptActivable(JSONObject json, int j) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SecurityException, NumberFormatException, IllegalArgumentException{
 		Object actionObject = Class.forName(resourcePath + json.keySet().toArray()[j].toString()).newInstance(); //istanza della classe letta da file ed esecuzione del setter per generare la risorsa
-		
+
 
 		try {
 			Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
 			method.invoke(actionObject, Integer.parseInt(json.get(json.keySet().toArray()[j].toString()).toString()));
-			
+
 		} catch (NoSuchMethodException | InvocationTargetException e){
-			//TODO in realtà niente da fare deve solo rimanere qui dentro
+			System.err.println("Impossibilie settare 'value' in questo oggetto -->" + json.keySet().toArray()[j].toString());
 		}
-		
-		
+
+
 		try {
 			Method method2 = actionObject.getClass().getDeclaredMethod("setGame",Game.class);
 			method2.invoke(actionObject, game);
 		} catch (NoSuchMethodException | InvocationTargetException e) {
-			//TODO in realtà niente da fare, deve solo rimanere qui dentro
+			System.err.println("Impossibile settare game in questo oggetto");
 		}
-		
-		
+
+
 		return (ActionResult)actionObject; //cast esplicito a action result necessario per aggiungerlo alla lista. L'oggetto in se non perde la propria classe
 	}
-	
-	
+
+
 
 	private BonusWithMultiplier createBonusWithMultiplier(JSONObject json) throws NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		BonusWithMultiplier bonus;	
@@ -768,7 +854,7 @@ public class CommonJsonParser {
 		}
 		return bonus;
 	}
-	
+
 	public ArrayList<Resource> loadStartingResources(){
 		ArrayList<Resource> list = new ArrayList<>();
 		try {

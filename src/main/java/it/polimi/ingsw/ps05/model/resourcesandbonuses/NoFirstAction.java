@@ -81,4 +81,8 @@ public class NoFirstAction extends PermanentBonus implements ActionResult {
 		
 	}
 
+    @Override
+    public String toString(){
+    	return "Non esegui la prima azione del turno";
+    }
 }
