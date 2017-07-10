@@ -164,8 +164,8 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                     for (Resource r : player.getResourceList()) {
                         if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
                                 r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
-                            opponentWidget.getResourceWidget().setResource(r.getID(), r.getValue());
-                            opponentWidget.getResourceWidget().repaint();
+                            opponentWidget.getPersonalBoard().getResourceWidget().setResource(r.getID(), r.getValue());
+                            opponentWidget.getPersonalBoard().getResourceWidget().repaint();
 
                         }
                     }

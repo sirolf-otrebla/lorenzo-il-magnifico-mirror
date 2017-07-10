@@ -36,7 +36,7 @@ public class PersonalBoardWindow {
             ColorEnumeration.Blue
     };
 
-    HashMap<ColorEnumeration, HBox> cardHboxesMap;
+    HashMap<ColorEnumeration, HBox> cardHboxesMap = new HashMap<>();
 
 
     public PersonalBoardWindow(GUIMain board) {

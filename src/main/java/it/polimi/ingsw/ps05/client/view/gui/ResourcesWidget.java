@@ -20,11 +20,12 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class ResourcesWidget {
 
-    private int[] resources;
+    private Integer[] resources = new Integer[4];
     private Label goldLabel, woodLabel, stoneLabel, servantLabel;
     private HBox hbox;
 
     public ResourcesWidget() {
+
         this.goldLabel = new Label();
         this.woodLabel = new Label();
         this.stoneLabel = new Label();
@@ -38,7 +39,7 @@ public class ResourcesWidget {
         this.stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
         this.servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
 
-        this.hbox.setSpacing(20 * resize);
+        this.hbox.setSpacing(65 * resize);
         this.hbox.setLayoutX((68.0 / 100) * stageWidth);
         this.hbox.setLayoutY((32.08 / 100) * stageHeight);
         this.hbox.setFillHeight(true);
@@ -63,12 +64,13 @@ public class ResourcesWidget {
         this.stoneLabel.setId("stoneLabel");
         this.servantLabel.setId("servantLabel");
 
-        hbox.setSpacing(60 * resize);
+        hbox.setSpacing(20 * resize);
         hbox.setId("resourcePopup");
         hbox.setLayoutX((68.0 / 100) * stageWidth);
         hbox.setLayoutY((32.08 / 100) * stageHeight);
         hbox.setFillHeight(true);
         hbox.setPrefHeight((4.8 / 100) * stageHeight);
+        hbox.setPrefWidth((16/100) * stageWidth);
         hbox.getChildren().addAll(goldLabel, woodLabel, stoneLabel, servantLabel);
 
         ImageView resourcesBackground = new ImageView();
