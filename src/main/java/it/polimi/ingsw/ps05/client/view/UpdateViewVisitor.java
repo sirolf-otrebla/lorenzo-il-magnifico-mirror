@@ -4,6 +4,8 @@ import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
 import it.polimi.ingsw.ps05.client.view.gui.*;
 import it.polimi.ingsw.ps05.model.*;
+import it.polimi.ingsw.ps05.model.cards.Card;
+import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
@@ -18,11 +20,16 @@ import java.util.HashMap;
  * Created by Alberto on 30/06/2017.
  */
 public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
-    private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap;
+    private HashMap<Integer, ActionSpaceWidgetInterface> actionSpaceWidgetHashMap = new HashMap<>();
     private GUIMain gui;
     private Client client;
+    private GameStatus status;
 
-    public UpdateViewVisitor(GUIMain main){
+
+    public UpdateViewVisitor(GUIMain main, GameStatus status){
+        this.status = status;
+        this.gui = main;
+        this.client = Client.getInstance();
         for (SingleOccupantActionSpaceWidget widget:
              gui.getMarketSpaceWidgets()) {
             actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
@@ -30,7 +37,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         actionSpaceWidgetHashMap.put(gui.getHarvestingSpace().getReferenceId(), gui.getHarvestingSpace());
         actionSpaceWidgetHashMap.put(gui.getProductionSpace().getReferenceId(), gui.getProductionSpace());
 
-        for (ColorEnumeration color: playerColorArray)
+        for (ColorEnumeration color: towerColorArray)
             for (TowerTileWidget tileWidget: gui.getTowerTileWidgetList(color))
                 actionSpaceWidgetHashMap.put(tileWidget.getReferenceId(), tileWidget);
 
@@ -43,8 +50,10 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(GameStatus status){
-
-
+        this.visit(status.getGameBoard());
+        for (Player p : status.getPlayerHashMap().values()) {
+            this.visit(p);
+        }
     }
 
     @Override
@@ -83,17 +92,12 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             widget.setOccupied(true);
             ColorEnumeration playerID = tile.getOccupant().getRelatedPlayerColor();
             widget.setOccupantPlayerColor(playerID);
-            //TODO ESISTE UN METODO MIGLIORE PER CONTROLLARE LA LEGALITÀ DI UNA AZIONE, PER ORA TENIAMO QUESTO
-            Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
-            for (Familiar f : family)
-                if ((new Action(f, tile).isLegal())) {
-                    widget.setLegal(true);
-                    widget.getLegalFamilyMemberList().add(f.getColor());
-                }
-            if (widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
-                widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
-            // altro da aggiungere?
         }
+        this.setWidgetLegal(widget, tile);
+        if (widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
+            widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
+        // altro da aggiungere?
+        widget.repaint();
     }
 
     @Override
@@ -104,6 +108,8 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             widget.setOccupantPlayerColor(marketSpace.getOccupant().getRelatedPlayerColor());
 
         }
+        this.setWidgetLegal(widget, marketSpace);
+        widget.repaint();
 
     }
 
@@ -112,7 +118,9 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
         widget.setOccupingFamiliarList(widgetList);
+        this.setWidgetLegal(widget, councilSpace);
         widget.repaint();
+
 
 
     }
@@ -123,6 +131,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(productionSpace);
         if (widgetList.size() > 1) widget.setMorethanZeroOccupants(true);
         widget.setOccupingFamiliarList(widgetList);
+        this.setWidgetLegal(widget, productionSpace);
         widget.repaint();
 
         //TODO ??? ALTRO DA AGGIUNGERE ???
@@ -136,6 +145,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(harvestingSpace);
         if (widgetList.size() > 1) widget.setMorethanZeroOccupants(true);
         widget.setOccupingFamiliarList(widgetList);
+        this.setWidgetLegal(widget, harvestingSpace);
         widget.repaint();
 
 
@@ -143,11 +153,16 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(Player player) {
+
+        // setting values on point markers
         Integer[] pointsVector = new Integer[3];
         pointsVector[0] = player.getResource(FaithResource.id).getValue();
         pointsVector[1] = player.getResource(MilitaryResource.id).getValue();
         pointsVector[2] = player.getResource(VictoryResource.ID).getValue();
         this.gui.updatePlayerPoints(player.getColor(), pointsVector);
+
+        // setting resources values
+        PersonalBoardWindow boardWindow = null;
         if (player.getColor() == this.gui.getPlayer().getPlayerColor()) {
             for (Resource r : player.getResourceList()) {
                 if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
@@ -156,6 +171,8 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                     this.gui.getPlayer().getResourceWidget().repaint();
                 }
             }
+
+            boardWindow = this.gui.getPlayer().getPersonalBoard();
 
         } else {
             for (OpponentWidget opponentWidget : this.gui.getOpponentsArray()) {
@@ -170,9 +187,30 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                         }
                     }
 
-                    OpponentBoardWindow boardWindow = opponentWidget.getPersonalBoard();
-
+                    boardWindow = opponentWidget.getPersonalBoard();
                 }
+            }
+        }
+
+        //setting cards on personal boards
+        HashMap<ColorEnumeration, ArrayList<TowerCard>> acquiredCardWidgetsHashMap = new HashMap<>();
+        acquiredCardWidgetsHashMap.put(ColorEnumeration.Green, new ArrayList<>());
+        acquiredCardWidgetsHashMap.put(ColorEnumeration.Blue, new ArrayList<>());
+        acquiredCardWidgetsHashMap.put(ColorEnumeration.Yellow, new ArrayList<>());
+        acquiredCardWidgetsHashMap.put(ColorEnumeration.Violet, new ArrayList<>());
+        for (TowerCard card: player.getGreenCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Green).add(card);
+        for (TowerCard card: player.getBlueCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Blue).add(card);
+        for (TowerCard card: player.getYellowCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Yellow).add(card);
+        for (TowerCard card: player.getVioletCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Violet).add(card);
+
+        for (ArrayList<TowerCard> arrayList : acquiredCardWidgetsHashMap.values()){
+            ColorEnumeration color = arrayList.get(0).color;
+            boardWindow.getCardAcquiredColorMap().remove(color);
+            boardWindow.getCardAcquiredColorMap().put(color, new ArrayList<>());
+            ArrayList<AcquiredCardWidget> acquiredCardWidgetArrayList = boardWindow.getCardAcquiredColorMap().get(color);
+            for (TowerCard towerCard : arrayList){
+                Integer id = towerCard.getReferenceID();
+                acquiredCardWidgetArrayList.add(new AcquiredCardWidget(id, GraphicResources.getCardPath(id), towerCard.color));
             }
         }
 
@@ -234,9 +272,19 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     }
 
+    private void setWidgetLegal(ActionSpaceWidgetInterface widget, ActionSpace actionSpace){
+        Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
+        for (Familiar f : family)
+            if ((new Action(f, actionSpace).isLegal())) {
+                widget.setLegal(true);
+                widget.getLegalFamilyMemberList().add(f.getColor());
+            }
+    }
+
+
     @Override
     public void run() {
-
+        visit(status);
     }
 }
 

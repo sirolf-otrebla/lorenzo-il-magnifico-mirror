@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
@@ -25,6 +26,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private int minDie;
     private boolean isLegal;
     private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
+    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
@@ -180,5 +182,13 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
 
     public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
         return legalActionMap;
+    }
+
+    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
+        return legalFamilyMemberList;
+    }
+
+    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
+        this.legalFamilyMemberList = legalFamilyMemberList;
     }
 }

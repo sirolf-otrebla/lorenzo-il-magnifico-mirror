@@ -26,15 +26,6 @@ public class AcquiredCardWidget extends ImageView{
     public AcquiredCardWidget() {
 
     }
-
-    public AcquiredCardWidget(ColorEnumeration color) {
-        this.color = color;
-    }
-
-    public AcquiredCardWidget(Integer referenceId) {
-        this.referenceId = referenceId;
-    }
-
     public AcquiredCardWidget(Integer referenceId, String path, ColorEnumeration color) {
         this.referenceId = referenceId;
         this.color = color;

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
+import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GUIMain extends Application {
+public class GUIMain extends Application implements LimView {
 
 
 	private Stage stage;
@@ -36,7 +37,7 @@ public class GUIMain extends Application {
 	public int PLAYER_NUMBER, OPPONENTS_NUMBER;
 	private Integer MOVE_TIMER;
 	private String[] opponentNames;
-
+	private static GUIMain instance;
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
 
@@ -134,6 +135,9 @@ public class GUIMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		this.stage = primaryStage;
+		this.instance = this;
 
 		//opponentNames = {"Pippo", "Pluto", "Paperino"};
 		int thisPlayerId = 0;
@@ -481,10 +485,8 @@ public class GUIMain extends Application {
 
 		stage.setScene(mainScene);
 		stage.sizeToScene();
-		stage.show();
 
 		//startBonusTileDraft();
-		startLeaderDraft(testLeaderIdArray);
 		//endLeaderDraft();
 		//setDiceValues(testDiceValues);
 		//timerWidget.setupTimer();
@@ -494,7 +496,10 @@ public class GUIMain extends Application {
 		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
 		//showEndGameResult(testFinalResults);
 
+	}
 
+	public void showInterface(){
+		stage.show();
 	}
 
 
@@ -506,7 +511,6 @@ public class GUIMain extends Application {
 
 	public void startBonusTileDraft() {
 		// Show bonus tile draft window
-		BonusTileDraftPopup.display();
 	}
 
 	public void updateBonusTileDraft(ColorEnumeration playerColor, Integer bonusTileId) {
@@ -851,6 +855,10 @@ public class GUIMain extends Application {
 
 	public ColorEnumeration[] getTowerColorArray() {
 		return towerColorArray;
+	}
+
+	public static GUIMain getInstance() {
+		return instance;
 	}
 }
 

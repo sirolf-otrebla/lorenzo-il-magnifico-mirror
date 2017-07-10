@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -28,13 +31,14 @@ public class LeaderDraftPopup {
     private static LeaderWidget[] newLeadersToDraftArray = new LeaderWidget[3];
     public static int numberOfLeadersAlreadySelected;
     public static boolean draftCompleted;
-    private static HBox hboxReference;
+    public static HBox hboxReference;
+    public static Integer cardChoosen;
 
     public static void display(Integer[] referenceIdArray) {
 
         /* Initialize leaders to be drafted */
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < referenceIdArray.length; i++) {
             leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
         }
 
@@ -98,6 +102,22 @@ public class LeaderDraftPopup {
                 leaderWidget.setMouseTransparent(true); // disable mouse click
                 leaderWidget.setDrafted(true);
                 numberOfLeadersAlreadySelected++;
+                LeaderDraftPopup.cardChoosen = leaderWidget.getReferenceID();
+                Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        LeaderDraftChoiceMessage responseMessage =
+                                new LeaderDraftChoiceMessage(cardChoosen);
+                        Client.getInstance().sendToServer(responseMessage);
+
+                    }
+                });
+
+                for (LeaderWidget leaderWidget1 : leadersToDraftArray) {
+                    leaderWidget1.setMouseTransparent(true);
+                }
+
             });
         } else {
             leaderWidget.setMouseTransparent(true);
@@ -114,10 +134,11 @@ public class LeaderDraftPopup {
             newLeadersToDraftArray[i] = new LeaderWidget(newReferenceIdArray[i]);
 
         /* Insert the new leaders in the leadersToDraft array */
+        int j = 0;
         for (int i = 0; i < 4; i++) {
-            int j = 0;
             if (!leadersToDraftArray[i].isDrafted()) {
                 leadersToDraftArray[i] = newLeadersToDraftArray[j];
+                leadersToDraftArray[i].setMouseTransparent(false);
                 j++;
             }
         }

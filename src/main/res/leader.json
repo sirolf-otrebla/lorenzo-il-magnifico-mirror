@@ -34,7 +34,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"NoOccupiedSpace": 0
 				}
@@ -54,7 +54,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"NoTowerOccupiedGold": 0
 				}
@@ -219,7 +219,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"GoldResourceCostBonus": -3
 				}
@@ -277,7 +277,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"BonusDice": 
 					{
@@ -320,7 +320,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"BonusDice": 
 					{
@@ -371,7 +371,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"BonusDice": 
 					{
@@ -415,7 +415,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"NoMilitaryPointsForGreen": 0
 				}
@@ -435,7 +435,7 @@
 
 			"Effect": 
 			{
-				"OnePerTurnEffect": 
+				"PermanentEffect": 
 				{
 					"DoubleBonus": 0
 				}

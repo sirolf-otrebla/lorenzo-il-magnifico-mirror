@@ -19,6 +19,7 @@ public class Board implements Serializable, VisitableFromView {
 
 	private static final long serialVersionUID = 3802284891664073914L;
 
+	private ArrayList<BonusTile> bonusTileArrayList;
 	public final static int MAX_PLAYERS = 4;
 	public final static int EPOCHS_NUMBER = 3;
 	public final static int RESOURCE_CONVERSION_RATIO = 5;
@@ -50,7 +51,7 @@ public class Board implements Serializable, VisitableFromView {
 			ArrayList<VictoryResource> blueConversion, ArrayList<VictoryResource> greenConversion,
 			ArrayList<LeaderCard> leaderCardList) {
 		super();
-
+		this.bonusTileArrayList = new ArrayList<>();
 		this.towerHashMap = new HashMap<>();
 		for (Tower tower : towerList){
 			this.towerHashMap.put(tower.getColor(), tower);
@@ -205,8 +206,14 @@ public class Board implements Serializable, VisitableFromView {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-
-		//TODO
+		vi.visit(this);
 	}
 
+	public ArrayList<BonusTile> getBonusTileArrayList() {
+		return bonusTileArrayList;
+	}
+
+	public void setBonusTileArrayList(ArrayList<BonusTile> bonusTileArrayList) {
+		this.bonusTileArrayList = bonusTileArrayList;
+	}
 }

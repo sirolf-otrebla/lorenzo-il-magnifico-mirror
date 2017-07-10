@@ -1,6 +1,7 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.draftmessages;
 
 import it.polimi.ingsw.ps05.client.ctrl.DraftVisitor;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftMessage;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Alberto on 02/07/2017.
  */
-public class EndDraftMessage implements LeaderDraftMessage {
+public class LeaderDraftEndMessage implements LeaderDraftMessage {
 
     /**
 	 * 
@@ -16,7 +17,7 @@ public class EndDraftMessage implements LeaderDraftMessage {
 	private static final long serialVersionUID = -620774875766220141L;
 	private ArrayList<Integer> playerLeaderCards;
 
-    public EndDraftMessage(ArrayList<Integer> playerLeaderCards){
+    public LeaderDraftEndMessage(ArrayList<Integer> playerLeaderCards){
 
         this.setPlayerLeaderCards(playerLeaderCards);
     }

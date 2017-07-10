@@ -12,7 +12,16 @@ import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.effects.OnePerTurnEffect;
 import it.polimi.ingsw.ps05.model.exceptions.MissingCardException;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.FaithResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.GoldResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.PermanentBonus;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.StoneResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.VictoryResource;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.WoodResource;
 import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
@@ -202,6 +211,12 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	public void putLeaderCard(LeaderCard leaderCard){
     	this.leaderCardHashMap.put(leaderCard.getReferenceID(), leaderCard);
 	}
+
+	public void putBonusTile(BonusTile tile){
+		setBonusTile(tile);
+	}
+
+
 
 
 

@@ -51,5 +51,10 @@ public class NoMilitaryPointsForGreen extends PermanentBonus {
 		game.getBoard().setMilitaryPath(path);
 		
 	}
+    
+    @Override
+    public String toString(){
+    	return "Non servono i punti militare per prendere più carte verdi";
+    }
 
 }

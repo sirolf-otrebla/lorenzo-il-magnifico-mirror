@@ -40,12 +40,7 @@ public class ImmediateEffect implements SimpleEffect {
 	@Override
 	public String toString(){
 
-		String res = new String();
-		for (ActionResult actionResult: effectList) {
-			res.concat(actionResult.toString());
-			res.concat(";");
-		}
-		return res;
+		return "Effetto immediato";
 	}
 
 }

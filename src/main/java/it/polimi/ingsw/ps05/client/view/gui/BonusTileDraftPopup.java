@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
@@ -24,7 +25,6 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  * Created by miotto on 04/07/17.
  */
 public class BonusTileDraftPopup {
-
     private static Stage popupStage;
     private static BonusTileWidget[] bonusTileArray = new BonusTileWidget[4];
     private static BonusTileWidget[] newBonusTileArray;
@@ -32,7 +32,7 @@ public class BonusTileDraftPopup {
     private static BonusTileWidget selectedBonusTile;
     private static HBox hboxReference;
 
-    public static void display() {
+    public static void display(Integer[] bonusTileToDraftArray) {
 
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -45,7 +45,7 @@ public class BonusTileDraftPopup {
 
         // create bonusTile widgets
         for(int i = 0; i < 4; i++) {
-            bonusTileArray[i] = new BonusTileWidget(i);
+            bonusTileArray[i] = new BonusTileWidget(bonusTileToDraftArray[i]);
             bonusTileArray[i].setOpacity(0.3);
             System.out.println(bonusTileArray[i].getImagePath());
             hbox.getChildren().add(bonusTileArray[i]);

@@ -811,7 +811,7 @@ public class CLIMain implements LimView, Runnable{
 				);
 		//TODO
 		String toWrite;
-		if (board.getExcomCards() != null){
+		if (board.getExcomCards() != null && board.getExcomCards().size() > 0){
 			textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
 			textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
 					board.getExcomCards().get(0).getFaithRequested().getValue());
@@ -1179,8 +1179,8 @@ public class CLIMain implements LimView, Runnable{
 	}
 	/**
 	 * This method print info about the selected familiar (its dice value and if it is used or not) 
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoFamiliar(int column, int row, TextGraphics textGraphics){
@@ -1678,11 +1678,14 @@ public class CLIMain implements LimView, Runnable{
 		}
 		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
 		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
+		System.out.println("Tutte le carte leader sono: " + allCards.size());
 		for (Integer i : list){
 			System.out.println("Player.id " + player.getPlayerID() + " Leader.id " + i);
-			cardsToCheck.add(getLeaderWithID(i, allCards));
+			LeaderCard l = getLeaderWithID(i, allCards);
+			System.out.println("carta leader selezionata è null?" + (l == null));
+			cardsToCheck.add(l);
 		}
-
+		
 		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
 		internalSemaphore.release();
 		Integer c = (Integer)chosenCard.get(0);
@@ -1698,10 +1701,13 @@ public class CLIMain implements LimView, Runnable{
 	 */
 	private LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
 		for (LeaderCard l : cards){
-			if (l.getReferenceID() == id){
+			System.out.println("carta analizzata: " + l.getReferenceID() + "carta da cercare: " + id);
+			if (l.getReferenceID().equals(id)){
+				System.out.println("Sto per ritornare una carta" );
 				return l;
 			}
 		}
+		System.out.println("Sto pre ritornare null");
 		return null;
 	}
 

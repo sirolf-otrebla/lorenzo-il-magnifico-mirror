@@ -64,5 +64,10 @@ public class NoMarket extends PermanentBonus implements ActionResult {
 		}
 		
 	}
+    
+    @Override
+    public String toString(){
+    	return "Non puoi usare il mercato";
+    }
 
 }

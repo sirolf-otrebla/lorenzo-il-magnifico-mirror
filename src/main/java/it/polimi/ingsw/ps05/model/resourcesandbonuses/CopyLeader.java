@@ -45,5 +45,9 @@ public class CopyLeader implements ActionResult {
 		return game;
 	}
 
+	@Override
+    public String toString(){
+    	return "Copi una carta leader attiva";
+    }
 
 }
