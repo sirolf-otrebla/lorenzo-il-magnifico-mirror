@@ -21,8 +21,6 @@ public class LeaderWidget extends ImageView{
 
     private int referenceId;
     private String imagePath;
-    private ImageView leaderCard;
-    private static ImageView backSide;
     private static boolean played;
     private boolean activable;
     private boolean active;
@@ -32,7 +30,6 @@ public class LeaderWidget extends ImageView{
     private boolean ofPlayerProperty; //TODO si dovrebbe poter settare dal controller
 
     public LeaderWidget() {
-        addBackImage();
     }
 
     public LeaderWidget(int referenceId) {
@@ -42,22 +39,24 @@ public class LeaderWidget extends ImageView{
         this.imagePath = imagePath;
         System.out.println(imagePath);
         addImage(imagePath);
-        addBackImage();
     }
 
     public void addImage(String imagePath) {
         File crDir = new File(imagePath);
         try {
             Image img = new Image(crDir.toURI().toURL().toString());
+            this.setImage(img);
             this.setFitHeight(LEADER_HEIGHT_PERC * stageHeight);
             this.setPreserveRatio(true);
             this.setSmooth(true);
-            // this.setupClickGesture();
+            System.out.println("image added");
+            //this.setupClickGesture();
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
     }
 
+    /*
     public void addBackImage() {
         File crDir = new File(backPath);
         try {
@@ -71,10 +70,11 @@ public class LeaderWidget extends ImageView{
         }
 
     }
+    */
 
 
     private void setupZoomGesture() {
-        this.leaderCard.setOnMouseEntered((MouseEvent e) -> {
+        this.setOnMouseEntered((MouseEvent e) -> {
             /* Actions to be performed when the card is clicked once */
             if(e.getClickCount() == 1) {
                 //TODO: implementare lo zoom
@@ -179,10 +179,6 @@ public class LeaderWidget extends ImageView{
 
     public void setOfPlayerProperty(boolean ofPlayerProperty) {
         this.ofPlayerProperty = ofPlayerProperty;
-    }
-
-    public ImageView getBackSide() {
-        return backSide;
     }
 
     public boolean isDiscarded() {

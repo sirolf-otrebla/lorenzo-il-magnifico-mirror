@@ -38,6 +38,7 @@ public class Game implements Observer {
     public static final int FAM_DIM = 4;
     private EndActionStrategyContainer endActionStrategyContainer;
     private Semaphore semStart;
+    private int act_waiting_time_ms = 0;
 
 
     public Game(boolean useCompleteRules, boolean useCustomBonusTiles, int id,
@@ -193,5 +194,13 @@ public class Game implements Observer {
     public ArrayList<ArrayList<Resource>> getPrivilegeConvResAlternatives() {
         return privilegeConvResAlternatives;
     }
+
+	public int getAct_waiting_time_ms() {
+		return act_waiting_time_ms;
+	}
+
+	public void setAct_waiting_time_ms(int act_waiting_time_s) {
+		this.act_waiting_time_ms = 1000*act_waiting_time_s;
+	}
 }
 

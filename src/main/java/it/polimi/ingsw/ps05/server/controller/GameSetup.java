@@ -43,6 +43,7 @@ public class GameSetup {
 		System.out.println("resource loaded in gameSetup " + l.size());
 		turnSetup = new TurnSetupManager(playerConnected, board, l);
 		game.setPrivilegeConvResAlternatives(parser.loadPrivilegeConversion());
+		game.setAct_waiting_time_ms(parser.loadActionWaitingTimer());
 	}
 	
 	private void createFamiliarForPlayers(){

@@ -38,8 +38,9 @@ public class LeaderDraftPopup {
 
         /* Initialize leaders to be drafted */
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++) {
             leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
+        }
 
         popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -146,7 +147,7 @@ public class LeaderDraftPopup {
 
     }
 
-    private static  void repaint() {
+    private static void repaint() {
 
         hboxReference.getChildren().clear();
 
