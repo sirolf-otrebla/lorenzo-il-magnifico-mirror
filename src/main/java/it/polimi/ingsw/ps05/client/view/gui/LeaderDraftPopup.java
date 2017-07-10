@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 import it.polimi.ingsw.ps05.client.ctrl.Client;
-import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,7 +38,7 @@ public class LeaderDraftPopup {
 
         /* Initialize leaders to be drafted */
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < referenceIdArray.length; i++) {
             leadersToDraftArray[i] = new LeaderWidget(referenceIdArray[i]);
         }
 
@@ -134,8 +134,8 @@ public class LeaderDraftPopup {
             newLeadersToDraftArray[i] = new LeaderWidget(newReferenceIdArray[i]);
 
         /* Insert the new leaders in the leadersToDraft array */
+        int j = 0;
         for (int i = 0; i < 4; i++) {
-            int j = 0;
             if (!leadersToDraftArray[i].isDrafted()) {
                 leadersToDraftArray[i] = newLeadersToDraftArray[j];
                 leadersToDraftArray[i].setMouseTransparent(false);

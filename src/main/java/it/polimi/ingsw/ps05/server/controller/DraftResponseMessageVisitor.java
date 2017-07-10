@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps05.server.controller;
 
-import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
-import it.polimi.ingsw.ps05.net.message.LeaderDraftUpdateNetMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.BonusTileDraftChoiceMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 /**
@@ -19,6 +19,11 @@ public class DraftResponseMessageVisitor {
         System.out.println("(LeaderDraftChoiceMessage) secondo visitor");
         this.client.getGame().getDraftController().DoChoice(
                 client.getPlayer().getColor(), msg.getChoice());
+    }
+
+    public void visit(BonusTileDraftChoiceMessage msg){
+        System.out.println("(BonusTileDraftChoiceMessage) secondo visitor");
+        this.client.getGame().getBonusTileDraftController().setChoice(msg.getChoice());
     }
 
 }

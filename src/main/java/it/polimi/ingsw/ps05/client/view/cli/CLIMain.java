@@ -1179,8 +1179,8 @@ public class CLIMain implements LimView, Runnable{
 	}
 	/**
 	 * This method print info about the selected familiar (its dice value and if it is used or not) 
-	 * @param width is the terminal width in which we will draw
-	 * @param height is the terminal height in which we will draw
+	 * @param column is the terminal width in which we will draw
+	 * @param row is the terminal height in which we will draw
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void infoFamiliar(int column, int row, TextGraphics textGraphics){

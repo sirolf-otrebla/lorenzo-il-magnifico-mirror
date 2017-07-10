@@ -487,7 +487,6 @@ public class GUIMain extends Application implements LimView {
 		stage.sizeToScene();
 
 		//startBonusTileDraft();
-		startLeaderDraft(testLeaderIdArray);
 		//endLeaderDraft();
 		//setDiceValues(testDiceValues);
 		//timerWidget.setupTimer();
@@ -512,7 +511,6 @@ public class GUIMain extends Application implements LimView {
 
 	public void startBonusTileDraft() {
 		// Show bonus tile draft window
-		BonusTileDraftPopup.display();
 	}
 
 	public void updateBonusTileDraft(ColorEnumeration playerColor, Integer bonusTileId) {

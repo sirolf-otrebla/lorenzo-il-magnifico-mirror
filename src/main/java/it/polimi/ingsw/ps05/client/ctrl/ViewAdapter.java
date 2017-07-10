@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.client.view.SetUpGuiVisitor;
-import it.polimi.ingsw.ps05.client.view.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
+import it.polimi.ingsw.ps05.client.view.gui.BonusTileDraftPopup;
 import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
 import it.polimi.ingsw.ps05.client.view.gui.GuiStarter;
 import it.polimi.ingsw.ps05.client.view.gui.LeaderDraftPopup;
@@ -11,10 +11,9 @@ import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.GameStatus;
-import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.SetupDoneMessage;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -116,7 +115,7 @@ public class ViewAdapter {
 		}
 	}
 
-	public void updateDraft(ArrayList<Integer> draftIDs){
+	public void updateLeaderDraft(ArrayList<Integer> draftIDs){
 		if (this.viewType == this.GUI_TYPE) {
 			Integer[] draftIdArray = new Integer[draftIDs.size()];
 			for (int i = 0; i < draftIDs.size() ; i++) {
@@ -126,7 +125,7 @@ public class ViewAdapter {
 				public Integer[] integers;
 				@Override
 				public void run() {
-					LeaderDraftPopup.display(integers);
+						LeaderDraftPopup.updateLeadersToDraft(integers);
 				}
 
 				public Runnable init(Integer[] draftIdArray){
@@ -160,7 +159,79 @@ public class ViewAdapter {
 		return null;
 	}
 
-	public void startDraft(ArrayList<Integer> draftIDs){
+	public void endLeaderDraft(){
+		if (this.viewType == this.GUI_TYPE) {
+			// TODO
+
+		} else {
+			CLIMain cliView = (CLIMain) this.view;
+		}
+
+	}
+
+	public void startBonusTileDraft(ArrayList<Integer> draftIDs){
+		if (this.viewType == this.GUI_TYPE) {
+			GUIMain gui = (GUIMain) this.view;
+			Integer[] draftIdArray = new Integer[draftIDs.size()];
+			for (int i = 0; i < draftIDs.size() ; i++) {
+				draftIdArray[i] = draftIDs.get(i);
+			}
+			Platform.runLater(new Runnable() {
+				public Integer[] integers;
+				@Override
+				public void run() {
+					BonusTileDraftPopup.display(integers);
+				}
+
+				public Runnable init(Integer[] draftIdArray){
+					this.integers = draftIdArray;
+					return this;
+				}
+			}.init(draftIdArray));
+
+		} else {
+			CLIMain cliView = (CLIMain) this.view;
+		}
+
+	}
+
+	public void updateBonusTileDraft(ArrayList<Integer> draftIDs){
+		if (this.viewType == this.GUI_TYPE) {
+			Integer[] draftIdArray = new Integer[draftIDs.size()];
+			for (int i = 0; i < draftIDs.size() ; i++) {
+				draftIdArray[i] = draftIDs.get(i);
+			}
+			Platform.runLater(new Runnable() {
+				public Integer[] integers;
+				@Override
+				public void run() {
+					BonusTileDraftPopup.display(integers);
+				}
+
+				public Runnable init(Integer[] draftIdArray){
+					this.integers = draftIdArray;
+					return this;
+				}
+			}.init(draftIdArray));
+
+
+		} else {
+			CLIMain cliView = (CLIMain) this.view;
+		}
+
+	}
+
+	public void endBonusTileDraft(){
+		if (this.viewType == this.GUI_TYPE) {
+			// TODO
+
+		} else {
+		;
+		}
+
+
+	}
+	public void startLeaderDraft(ArrayList<Integer> draftIDs){
 		if (this.viewType == this.GUI_TYPE) {
 			GUIMain gui = (GUIMain) this.view;
 			Integer[] draftIdArray = new Integer[draftIDs.size()];

@@ -29,7 +29,7 @@ public class BonusTileDraftPopup {
 
     private static BonusTileWidget selectedBonusTile;
 
-    public static void display() {
+    public static void display(Integer[] bonusTileToDraftArray) {
 
         popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -41,7 +41,7 @@ public class BonusTileDraftPopup {
 
         // create bonusTile widgets
         for(int i = 0; i < 4; i++) {
-            bonusTileArray[i] = new BonusTileWidget(i);
+            bonusTileArray[i] = new BonusTileWidget(bonusTileToDraftArray[i]);
             System.out.println(bonusTileArray[i].getImagePath());
             hbox.getChildren().add(bonusTileArray[i]);
             //GridPane.setConstraints(bonusTileArray[i].getImage(), i, 0);

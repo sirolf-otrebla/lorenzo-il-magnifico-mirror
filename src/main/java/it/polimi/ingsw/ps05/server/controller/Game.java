@@ -30,6 +30,7 @@ public class Game implements Observer {
     private ArrayList<ExcommunicationCard> excommList;
     private Player activePlayer;
     private Round state;
+    private BonusTileDraftController bonusTileDraftController;
     private DraftController draftController;
     private Thread draftControllerThread;
     private static final int MAX_LEADER_CARDS = 4;
@@ -199,7 +200,11 @@ public class Game implements Observer {
 		return act_waiting_time_ms;
 	}
 
-	public void setAct_waiting_time_ms(int act_waiting_time_s) {
+    public BonusTileDraftController getBonusTileDraftController() {
+        return bonusTileDraftController;
+    }
+
+    public void setAct_waiting_time_ms(int act_waiting_time_s) {
 		this.act_waiting_time_ms = 1000*act_waiting_time_s;
 	}
 }

@@ -1,5 +1,6 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.draftmessages;
 
+import it.polimi.ingsw.ps05.net.message.draftmessages.DraftResponseNetMessage;
 import it.polimi.ingsw.ps05.server.controller.DraftResponseMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
