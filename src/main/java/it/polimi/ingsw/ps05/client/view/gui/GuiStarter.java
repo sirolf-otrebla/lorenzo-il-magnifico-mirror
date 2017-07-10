@@ -24,7 +24,7 @@ public class GuiStarter implements Runnable {
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
         HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
         for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());
-        this.guiMain.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120, usernamesHashMap);
+        this.guiMain.setInitValues(status.getThisPlayer().getColor(), status.getPlayerHashMap().size(), 120, usernamesHashMap);
     }
 
     @Override

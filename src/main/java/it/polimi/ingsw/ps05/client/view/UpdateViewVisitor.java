@@ -50,6 +50,16 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(GameStatus status){
+        System.out.println("PLAYER COLOR:");
+        System.out.println(status.getThisPlayer().getColor().toString());
+        System.out.println("__________________________________________");
+        HashMap<ColorEnumeration, Integer> diceHashMap = new HashMap<>();
+        for (Familiar f: status.getThisPlayer().getFamilyList()) {
+            if (f.getColor() != ColorEnumeration.Any && f.getColor() != ColorEnumeration.Ghost){
+                diceHashMap.put(f.getColor(), f.getRelatedDice().getValue());
+            }
+        }
+        this.gui.setDiceValues(diceHashMap);
         this.visit(status.getGameBoard());
         for (Player p : status.getPlayerHashMap().values()) {
             this.visit(p);
