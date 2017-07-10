@@ -167,6 +167,9 @@ public class GUIMain extends Application implements LimView {
 			stageWidth = stageHeight * 1.75;
 		}
 		resize = stageWidth / ORIGINAL_WIDTH;
+		System.out.println("stageWidth: " + stageWidth);
+		System.out.println("stageHeight: " + stageHeight);
+		System.out.println("resize: " + resize);
 
 		/* Bind root pane size with window size */
 		root.minWidthProperty().bind(stage.widthProperty());
@@ -226,8 +229,7 @@ public class GUIMain extends Application implements LimView {
 
         /* Add market action spaces */
 		// Initialize
-		int i = 0;
-		for (i = 0; i < this.marketSpaceWidgets.length; i++)
+		for (int i = 0; i < this.marketSpaceWidgets.length; i++)
 			marketSpaceWidgets[i] = new MarketSpaceWidget(1);
 		// Add to board
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
@@ -263,14 +265,17 @@ public class GUIMain extends Application implements LimView {
 			System.out.println(color + " " + opponentsHashMap.get(color).getOpponentUsername());
 		}
 
+
+
 		/* Add points markers */
-		for (i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			// dentro il il singolo tracciato
 			if(i < 1)
 				this.trackBoxesArray[i] = new VBox(12 * resize);
 			else
 				this.trackBoxesArray[i] = new HBox(12 * resize);
 			root.getChildren().add(this.trackBoxesArray[i]);
+
 			for (int j = 0; j < PLAYER_NUMBER; j++) {
 				// dentro il colore del giocatore
 				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j); // ottiene il colore del segnalino
@@ -287,6 +292,7 @@ public class GUIMain extends Application implements LimView {
 				}
 				this.trackBoxesArray[i].getChildren().add(markerWidgetList[i][j].getMarker());
 			}
+
 		}
 
 		/****** MODO 1 ******/
@@ -310,7 +316,7 @@ public class GUIMain extends Application implements LimView {
 
         /* Initialize opponents familiars */
 		for(ColorEnumeration color: opponentsHashMap.keySet()) {
-		    for(i = 0; i < 4; i++) {
+		    for(int i = 0; i < 4; i++) {
 		        opponentsHashMap.get(color).getFamiliarWidgetList()[i] = new FamiliarWidget(color, GraphicResources.getFamiliarColor(i));
             }
         }
@@ -349,7 +355,7 @@ public class GUIMain extends Application implements LimView {
 
 
 		/* Add excommunication widgets */
-		for(i = 0; i < 3; i++) {
+		for(int i = 0; i < 3; i++) {
 			excomWidgetArray[i] = new ExcomWidget();
 			excomWidgetArray[i].setLayoutX(((50.2 + 4.4 * i) / 100) * stageWidth);
 			root.getChildren().add(excomWidgetArray[i]);
@@ -593,21 +599,9 @@ public class GUIMain extends Application implements LimView {
 		}
 	}
 
-	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, ActionSpaceWidgetInterface actionSpaceWidgetInterface) {
-
-		// get the familiar image
-
-		String path = GraphicResources.getFamiliarPath(playerColor, familiarColor);
-		File crDir = new File(path);
-		try{
-			Image familiarPlayedImage = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
-			ImageView familiarPlayed = new ImageView(familiarPlayedImage);
-		} catch (MalformedURLException e){
-			e.printStackTrace();
-		}
-
-		// add to the board
-
+	public void setLegalActionSpaces(HashMap<Integer, HashMap<ColorEnumeration, Boolean>> legalMap) {
+		for(ActionSpaceWidgetInterface actionSpace: actionSpaces)
+			actionSpace.setLegalActionMap(legalMap.get(actionSpace.getReferenceId()));
 	}
 
 	public void updatePlayerPoints(ColorEnumeration color, Integer[] newPoints) {
@@ -869,7 +863,28 @@ public class GUIMain extends Application implements LimView {
 
 
 
+/*
+	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, Integer actionSpaceToOccupy) {
 
+		// get the familiar image
+
+		String path = GraphicResources.getFamiliarPath(playerColor, familiarColor);
+		File crDir = new File(path);
+		try{
+			Image familiarPlayedImage = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+			ImageView familiarPlayed = new ImageView(familiarPlayedImage);
+		} catch (MalformedURLException e){
+			e.printStackTrace();
+		}
+
+		// add to the board
+		for(ActionSpaceWidgetInterface actionSpace: actionSpaces) {
+			if(actionSpace.getReferenceId() == actionSpaceToOccupy)
+				actionSpace.
+		}
+
+	}
+	*/
 
 /* Add tower cards and tower action spaces */
 		/*

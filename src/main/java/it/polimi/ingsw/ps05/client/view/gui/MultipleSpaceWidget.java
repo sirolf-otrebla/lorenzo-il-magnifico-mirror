@@ -31,7 +31,6 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     private int referenceId;
     private int minDie;
-    private boolean isLegal;
     final ScrollPane scrollPane = new ScrollPane();
     final HBox hbox = new HBox();
     private PlayerWidget player;
@@ -193,14 +192,6 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         this.referenceId = referenceId;
     }
 
-    public boolean isLegal() {
-        return isLegal;
-    }
-
-    public void setLegal(boolean legal) {
-        isLegal = legal;
-    }
-
     public void setMinDie(int minDie) {
         this.minDie = minDie;
     }
@@ -211,10 +202,6 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public PlayerWidget getPlayer() {
         return player;
-    }
-
-    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
-        return legalActionMap;
     }
 
     @Override
@@ -234,5 +221,13 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public void setOccupingFamiliarList(ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList) {
         this.occupingFamiliarList = occupingFamiliarList;
+    }
+
+    public void setLegalActionMap(HashMap<ColorEnumeration, Boolean> legalActionMap) {
+        this.legalActionMap = legalActionMap;
+    }
+
+    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
+        return legalActionMap;
     }
 }
