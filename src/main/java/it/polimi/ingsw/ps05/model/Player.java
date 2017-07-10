@@ -26,6 +26,10 @@ import it.polimi.ingsw.ps05.model.exceptions.OccupiedPositionException;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.exceptions.RequirementsNotFullfilledException;
 
+/** this class represents a Player within the software's model. A player is one of the most important
+ * classes of this implementation. it has references to Cards, Family Members, Leader Cards and Effects
+ * applied on himself.
+ */
 public class Player implements Serializable, PlayerRelated, VisitableFromView {
 
 	/**
@@ -59,6 +63,13 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	//TODO fare controllo se prima azione del turno nel controller (una scomunica lo richiede)
 
 
+	/** this is the main constructor of this class
+	 *
+	 * @param playerID	this is the player ID, which is unique and assigned dynamically by the server. it also
+	 *                  corresponds to the related Client id
+	 * @param username  this is the Player's username, as represented on the Client's view
+	 * @param color		this the player color, according to the game rules.
+	 */
 	public Player(int playerID, String username, ColorEnumeration color){
 		this.playerID = playerID;
 		this.username = username;
@@ -74,6 +85,15 @@ public class Player implements Serializable, PlayerRelated, VisitableFromView {
 	}
 
 
+	/** this method is used to execute and action on a certain ActionSpace, using a certain Family Member.
+	 *
+	 * @param familiar
+	 * @param position
+	 * @param selectedOption
+	 * @return
+	 * @throws OccupiedPositionException
+	 * @throws RequirementsNotFullfilledException
+	 */
 	public Action doAction(Familiar familiar, ActionSpace position, int selectedOption) throws OccupiedPositionException, RequirementsNotFullfilledException {
 
 
