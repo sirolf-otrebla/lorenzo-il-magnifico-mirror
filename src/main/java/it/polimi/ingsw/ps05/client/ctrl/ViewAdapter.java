@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
+import it.polimi.ingsw.ps05.client.view.SetUpGuiVisitor;
 import it.polimi.ingsw.ps05.client.view.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.SetupDoneMessage;
+import javafx.concurrent.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class ViewAdapter {
 	public static final String CLI_TYPE = "cli";
 
 	private Thread CliThread;
+	private Task GuiThread = null;
 	private String viewType;
 
 	private LimView view;
@@ -53,15 +56,23 @@ public class ViewAdapter {
 	}
 
 	private void setUpGui(GameStatus gameStatus){
-		GUIMain gui = new GUIMain();
-
-		UpdateViewVisitor guiVisitor = new  UpdateViewVisitor(Client.getInstance(), gui);
-
+		SetUpGuiVisitor setUpGuiVisitor = new SetUpGuiVisitor(gameStatus);
+		this.GuiThread = new Task() {
+			@Override
+			protected Object call() throws Exception {
+				return null;
+			}
+		};
 		//TODO
 	}
 
 	public void startGameView(GameStatus status){
 		if (this.viewType == this.GUI_TYPE) {
+			if (GuiThread != null ){
+				//errore
+			} else {
+
+			}
 
 		} else {
 

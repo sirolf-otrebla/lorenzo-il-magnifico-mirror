@@ -481,7 +481,6 @@ public class GUIMain extends Application {
 
 		stage.setScene(mainScene);
 		stage.sizeToScene();
-		stage.show();
 
 		//startBonusTileDraft();
 		//startLeaderDraft(testLeaderIdArray);
@@ -493,8 +492,13 @@ public class GUIMain extends Application {
 		insertExcomCards(testExcomCards);
 		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
 		//showEndGameResult(testFinalResults);
+		showInterface();
 
 
+	}
+
+	public void showInterface(){
+		stage.show();
 	}
 
 

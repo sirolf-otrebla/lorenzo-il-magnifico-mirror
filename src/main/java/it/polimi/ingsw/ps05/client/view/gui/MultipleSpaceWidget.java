@@ -9,7 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.util.Pair;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
@@ -21,6 +25,8 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
+    private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
+
     public static final double SCROLLPANE_HEIGHT_RESIZE = 1.2, SCROLLPANE_WIDTH_RESIZE = 8.0;
 
     private int referenceId;
@@ -30,6 +36,7 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
     final HBox hbox = new HBox();
     private PlayerWidget player;
     private HashMap <ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
+    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
 
     public MultipleSpaceWidget(int referenceId, int minDie, PlayerWidget player) {
@@ -63,6 +70,18 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
     public void repaint() {
         /* removing all familiars inside the box */
         this.hbox.getChildren().clear();
+
+        for(Pair<ColorEnumeration, ColorEnumeration> familiar: occupingFamiliarList) {
+            String path = GraphicResources.getFamiliarPath(familiar.getKey(), familiar.getValue());
+            File crDir = new File(path);
+            try{
+                Image img = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+                ImageView familiarImage = new ImageView(img);
+                this.hbox.getChildren().add(familiarImage);
+            } catch (MalformedURLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void setupGestureTarget() {
@@ -196,5 +215,24 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
         return legalActionMap;
+    }
+
+    @Override
+    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
+        return legalFamilyMemberList;
+    }
+
+    @Override
+    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
+        this.legalFamilyMemberList = legalFamilyMemberList;
+    }
+
+
+    public ArrayList<Pair<ColorEnumeration, ColorEnumeration>> getOccupingFamiliarList() {
+        return occupingFamiliarList;
+    }
+
+    public void setOccupingFamiliarList(ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList) {
+        this.occupingFamiliarList = occupingFamiliarList;
     }
 }
