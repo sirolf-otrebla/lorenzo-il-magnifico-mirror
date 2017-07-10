@@ -1,0 +1,139 @@
+{
+	"FIRST": 
+	{
+		"MilitaryMalusExcomm": 
+		{
+			"MilitaryResource": -1
+		},
+
+		"GoldMalusExcomm": 
+		{
+			"GoldResource": -1
+		},
+
+		"ServantMalusExcomm": 
+		{
+			"ServantResource": -1
+		},
+
+		"WoodStoneMalusExcomm": 
+		{
+			"WoodResource": -1,
+			"StoneResource": -1
+		},
+
+		"HarvestingMalusExcomm": 
+		{
+			"HarvestBonus": -3
+		},
+
+		"ProductionMalusExcomm": 
+		{
+			"ProductionBonus": -3
+		},
+
+		"DiceMalusExcomm": 
+		{
+			"AllBonus": -1
+		}
+	},
+
+	"SECOND": 
+	{
+		"GreenCardMalusExcomm": 
+		{
+			"GreenBonus": -4
+		},
+
+		"BlueCardMalusExcomm": 
+		{
+			"BlueBonus": -4
+		},
+
+		"YellowCardMalusExcomm": 
+		{
+			"YellowBonus": -4
+		},
+
+		"VioletCardMalusExcomm": 
+		{
+			"VioletBonus": -4
+		},
+
+		"NoMarketExcomm": 
+		{
+			"NoMarket" : 0
+		},
+
+		"ServantMalusExcomm": 
+		{
+			"ServantResource": 2
+		},
+
+		"NoActionExcomm": 
+		{
+			"NoFirstAction" : 0
+		}
+	},
+
+	"THIRD": 
+	{
+		"NoBlueVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"NoVioletVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"NoGreenVictoryPtsExcomm": 
+		{
+			
+		},
+
+		"ReduceVictoryPtsExcomm": 
+		[
+			{
+				"toCheck": 
+				{
+					"VictoryResource": 5
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"MilitaryResource": 1
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"StoneResource": 1,
+					"WoodResource": 1
+				},
+
+				"VictoryResource": -1
+			},
+
+			{
+				"toCheck": 
+				{
+					"GoldResource": 1,
+					"ServantResource": 1,
+					"StoneResource": 1,
+					"WoodResource": 1
+				},
+
+				"VictoryResource": -1
+			}
+		]
+	}
+}
