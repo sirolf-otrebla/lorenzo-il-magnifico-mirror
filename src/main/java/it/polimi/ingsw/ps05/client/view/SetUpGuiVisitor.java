@@ -41,7 +41,6 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
         HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
         for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());
-        this.gui.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120, usernamesHashMap); // settare timeout
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {

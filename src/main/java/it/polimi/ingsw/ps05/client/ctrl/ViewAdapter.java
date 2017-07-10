@@ -100,10 +100,10 @@ public class ViewAdapter {
 
 	public void setUpInterface(GameSetupMessage msg){
 		if (this.viewType == this.GUI_TYPE) {
-			GuiStarter starter = new GuiStarter();
+			GuiStarter starter = new GuiStarter(msg);
 			Platform.runLater(starter);
 			try {
-				guiInitSemaphore.acquire();
+				this.guiInitSemaphore.acquire();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -286,5 +286,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
     public void run() {
         visit(status);
     }
+
+
 }
 
