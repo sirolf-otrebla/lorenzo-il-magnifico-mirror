@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps05.net.message.gamemessages.RejoinMessage;
 import it.polimi.ingsw.ps05.server.database.Database;
 import it.polimi.ingsw.ps05.server.net.NetworkListener;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
+import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class Server {
         return instance;
     }
 
-    public void  startServer(int waitingTime, boolean useCompleteRules, boolean useCustomTiles){
+    public void  startServer(boolean useCompleteRules, boolean useCustomTiles){
         globalClientMap = new HashMap<>();
-        this.serverLobby = new Lobby(waitingTime,useCompleteRules, useCustomTiles);
+        this.serverLobby = new Lobby(1000*CommonJsonParser.loadLobbyWaitingTimer(),useCompleteRules, useCustomTiles);
         Thread lobbyThread = new Thread(this.serverLobby);
         lobbyThread.start();
         userDatabase =  Database.getInstance();

@@ -25,8 +25,6 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 	private Game game = null;
 	private boolean logged = false;
 
-	private static final int  ACT_WAITING_TIME = 12000000;
-
 	private Player pl = null;
 	private boolean plExists = false;
 	private String username;
@@ -109,7 +107,7 @@ public class PlayerClient extends Observable implements Runnable, Observer{
 		this.active = true;
 		this.timer = new Timer();
 		InactivePlayerTask task = new InactivePlayerTask(this.game, this);
-		timer.schedule(task, PlayerClient.ACT_WAITING_TIME);
+		timer.schedule(task, game.getAct_waiting_time_ms());
 		
 	}
 
