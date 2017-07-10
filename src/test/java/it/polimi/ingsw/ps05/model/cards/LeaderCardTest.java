@@ -70,22 +70,19 @@ public class LeaderCardTest {
     }
 
     @Test
-    public void applyNonActivableEffects() throws Exception {
-    }
-
-    @Test
     public void discard() throws Exception {
         card.discard(player);
-        assertNull(player.getLeaderCardList().get(0));
+        assertEquals(0, player.getLeaderCardList().size());
     }
 
     @Test
     public void getEpoch() throws Exception {
-        assertNull(card.getEpoch());
+        assertEquals(EpochEnumeration.NO_EPOCH, card.getEpoch());
     }
 
     @Test
     public void getName() throws Exception {
+        card.setCardName(cardName);
         assertEquals(cardName, card.getCardName());
     }
 
@@ -96,18 +93,18 @@ public class LeaderCardTest {
 
     @Test
     public void setEffects() throws Exception {
+        assertEquals(effectsTest, card.getEffects());
     }
 
     @Test
     public void setCardName() throws Exception {
-    }
-
-    @Test
-    public void applyNonActivableEffects1() throws Exception {
+        card.setCardName(cardName);
+        assertEquals(cardName, card.getCardName());
     }
 
     @Test
     public void getReferenceID() throws Exception {
+        assertEquals(referenceId, (int)card.getReferenceID());
     }
 
 }
