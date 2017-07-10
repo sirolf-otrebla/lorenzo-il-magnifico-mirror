@@ -19,6 +19,7 @@ import javafx.concurrent.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by Alberto on 29/06/2017.
@@ -30,6 +31,7 @@ public class ViewAdapter {
 	private Thread CliThread;
 	private Task GuiThread = null;
 	private String viewType;
+	private Semaphore guiInitSemaphore = new Semaphore(0);
 
 	private LimView view;
 
@@ -100,6 +102,11 @@ public class ViewAdapter {
 		if (this.viewType == this.GUI_TYPE) {
 			GuiStarter starter = new GuiStarter();
 			Platform.runLater(starter);
+			try {
+				guiInitSemaphore.acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			GUIMain gui = starter.getGuiMain();
 			this.view = gui;
 			SetupDoneMessage setupDoneMessage = new SetupDoneMessage();
@@ -292,5 +299,7 @@ public class ViewAdapter {
 
 	}
 
-
+	public Semaphore getGuiInitSemaphore() {
+		return guiInitSemaphore;
+	}
 }

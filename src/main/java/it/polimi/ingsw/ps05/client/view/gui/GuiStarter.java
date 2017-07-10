@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.client.ctrl.ViewAdapter;
 import javafx.stage.Stage;
 
 /**
@@ -13,6 +14,8 @@ public class GuiStarter implements Runnable {
     public void run() {
         try {
             guiMain.start(new Stage());
+            ViewAdapter.getInstance().getGuiInitSemaphore().release();
+            System.out.println("SEMAPHORE RELEASED, GUI INITIALIZED");
         } catch (Exception e) {
             e.printStackTrace();
         }

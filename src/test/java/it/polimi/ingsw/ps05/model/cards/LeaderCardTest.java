@@ -91,7 +91,7 @@ public class LeaderCardTest {
 
     @Test
     public void setRequirements() throws Exception {
-
+        assertEquals(requirementsTest1, card.getRequirements());
     }
 
     @Test

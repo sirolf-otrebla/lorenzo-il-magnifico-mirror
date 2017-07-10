@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps05.client.view.gui;
 import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -110,24 +111,26 @@ public class GUIMain extends Application implements LimView {
 
 	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout, HashMap<ColorEnumeration, String> usernamesHashMap){
 
+		System.out.println("DENTRO setInitValues GUI");
+		this.usernamesHashMap = usernamesHashMap;
+
+		// setto variabili globali
+		this.OPPONENTS_NUMBER = opponentNumber;
+		this.MOVE_TIMER = timeout;
+
 	    // creo il giocatore
         player = new PlayerWidget(this, thisPlayerColor);
 	    this.player.setPlayerColor(thisPlayerColor);
 
-	    // setto variabili globali
-		this.OPPONENTS_NUMBER = opponentNumber;
-		this.MOVE_TIMER = timeout;
-
-
-		this.usernamesHashMap = usernamesHashMap;
-		int i = 0;
-
-        // popolo la hashmap degli avversari
-        for (ColorEnumeration color: usernamesHashMap.keySet())
-            opponentsHashMap.put(color, new OpponentWidget(this, color));
+        // creo gli avversari
+        for (ColorEnumeration color: usernamesHashMap.keySet()) {
+			System.out.println("creando gli avversari: " + color);
+			opponentsHashMap.put(color, new OpponentWidget(this, color));
+		}
 
         // aggiungo il nome
         for (ColorEnumeration color: usernamesHashMap.keySet()) {
+			System.out.println("aggiungendo i nomi: " + usernamesHashMap.get(color));
             opponentsHashMap.get(color).setOpponentUsername(usernamesHashMap.get(color));
         }
 
@@ -138,13 +141,6 @@ public class GUIMain extends Application implements LimView {
 
 		this.stage = primaryStage;
 		this.instance = this;
-
-		//opponentNames = {"Pippo", "Pluto", "Paperino"};
-		int thisPlayerId = 0;
-		int[] opponentIdArray = {1, 2, 3};
-
-
-
 
 		zoomReference = zoomedCard;
 
@@ -187,18 +183,12 @@ public class GUIMain extends Application implements LimView {
 		root.maxHeightProperty().bind(stage.heightProperty());
 
 		/* Add tower cards and tower action spaces */
-
 		VBox towerCardBox; // box verticale contenente le carte
-		TowerCardWidget[] towerCardWidgetArray; // array di carte dello stesso colore
-
 		VBox towerActionBox; // box verticale contenente gli spazi azione della stessa torre
-		TowerTileWidget[] towerTileWidgetArray; // array di spazi azione della stessa torre
-
 
 		for (int i = 0; i < 4; i++) towerCardBoxesArray.put(towerColorArray[i], new VBox());
 		for (int i = 0; i < 4; i++) {
 			towerCardBox = towerCardBoxesArray.get(towerColorArray[i]);
-			System.out.println(towerColorArray[i].toString());
 			towerCardBox.setSpacing((1.8 / 100) * stageHeight); //TODO spacing di prova, controllare
 			towerCardBox.setLayoutX((0.8684 + 10.95 * i) / 100 * stageWidth);
 			towerCardBox.setLayoutY((2.7468 / 100) * stageHeight);
@@ -234,23 +224,7 @@ public class GUIMain extends Application implements LimView {
 			}
 		}
 
-
-		/* Instantiate player and opponents widgets */
-
-		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId));
-
-		int i = 0;
-		for (i = 0; i < OPPONENTS_NUMBER; i++) {
-			opponentsArray[i] = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
-		}
-
-		for (i = 0; i < OPPONENTS_NUMBER; i++) {
-			System.out.println(opponentsArray[i].getOpponentColor().toString());
-		}
-
-
 		/* Add player resources */
-
 		resourcesWidgetArray[0] = new ResourcesWidget();
 		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
 		root.getChildren().add(playerResourcesBox);
@@ -258,6 +232,7 @@ public class GUIMain extends Application implements LimView {
 
         /* Add market action spaces */
 		// Initialize
+		int i = 0;
 		for (i = 0; i < this.marketSpaceWidgets.length; i++)
 			marketSpaceWidgets[i] = new MarketSpaceWidget(1);
 		// Add to board
@@ -289,25 +264,32 @@ public class GUIMain extends Application implements LimView {
 		insertMultipleSpace(councilSpaceWidget, root, 1, 51.5, 53.7); // council
 		actionSpaces.add(councilSpaceWidget);
 
+		System.out.println("finalmente dentro guimain: colore del giocatore: " + player.getPlayerColor());
+		for(ColorEnumeration color: opponentsHashMap.keySet()) {
+			System.out.println(color + " " + opponentsHashMap.get(color).getOpponentUsername());
+		}
 
 		/* Add points markers */
 		for (i = 0; i < 4; i++) {
+			// dentro il il singolo tracciato
 			if(i < 1)
 				this.trackBoxesArray[i] = new VBox(12 * resize);
 			else
 				this.trackBoxesArray[i] = new HBox(12 * resize);
 			root.getChildren().add(this.trackBoxesArray[i]);
 			for (int j = 0; j < PLAYER_NUMBER; j++) {
+				// dentro il colore del giocatore
 				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j); // ottiene il colore del segnalino
 				String thisPath = path + "markers/marker-" + markerColor.toString().toLowerCase() + ".png";
 				System.out.println(thisPath);
 				markerWidgetList[i][j] = new MarkerWidget(thisPath);
-				if(player.getPlayerColor() == markerColor)
+				if(player.getPlayerColor() == markerColor) {
+					System.out.println("Inside player");
 					player.getPlayerMarkers()[i] = markerWidgetList[i][j];
+				}
 				else {
-					for (int k = 0; k < OPPONENTS_NUMBER; k++)
-						if(opponentsArray[k].getOpponentColor() == markerColor)
-							opponentsArray[k].getOpponentMarkers()[i] = markerWidgetList[i][j];
+					System.out.println("Inside opponent " + opponentsHashMap.get(markerColor));
+					opponentsHashMap.get(markerColor).getOpponentMarkers()[i] = markerWidgetList[i][j];
 				}
 				this.trackBoxesArray[i].getChildren().add(markerWidgetList[i][j].getMarker());
 			}
@@ -339,11 +321,8 @@ public class GUIMain extends Application implements LimView {
             }
         }
 
-
 		/* Add player buttons */
-
 		// Personal cards
-
 		player.commands.setAlignment(Pos.CENTER);
 		player.showCardsButton.setId("showCardsButton");
 		player.showCardsButton.setMaxWidth(Double.MAX_VALUE);
@@ -391,11 +370,10 @@ public class GUIMain extends Application implements LimView {
 		diceBox.setLayoutX((26.3 / 100) * stageWidth);
 		diceBox.setLayoutY((91.0 / 100) * stageHeight);
 		diceBox.setPrefHeight((4.8 / 100) * stageHeight);
-
 		// poplo la hashmap
 		for(ColorEnumeration dieColor: diceColorArray)
 		    diceHashMap.put(dieColor, new DieWidget(dieColor));
-
+		// aggiungo i dadi alla board
 		for (ColorEnumeration dieColor: diceHashMap.keySet()) {
 			diceBox.getChildren().add(diceHashMap.get(dieColor));
 		}
@@ -500,6 +478,18 @@ public class GUIMain extends Application implements LimView {
 
 	public void showInterface(){
 		stage.show();
+		Platform.runLater(new Runnable() {
+			private Stage stage;
+			@Override
+			public void run() {
+				stage.show();
+			}
+
+			public Runnable init(Stage stage){
+				this.stage = stage;
+				return this;
+			}
+		}.init(stage));
 	}
 
 
