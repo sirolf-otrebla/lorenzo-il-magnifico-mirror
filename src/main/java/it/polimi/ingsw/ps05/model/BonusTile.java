@@ -18,11 +18,6 @@ public class BonusTile implements Serializable, Draftable{
 	private BonusTileType type;
 	private Integer referenceID;
 
-
-	public void setReferenceID(Integer referenceID) {
-		this.referenceID = referenceID;
-	}
-
 	public BonusTile() {
 		
 	}
@@ -84,10 +79,14 @@ public class BonusTile implements Serializable, Draftable{
 	public void setType(BonusTileType type) {
 		this.type = type;
 	}
-
-
-	@Override
-	public Integer getReferenceID() {
-		return referenceID;
+	
+	public void setReferenceID(Integer referenceID){
+		this.referenceID = referenceID;
 	}
+
+	public Integer getReferenceID(){
+		return this.referenceID;
+	}
+
+
 }
