@@ -104,7 +104,7 @@ public class ResourcesWidget {
     }
 
     public void setResource(String stringId, int newValue){
-        int i = resources[GraphicResources.getResource(stringId)];
+        int i = GraphicResources.getResource(stringId);
         resources[i] = newValue;
     }
 

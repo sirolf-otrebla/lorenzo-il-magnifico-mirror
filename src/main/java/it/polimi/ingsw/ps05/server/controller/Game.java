@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps05.net.message.NetMessage;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategy;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.EndActionStrategyContainer;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.MoveNextPlayerStrategy;
+import it.polimi.ingsw.ps05.server.controller.startactionstrategies.DoNothingStrategy;
+import it.polimi.ingsw.ps05.server.controller.startactionstrategies.StartActionStrategyContainer;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.*;
@@ -37,6 +39,8 @@ public class Game implements Observer {
     private boolean useCompleteRules = false;
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
+    private StartActionStrategyContainer startActionStrategyContainer = new StartActionStrategyContainer(
+            new DoNothingStrategy(), this);
     private EndActionStrategyContainer endActionStrategyContainer;
     private Semaphore semStart;
     private int act_waiting_time_ms = 0;
@@ -202,6 +206,10 @@ public class Game implements Observer {
 
     public BonusTileDraftController getBonusTileDraftController() {
         return bonusTileDraftController;
+    }
+
+    public StartActionStrategyContainer getStartActionStrategyContainer() {
+        return startActionStrategyContainer;
     }
 
     public void setAct_waiting_time_ms(int act_waiting_time_s) {

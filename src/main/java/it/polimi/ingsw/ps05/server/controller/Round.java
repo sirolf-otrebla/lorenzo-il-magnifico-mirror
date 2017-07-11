@@ -38,6 +38,7 @@ public class Round {
             game.getActivePlayer().evaluatePermanentEffects();
             Integer effectListSize = game.getActivePlayer().getPermanentEffectResList().size();
             game.getGameFlowctrl().sendUpdateMsg();
+            game.getStartActionStrategyContainer().executeStrategy();
             this.waitCommand();
             this.executeCommand();
             game.getActivePlayer().resetPermanentEffects(effectListSize);
