@@ -72,6 +72,8 @@ public class GUIMain extends Application implements LimView {
 	private ImageView zoomedCard = new ImageView();
 	static ImageView zoomReference;
 	private Circle playerActiveCircle;
+	private Color activeColor = Color.web("0x2E96F2", 1.0);
+	private Color inactiveColor = Color.web("0xD2E4F4", 0.8);
 	private Label infoLabel;
 
 	private GraphicResources graphicMap = new GraphicResources();
@@ -435,9 +437,10 @@ public class GUIMain extends Application implements LimView {
 
 		/* Add player active circle */
 		playerActiveCircle = new Circle(10 * resize);
-		playerActiveCircle.setFill(new Color(210, 230, 247, 0.8));
+		playerActiveCircle.setFill(inactiveColor);
 		playerActiveCircle.setCenterX((66 / 100) * stageWidth);
-		playerActiveCircle.setCenterY((95 / 100) * stageHeight);
+		playerActiveCircle.setCenterY((93 / 100) * stageHeight);
+		root.getChildren().add(playerActiveCircle);
 
 		/* Text info for the player */
 		infoLabel = new Label();
@@ -661,7 +664,7 @@ public class GUIMain extends Application implements LimView {
 			if(!leader.isPlayed())
 				leader.setMouseTransparent(false);
 		// mostra status tramite cerchio
-		playerActiveCircle.setFill(new Color(46, 150, 242, 1));
+		playerActiveCircle.setFill(activeColor);
 	}
 
 	public void setPlayerInactive() {
@@ -675,7 +678,14 @@ public class GUIMain extends Application implements LimView {
 			if(!leader.isPlayed())
 				leader.setMouseTransparent(true);
 		// mostra status tramite cerchio
-		playerActiveCircle.setFill(new Color(210, 230, 247, 0.8));
+		playerActiveCircle.setFill(inactiveColor);
+	}
+
+	public void resetPlayableFamiliars() {
+		for(FamiliarWidget familiar: player.getFamiliarWidgetList()) {
+			familiar.addImage(player.getPlayerColor(), familiar.getFamiliarColor());
+			familiar.setupGestureSource();
+		}
 	}
 
 	public void setDiceValues(HashMap<ColorEnumeration, Integer> newDiceValues) {
