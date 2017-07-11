@@ -8,7 +8,10 @@ import java.util.Iterator;
 import java.util.concurrent.Semaphore;
 
 /**
- * Created by Alberto on 19/06/2017.
+ * this class represents a Round. in this context a round is not what it is in the official game rules:
+ * what is called round from the official rules in this implementation is called Turn. Round is, as the word
+ * suggest, a simple sequence of actions that starts and ends with the same player. 4 rounds compose a Turn.
+ * 2 Turns compose an epoch
  */
 public class Round {
     private ArrayList<Player> playerOrder;
@@ -22,12 +25,22 @@ public class Round {
     /* result listeners */
     private Iterator<Player> plOrdIt;
 
+    /**
+     * default constructor for Random Class. needs the player Order and the game
+     * @param playerOrder player order (a list where the player with lowest index is the 1st to play.
+     * @param game a reference to te related game
+     */
     public Round(ArrayList<Player> playerOrder, Game game){
         this.game = game;
         this.playerOrder = playerOrder;
         waitingMessageSemaphore = new Semaphore(0);
 
     }
+
+    /**
+     * execute a round as described in class Desciption.
+     * @throws InterruptedException thrown when the thread that hosts this method is interrupted.
+     */
     public void executeRound() throws InterruptedException {
         this.game.setState(this);
         plOrdIt = playerOrder.iterator();
@@ -46,12 +59,22 @@ public class Round {
         } while (playerCounter < playerOrder.size());
 
     }
+
+    /**
+     * here the round waits the active player to send a proper {@link GameMessage}. if the Server catch a message
+     * from the network {@code waitingMessageSemaphore} is released.
+     * @throws InterruptedException
+     */
     private synchronized void waitCommand() throws InterruptedException {
         // send message
     	System.out.println("WAIT COMMAND");
         this.waitingMessageSemaphore.acquire();
     }
 
+    /**
+     * here the round executes the command sent by the client, using a GameCommandsVisitor object
+     * @see GameCommandsVisitor
+     */
     private void executeCommand(){
         try {
             visitor = new GameCommandsVisitor(this.game.getActivePlayer(), this);
@@ -68,6 +91,9 @@ public class Round {
     }
 
 
+    /**
+     *  moves the round state to the next player. if there are no more players, the round ends.
+     */
     public void nextState() {
         Integer playerID = this.game.getActivePlayer().getPlayerID();
         this.game.getPlayerClient(playerID).setInactive();
@@ -81,6 +107,10 @@ public class Round {
         }
     }
 
+    /** receives a {@link GameMessage} as a input parameter, and release the waiting semaphore.
+     *
+     * @param inputMessage an input message from the Client
+     */
     public void setInputMessage(GameMessage inputMessage) {
         this.inputMessage = inputMessage;
         waitingMessageSemaphore.release();

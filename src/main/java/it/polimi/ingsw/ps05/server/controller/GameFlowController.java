@@ -14,6 +14,11 @@ import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
 import java.util.ArrayList;
 
+/**
+ * this class implement the Game Flow controller, which is the main controller class. the
+ * game flow controller deals with keeping the game proceeding, calling turns and rounds and
+ * modifying classes such as {@link Game} or others.
+ */
 public class GameFlowController implements Runnable {
 
 
@@ -22,6 +27,11 @@ public class GameFlowController implements Runnable {
 
 	public ExcommunicationTriggerListener exTrigger = new ExcommunicationTriggerListener(this);
 
+	/**
+	 * this is the main constructor for GameFlowController
+	 * @param game the game Flow Controller needs a reference to the related {@link Game} in order to be
+	 *             instantiated
+	 */
 	public GameFlowController(Game game){
 		System.out.println("GFLWCTRL start");
         this.game = game;
@@ -29,11 +39,20 @@ public class GameFlowController implements Runnable {
 		System.out.println("GFLWCTRL cons end");
 	}
 
+	/**this method sets the game imput, which will be further handled by {@link GameCommandsVisitor}
+	 * @param gameInput a {@link NetMessage} representing the game input
+	 */
 	public synchronized void setGameInput(NetMessage gameInput) {
 		this.gameInput = gameInput;
 		notifyAll();
 	}
 
+	/**
+	 * this method is designed to send an update message to all player regarding the game status.
+	 * is useful if the client, like in this implementation, takes care not about the single Actions but about
+	 * the whole Game Status.
+	 * @see GameUpdateMessage
+	 */
 	public void sendUpdateMsg(){
 		System.out.println("Sending Update Msg");
 		Board board = this.game.getBoard();
@@ -49,6 +68,10 @@ public class GameFlowController implements Runnable {
 
 	}
 
+	/**
+	 * the game flow controller is a runnable Class an this is it's main loop, representing the main operation
+	 * that are needed to keep the game flow.
+	 */
 	@Override
 	public void run()  {
 		System.out.println("RUN START");
@@ -76,6 +99,11 @@ public class GameFlowController implements Runnable {
 		}
 	}
 
+	/** this method takes care of evaluating victory points and conditions. it is not communicating with the
+	 * client, so other code takes the responsibility of dealing with Player Clients.
+	 * @param pl represent the player that the method has to handle
+	 * @return the total victory points related to the player {@code pl}
+	 */
 	public int evaluateVictoryPts(Player pl){
 		int tot = pl.getResource(VictoryResource.ID).getValue();
 		tot = tot + game.getBoard().getBlueCardsConversion().get(pl.getBlueCardList().size()).getValue();

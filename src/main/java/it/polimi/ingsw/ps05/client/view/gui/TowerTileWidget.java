@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
+import it.polimi.ingsw.ps05.client.view.interfaces.TowerTileViewObject;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
+import it.polimi.ingsw.ps05.net.message.ActionMessage;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.paint.ImagePattern;
@@ -19,8 +22,10 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
     private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
 
+
     public TowerTileWidget(int minDie) {
         super(minDie);
+       //Client.getInstance().linkToObserver(this);
     }
 
     @Override
@@ -33,11 +38,10 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
 
             System.out.println("starting if");
             if(!isOccupied() && isLegal && e.getDragboard().hasContent(FAMILIAR_DATA)) {
-                // AZIONE LEGALE
+                ActionMessage actionMessage = null;
                 if(this.associatedCard.hasMorePaymentOptions()) {
                     /* Showing payment selection window if associated card has payment alternatives */
                     PaymentPopup paymentPopup = new PaymentPopup();
-                    paymentPopup.setResArrayList(null); //TODO: come si passano le risorse tra cui scegliere al popup?
                     success = false;
                     // AZIONE ANNULLATA
                     if (paymentPopup.display(this.getAssociatedCard().getCardName()) != -1) {
@@ -49,14 +53,19 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
                         this.getOccupationCircle().setOpacity(1);
                         this.getOccupationCircle().setFill(new ImagePattern(img));
                         // add card to the player collection
-                        //TODO da comunicare al controller
+                         actionMessage = new
+                                ActionMessage(sourceData.getFamiliarColor(), this.getReferenceId(),
+                                 paymentPopup.result, Client.getInstance().getGameStatus().getThisPlayer());
                         // AZIONE COMPLETATA
                         success = true;
                     }
                 } else {
-                    /* Adding card to personal collection */
-                    //TODO da comunicare al controller
+                     actionMessage = new
+                            ActionMessage(sourceData.getFamiliarColor(), this.getReferenceId(), 0,
+                            Client.getInstance().getGameStatus().getThisPlayer());
                 }
+
+                Client.getInstance().sendToServer(actionMessage);
             }
 
             e.setDropCompleted(success);
@@ -77,11 +86,21 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
         return morePaymentOptions;
     }
 
+
+    public Integer getSelectedPayment() {
+        return null;
+    }
+
     public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
         return legalFamilyMemberList;
     }
 
     public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
         this.legalFamilyMemberList = legalFamilyMemberList;
+    }
+
+    public void notifyToActionHandler() {
+        setChanged();
+        notify();
     }
 }

@@ -29,8 +29,8 @@ import java.util.ArrayList;
 public class PaymentPopup {
 
 
-    private ArrayList<ArrayList<String>> resArrayList;
     static boolean canceled; // usato per comunicare che il giocatore ha annullato l'azione
+    public Integer result;
 
     public int display(String cardName) {
 
@@ -48,16 +48,18 @@ public class PaymentPopup {
         ArrayList<RadioButton> buttonList = new ArrayList<RadioButton>();
 
         int i = 0;
-        for (ArrayList<String> resList : resArrayList) {
-            String text = new String();
-            for (String res : resList) text += res + ",";
-            RadioButton rb = new RadioButton(text);
-            buttonList.add(rb);
-            rb.setToggleGroup(toggleGroup);
-            rb.setUserData(i);
-            selectablesBox.getChildren().add(rb);
-            i++;
-        }
+
+        RadioButton rb1 = new RadioButton("First payment");
+        buttonList.add(rb1);
+        rb1.setToggleGroup(toggleGroup);
+        rb1.setUserData(0);
+        selectablesBox.getChildren().add(rb1);
+
+        RadioButton rb2 = new RadioButton("Second payment");
+        buttonList.add(rb2);
+        rb2.setToggleGroup(toggleGroup);
+        rb2.setUserData(1);
+        selectablesBox.getChildren().add(rb2);
 
         Button confirmButton = new Button("OK");
         confirmButton.setOnAction((ActionEvent e) -> {
@@ -96,17 +98,16 @@ public class PaymentPopup {
 
         if(canceled)
             return -1;
-        else
+        else {
+            result = (int)toggleGroup.getSelectedToggle().getUserData();
             return (int)toggleGroup.getSelectedToggle().getUserData(); // ritorna
+        }
+
+
     }
 
-    public ArrayList<ArrayList<String>> getResArrayList() {
-        return resArrayList;
-    }
 
-    public void setResArrayList(ArrayList<ArrayList<String>> resArrayList) {
-        this.resArrayList = resArrayList;
-    }
+
 }
 
 

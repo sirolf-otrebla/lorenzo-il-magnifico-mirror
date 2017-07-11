@@ -4,7 +4,8 @@ package it.polimi.ingsw.ps05.server.controller;
 import java.util.TimerTask;
 
 /**
- * Created by Alberto on 02/07/2017.
+ * this task is responsible of starting a game when too much time has passed since a Client tries to connect
+ * with the lobby.
  */
 public class StartGameTimerTask extends TimerTask {
 

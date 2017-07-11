@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-/**
- * Created by Alberto on 02/07/2017.
- */
+/** This class takes care of the Leader Cards Draft when using advanced rules
+ *
+ * */
 public class DraftController implements Runnable{
 
     private static final int MAX_LEADER_CARDS = 4;
@@ -29,6 +29,12 @@ public class DraftController implements Runnable{
     private HashMap<ColorEnumeration, ArrayList<Integer>> choosenCardsMap =  new HashMap<>();
     private HashMap<Integer, LeaderCard> leaderCardHashMap = new HashMap<>();
 
+    /**
+     * this is the DraftController constructor. it needs an Arraylist of connected clients,
+     * which are the ones that participate to the Draft. moreover, it needs a reference to the game
+     * @param clients this is an {@code ArrayList} of connected {@link PlayerClient}
+     * @param game this is a reference to the game containing the leader draft.
+     */
     public DraftController(ArrayList<PlayerClient> clients, Game game){
         this.leaderCardArrayList = game.getBoard().getLeaderCardsList();
         ArrayList<PlayerClient> draftClientArrayList = new ArrayList<>();
@@ -51,6 +57,9 @@ public class DraftController implements Runnable{
 
     }
 
+    /** this method assigns random cards to every player connected
+     *
+     */
     private void assignRandomCards(){
         Random rand = new Random();
         for(ArrayList<Integer> array : leaderCardReferenceIdMatrix.values()){
@@ -62,6 +71,11 @@ public class DraftController implements Runnable{
         }
     }
 
+    /**
+     *  this method send a {@link StartLeaderDraftMessage} which warns the Client that a
+     *  Leader Card Draft is starting. the StartLeaderDraftMessage also contains a random
+     *  set of Leader Cards, which are the first one drafted.
+     */
     private void sendInitialDraftMessage(){
         try {
         	System.out.println("Pre sem");
@@ -77,7 +91,16 @@ public class DraftController implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
+
+    /** this is the DraftController's main loop. as a Run method, it have to be executed
+     * by a separate thread, which is synchronized with the Game's main thread. Actually, the
+     * main thread waits this method to stops by calling a {@code  Thread.join()} on his thread.
+     * This method is governed by a semaphore, which represents how many clients have already chosen their
+     * leader cards. when the semaphore has many permits as the number of connected players, the loop proceeds.
+     *
+     */
     @Override
     public void run() {
         assignRandomCards();
@@ -129,6 +152,12 @@ public class DraftController implements Runnable{
 
     }
 
+    /** this method is called by the {@link DraftResponseMessageVisitor} when a {@link it.polimi.ingsw.ps05.net.message.draftmessages.DraftResponseNetMessage}
+     * is sent by a Client. here the choice is applied and the Main loop semaphore released.
+     *
+     * @param playerColor   the Choosing player's color
+     * @param leaderCardReferenceID     the leaderReferenceID, which is static and unique for every Leader Card.
+     */
     public void DoChoice(ColorEnumeration playerColor, Integer leaderCardReferenceID){
         this.choosenCardsMap.get(playerColor).add(leaderCardReferenceID);
         this.leaderCardReferenceIdMatrix.get(playerColor).remove(leaderCardReferenceID);

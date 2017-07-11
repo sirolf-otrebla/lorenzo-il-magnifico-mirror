@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
 
+/** this class has the charge of loading the board and do some preliminary operations
+ * in order to make the game start
+ */
 public class GameSetup {
 
 	Board board;
@@ -24,6 +27,12 @@ public class GameSetup {
 	//TODO scelta regole
 	
 	//si presuppone che sia il network adapter o chi per lui a chiamare questa classe
+
+	/** this is the standard constructor for GameSetup Class
+	 * @param players these are the players in game (note that are passed only {@link Player} and not
+	 * {@link it.polimi.ingsw.ps05.server.net.PlayerClient} classes.
+	 * @param game this is the related game
+	 */
 	public GameSetup(ArrayList<Player> players, Game game){
 		this.playerConnected = players;
 		parser = new CommonJsonParser(playerConnected.size(), game);
@@ -45,7 +54,11 @@ public class GameSetup {
 		game.setPrivilegeConvResAlternatives(parser.loadPrivilegeConversion());
 		game.setAct_waiting_time_ms(parser.loadActionWaitingTimer());
 	}
-	
+
+	/**
+	 * this method instantiates the family of each player, calling the constructor for
+	 * Black, orange, white, black and neutral family member.
+	 */
 	private void createFamiliarForPlayers(){
 		for (Player p : playerConnected){
 			ArrayList<Familiar> familyList = new ArrayList<Familiar>();
@@ -61,15 +74,27 @@ public class GameSetup {
 			}
 		}
 	}
-	
+
+	/**
+	 * this method loads from files the excommunication cards and effects
+	 * @return an ArrayList of {@link ExcommunicationCard}, representing one card for each
+	 * in game epoch
+	 */
 	private ArrayList<ExcommunicationCard> loadExcommEffect(){
 		return parser.loadExcommunicationCard("./src/main/res/excom.json");
 	}
-	
+
+	/**
+	 * this method takes care of loading the board from .json files
+	 */
 	private void loadBoard(){
 		board = parser.loadBoard("./src/main/res/board.json");
 	}
-	
+
+	/**
+	 * this method takes care of loading bo
+	 * @param custom
+	 */
 	private void loadBonusTiles(boolean custom){
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
 		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", custom ? BonusTileType.Custom : BonusTileType.Default);

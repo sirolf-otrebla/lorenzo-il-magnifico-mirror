@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import it.polimi.ingsw.ps05.server.controller.PrivilegeBonusListener;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.ClaimPrivilegeStrategy;
@@ -24,12 +23,10 @@ public class PrivilegeBonus extends Observable implements ActionResult {
 	//TODO: IMPLEMENTARE CONTROLLI LUNGHEZZA RISPETTO A QUANTO PASSATO DA FUORI
 
 	public PrivilegeBonus( Integer value){
-		this.addObserver(PrivilegeBonusListener.getInstance());
 		this.value = value;
 	}
 	
 	public PrivilegeBonus(){
-		this.addObserver(PrivilegeBonusListener.getInstance());
 	}
 
 	public void setValue(Integer value){

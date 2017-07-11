@@ -6,7 +6,11 @@ import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import java.util.TimerTask;
 
 /**
- * Created by Alberto on 29/06/2017.
+ * this class represent the task executed when a certain client does not respond in time when it has
+ * to make an action. it extends {@code TimerTask}
+ * @see TimerTask
+ * @see java.util.Timer
+ * @see PlayerClient
  */
 public class InactivePlayerTask extends TimerTask {
 	

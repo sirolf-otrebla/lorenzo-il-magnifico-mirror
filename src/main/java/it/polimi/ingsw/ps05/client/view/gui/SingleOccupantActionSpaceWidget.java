@@ -10,12 +10,13 @@ import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
 
 
-public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterface {
+public class SingleOccupantActionSpaceWidget extends Observable implements ActionSpaceWidgetInterface {
 
     private Integer referenceId;
     private boolean occupied;

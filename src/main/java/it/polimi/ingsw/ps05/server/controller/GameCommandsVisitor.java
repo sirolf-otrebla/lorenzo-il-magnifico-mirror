@@ -17,7 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Alberto on 19/06/2017.
+ * This class is meant to select and compute messages from Clients that are connected to a certain game
+ * session. it uses the Visitor Pattern and applies the result of the computation to a {@link Round} object,
+ * which represents the state of the game flow/
+ * @see Round
+ * @see GameFlowController
+ * @see GameMessage
  */
 public class GameCommandsVisitor implements VisitorInterface {
 
@@ -25,11 +30,21 @@ public class GameCommandsVisitor implements VisitorInterface {
     private Round round;
 
 
+    /**
+     *  main constructor for GameCommandsVisitor
+     * @param activePlayer represents the active player (the player that can send and receive
+     *                    messages from server
+     * @param round represents the game flow internal state
+     */
     public GameCommandsVisitor(Player activePlayer, Round round) {
         this.activePlayer = activePlayer;
         this.round = round;
     }
 
+    /** this method is called when a {@link HarvestActionMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param msg represents the message sent by the client.
+     */
     public void visit(HarvestActionMessage msg){
         HashMap<Integer, GreenCard> map = this.activePlayer.getGreenCardHashMap();
         for (Integer i: msg.getActiveCardsIds() )
@@ -39,7 +54,10 @@ public class GameCommandsVisitor implements VisitorInterface {
             map.get(i).setToBeActivated(false);
 
     }
-
+    /** this method is called when a {@link ProductionActionMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param msg represents the message sent by the client.
+     */
     public void visit(ProductionActionMessage msg){
         HashMap<Integer, YellowCard> map = this.activePlayer.getYellowCardHashMap();
         for (int i = 0; i < msg.getActiveCardsIds().size(); i++){
@@ -54,7 +72,10 @@ public class GameCommandsVisitor implements VisitorInterface {
             map.get(msg.getActiveCardsIds().get(i)).setToBeActivated(false);
         }
     }
-
+    /** this method is called when a {@link DiscardLeaderMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param msg represents the message sent by the client.
+     */
     public void visit(DiscardLeaderMessage msg){
         Integer leaderCardReferenceID = msg.getLeaderCardReferenceID();
         this.activePlayer.getLeaderCardHashMap().remove(leaderCardReferenceID);
@@ -62,9 +83,18 @@ public class GameCommandsVisitor implements VisitorInterface {
         //TODO
     }
 
+    /** this method is called when a {@link PassActionMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param msg represents the message sent by the client.
+     */
     public void visit(PassActionMessage msg){
         System.out.println("action passed");
     }
+
+    /** this method is called when a {@link ActivateLeaderMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param lCardMsg represents the message sent by the client.
+     */
     public void visit(ActivateLeaderMessage lCardMsg){
             LeaderCard card = this.activePlayer.getLeaderCardHashMap().get(lCardMsg.getLeaderCardReferenceID());
             card.applyNonActivableEffects(activePlayer);
@@ -72,6 +102,12 @@ public class GameCommandsVisitor implements VisitorInterface {
 
     }
 
+    /** this method is called when a {@link ActionMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * An actionmessage is the most important type of Game message, because of being decorated by
+     * several other Game messages.
+     * @param mess represents the message sent by the client.
+     */
     @Override
     public void visit(ActionMessage mess) {
     	System.out.println("visiting action message in game commands");
@@ -117,14 +153,22 @@ public class GameCommandsVisitor implements VisitorInterface {
 
 
     }
-
+    /** this method is called when a {@link ExitGameMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param mess represents the message sent by the client. In this implementation it is not
+     *             necessary to catch this message because of the network-side classes that are
+     *             already handling this situation.
+     */
     @Override
     public void visit(ExitGameMessage mess){
         //TODO:
         // gestione permanenza partita
     }
 
-
+    /** this method is called when a {@link PrivilegeConversionMessage} is sent by the client.
+     * the goal of this method is to handle de client request and modify the round status.
+     * @param msg represents the message sent by the client.
+     */
     public void visit(PrivilegeConversionMessage msg){
         ArrayList<Integer> choices = msg.getChoices();
         Game game = this.round.getGame();
@@ -139,6 +183,12 @@ public class GameCommandsVisitor implements VisitorInterface {
     }
 
 
+    /** this method is an auxiliary method designed to validate the player class, who's sent
+     * by the client in certain messages who needs player validation. in this way, the software
+     * is aware of possible manipulations and hacks/cheats on the client code.
+     * @param expected
+     * @throws Exception
+     */
     private void validatePlayer(Player expected) throws  Exception{
         ArrayList<Resource> resList = expected.getResourceList();
         for (Resource res: resList) {
