@@ -13,10 +13,12 @@ import java.util.Observer;
 public class ProductionActionListener implements Observer {
     @Override
     public void update(Observable o, Object arg) {
+    	System.out.println("sto per mandare produzione");
         ProductionSpaceViewObject spaceViewObject = (ProductionSpaceViewObject) arg;
         ActionMessage actionMessage = new ActionMessage(spaceViewObject.getFamilyMemberID(),spaceViewObject.getId(),
                 0, Client.getInstance().getGameStatus().getThisPlayer());
         ProductionActionMessage productionActionMessage = new ProductionActionMessage(actionMessage, spaceViewObject.getActiveCardsId(), spaceViewObject.optionForCards());
         Client.getInstance().sendToServer(productionActionMessage);
+        System.out.println("Produzione mandato");
     }
 }

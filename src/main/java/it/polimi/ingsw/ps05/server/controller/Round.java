@@ -16,6 +16,8 @@ public class Round {
     private GameMessage inputMessage;
     private GameCommandsVisitor visitor;
     private Semaphore waitingMessageSemaphore;
+    
+    
 
     private int playerCounter;
 
@@ -43,12 +45,14 @@ public class Round {
             this.executeCommand();
             game.getActivePlayer().resetPermanentEffects(effectListSize);
             game.getEndActionStrategyContainer().executeStrategy();
+            game.getStartActionStrategyContainer().resetStrategy();
         } while (playerCounter < playerOrder.size());
 
     }
     private synchronized void waitCommand() throws InterruptedException {
         // send message
     	System.out.println("WAIT COMMAND");
+    	System.out.println(waitingMessageSemaphore.availablePermits());
         this.waitingMessageSemaphore.acquire();
     }
 
@@ -80,6 +84,8 @@ public class Round {
             System.out.println("round finished");
         }
     }
+    
+    
 
     public void setInputMessage(GameMessage inputMessage) {
         this.inputMessage = inputMessage;

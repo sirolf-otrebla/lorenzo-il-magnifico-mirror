@@ -83,7 +83,7 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
             Player p = client.getPlayer();
             msg.getExcommunicationCard().applyEffect(p);
         }
-        efdssfsd
+        client.getGame().gettManager().releaseExcommSem();
     }
 
     @Override

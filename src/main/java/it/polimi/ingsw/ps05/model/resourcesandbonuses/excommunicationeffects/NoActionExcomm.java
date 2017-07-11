@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.PermanentBonus;
 import it.polimi.ingsw.ps05.server.controller.Game;
+import it.polimi.ingsw.ps05.server.controller.startactionstrategies.DoNothingStrategy;
 import it.polimi.ingsw.ps05.model.effects.EffectType;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
@@ -58,7 +59,7 @@ public class NoActionExcomm extends PermanentBonus implements ExcommunicationEff
 
 	@Override
 	public void applyResult(PlayerRelated playerR) {
-		afsaf
+		game.getStartActionStrategyContainer().setChosenStrategy(new DoNothingStrategy(game, true));
 		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
 		}
@@ -82,6 +83,6 @@ public class NoActionExcomm extends PermanentBonus implements ExcommunicationEff
 
 	@Override
 	public void resetResult(PlayerRelated playerR) {
-		fedwfs
+		game.getStartActionStrategyContainer().resetStrategy();
 	}
 }

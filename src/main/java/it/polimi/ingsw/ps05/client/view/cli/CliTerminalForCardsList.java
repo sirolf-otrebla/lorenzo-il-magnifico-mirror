@@ -180,7 +180,9 @@ public class CliTerminalForCardsList {
 				e.printStackTrace();
 			}
 		} else if (cards.get(0) instanceof String){
-
+			for (String s : (ArrayList<String>)cards){
+				textGraphics.putString((i*currentWidth)/cards.size() + 1, i + 1, s);
+			}
 		} else {
 			infoPrivilege((i*currentWidth)/cards.size() + 1, 0, cards.get(i), textGraphics);
 		}

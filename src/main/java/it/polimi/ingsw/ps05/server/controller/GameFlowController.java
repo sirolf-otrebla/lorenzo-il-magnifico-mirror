@@ -25,6 +25,8 @@ public class GameFlowController implements Runnable {
 	private int turnDone = 0;
 
 	public ExcommunicationTriggerListener exTrigger = new ExcommunicationTriggerListener(this);
+	
+	private RoundController turnRoundCtrl;
 
 	public GameFlowController(Game game){
 		System.out.println("GFLWCTRL start");
@@ -65,9 +67,10 @@ public class GameFlowController implements Runnable {
 				PlayerClient plClient =
 						game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0).getPlayerID());
 				System.out.println("PlClient : " + plClient);
-				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
+				turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
 				this.game.gettManager().loadNextTurn();
+				turnRoundCtrl.resetEndTurnReceived();
 				turnDone++;
 			} catch (InterruptedException e ){
 				e.printStackTrace();
@@ -99,6 +102,10 @@ public class GameFlowController implements Runnable {
 		}
 
 
+	}
+	
+	public RoundController getRoundCtrl(){
+		return turnRoundCtrl;
 	}
 
 	public int evaluateVictoryPts(Player pl){

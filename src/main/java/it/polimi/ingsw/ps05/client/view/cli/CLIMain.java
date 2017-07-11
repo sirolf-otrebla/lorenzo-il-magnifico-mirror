@@ -4,9 +4,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalResizeListener;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
-import it.polimi.ingsw.ps05.client.view.interfaces.PassActionViewObject;
 import it.polimi.ingsw.ps05.model.*;
-import it.polimi.ingsw.ps05.model.exceptions.IllegalMethodCallException;
 import it.polimi.ingsw.ps05.model.spaces.CouncilSpace;
 import it.polimi.ingsw.ps05.model.effects.Effect;
 import it.polimi.ingsw.ps05.model.cards.GreenCard;
@@ -15,9 +13,6 @@ import it.polimi.ingsw.ps05.model.spaces.HarvestingSpace;
 import it.polimi.ingsw.ps05.model.spaces.MarketSpace;
 import it.polimi.ingsw.ps05.model.spaces.ProductionSpace;
 import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
-import it.polimi.ingsw.ps05.model.exceptions.DiceTooLowException;
-import it.polimi.ingsw.ps05.model.exceptions.IllegalActionException;
-import it.polimi.ingsw.ps05.model.exceptions.NotEnoughResourcesException;
 import it.polimi.ingsw.ps05.model.spaces.TileWithEffect;
 import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
@@ -802,7 +797,7 @@ public class CLIMain implements LimView, Runnable{
 		//TODO
 		String toWrite;
 		if (board.getExcomCards() != null && board.getExcomCards().size() > 0){
-			textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get(0).getEpochID().toString());
+			textGraphics.putString(x + 1, 5*height/16 + 1, board.getExcomCards().get((int)Math.floor((board.getTurnNumber()-1)/2)).getEpochID().toString());
 			textGraphics.putString(x + 1, 5*height/16 + 2, board.getExcomCards().get(0).getFaithRequested().toString() + " " + 
 					board.getExcomCards().get(0).getFaithRequested().getValue());
 			toWrite = board.getExcomCards().get(0).getExcommEffect().toString();
@@ -1056,7 +1051,13 @@ public class CLIMain implements LimView, Runnable{
 	 * @param textGraphics is the graphic object where the CLI is going to write
 	 */
 	private void printInfo(int width, int height, TextGraphics textGraphics){
-		int colForInfo = 3*width/8+3+getMaxOffset(offSet.get(offSet.size()-1)) + 3;
+		int offsetToUse = 0;
+		try{
+			offsetToUse = getMaxOffset(offSet.get(offSet.size()-1));
+		} catch (Exception e){
+			
+		}
+		int colForInfo = 3*width/8+3+offsetToUse + 3;
 		String space = new String(new char[width/8 + 3]).replace('\0', ' ');
 		for (int i = 1; i < height/4; i++){
 			textGraphics.putString(colForInfo, i, 
@@ -1079,9 +1080,12 @@ public class CLIMain implements LimView, Runnable{
 						infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
 					}
 				} catch (NullPointerException e){
-					infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
+					try{
+						infoCard(colForInfo,0,board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().get(tileIdForTower.get(currentColBoard).get(currentRowBoard)).getCard(), textGraphics);
+					} catch (NullPointerException e1){
+						
+					}
 				}
-				
 
 			} else if(currentColBoard < board.getTowerList().size() && currentRowBoard == board.getTowerList().get(towerOrder.get(currentColBoard)).getTiles().size()) {
 				infoMarket(colForInfo,0,textGraphics);
@@ -1580,21 +1584,16 @@ public class CLIMain implements LimView, Runnable{
 			ArrayList<ArrayList<Integer>> temp1 = (ArrayList<ArrayList<Integer>>)a;
 			System.out.println("CARTE SELEZIONATE " + temp1.size());
 			for (Integer c : temp1.get(0)){
-				
 				ids.add(this.player.getYellowCardList().get(c).getReferenceID());
 			}
 			for (Integer c : temp1.get(1)){
 				option.add(c);
 			}
-			
+			System.out.println("sto per notificare all'observer");
 			CliProductionSpaceViewObject b = new CliProductionSpaceViewObject(productionList.get(currentColBoard),
 					ghost != null ? ghost.getColor():((Familiar)this.player.getFamilyList().toArray()[selectedFam]).getColor(),
 							ids,option);
 			b.notifyToActionHandler();
-		}
-		
-		if (a.size() != 0){
-		
 		}
 	}
 
@@ -1819,6 +1818,28 @@ public class CLIMain implements LimView, Runnable{
 		
 		return a.get(0) == 0 ? false : true;
 		
+	}
+	
+	public Integer getBonusTileDraft(ArrayList<Integer> list){
+		ArrayList<BonusTile> toShow = new ArrayList<>();
+		for (BonusTile t : board.getBonusTileArrayList()){
+			for (int i = 0; i < list.size(); i++){
+				if (t.getReferenceID().equals(list.get(i))){
+					toShow.add(t);
+				}
+			}
+		}
+		
+		try {
+			CliTerminalForCardsList chose = new CliTerminalForCardsList(toShow, terminal.getTerminalSize().getColumns(), 1, 1);
+			ArrayList<Integer> a = (ArrayList<Integer>)chose.start();
+			if (a.size() == 0) return 0;
+			
+			return toShow.get(a.get(0)).getReferenceID();
+			
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	/**

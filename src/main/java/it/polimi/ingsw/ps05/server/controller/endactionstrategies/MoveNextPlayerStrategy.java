@@ -14,6 +14,7 @@ public class MoveNextPlayerStrategy implements EndActionStrategy {
 
     @Override
     public void execute(EndActionStrategyContainer container) {
+    	game.getGameFlowctrl().getRoundCtrl().addEndActionDone();
         game.getState().nextState();
         container.strategyEnded();
        /* ArrayList<Player> playerArrayList = new ArrayList<>();

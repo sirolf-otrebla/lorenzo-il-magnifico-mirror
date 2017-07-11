@@ -84,6 +84,7 @@ public class GameSetup {
 			for (int i = 0; i < playerConnected.size(); i++) {
 				playerConnected.get(i).setBonusTile(bonusTiles.get(i));
 			}
+			this.board.setBonusTileArrayList(bonusTiles);
 		}
 
 	}

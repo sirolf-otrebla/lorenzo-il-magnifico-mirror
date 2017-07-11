@@ -26,6 +26,7 @@ public class Client {
     private ActivateLeaderListener activateLeaderListener = new ActivateLeaderListener();
     private HarvestActionListener harvestActionListener = new HarvestActionListener();
     private PassActionListener passActionListener = new PassActionListener();
+    private ProductionActionListener productionActionListener = new ProductionActionListener();
     /* end event observers */
     private static Client client;
     private ServerInterface serverInterface;
@@ -116,7 +117,7 @@ public class Client {
     }
 
     public void linkToObserver(ProductionSpaceViewObject observable){
-    	//TODO
+    	observable.addObserver(this.productionActionListener);
     }
 
     public void launchLoginForm(){

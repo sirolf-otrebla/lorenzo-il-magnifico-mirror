@@ -1,6 +1,6 @@
 {
-	"ActionWaitingTimer" : 3,
+	"ActionWaitingTimer" : 120,
 	"LobbyWaitingTimer" : 120,
-	"useCompleteRules" : true,
-	"UseCustomBonusTile" : false
+	"useCompleteRules" : false,
+	"UseCustomBonusTile" : true
 }

@@ -46,6 +46,7 @@ public class CliProductionSpaceViewObject extends ProductionSpaceViewObject {
 
     @Override
     public void notifyToActionHandler() {
+    	System.out.println("notifico all'observer");
         setChanged();
         notifyObservers(this);
     }

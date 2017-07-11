@@ -76,18 +76,25 @@ public class Action implements Period {
 		if (this.familiar.isUsed()) return false;
 		if (position != null && this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
 
-		if (position instanceof TowerTileInterface &&
-				((TowerTileInterface)position).getParentTower().getColor().equals(ColorEnumeration.Green)){
-			try{
-				if (familiar.getRelatedPlayer().getResource(MilitaryResource.id).getValue().intValue() < 
-						((TowerTileInterface)position).getParentTower().getBoard().getMilitaryPath().get(
-								familiar.getRelatedPlayer().getGreenCardList().size() + 1).getValue().intValue()){
+		if (position instanceof TowerTileInterface){
+			for (TowerTileInterface t : ((TowerTileInterface) position).getParentTower().getTiles().values()){
+				if (t.isOccupied() && t.getOccupant().getRelatedPlayer().equals(familiar.getRelatedPlayer()) &&
+						(!t.getOccupant().getColor().equals(ColorEnumeration.Any) && 
+								!familiar.getColor().equals(ColorEnumeration.Any))){
 					return false;
 				}
-			} catch (IndexOutOfBoundsException e){
-				return false;
 			}
-
+			if (((TowerTileInterface)position).getParentTower().getColor().equals(ColorEnumeration.Green)){
+				try{
+					if (familiar.getRelatedPlayer().getResource(MilitaryResource.id).getValue().intValue() < 
+							((TowerTileInterface)position).getParentTower().getBoard().getMilitaryPath().get(
+									familiar.getRelatedPlayer().getGreenCardList().size() + 1).getValue().intValue()){
+						return false;
+					}
+				} catch (IndexOutOfBoundsException e){
+					return false;
+				}
+			}
 		}
 
 		// 2- 2b)

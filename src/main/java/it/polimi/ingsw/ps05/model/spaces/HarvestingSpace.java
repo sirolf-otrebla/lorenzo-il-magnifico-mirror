@@ -32,6 +32,14 @@ public class HarvestingSpace extends MultipleOccupantsActionSpace {
 	public ArrayList<Effect> getEffects() {
 		return effectList;
 	}
+	
+	@Override
+	public boolean isOccupied(){
+		if (this.getEffects() != null && this.getEffects().size() != 0){
+			return false;
+		}
+		return super.isOccupied();
+	}
 
 	@Override
 	public void applyEffect(Familiar pl) {

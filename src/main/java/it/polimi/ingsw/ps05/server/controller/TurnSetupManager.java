@@ -25,6 +25,10 @@ public class TurnSetupManager extends Observable{
 		this.turn = setupFirstTurn();
 
 	}
+	
+	public void releaseExcommSem(){
+		excommSemaphore.release();
+	}
 
 	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
 
@@ -71,6 +75,7 @@ public class TurnSetupManager extends Observable{
 				for (Dice d : currentTurn.getDice()){
 					if (f.getColor() == d.getColor()){
 						f.setDice(d);
+						f.resetPosition();
 						break;
 					}
 				}

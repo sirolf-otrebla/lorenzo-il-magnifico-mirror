@@ -32,8 +32,12 @@ public class GameCommandsVisitor implements VisitorInterface {
 
     public void visit(HarvestActionMessage msg){
         HashMap<Integer, GreenCard> map = this.activePlayer.getGreenCardHashMap();
-        for (Integer i: msg.getActiveCardsIds() )
-            map.get(i).setToBeActivated(true);
+        System.out.println("IDS SIZE: " + msg.getActiveCardsIds().size());
+        for (Integer i: msg.getActiveCardsIds() ){
+        	System.out.println("I: " + i);
+        	map.get(i).setToBeActivated(true);
+        }
+            
         msg.getActionMessage().acceptVisitor(this);
         for (Integer i: msg.getActiveCardsIds() )
             map.get(i).setToBeActivated(false);
