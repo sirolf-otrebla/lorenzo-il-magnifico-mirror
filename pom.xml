@@ -55,13 +55,13 @@
 				</configuration>
 				<executions>
 					<execution>
-						<referenceId>jacoco-initialize</referenceId>
+						<id>jacoco-initialize</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<referenceId>jacoco-site</referenceId>
+						<id>jacoco-site</id>
 						<phase>package</phase>
 						<goals>
 							<goal>report</goal>
