@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps05.net.GameStatus;
 import it.polimi.ingsw.ps05.net.message.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.SetupDoneMessage;
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationTriggerMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -171,6 +172,31 @@ public class ViewAdapter {
 			cliView.createTerminalWithMessage(message);
 		}
 
+	}
+	
+	public boolean triggerExcomm(ExcommunicationTriggerMessage msg) {
+		if (msg.getState() == msg.EXCOMMUNICATED){
+			if (this.viewType == this.GUI_TYPE) {
+				// TODO
+
+			} else {
+				CLIMain cliView = (CLIMain) this.view;
+				cliView.createTerminalWithMessage("Sei stato scomunicato!");
+			}
+		} else {
+			if (this.viewType == this.GUI_TYPE) {
+				// TODO
+
+			} else {
+				CLIMain cliView = (CLIMain) this.view;
+				try {
+					return cliView.askForExcomm();
+				} catch (IOException e) {
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 
 

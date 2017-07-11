@@ -82,6 +82,7 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
             Player p = client.getPlayer();
             msg.getExcommunicationCard().applyEffect(p);
         }
+        efdssfsd
     }
 
     @Override
@@ -111,5 +112,7 @@ public class ServerNetMessageVisitor implements Observer, NetMessageVisitor {
     public void visit(AuthResponseMessage msg) {
         //todo
     }
+    
+    
 
 }

@@ -244,17 +244,7 @@ public class CLIMain implements LimView, Runnable{
 		for (Player p : status.getPlayerHashMap().values()){
 			this.playersList.add(p);
 		}
-
-		for (Player p : status.getPlayerHashMap().values()){
-			System.out.println("CLI: " + p.getUsername());
-			System.out.println("CLIBlu: " + p.getBlueCardList());
-			System.out.println("CLIVerde: " + p.getGreenCardList());
-			System.out.println("CLIGiallo: " + p.getYellowCardList());
-			System.out.println("CLIViola: " + p.getVioletCardList());
-			for (Resource r : p.getResourceList()){
-				System.out.println("CLI " + r.getID() + " " + r.getValue());
-			}
-		}
+		
 		this.playersList.remove(this.player);
 		try {
 			terminal.clearScreen();
@@ -955,7 +945,9 @@ public class CLIMain implements LimView, Runnable{
 			ids.sort(comp);
 			for (int b = 0; b < tower.getTiles().size(); b++){
 				TowerTileInterface tile = tower.getTiles().get(ids.get(b));
-				off.add(((ActionSpace)tile).isOccupied() ? OCCUPIED.length() : tile.getCard().getName().length());
+				off.add(((ActionSpace)tile).isOccupied() ? 
+						OCCUPIED.length() : 
+							tile.getCard().getName().length());
 				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 3 + b*height/16, ((ActionSpace)tile).isOccupied() ? OCCUPIED : tile.getCard().getName());
 				textGraphics.putString(a*width/8 + 1 + (a != 0 ? 1:0), 4 + b*height/16, "Dado: " + tile.getDiceRequired().getValue());
 				list.add(new TerminalPosition(a*width/8 + 1 + off.get(b) + (a!=0 ? 1:0), 3 + b*height/16));
@@ -993,7 +985,8 @@ public class CLIMain implements LimView, Runnable{
 				7*height/16+2,
 				textGraphics
 				);
-
+		textGraphics.putString((Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 + 1,
+		5*height/16-1, "Turno " + board.getTurnNumber());
 		int startCol = (Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1;
 		int dist = width-1 - ((Math.max(marketList.size(), productionList.size()+harvestList.size()+2) + 3)*width/16 - 1);
 		for (int i = 0; i < playersList.size(); i++){
@@ -1679,6 +1672,7 @@ public class CLIMain implements LimView, Runnable{
 		ArrayList<LeaderCard> cardsToCheck = new ArrayList<>();
 		ArrayList<LeaderCard> allCards = board.getLeaderCardsList();
 		System.out.println("Tutte le carte leader sono: " + allCards.size());
+		System.out.println("----------le carte leader da mostrare sono " + list.size());
 		for (Integer i : list){
 			System.out.println("Player.id " + player.getPlayerID() + " Leader.id " + i);
 			LeaderCard l = getLeaderWithID(i, allCards);
@@ -1686,10 +1680,10 @@ public class CLIMain implements LimView, Runnable{
 			cardsToCheck.add(l);
 		}
 		
+		System.out.println("-----------le carte selezionabili sono: " + cardsToCheck.size());
 		ArrayList<?> chosenCard = choseDraftCard(cardsToCheck, terminal.getTerminalSize().getColumns());
 		internalSemaphore.release();
-		Integer c = (Integer)chosenCard.get(0);
-		player.putLeaderCard(getLeaderWithID(c,allCards));
+		Integer c = cardsToCheck.get((Integer)chosenCard.get(0)).getReferenceID();
 		return c;
 	}
 
@@ -1701,9 +1695,7 @@ public class CLIMain implements LimView, Runnable{
 	 */
 	private LeaderCard getLeaderWithID(Integer id, ArrayList<LeaderCard> cards){
 		for (LeaderCard l : cards){
-			System.out.println("carta analizzata: " + l.getReferenceID() + "carta da cercare: " + id);
 			if (l.getReferenceID().equals(id)){
-				System.out.println("Sto per ritornare una carta" );
 				return l;
 			}
 		}

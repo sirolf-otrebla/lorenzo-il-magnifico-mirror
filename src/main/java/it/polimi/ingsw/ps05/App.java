@@ -51,42 +51,17 @@ public class App {
 		boolean started = false;
 		for (String s : App.serverAliases) {
 			if (s.equals(in)) {
-				//TODO START SERVER
+				scanner.close();
 				started = true;
-				System.out.println("use complete rules? ");
-				in = scanner.nextLine();
-				boolean useCompleteRules = true;
-				boolean useCustomBonusTiles = false;
-				if (in.equals("y") || in.equals("yes")) {
-					useCompleteRules = true;
-				} else {
-					useCompleteRules = false;
-				}
-				System.out.println("complete rules chosen " + useCompleteRules);
-				System.out.println("use custom Bonus Tiles? ");
-				in = scanner.nextLine();
-				if (in.equals("y") || in.equals("yes")) {
-					useCustomBonusTiles = true;
-				} else {
-					useCustomBonusTiles = false;
-				}
-				Server server = Server.getInstance();
-				System.out.println("complete rules chosen " + useCompleteRules);
-				System.out.println("bonus tiles chosen " + useCustomBonusTiles);
-				server.startServer( useCompleteRules, useCustomBonusTiles);
+				Server.getInstance().startServer();
 			}
 		}
 		if (!started) {
 			for (String s : App.clientAliases) {
 				if (s.equals(in)) {
 					Client.getInstance();
-
-
-					//Client.getInstance();
-					//CliTest test = new CliTest();
-
+					scanner.close();
 					Login.main(null);
-					//TODO START CLIENT
 				}
 			}
 		}

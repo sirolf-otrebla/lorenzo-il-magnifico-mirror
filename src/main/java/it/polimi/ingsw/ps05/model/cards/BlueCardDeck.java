@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.cards;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
 
@@ -35,6 +36,7 @@ public class BlueCardDeck implements Deck {
 				thirdEpochCard.add(o);
 			}
 		}
+		System.out.println("Le carte blu hanno: \nPRIMA EPOCA: " + firstEpochCard.size() + "\nSECONDA EPOCA: " + secondEpochCard.size() + "\nTERZAEPOCA: " + thirdEpochCard.size());
 	}
 
 	/**
@@ -45,9 +47,11 @@ public class BlueCardDeck implements Deck {
 	public TowerCard getCard(Epoch epoch) {
 		if (epoch.getID().equals(EpochEnumeration.FIRST)){
 			Random randomNum = new Random();
+			System.out.println("il deck blu prerimozione " + firstEpochCard.size());
 			Integer theNum =  randomNum.nextInt(firstEpochCard.size());
 			BlueCard card = firstEpochCard.get(theNum);
 			removeCardFromList(card, firstEpochCard);
+			System.out.println("il deck blue postrimozione " + firstEpochCard.size());
 			return card;
 		} else if (epoch.getID().equals(EpochEnumeration.SECOND)){
 			Random randomNum = new Random();
@@ -62,6 +66,12 @@ public class BlueCardDeck implements Deck {
 			removeCardFromList(card, thirdEpochCard);
 			return card;
 		}
+	}
+	
+	ColorEnumeration color = ColorEnumeration.Blue;
+	
+	public ColorEnumeration getDeckColor(){
+		return color;
 	}
 
 

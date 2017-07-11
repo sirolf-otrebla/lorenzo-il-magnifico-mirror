@@ -81,7 +81,7 @@ public class CliTerminalForCardsList {
 						height-1 ,
 						cardTextGraphics);
 				printInfo(i,cardTextGraphics);
-				
+
 			}
 			System.out.println(requirementsAvailable.toString());
 			System.out.println(requirementsSelected.toString());
@@ -95,7 +95,7 @@ public class CliTerminalForCardsList {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (requirementsAvailable.size() != 0){
 			ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
 			ArrayList<Integer> temp = new ArrayList<>();
@@ -106,7 +106,7 @@ public class CliTerminalForCardsList {
 			toReturn.add(requirementsSelected);
 			return toReturn;
 		}
-		
+
 		return selected;
 	}
 
@@ -140,11 +140,13 @@ public class CliTerminalForCardsList {
 			case Character:
 				if (keyStroke.getCharacter() == ' ' && numMaxCardSelectable > 0){
 					if (selected.contains(cards.get(indiceCarta))){
+						System.out.println("Rimuovo selezione");
 						selected.remove(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), " ");
 					} else if (selected.size() < numMaxCardSelectable){
 						selected.add(indiceCarta);
 						textGraphics.putString(cardTerminal.getCursorPosition(), "X", SGR.BOLD);
+						System.out.println("Aggiungo selezione");
 					}
 				}
 				break;
@@ -152,7 +154,7 @@ public class CliTerminalForCardsList {
 				enterDetected = true;
 				selected = new ArrayList<>();
 				break;
-			
+
 			case EOF:
 				enterDetected = true;
 				selected = new ArrayList<>();
@@ -166,7 +168,7 @@ public class CliTerminalForCardsList {
 			cardTerminal.flush();
 		}
 	}
-	
+
 	private void printInfo(int i,TextGraphics textGraphics){
 		if (cards.get(0) instanceof Card){
 			infoCard((i*currentWidth)/cards.size() + 1, 0, (Card)cards.get(i), textGraphics);
@@ -178,7 +180,7 @@ public class CliTerminalForCardsList {
 				e.printStackTrace();
 			}
 		} else if (cards.get(0) instanceof String){
-			
+
 		} else {
 			infoPrivilege((i*currentWidth)/cards.size() + 1, 0, cards.get(i), textGraphics);
 		}
@@ -209,7 +211,7 @@ public class CliTerminalForCardsList {
 			requirementsSelected.set(indiceCarta, requirementsSelected.get(indiceCarta) + 1);
 		}
 	}
-	
+
 	private void infoPrivilege(int column, int row, Object list, TextGraphics textGraphics){
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		for (Resource res : (ArrayList<Resource>)list){
@@ -242,38 +244,52 @@ public class CliTerminalForCardsList {
 			//requirementList == null, non fare niente cercare di risolvere
 		}
 		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-		try {
-			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Effetti:");
+		lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+		System.out.println("Effetti: " + card.getEffects().size());
+		for (Effect effect : card.getEffects()){
+			textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
 			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-			System.out.println("Effetti: " + card.getEffects().size());
-			for (Effect effect : card.getEffects()){
-				textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, effect.getEffectType().toString());
-				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-				if (!(effect instanceof ActivableEffect)) {
-					System.out.println("non effetto attivabile");
-					System.out.println("effetti disponibili: " + ((SimpleEffect)effect).getResultList().size());
-					for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
-						textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, result.toString() + " " + result.getValue());
-						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			if (!(effect instanceof ActivableEffect)) {
+				System.out.println("non effetto attivabile");
+				System.out.println("effetti disponibili: " + ((SimpleEffect)effect).getResultList().size());
+				for (ActionResult result : ((SimpleEffect)effect).getResultList()) {
+					String toWrite;
+					try{
+						toWrite = result.toString() + " " + result.getValue();
+						System.out.println("ho settato la stringa da stampare");
+					} catch (Exception e){
+						System.err.println("eccezione nel prendere la stringa, ne setto una senza valore");
+						toWrite = result.toString();
 					}
-					lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
-				} else {
-					lastPos = activableEffect(lastPos,(ActivableEffect)effect,textGraphics);
+
+					int size = currentWidth/cards.size();
+					do{
+						if (toWrite.length() > size - 2 ){
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, toWrite.substring(0, size-2));
+							toWrite = toWrite.substring(size-2,toWrite.length());
+						} else {
+							textGraphics.putString(lastPos.getColumn(), lastPos.getRow() +1, toWrite);
+							toWrite = "";
+						}
+						lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+					} while(toWrite.length() != 0);
+
+
 				}
 				lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
+			} else {
+				try {
+					lastPos = activableEffect(lastPos,(ActivableEffect)effect,textGraphics);
+				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-
-		} catch (NoSuchMethodException e){
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			lastPos = new TerminalPosition(lastPos.getColumn(),lastPos.getRow()+1);
 		}
 	}
-	
+
 	private void infoBonusTile(int column, int row, TextGraphics textGraphics, BonusTile tile) throws InstantiationException, IllegalAccessException, NoSuchMethodException{
 		TerminalPosition lastPos = new TerminalPosition(column,row);
 		textGraphics.putString(lastPos.getColumn(), lastPos.getRow() + 1, "Bonus Tile");

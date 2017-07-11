@@ -3,12 +3,13 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.PermanentBonus;
 import it.polimi.ingsw.ps05.server.controller.Game;
 import it.polimi.ingsw.ps05.model.effects.EffectType;
 import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
-public class ServantMalusExcomm implements ExcommunicationEffect {
+public class ServantMalusExcomm extends PermanentBonus implements ExcommunicationEffect {
 
 	/**
 	 * 
@@ -49,9 +50,8 @@ public class ServantMalusExcomm implements ExcommunicationEffect {
 	
 	@Override
 	public void apply(PlayerRelated familyMember) {
-		for (ActionResult r : malus) {
-			r.applyResult(familyMember);
-		}
+		applyResult(familyMember);
+		
 	}
 
 	@Override
@@ -63,5 +63,38 @@ public class ServantMalusExcomm implements ExcommunicationEffect {
 	public void setGame(Game game) {
 		this.game = game;
 		
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		for (ActionResult r : malus){
+			r.applyResult(playerR);
+		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
+	}
+
+	@Override
+	public void setValue(Integer amount) throws NoSuchMethodException {
+		throw new NoSuchMethodException();
+		
+	}
+
+	@Override
+	public Integer getValue() throws NoSuchMethodException {
+		throw new NoSuchMethodException();
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR) {
+		for (ActionResult r : malus){
+			((PermanentBonus)r).resetResult(playerR);
+		}
 	}
 }

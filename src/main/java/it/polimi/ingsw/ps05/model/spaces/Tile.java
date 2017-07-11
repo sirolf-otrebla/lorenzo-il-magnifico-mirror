@@ -115,7 +115,6 @@ public class Tile extends TowerTileInterface {
 
 	@Override
 	public void removeTowerCard() {
-		// TODO Auto-generated method stub
 		card = null;
 	}
 
@@ -138,4 +137,5 @@ public class Tile extends TowerTileInterface {
     public boolean hasMorePaymentOptions() {
         return this.hasMorePaymentOptions;
     }
+    
 }

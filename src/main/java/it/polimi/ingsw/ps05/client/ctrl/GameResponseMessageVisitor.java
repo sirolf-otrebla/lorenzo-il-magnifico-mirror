@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps05.client.view.View;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.net.message.EndGameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.*;
 
 import java.util.ArrayList;
@@ -59,6 +60,14 @@ public class GameResponseMessageVisitor {
 	}
 
 	public void visit(ExcommunicationTriggerMessage msg){
+		boolean response = ViewAdapter.getInstance().triggerExcomm(msg);
+			ExcommunicationChoiceMessage message = new 
+					ExcommunicationChoiceMessage(response, msg.getExcommunicationCard());
+			Client.getInstance().sendToServer(message);
+	}
 
+
+	public void visit(EndGameMessage endGameMessage) {
+		ViewAdapter.getInstance().printMessage(endGameMessage.toString());
 	}
 }

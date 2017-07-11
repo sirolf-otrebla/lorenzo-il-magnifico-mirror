@@ -38,9 +38,11 @@ public class Server {
         return instance;
     }
 
-    public void  startServer(boolean useCompleteRules, boolean useCustomTiles){
+    public void  startServer(){
         globalClientMap = new HashMap<>();
-        this.serverLobby = new Lobby(1000*CommonJsonParser.loadLobbyWaitingTimer(),useCompleteRules, useCustomTiles);
+        this.serverLobby = new Lobby(1000*CommonJsonParser.loadLobbyWaitingTimer(),
+        		CommonJsonParser.useCompleteRules(),
+        		CommonJsonParser.useCustomBonusTile());
         Thread lobbyThread = new Thread(this.serverLobby);
         lobbyThread.start();
         userDatabase =  Database.getInstance();

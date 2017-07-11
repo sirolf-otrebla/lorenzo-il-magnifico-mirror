@@ -62,7 +62,7 @@ public class CommonJsonParser {
 
 	public int loadActionWaitingTimer(){
 		try {
-			File file = new File("./src/main/res/timer.json");
+			File file = new File("./src/main/res/rules.json");
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 			Object time = obj.get("ActionWaitingTimer");
 			return Integer.parseInt(time.toString());
@@ -72,10 +72,34 @@ public class CommonJsonParser {
 		}
 
 	}
+	
+	public static boolean useCompleteRules(){
+		try {
+			File file = new File("./src/main/res/rules.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			Object rules = obj.get("useCompleteRules");
+			return (boolean)rules;
+		} catch (IOException | ParseException | SecurityException | IllegalArgumentException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean useCustomBonusTile(){
+		try {
+			File file = new File("./src/main/res/rules.json");
+			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
+			Object rules = obj.get("UseCustomBonusTile");
+			return (boolean)rules;
+		} catch (IOException | ParseException | SecurityException | IllegalArgumentException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public static int loadLobbyWaitingTimer(){
 		try {
-			File file = new File("./src/main/res/timer.json");
+			File file = new File("./src/main/res/rules.json");
 			JSONObject obj = (JSONObject) (new JSONParser()).parse(new FileReader(file));
 			Object time = obj.get("LobbyWaitingTimer");
 			return Integer.parseInt(time.toString());
@@ -97,12 +121,9 @@ public class CommonJsonParser {
 			for (Object o : array){
 				ArrayList<Resource> interList = new ArrayList<>();
 				JSONObject a = (JSONObject)o;
-				System.out.println("oggetto " + a);
 				for (int i = 0; i < a.keySet().size(); i++){
 					Object actionObject = Class.forName(resourcePath + a.keySet().toArray()[i].toString()).newInstance();
 					Method method = actionObject.getClass().getDeclaredMethod("setValue",Integer.class);
-					System.out.println(a.keySet().toArray()[i]);
-					System.out.println(a.get(a.keySet().toArray()[i]));
 					method.invoke(actionObject, Integer.parseInt(a.get(a.keySet().toArray()[i]).toString()));
 					interList.add((Resource)actionObject);
 				}
@@ -136,8 +157,6 @@ public class CommonJsonParser {
 		card.setCardName(getCardName(obj));
 		card.setRequirements(getRequirements((JSONObject)obj.get("Requirement")));
 		card.setEffects(loadEffectForLeader((JSONObject)obj.get("Effect")));
-		System.out.println("effetti settati nella carta leader: " + card.getEffects().size());
-		System.out.println("azioni nell'effetto settato: " + ((SimpleEffect)card.getEffects().get(0)).getResultList().size());
 		return card;
 	}
 
@@ -149,7 +168,6 @@ public class CommonJsonParser {
 			Object object = null;
 			try {
 				object = Class.forName(effectPath + json.keySet().toArray()[i].toString()).newInstance();
-				System.out.println("instanciated " + json.keySet().toArray()[i].toString());
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 				System.err.println("not found " + json.keySet().toArray()[i].toString());
 			} //creo immediate o activable o permanent o endgame
@@ -180,7 +198,6 @@ public class CommonJsonParser {
 						System.err.println("invocazione fallita di setValue, lanciata eccezzione");
 					}
 					
-					System.out.println("action result creato è null? " + (actionObject==null));
 					resList.set(j, (ActionResult)actionObject);
 				} else {
 
@@ -748,7 +765,6 @@ public class CommonJsonParser {
 							!effectList.keySet().toArray()[j].toString().equals("ResourceToCount") &
 							!effectList.keySet().toArray()[j].toString().equals("BonusDice")){
 						ActionResult r = createAllExceptActivable(effectList, j);
-						System.out.println("action result creato è null? " + (r==null));
 						resList.add(r); 
 					} else if (!effectList.keySet().toArray()[j].toString().equals("BonusDice")){
 						resList.add(createBonusWithMultiplier(effectList));

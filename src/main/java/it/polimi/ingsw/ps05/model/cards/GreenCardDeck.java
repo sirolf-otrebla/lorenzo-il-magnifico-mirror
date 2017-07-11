@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.model.cards;
 
+import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
 
@@ -7,18 +8,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GreenCardDeck implements Deck {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1646027742455082138L;
 
 	ArrayList<GreenCard> cardList;
-	
+
 	ArrayList<GreenCard> firstEpochCard = new ArrayList<GreenCard>();
 	ArrayList<GreenCard> secondEpochCard = new ArrayList<GreenCard>();
 	ArrayList<GreenCard> thirdEpochCard = new ArrayList<GreenCard>();
-	
+
 	/**
 	 * The deck is a container of card, divided for color and epoch. Each deck contains the cards of the same
 	 * color.
@@ -35,6 +36,7 @@ public class GreenCardDeck implements Deck {
 				thirdEpochCard.add(o);
 			}
 		}
+		System.out.println("Le carte verdi hanno: \nPRIMA EPOCA: " + firstEpochCard.size() + "\nSECONDA EPOCA: " + secondEpochCard.size() + "\nTERZAEPOCA: " + thirdEpochCard.size());
 	}
 
 	/**
@@ -45,9 +47,11 @@ public class GreenCardDeck implements Deck {
 	public TowerCard getCard(Epoch epoch) {
 		if (epoch.getID().equals(EpochEnumeration.FIRST)){
 			Random randomNum = new Random();
+			System.out.println("il deck verde prerimozione " + firstEpochCard.size());
 			Integer theNum =  randomNum.nextInt(firstEpochCard.size());
 			GreenCard card = firstEpochCard.get(theNum);
 			removeCardFromList(card, firstEpochCard);
+			System.out.println("il deck verde postrimozione " + firstEpochCard.size());
 			return card;
 		} else if (epoch.getID().equals(EpochEnumeration.SECOND)){
 			Random randomNum = new Random();
@@ -62,6 +66,12 @@ public class GreenCardDeck implements Deck {
 			removeCardFromList(card, thirdEpochCard);
 			return card;
 		}
+	}
+
+	ColorEnumeration color = ColorEnumeration.Green;
+
+	public ColorEnumeration getDeckColor(){
+		return color;
 	}
 
 

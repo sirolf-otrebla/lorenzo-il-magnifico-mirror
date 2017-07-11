@@ -132,6 +132,7 @@ public class DraftController implements Runnable{
     public void DoChoice(ColorEnumeration playerColor, Integer leaderCardReferenceID){
         this.choosenCardsMap.get(playerColor).add(leaderCardReferenceID);
         this.leaderCardReferenceIdMatrix.get(playerColor).remove(leaderCardReferenceID);
+        System.out.println(this.leaderCardReferenceIdMatrix.get(playerColor).toString());
         sem.release();
         System.out.println("(DraftController) semaforo rilasciato: numero permessi: \t" +
                  + sem.availablePermits());

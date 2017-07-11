@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.model;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ServantResource;
 import it.polimi.ingsw.ps05.model.spaces.ActionSpace;
+import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.MilitaryResource;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.model.exceptions.*;
 
@@ -74,6 +76,20 @@ public class Action implements Period {
 		if (this.familiar.isUsed()) return false;
 		if (position != null && this.position.isOccupied()) return false; //TODO da verificare se accettà più familiari
 
+		if (position instanceof TowerTileInterface &&
+				((TowerTileInterface)position).getParentTower().getColor().equals(ColorEnumeration.Green)){
+			try{
+				if (familiar.getRelatedPlayer().getResource(MilitaryResource.id).getValue().intValue() < 
+						((TowerTileInterface)position).getParentTower().getBoard().getMilitaryPath().get(
+								familiar.getRelatedPlayer().getGreenCardList().size() + 1).getValue().intValue()){
+					return false;
+				}
+			} catch (IndexOutOfBoundsException e){
+				return false;
+			}
+
+		}
+
 		// 2- 2b)
 		ArrayList<ArrayList<Resource>> list = this.position.getRequirements();
 		Iterator<ArrayList<Resource>> iterator = list.iterator();
@@ -132,7 +148,7 @@ public class Action implements Period {
 		this.position.setOccupied(this.familiar);
 		this.familiar.setPosition(this.position);
 		this.position.applyEffect(this.familiar);
-		
+
 	}
 
 

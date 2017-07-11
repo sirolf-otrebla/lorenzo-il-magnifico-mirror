@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 import it.polimi.ingsw.ps05.model.*;
 import java.util.ArrayList;
@@ -68,6 +69,9 @@ public class GameSetup {
 	
 	private void loadBoard(){
 		board = parser.loadBoard("./src/main/res/board.json");
+		for (Tower t : board.getTowerList().values()){
+			t.setBoard(board);
+		}
 	}
 	
 	private void loadBonusTiles(boolean custom){
