@@ -2,8 +2,9 @@ package it.polimi.ingsw.ps05.model.cards;
 
 import it.polimi.ingsw.ps05.model.*;
 import it.polimi.ingsw.ps05.model.effects.Effect;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.BonusDice;
-import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
+import it.polimi.ingsw.ps05.model.effects.EndGameEffect;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,7 +33,29 @@ public class YellowCardTest {
     private BonusDice bonusDice = new BonusDice(3, ColorEnumeration.Black, false);
 
     YellowCard card;
-    ArrayList<YellowCard> playerGreenCards = new ArrayList<>();
+    ArrayList<YellowCard> playerYellowCards = new ArrayList<>();
+
+    private int selectedEffects = 1;
+
+    @Before
+    public void setup() {
+        firstRequirement.add(new FaithResource(7));
+        secondRequirement.add(new StoneResource(1));
+        thirdRequirement.add(new ServantResource(3));
+
+        requirementsTest.add(firstRequirement);
+        requirementsTest.add(secondRequirement);
+
+        effectsTest.add(new EndGameEffect());
+        /*
+        card = new YellowCard(3, EpochEnumeration.SECOND, ColorEnumeration.Yellow, cardName, effectsTest);
+        card.setRequirements(requirementsTest);
+        card.setEffects(effectsTest);
+        card.setActive(true);
+
+        playerLeaderCards.add(card);
+        */
+    }
 
     @Test
     public void getSelectedEffects() throws Exception {
@@ -41,6 +64,7 @@ public class YellowCardTest {
 
     @Test
     public void setSelectedEffects() throws Exception {
+
     }
 
     @Test

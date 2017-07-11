@@ -291,7 +291,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
         for (Familiar f : family)
             if ((new Action(f, actionSpace).isLegal())) {
-                widget.setLegal(true);
+                //widget.setLegal(true);
                 widget.getLegalFamilyMemberList().add(f.getColor());
             }
     }
