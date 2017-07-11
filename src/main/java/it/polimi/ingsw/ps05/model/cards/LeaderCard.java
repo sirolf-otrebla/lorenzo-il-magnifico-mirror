@@ -52,7 +52,7 @@ public class LeaderCard implements Card, Draftable {
 	        if (card.equals(this)) cardlist.remove(this);
         }
         PrivilegeBonus priv = new PrivilegeBonus(1);
-        //TODO: GESTIRE PRIVILEGI
+        
     }
 	
 	@Override

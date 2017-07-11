@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps05.client.view.cli;
 
+import it.polimi.ingsw.ps05.client.ctrl.Client;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActivateLeaderViewObject;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
 
@@ -9,6 +10,7 @@ public class CliActivateLeaderViewObject extends ActivateLeaderViewObject{
 	
 	public CliActivateLeaderViewObject(LeaderCard card) {
 		this.card = card;
+		Client.getInstance().linkToObserver(this);
 	}
 	
 	public LeaderCard getLeaderCard(){

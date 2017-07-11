@@ -16,6 +16,8 @@ public class RoundController {
     private ArrayList<Player> playerOrder;
     private Game game;
     private ArrayList<Round> roundList;
+    private Round round;
+    private int endTurnReceived = 0;
 
     public RoundController(Turn turn, Game game){
         this.turn = turn;
@@ -26,10 +28,14 @@ public class RoundController {
 
     public void executeTurn() throws InterruptedException{
         for (int i = 0; i < Game.FAM_DIM ; i++){
-            Round round = new Round(playerOrder, game);
+            round = new Round(playerOrder, game);
             round.executeRound();
             roundList.add(round);
         }
+    }
+    
+    public Round getRound(){
+    	return round;
     }
 
     public Turn getTurn() {
@@ -37,5 +43,17 @@ public class RoundController {
     }
     public ArrayList<Round> getRoundList() {
         return roundList;
+    }
+    
+    public void addEndActionDone(){
+    	endTurnReceived++;
+    }
+    
+    public void resetEndTurnReceived(){
+    	endTurnReceived = 0;
+    }
+    
+    public int getEndTurnReceived(){
+    	return endTurnReceived;
     }
 }

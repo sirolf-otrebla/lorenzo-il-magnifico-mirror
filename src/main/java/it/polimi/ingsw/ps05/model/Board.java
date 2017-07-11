@@ -35,6 +35,7 @@ public class Board implements Serializable, VisitableFromView {
 	private ArrayList<VictoryResource> blueCardsConversion = null; //array da 6 elementi che dice quant ipunti vittoria vengono assegnati per "i" carte
 	//serializzabile
 	private ArrayList<LeaderCard> leaderCardsList = null;
+	private Integer turnNumber = 1;
 	
 	/**
 	 * The board is the place that contains every single ActionSpace where users can put Familiars.
@@ -207,6 +208,14 @@ public class Board implements Serializable, VisitableFromView {
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
 		vi.visit(this);
+	}
+
+	public Integer getTurnNumber() {
+		return turnNumber;
+	}
+
+	public void setTurnNumber(Integer turnNumber) {
+		this.turnNumber = turnNumber;
 	}
 
 	public ArrayList<BonusTile> getBonusTileArrayList() {

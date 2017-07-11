@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.client.view.SetUpGuiVisitor;
+import it.polimi.ingsw.ps05.client.view.UpdateViewVisitor;
 import it.polimi.ingsw.ps05.client.view.cli.CLIMain;
 import it.polimi.ingsw.ps05.client.view.gui.BonusTileDraftPopup;
 import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
@@ -11,9 +12,14 @@ import it.polimi.ingsw.ps05.model.Familiar;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 import it.polimi.ingsw.ps05.net.GameStatus;
+import it.polimi.ingsw.ps05.net.message.draftmessages.BonusTileDraftChoiceMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.BonusTileDraftUpdateNetMessage;
 import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftEndMessage;
 import it.polimi.ingsw.ps05.net.message.GameSetupMessage;
 import it.polimi.ingsw.ps05.net.message.SetupDoneMessage;
+
+import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationTriggerMessage;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -100,9 +106,9 @@ public class ViewAdapter {
 	}
 
 	public void updateView(GameStatus status){
-		//CLIMain cli = (CLIMain) this.view;
-		//cli.updateGame(status);
-		//cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
+		CLIMain cli = (CLIMain) this.view;
+		cli.updateGame(status);
+		cli.setActivePlayer(status.getPlayerHashMap().get(status.getActivePlayerId()));
 
 	}
 
@@ -165,12 +171,14 @@ public class ViewAdapter {
 		return null;
 	}
 
-	public void endLeaderDraft(){
+	public void endLeaderDraft(LeaderDraftEndMessage msg){
 		if (this.viewType == this.GUI_TYPE) {
 			// TODO
 
 		} else {
+			System.out.println("Finito draft leader setto le carte");
 			CLIMain cliView = (CLIMain) this.view;
+			cliView.setSelectedLeaderCard(msg.getPlayerLeaderCards());
 		}
 
 	}
@@ -197,6 +205,11 @@ public class ViewAdapter {
 
 		} else {
 			CLIMain cliView = (CLIMain) this.view;
+			if (CliThread == null){
+				CliThread = new Thread(cliView);
+				CliThread.setDaemon(true);
+				CliThread.start();
+			}
 		}
 
 	}
@@ -223,6 +236,9 @@ public class ViewAdapter {
 
 		} else {
 			CLIMain cliView = (CLIMain) this.view;
+			System.out.println("Draft ids setup length " + draftIDs.size());
+			BonusTileDraftChoiceMessage choice = new BonusTileDraftChoiceMessage(cliView.getBonusTileDraft(draftIDs));
+			Client.getInstance().sendToServer(choice);
 		}
 
 	}
@@ -232,7 +248,7 @@ public class ViewAdapter {
 			// TODO
 
 		} else {
-		;
+		
 		}
 
 
@@ -296,6 +312,31 @@ public class ViewAdapter {
 			cliView.createTerminalWithMessage(message);
 		}
 
+	}
+	
+	public boolean triggerExcomm(ExcommunicationTriggerMessage msg) {
+		if (msg.getState() == msg.EXCOMMUNICATED){
+			if (this.viewType == this.GUI_TYPE) {
+				// TODO
+
+			} else {
+				CLIMain cliView = (CLIMain) this.view;
+				cliView.createTerminalWithMessage("Sei stato scomunicato!");
+			}
+		} else {
+			if (this.viewType == this.GUI_TYPE) {
+				// TODO
+
+			} else {
+				CLIMain cliView = (CLIMain) this.view;
+				try {
+					return cliView.askForExcomm();
+				} catch (IOException e) {
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 
 	public Semaphore getGuiInitSemaphore() {

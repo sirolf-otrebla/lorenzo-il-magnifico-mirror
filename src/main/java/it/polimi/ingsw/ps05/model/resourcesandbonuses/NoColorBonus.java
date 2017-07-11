@@ -10,7 +10,7 @@ public class NoColorBonus extends PermanentBonus {
 	 * 
 	 */
 	private static final long serialVersionUID = -8105323045051472500L;
-	private Integer value; //con value si Integerende il valore del bonus conferito dalla carta
+	private Integer value; //con value si intende il valore del bonus conferito dalla carta
 	transient private Game game;
 
 	public NoColorBonus(Integer value){
@@ -28,11 +28,6 @@ public class NoColorBonus extends PermanentBonus {
 	@Override
 	public Integer getValue() throws NoSuchMethodException {
 		return value;
-
-	}
-
-	public Integer getAmount(){
-		return this.value;
 	}
 
 	@Override

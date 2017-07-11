@@ -12,7 +12,7 @@ public class GreenCard implements Resource {
 	 */
 	private static final long serialVersionUID = -4385339197953293053L;
 	Integer value;
-	public static final String id = "Carta Blu";
+	public static final String id = "Carta Verde";
 	
 	public GreenCard(){
 		
@@ -38,7 +38,7 @@ public class GreenCard implements Resource {
 
 	@Override
 	public boolean hasEnoughResources(Familiar playerFamiliar) {
-		if (playerFamiliar.getRelatedPlayer().getBlueCardList().size() >= value)
+		if (playerFamiliar.getRelatedPlayer().getGreenCardList().size() >= value)
 			return true;
 		return false;
 	}

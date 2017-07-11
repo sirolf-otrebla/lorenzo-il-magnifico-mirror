@@ -83,6 +83,11 @@ public class DoubleBonus extends PermanentBonus {
 	public Game getGame() {
 		return game;
 	}
+	
+	@Override
+	public String toString(){
+		return "Raddoppi le risorse ricevute dagli effetti immediati";
+	}
 
 
 	/** resets the board as it was before calling applyResult()

@@ -71,7 +71,7 @@
 		},
 
 		{
-			"Epoch": "THIRD",
+			"Epoch": "FIRST",
 			"Color": "Blue",
 			"Requirement": 
 			{
@@ -234,7 +234,7 @@
 		},
 
 		{
-			"Epoch": "THIRD",
+			"Epoch": "SECOND",
 			"Color": "Blue",
 			"Requirement": 
 			{
@@ -1818,7 +1818,7 @@
 		},
 
 		{
-			"Epoch": "SECOND",
+			"Epoch": "THIRD",
 			"Color": "Green",
 			"Requirement": 
 			{
@@ -3189,7 +3189,7 @@
 		},
 
 		{
-			"Epoch": "FIRST",
+			"Epoch": "THIRD",
 			"Color": "Yellow",
 			"Requirement": 
 			{

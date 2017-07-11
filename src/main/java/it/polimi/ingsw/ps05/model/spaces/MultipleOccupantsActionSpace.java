@@ -13,6 +13,7 @@ public abstract class MultipleOccupantsActionSpace extends ActionSpaceWithEffect
 	 * 
 	 */
 	private static final long serialVersionUID = 8263755224788573779L;
+	
 
 	public ArrayList<Familiar> getOccupantList(){
     	ArrayList<Familiar> list = new ArrayList<>();

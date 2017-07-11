@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps05.client.ctrl.ViewVisitorInterface;
+import it.polimi.ingsw.ps05.model.Board;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Epoch;
 import it.polimi.ingsw.ps05.model.EpochEnumeration;
@@ -26,6 +27,7 @@ public abstract class Tower implements Serializable, VisitableFromView {
 	HashMap<Integer, TowerTileInterface> tiles; //dove vanno messi i tile
 	Deck deck;
 	private ColorEnumeration color = ColorEnumeration.NOT_INITIALIZED;
+	Board board;
 	
 	public Tower(){
 		this.occupied = false;
@@ -72,7 +74,7 @@ public abstract class Tower implements Serializable, VisitableFromView {
 	
 	public void setDeck(Deck deck){
 		this.deck = deck;
-		this.color = this.deck.getCard(new Epoch(EpochEnumeration.FIRST)).color;
+		this.color = deck.getDeckColor();
 	}
 	
 	public ColorEnumeration getColor(){
@@ -89,6 +91,14 @@ public abstract class Tower implements Serializable, VisitableFromView {
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
 		vi.visit(this);
+	}
+	
+	public void setBoard(Board board){
+		this.board = board;
+	}
+	
+	public Board getBoard(){
+		return board;
 	}
 
 

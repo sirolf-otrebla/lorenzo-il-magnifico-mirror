@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps05.model.resourcesandbonuses.excommunicationeffects;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.ActionResult;
+import it.polimi.ingsw.ps05.model.resourcesandbonuses.PermanentBonus;
 import it.polimi.ingsw.ps05.server.controller.Game;
 
 import it.polimi.ingsw.ps05.model.effects.Effect;
@@ -11,7 +12,7 @@ import it.polimi.ingsw.ps05.model.PlayerRelated;
 import it.polimi.ingsw.ps05.model.cards.VioletCard;
 import it.polimi.ingsw.ps05.model.exceptions.RepeatedAssignmentException;
 
-public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
+public class NoVioletVictoryPtsExcomm extends PermanentBonus implements ExcommunicationEffect{
 
     /**
 	 * 
@@ -43,9 +44,7 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 	
 	@Override
 	public void apply(PlayerRelated familyMember) {
-		for (VioletCard c : familyMember.getRelatedPlayer().getVioletCardList()){
-			c.effects = new ArrayList<Effect>();
-		}
+		applyResult(familyMember);
 		
 	}
 
@@ -57,6 +56,37 @@ public class NoVioletVictoryPtsExcomm implements ExcommunicationEffect{
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
+		
+	}
+
+	@Override
+	public void applyResult(PlayerRelated playerR) {
+		for (VioletCard c : playerR.getRelatedPlayer().getVioletCardList()){
+			c.effects = new ArrayList<>();
+		}
+		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
+		}
+	}
+
+	@Override
+	public void setValue(Integer amount) throws NoSuchMethodException {
+		throw new NoSuchMethodException();
+		
+	}
+
+	@Override
+	public Integer getValue() throws NoSuchMethodException {
+		throw new NoSuchMethodException();
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
+	}
+
+	@Override
+	public void resetResult(PlayerRelated playerR) {
 		
 	}
 }

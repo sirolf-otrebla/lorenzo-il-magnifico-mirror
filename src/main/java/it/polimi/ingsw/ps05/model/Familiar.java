@@ -149,6 +149,7 @@ public class Familiar implements Serializable, PlayerRelated {
 	 */
 	public void resetPosition(){
 	    this.setPosition(null);
+	    used = false;
     }
 
 	/** getter for related die

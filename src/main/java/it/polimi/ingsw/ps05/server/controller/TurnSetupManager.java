@@ -17,19 +17,21 @@ public class TurnSetupManager extends Observable{
 	private ArrayList<Player> playersConnected; //variabile monouso solo per il primo turno
 	private ArrayList<Resource> startResource;
 	private Semaphore excommSemaphore = new Semaphore(0);
-	
+
 	public TurnSetupManager(ArrayList<Player> playersConnected, Board board, ArrayList<Resource> startingResource){
 		this.board = board;
 		this.playersConnected = playersConnected;
 		this.startResource = startingResource;
-		System.out.println("Starting resource: " + startingResource.size());
-		System.out.println("Start resource: " + this.startResource.size());
 		this.turn = setupFirstTurn();
-		
+
 	}
 	
+	public void releaseExcommSem(){
+		excommSemaphore.release();
+	}
+
 	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
-		
+
 		ArrayList<Player> newOrder = new ArrayList<Player>();
 		for (Player o : onCouncil){
 			newOrder.add(o);
@@ -40,7 +42,7 @@ public class TurnSetupManager extends Observable{
 		}
 		next.setPlayerOrder(newOrder);
 	}
-	
+
 	private void resetBoard(Turn next){
 		//reset degli spazi generici in elenco
 
@@ -52,8 +54,10 @@ public class TurnSetupManager extends Observable{
 		//todo da controllare
 		//reset delle carte
 		for (Tower o : board.getTowerList().values()){
+			o.setOccupied(false);
 			for (TowerTileInterface a : o.getTiles().values()){
 				a.removeTowerCard();
+				a.reset();
 			}
 		}
 		//council, serve spostare anche l'ordine dei giocatori
@@ -64,26 +68,27 @@ public class TurnSetupManager extends Observable{
 		board.setPlayerOnCouncil(null);
 		updatePlayerOrder(list,next);
 	}
-	
+
 	private void updateFamiliar(Turn currentTurn){
 		for (Player o : currentTurn.getPlayerOrder()){
 			for (Familiar f : o.getFamilyList()){
 				for (Dice d : currentTurn.getDice()){
 					if (f.getColor() == d.getColor()){
 						f.setDice(d);
+						f.resetPosition();
 						break;
 					}
 				}
 			}
 		}
 	}
-	
+
 	private void setUpBoardCard(Turn currentTurn){
 		for (Tower o : board.getTowerList().values()){
 			o.setCardInTile(currentTurn.getEpoch());
 		}
 	}
-	
+
 	private ArrayList<Dice> rollDice(){
 		ArrayList<Dice> dice = new ArrayList<Dice>();
 		dice.add(new Dice(ColorEnumeration.Black));
@@ -92,49 +97,75 @@ public class TurnSetupManager extends Observable{
 		dice.add(new Dice(ColorEnumeration.Any, 0));
 		return dice;
 	}
-	
+
 	public void loadNextTurn(){
+		System.out.println("INIZIO CAMBIO TURNO");
 		turnHistory.add(this.turn);
 		Turn next = turn.getEmptyTurn();
 		next.setDice(rollDice());
 		resetBoard(next);
 		next.setTurnNumber(turn.getTurnNumber() + 1);
-		next.setEpoch(new Epoch(EpochEnumeration.getEpoch(next.getTurnNumber() / 2)));
-		if (!next.getEpoch().getID().equals(turn.getEpoch().getID())){
-			this.setChanged();
-			notifyObservers(turn.getEpoch());
-			try {
-				excommSemaphore.acquire(this.playersConnected.size());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 		updateFamiliar(next);
 		next.setNext(new Turn());
+		if (next.getTurnNumber() == 3){
+			
+			if(board.getExcomCards() != null){
+				this.setChanged();
+				notifyObservers(turn.getEpoch());
+				try {
+					excommSemaphore.acquire(this.playersConnected.size());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				next.setEpoch(new Epoch(EpochEnumeration.SECOND, board.getExcomCards().get(1)));
+			} else {
+				next.setEpoch(new Epoch(EpochEnumeration.SECOND));
+			}
+		} else if (next.getTurnNumber() == 5){
+			next.setEpoch(new Epoch(EpochEnumeration.THIRD));
+			if(board.getExcomCards() != null){
+				this.setChanged();
+				notifyObservers(turn.getEpoch());
+				try {
+					excommSemaphore.acquire(this.playersConnected.size());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				next.setEpoch(new Epoch(EpochEnumeration.THIRD, board.getExcomCards().get(2)));
+			} else {
+				next.setEpoch(new Epoch(EpochEnumeration.THIRD));
+			}
+		} else {
+			next.setEpoch(turn.getEpoch());
+		}
 		setUpBoardCard(next);
 		this.turn = next;
+		System.out.println("FINE CAMBIO TURNO");
 	}
-	
+
 	private Turn setupFirstTurn(){
 		Turn firstTurn = new Turn();
 		firstTurn.setDice(rollDice());
 		firstTurn.setPlayerOrder(setRandomPlayerOrder());
 		firstTurn.setTurnNumber(1);
-		firstTurn.setEpoch(new Epoch(EpochEnumeration.FIRST));
+		if (board.getExcomCards() != null && board.getExcomCards().size() > 0){
+			Epoch epoch = new Epoch(EpochEnumeration.FIRST, board.getExcomCards().get(0));
+			firstTurn.setEpoch(epoch);
+		} else {
+			firstTurn.setEpoch(new Epoch(EpochEnumeration.FIRST));
+		}
 		firstTurn.setNext(new Turn());
 		updateFamiliar(firstTurn);
 		setUpBoardCard(firstTurn);
 		return firstTurn;
 	}
-	
+
 	private ArrayList<Player> setRandomPlayerOrder(){
 		ArrayList<Player> plList = new ArrayList<>();
 		plList.ensureCapacity(this.playersConnected.size());
 		for( Player pl : playersConnected){
 			plList.add(pl);
 		}
-		System.out.println("player order size in turn setup manager: " + plList.size());
-		System.out.println("Start resource: " + startResource.size());
 		Collections.shuffle(plList);
 		for (int i = 0; i < plList.size(); i++){
 			for (Resource r : startResource){
@@ -143,16 +174,16 @@ public class TurnSetupManager extends Observable{
 				if (r.getID().equals(GoldResource.id)){
 					r.setValue(r.getValue() + 1);
 				}
-				
+
 			}
 		}
 		return plList;
 	}
-	
+
 	public Turn getTurn(){
 		return this.turn;
 	}
-	
-	
-	
+
+
+
 }

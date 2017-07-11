@@ -41,11 +41,14 @@ public class ProductionSpace extends MultipleOccupantsActionSpace {
 		this.effectList = effectList;
 	}
 	
-	
-	
-	void startProduce(Familiar familiar){
-		
+	@Override
+	public boolean isOccupied(){
+		if (this.getEffects() != null && this.getEffects().size() != 0){
+			return false;
+		}
+		return super.isOccupied();
 	}
+	
 
     private ArrayList<Effect> effectList;
     @Override

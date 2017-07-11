@@ -264,9 +264,9 @@ public class GUIMain extends Application implements LimView {
         /* Add harvest and production action spaces */
 
 		if(PLAYER_NUMBER >= 3) {
-			insertActionSpace(singleProductionSpace, root, 1, 0.9, 79.3); // single production
+			insertActionSpace(singleProductionSpace, root, 1, 1.9, 80.8); // single production
 			actionSpaces.add(singleProductionSpace);
-			insertActionSpace(singleHarvestingSpace, root, 1, 0.9, 90.4); // single harvest
+			insertActionSpace(singleHarvestingSpace, root, 1, 1.9, 91.9); // single harvest
 			actionSpaces.add(singleHarvestingSpace);
 			insertMultipleSpace(productionSpace, root, 1, 6.0, 79.2); // production
 			actionSpaces.add(productionSpace);
@@ -638,6 +638,12 @@ public class GUIMain extends Application implements LimView {
 	public void setLegalActionSpaces(HashMap<Integer, HashMap<ColorEnumeration, Boolean>> legalMap) {
 		for(ActionSpaceWidgetInterface actionSpace: actionSpaces)
 			actionSpace.setLegalActionMap(legalMap.get(actionSpace.getReferenceId()));
+	}
+
+	public void reorderMarkers() {
+		for(int i = 0; i < 4; i++) {
+
+		}
 	}
 
 	public void updatePlayerPoints(ColorEnumeration color, Integer[] newPoints) {

@@ -47,7 +47,7 @@ public class Game implements Observer {
     private boolean useCustomBonusTiles = false;
     public static final int FAM_DIM = 4;
     private StartActionStrategyContainer startActionStrategyContainer = new StartActionStrategyContainer(
-            new DoNothingStrategy(), this);
+            new DoNothingStrategy(this,false), this);
     private EndActionStrategyContainer endActionStrategyContainer;
     private Semaphore semStart;
     private int act_waiting_time_ms = 0;
@@ -116,14 +116,19 @@ public class Game implements Observer {
          semStart.acquire(clientHashMap.size());
         // starting
          System.out.println("Complete rules: " + useCompleteRules + "\tBonus Tile" + useCustomBonusTiles);
-        if (useCompleteRules || useCustomBonusTiles){
+        if (useCompleteRules){
         	draftController = new DraftController(new ArrayList<>(clientHashMap.values()), this);
             this.draftControllerThread = new Thread(draftController);
             this.draftControllerThread.start();
             draftControllerThread.join();
             System.out.println("post draft");
-
-
+        }
+        
+        if (useCustomBonusTiles){
+        	bonusTileDraftController = new BonusTileDraftController(new ArrayList<>(clientHashMap.values()), this);
+        	this.draftControllerThread = new Thread(bonusTileDraftController);
+        	this.draftControllerThread.start();
+        	draftControllerThread.join();
         }
         System.out.println("Starting game flow");
         this.flowCrlThread.start();
