@@ -24,7 +24,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private ColorEnumeration occupantPlayerColor;
     private boolean isOccupied;
     private int minDie;
-    private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
+    HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
     private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
@@ -49,7 +49,13 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
 
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+            ColorEnumeration plColor = sourceData.getPlayerColor(), fColor = sourceData.getFamiliarColor();
 
+            System.out.println("Occupato: " + occupied);
+            System.out.println("Azione legale: " + isLegal);
+            System.out.println("Giocatore: " + plColor);
+            System.out.println("Familiare: " + fColor);
+            System.out.println("dragboard.hasContent(FAMILIAR_DATA): " + e.getDragboard().hasContent(FAMILIAR_DATA));
             if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
                 e.acceptTransferModes(TransferMode.MOVE);
             }
@@ -64,10 +70,10 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
-            if (isLegal) {
+            if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);
-            } else if (!isLegal){
+            } else if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && !isLegal){
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FIREBRICK);
             }
@@ -92,15 +98,18 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
         occupationCircle.setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
             System.out.println("starting if");
-            if (e.getDragboard().hasContent(FAMILIAR_DATA)) {
-                FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            if (!isOccupied() && isLegal && e.getDragboard().hasContent(FAMILIAR_DATA)) {
                 Image img = new Image(sourceData.getFamiliarImagePath());
                 System.out.println("inside action space drag dropped");
                 occupationCircle.setOpacity(1);
                 occupationCircle.setFill(new ImagePattern(img));
                 this.occupied = true;
+                this.setFamilyMemberColor(sourceData.getFamiliarColor());
+                this.setOccupantPlayerColor(sourceData.getPlayerColor());
                 success = true;
             }
 

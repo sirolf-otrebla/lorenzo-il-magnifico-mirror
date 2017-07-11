@@ -46,9 +46,8 @@ public class GUIMain extends Application implements LimView {
 	private HashMap<ColorEnumeration, String> usernamesHashMap;
 
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
-	private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
+	// private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
 	private HBox playerResourcesBox;
-	private ResourcesWidget[] resourcesWidgetArray = new ResourcesWidget[4];
 
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
@@ -65,7 +64,6 @@ public class GUIMain extends Application implements LimView {
 
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
-	private DieWidget[] diceWidgetArray = new DieWidget[3];
 	private HashMap<ColorEnumeration, DieWidget> diceHashMap = new HashMap<>();
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
@@ -240,8 +238,7 @@ public class GUIMain extends Application implements LimView {
 		}
 
 		/* Add player resources */
-		resourcesWidgetArray[0] = new ResourcesWidget();
-		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
+		playerResourcesBox = player.getResourceWidget().setupThisPlayerResource();
 		root.getChildren().add(playerResourcesBox);
 
 
@@ -596,25 +593,15 @@ public class GUIMain extends Application implements LimView {
 
 	public void updatePlayerResources(HashMap<String, Integer> thisPlayerResources, HashMap<ColorEnumeration, HashMap<String, Integer>> otherPlayerResources) {
 
-		//TODO decidere come passare le risorse
-
-		for(String newResource: thisPlayerResources.keySet()) {
-			for(int i = 0; i < 4; i++) {
-				player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
-			}
-		}
-
+		// aggiorna le risorse del giocatore
+		for(String newResource: thisPlayerResources.keySet())
+			player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
 		player.getResourceWidget().repaint();
 
-
+		// aggiorna le risorse degli avversari
 		for(ColorEnumeration opponentColor: otherPlayerResources.keySet()) {
-			for(OpponentWidget opponent: opponentsArray) {
-				if(opponent.getOpponentColor() == opponentColor) {
-					for (String id : otherPlayerResources.get(opponentColor).keySet()) {
-						opponent.getPersonalBoard().getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
-					}
-				}
-			}
+			for(String newResource: otherPlayerResources.get(opponentColor).keySet())
+				opponentsHashMap.get(opponentColor).getPersonalBoard().getResourceWidget().setResource(newResource, otherPlayerResources.get(opponentColor).get(newResource));
 		}
 	}
 

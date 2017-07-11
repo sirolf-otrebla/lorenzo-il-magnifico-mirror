@@ -22,4 +22,6 @@ public interface ActionSpaceWidgetInterface {
 
     public HashMap<ColorEnumeration, Boolean> getLegalActionMap();
 
+
+
 }

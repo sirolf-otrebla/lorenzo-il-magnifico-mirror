@@ -19,6 +19,8 @@ import javafx.stage.StageStyle;
 
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.resize;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
@@ -42,10 +44,10 @@ public class PaymentPopup {
 
         ToggleGroup toggleGroup = new ToggleGroup();
 
-        VBox selectables = new VBox();
+        VBox selectablesBox = new VBox();
         ArrayList<RadioButton> buttonList = new ArrayList<RadioButton>();
 
-        int i = 1;
+        int i = 0;
         for (ArrayList<String> resList : resArrayList) {
             String text = new String();
             for (String res : resList) text += res + ",";
@@ -53,7 +55,7 @@ public class PaymentPopup {
             buttonList.add(rb);
             rb.setToggleGroup(toggleGroup);
             rb.setUserData(i);
-            selectables.getChildren().add(rb);
+            selectablesBox.getChildren().add(rb);
             i++;
         }
 
@@ -75,11 +77,21 @@ public class PaymentPopup {
         VBox vbox = new VBox(20 * resize);
         vbox.setId("paymentSelection");
         vbox.setPadding(new Insets(50 * resize, 50 * resize, 50 * resize, 50 * resize));
-        vbox.getChildren().addAll(label, selectables, utilButtonBox);
+        vbox.getChildren().addAll(label, selectablesBox, utilButtonBox);
         vbox.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(vbox, 600 * resize, 300 * resize);
+
+        // add stylesheets
+        File f = new File("./src/main/res/fx-style.css");
+        try {
+            scene.getStylesheets().add(f.toURI().toURL().toString());
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
         popup.setScene(scene);
+        popup.setAlwaysOnTop(true);
         popup.showAndWait();
 
         if(canceled)
