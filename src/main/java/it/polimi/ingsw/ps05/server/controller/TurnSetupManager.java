@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.*;
 
+/**this class takes care of creating Turns Object and extracting informations from them
+ *
+ */
 public class TurnSetupManager extends Observable{
 
 	private Turn turn; //vecchio turno
@@ -18,6 +21,12 @@ public class TurnSetupManager extends Observable{
 	private ArrayList<Resource> startResource;
 	private Semaphore excommSemaphore = new Semaphore(0);
 
+	/**
+	 *
+	 * @param playersConnected an arraylist filled by players that are currently in game
+	 * @param board			a related board
+	 * @param startingResource an arraylist representing the resoruces each one has at the start of the game
+	 */
 	public TurnSetupManager(ArrayList<Player> playersConnected, Board board, ArrayList<Resource> startingResource){
 		this.board = board;
 		this.playersConnected = playersConnected;
@@ -25,11 +34,20 @@ public class TurnSetupManager extends Observable{
 		this.turn = setupFirstTurn();
 
 	}
-	
+
+	/**
+	 *  this method is called when a player has chosen if take the excommunication or not, then a semaphore
+	 *  is released
+	 */
 	public void releaseExcommSem(){
 		excommSemaphore.release();
 	}
 
+	/**
+	 * this method updates the player order according on the council occupants
+	 * @param onCouncil an arraylist representing all players that are occupying council space
+	 * @param next the next turn, where the new order will be set.
+	 */
 	private void updatePlayerOrder(ArrayList<Player> onCouncil,Turn next){
 
 		ArrayList<Player> newOrder = new ArrayList<Player>();
@@ -43,6 +61,10 @@ public class TurnSetupManager extends Observable{
 		next.setPlayerOrder(newOrder);
 	}
 
+	/**reset the boards before a new turn.
+	 *
+	 * @param next the next turn
+	 */
 	private void resetBoard(Turn next){
 		//reset degli spazi generici in elenco
 
@@ -69,6 +91,10 @@ public class TurnSetupManager extends Observable{
 		updatePlayerOrder(list,next);
 	}
 
+	/**
+	 * this method resets the familymember's position and updates their dice.
+	 * @param currentTurn this is the current turn, and is needed for obtain dice values
+	 */
 	private void updateFamiliar(Turn currentTurn){
 		for (Player o : currentTurn.getPlayerOrder()){
 			for (Familiar f : o.getFamilyList()){
@@ -83,12 +109,21 @@ public class TurnSetupManager extends Observable{
 		}
 	}
 
+	/**
+	 * this method set up the board, assigning to each tower tile an appropriate
+	 * card
+	 * @param currentTurn the current turn, used to obtain appropriate cards
+	 */
 	private void setUpBoardCard(Turn currentTurn){
 		for (Tower o : board.getTowerList().values()){
 			o.setCardInTile(currentTurn.getEpoch());
 		}
 	}
 
+	/**
+	 *  this method rolls all dice,
+	 * @return an arraylist of newly rolled dice
+	 */
 	private ArrayList<Dice> rollDice(){
 		ArrayList<Dice> dice = new ArrayList<Dice>();
 		dice.add(new Dice(ColorEnumeration.Black));
@@ -98,6 +133,9 @@ public class TurnSetupManager extends Observable{
 		return dice;
 	}
 
+	/**
+	 * this method loads the next turn.
+	 */
 	public void loadNextTurn(){
 		System.out.println("INIZIO CAMBIO TURNO");
 		turnHistory.add(this.turn);

@@ -10,7 +10,6 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
-import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Iterator;
@@ -90,11 +89,6 @@ public class BlueAction extends Observable implements ActionResult, BonusAction 
 	@Override
 	public Game getGame() {
 		return game;
-	}
-
-	@Override
-	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
-		visitor.visit(this, pl );
 	}
 
 

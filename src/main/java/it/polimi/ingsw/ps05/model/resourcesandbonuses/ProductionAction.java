@@ -8,7 +8,6 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
-import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 
 import java.util.Iterator;
 import java.util.Observable;
@@ -84,11 +83,6 @@ public class ProductionAction extends Observable implements ActionResult, BonusA
 	@Override
 	public Game getGame() {
 		return game;
-	}
-
-	@Override
-	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
-		visitor.visit(this, pl );
 	}
 
 	@Override

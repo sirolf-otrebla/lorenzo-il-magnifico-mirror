@@ -10,13 +10,12 @@ import it.polimi.ingsw.ps05.model.spaces.Tower;
 import it.polimi.ingsw.ps05.model.cards.TowerCard;
 import it.polimi.ingsw.ps05.model.spaces.TowerTileInterface;
 import it.polimi.ingsw.ps05.server.controller.Game;
-import it.polimi.ingsw.ps05.scrap.ResultTriggerVisitor;
 import it.polimi.ingsw.ps05.server.controller.endactionstrategies.BonusActionStrategy;
 
 import java.util.Iterator;
 import java.util.Observable;
 
-public class VioletAction extends Observable implements ActionResult, BonusAction {
+public class VioletAction extends Observable implements ActionResult {
 	/**
 	 * 
 	 */
@@ -99,8 +98,5 @@ public class VioletAction extends Observable implements ActionResult, BonusActio
 
 
 
-    @Override
-	public void acceptListener(ResultTriggerVisitor visitor, PlayerRelated pl) {
-		visitor.visit(this, pl );
-	}
+
 }
