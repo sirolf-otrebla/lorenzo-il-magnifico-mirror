@@ -61,9 +61,9 @@ public class NoMarketExcomm extends PermanentBonus implements ExcommunicationEff
 		for (ActionResult r : malus){
 			r.applyResult(playerR);
 		}
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+		/*if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
+		}*/
 	}
 
 	@Override

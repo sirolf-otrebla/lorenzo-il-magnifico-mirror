@@ -64,9 +64,9 @@ public class NoVioletVictoryPtsExcomm extends PermanentBonus implements Excommun
 		for (VioletCard c : playerR.getRelatedPlayer().getVioletCardList()){
 			c.effects = new ArrayList<>();
 		}
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+		/*if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
+		}*/
 	}
 
 	@Override

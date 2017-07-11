@@ -60,9 +60,9 @@ public class NoGreenVictoryPtsExcomm extends PermanentBonus implements Excommuni
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		playerR.getRelatedPlayer().removeGreenCard();
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+		/*if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
+		}*/
 	}
 
 	@Override

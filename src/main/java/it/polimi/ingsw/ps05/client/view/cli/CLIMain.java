@@ -178,7 +178,7 @@ public class CLIMain implements LimView, Runnable{
 							if (ratioWidth > 1) ratioWidth = (float) 1;
 							ratioSet = true;
 						}
-						System.out.println("NEW SIZE DIOPORCO" + newSize.toString());
+						System.out.println("NEW SIZE " + newSize.toString());
 						System.out.println("ratio width: " + ratioWidth + "ratio height: " + ratioHeight);
 						terminal.clearScreen();
 						drawGraphics(Math.round(ratioWidth*terminal.getTerminalSize().getColumns()),Math.round(ratioHeight*terminal.getTerminalSize().getRows()),textGraphics);	

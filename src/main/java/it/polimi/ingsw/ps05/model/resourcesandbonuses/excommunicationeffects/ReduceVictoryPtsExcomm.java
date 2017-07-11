@@ -52,7 +52,7 @@ public class ReduceVictoryPtsExcomm extends PermanentBonus implements Excommunic
 	}
 	@Override
 	public String toString(){
-		return null;
+		return "Riduce i punti vittoria";
 	}
 
 	@Override

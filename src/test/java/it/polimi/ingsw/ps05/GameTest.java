@@ -45,7 +45,6 @@ public class GameTest {
 		assertEquals(ID, game.getGameId());
 		assertNotNull(game.getPlayerInGame());
 		assertEquals(game, game.getGameFlowctrl().getGame());
-		assertEquals(ZERO, game.getGameFlowctrl().evaluateVictoryPts(pList.get(ZERO)));
 		
 		//non posso testare roundController perché 
 		// round richiede playerClient e questo richiede una connessione vera

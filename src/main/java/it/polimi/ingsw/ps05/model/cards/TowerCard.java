@@ -76,7 +76,7 @@ public abstract class TowerCard implements Card {
 	/**
 	 * Removes the false resource described before
 	 */
-	public void removeFalseResource(){
+	public synchronized void removeFalseResource(){
 		for (ArrayList<Resource> or : requirements){
 			for (Resource r : or){
 				if (r.getID().equals(AlwaysUnFullFilledResource.id)){
