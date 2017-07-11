@@ -24,7 +24,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private ColorEnumeration occupantPlayerColor;
     private boolean isOccupied;
     private int minDie;
-    private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
+    HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
@@ -66,7 +66,13 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     public void setupDragEntered() {
         occupationCircle.setOnDragEntered((DragEvent e) -> {
 
+            System.out.println("DRAG ENTERED");
+
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            System.out.println("dati ottenuti dalla dragboard");
+            System.out.println("playercolor: " + sourceData.getPlayerColor());
+            System.out.println("familiarcolor: " + sourceData.getFamiliarColor());
+            System.out.println("imagepath: " + sourceData.getFamiliarImagePath());
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
             if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
