@@ -34,6 +34,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
              gui.getMarketSpaceWidgets()) {
             actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
         }
+        actionSpaceWidgetHashMap.put(gui.getCouncilSpaceWidget().getReferenceId(), gui.getCouncilSpaceWidget());
         actionSpaceWidgetHashMap.put(gui.getHarvestingSpace().getReferenceId(), gui.getHarvestingSpace());
         actionSpaceWidgetHashMap.put(gui.getProductionSpace().getReferenceId(), gui.getProductionSpace());
 
@@ -130,8 +131,9 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(CouncilSpace councilSpace){
-        CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(councilSpace.getId());
+        CouncilSpaceWidget widget = (CouncilSpaceWidget) actionSpaceWidgetHashMap.get(this.gui.getCouncilSpaceWidget().getReferenceId());
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
+        if (widget == null) System.out.println("diobono");
         widget.setOccupingFamiliarList(widgetList);
         this.setWidgetLegal(widget, councilSpace);
         widget.repaint();

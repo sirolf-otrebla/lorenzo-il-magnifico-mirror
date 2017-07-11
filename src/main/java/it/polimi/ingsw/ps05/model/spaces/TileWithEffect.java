@@ -118,7 +118,7 @@ public class TileWithEffect extends TowerTileInterface {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-		//TODO
+		vi.visit(this);
 	}
 	
 	@Override

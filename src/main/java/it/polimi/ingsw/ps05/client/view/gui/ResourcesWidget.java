@@ -95,12 +95,18 @@ public class ResourcesWidget {
     }
 
     public void repaint() {
-
-        goldLabel.setText(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        goldLabel.setVisible(false);
+        woodLabel.setVisible(false);
+        stoneLabel.setVisible(false);
+        servantLabel.setVisible(false); //String.valueOf(resources[GraphicResources.getResource("Oro")])
+        goldLabel.setText("PROVA PROVA PROVA PROVA PROVA");
         woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
         stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
         servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
-
+        goldLabel.setVisible(true);
+        woodLabel.setVisible(true);
+        stoneLabel.setVisible(true);
+        servantLabel.setVisible(true);
     }
 
     public void setResource(String stringId, int newValue){

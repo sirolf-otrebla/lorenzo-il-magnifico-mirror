@@ -132,4 +132,6 @@ public abstract class ActionSpace implements Serializable, VisitableFromView{
 			return this.firstOccupant.getColor();
 		return null;
 	}
+
+
 }

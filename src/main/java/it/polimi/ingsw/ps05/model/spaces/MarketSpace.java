@@ -71,7 +71,7 @@ public class MarketSpace extends SingleOccupantActionSpace {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-		// TODO Auto-generated method stub
-		
+
+		vi.visit(this);
 	}
 }

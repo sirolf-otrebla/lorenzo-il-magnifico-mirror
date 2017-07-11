@@ -185,7 +185,7 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     @Override
     public void setReferenceId(Integer referenceId) {
-
+        this.referenceId = referenceId;
     }
 
     public void setId(int referenceId) {

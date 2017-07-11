@@ -70,21 +70,25 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
         
         //TODO CONTROLLARE QUESTA SOLUZIONE
         MarketSpaceWidget[] marketSpaceWidgets = gui.getMarketSpaceWidgets();
-        MarketSpaceWidget thisWidget = marketSpaceWidgets[marketSpace.getMarketSpaceTypeID()];
+        MarketSpaceWidget thisWidget = marketSpaceWidgets[marketSpace.getMarketSpaceTypeID()-1];
         thisWidget.setReferenceId(marketSpace.getId());
         thisWidget.setResult(marketSpace.getEffects().toString());
+        System.out.println("id spazio \t" + marketSpace.getId() + "id widget \t" + thisWidget.getReferenceId());
     }
 
     @Override
     public void visit(CouncilSpace councilSpace) {
         Integer id = councilSpace.getId();
         gui.getCouncilSpaceWidget().setReferenceId(id);
+        System.out.println("id spazio \t" + councilSpace.getId() + "id widget \t" + gui.getCouncilSpaceWidget().getReferenceId());
     }
 
     @Override
     public void visit(ProductionSpace productionSpace) {
         Integer id = productionSpace.getId();
         gui.getProductionSpace().setReferenceId(id);
+        System.out.println("id spazio \t" + productionSpace.getId() + "id widget \t" + gui.getProductionSpace().getReferenceId());
+
 
     }
 
@@ -92,6 +96,8 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
     public void visit(HarvestingSpace harvestingSpace) {
         Integer id = harvestingSpace.getId();
         gui.getHarvestingSpace().setReferenceId(id);
+        System.out.println("id spazio \t" + harvestingSpace.getId() + "id widget \t" + gui.getHarvestingSpace().getReferenceId());
+
     }
 
     @Override

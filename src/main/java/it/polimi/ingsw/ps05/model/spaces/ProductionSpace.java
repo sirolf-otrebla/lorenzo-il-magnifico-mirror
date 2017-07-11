@@ -69,5 +69,6 @@ public class ProductionSpace extends MultipleOccupantsActionSpace {
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
 
+		vi.visit(this);
 	}
 }

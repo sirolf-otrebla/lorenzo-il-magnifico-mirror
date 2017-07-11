@@ -102,7 +102,7 @@ public class CouncilSpace extends MultipleOccupantsActionSpace {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-
+		vi.visit(this);
 	}
 
 }
