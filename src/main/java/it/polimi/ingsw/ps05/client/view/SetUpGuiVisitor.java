@@ -37,7 +37,7 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
 
         this.gui.getPlayer().setPlayerColor(status.getThisPlayer().getColor());
         Player activePlayer = status.getPlayerHashMap().get(status.getActivePlayerId());
-        status.getPlayerHashMap().remove(status.getActivePlayerId());
+        status.getPlayerHashMap().remove(status.getThisPlayer().getPlayerID());
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
         HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
         for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());
@@ -46,8 +46,6 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
              status.getPlayerHashMap().values()) {
             p.acceptVisitor(this);
         }
-        status.getPlayerHashMap().put(status.getActivePlayerId(), activePlayer);
-
         Integer[] excommCardsIdArray = new Integer[3];
         //for (ExcommunicationCard card : board.getExcomCards()) {
         //    excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
@@ -147,6 +145,13 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
     public void run() {
         synchronized (gui) {
             visit(initStatus);
+            UpdateViewVisitor updateVisitor = new UpdateViewVisitor(gui, initStatus);
+            for (Player p: initStatus.getPlayerHashMap().values()) {
+                System.out.println("_______________________");
+                System.out.println(p.getColor().toString());
+                System.out.println("_______________________");
+            }
+            updateVisitor.visit(initStatus);
         }
     }
 }

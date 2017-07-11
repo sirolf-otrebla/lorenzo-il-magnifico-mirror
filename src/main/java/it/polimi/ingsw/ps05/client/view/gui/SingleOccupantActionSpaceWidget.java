@@ -24,8 +24,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private ColorEnumeration occupantPlayerColor;
     private boolean isOccupied;
     private int minDie;
-    HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
-    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
+    private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
@@ -181,13 +180,6 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
         this.occupantPlayerColor = occupantPlayerColor;
     }
 
-    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
-        return legalFamilyMemberList;
-    }
-
-    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
-        this.legalFamilyMemberList = legalFamilyMemberList;
-    }
 
     public void setLegalActionMap(HashMap<ColorEnumeration, Boolean> legalActionMap) {
         this.legalActionMap = legalActionMap;

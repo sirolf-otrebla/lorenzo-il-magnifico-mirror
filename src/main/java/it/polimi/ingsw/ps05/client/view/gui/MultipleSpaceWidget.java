@@ -204,15 +204,6 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         return player;
     }
 
-    @Override
-    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
-        return legalFamilyMemberList;
-    }
-
-    @Override
-    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
-        this.legalFamilyMemberList = legalFamilyMemberList;
-    }
 
 
     public ArrayList<Pair<ColorEnumeration, ColorEnumeration>> getOccupingFamiliarList() {

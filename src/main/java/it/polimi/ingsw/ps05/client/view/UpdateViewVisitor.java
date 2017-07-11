@@ -50,6 +50,16 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(GameStatus status){
+        System.out.println("PLAYER COLOR:");
+        System.out.println(status.getThisPlayer().getColor().toString());
+        System.out.println("__________________________________________");
+        HashMap<ColorEnumeration, Integer> diceHashMap = new HashMap<>();
+        for (Familiar f: status.getThisPlayer().getFamilyList()) {
+            if (f.getColor() != ColorEnumeration.Any && f.getColor() != ColorEnumeration.Ghost){
+                diceHashMap.put(f.getColor(), f.getRelatedDice().getValue());
+            }
+        }
+        this.gui.setDiceValues(diceHashMap);
         this.visit(status.getGameBoard());
         for (Player p : status.getPlayerHashMap().values()) {
             this.visit(p);
@@ -70,7 +80,12 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
         for (ColorEnumeration c: this.gui.getTowerColorArray()) {
             Tower tower = board.getTowerList().get(c);
-            TowerTileInterface[] towerTileInterfaces = (TowerTileInterface[]) tower.getTiles().values().toArray();
+            TowerTileInterface[] towerTileInterfaces = new TowerTileInterface[tower.getTiles().values().size()];
+            int i = 0;
+            for ( TowerTileInterface towertile:  tower.getTiles().values()) {
+                towerTileInterfaces[i] = towertile;
+                i++;
+            }
             int[] cards = new int[towerTileInterfaces.length];
             for (TowerTileInterface t: towerTileInterfaces) {
                 Integer dice = t.getDiceRequired().getValue();
@@ -168,28 +183,25 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                 if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
                         r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
                     this.gui.getPlayer().getResourceWidget().setResource(r.getID(), r.getValue());
-                    this.gui.getPlayer().getResourceWidget().repaint();
+                   ;
                 }
             }
-
+            this.gui.getPlayer().getResourceWidget().repaint();
             boardWindow = this.gui.getPlayer().getPersonalBoard();
 
         } else {
-            for (OpponentWidget opponentWidget : this.gui.getOpponentsArray()) {
-                if (opponentWidget.getOpponentColor() == player.getColor()) {
 
-                    for (Resource r : player.getResourceList()) {
-                        if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
-                                r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
-                            opponentWidget.getPersonalBoard().getResourceWidget().setResource(r.getID(), r.getValue());
-                            opponentWidget.getPersonalBoard().getResourceWidget().repaint();
+            OpponentWidget opponentWidget = this.gui.getOpponentsHashMap().get(player.getColor());
+            for (Resource r : player.getResourceList()) {
+                if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                        r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
+                    opponentWidget.getPersonalBoard().getResourceWidget().setResource(r.getID(), r.getValue());;
 
-                        }
-                    }
-
-                    boardWindow = opponentWidget.getPersonalBoard();
                 }
             }
+            opponentWidget.getPersonalBoard().getResourceWidget().repaint();
+            boardWindow = opponentWidget.getPersonalBoard();
+
         }
 
         //setting cards on personal boards
@@ -198,19 +210,25 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Blue, new ArrayList<>());
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Yellow, new ArrayList<>());
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Violet, new ArrayList<>());
-        for (TowerCard card: player.getGreenCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Green).add(card);
-        for (TowerCard card: player.getBlueCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Blue).add(card);
-        for (TowerCard card: player.getYellowCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Yellow).add(card);
-        for (TowerCard card: player.getVioletCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Violet).add(card);
+        for (TowerCard card: player.getGreenCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Green).add(card);
+        for (TowerCard card: player.getBlueCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Blue).add(card);
+        for (TowerCard card: player.getYellowCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Yellow).add(card);
+        for (TowerCard card: player.getVioletCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Violet).add(card);
 
         for (ArrayList<TowerCard> arrayList : acquiredCardWidgetsHashMap.values()){
-            ColorEnumeration color = arrayList.get(0).color;
-            boardWindow.getCardAcquiredColorMap().remove(color);
-            boardWindow.getCardAcquiredColorMap().put(color, new ArrayList<>());
-            ArrayList<AcquiredCardWidget> acquiredCardWidgetArrayList = boardWindow.getCardAcquiredColorMap().get(color);
-            for (TowerCard towerCard : arrayList){
-                Integer id = towerCard.getReferenceID();
-                acquiredCardWidgetArrayList.add(new AcquiredCardWidget(id, GraphicResources.getCardPath(id), towerCard.color));
+            if (arrayList.size() > 0) {
+                ColorEnumeration color = arrayList.get(0).color;
+                boardWindow.getCardAcquiredColorMap().remove(color);
+                boardWindow.getCardAcquiredColorMap().put(color, new ArrayList<>());
+                ArrayList<AcquiredCardWidget> acquiredCardWidgetArrayList = boardWindow.getCardAcquiredColorMap().get(color);
+                for (TowerCard towerCard : arrayList) {
+                    Integer id = towerCard.getReferenceID();
+                    acquiredCardWidgetArrayList.add(new AcquiredCardWidget(id, GraphicResources.getCardPath(id), towerCard.color));
+                }
             }
         }
 
@@ -274,11 +292,11 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     private void setWidgetLegal(ActionSpaceWidgetInterface widget, ActionSpace actionSpace){
         Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
+        widget.setLegalActionMap(new HashMap<>());
         for (Familiar f : family)
             if ((new Action(f, actionSpace).isLegal())) {
-                //widget.setLegal(true);
-                widget.getLegalFamilyMemberList().add(f.getColor());
-            }
+                widget.getLegalActionMap().put(f.getColor(), true);
+            } else widget.getLegalActionMap().put(f.getColor(), false);
     }
 
 

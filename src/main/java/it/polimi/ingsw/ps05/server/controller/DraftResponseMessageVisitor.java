@@ -4,8 +4,8 @@ import it.polimi.ingsw.ps05.net.message.draftmessages.BonusTileDraftChoiceMessag
 import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftChoiceMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 
-/**
- * Created by Alberto on 05/07/2017.
+/** This class is a visitor class designed to take care of
+ *
  */
 public class DraftResponseMessageVisitor {
     private PlayerClient client;

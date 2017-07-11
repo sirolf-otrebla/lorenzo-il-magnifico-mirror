@@ -617,12 +617,10 @@ public class GUIMain extends Application implements LimView {
 				pointsToUpdate.setText(newPoints[i].toString());
 			}
 		else
-			for(int i = 0; i < OPPONENTS_NUMBER; i++) {
-				if (opponentsArray[i].getOpponentColor() == color) {
-					Text pointsToUpdate = opponentsArray[i].getOpponentMarkers()[i + 1].getPoints();
-					pointsToUpdate.setText(newPoints.toString());
+			for(int i = 0; i < 3; i++) {
+					Text pointsToUpdate = opponentsHashMap.get(color).getOpponentMarkers()[i + 1].getPoints();
+					pointsToUpdate.setText(newPoints[i].toString());
 				}
-			}
 	}
 
 	public void setPlayerActive() {
@@ -841,6 +839,10 @@ public class GUIMain extends Application implements LimView {
 
 	public static GUIMain getInstance() {
 		return instance;
+	}
+
+	public HashMap<ColorEnumeration, OpponentWidget> getOpponentsHashMap() {
+		return opponentsHashMap;
 	}
 }
 

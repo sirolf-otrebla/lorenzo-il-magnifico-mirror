@@ -61,7 +61,15 @@ public class ViewAdapter {
 	}
 
 	private void setUpGui(GameStatus gameStatus){
-		GUIMain gui = (GUIMain) this.view;
+        GuiStarter starter = new GuiStarter(gameStatus);
+        Platform.runLater(starter);
+        try {
+            this.guiInitSemaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        GUIMain gui = starter.getGuiMain();
+        this.view = gui;
 		SetUpGuiVisitor setUpGuiVisitor = new SetUpGuiVisitor(gameStatus);
 		setUpGuiVisitor.setGui(gui);
 		Platform.runLater(setUpGuiVisitor);
@@ -100,15 +108,6 @@ public class ViewAdapter {
 
 	public void setUpInterface(GameSetupMessage msg){
 		if (this.viewType == this.GUI_TYPE) {
-			GuiStarter starter = new GuiStarter(msg);
-			Platform.runLater(starter);
-			try {
-				this.guiInitSemaphore.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			GUIMain gui = starter.getGuiMain();
-			this.view = gui;
 			SetupDoneMessage setupDoneMessage = new SetupDoneMessage();
 			Client.getInstance().sendToServer(setupDoneMessage);
 		} else {
