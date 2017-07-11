@@ -39,9 +39,9 @@ public class ExcomPopup {
         final ToggleGroup group = new ToggleGroup();
 
         RadioButton supportButton = new RadioButton("Support the Church");
-        supportButton.setUserData(true);
+        supportButton.setUserData(false);
         RadioButton sufferButton = new RadioButton("Suffer the excommunication");
-        sufferButton.setUserData(false);
+        sufferButton.setUserData(true);
 
         supportButton.setSelected(true);
 

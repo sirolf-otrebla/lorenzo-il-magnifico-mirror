@@ -7,6 +7,8 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
+
 /**
  * Created by miotto on 27/06/17.
  */
@@ -26,9 +28,12 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
         this.getOccupationCircle().setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
             System.out.println("starting if");
-            if(!isOccupied() && e.getDragboard().hasImage()) {
+            if(!isOccupied() && isLegal && e.getDragboard().hasContent(FAMILIAR_DATA)) {
+                // AZIONE LEGALE
                 if(this.associatedCard.hasMorePaymentOptions()) {
                     /* Showing payment selection window if associated card has payment alternatives */
                     PaymentPopup paymentPopup = new PaymentPopup();
@@ -40,17 +45,17 @@ public class TowerTileWidget extends SingleOccupantActionSpaceWidget {
                         // set space occupied
                         this.setOccupied(true);
                         // insert familiar image
-                        Image source = e.getDragboard().getImage();
+                        Image img = new Image(sourceData.getFamiliarImagePath());
                         this.getOccupationCircle().setOpacity(1);
-                        this.getOccupationCircle().setFill(new ImagePattern(source));
+                        this.getOccupationCircle().setFill(new ImagePattern(img));
                         // add card to the player collection
-                        // this.associatedCard.addToPersonalBoard(); // TODO: ricevere il colore del giocatore tramite serializzazione
+                        //TODO da comunicare al controller
                         // AZIONE COMPLETATA
                         success = true;
                     }
                 } else {
                     /* Adding card to personal collection */
-
+                    //TODO da comunicare al controller
                 }
             }
 

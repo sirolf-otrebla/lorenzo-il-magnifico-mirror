@@ -8,6 +8,7 @@ import javafx.scene.input.*;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
 import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
+import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.path;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -30,17 +31,17 @@ public class FamiliarWidget extends ImageView{
         this.playerColor = playerColor;
         this.familiarColor = familiarColor;
 
-        this.imagePath = path + this.playerColor.toString().toLowerCase() + "pl/" + this.familiarColor.toString().toLowerCase() + ".png";
-
-        addImage(this.imagePath);
+        addImage(playerColor, familiarColor);
 
         setupGestureSource();
     }
 
-    public void addImage(String path) {
-        File crDir = new File(path);
+    public void addImage(ColorEnumeration playerColor, ColorEnumeration familiarColor) {
+
+        this.imagePath = path + this.playerColor.toString().toLowerCase() + "pl/" + this.familiarColor.toString().toLowerCase() + ".png";
+        File familiarFile = new File(this.imagePath);
         try{
-            this.img = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+            this.img = new Image(familiarFile.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
             this.setImage(img);
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -72,6 +73,10 @@ public class FamiliarWidget extends ImageView{
             /* Put the data in the dragboard */
             ClipboardContent content = new ClipboardContent();
             FamiliarData data = new FamiliarData(this.playerColor, this.familiarColor, this.getImagePath());
+            System.out.println("dati inseriti nella dragboard");
+            System.out.println("playercolor: " + data.getPlayerColor());
+            System.out.println("familiarcolor: " + data.getFamiliarColor());
+            System.out.println("imagepath: " + data.getFamiliarImagePath());
             content.put(FAMILIAR_DATA, data);
             db.setContent(content);
 

@@ -154,7 +154,6 @@ public class ResourceTest {
 
 	@Test
 	public void allBonusTest() throws NoSuchMethodException {
-
 		AllBonus actionResult = new AllBonus(); //allbonus
 		actionResult.setGame(game);
 		actionResult.setValue(2);
@@ -162,6 +161,8 @@ public class ResourceTest {
 		assertEquals((int) firstDice -2, (int) firstTile.getDiceRequired().getValue());
 		actionResult.resetResult(players.get(1));
 		assertEquals((int) firstDice, (int) firstTile.getDiceRequired().getValue());
+
+
 	}
 
 	
@@ -193,6 +194,7 @@ public class ResourceTest {
 	
 	@Test
 	public void blueActionTest() throws NoSuchMethodException{
+
 		BlueAction a = new BlueAction();
 		assertNull(a.getGame());
 		assertNull(a.getValue());
@@ -200,7 +202,19 @@ public class ResourceTest {
 		assertEquals(1, (int) a.getValue());
 		a.setGame(game);
 		assertEquals(game,a.getGame());
-		
+		a.applyResult(players.get(1));
+		Familiar test = new Familiar();
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertEquals(ColorEnumeration.Ghost, test.getColor());
+		a.resetResult(players.get(1));
+		test = null;
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertNull(test);
+
 		BlueAction b = new BlueAction(3);
 		assertEquals(3, (int) b.getValue());
 	}

@@ -47,24 +47,22 @@ public class YellowCardTest {
         requirementsTest.add(secondRequirement);
 
         effectsTest.add(new EndGameEffect());
-        /*
-        card = new YellowCard(3, EpochEnumeration.SECOND, ColorEnumeration.Yellow, cardName, effectsTest);
-        card.setRequirements(requirementsTest);
-        card.setEffects(effectsTest);
-        card.setActive(true);
 
-        playerLeaderCards.add(card);
-        */
+        card = new YellowCard(3, epochTest, ColorEnumeration.Yellow, cardName, effectsTest);
+        card.setSelectedEffects(selectedEffects);
+        card.setToBeActivated(true);
+
     }
 
     @Test
     public void getSelectedEffects() throws Exception {
-
+        assertEquals(selectedEffects, card.getSelectedEffects());
     }
 
     @Test
     public void setSelectedEffects() throws Exception {
-
+        card.setSelectedEffects(3);
+        assertEquals(3, card.getSelectedEffects());
     }
 
     @Test
@@ -73,22 +71,29 @@ public class YellowCardTest {
 
     @Test
     public void getToBeActivated() throws Exception {
+        assertEquals(true, card.getToBeActivated());
     }
 
     @Test
     public void setToBeActivated() throws Exception {
+        card.setToBeActivated(false);
+        assertEquals(false, card.getToBeActivated());
     }
 
     @Test
     public void moveToPlayer() throws Exception {
+        card.moveToPlayer(player);
+        assertEquals(card, player.getYellowCardList().get(0));
     }
 
     @Test
     public void applyNonActivableEffects() throws Exception {
+
     }
 
     @Test
     public void getActivableEffectList() throws Exception {
+
     }
 
 }

@@ -27,13 +27,25 @@ public class ResourcesWidget {
     public ResourcesWidget() {
 
         this.goldLabel = new Label();
+        this.goldLabel.setId("goldResource");
         this.woodLabel = new Label();
+        this.woodLabel.setId("woodResource");
         this.stoneLabel = new Label();
+        this.stoneLabel.setId("stoneResource");
         this.servantLabel = new Label();
+        this.servantLabel.setId("servantResource");
         this.hbox = new HBox();
     }
 
     public HBox setupThisPlayerResource() {
+
+        System.out.println("SETTING UP PLAYER RESOURCES");
+        System.out.println(String.valueOf(resources[GraphicResources.getResource("Oro")]));
+        System.out.println(String.valueOf(resources[GraphicResources.getResource("Legno")]));
+        System.out.println(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
+        System.out.println(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
+
+
         this.goldLabel.setText(String.valueOf(resources[GraphicResources.getResource("Oro")]));
         this.woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
         this.stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
@@ -58,11 +70,6 @@ public class ResourcesWidget {
         this.woodLabel.setText(String.valueOf(resources[GraphicResources.getResource("Legno")]));
         this.stoneLabel.setText(String.valueOf(resources[GraphicResources.getResource("Pietra")]));
         this.servantLabel.setText(String.valueOf(resources[GraphicResources.getResource("Servitori")]));
-
-        this.goldLabel.setId("goldLabel");
-        this.woodLabel.setId("woodLabel");
-        this.stoneLabel.setId("stoneLabel");
-        this.servantLabel.setId("servantLabel");
 
         hbox.setSpacing(20 * resize);
         hbox.setId("resourcePopup");

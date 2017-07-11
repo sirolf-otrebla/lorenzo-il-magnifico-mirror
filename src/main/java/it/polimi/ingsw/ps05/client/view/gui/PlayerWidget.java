@@ -17,7 +17,7 @@ public class PlayerWidget {
 
     private GUIMain board;
 
-    private boolean active; // define if it's the player's turn
+    private static boolean active; // define if it's the player's turn
     private ColorEnumeration playerColor;
     private String playerUsername;
     private ResourcesWidget resourceWidget = new ResourcesWidget();
@@ -73,12 +73,12 @@ public class PlayerWidget {
 
     }
 
-    public boolean isActive() {
+    public static boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public static void setActive(boolean act) {
+        active = act;
     }
 
     public ColorEnumeration getPlayerColor() {
