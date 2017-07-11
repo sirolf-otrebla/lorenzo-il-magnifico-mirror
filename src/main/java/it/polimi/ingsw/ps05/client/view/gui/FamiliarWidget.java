@@ -72,6 +72,10 @@ public class FamiliarWidget extends ImageView{
             /* Put the data in the dragboard */
             ClipboardContent content = new ClipboardContent();
             FamiliarData data = new FamiliarData(this.playerColor, this.familiarColor, this.getImagePath());
+            System.out.println("dati inseriti nella dragboard");
+            System.out.println("playercolor: " + data.getPlayerColor());
+            System.out.println("familiarcolor: " + data.getFamiliarColor());
+            System.out.println("imagepath: " + data.getFamiliarImagePath());
             content.put(FAMILIAR_DATA, data);
             db.setContent(content);
 

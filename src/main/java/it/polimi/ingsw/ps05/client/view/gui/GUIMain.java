@@ -46,9 +46,8 @@ public class GUIMain extends Application implements LimView {
 	private HashMap<ColorEnumeration, String> usernamesHashMap;
 
 	private FamiliarWidget[][] familiarWidgetLists = new FamiliarWidget[3][4];
-	private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
+	// private LeaderWidget[] playerLeaderWidgetList = new LeaderWidget[4];
 	private HBox playerResourcesBox;
-	private ResourcesWidget[] resourcesWidgetArray = new ResourcesWidget[4];
 
 	private ExcomWidget[] excomWidgets = new ExcomWidget[3]; // 1 per era
 
@@ -65,7 +64,6 @@ public class GUIMain extends Application implements LimView {
 
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
 
-	private DieWidget[] diceWidgetArray = new DieWidget[3];
 	private HashMap<ColorEnumeration, DieWidget> diceHashMap = new HashMap<>();
 	private MarkerWidget[][] markerWidgetList = new MarkerWidget[4][4];
 	private final Pane[] trackBoxesArray = new Pane[4];
@@ -73,6 +71,7 @@ public class GUIMain extends Application implements LimView {
 	private TimerWidget timerWidget = new TimerWidget();
 	private ImageView zoomedCard = new ImageView();
 	static ImageView zoomReference;
+	private Circle playerActiveCircle;
 	private Label infoLabel;
 
 	private GraphicResources graphicMap = new GraphicResources();
@@ -240,8 +239,7 @@ public class GUIMain extends Application implements LimView {
 		}
 
 		/* Add player resources */
-		resourcesWidgetArray[0] = new ResourcesWidget();
-		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
+		playerResourcesBox = player.getResourceWidget().setupThisPlayerResource();
 		root.getChildren().add(playerResourcesBox);
 
 
@@ -262,6 +260,24 @@ public class GUIMain extends Application implements LimView {
 		}
 
         /* Add harvest and production action spaces */
+
+		if(PLAYER_NUMBER >= 3) {
+			insertActionSpace(singleProductionSpace, root, 1, 0.9, 79.3); // single production
+			actionSpaces.add(singleProductionSpace);
+			insertActionSpace(singleHarvestingSpace, root, 1, 0.9, 90.4); // single harvest
+			actionSpaces.add(singleHarvestingSpace);
+			insertMultipleSpace(productionSpace, root, 1, 6.0, 79.2); // production
+			actionSpaces.add(productionSpace);
+			insertMultipleSpace(harvestingSpace, root, 1, 6.0, 90.3137); // harvest
+			actionSpaces.add(harvestingSpace);
+		} else {
+			insertActionSpace(singleProductionSpace, root, 1, 0.9, 79.3); // single production
+			actionSpaces.add(singleProductionSpace);
+			insertActionSpace(singleHarvestingSpace, root, 1, 0.9, 90.4); // single harvest
+			actionSpaces.add(singleHarvestingSpace);
+		}
+
+        /*
         if(PLAYER_NUMBER >= 3) {
 			insertMultipleSpace(productionSpace, root, 1, 0.892, 79.2); // production
 			actionSpaces.add(productionSpace);
@@ -273,6 +289,9 @@ public class GUIMain extends Application implements LimView {
 			insertActionSpace(singleHarvestingSpace, root, 1, 0.9, 90.4); // single harvest
 			actionSpaces.add(singleHarvestingSpace);
 		}
+		*/
+
+
 
 		/* Add council space */
 		insertMultipleSpace(councilSpaceWidget, root, 1, 51.5, 53.7); // council
@@ -414,6 +433,11 @@ public class GUIMain extends Application implements LimView {
 		zoomedCard.setPreserveRatio(true);
 		root.getChildren().add(zoomedCard);
 
+		/* Add player active circle */
+		playerActiveCircle = new Circle(10 * resize);
+		playerActiveCircle.setFill(new Color(210, 230, 247, 0.8));
+		playerActiveCircle.setCenterX((66 / 100) * stageWidth);
+		playerActiveCircle.setCenterY((95 / 100) * stageHeight);
 
 		/* Text info for the player */
 		infoLabel = new Label();
@@ -596,25 +620,15 @@ public class GUIMain extends Application implements LimView {
 
 	public void updatePlayerResources(HashMap<String, Integer> thisPlayerResources, HashMap<ColorEnumeration, HashMap<String, Integer>> otherPlayerResources) {
 
-		//TODO decidere come passare le risorse
-
-		for(String newResource: thisPlayerResources.keySet()) {
-			for(int i = 0; i < 4; i++) {
-				player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
-			}
-		}
-
+		// aggiorna le risorse del giocatore
+		for(String newResource: thisPlayerResources.keySet())
+			player.getResourceWidget().setResource(newResource, thisPlayerResources.get(newResource));
 		player.getResourceWidget().repaint();
 
-
+		// aggiorna le risorse degli avversari
 		for(ColorEnumeration opponentColor: otherPlayerResources.keySet()) {
-			for(OpponentWidget opponent: opponentsArray) {
-				if(opponent.getOpponentColor() == opponentColor) {
-					for (String id : otherPlayerResources.get(opponentColor).keySet()) {
-						opponent.getPersonalBoard().getResourceWidget().setResource(id, otherPlayerResources.get(opponentColor).get(id));
-					}
-				}
-			}
+			for(String newResource: otherPlayerResources.get(opponentColor).keySet())
+				opponentsHashMap.get(opponentColor).getPersonalBoard().getResourceWidget().setResource(newResource, otherPlayerResources.get(opponentColor).get(newResource));
 		}
 	}
 
@@ -638,10 +652,30 @@ public class GUIMain extends Application implements LimView {
 
 	public void setPlayerActive() {
 		this.getPlayer().setActive(true);
+		// rende i familiari cliccabili
+		for(FamiliarWidget familiar: player.getFamiliarWidgetList()) {
+			familiar.setMouseTransparent(false);
+		}
+		// rende i leader cliccabili
+		for(LeaderWidget leader: player.getLeaderWidgetList())
+			if(!leader.isPlayed())
+				leader.setMouseTransparent(false);
+		// mostra status tramite cerchio
+		playerActiveCircle.setFill(new Color(46, 150, 242, 1));
 	}
 
 	public void setPlayerInactive() {
 		this.getPlayer().setActive(false);
+		// rende i familiari non cliccabili
+		for(FamiliarWidget familiar: player.getFamiliarWidgetList()) {
+			familiar.setMouseTransparent(true);
+		}
+		// rende i leader non cliccabili
+		for(LeaderWidget leader: player.getLeaderWidgetList())
+			if(!leader.isPlayed())
+				leader.setMouseTransparent(true);
+		// mostra status tramite cerchio
+		playerActiveCircle.setFill(new Color(210, 230, 247, 0.8));
 	}
 
 	public void setDiceValues(HashMap<ColorEnumeration, Integer> newDiceValues) {

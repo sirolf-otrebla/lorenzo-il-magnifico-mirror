@@ -28,7 +28,7 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         this.leaderWidgets = leaderWidgets;
     }
 
-    public void display(ResourcesWidget resourceWidget) {
+    public void display() {
 
         Stage stage = new Stage();
 
@@ -48,13 +48,13 @@ public class OpponentBoardWindow extends PersonalBoardWindow{
         });
 
         /* add button for leaders */
-        Button showLeaderButton = new Button("Leader Played");
+        Button showLeaderButton = new Button("Leader");
+        showLeaderButton.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
         showLeaderButton.setOnAction((ActionEvent e) -> {
             leaderPopup.display();
         });
 
         /* button for resources */
-        /* add button that shows bonus tile */
         Button showResources = new Button("Resources");
         showResources.setPrefSize((3 / 100) * personalBoardWidth, (1 / 100) * personalBoardHeight);
         showResources.setOnAction((ActionEvent e) -> {
