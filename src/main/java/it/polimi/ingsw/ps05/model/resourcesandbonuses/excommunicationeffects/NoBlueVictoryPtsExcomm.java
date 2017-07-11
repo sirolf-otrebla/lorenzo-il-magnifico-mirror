@@ -59,9 +59,9 @@ public class NoBlueVictoryPtsExcomm extends PermanentBonus implements Excommunic
 	@Override
 	public void applyResult(PlayerRelated playerR) {
 		playerR.getRelatedPlayer().removeBlueCard();
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+		/*if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
+		}*/
 	}
 
 	@Override

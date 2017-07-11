@@ -71,9 +71,6 @@ public class BlueCardMalusExcomm extends PermanentBonus implements Excommunicati
 		for (ActionResult r : malus){
 			r.applyResult(playerR);
 		}
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
-			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
 	}
 
 	@Override

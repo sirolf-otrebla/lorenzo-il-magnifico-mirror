@@ -26,7 +26,7 @@ public class LoginController {
 	String username = null;
 	String password = null;
 	String registration = "Login";
-	ServerInterface dioporc;
+	ServerInterface serverInterface;
 	private String viewType;
 	private Semaphore semaphore;
 	private int status = -1;
@@ -101,9 +101,9 @@ public class LoginController {
 				SocketConnection s = new SocketConnection(serverAddress, new Integer(serverPort));
 				connToUse = s;
 				l.setConnected();
-				dioporc = ServerInterface.getInstance();
-				dioporc.setConnection(s);
-				Thread dioporcThread = new Thread(dioporc);
+				serverInterface = ServerInterface.getInstance();
+				serverInterface.setConnection(s);
+				Thread dioporcThread = new Thread(serverInterface);
 				dioporcThread.start();
 			} catch (IOException e) {
 				serverAddress = null;

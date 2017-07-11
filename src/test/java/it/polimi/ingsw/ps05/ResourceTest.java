@@ -208,12 +208,6 @@ public class ResourceTest {
 			if(familiar.getColor() == ColorEnumeration.Ghost)
 				test = familiar;
 		assertEquals(ColorEnumeration.Ghost, test.getColor());
-		a.resetResult(players.get(1));
-		test = null;
-		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
-			if(familiar.getColor() == ColorEnumeration.Ghost)
-				test = familiar;
-		assertNull(test);
 
 		BlueAction b = new BlueAction(3);
 		assertEquals(3, (int) b.getValue());
@@ -272,11 +266,21 @@ public class ResourceTest {
 		assertEquals(1,(int)d.getValue());
 		assertNull(d.getGame());
 		assertEquals(ColorEnumeration.Black, d.getColor());
+		Integer f = players.get(0).getFamilyMember(ColorEnumeration.Black).getRelatedDice().getValue();
 		assertTrue(d.isToAdd());
 		d.setValue(5);
 		assertEquals(5, (int)d.getValue());
 		d.setGame(game);
 		assertEquals(game,d.getGame());
+		d.applyResult(players.get(0));
+		assertEquals(5+f, players.get(0).getFamilyMember(ColorEnumeration.Black).getRelatedDice().getValue().intValue());
+		d.resetResult(players.get(0));
+		assertEquals(f.intValue(), players.get(0).getFamilyMember(ColorEnumeration.Black).getRelatedDice().getValue().intValue());
+		d = new BonusDice(7, ColorEnumeration.Black, false);
+		d.applyResult(players.get(1));
+		assertEquals(7, players.get(1).getFamilyMember(ColorEnumeration.Black).getRelatedDice().getValue().intValue());
+		d.resetResult(players.get(1));
+		assertEquals(f.intValue(), players.get(1).getFamilyMember(ColorEnumeration.Black).getRelatedDice().getValue().intValue());
 	}
 	
 	@Test
@@ -372,6 +376,13 @@ public class ResourceTest {
 		assertEquals(game,a1.getGame());
 		a1.setValue(2);
 		assertEquals(2,(int)a1.getValue());
+		
+		a.applyResult(players.get(1));
+		Familiar test = new Familiar();
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertEquals(ColorEnumeration.Ghost, test.getColor());
 	}
 	
 	@Test
@@ -485,6 +496,13 @@ public class ResourceTest {
 		
 		GreenAction b = new GreenAction(3);
 		assertEquals(3, (int) b.getValue());
+		
+		a.applyResult(players.get(1));
+		Familiar test = new Familiar();
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertEquals(ColorEnumeration.Ghost, test.getColor());
 	}
 	
 	@Test
@@ -499,6 +517,13 @@ public class ResourceTest {
 		
 		YellowAction b = new YellowAction(3);
 		assertEquals(3, (int) b.getValue());
+		
+		a.applyResult(players.get(1));
+		Familiar test = new Familiar();
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertEquals(ColorEnumeration.Ghost, test.getColor());
 	}
 	
 	@Test
@@ -513,6 +538,13 @@ public class ResourceTest {
 		
 		VioletAction b = new VioletAction(3);
 		assertEquals(3, (int) b.getValue());
+		
+		a.applyResult(players.get(1));
+		Familiar test = new Familiar();
+		for(Familiar familiar: players.get(1).getRelatedPlayer().getFamilyList())
+			if(familiar.getColor() == ColorEnumeration.Ghost)
+				test = familiar;
+		assertEquals(ColorEnumeration.Ghost, test.getColor());
 	}
 	
 	@Test
@@ -774,6 +806,114 @@ public class ResourceTest {
 		}
 
 
+	}
+	
+	@Test
+	public void violetCardRes(){
+		VioletCard r = new VioletCard();
+		r.setValue(5);
+		assertEquals(5,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+	}
+	
+	@Test
+	public void yellowCardRes(){
+		it.polimi.ingsw.ps05.model.resourcesandbonuses.YellowCard r = new it.polimi.ingsw.ps05.model.resourcesandbonuses.YellowCard();
+		r.setValue(5);
+		assertEquals(5,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+	}
+	
+	@Test
+	public void blueCardRes(){
+		it.polimi.ingsw.ps05.model.resourcesandbonuses.BlueCard r = new it.polimi.ingsw.ps05.model.resourcesandbonuses.BlueCard();
+		r.setValue(5);
+		assertEquals(5,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
+	}
+	
+	@Test
+	public void greenCardRes(){
+		it.polimi.ingsw.ps05.model.resourcesandbonuses.GreenCard r = new it.polimi.ingsw.ps05.model.resourcesandbonuses.GreenCard();
+		r.setValue(5);
+		assertEquals(5,(int)r.getValue());
+		try {
+			r.remove(5);
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.remove(new GoldResource(2));
+			fail();
+		} catch (NotEnoughResourcesException | IllegalMethodCallException e) {
+			assertEquals(IllegalMethodCallException.class,e.getClass());
+		}
+		
+		try {
+			r.removeFromPlayer(new Familiar());
+			fail();
+		} catch (Exception e) {
+			assertEquals(NotEnoughResourcesException.class,e.getClass());
+		}
 	}
 
 	@Test

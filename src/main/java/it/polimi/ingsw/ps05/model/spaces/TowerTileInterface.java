@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps05.model.resourcesandbonuses.Dice;
 /* this interface is a generalization of all card spaces within the towers. 
  * further comments will be added;
  *  */
-public abstract  class  TowerTileInterface extends SingleOccupantActionSpace implements Serializable {
+public abstract class TowerTileInterface extends SingleOccupantActionSpace implements Serializable {
 
 	/**
 	 * 

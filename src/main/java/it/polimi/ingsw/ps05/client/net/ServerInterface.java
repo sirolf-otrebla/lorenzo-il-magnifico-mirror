@@ -31,8 +31,8 @@ public class ServerInterface implements Runnable{
 
     @Override
     public void run() {
-        Thread diocan = new Thread(Client.getInstance().getMessageTaker());
-        diocan.start();
+        Thread thread = new Thread(Client.getInstance().getMessageTaker());
+        thread.start();
         this.connection.listen();
     }
 }

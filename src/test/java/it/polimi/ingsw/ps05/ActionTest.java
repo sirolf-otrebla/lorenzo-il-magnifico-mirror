@@ -128,56 +128,6 @@ public class ActionTest extends TestCase {
 	}
 
 	@Test
-	public void testActionOnSpace() throws InterruptedException {
-		ArrayList<Player> list = new ArrayList<Player>();
-		Random randomNum = new Random();
-		int numP = randomNum.nextInt(4) + 1;
-		for (int i = 0; i < numP; i++){
-			list.add(new Player(i, "Giocatore " + i, ColorEnumeration.values()[i]));
-		}
-
-		Game game = new Game(true, true, numP, null);
-		try {
-			game.start();
-		} catch (InterruptedException exc) {
-			//TODO gestire eccezione
-			exc.printStackTrace();
-		}
-		GameSetup gameSetup = new GameSetup(list,game);
-		TurnSetupManager turnSetup = gameSetup.getTurnSetupManager();
-		Turn turn = turnSetup.getTurn();
-		//ActionSpace space = Board.getInstance().getActSpacesMap().values().get(0);
-		//for(int i = 0; i < Board.getInstance().getActSpacesMap().values().size(); i++){
-		//	space = Board.getInstance().getActSpacesMap().get(i);
-		//	if (Board.getInstance().getActSpacesMap().values().get(i) instanceof MarketSpace){
-		//		break;
-		//	}
-		// }
-		// RISISTEMARE STA ROBA SU
-		/* System.out.println(space.getClass().toString());
-		Action action = new Action(turn.getPlayerOrder().get(0).getFamilyList().get(0), space);
-		if (action.isLegal()){
-			System.out.println("isLegal");
-			try {
-				//fallisce perché non ha niente da produrre in marketspace o productspace
-				//applyeffect di councilspace è vuoto
-				action.run(randomNum.nextInt(action.getSuitableReqAlternatives().size()));
-
-			} catch (IllegalActionException | NotEnoughResourcesException | DiceTooLowException e) {
-				//  Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		*/
-
-	}
-
-	@Test
-	public void testEffects(){
-		// 
-	}
-
-	@Test
 	public void testActionIsLegal(){
 		testPl.addResource(new ServantResource(ActionTest.PL_SERVANTS_AMNT));
 		assertTrue(this.testActl.isLegal());

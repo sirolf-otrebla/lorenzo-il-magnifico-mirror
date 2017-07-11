@@ -71,9 +71,9 @@ public class DiceMalusExcomm extends PermanentBonus implements ExcommunicationEf
 		for (ActionResult r : malus){
 			r.applyResult(playerR);
 		}
-		if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
+		/*if (!playerR.getRelatedPlayer().getPermanentBonusList().contains(this)){
 			playerR.getRelatedPlayer().getPermanentBonusList().add(this);
-		}
+		}*/
 	}
 
 	@Override

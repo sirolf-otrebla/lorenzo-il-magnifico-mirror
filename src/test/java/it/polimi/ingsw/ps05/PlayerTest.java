@@ -52,6 +52,10 @@ public class PlayerTest {
 		assertEquals(5,(int)f.getRelatedDice().getValue());
 		assertEquals(ColorEnumeration.Ghost, f.getColor());
 		assertEquals(p,f.getRelatedPlayer());
+		assertEquals(UNO, p.getFamilyList().size());
+		assertNotNull(p.getFamilyMap().get(f.getColor()));
+		assertNotNull(p.getFamilyMember(f.getColor()));
+		assertEquals(f,p.getFamilyMap().get(f.getColor()));
 		
 		BonusTile bonus = new BonusTile();
 		assertNull(p.getBonusTile());
@@ -104,11 +108,12 @@ public class PlayerTest {
 		Familiar f1 = new Familiar(p,ColorEnumeration.Black);
 		ArrayList<Familiar> fList = new ArrayList<>();
 		fList.add(f1);
+		try{
 		p.setFamiliars(fList);
-		assertEquals(UNO, p.getFamilyList().size());
-		assertNotNull(p.getFamilyMap().get(f1.getColor()));
-		assertNotNull(p.getFamilyMember(f1.getColor()));
-		assertEquals(f1,p.getFamilyMap().get(f1.getColor()));
+		} catch (Exception e){
+			assertEquals(RepeatedAssignmentException.class, e.getClass());
+		}
+		
 		
 	}
 	
