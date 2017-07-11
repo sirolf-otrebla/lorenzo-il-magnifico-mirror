@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps05.server.controller;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import it.polimi.ingsw.ps05.model.Player;
 import it.polimi.ingsw.ps05.model.cards.LeaderCard;
-import it.polimi.ingsw.ps05.net.message.LeaderDraftUpdateNetMessage;
-import it.polimi.ingsw.ps05.net.message.EndDraftMessage;
-import it.polimi.ingsw.ps05.net.message.StartLeaderDraftMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftUpdateNetMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.LeaderDraftEndMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.StartLeaderDraftMessage;
 import it.polimi.ingsw.ps05.server.net.PlayerClient;
 import it.polimi.ingsw.ps05.utils.CommonJsonParser;
 
@@ -117,7 +117,7 @@ public class DraftController implements Runnable{
         for (PlayerClient client : this.clientArrayList){
             Player player = client.getPlayer();
             ArrayList<Integer> playerCardIds = this.choosenCardsMap.get(player.getColor());
-            EndDraftMessage message = new EndDraftMessage(playerCardIds);
+            LeaderDraftEndMessage message = new LeaderDraftEndMessage(playerCardIds);
             for (LeaderCard leader: this.leaderCardArrayList) {
                 if (playerCardIds.contains(leader.getReferenceID())){
                     player.putLeaderCard(leader);

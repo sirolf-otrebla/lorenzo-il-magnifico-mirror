@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps05.model.cards.ExcommunicationCard;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.*;
 import it.polimi.ingsw.ps05.model.spaces.*;
 import it.polimi.ingsw.ps05.net.GameStatus;
+import javafx.concurrent.Task;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,17 +19,16 @@ import java.util.HashMap;
 /**
  * Created by Alberto on 01/07/2017.
  */
-public class SetUpGuiVisitor implements ViewVisitorInterface {
+public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
 
-    private
+    private GameStatus initStatus;
+    private GUIMain gui;
+    private UpdateViewVisitor updateViewVisitor;
 
-    GUIMain gui;
 
-    public SetUpGuiVisitor(GUIMain gui){
-        this.gui = gui;
+    public SetUpGuiVisitor(GameStatus initStatus) {
+        this.initStatus = initStatus;
     }
-
-
 
     @Override
     public void visit(GameStatus status) {
@@ -41,7 +41,6 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
         HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
         for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());
-        this.gui.setInitValues(activePlayer.getColor(), status.getPlayerHashMap().size(), 120, usernamesHashMap); // settare timeout
         status.getGameBoard().acceptVisitor(this);
         for (Player p :
              status.getPlayerHashMap().values()) {
@@ -50,50 +49,10 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
         status.getPlayerHashMap().put(status.getActivePlayerId(), activePlayer);
 
         Integer[] excommCardsIdArray = new Integer[3];
-        for (ExcommunicationCard card : board.getExcomCards()) {
-            excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
-        }
-        this.gui.insertExcomCards(excommCardsIdArray);
-
-
-        // update dei punti fede, militare, vittoria
-
-        // fine update dei punti militari.
-
-        // inserisco risorse nei giocatori
-        HashMap<String, Integer> playerResourcesHashMap = new HashMap<>();
-        for(Resource r : status.getThisPlayer().getResourceList()){
-            if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
-                    r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
-                playerResourcesHashMap.put(r.getID(), r.getValue());
-            }
-        }
-
-        HashMap<ColorEnumeration, HashMap<String, Integer>> opponentsResourcesHashMap = new HashMap<>();
-        status.getPlayerHashMap().remove(status.getThisPlayer().getPlayerID());
-        for (Integer i : status.getPlayerHashMap().keySet()){
-            HashMap<String, Integer> opponentResourcesHashMap = new HashMap<>();
-            for(Resource r : status.getPlayerHashMap().get(i).getResourceList()){
-                if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
-                        r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
-                    opponentResourcesHashMap.put(r.getID(), r.getValue());
-                }
-            }
-            opponentsResourcesHashMap.put(status.getPlayerHashMap().get(i).getColor(), opponentResourcesHashMap);
-        }
-
-        this.gui.updatePlayerResources(playerResourcesHashMap, opponentsResourcesHashMap);
-
-        // fine setup risorse
-
-
-
-
-
-
-
-
-
+        //for (ExcommunicationCard card : board.getExcomCards()) {
+        //    excommCardsIdArray[card.getEpochID().ordinal()] = card.getReferenceID();
+       // }
+        //this.gui.insertExcomCards(excommCardsIdArray);
 
     }
 
@@ -175,4 +134,61 @@ public class SetUpGuiVisitor implements ViewVisitorInterface {
             }
         }
     }
+
+    public void setInitStatus(GameStatus initStatus) {
+        this.initStatus = initStatus;
+    }
+
+    public void setGui(GUIMain gui) {
+        this.gui = gui;
+    }
+
+    @Override
+    public void run() {
+        synchronized (gui) {
+            visit(initStatus);
+            UpdateViewVisitor updateVisitor = new UpdateViewVisitor(gui, initStatus);
+            updateVisitor.visit(initStatus);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// inserisco risorse nei giocatori
+       /* HashMap<String, Integer> playerResourcesHashMap = new HashMap<>();
+        for(Resource r : status.getThisPlayer().getResourceList()){
+            if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                    r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
+                playerResourcesHashMap.put(r.getID(), r.getValue());
+            }
+        }
+
+        HashMap<ColorEnumeration, HashMap<String, Integer>> opponentsResourcesHashMap = new HashMap<>();
+        status.getPlayerHashMap().remove(status.getThisPlayer().getPlayerID());
+        for (Integer i : status.getPlayerHashMap().keySet()){
+            HashMap<String, Integer> opponentResourcesHashMap = new HashMap<>();
+            for(Resource r : status.getPlayerHashMap().get(i).getResourceList()){
+                if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                        r.getID() == WoodResource.id ||r.getID() == StoneResource.id){
+                    opponentResourcesHashMap.put(r.getID(), r.getValue());
+                }
+            }
+            opponentsResourcesHashMap.put(status.getPlayerHashMap().get(i).getColor(), opponentResourcesHashMap);
+        }
+
+        this.gui.updatePlayerResources(playerResourcesHashMap, opponentsResourcesHashMap); */
+
+// fine setup risorse
+

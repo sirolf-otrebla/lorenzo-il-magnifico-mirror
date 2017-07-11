@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.ps05.client.view.gui.FamiliarData.FAMILIAR_DATA;
@@ -23,8 +24,8 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     private ColorEnumeration occupantPlayerColor;
     private boolean isOccupied;
     private int minDie;
-    private boolean isLegal;
     private HashMap<ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
+    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
     public SingleOccupantActionSpaceWidget(int minimumDie) {
         occupationCircle = new Circle(FAMILIAR_MIN_SIZE / 2 * resize);
@@ -63,10 +64,10 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
-            if (!occupied && isLegal) {
+            if (isLegal) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);
-            } else if (!occupied && !isLegal){
+            } else if (!isLegal){
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FIREBRICK);
             }
@@ -87,6 +88,7 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
     }
 
     public void setupDragDropped() {
+
         occupationCircle.setOnDragDropped((DragEvent e) -> {
             /* What to do when the source is dropped */
             boolean success = false;
@@ -170,12 +172,16 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
         this.occupantPlayerColor = occupantPlayerColor;
     }
 
-    public boolean isLegal() {
-        return isLegal;
+    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
+        return legalFamilyMemberList;
     }
 
-    public void setLegal(boolean legal) {
-        isLegal = legal;
+    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
+        this.legalFamilyMemberList = legalFamilyMemberList;
+    }
+
+    public void setLegalActionMap(HashMap<ColorEnumeration, Boolean> legalActionMap) {
+        this.legalActionMap = legalActionMap;
     }
 
     public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {

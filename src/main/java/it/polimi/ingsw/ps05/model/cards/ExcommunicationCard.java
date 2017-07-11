@@ -48,7 +48,6 @@ public class ExcommunicationCard implements Serializable {
 	 */
 	public void applyEffect(Player pl){
 		excomEffect.apply(pl);
-		pl.
 	}
 
 	/** this method returns the era id of this excommunication card

@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps05.client.net;
 
 import it.polimi.ingsw.ps05.client.ctrl.*;
 import it.polimi.ingsw.ps05.net.message.*;
+import it.polimi.ingsw.ps05.net.message.draftmessages.DraftMessage;
+import it.polimi.ingsw.ps05.net.message.draftmessages.DraftResponseNetMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.ExcommunicationChoiceMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameMessage;
 import it.polimi.ingsw.ps05.net.message.gamemessages.GameResponseMessage;

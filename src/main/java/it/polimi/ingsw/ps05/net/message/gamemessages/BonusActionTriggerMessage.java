@@ -23,7 +23,7 @@ public class BonusActionTriggerMessage implements GameResponseMessage {
     /**
      *
      * @param actionColor       if NOT_INIZIALIZED: FREE ACTION, IF ANY: FREE ACTION ONLY ON TOWERS
-     *                          ANITHING ELSE: FREE ACTION UNDER THE TOWER WITH THIS COLOR
+     *                          ANyTHING ELSE: FREE ACTION UNDER THE TOWER WITH THIS COLOR
      * @param gameUpdateMessage
      * @param ghostFamiliar
      */

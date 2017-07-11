@@ -25,16 +25,17 @@ import static it.polimi.ingsw.ps05.client.view.gui.GUIMain.*;
  */
 public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
+    private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
+
     public static final double SCROLLPANE_HEIGHT_RESIZE = 1.2, SCROLLPANE_WIDTH_RESIZE = 8.0;
 
     private int referenceId;
     private int minDie;
-    private boolean isLegal;
     final ScrollPane scrollPane = new ScrollPane();
     final HBox hbox = new HBox();
     private PlayerWidget player;
     private HashMap <ColorEnumeration, Boolean> legalActionMap = new HashMap<>();
-    private ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList;
+    private ArrayList<ColorEnumeration> legalFamilyMemberList = new ArrayList<>();
 
 
     public MultipleSpaceWidget(int referenceId, int minDie, PlayerWidget player) {
@@ -191,14 +192,6 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         this.referenceId = referenceId;
     }
 
-    public boolean isLegal() {
-        return isLegal;
-    }
-
-    public void setLegal(boolean legal) {
-        isLegal = legal;
-    }
-
     public void setMinDie(int minDie) {
         this.minDie = minDie;
     }
@@ -211,9 +204,16 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         return player;
     }
 
-    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
-        return legalActionMap;
+    @Override
+    public ArrayList<ColorEnumeration> getLegalFamilyMemberList() {
+        return legalFamilyMemberList;
     }
+
+    @Override
+    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList) {
+        this.legalFamilyMemberList = legalFamilyMemberList;
+    }
+
 
     public ArrayList<Pair<ColorEnumeration, ColorEnumeration>> getOccupingFamiliarList() {
         return occupingFamiliarList;
@@ -221,5 +221,13 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
 
     public void setOccupingFamiliarList(ArrayList<Pair<ColorEnumeration, ColorEnumeration>> occupingFamiliarList) {
         this.occupingFamiliarList = occupingFamiliarList;
+    }
+
+    public void setLegalActionMap(HashMap<ColorEnumeration, Boolean> legalActionMap) {
+        this.legalActionMap = legalActionMap;
+    }
+
+    public HashMap<ColorEnumeration, Boolean> getLegalActionMap() {
+        return legalActionMap;
     }
 }

@@ -26,14 +26,17 @@ public class OpponentWidget {
             leaderWidgetList);
     private final LeaderPopup leaderPopup = new LeaderPopup();
 
-    final Button personalBoardButton = new Button();
+    Button personalBoardButton = new Button();
 
 
 
 
-    public OpponentWidget(GUIMain board, ColorEnumeration opponentColor) {
+    public OpponentWidget(GUIMain board, ColorEnumeration opponentColor, String username) {
         this.board = board;
         this.opponentColor = opponentColor;
+        this.opponentUsername = username;
+
+        personalBoardButton.setText(username);
     }
 
 
@@ -72,4 +75,5 @@ public class OpponentWidget {
     public void setOpponentUsername(String opponentUsername) {
         this.opponentUsername = opponentUsername;
     }
+
 }

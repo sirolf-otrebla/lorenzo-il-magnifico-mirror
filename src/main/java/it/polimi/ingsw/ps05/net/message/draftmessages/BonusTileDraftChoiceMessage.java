@@ -1,20 +1,16 @@
-package it.polimi.ingsw.ps05.net.message;
+package it.polimi.ingsw.ps05.net.message.draftmessages;
 
 import it.polimi.ingsw.ps05.server.controller.DraftResponseMessageVisitor;
 import it.polimi.ingsw.ps05.server.net.NetMessageVisitor;
 
 /**
- * Created by Alberto on 02/07/2017.
+ * Created by Alberto on 10/07/2017.
  */
-public class LeaderDraftChoiceMessage implements DraftResponseNetMessage {
+public class BonusTileDraftChoiceMessage implements DraftResponseNetMessage {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3208852752070619956L;
-	private Integer choice;
+    private Integer choice;
 
-    public LeaderDraftChoiceMessage(Integer choice){
+    public BonusTileDraftChoiceMessage(Integer choice){
         this.choice = choice;
     }
 
@@ -24,7 +20,7 @@ public class LeaderDraftChoiceMessage implements DraftResponseNetMessage {
 
     @Override
     public void acceptVisitor(NetMessageVisitor vi) throws Exception {
-         vi.visit(this);
+        vi.visit(this);
     }
 
 

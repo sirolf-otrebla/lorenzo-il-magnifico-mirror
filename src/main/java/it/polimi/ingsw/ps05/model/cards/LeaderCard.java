@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps05.model.effects.SimpleEffect;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.PrivilegeBonus;
 import it.polimi.ingsw.ps05.model.resourcesandbonuses.Resource;
 
-public class LeaderCard implements Card {
+public class LeaderCard implements Card, Draftable {
 
 	/**
 	 * 
@@ -92,5 +92,13 @@ public class LeaderCard implements Card {
 
 	public Integer getReferenceID() {
 		return referenceID;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

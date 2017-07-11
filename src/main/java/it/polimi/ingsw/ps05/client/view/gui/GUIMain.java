@@ -1,8 +1,10 @@
 package it.polimi.ingsw.ps05.client.view.gui;
 
 
+import it.polimi.ingsw.ps05.client.view.LimView;
 import it.polimi.ingsw.ps05.model.ColorEnumeration;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -24,7 +26,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GUIMain extends Application {
+public class GUIMain extends Application implements LimView {
 
 
 	private Stage stage;
@@ -36,7 +38,7 @@ public class GUIMain extends Application {
 	public int PLAYER_NUMBER, OPPONENTS_NUMBER;
 	private Integer MOVE_TIMER;
 	private String[] opponentNames;
-
+	private static GUIMain instance;
 	private PlayerWidget player;
 	private OpponentWidget[] opponentsArray = new OpponentWidget[3];
 
@@ -100,6 +102,9 @@ public class GUIMain extends Application {
             ColorEnumeration.Orange
     };
 
+	private double screenWidth, screenHeight, screenRatio, screenMinX, screenMinY;
+	private boolean wider;
+
 
 
 
@@ -109,38 +114,56 @@ public class GUIMain extends Application {
 
 	public void setInitValues(ColorEnumeration thisPlayerColor, Integer opponentNumber, Integer timeout, HashMap<ColorEnumeration, String> usernamesHashMap){
 
+		System.out.println("DENTRO setInitValues GUI");
+		this.usernamesHashMap = usernamesHashMap;
+
+		/* Retrieving screen bounds */
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		screenWidth = primaryScreenBounds.getWidth();
+		screenHeight = primaryScreenBounds.getHeight();
+		screenRatio = screenWidth / screenHeight;
+		screenMinX = primaryScreenBounds.getMinX();
+		screenMinY = primaryScreenBounds.getMinY();
+
+		if (screenRatio <= 1.75) {
+			screenMinX = primaryScreenBounds.getMinX();
+			screenWidth = primaryScreenBounds.getWidth();
+			screenHeight = screenWidth / 1.75;
+			stageWidth = screenWidth;
+			stageHeight = screenHeight;
+			wider = false;
+		} else {
+			screenMinY = primaryScreenBounds.getMinY();
+			screenHeight = primaryScreenBounds.getHeight();
+			screenWidth = screenHeight * 1.75;
+			stageHeight = screenHeight;
+			stageWidth = screenHeight * 1.75;
+			wider = true;
+		}
+		resize = stageWidth / ORIGINAL_WIDTH;
+
+		// setto variabili globali
+		this.OPPONENTS_NUMBER = opponentNumber;
+		this.PLAYER_NUMBER = opponentNumber + 1;
+		this.MOVE_TIMER = timeout;
+
 	    // creo il giocatore
         player = new PlayerWidget(this, thisPlayerColor);
 	    this.player.setPlayerColor(thisPlayerColor);
 
-	    // setto variabili globali
-		this.OPPONENTS_NUMBER = opponentNumber;
-		this.MOVE_TIMER = timeout;
-
-
-		this.usernamesHashMap = usernamesHashMap;
-		int i = 0;
-
-        // popolo la hashmap degli avversari
-        for (ColorEnumeration color: usernamesHashMap.keySet())
-            opponentsHashMap.put(color, new OpponentWidget(this, color));
-
-        // aggiungo il nome
+        // creo gli avversari
         for (ColorEnumeration color: usernamesHashMap.keySet()) {
-            opponentsHashMap.get(color).setOpponentUsername(usernamesHashMap.get(color));
-        }
+			System.out.println("creando gli avversari: " + color);
+			opponentsHashMap.put(color, new OpponentWidget(this, color, usernamesHashMap.get(color)));
+		}
 
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		//opponentNames = {"Pippo", "Pluto", "Paperino"};
-		int thisPlayerId = 0;
-		int[] opponentIdArray = {1, 2, 3};
-
-
-
+		this.stage = primaryStage;
+		this.instance = this;
 
 		zoomReference = zoomedCard;
 
@@ -152,27 +175,19 @@ public class GUIMain extends Application {
 		stage.setTitle("Lorenzo il Magnifico");
 		stage.setResizable(false);
 
-		/* Retrieving screen bounds */
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-		double screenWidth = primaryScreenBounds.getWidth();
-		double screenHeight = primaryScreenBounds.getHeight();
-		double screenRatio = screenWidth / screenHeight;
-
 		/* Set up window size */
-		if (screenRatio <= 1.75) {
-			stage.setX(primaryScreenBounds.getMinX());
-			stage.setWidth(primaryScreenBounds.getWidth());
-			stage.setHeight(primaryScreenBounds.getWidth() / 1.75);
-			stageWidth = primaryScreenBounds.getWidth();
-			stageHeight = stageWidth / 1.75;
+		if (wider == false) {
+			stage.setX(screenMinX);
+			stage.setWidth(stageWidth);
+			stage.setHeight(stageHeight);
 		} else {
-			stage.setY(primaryScreenBounds.getMinY());
-			stage.setHeight(primaryScreenBounds.getHeight());
-			stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
-			stageHeight = primaryScreenBounds.getHeight();
-			stageWidth = stageHeight * 1.75;
+			stage.setY(screenMinY);
+			stage.setHeight(stageHeight);
+			stage.setWidth(stageWidth);
 		}
-		resize = stageWidth / ORIGINAL_WIDTH;
+		System.out.println("stageWidth: " + stageWidth);
+		System.out.println("stageHeight: " + stageHeight);
+		System.out.println("resize: " + resize);
 
 		/* Bind root pane size with window size */
 		root.minWidthProperty().bind(stage.widthProperty());
@@ -183,18 +198,12 @@ public class GUIMain extends Application {
 		root.maxHeightProperty().bind(stage.heightProperty());
 
 		/* Add tower cards and tower action spaces */
-
 		VBox towerCardBox; // box verticale contenente le carte
-		TowerCardWidget[] towerCardWidgetArray; // array di carte dello stesso colore
-
 		VBox towerActionBox; // box verticale contenente gli spazi azione della stessa torre
-		TowerTileWidget[] towerTileWidgetArray; // array di spazi azione della stessa torre
-
 
 		for (int i = 0; i < 4; i++) towerCardBoxesArray.put(towerColorArray[i], new VBox());
 		for (int i = 0; i < 4; i++) {
 			towerCardBox = towerCardBoxesArray.get(towerColorArray[i]);
-			System.out.println(towerColorArray[i].toString());
 			towerCardBox.setSpacing((1.8 / 100) * stageHeight); //TODO spacing di prova, controllare
 			towerCardBox.setLayoutX((0.8684 + 10.95 * i) / 100 * stageWidth);
 			towerCardBox.setLayoutY((2.7468 / 100) * stageHeight);
@@ -230,23 +239,7 @@ public class GUIMain extends Application {
 			}
 		}
 
-
-		/* Instantiate player and opponents widgets */
-
-		player = new PlayerWidget(this, GraphicResources.getPlayerColor(thisPlayerId));
-
-		int i = 0;
-		for (i = 0; i < OPPONENTS_NUMBER; i++) {
-			opponentsArray[i] = new OpponentWidget(this, GraphicResources.getPlayerColor(opponentIdArray[i]));
-		}
-
-		for (i = 0; i < OPPONENTS_NUMBER; i++) {
-			System.out.println(opponentsArray[i].getOpponentColor().toString());
-		}
-
-
 		/* Add player resources */
-
 		resourcesWidgetArray[0] = new ResourcesWidget();
 		playerResourcesBox = resourcesWidgetArray[0].setupThisPlayerResource();
 		root.getChildren().add(playerResourcesBox);
@@ -254,7 +247,7 @@ public class GUIMain extends Application {
 
         /* Add market action spaces */
 		// Initialize
-		for (i = 0; i < this.marketSpaceWidgets.length; i++)
+		for (int i = 0; i < this.marketSpaceWidgets.length; i++)
 			marketSpaceWidgets[i] = new MarketSpaceWidget(1);
 		// Add to board
 		insertActionSpace(marketSpaceWidgets[0], root, 1, 28.3036, 80.1562); // gold
@@ -285,29 +278,42 @@ public class GUIMain extends Application {
 		insertMultipleSpace(councilSpaceWidget, root, 1, 51.5, 53.7); // council
 		actionSpaces.add(councilSpaceWidget);
 
+		System.out.println("finalmente dentro guimain: colore del giocatore: " + player.getPlayerColor());
+		for(ColorEnumeration color: opponentsHashMap.keySet()) {
+			System.out.println(color + " " + opponentsHashMap.get(color).getOpponentUsername());
+		}
+
+		System.out.println("PRIMA DEI MARKER");
 
 		/* Add points markers */
-		for (i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
+			// dentro il il singolo tracciato
 			if(i < 1)
 				this.trackBoxesArray[i] = new VBox(12 * resize);
 			else
 				this.trackBoxesArray[i] = new HBox(12 * resize);
 			root.getChildren().add(this.trackBoxesArray[i]);
+
 			for (int j = 0; j < PLAYER_NUMBER; j++) {
+				// dentro il colore del giocatore
 				ColorEnumeration markerColor = GraphicResources.getPlayerColor(j); // ottiene il colore del segnalino
 				String thisPath = path + "markers/marker-" + markerColor.toString().toLowerCase() + ".png";
 				System.out.println(thisPath);
 				markerWidgetList[i][j] = new MarkerWidget(thisPath);
-				if(player.getPlayerColor() == markerColor)
+				if(player.getPlayerColor() == markerColor) {
+					System.out.println("Inside player");
 					player.getPlayerMarkers()[i] = markerWidgetList[i][j];
+				}
 				else {
-					for (int k = 0; k < OPPONENTS_NUMBER; k++)
-						if(opponentsArray[k].getOpponentColor() == markerColor)
-							opponentsArray[k].getOpponentMarkers()[i] = markerWidgetList[i][j];
+					System.out.println("Inside opponent " + opponentsHashMap.get(markerColor));
+					opponentsHashMap.get(markerColor).getOpponentMarkers()[i] = markerWidgetList[i][j];
 				}
 				this.trackBoxesArray[i].getChildren().add(markerWidgetList[i][j].getMarker());
 			}
+
 		}
+
+		System.out.println("DOPO I MARKER");
 
 		/****** MODO 1 ******/
 		// Play-order markers
@@ -330,16 +336,13 @@ public class GUIMain extends Application {
 
         /* Initialize opponents familiars */
 		for(ColorEnumeration color: opponentsHashMap.keySet()) {
-		    for(i = 0; i < 4; i++) {
+		    for(int i = 0; i < 4; i++) {
 		        opponentsHashMap.get(color).getFamiliarWidgetList()[i] = new FamiliarWidget(color, GraphicResources.getFamiliarColor(i));
             }
         }
 
-
 		/* Add player buttons */
-
 		// Personal cards
-
 		player.commands.setAlignment(Pos.CENTER);
 		player.showCardsButton.setId("showCardsButton");
 		player.showCardsButton.setMaxWidth(Double.MAX_VALUE);
@@ -372,7 +375,7 @@ public class GUIMain extends Application {
 
 
 		/* Add excommunication widgets */
-		for(i = 0; i < 3; i++) {
+		for(int i = 0; i < 3; i++) {
 			excomWidgetArray[i] = new ExcomWidget();
 			excomWidgetArray[i].setLayoutX(((50.2 + 4.4 * i) / 100) * stageWidth);
 			root.getChildren().add(excomWidgetArray[i]);
@@ -387,11 +390,10 @@ public class GUIMain extends Application {
 		diceBox.setLayoutX((26.3 / 100) * stageWidth);
 		diceBox.setLayoutY((91.0 / 100) * stageHeight);
 		diceBox.setPrefHeight((4.8 / 100) * stageHeight);
-
 		// poplo la hashmap
 		for(ColorEnumeration dieColor: diceColorArray)
 		    diceHashMap.put(dieColor, new DieWidget(dieColor));
-
+		// aggiungo i dadi alla board
 		for (ColorEnumeration dieColor: diceHashMap.keySet()) {
 			diceBox.getChildren().add(diceHashMap.get(dieColor));
 		}
@@ -481,10 +483,8 @@ public class GUIMain extends Application {
 
 		stage.setScene(mainScene);
 		stage.sizeToScene();
-		stage.show();
 
 		//startBonusTileDraft();
-		startLeaderDraft(testLeaderIdArray);
 		//endLeaderDraft();
 		//setDiceValues(testDiceValues);
 		//timerWidget.setupTimer();
@@ -494,7 +494,21 @@ public class GUIMain extends Application {
 		updateInfoLabel("Buonaseeeera, tutto bbene? Enniende");
 		//showEndGameResult(testFinalResults);
 
+	}
 
+	public void showInterface(){
+		Platform.runLater(new Runnable() {
+			private Stage stage;
+			@Override
+			public void run() {
+				stage.show();
+			}
+
+			public Runnable init(Stage stage){
+				this.stage = stage;
+				return this;
+			}
+		}.init(stage));
 	}
 
 
@@ -506,7 +520,6 @@ public class GUIMain extends Application {
 
 	public void startBonusTileDraft() {
 		// Show bonus tile draft window
-		BonusTileDraftPopup.display();
 	}
 
 	public void updateBonusTileDraft(ColorEnumeration playerColor, Integer bonusTileId) {
@@ -605,23 +618,9 @@ public class GUIMain extends Application {
 		}
 	}
 
-
-
-	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, ActionSpaceWidgetInterface actionSpaceWidgetInterface) {
-
-		// get the familiar image
-
-		String path = GraphicResources.getFamiliarPath(playerColor, familiarColor);
-		File crDir = new File(path);
-		try{
-			Image familiarPlayedImage = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
-			ImageView familiarPlayed = new ImageView(familiarPlayedImage);
-		} catch (MalformedURLException e){
-			e.printStackTrace();
-		}
-
-		// add to the board
-
+	public void setLegalActionSpaces(HashMap<Integer, HashMap<ColorEnumeration, Boolean>> legalMap) {
+		for(ActionSpaceWidgetInterface actionSpace: actionSpaces)
+			actionSpace.setLegalActionMap(legalMap.get(actionSpace.getReferenceId()));
 	}
 
 	public void updatePlayerPoints(ColorEnumeration color, Integer[] newPoints) {
@@ -647,10 +646,10 @@ public class GUIMain extends Application {
 		this.getPlayer().setActive(false);
 	}
 
-	public void setDiceValues(Integer[] newValues) {
-		for (int i = 0; i < 3; i++) {
-			this.diceWidgetArray[i].setValue(newValues[i]);
-			this.diceWidgetArray[i].repaint();
+	public void setDiceValues(HashMap<ColorEnumeration, Integer> newDiceValues) {
+		for (ColorEnumeration diceColor: diceColorArray) {
+			diceHashMap.get(diceColor).setValue(newDiceValues.get(diceColor));
+			diceHashMap.get(diceColor).repaint();
 		}
 	}
 
@@ -852,6 +851,10 @@ public class GUIMain extends Application {
 	public ColorEnumeration[] getTowerColorArray() {
 		return towerColorArray;
 	}
+
+	public static GUIMain getInstance() {
+		return instance;
+	}
 }
 
 
@@ -879,7 +882,28 @@ public class GUIMain extends Application {
 
 
 
+/*
+	public void updateFamiliarOnBoard(ColorEnumeration playerColor, ColorEnumeration familiarColor, Integer actionSpaceToOccupy) {
 
+		// get the familiar image
+
+		String path = GraphicResources.getFamiliarPath(playerColor, familiarColor);
+		File crDir = new File(path);
+		try{
+			Image familiarPlayedImage = new Image(crDir.toURI().toURL().toString(), FAMILIAR_MIN_SIZE * resize, FAMILIAR_MIN_SIZE * resize, true, true);
+			ImageView familiarPlayed = new ImageView(familiarPlayedImage);
+		} catch (MalformedURLException e){
+			e.printStackTrace();
+		}
+
+		// add to the board
+		for(ActionSpaceWidgetInterface actionSpace: actionSpaces) {
+			if(actionSpace.getReferenceId() == actionSpaceToOccupy)
+				actionSpace.
+		}
+
+	}
+	*/
 
 /* Add tower cards and tower action spaces */
 		/*
@@ -1009,4 +1033,16 @@ public class GUIMain extends Application {
 	//commands.layoutXProperty().bind(stage.widthProperty().multiply(68.75 / 100));
 	//commands.layoutYProperty().bind(stage.heightProperty().multiply(9.375 / 100));
 
+/*
+		stage.setX(screenMinX);
+		stage.setWidth(screenWidth);
+		stage.setHeight(screenWidth / 1.75);
+		stageWidth = screenWidth;
+		stageHeight = screenWidth / 1.75;
 
+		stage.setY(primaryScreenBounds.getMinY());
+		stage.setHeight(primaryScreenBounds.getHeight());
+		stage.setWidth(primaryScreenBounds.getHeight() * 1.75);
+		stageHeight = primaryScreenBounds.getHeight();
+		stageWidth = stageHeight * 1.75;
+		*/

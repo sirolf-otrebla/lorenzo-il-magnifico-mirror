@@ -65,7 +65,6 @@ public class GameFlowController implements Runnable {
 				PlayerClient plClient =
 						game.getPlayerInGame().get(thisTurn.getPlayerOrder().get(0).getPlayerID());
 				System.out.println("PlClient : " + plClient);
-				plClient.setActive();
 				RoundController turnRoundCtrl = new RoundController(thisTurn, game);
 				turnRoundCtrl.executeTurn();
 				this.game.gettManager().loadNextTurn();

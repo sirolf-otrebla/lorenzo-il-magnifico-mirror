@@ -78,9 +78,14 @@ public class GameSetup {
 		//ora è settato a mano il parametro del tipo ma andrà preso dal setup iniziale della partita, deciso alla creazione
 		bonusTiles = parser.loadBonusTiles("./src/main/res/bonusTile.json", custom ? BonusTileType.Custom : BonusTileType.Default);
 		System.out.println(bonusTiles.size());
-		for (int i = 0; i < playerConnected.size(); i++){
-			playerConnected.get(i).setBonusTile(bonusTiles.get(i));
+		if (custom){
+			this.board.setBonusTileArrayList(bonusTiles);
+		} else {
+			for (int i = 0; i < playerConnected.size(); i++) {
+				playerConnected.get(i).setBonusTile(bonusTiles.get(i));
+			}
 		}
+
 	}
 
 	public Board getBoard(){

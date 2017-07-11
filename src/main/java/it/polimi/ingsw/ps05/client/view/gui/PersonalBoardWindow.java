@@ -40,7 +40,10 @@ public class PersonalBoardWindow {
 
 
     public PersonalBoardWindow(GUIMain board) {
-
+        cardAcquiredColorMap.put(ColorEnumeration.Green, new ArrayList<AcquiredCardWidget>());
+        cardAcquiredColorMap.put(ColorEnumeration.Blue, new ArrayList<AcquiredCardWidget>());
+        cardAcquiredColorMap.put(ColorEnumeration.Yellow, new ArrayList<AcquiredCardWidget>());
+        cardAcquiredColorMap.put(ColorEnumeration.Violet, new ArrayList<AcquiredCardWidget>());
         // calculate and set window dimensions
         personalBoardHeight = stageHeight * 0.90;
         personalBoardWidth = (stageHeight * 0.90) * ORIGINAL_RATIO;
@@ -159,6 +162,11 @@ public class PersonalBoardWindow {
 
     public ArrayList<AcquiredCardWidget> getHarvestingCards () {
         return this.cardAcquiredColorMap.get(ColorEnumeration.Green);
+    }
+
+
+    public HashMap<ColorEnumeration, ArrayList<AcquiredCardWidget>> getCardAcquiredColorMap() {
+        return cardAcquiredColorMap;
     }
 }
 

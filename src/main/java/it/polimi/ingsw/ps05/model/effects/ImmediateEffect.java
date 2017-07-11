@@ -32,9 +32,9 @@ public class ImmediateEffect implements SimpleEffect {
 	}
 
 	@Override
-	public void apply(PlayerRelated familyMember) {
+	public void apply(PlayerRelated playerR) {
 		for( ActionResult res : effectList )
-			res.applyResult(familyMember);
+			res.applyResult(playerR);
 	}
 
 	@Override

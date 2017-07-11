@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps05.client.ctrl;
 
 import it.polimi.ingsw.ps05.client.net.ClientMessageVisitor;
 import it.polimi.ingsw.ps05.client.net.ServerInterface;
+import it.polimi.ingsw.ps05.client.view.gui.GUIMain;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActionSpaceViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.ActivateLeaderViewObject;
 import it.polimi.ingsw.ps05.client.view.interfaces.DiscardLeaderViewObject;
@@ -141,4 +142,5 @@ public class Client {
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
+
 }
