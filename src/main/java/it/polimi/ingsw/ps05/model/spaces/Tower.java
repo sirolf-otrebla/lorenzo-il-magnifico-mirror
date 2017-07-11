@@ -88,7 +88,7 @@ public abstract class Tower implements Serializable, VisitableFromView {
 
 	@Override
 	public void acceptVisitor(ViewVisitorInterface vi) {
-
+		vi.visit(this);
 	}
 
 

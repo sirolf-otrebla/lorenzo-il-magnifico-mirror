@@ -85,18 +85,34 @@ public class SetUpGuiVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(ProductionSpace productionSpace) {
-        Integer id = productionSpace.getId();
-        gui.getProductionSpace().setReferenceId(id);
-        System.out.println("id spazio \t" + productionSpace.getId() + "id widget \t" + gui.getProductionSpace().getReferenceId());
+        if (productionSpace.getEffects().size() == 0){
+            Integer id = productionSpace.getId();
+            gui.getSingleProductionSpace().setReferenceId(id);
+            System.out.println("id spazio \t" + productionSpace.getId() + "id widget \t" + gui.getSingleProductionSpace().getReferenceId());
+
+        } else {
+            Integer id = productionSpace.getId();
+            gui.getProductionSpace().setReferenceId(id);
+            System.out.println("id spazio \t" + productionSpace.getId() + "id widget \t" + gui.getProductionSpace().getReferenceId());
+
+        }
 
 
     }
 
     @Override
     public void visit(HarvestingSpace harvestingSpace) {
-        Integer id = harvestingSpace.getId();
-        gui.getHarvestingSpace().setReferenceId(id);
-        System.out.println("id spazio \t" + harvestingSpace.getId() + "id widget \t" + gui.getHarvestingSpace().getReferenceId());
+        if (harvestingSpace.getEffects().size() == 0){
+            Integer id = harvestingSpace.getId();
+            gui.getSingleHarvestingSpace().setReferenceId(id);
+            System.out.println("id spazio \t" + harvestingSpace.getId() + "id widget \t" + gui.getSingleHarvestingSpace().getReferenceId());
+
+        } else {
+            Integer id = harvestingSpace.getId();
+            gui.getHarvestingSpace().setReferenceId(id);
+            System.out.println("id spazio \t" + harvestingSpace.getId() + "id widget \t" + gui.getHarvestingSpace().getReferenceId());
+
+        }
 
     }
 

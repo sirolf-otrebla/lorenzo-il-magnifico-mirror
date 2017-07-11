@@ -35,6 +35,8 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             actionSpaceWidgetHashMap.put(widget.getReferenceId(), widget);
         }
         actionSpaceWidgetHashMap.put(gui.getCouncilSpaceWidget().getReferenceId(), gui.getCouncilSpaceWidget());
+        actionSpaceWidgetHashMap.put(gui.getSingleHarvestingSpace().getReferenceId(), gui.getSingleHarvestingSpace());
+        actionSpaceWidgetHashMap.put(gui.getSingleProductionSpace().getReferenceId(), gui.getSingleProductionSpace());
         actionSpaceWidgetHashMap.put(gui.getHarvestingSpace().getReferenceId(), gui.getHarvestingSpace());
         actionSpaceWidgetHashMap.put(gui.getProductionSpace().getReferenceId(), gui.getProductionSpace());
 
@@ -113,6 +115,7 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         if (widget.getAssociatedCard().getReferenceId() != tile.getCard().getReferenceID())
             widget.setAssociatedCard(new TowerCardWidget(tile.getCard().getReferenceID()));
         // altro da aggiungere?
+        this.setWidgetLegal(widget, tile);
         widget.repaint();
     }
 
@@ -124,8 +127,9 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
             widget.setOccupantPlayerColor(marketSpace.getOccupant().getRelatedPlayerColor());
 
         }
-        this.setWidgetLegal(widget, marketSpace);
         widget.repaint();
+        this.setWidgetLegal(widget, marketSpace);
+
 
     }
 
@@ -135,8 +139,9 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(councilSpace);
         if (widget == null) System.out.println("diobono");
         widget.setOccupingFamiliarList(widgetList);
-        this.setWidgetLegal(widget, councilSpace);
         widget.repaint();
+        this.setWidgetLegal(widget, councilSpace);
+
 
 
 
@@ -144,12 +149,30 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(ProductionSpace productionSpace){
-        ProductionSpaceWidget widget = (ProductionSpaceWidget) actionSpaceWidgetHashMap.get(productionSpace.getId());
-        ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(productionSpace);
-        if (widgetList.size() > 1) widget.setMorethanZeroOccupants(true);
-        widget.setOccupingFamiliarList(widgetList);
-        this.setWidgetLegal(widget, productionSpace);
-        widget.repaint();
+        if (productionSpace.getEffects().size() == 0){
+            SingleProductionSpaceWidget widget = (SingleProductionSpaceWidget) actionSpaceWidgetHashMap.get(productionSpace.getId());
+            ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(productionSpace);
+            if (widgetList.size() > 1){
+                widget.setOccupied(true);
+                widget.setOccupantPlayerColor(widgetList.get(0).getKey());
+                widget.setFamilyMemberColor(widgetList.get(0).getValue());
+            }
+            widget.repaint();
+            this.setWidgetLegal(widget, productionSpace);
+
+
+        }else {
+
+            ProductionSpaceWidget widget = (ProductionSpaceWidget) actionSpaceWidgetHashMap.get(productionSpace.getId());
+            ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(productionSpace);
+            if (widgetList.size() > 1){
+                widget.setMorethanZeroOccupants(true);
+                widget.setOccupingFamiliarList(widgetList);
+            }
+            widget.repaint();
+            this.setWidgetLegal(widget, productionSpace);
+
+        }
 
         //TODO ??? ALTRO DA AGGIUNGERE ???
 
@@ -157,13 +180,28 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(HarvestingSpace harvestingSpace){
+        if (harvestingSpace.getEffects().size() == 0){
+            SingleHarvestingSpaceWidget widget = (SingleHarvestingSpaceWidget) actionSpaceWidgetHashMap.get(harvestingSpace.getId());
+            ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(harvestingSpace);
+            if (widgetList.size() > 1){
+                widget.setOccupied(true);
+                widget.setOccupantPlayerColor(widgetList.get(0).getKey());
+                widget.setFamilyMemberColor(widgetList.get(0).getValue());
+            }
+            widget.repaint();
+            this.setWidgetLegal(widget, harvestingSpace);
 
-        HarvestingSpaceWidget widget = (HarvestingSpaceWidget) actionSpaceWidgetHashMap.get(harvestingSpace.getId());
-        ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(harvestingSpace);
-        if (widgetList.size() > 1) widget.setMorethanZeroOccupants(true);
-        widget.setOccupingFamiliarList(widgetList);
-        this.setWidgetLegal(widget, harvestingSpace);
-        widget.repaint();
+        } else{
+            HarvestingSpaceWidget widget = (HarvestingSpaceWidget) actionSpaceWidgetHashMap.get(harvestingSpace.getId());
+            ArrayList<Pair<ColorEnumeration, ColorEnumeration>> widgetList = this.copyModelOccupantList(harvestingSpace);
+            if (widgetList.size() > 1){
+                widget.setMorethanZeroOccupants(true);
+                widget.setOccupingFamiliarList(widgetList);
+            }
+            this.setWidgetLegal(widget, harvestingSpace);
+            widget.repaint();
+        }
+
 
 
     }
@@ -278,6 +316,9 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     @Override
     public void visit(Tower tower) {
+        for (TowerTileInterface tile: tower.getTiles().values()) {
+            tile.acceptVisitor(this);
+        }
 
     }
 

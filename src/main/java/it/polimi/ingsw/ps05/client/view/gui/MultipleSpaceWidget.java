@@ -8,9 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -59,6 +63,10 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        scrollPane.setStyle("-fx-border-style: outset");
+        scrollPane.setStyle("-fx-border-width: 8px");
+        scrollPane.setStyle("-fx-border-color: palegreen");
+
         scrollPane.setPannable(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(false);
@@ -69,7 +77,7 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
     public void repaint() {
         /* removing all familiars inside the box */
         this.hbox.getChildren().clear();
-
+        if (occupingFamiliarList == null) return;
         for(Pair<ColorEnumeration, ColorEnumeration> familiar: occupingFamiliarList) {
             String path = GraphicResources.getFamiliarPath(familiar.getKey(), familiar.getValue());
             File crDir = new File(path);
@@ -111,8 +119,9 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
         scrollPane.setOnDragEntered((DragEvent e) -> {
 
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            System.out.println("test DRAG ENTER");
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
-
+            System.out.println("IS legal? \t "+ isLegal);
             if (e.getGestureSource() != scrollPane && isLegal) {
                 scrollPane.setStyle("-fx-border-style: outset");
                 scrollPane.setStyle("-fx-border-width: 8px");

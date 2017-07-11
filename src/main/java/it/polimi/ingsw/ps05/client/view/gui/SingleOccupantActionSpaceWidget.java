@@ -69,12 +69,12 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
             System.out.println("DRAG ENTERED");
 
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+            System.out.println("is legal: \t" + isLegal);
             System.out.println("dati ottenuti dalla dragboard");
             System.out.println("playercolor: " + sourceData.getPlayerColor());
             System.out.println("familiarcolor: " + sourceData.getFamiliarColor());
             System.out.println("imagepath: " + sourceData.getFamiliarImagePath());
-            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
-
             if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);

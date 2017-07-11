@@ -58,8 +58,8 @@ public class GUIMain extends Application implements LimView {
 	private MarketSpaceWidget[] marketSpaceWidgets = new MarketSpaceWidget[4];
 	private SingleProductionSpaceWidget singleProductionSpace = new SingleProductionSpaceWidget(1, player);
 	private SingleHarvestingSpaceWidget singleHarvestingSpace = new SingleHarvestingSpaceWidget(1, player);
-	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(1, player);
-	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(1, player);
+	private ProductionSpaceWidget productionSpace = new ProductionSpaceWidget(4, player);
+	private HarvestingSpaceWidget harvestingSpace = new HarvestingSpaceWidget(4, player);
 	private CouncilSpaceWidget councilSpaceWidget = new CouncilSpaceWidget(1, player);
 
 	private ArrayList<ActionSpaceWidgetInterface> actionSpaces = new ArrayList<>();
@@ -435,7 +435,7 @@ public class GUIMain extends Application implements LimView {
 
 		/* Add player active circle */
 		playerActiveCircle = new Circle(10 * resize);
-		playerActiveCircle.setFill(new Color(210, 230, 247, 0.8));
+		playerActiveCircle.setFill(new Color(0.8, 0.3, 0.5, 0.8));
 		playerActiveCircle.setCenterX((66 / 100) * stageWidth);
 		playerActiveCircle.setCenterY((95 / 100) * stageHeight);
 
@@ -890,6 +890,14 @@ public class GUIMain extends Application implements LimView {
 
 	public HashMap<ColorEnumeration, OpponentWidget> getOpponentsHashMap() {
 		return opponentsHashMap;
+	}
+
+	public SingleProductionSpaceWidget getSingleProductionSpace() {
+		return singleProductionSpace;
+	}
+
+	public SingleHarvestingSpaceWidget getSingleHarvestingSpace() {
+		return singleHarvestingSpace;
 	}
 }
 
