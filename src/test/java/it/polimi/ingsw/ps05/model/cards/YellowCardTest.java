@@ -50,6 +50,7 @@ public class YellowCardTest {
 
         card = new YellowCard(3, epochTest, ColorEnumeration.Yellow, cardName, effectsTest);
         card.setSelectedEffects(selectedEffects);
+        card.setToBeActivated(true);
 
     }
 
@@ -70,22 +71,29 @@ public class YellowCardTest {
 
     @Test
     public void getToBeActivated() throws Exception {
+        assertEquals(true, card.getToBeActivated());
     }
 
     @Test
     public void setToBeActivated() throws Exception {
+        card.setToBeActivated(false);
+        assertEquals(false, card.getToBeActivated());
     }
 
     @Test
     public void moveToPlayer() throws Exception {
+        card.moveToPlayer(player);
+        assertEquals(card, player.getYellowCardList().get(0));
     }
 
     @Test
     public void applyNonActivableEffects() throws Exception {
+
     }
 
     @Test
     public void getActivableEffectList() throws Exception {
+
     }
 
 }

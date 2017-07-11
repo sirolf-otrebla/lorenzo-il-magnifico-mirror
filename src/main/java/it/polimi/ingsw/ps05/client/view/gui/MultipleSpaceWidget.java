@@ -113,6 +113,10 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
             FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
             boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
 
+            scrollPane.setStyle("-fx-border-style: outset");
+            scrollPane.setStyle("-fx-border-width: 8px");
+            scrollPane.setStyle("-fx-border-color: palegreen");
+
             if (e.getGestureSource() != scrollPane && isLegal) {
                 scrollPane.setStyle("-fx-border-style: outset");
                 scrollPane.setStyle("-fx-border-width: 8px");
@@ -137,11 +141,14 @@ public class MultipleSpaceWidget implements ActionSpaceWidgetInterface {
             /* What to do when the source is dropped */
             boolean success = false;
 
+            FamiliarData sourceData = (FamiliarData)e.getDragboard().getContent(FAMILIAR_DATA);
+            boolean isLegal = legalActionMap.get(sourceData.getFamiliarColor());
+
             System.out.println("starting if");
-            if(e.getDragboard().hasImage()) {
+            if(e.getGestureSource() != scrollPane && isLegal) {
                 //TODO comunicare al controller che il familiare è stato posizionato nello spazio multiplo
                 System.out.println("inside if");
-                Image source = e.getDragboard().getImage();
+                Image source = new Image(sourceData.getFamiliarImagePath());
                 ImageView imageElement = new ImageView(source);
                 hbox.getChildren().add(imageElement);
                 success = true;

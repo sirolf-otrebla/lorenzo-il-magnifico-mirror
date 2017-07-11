@@ -12,7 +12,7 @@ public class YellowCard implements Resource {
 	 */
 	private static final long serialVersionUID = 6487480709568191121L;
 	Integer value;
-	public static final String id = "Carta Blu";
+	public static final String id = "Carta Gialla";
 	
 	public YellowCard(){
 		
