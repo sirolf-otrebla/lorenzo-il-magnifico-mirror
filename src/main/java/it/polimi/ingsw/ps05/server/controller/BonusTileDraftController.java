@@ -42,20 +42,23 @@ public class BonusTileDraftController implements Runnable {
      *  this method send the initial draft message, which starts the Draft procedure.
      */
     public void sendInitialDraftMessage(){
+    	System.out.println("sending start message");
         for (BonusTile bonusT: bonusTileArrayList) {
             bonusTilesIds.add(bonusT.getReferenceID());
         }
         for (PlayerClient client: playerClients) {
            client.sendMessage( new StartBonusTileDraftMessage(bonusTilesIds));
         }
+        System.out.println("finished start message");
     }
 
     /**
      *  this method is called when a client choices a bonus tile, and send to the server
      *  the related message, which is treated by {@link DraftResponseMessageVisitor}
-     * @param choice the integer representing the referenceID of the choosen bonus tile
+     * @param choice the integer representing the referenceID of the chosen bonus tile
      */
     public void setChoice(Integer choice){
+    	System.out.println("SetChoice");
         this.activeClient.getPlayer().setBonusTile(bonusTileHashMap.get(choice));
         this.bonusTileArrayList.remove(bonusTileHashMap.get(choice));
         bonusTilesIds.clear();
@@ -73,8 +76,10 @@ public class BonusTileDraftController implements Runnable {
      */
     @Override
     public void run() {
+    	System.out.println("Start thread");
         sendInitialDraftMessage();
         for (PlayerClient client : this.playerClients) {
+        	System.out.println("Nel ciclo");
             activeClient = client;
             activeClient.sendMessage(new BonusTileDraftUpdateNetMessage(bonusTilesIds));
             try {

@@ -30,6 +30,7 @@ public class LeaderDraftEndMessage implements LeaderDraftMessage {
 	@Override
 	public void acceptVisitor(DraftVisitor vi) {
 		// TODO Auto-generated method stub
+		vi.visit(this);
 		
 	}
 

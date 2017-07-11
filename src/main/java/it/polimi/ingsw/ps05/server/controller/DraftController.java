@@ -117,12 +117,14 @@ public class DraftController implements Runnable{
         for (PlayerClient client : this.clientArrayList){
             Player player = client.getPlayer();
             ArrayList<Integer> playerCardIds = this.choosenCardsMap.get(player.getColor());
+            System.out.println("CARTE LEADER ALLA FINE DEL DRAFT: " + playerCardIds.size());
+            System.out.println("Carte rimaste nella hashmap: " + leaderCardReferenceIdMatrix.get(player.getColor()).size());
             LeaderDraftEndMessage message = new LeaderDraftEndMessage(playerCardIds);
-            for (LeaderCard leader: this.leaderCardArrayList) {
-                if (playerCardIds.contains(leader.getReferenceID())){
-                    player.putLeaderCard(leader);
-                }
+            for (Integer id : playerCardIds){
+            	player.putLeaderCard(leaderCardHashMap.get(id));
+            	System.out.println("Aggiungo carta leader a player " + player.getLeaderCardList().size());
             }
+            player.putLeaderCard(leaderCardHashMap.get(leaderCardReferenceIdMatrix.get(player.getColor()).get(0)));
             client.sendMessage(message);
         }
         System.out.println("post comunicato carte");

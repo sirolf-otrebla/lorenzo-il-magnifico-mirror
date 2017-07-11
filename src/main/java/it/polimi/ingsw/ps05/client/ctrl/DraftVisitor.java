@@ -14,7 +14,7 @@ public class DraftVisitor {
     }
 
     public void visit(LeaderDraftEndMessage msg){
-        ViewAdapter.getInstance().endLeaderDraft();
+        ViewAdapter.getInstance().endLeaderDraft(msg);
     }
 
     public void visit(LeaderDraftUpdateNetMessage msg){
