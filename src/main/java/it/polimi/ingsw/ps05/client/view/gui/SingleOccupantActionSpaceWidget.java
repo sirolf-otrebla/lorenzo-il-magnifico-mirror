@@ -75,6 +75,11 @@ public class SingleOccupantActionSpaceWidget implements ActionSpaceWidgetInterfa
             System.out.println("playercolor: " + sourceData.getPlayerColor());
             System.out.println("familiarcolor: " + sourceData.getFamiliarColor());
             System.out.println("imagepath: " + sourceData.getFamiliarImagePath());
+            System.out.println("Occupato: " + occupied);
+            System.out.println("e.getGestureSource() != this: " + (e.getGestureSource() != this));
+            System.out.println("e.getDragboard().hasContent(FAMILIAR_DATA): " + e.getDragboard().hasContent(FAMILIAR_DATA));
+            System.out.println("is legal: " + isLegal);
+
             if (!occupied && e.getGestureSource() != this && e.getDragboard().hasContent(FAMILIAR_DATA) && isLegal) {
                 occupationCircle.setOpacity(0.4);
                 occupationCircle.setFill(Color.FORESTGREEN);

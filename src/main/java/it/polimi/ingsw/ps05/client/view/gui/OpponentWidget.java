@@ -29,8 +29,6 @@ public class OpponentWidget {
     Button personalBoardButton = new Button();
 
 
-
-
     public OpponentWidget(GUIMain board, ColorEnumeration opponentColor, String username) {
         this.board = board;
         this.opponentColor = opponentColor;
