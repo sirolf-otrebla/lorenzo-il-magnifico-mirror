@@ -20,7 +20,7 @@ public class GuiStarter implements Runnable {
 
     public GuiStarter(GameStatus status) {
         Player activePlayer = status.getPlayerHashMap().get(status.getActivePlayerId());
-        status.getPlayerHashMap().remove(status.getActivePlayerId());
+        status.getPlayerHashMap().remove(status.getThisPlayer().getPlayerID());
         ArrayList<Player> playerArrayList = new ArrayList< >(status.getPlayerHashMap().values());
         HashMap<ColorEnumeration, String> usernamesHashMap = new HashMap<>();
         for (Player p: status.getPlayerHashMap().values()) usernamesHashMap.put(p.getColor(), p.getUsername());

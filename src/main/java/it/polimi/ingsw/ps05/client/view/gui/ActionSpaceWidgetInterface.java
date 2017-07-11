@@ -14,10 +14,6 @@ public interface ActionSpaceWidgetInterface {
 
     public void setReferenceId(Integer referenceId);
 
-    public void setLegalFamilyMemberList(ArrayList<ColorEnumeration> legalFamilyMemberList);
-
-    public ArrayList<ColorEnumeration> getLegalFamilyMemberList();
-
     public void setLegalActionMap(HashMap<ColorEnumeration, Boolean> legalActionMap);
 
     public HashMap<ColorEnumeration, Boolean> getLegalActionMap();

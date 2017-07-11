@@ -183,28 +183,25 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
                 if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
                         r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
                     this.gui.getPlayer().getResourceWidget().setResource(r.getID(), r.getValue());
-                    this.gui.getPlayer().getResourceWidget().repaint();
+                   ;
                 }
             }
-
+            this.gui.getPlayer().getResourceWidget().repaint();
             boardWindow = this.gui.getPlayer().getPersonalBoard();
 
         } else {
-            for (OpponentWidget opponentWidget : this.gui.getOpponentsArray()) {
-                if (opponentWidget.getOpponentColor() == player.getColor()) {
 
-                    for (Resource r : player.getResourceList()) {
-                        if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
-                                r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
-                            opponentWidget.getPersonalBoard().getResourceWidget().setResource(r.getID(), r.getValue());
-                            opponentWidget.getPersonalBoard().getResourceWidget().repaint();
+            OpponentWidget opponentWidget = this.gui.getOpponentsHashMap().get(player.getColor());
+            for (Resource r : player.getResourceList()) {
+                if (r.getID() == GoldResource.id || r.getID() == ServantResource.id ||
+                        r.getID() == WoodResource.id || r.getID() == StoneResource.id) {
+                    opponentWidget.getPersonalBoard().getResourceWidget().setResource(r.getID(), r.getValue());;
 
-                        }
-                    }
-
-                    boardWindow = opponentWidget.getPersonalBoard();
                 }
             }
+            opponentWidget.getPersonalBoard().getResourceWidget().repaint();
+            boardWindow = opponentWidget.getPersonalBoard();
+
         }
 
         //setting cards on personal boards
@@ -213,19 +210,25 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Blue, new ArrayList<>());
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Yellow, new ArrayList<>());
         acquiredCardWidgetsHashMap.put(ColorEnumeration.Violet, new ArrayList<>());
-        for (TowerCard card: player.getGreenCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Green).add(card);
-        for (TowerCard card: player.getBlueCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Blue).add(card);
-        for (TowerCard card: player.getYellowCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Yellow).add(card);
-        for (TowerCard card: player.getVioletCardHashMap().values()) acquiredCardWidgetsHashMap.get(ColorEnumeration.Violet).add(card);
+        for (TowerCard card: player.getGreenCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Green).add(card);
+        for (TowerCard card: player.getBlueCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Blue).add(card);
+        for (TowerCard card: player.getYellowCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Yellow).add(card);
+        for (TowerCard card: player.getVioletCardHashMap().values())
+            acquiredCardWidgetsHashMap.get(ColorEnumeration.Violet).add(card);
 
         for (ArrayList<TowerCard> arrayList : acquiredCardWidgetsHashMap.values()){
-            ColorEnumeration color = arrayList.get(0).color;
-            boardWindow.getCardAcquiredColorMap().remove(color);
-            boardWindow.getCardAcquiredColorMap().put(color, new ArrayList<>());
-            ArrayList<AcquiredCardWidget> acquiredCardWidgetArrayList = boardWindow.getCardAcquiredColorMap().get(color);
-            for (TowerCard towerCard : arrayList){
-                Integer id = towerCard.getReferenceID();
-                acquiredCardWidgetArrayList.add(new AcquiredCardWidget(id, GraphicResources.getCardPath(id), towerCard.color));
+            if (arrayList.size() > 0) {
+                ColorEnumeration color = arrayList.get(0).color;
+                boardWindow.getCardAcquiredColorMap().remove(color);
+                boardWindow.getCardAcquiredColorMap().put(color, new ArrayList<>());
+                ArrayList<AcquiredCardWidget> acquiredCardWidgetArrayList = boardWindow.getCardAcquiredColorMap().get(color);
+                for (TowerCard towerCard : arrayList) {
+                    Integer id = towerCard.getReferenceID();
+                    acquiredCardWidgetArrayList.add(new AcquiredCardWidget(id, GraphicResources.getCardPath(id), towerCard.color));
+                }
             }
         }
 
@@ -289,11 +292,11 @@ public class UpdateViewVisitor implements ViewVisitorInterface, Runnable {
 
     private void setWidgetLegal(ActionSpaceWidgetInterface widget, ActionSpace actionSpace){
         Collection<Familiar> family = Client.getInstance().getGameStatus().getThisPlayer().getFamilyMap().values();
+        widget.setLegalActionMap(new HashMap<>());
         for (Familiar f : family)
             if ((new Action(f, actionSpace).isLegal())) {
-                //widget.setLegal(true);
-                widget.getLegalFamilyMemberList().add(f.getColor());
-            }
+                widget.getLegalActionMap().put(f.getColor(), true);
+            } else widget.getLegalActionMap().put(f.getColor(), false);
     }
 
 
